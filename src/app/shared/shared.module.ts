@@ -4,12 +4,14 @@ import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 
 import { SideNavComponent } from './layout/side-nav/side-nav.component';
+import { FooterComponent } from './footer/footer.component';
 
 
 const routes: Routes = [];
 @NgModule({
   declarations: [
-    SideNavComponent
+    SideNavComponent,
+    FooterComponent
   ],
   imports: [
     CommonModule,

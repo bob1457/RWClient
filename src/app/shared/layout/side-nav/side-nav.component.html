@@ -16,7 +16,7 @@
     </div>
     <main class="side">
         <mat-nav-list>
-            <mat-list-item>
+            <mat-list-item style="margin-top: -10px;">
                 <mat-icon style="color: aqua;" [routerLink]="['/manage/dash_ui']" [routerLinkActive]="['active']" matListIcon>palette</mat-icon>
                 <!--<div><i class="fas fa-tachometer-alt" style="float: left;"></i></div>-->
                 <a matLine [routerLink]="['/manage/dash_ui']" [routerLinkActive]="['active']">Dashboard</a>
@@ -251,8 +251,8 @@
               </button>
             </div>
 
-            <button style="margin-right: 20px; border: 0 transparent;" [matMenuTriggerFor]="appMail"><mat-icon matBadge="5" style="color: blue;" matBadgeColor="primary">email</mat-icon></button>
-            <button style=" border: 0 transparent;"><mat-icon matBadge="3" [matMenuTriggerFor]="appNote" matBadgeColor="warn" style="color: rgb(241, 150, 57);">notification_important</mat-icon></button>
+            <button style="margin-right: 20px; border: 0 transparent; background: transparent;" [matMenuTriggerFor]="appMail"><mat-icon matBadge="5" style="color: blue;" matBadgeColor="primary">email</mat-icon></button>
+            <button style=" border: 0 transparent; background: transparent;"><mat-icon matBadge="3" [matMenuTriggerFor]="appNote" matBadgeColor="warn" style="color: rgb(241, 150, 57);">notification_important</mat-icon></button>
 
             <mat-menu #appMail="matMenu" [overlapTrigger]="false" style="background: transparent;">
                 <button mat-menu-item>
@@ -333,6 +333,8 @@
         </div>
 
       </div>
+
+      <app-footer></app-footer>
     </div>
 
 
