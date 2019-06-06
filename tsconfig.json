@@ -17,6 +17,32 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "app-material": [
+        "dist/app-material"
+      ],
+      "app-material/*": [
+        "dist/app-material/*"
+      ],
+      "auth": [
+        "dist/auth"
+      ],
+      "auth/*": [
+        "dist/auth/*"
+      ],
+      "app-logging": [
+        "dist/app-logging"
+      ],
+      "app-logging/*": [
+        "dist/app-logging/*"
+      ],
+      "app-error-handling": [
+        "dist/app-error-handling"
+      ],
+      "app-error-handling/*": [
+        "dist/app-error-handling/*"
+      ]
+    }
   }
 }

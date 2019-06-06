@@ -23,7 +23,8 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/custom-theme.scss",
+              "src/styles.scss"
             ],
             "scripts": []
           },
@@ -114,6 +115,147 @@
           }
         }
       }
-    }},
+    },
+    "app-material": {
+      "projectType": "library",
+      "root": "projects/app-material",
+      "sourceRoot": "projects/app-material/src",
+      "prefix": "rwc-lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/app-material/tsconfig.lib.json",
+            "project": "projects/app-material/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/app-material/src/test.ts",
+            "tsConfig": "projects/app-material/tsconfig.spec.json",
+            "karmaConfig": "projects/app-material/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/app-material/tsconfig.lib.json",
+              "projects/app-material/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "auth": {
+      "projectType": "library",
+      "root": "projects/auth",
+      "sourceRoot": "projects/auth/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/auth/tsconfig.lib.json",
+            "project": "projects/auth/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/auth/src/test.ts",
+            "tsConfig": "projects/auth/tsconfig.spec.json",
+            "karmaConfig": "projects/auth/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/auth/tsconfig.lib.json",
+              "projects/auth/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "app-logging": {
+      "projectType": "library",
+      "root": "projects/app-logging",
+      "sourceRoot": "projects/app-logging/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/app-logging/tsconfig.lib.json",
+            "project": "projects/app-logging/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/app-logging/src/test.ts",
+            "tsConfig": "projects/app-logging/tsconfig.spec.json",
+            "karmaConfig": "projects/app-logging/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/app-logging/tsconfig.lib.json",
+              "projects/app-logging/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "app-error-handling": {
+      "projectType": "library",
+      "root": "projects/app-error-handling",
+      "sourceRoot": "projects/app-error-handling/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/app-error-handling/tsconfig.lib.json",
+            "project": "projects/app-error-handling/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/app-error-handling/src/test.ts",
+            "tsConfig": "projects/app-error-handling/tsconfig.spec.json",
+            "karmaConfig": "projects/app-error-handling/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/app-error-handling/tsconfig.lib.json",
+              "projects/app-error-handling/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    }
+  },
   "defaultProject": "RWClient"
 }
