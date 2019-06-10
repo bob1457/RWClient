@@ -59,10 +59,10 @@ export class SideNavComponent implements OnInit {
 
     if (this.sidenavWidth === 17.5) {
       this.sidenavWidth = 4; // mini side nav
-      // this.ToggleButtonDisplay = '';
+      this.ToggleButtonDisplay = 'none';
     } else {
       this.sidenavWidth = 17.5; // full width side nav
-      // this.ToggleButtonDisplay = 'none';
+      this.ToggleButtonDisplay = 'none';
     }
     console.log('side nav width changed to ' + this.sidenavWidth);
   }

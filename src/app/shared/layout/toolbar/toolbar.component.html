@@ -1,0 +1,100 @@
+<mat-toolbar class="main-toolbar mat-elevation-z2" fxLayout="row" fxLayoutAlign="start center" color="primary" >
+  <!--<button mat-icon-button>
+    <mat-icon style="color:#d6c7c7;">menu</mat-icon>
+  </button>
+  My App
+  <mat-icon style="color:#d6c7c7;">network_check</mat-icon>
+  -->
+  <div [ngStyle]="{ 'display': ToggleButtonDisplay }">
+      <div fxLayout="row">
+          <div class="logo">
+              <img src="../../../../assets/images/R.png" width="35px;" />
+          </div>
+
+          <button mat-icon-button (click)="drawer.toggle()">
+            <mat-icon>menu</mat-icon>
+          </button>
+      </div>
+  </div>
+
+  <div [ngStyle]="{ 'display': OpenButtonDisplay}">
+    <button mat-icon-button (click)="drawer.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+  </div>
+
+  <button style="margin-right: 20px; border: 0 transparent; background: transparent;" [matMenuTriggerFor]="appMail"><mat-icon matBadge="5" style="color: blue;" matBadgeColor="primary">email</mat-icon></button>
+  <button style=" border: 0 transparent; background: transparent;"><mat-icon matBadge="3" [matMenuTriggerFor]="appNote" matBadgeColor="warn" style="color: rgb(241, 150, 57);">notification_important</mat-icon></button>
+
+  <mat-menu #appMail="matMenu" [overlapTrigger]="false" style="background: transparent;">
+      <button mat-menu-item>
+        <!--<mat-icon style="color: black;">dialpad</mat-icon>
+        <i class="far fa-user-circle" style="color: #09af00"></i>-->
+        <span>&nbsp; My Messages</span><br>
+
+    </button>
+
+    <button mat-menu-item (click)="logout()">
+      <!--<mat-icon style="color: black;">notifications_off</mat-icon>
+      <i class="fas fa-sign-out-alt" style="color: #e9176b"></i>-->
+      <span>&nbsp; Logout</span>
+    </button>
+  </mat-menu>
+
+  <mat-menu #appNote="matMenu" [overlapTrigger]="false">
+    <button mat-menu-item>
+      <!--<mat-icon style="color: black;">dialpad</mat-icon>
+      <i class="far fa-user-circle" style="color: #09af00"></i>-->
+      <span>&nbsp; My Notification</span><br>
+    </button>
+
+    <button mat-menu-item (click)="logout()">
+      <!--<mat-icon style="color: black;">notifications_off</mat-icon>
+      <i class="fas fa-sign-out-alt" style="color: #e9176b"></i>-->
+      <span>&nbsp; Logout</span>
+    </button>
+  </mat-menu>
+
+  <span class="fill-remaining-space"></span>
+    <form class="example-form">
+      <mat-form-field *ngIf="visible" class="">
+                      <!--<mat-placeholder><mat-icon>search</mat-icon></mat-placeholder> -->
+
+        <input #search (blur)="onBlurMethod()" type="text" placeholder="" matInput appAutofocus>
+
+      </mat-form-field>
+    </form>
+
+    <button mat-icon-button (click)="showSearch()">
+      <mat-icon>search</mat-icon>
+    </button>
+
+
+              <button mat-button class="more-btn" [matMenuTriggerFor]="menu">
+          <!--<mat-icon>more_vert</mat-icon>     attr.src="{{serverUrl}}{{user.avatarImgUrl}}" width="38" height="38" title="{{user.userName}}"  *ngIf="user" attr. -->
+          <img src="../../../../assets/images/avatar.png" width="38" height="38" title="bob" >
+        </button>
+
+              <!-- To be reviewed -->
+              <button mat-icon-button (click)="drawer2.toggle()">
+          <mat-icon style="color: #09af00;  font-size: 1.5em;" title="Quick Links">settings</mat-icon>
+        </button>
+
+              <mat-menu #menu="matMenu" [overlapTrigger]="false">
+                  <button [routerLink]="['/manage/profile']" mat-menu-item>
+              <!--<mat-icon style="color: black;">dialpad</mat-icon>-->
+              <i class="far fa-user-circle" style="color: #09af00;"></i>
+              <span>&nbsp; My Account</span><br>
+
+            </button>
+                  <button mat-menu-item disabled>
+              <mat-icon style="color:#d6c7c7;">voicemail</mat-icon>
+              <span>Check voicemail</span>
+            </button>
+                  <button mat-menu-item (click)="logout()">
+              <!--<mat-icon style="color: black;">notifications_off</mat-icon>-->
+              <i class="fas fa-sign-out-alt" style="color: #e9176b"></i>
+              <span>&nbsp; Logout</span>
+            </button>
+              </mat-menu>
+</mat-toolbar>

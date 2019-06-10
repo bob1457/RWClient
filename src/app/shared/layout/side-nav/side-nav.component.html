@@ -226,13 +226,9 @@
   <div class="panel-wrapper">
       <div class="main-content">
         <div class="app-sidenav-content">
+           <!--<app-toolbar></app-toolbar some issues of display and button function, future consideration -->
           <mat-toolbar class="main-toolbar mat-elevation-z2" fxLayout="row" fxLayoutAlign="start center" color="primary" >
-            <!--<button mat-icon-button>
-              <mat-icon style="color:#d6c7c7;">menu</mat-icon>
-            </button>
-            My App
-            <mat-icon style="color:#d6c7c7;">network_check</mat-icon>
-            -->
+
             <div [ngStyle]="{ 'display': ToggleButtonDisplay }">
                 <div fxLayout="row">
                     <div class="logo">
@@ -309,7 +305,7 @@
                   </button>
 
                         <mat-menu #menu="matMenu" [overlapTrigger]="false">
-                            <button [routerLink]="['/manage/profile']" mat-menu-item>
+                            <button [routerLink]="['/Manage/profile']" mat-menu-item>
                         <!--<mat-icon style="color: black;">dialpad</mat-icon>-->
                         <i class="far fa-user-circle" style="color: #09af00;"></i>
                         <span>&nbsp; My Account</span><br>
@@ -344,10 +340,12 @@
 <mat-drawer-container class="right-container">
     <mat-drawer style="width: 240px;background: rgb(201, 199, 199);overflow-y: hidden;" #drawer2 mode="over" opened="false" position="end">
         Right drawer
+        <mat-drawer-content>
+          Main content
+        </mat-drawer-content>
     </mat-drawer>
-    <!--<mat-drawer-content>
-    Main content
-  </mat-drawer-content>-->
+    <!---->
 </mat-drawer-container>
+
 
 
