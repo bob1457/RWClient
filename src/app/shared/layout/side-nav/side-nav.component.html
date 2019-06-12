@@ -1,9 +1,9 @@
 <!--<p>
-  side-nav works!
+  side-nav works! [@changeSideBarSize]
 </p>
 -->
 <mat-drawer-container class="app-container" autosize>
-  <mat-drawer #drawer class="app-sidenav" style="padding:0;" [opened]="opened" [mode]="mode" fxLayout="column" [ngStyle]="{ 'width.em': sidenavWidth }" (mouseenter)="increase()">
+  <mat-drawer  #drawer class="app-sidenav" style="padding:0;" [opened]="opened" [mode]="mode" fxLayout="column" [ngStyle]="{ 'width.em': sidenavWidth }" (mouseenter)="increase()">
     <div fxLayout="row" style="background-color: cadetblue;height: 63px; overflow-x: hidden">
         <button mat-icon-button (click)="changeSideNav()">
             <mat-icon>menu</mat-icon>
@@ -19,7 +19,7 @@
             <mat-list-item style="margin-top: -10px;">
                 <mat-icon style="color: aqua;" [routerLink]="['/manage/dash_ui']" [routerLinkActive]="['active']" matListIcon>palette</mat-icon>
                 <!--<div><i class="fas fa-tachometer-alt" style="float: left;"></i></div>-->
-                <a matLine [routerLink]="['/manage/dash_ui']" [routerLinkActive]="['active']">Dashboard</a>
+                <a matLine [routerLink]="['/Manage/dashboard']" [routerLinkActive]="['active']">Dashboard</a>
                 <button mat-icon-button (click)="showInfo(link)">
           <!----><mat-icon>info</mat-icon></button>
             </mat-list-item>
@@ -306,18 +306,18 @@
 
                         <mat-menu #menu="matMenu" [overlapTrigger]="false">
                             <button [routerLink]="['/Manage/profile']" mat-menu-item>
-                        <!--<mat-icon style="color: black;">dialpad</mat-icon>-->
-                        <i class="far fa-user-circle" style="color: #09af00;"></i>
+                        <mat-icon style="color: black;">account_circle</mat-icon>
+                        <!--<i class="far fa-user-circle" style="color: #09af00;"></i>-->
                         <span>&nbsp; My Account</span><br>
 
                       </button>
-                            <button mat-menu-item disabled>
-                        <mat-icon style="color:#d6c7c7;">voicemail</mat-icon>
-                        <span>Check voicemail</span>
+                      <button mat-menu-item disabled>
+                        <mat-icon style="color:#d6c7c7;">settings_applications</mat-icon> &nbsp;
+                        <span>Settings</span>
                       </button>
                             <button mat-menu-item (click)="logout()">
-                        <!--<mat-icon style="color: black;">notifications_off</mat-icon>-->
-                        <i class="fas fa-sign-out-alt" style="color: #e9176b"></i>
+                        <!--<mat-icon style="color: black;">settings_applications</mat-icon>-->
+                        <span style="font-size: 1.5em; margin-left: 5px;"><i  class="fas fa-sign-out-alt" style="color: #e9176b"></i></span> &nbsp;
                         <span>&nbsp; Logout</span>
                       </button>
                         </mat-menu>
@@ -338,13 +338,15 @@
 
 <!-- Right Side Drawer -->
 <mat-drawer-container class="right-container">
-    <mat-drawer style="width: 240px;background: rgb(201, 199, 199);overflow-y: hidden;" #drawer2 mode="over" opened="false" position="end">
+    <mat-drawer style="width: 240px;background: rgb(201, 199, 199); overflow-y: hidden;" #drawer2 mode="over" opened="false" position="end">
         Right drawer
-        <mat-drawer-content>
+        <div>
           Main content
-        </mat-drawer-content>
+        </div>
     </mat-drawer>
-    <!---->
+    <!--<mat-drawer-content>
+          Main content
+        </mat-drawer-content>-->
 </mat-drawer-container>
 
 

@@ -2,14 +2,33 @@ import { Component, OnInit } from '@angular/core';
 import { MediaObserver, MediaChange } from '@angular/flex-layout';
 import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
+import {  trigger, state, style, animate, transition } from '@angular/animations'
 
 
 @Component({
   selector: 'app-side-nav',
   templateUrl: './side-nav.component.html',
-  styleUrls: ['./side-nav.component.scss']
+  styleUrls: ['./side-nav.component.scss'],
+  animations: [
+    trigger('changeSideBarSize', [
+      state('decrease', style({
+        width: '64px',
+        transform: 'translateX(-80%)'
+      })),
+      state('increase', style({
+        width: '280px',
+        transform: 'translateX(0%)'
+      })),
+      // transition('* => *', animate('2000ms')),
+      transition('* => *', animate(2000))
+    ])
+  ]
 })
 export class SideNavComponent implements OnInit {
+
+
+  currentState = 'increase';
+
 
   mode: string = 'side';
   opened: boolean = true;
