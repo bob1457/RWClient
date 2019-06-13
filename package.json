@@ -4,7 +4,9 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "start:pm": " ng serve property-manager --port 4201",
     "build": "ng build",
+    "build:dashboard": "ng build dashboard",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -24,6 +26,10 @@
     "@angular/router": "~8.0.0",
     "@lib/app-material": "file:dist/app-material",
     "@lib/dashboard": "file:dist/dashboard",
+    "@ngrx/effects": "^8.0.1",
+    "@ngrx/entity": "^8.0.1",
+    "@ngrx/store": "^8.0.1",
+    "@ngrx/store-devtools": "^8.0.1",
     "hammerjs": "^2.0.8",
     "rxjs": "~6.4.0",
     "tslib": "^1.9.0",

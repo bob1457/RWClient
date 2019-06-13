@@ -13,7 +13,8 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full'},
       { path: 'dashboard', component: DashboardComponent},
-      { path: 'profile', component: ProfileComponent}
+      { path: 'profile', component: ProfileComponent},
+      { path: 'property', loadChildren: '../../../projects/property-manager/src/app/app.module-export#AppPmModule'}
     ]
   }
 ];

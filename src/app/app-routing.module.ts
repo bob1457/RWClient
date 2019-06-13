@@ -4,7 +4,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from 'projects/auth/src/public-api';
 
 const routes: Routes = [
-  {path: '', component: LoginComponent}
+  {path: '', component: LoginComponent} // ,
+  // {path: 'property', loadChildren: '../../projects/property-manager/src/app/app.module-export#AppPmModule'}
 ];
 
 

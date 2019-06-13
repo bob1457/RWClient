@@ -13,6 +13,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ManageModule } from './manage/manage.module';
 import { SharedModule } from './shared/shared.module';
 
+import { StoreModule } from '@ngrx/store';
+
 @NgModule({
   declarations: [
     AppComponent
@@ -24,7 +26,8 @@ import { SharedModule } from './shared/shared.module';
     AppMaterialModule,
     ManageModule,
     AuthModule,
-    SharedModule
+    SharedModule,
+    StoreModule.forRoot({})
   ],
   providers: [],
   bootstrap: [AppComponent]
