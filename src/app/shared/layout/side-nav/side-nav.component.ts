@@ -44,6 +44,8 @@ export class SideNavComponent implements OnInit {
   sidenavWidth = 17.5; // side nav width when started (default: full-width side nav)
 
 
+  theme$:string = "dark-theme";
+
   constructor(public mediaObserver: MediaObserver, private router: Router) {
     this.watcher = mediaObserver.media$.subscribe((mediaChange: MediaChange) => {
       this.mode = this.getMode(mediaChange);
@@ -110,6 +112,14 @@ export class SideNavComponent implements OnInit {
       // this.show_logo = true;
       return 'false';
     }
+  }
+
+  changeDark() {
+    this.theme$ = "dark-theme";
+  }
+
+  changeLight() {
+    this.theme$ = "light-theme"
   }
 
 }
