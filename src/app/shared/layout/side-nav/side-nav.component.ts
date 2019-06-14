@@ -39,12 +39,14 @@ export class SideNavComponent implements OnInit {
   activeMediaQuery = '';
 
   ToggleButtonDisplay: string = 'none';
+  SideToggleButtonDisplay: string = '';
+
   OpenButtonDisplay: string = 'none';
   visible: boolean = false;
   sidenavWidth = 17.5; // side nav width when started (default: full-width side nav)
 
 
-  theme$:string = "dark-theme";
+  theme$:string = "dark-theme"; // this is default -- selecting theme can be implemented using observable from rxjs... later.
 
   constructor(public mediaObserver: MediaObserver, private router: Router) {
     this.watcher = mediaObserver.media$.subscribe((mediaChange: MediaChange) => {
@@ -69,6 +71,7 @@ export class SideNavComponent implements OnInit {
 
   increase() {
     this.sidenavWidth = 17.5;
+    this.SideToggleButtonDisplay = '';
     console.log('increase sidenav width');
   }
   decrease(){
@@ -81,9 +84,11 @@ export class SideNavComponent implements OnInit {
     if (this.sidenavWidth === 17.5) {
       this.sidenavWidth = 4; // mini side nav
       this.ToggleButtonDisplay = 'none';
+      this.SideToggleButtonDisplay = 'none';
     } else {
       this.sidenavWidth = 17.5; // full width side nav
       this.ToggleButtonDisplay = 'none';
+      this.SideToggleButtonDisplay = '';
     }
     console.log('side nav width changed to ' + this.sidenavWidth);
   }
