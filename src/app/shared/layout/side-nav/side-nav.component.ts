@@ -29,6 +29,9 @@ export class SideNavComponent implements OnInit {
 
   currentState = 'increase';
 
+  isAdmin = false;
+
+  link = '';
 
   mode: string = 'side';
   opened: boolean = true;
@@ -125,6 +128,15 @@ export class SideNavComponent implements OnInit {
 
   changeLight() {
     this.theme$ = "light-theme"
+  }
+
+
+  logout() {
+
+  }
+
+  showInfo(link: any) {
+
   }
 
 }

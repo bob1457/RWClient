@@ -11,10 +11,11 @@
   "exclude": [
     "test.ts",
     "**/*.spec.ts",
-    "../projects/property-manager/src/**/*spec.ts",
-    "../projects/property-manager/src/app/app.module.ts",
-    "../projects/property-manager/src/main.ts",
-    "../projects/property-manager/src/test.tx"
+    "./projects/property-manager/src/**/*spec.ts",
+    // "../projects/property-manager/src/app/app.module.ts",
+    "./projects/property-manager/src/app/app.module.ts",
+    "./projects/property-manager/src/main.ts",
+    "./projects/property-manager/src/test.ts"
 
   ]
 }

@@ -1,4 +1,7 @@
+import { DashboardModule } from '@lib/dashboard';
 import { AppMaterialModule } from '@lib/app-material';
+
+
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -10,18 +13,20 @@ import { SharedModule } from '../shared/shared.module';
 import { DashhomeComponent } from '@lib/dashboard';
 import { DashboardComponent } from '@lib/dashboard';
 
+
 @NgModule({
   declarations: [
-    HomeComponent,
-    DashhomeComponent,
-    DashboardComponent
+    HomeComponent
+    // DashhomeComponent,
+    // DashboardComponent
   ],
   imports: [
     CommonModule,
     ManageRoutingModule,
     SharedModule,
     FlexLayoutModule,
-    AppMaterialModule
+    AppMaterialModule,
+    DashboardModule
   ],
   exports: [
     HomeComponent

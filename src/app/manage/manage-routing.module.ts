@@ -14,7 +14,9 @@ const routes: Routes = [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full'},
       { path: 'dashboard', component: DashboardComponent},
       { path: 'profile', component: ProfileComponent},
-      { path: 'property', loadChildren: '../../../projects/property-manager/src/app/app.module-export#AppPmModule'}
+      // { path: 'property', loadChildren: '../../../projects/property-manager/src/app/app.module-export#AppPmModule'}
+      // tslint:disable-next-line:max-line-length
+      { path: 'property', loadChildren: () => import('../../../projects/property-manager/src/app/app.module-export').then(m => m.AppPmModule)}
     ]
   }
 ];
