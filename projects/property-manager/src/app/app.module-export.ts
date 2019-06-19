@@ -5,6 +5,8 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { AppPmComponent } from './app.component';
 import { PropertyHomeComponent } from './property-home/property-home.component';
+import { PropertyListComponent } from './property-list/property-list.component';
+import { PropertyDetailsComponent } from './property-details/property-details.component';
 
 const routes: Routes = [
   { path: '', component: PropertyHomeComponent}
@@ -13,7 +15,9 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AppPmComponent,
-    PropertyHomeComponent
+    PropertyHomeComponent,
+    PropertyListComponent,
+    PropertyDetailsComponent
   ],
   imports: [
     // BrowserModule,

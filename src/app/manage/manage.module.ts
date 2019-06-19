@@ -10,15 +10,11 @@ import { ManageRoutingModule } from './manage-routing.module';
 import { HomeComponent } from './home/home.component';
 
 import { SharedModule } from '../shared/shared.module';
-import { DashhomeComponent } from '@lib/dashboard';
-import { DashboardComponent } from '@lib/dashboard';
 
 
 @NgModule({
   declarations: [
     HomeComponent
-    // DashhomeComponent,
-    // DashboardComponent
   ],
   imports: [
     CommonModule,
@@ -30,7 +26,6 @@ import { DashboardComponent } from '@lib/dashboard';
   ],
   exports: [
     HomeComponent
-    //DashhomeComponent
   ]
 })
 export class ManageModule { }
