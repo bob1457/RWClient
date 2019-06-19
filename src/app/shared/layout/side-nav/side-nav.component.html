@@ -5,15 +5,18 @@
 <div [class]="theme$">
     <mat-drawer-container class="app-container" autosize>
         <mat-drawer #drawer class="app-sidenav" style="padding:0;" [opened]="opened" [mode]="mode" fxLayout="column" [ngStyle]="{ 'width.em': sidenavWidth }" (mouseenter)="increase()">
-            <div fxLayout="row" color="primary" style="height: 63px; overflow-x: hidden">
+            <div fxLayout="row" color="primary" style="height: 200px; overflow-x: hidden">
                 <!--background-color: cadetblue;-->
                 <button mat-icon-button style="float: right;margin-right: 16px;" (click)="changeSideNav()">
           <mat-icon>menu</mat-icon>
         </button>
 
                 <div class="brand" style="width: 100%;" [style.display]="SideToggleButtonDisplay">
-                    <span> </span>
-                    <img src="../../../../assets/images/R.png" width="35px;" style="margin-right: 50px; margin-top: -50px;" />
+                    <span >
+                      <!-- side bar clock -->
+                      <app-clock style="border: 1px solid white; width: 140px;height: 120px;"></app-clock>
+                    </span>
+                    <img src="../../../../assets/images/R.png" width="35px;" style="margin-right: 50px; margin-top: 20px;float: right;" />
                 </div>
             </div>
             <main class="side">

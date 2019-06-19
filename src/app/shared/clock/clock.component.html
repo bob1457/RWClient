@@ -1,0 +1,33 @@
+<!-- <p>
+  clock works!
+</p> -->
+
+<div class="clock">
+  <div
+    class="hand hour-hand"
+    [style.transform]="'rotate(' + (hourDegrees$ | async) + 'deg)'"
+  ></div>
+  <div
+    class="hand minute-hand"
+    [style.transform]="'rotate(' + (minDegrees$ | async) + 'deg)'"
+  ></div>
+  <div
+    class="hand second-hand"
+    [style.transform]="'rotate(' + (secDegrees$ | async) + 'deg)'"
+  ></div>
+</div>
+
+<p
+  style="margin-top: 80px;
+text-align: center;
+font-family: inherit;"
+>
+  <!-- H Deg:	{{hourDegrees$|async}} -->
+  {{ myDate | date: "MMMM d, y" }}
+</p>
+<!-- <p>
+M Deg:{{minDegrees$|async}}
+</p>
+<p>
+SEC Deg:{{secDegrees$|async}}
+</p> -->
