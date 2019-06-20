@@ -1,7 +1,8 @@
 
 // import { DashboardComponent } from './../../../projects/dashboard/src/lib/dashboard.component';
 // import { ProfileComponent } from './../../../projects/auth/src/lib/profile/profile.component';
-import { ProfileComponent } from '@lib/auth';
+// import { ProfileComponent } from '@lib/auth';
+import { ProfileComponent } from '../../../projects/auth/src/lib/profile/profile.component';
 import { HomeComponent } from './home/home.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';

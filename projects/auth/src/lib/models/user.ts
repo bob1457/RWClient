@@ -1,5 +1,6 @@
 export interface User {
-  username: string;
+  username?: string;
   password?: string;
   rememberMe?: boolean;
+  token?: string;
 }

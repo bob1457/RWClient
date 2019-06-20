@@ -29,7 +29,7 @@ export class SideNavComponent implements OnInit {
 
   currentState = 'increase';
 
-  isAdmin = false;
+  isAdmin = true;
 
   link = '';
 

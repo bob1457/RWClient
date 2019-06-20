@@ -1,7 +1,11 @@
+
 import { HomeComponent } from './manage/home/home.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { LoginComponent, AuthModule } from '@lib/auth';
+// import { LoginComponent, AuthModule, ProfileComponent } from '@lib/auth';
+import { LoginComponent } from '../../projects/auth/src/lib/login/login.component';
+
+import { AuthModule } from './../../projects/auth/src/lib/auth.module';
 
 const routes: Routes = [
   {path: '', component: LoginComponent} // ,

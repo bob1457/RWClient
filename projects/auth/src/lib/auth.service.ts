@@ -1,9 +1,43 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { User } from './models';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor() { }
+  private baseUrl = 'https://localhost:44336/api'
+
+  constructor(private httpClient: HttpClient) { }
+
+  getToken(): string {
+    return localStorage.getItem('token');
+  }
+
+  logIn(user): Observable<any> { // it is email before, now try to use username, instead.
+    debugger;
+    const url = `${this.baseUrl}/Auth/signin`;
+    console.log(user);
+    return this.httpClient.post<User>(url, user)
+    .pipe(map(response => {
+      localStorage.setItem('currentUser', JSON.stringify(response.token));
+      return response;
+    }));
+  }
+
+  signUp(email: string, password: string): Observable<User> {
+    const url = `${this.baseUrl}/register`;
+    return this.httpClient.post<User>(url, {email, password});
+  }
+
+
+  // Need to get the server side api endporint implementation to get the status
+  getStatus(): Observable<User> {
+    const url = `${this.baseUrl}/status`;
+    return this.httpClient.get<User>(url);
+  }
+
 }
