@@ -20,7 +20,8 @@
   border-top:1px solid rgba(58, 235, 102, 0.75);
 }
 .hour-hand {
-  border-top-width:8px;
+  border-top-width:5px;
+  border-color: rgb(221, 71, 71);
 }
 .minute-hand {
   border-top-width:4px;

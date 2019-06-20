@@ -1,14 +1,14 @@
 import { AuthService } from './../auth.service';
-import { Component, OnInit } from "@angular/core";
-import { NgForm } from "@angular/forms";
+import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AppState } from '../store/app.state';
 
 @Component({
-  selector: "lib-login",
-  templateUrl: "./login.component.html",
-  styleUrls: ["./login.component.scss"]
+  selector: 'lib-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
   checked = false;
@@ -34,13 +34,14 @@ export class LoginComponent implements OnInit {
     .subscribe(
       res => {
         console.log(res);
-        if(!res) {
+        if(!res.token) {
           this.errMsg = 'Authentication Failed!'
+          this.loading = false;
+
         }
         else {
           this.router.navigate(['/Manage']);
         }
-        // this.loading = false;
       },
       err => {
         console.log(err);

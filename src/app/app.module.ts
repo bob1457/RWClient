@@ -1,3 +1,4 @@
+import { JwtInterceptor } from './helpers/JwtInterceptor';
 
 // import { AppMaterialModule } from './app-material/app-material.module';
 import { AppMaterialModule } from '@lib/app-material' ; //      ../../projects/app-material/src/lib/app-material.module';
@@ -13,6 +14,7 @@ import { ManageModule } from './manage/manage.module';
 import { SharedModule } from './shared/shared.module';
 
 import { StoreModule } from '@ngrx/store';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { StoreModule } from '@ngrx/store';
     SharedModule,
     StoreModule.forRoot({})
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass:JwtInterceptor, multi:true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

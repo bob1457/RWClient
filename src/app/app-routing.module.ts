@@ -8,7 +8,8 @@ import { LoginComponent } from '../../projects/auth/src/lib/login/login.componen
 import { AuthModule } from './../../projects/auth/src/lib/auth.module';
 
 const routes: Routes = [
-  {path: '', component: LoginComponent} // ,
+  {path: '', component: LoginComponent},
+  { path: 'login', component: LoginComponent } // ,
   // {path: 'property', loadChildren: '../../projects/property-manager/src/app/app.module-export#AppPmModule'}
 ];
 

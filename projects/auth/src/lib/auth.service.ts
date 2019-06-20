@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { User } from './models';
 import { map } from 'rxjs/operators';
 
@@ -9,9 +9,19 @@ import { map } from 'rxjs/operators';
 })
 export class AuthService {
 
-  private baseUrl = 'https://localhost:44336/api'
+  private baseUrl = 'https://localhost:44336/api';
 
-  constructor(private httpClient: HttpClient) { }
+  private currentUserSubject: BehaviorSubject<User>;
+  public currentUser: Observable<User>;
+
+  constructor(private httpClient: HttpClient) {
+    this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
+    this.currentUser = this.currentUserSubject.asObservable();
+  }
+
+  public get currentUserValue(): User {
+    return this.currentUserSubject.value;
+  }
 
   getToken(): string {
     return localStorage.getItem('token');

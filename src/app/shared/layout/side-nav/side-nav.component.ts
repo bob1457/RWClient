@@ -132,7 +132,10 @@ export class SideNavComponent implements OnInit {
 
 
   logout() {
-
+    // localStorage.clear();
+    localStorage.removeItem('currentUser');
+    this.router.navigate(['/']);
+    console.log('logged out!');
   }
 
   showInfo(link: any) {

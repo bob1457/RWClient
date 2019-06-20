@@ -1,3 +1,4 @@
+import { AuthGuard } from './../helpers/auth.guard';
 
 // import { DashboardComponent } from './../../../projects/dashboard/src/lib/dashboard.component';
 // import { ProfileComponent } from './../../../projects/auth/src/lib/profile/profile.component';
@@ -12,6 +13,7 @@ import { DashboardComponent } from '@lib/dashboard';
 const routes: Routes = [
   {path: 'Manage',
     component: HomeComponent,
+    canActivate: [AuthGuard],
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full'},
       { path: 'dashboard', component: DashboardComponent},
