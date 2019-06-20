@@ -66,11 +66,12 @@ export class AuthEffects {
       this.authService.logIn(credits).pipe(
         mergeMap((data: User) => [
           new AuthActions.LogInSuccess(data),
-          new RouterActions.Go({path:''})
+          new RouterActions.Go({path:'./Manage'})
         ]),
         catchError((err: HttpErrorResponse) => of(new AuthActions.LogInFailure(err.error)))
       ))
   )
+
 
   // @Effect()
   // LogIn: Observable<any> = this.actions
