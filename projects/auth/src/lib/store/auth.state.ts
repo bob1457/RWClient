@@ -5,12 +5,19 @@
 import { createFeatureSelector, createSelector, ActionReducerMap } from '@ngrx/store';
 
 import * as auth from './auth.reducers';
+import { User } from '../models';
 
 
-export interface AppState {
-  authState: auth.State;
-  // ...
-  // More "States" relates to Auth workflow can be added here
+// export interface AuthState {
+//   authState: auth.State;
+//   // ...
+//   // More "States" relates to Auth workflow can be added here
+// }
+
+export interface AuthState {
+  isAuthenticated: boolean;
+  user: User | null;
+  errorMessage: string | null;
 }
 
 export const reducers = {
@@ -22,4 +29,4 @@ export const reducers = {
 // `createFeatureSelector` is for selecting a "Type" (AuthState)
 // When requesting whole "Auth State", the app can call this const directly
 
-export const selectAuthState = createFeatureSelector<AppState>('auth');
+export const selectAuthState = createFeatureSelector<AuthState>('auth');

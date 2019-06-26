@@ -65,13 +65,19 @@ export class AuthEffects {
     exhaustMap((credits: Authentication) =>
       this.authService.logIn(credits).pipe(
         mergeMap((data: User) => [
-          new AuthActions.LogInSuccess(data),
-          new RouterActions.Go({path:'./Manage'})
+          new AuthActions.LogInSuccess(data) // ,
+          // new RouterActions.Go({path: '/Manage'})
         ]),
         catchError((err: HttpErrorResponse) => of(new AuthActions.LogInFailure(err.error)))
       ))
-  )
+  );
 
+  @Effect({ dispatch: false })
+  LogInSuccess = this.actions.pipe(
+    ofType(AuthActionTypes.LOGIN_SUCCESS),
+    map((action: AuthActions.LogInSuccess) => action.payload),
+    tap(() => this.router.navigate(['/Manage']))
+  );
 
   // @Effect()
   // LogIn: Observable<any> = this.actions

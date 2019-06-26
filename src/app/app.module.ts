@@ -1,3 +1,4 @@
+import { AuthEffects } from './../../projects/auth/src/lib/store/auth.effects';
 import { JwtInterceptor } from './helpers/JwtInterceptor';
 
 // import { AppMaterialModule } from './app-material/app-material.module';
@@ -15,6 +16,9 @@ import { SharedModule } from './shared/shared.module';
 
 import { StoreModule } from '@ngrx/store';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
+import { StoreDevtoolsModule} from '@ngrx/store-devtools';
+import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
   declarations: [
@@ -27,7 +31,12 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
     AppMaterialModule,
     ManageModule,
     SharedModule,
-    StoreModule.forRoot({})
+    EffectsModule.forRoot([AuthEffects]),
+    StoreModule.forRoot({}),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25, // Retains last 25 states
+      logOnly: environment.production, // Restrict extension to log-only mode
+    })
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass:JwtInterceptor, multi:true}

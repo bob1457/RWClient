@@ -2,6 +2,7 @@
 
 import { Action } from '@ngrx/store';
 import { Authentication } from './authentication'; // import the interface (model) for type check
+import { User } from '../models';
 
 // Use 'enum' to be registered as a map later
 export enum AuthActionTypes {
@@ -26,7 +27,7 @@ export class LogIn implements Action {
 
 export class LogInSuccess implements Action {
   readonly type = AuthActionTypes.LOGIN_SUCCESS;
-  constructor(public payload: any) {}
+  constructor(public payload: User) {}
 }
 
 export class LogInFailure implements Action {
