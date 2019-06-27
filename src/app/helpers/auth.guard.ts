@@ -1,6 +1,6 @@
-import { getUserStatus } from './../../../projects/auth/src/lib/store/auth.reducers';
+// import { getUserStatus } from './../../../projects/auth/src/lib/store/auth.reducers';
 
-import { AuthState } from './../../../projects/auth/src/lib/store/auth.state';
+// import { AuthState } from './../../../projects/auth/src/lib/store/auth.state';
 import { isLoggedIn } from '@lib/auth';
 import { Injectable } from '@angular/core';
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
@@ -35,6 +35,11 @@ export class AuthGuard implements CanActivate {
       debugger;
       const currentUser = localStorage.getItem('currentUser'); // this.authService.currentUserValue;
       console.log(currentUser);
+
+      this.loginStatus$.subscribe((loggedIn) => {
+        console.log(loggedIn);
+      });
+
       if (currentUser) {
             // authorised so return true
             // this.isLoggedIn = true;

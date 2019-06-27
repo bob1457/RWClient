@@ -83,17 +83,18 @@ switch (action.type) {
     }
   }
 
+// Use "Const" for getting read-only data managed by current "Reducer"
 export const isLoggedIn = (state: AuthState) => state.isAuthenticated;
 export const getUser = (state: AuthState) => state.user;
 export const errorMessage = (state: AuthState) => state.errorMessage;
 
 
-// Selectors:
+// Selectors: - possibly move to a separate selector file
 
-export const getAuthStatus = createFeatureSelector<AuthState>('auth');
-export const getUserStatus = createSelector(getAuthStatus, isLoggedIn)
+export const getAuthStatus = createFeatureSelector<AuthState>('auth'); // Select required slice of state
+export const getUserStatus = createSelector(getAuthStatus, isLoggedIn)  // Select the attribute of the state in the slice
 
-// Use "Const" for getting read-only data managed by current "Reducer"
+
 
 
 
