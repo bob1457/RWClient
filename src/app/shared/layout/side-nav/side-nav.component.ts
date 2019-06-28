@@ -1,7 +1,9 @@
+import * as fromAuth from '@lib/auth';
+import { Store } from '@ngrx/store';
 import { Component, OnInit } from '@angular/core';
 import { MediaObserver, MediaChange } from '@angular/flex-layout';
 import { Router } from '@angular/router';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, Subscription, from } from 'rxjs';
 import {  trigger, state, style, animate, transition } from '@angular/animations'
 
 
@@ -51,7 +53,9 @@ export class SideNavComponent implements OnInit {
 
   theme$:string = "dark-theme"; // this is default -- selecting theme can be implemented using observable from rxjs... later.
 
-  constructor(public mediaObserver: MediaObserver, private router: Router) {
+  constructor(public mediaObserver: MediaObserver,
+              private router: Router,
+              private store: Store<fromAuth.AuthState>) {
     this.watcher = mediaObserver.media$.subscribe((mediaChange: MediaChange) => {
       this.mode = this.getMode(mediaChange);
       this.opened = this.getOpened(mediaChange);
@@ -131,11 +135,15 @@ export class SideNavComponent implements OnInit {
   }
 
 
-  logout() {
+  logout(): void {
     // localStorage.clear();
-    localStorage.removeItem('currentUser');
-    this.router.navigate(['/']);
-    console.log('logged out!');
+
+    this.store.dispatch(new fromAuth.LogOut);
+
+
+    // localStorage.removeItem('currentUser');
+    // this.router.navigate(['/']);
+    // console.log('logged out!');
   }
 
   showInfo(link: any) {

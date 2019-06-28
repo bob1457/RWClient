@@ -55,20 +55,19 @@ export class AuthEffects {
   );
 */
 
-
-
-
   @Effect()
+  // debugger;
   login$: Observable<Action> = this.actions.pipe(
     ofType<AuthActions.LogIn>(AuthActionTypes.LOGIN),
     map((action: AuthActions.LogIn) => action.payload),
     exhaustMap((credits: Authentication) =>
       this.authService.logIn(credits).pipe(
         mergeMap((data: User) => [
-          new AuthActions.LogInSuccess(data) // ,
+          new AuthActions.LogInSuccess(data) //,
+          // console.log('received: ', data)
           // new RouterActions.Go({path: '/Manage'})
         ]),
-        catchError((err: HttpErrorResponse) => of(new AuthActions.LogInFailure(err.error)))
+        catchError((err: HttpErrorResponse) => of(new LogInFailure(err.error)))
       ))
   );
 
@@ -139,13 +138,7 @@ export class AuthEffects {
     ofType(AuthActionTypes.SIGNUP_FAILURE)
   );
 
-  @Effect({ dispatch: false })
-  public LogOut: Observable<any> = this.actions.pipe(
-    ofType(AuthActionTypes.LOGOUT),
-    tap((user) => {
-      localStorage.removeItem('token');
-    })
-  );
+
 
   @Effect({ dispatch: false })
   GetStatus: Observable<any> = this.actions
@@ -154,4 +147,19 @@ export class AuthEffects {
       return this.authService.getStatus();
     });
 */
+
+@Effect({ dispatch: false })
+  LogInFailure = this.actions.pipe(
+    ofType(AuthActionTypes.LOGIN_FAILURE)
+  );
+
+@Effect({ dispatch: false })
+  public LogOut: Observable<Action> = this.actions.pipe(
+    ofType(AuthActionTypes.LOGOUT),
+    tap((user) => {
+      localStorage.removeItem('currentUser');
+      this.router.navigate(['./'])
+    })
+  );
+
 }

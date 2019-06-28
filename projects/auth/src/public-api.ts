@@ -13,4 +13,5 @@ export * from './lib/profile/profile.component';
 export * from './lib/store/auth.state';
 export * from './lib/store/auth.reducers';
 export * from './lib/store/auth.selectors';
+export * from './lib/store/auth.actions';
 

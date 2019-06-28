@@ -1,3 +1,4 @@
+import { getLogInStatus } from './../../../projects/auth/src/lib/store/auth.reducers';
 // import { getUserStatus } from './../../../projects/auth/src/lib/store/auth.reducers';
 
 // import { AuthState } from './../../../projects/auth/src/lib/store/auth.state';
@@ -26,7 +27,7 @@ export class AuthGuard implements CanActivate {
         private store: Store<fromAuth.AuthState>,
         private authService: AuthService
     ) {
-      this.loginStatus$ = this.store.select(fromAuth.getUserStatus);
+      this.loginStatus$ = this.store.select(fromAuth.getLogInStatus);
       console.log(isLoggedIn);
       console.log(this.loginStatus$);
     }
@@ -60,9 +61,6 @@ export class AuthGuard implements CanActivate {
       //   }),
       //   take(1)
       // );
-
-
-
 
 
 

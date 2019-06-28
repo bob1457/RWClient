@@ -1,3 +1,4 @@
+import { AuthModule } from '@lib/auth';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppMaterialModule } from '@lib/app-material';
 import { NgModule } from '@angular/core';
@@ -21,6 +22,7 @@ const routes: Routes = [];
   imports: [
     CommonModule,
     AppMaterialModule,
+    AuthModule,
     BrowserAnimationsModule,
     RouterModule.forChild(routes)
   ],

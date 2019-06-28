@@ -18,6 +18,7 @@ export interface AuthState {
   isAuthenticated: boolean;
   user: User | null;
   errorMessage: string | null;
+  loading: boolean;
 }
 
 export const reducers = {
