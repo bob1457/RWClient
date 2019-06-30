@@ -9,6 +9,7 @@
     "./projects/property-manager/src/**/*.ts"
   ],
   "exclude": [
+    "dist",
     "test.ts",
     "**/*.spec.ts",
     "./projects/property-manager/src/**/*spec.ts",

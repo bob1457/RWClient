@@ -3,29 +3,18 @@
 </p> -->
 
 <div class="clock">
-  <div
-    class="hand hour-hand"
-    [style.transform]="'rotate(' + (hourDegrees$ | async) + 'deg)'"
-  ></div>
-  <div
-    class="hand minute-hand"
-    [style.transform]="'rotate(' + (minDegrees$ | async) + 'deg)'"
-  ></div>
-  <div
-    class="hand second-hand"
-    [style.transform]="'rotate(' + (secDegrees$ | async) + 'deg)'"
-  ></div>
+    <div class="hand hour-hand" [style.transform]="'rotate(' + (hourDegrees$ | async) + 'deg)'" style="margin-top: -3px;"></div>
+    <div class="hand minute-hand" [style.transform]="'rotate(' + (minDegrees$ | async) + 'deg)'"></div>
+    <div class="hand second-hand" [style.transform]="'rotate(' + (secDegrees$ | async) + 'deg)'"></div>
 </div>
 
-<p
-  style="margin-top: 80px;
+<p style="margin-top: 80px;
 text-align: center;
 font-family: inherit;
 color: #80f1ad;
-font-size: .7em;"
->
-  <!-- H Deg:	{{hourDegrees$|async}} -->
-  {{ myDate | date: "medium" }}
+font-size: .7em;">
+    <!-- H Deg:	{{hourDegrees$|async}} -->
+    {{ myDate | date: "medium" }}
 </p>
 <!-- <p>
 M Deg:{{minDegrees$|async}}

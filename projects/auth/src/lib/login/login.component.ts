@@ -28,12 +28,15 @@ export class LoginComponent implements OnInit {
   // constructor(private authService: AuthService,
   //             private router: Router,
   //             private store: Store<AuthState>) {}
-  constructor(private store: Store<AuthState>) {}
+  constructor(private store: Store<AuthState>) {
+    this.error = this.store.select(getErrorMsg);
+  }
 
   ngOnInit() {
     debugger;
      // set error
-    this.error = this.store.select(getErrorMsg);
+    // this.error = this.store.select(getErrorMsg);
+    this.error.subscribe(err => {console.log(err)});
      // set loading status
     this.loading = this.store.select(getLoadingStatus);
   }

@@ -51,7 +51,7 @@ export class SideNavComponent implements OnInit {
   sidenavWidth = 17.5; // side nav width when started (default: full-width side nav)
 
 
-  theme$:string = "dark-theme"; // this is default -- selecting theme can be implemented using observable from rxjs... later.
+  theme$:string = 'dark-theme'; // this is default -- selecting theme can be implemented using observable from rxjs... later.
 
   constructor(public mediaObserver: MediaObserver,
               private router: Router,
