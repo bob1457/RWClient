@@ -58,7 +58,7 @@ switch (action.type) {
           user: {
             token: action.payload.token,
             // email: action.payload.email,
-            username: action.payload.username
+            username: action.payload.user.userName
           },
           errorMessage: null
         };
