@@ -1,12 +1,14 @@
+import { AppState } from './../../../../../src/app/store/app.state';
+import * as fromRouter from './../../../../../src/app/store/router.actions'
 import { User } from './../models/user';
 import { Injectable } from '@angular/core';
-import { Action } from '@ngrx/store';
+import { Action, Store } from '@ngrx/store';
 import { Router } from '@angular/router';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable } from 'rxjs';
 
 import * as AuthActions from './auth.actions';
-import * as RouterActions from './router.actions';
+// import * as RouterActions from './router.actions';
 
 import { of } from 'rxjs'; // rxjs 6.xx only
 
@@ -37,6 +39,7 @@ export class AuthEffects {
   constructor(
     private actions: Actions,
     private authService: AuthService,
+    private store: Store<AppState>,
     private router: Router
   ) {}
 /*
@@ -75,8 +78,8 @@ export class AuthEffects {
   LogInSuccess = this.actions.pipe(
     ofType(AuthActionTypes.LOGIN_SUCCESS),
     map((action: AuthActions.LogInSuccess) => action.payload),
-    tap(() => this.router.navigate(['/Manage']))
-  );
+    tap(() => this.store.dispatch(new fromRouter.Go({ path: ['/Manage']}))
+  ));
 
   // @Effect()
   // LogIn: Observable<any> = this.actions
@@ -158,7 +161,8 @@ export class AuthEffects {
     ofType(AuthActionTypes.LOGOUT),
     tap((user) => {
       localStorage.removeItem('currentUser');
-      this.router.navigate(['./'])
+      // this.router.navigate(['./'])
+      this.store.dispatch(new fromRouter.Go({ path: ['/Manage']}));
     })
   );
 

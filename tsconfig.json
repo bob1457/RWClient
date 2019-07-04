@@ -14,9 +14,6 @@
     "typeRoots": [
       "node_modules/@types"
     ],
-
-
-
     "lib": [
       "es2018",
       "dom"
@@ -51,6 +48,12 @@
       ],
       "dashboard/*": [
         "dist/dashboard/*"
+      ],
+      "app-core": [
+        "dist/app-core"
+      ],
+      "app-core/*": [
+        "dist/app-core/*"
       ]
     }
   }

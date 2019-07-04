@@ -3,7 +3,7 @@ import { getErrorMsg, getLoadingStatus } from './../store/auth.reducers';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 // import { Router } from '@angular/router';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { AuthState } from '../store/auth.state';
 import { LogIn } from '../store/auth.actions';
 import { Observable } from 'rxjs';
@@ -36,9 +36,10 @@ export class LoginComponent implements OnInit {
     debugger;
      // set error
     // this.error = this.store.select(getErrorMsg);
-    this.error.subscribe(err => {console.log(err)});
+    // this.error.subscribe(err => {console.log(err)});
+    this.error = this.store.pipe(select(getErrorMsg))
      // set loading status
-    this.loading = this.store.select(getLoadingStatus);
+    this.loading = this.store.pipe(select(getLoadingStatus));
   }
 
 
