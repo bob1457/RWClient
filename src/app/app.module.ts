@@ -21,7 +21,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { StoreDevtoolsModule} from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
-import { StoreRouterConnectingModule, RouterStateSerializer } from '@ngrx/router-store';
+import { StoreRouterConnectingModule, RouterStateSerializer, routerReducer } from '@ngrx/router-store';
 
 @NgModule({
   declarations: [
@@ -35,7 +35,7 @@ import { StoreRouterConnectingModule, RouterStateSerializer } from '@ngrx/router
     ManageModule,
     SharedModule,
     EffectsModule.forRoot([AuthEffects]),
-    StoreModule.forRoot({}),
+    StoreModule.forRoot({router: routerReducer}),
     StoreRouterConnectingModule.forRoot(),
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states
