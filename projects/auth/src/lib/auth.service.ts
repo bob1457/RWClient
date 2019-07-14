@@ -31,9 +31,11 @@ export class AuthService {
     debugger;
     const url = `${this.baseUrl}/Auth/signin`;
     console.log(user);
-    return this.httpClient.post<User>(url, user)
+    return this.httpClient.post<any>(url, user)
     .pipe(map(response => {
       localStorage.setItem('currentUser', JSON.stringify(response.token));
+      localStorage.setItem('username', JSON.stringify(response.user.userName));
+      localStorage.setItem('avatar', JSON.stringify(response.user.avatarImgUrl));
       return response;
     }));
   }

@@ -22,7 +22,7 @@ export const initialState: AuthState = { // Define initial state
 export function reducer(state = initialState, action: All): AuthState {
    // Case can be more complex
    // "Login" is not put since it's not used for representing a status (State)
-// debugger;
+debugger;
   // Reducer implementation - update state in application state store
   // return type is State
 switch (action.type) {
@@ -46,7 +46,10 @@ switch (action.type) {
           user: {
             token: action.payload.token,
             // email: action.payload.email,
-            username: action.payload.user.userName
+            username: action.payload.user.userName,
+            firstname: action.payload.user.firstName,
+            lastname: action.payload.user.lastName,
+            avatarUrl: action.payload.user.avatarImgUrl
           },
           errorMessage: null
         };

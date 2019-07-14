@@ -3,4 +3,7 @@ export interface User {
   password?: string;
   rememberMe?: boolean;
   token?: string;
+  avatarUrl?: string;
+  firstname?: string;
+  lastname?: string;
 }
