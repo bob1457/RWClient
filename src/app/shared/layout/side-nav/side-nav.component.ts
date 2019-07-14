@@ -1,10 +1,12 @@
 import * as fromAuth from '@lib/auth';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { Component, OnInit } from '@angular/core';
 import { MediaObserver, MediaChange } from '@angular/flex-layout';
 import { Router } from '@angular/router';
 import { Observable, Subscription, from } from 'rxjs';
 import {  trigger, state, style, animate, transition } from '@angular/animations'
+import { getUserInfo } from 'projects/auth/src/public-api';
+import { User } from '@lib/auth';
 
 
 @Component({
@@ -28,6 +30,7 @@ import {  trigger, state, style, animate, transition } from '@angular/animations
 })
 export class SideNavComponent implements OnInit {
 
+  serverUrl = 'http://localhost:58088/';
 
   currentState = 'increase';
 
@@ -35,28 +38,30 @@ export class SideNavComponent implements OnInit {
 
   link = '';
 
-  mode: string = 'side';
-  opened: boolean = true;
+  mode = 'side';
+  opened = true;
 
   media$: Observable<MediaChange>;
 
   watcher: Subscription;
   activeMediaQuery = '';
 
-  ToggleButtonDisplay: string = 'none';
-  SideToggleButtonDisplay: string = '';
+  ToggleButtonDisplay = 'none';
+  SideToggleButtonDisplay = '';
 
-  OpenButtonDisplay: string = 'none';
-  visible: boolean = false;
+  OpenButtonDisplay = 'none';
+  visible = false;
   sidenavWidth = 17.5; // side nav width when started (default: full-width side nav)
 
+  user: Observable<User>;
+  avatar = '';
 
-  theme$:string = 'dark-theme'; // this is default -- selecting theme can be implemented using observable from rxjs... later.
+  theme$ = 'dark-theme'; // this is default -- selecting theme can be implemented using observable from rxjs... later.
 
   constructor(public mediaObserver: MediaObserver,
               private router: Router,
               private store: Store<fromAuth.AuthState>) {
-    this.watcher = mediaObserver.media$.subscribe((mediaChange: MediaChange) => {
+      this.watcher = mediaObserver.media$.subscribe((mediaChange: MediaChange) => {
       this.mode = this.getMode(mediaChange);
       this.opened = this.getOpened(mediaChange);
       this.OpenButtonDisplay = this.showHideOpenButton(mediaChange,);
@@ -64,6 +69,9 @@ export class SideNavComponent implements OnInit {
    }
 
   ngOnInit() {
+    debugger;
+    this.user = this.store.pipe(select(getUserInfo));
+    this.avatar = JSON.parse(localStorage.getItem('avatar'));
   }
 
   showSearch() {
