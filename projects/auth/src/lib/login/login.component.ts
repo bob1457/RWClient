@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    debugger;
+    // debugger;
      // set error
     // this.error = this.store.select(getErrorMsg);
     // this.error.subscribe(err => {console.log(err)});
@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit {
 
 
   onSubmit(form: NgForm) {
-    debugger;
+    // debugger;
     console.log(form.value);
     // this.loading = true;
 
