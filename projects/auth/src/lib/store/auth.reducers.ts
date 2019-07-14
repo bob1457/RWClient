@@ -1,15 +1,3 @@
-import { LayoutModule } from '@angular/cdk/layout';
-// import { isAuthenticated } from './auth.reducers';
-// import { isLoggedIn } from '@lib/auth';
-
-// Used to decide what “State” should be provided based on the different “Types” <- defined in “Action”.
-
-// (pure) function that dispatch actions to update state in store
-// What reducer will do:
-// 1. Respond to actions
-// 2. Update state of the application
-
-import { User } from '../models/user';
 import { AuthActionTypes, All } from './auth.actions';
 import { AuthState } from './auth.state';
 
@@ -34,7 +22,7 @@ export const initialState: AuthState = { // Define initial state
 export function reducer(state = initialState, action: All): AuthState {
    // Case can be more complex
    // "Login" is not put since it's not used for representing a status (State)
-debugger;
+// debugger;
   // Reducer implementation - update state in application state store
   // return type is State
 switch (action.type) {

@@ -1,5 +1,5 @@
-import { AppState } from './../../../../../src/app/store/app.state';
-import * as fromRouter from './../../../../../src/app/store/router.actions'
+// import { AppState } from './../../../../../src/app/store/app.state';
+// import * as fromRouter from './../../../../../src/app/store/router.actions';
 import { User } from './../models/user';
 import { Injectable } from '@angular/core';
 import { Action, Store } from '@ngrx/store';
@@ -30,6 +30,7 @@ import {
 } from './auth.actions';
 import { Authentication } from './authentication';
 import { HttpErrorResponse } from '@angular/common/http';
+import { AuthState } from './auth.state';
 
 
 
@@ -39,7 +40,7 @@ export class AuthEffects {
   constructor(
     private actions: Actions,
     private authService: AuthService,
-    private store: Store<AppState>,
+    private store: Store<AuthState>,
     private router: Router
   ) {}
 /*
@@ -78,8 +79,10 @@ export class AuthEffects {
   LogInSuccess = this.actions.pipe(
     ofType(AuthActionTypes.LOGIN_SUCCESS),
     map((action: AuthActions.LogInSuccess) => action.payload),
-    tap(() => this.store.dispatch(new fromRouter.Go({ path: ['/Manage']}))
+    tap(() => this.router.navigate(['./Manage'])
   ));
+
+  // this.store.dispatch( new fromRouter.Go({ path: ['/Manage']}) )
 
   // @Effect()
   // LogIn: Observable<any> = this.actions
@@ -161,8 +164,8 @@ export class AuthEffects {
     ofType(AuthActionTypes.LOGOUT),
     tap((user) => {
       localStorage.removeItem('currentUser');
-      // this.router.navigate(['./'])
-      this.store.dispatch(new fromRouter.Go({ path: ['/Manage']}));
+      this.router.navigate(['./']);
+      // this.store.dispatch(new fromRouter.Go({ path: ['/Manage']}));
     })
   );
 

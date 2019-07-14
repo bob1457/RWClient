@@ -12,7 +12,7 @@ export interface RouterStateUrl {
 export type RouterState = RouterReducerState<RouterStateUrl>;
 export const reducer = routerReducer;
 
-export class CustomeSerializer implements RouterStateSerializer<RouterStateUrl>{
+export class CustomSerializer implements RouterStateSerializer<RouterStateUrl>{
   serialize(routerState: RouterStateSnapshot): RouterStateUrl {
       const { url } = routerState;
       const { queryParams } = routerState.root;

@@ -27,6 +27,7 @@
         "@angular/platform-browser": "~8.0.0",
         "@angular/platform-browser-dynamic": "~8.0.0",
         "@angular/router": "~8.0.0",
+        "@lib/app-core": "file:dist/app-core",
         "@lib/app-material": "file:dist/app-material",
         "@lib/auth": "file:dist/auth",
         "@lib/dashboard": "file:dist/dashboard",

@@ -21,7 +21,8 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { StoreDevtoolsModule} from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
-import { StoreRouterConnectingModule, RouterStateSerializer, routerReducer } from '@ngrx/router-store';
+import { StoreRouterConnectingModule, RouterStateSerializer, routerReducer, RouterState } from '@ngrx/router-store';
+
 
 @NgModule({
   declarations: [
@@ -35,8 +36,21 @@ import { StoreRouterConnectingModule, RouterStateSerializer, routerReducer } fro
     ManageModule,
     SharedModule,
     EffectsModule.forRoot([AuthEffects]),
-    StoreModule.forRoot({router: routerReducer}),
-    StoreRouterConnectingModule.forRoot(),
+    StoreModule.forRoot({router: routerReducer},
+      {
+        runtimeChecks: {
+          strictActionImmutability: true,
+          strictActionSerializability: true,
+          strictStateImmutability: true,
+          strictStateSerializability: true
+        }
+      }),
+    StoreRouterConnectingModule.forRoot(
+      {
+        routerState: RouterState.Minimal,
+        serializer: fromStore.CustomSerializer
+      }
+    ),
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states
       logOnly: environment.production, // Restrict extension to log-only mode
@@ -44,7 +58,7 @@ import { StoreRouterConnectingModule, RouterStateSerializer, routerReducer } fro
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass:JwtInterceptor, multi: true},
-    {provide: RouterStateSerializer, useClass: fromStore.CustomeSerializer}
+    {provide: RouterStateSerializer, useClass: fromStore.CustomSerializer}
   ],
   bootstrap: [AppComponent]
 })
