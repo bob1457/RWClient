@@ -1,4 +1,5 @@
-import { PropertyService } from './../../../../app-core/src/lib/property/services/property.service';
+import { Subscription } from 'rxjs';
+import { PropertyService, Property } from '@lib/app-core';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -10,9 +11,13 @@ export class PropertyHomeComponent implements OnInit {
 
   constructor(private propertyService: PropertyService) { }
 
+  list: Property[];
+
   ngOnInit() {
   }
 
-
+  getPropertyList() {
+    return this.propertyService.findAll().subscribe(pList => this.list = pList);
+  }
 
 }
