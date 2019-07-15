@@ -99,6 +99,7 @@ export const loading = (state: AuthState) => state.loading;
 // Selectors: - possibly move to a separate selector file
 
 export const getAuthStatus = createFeatureSelector<AuthState>('auth'); // Select required slice of state
+
 export const getLogInStatus = createSelector(getAuthStatus, isLoggedIn);  // Select the attribute of the state in the slice
 export const getErrorMsg = createSelector(getAuthStatus, error);
 export const getLoadingStatus = createSelector(getAuthStatus, loading);
