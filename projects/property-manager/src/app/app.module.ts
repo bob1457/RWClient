@@ -1,3 +1,4 @@
+import { AppCoreModule } from '@lib/app-core';
 import { AppMaterialModule } from '@lib/app-material';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -19,7 +20,8 @@ import { PropertyDetailsComponent } from './property-details/property-details.co
   imports: [
     BrowserModule,
     AppRoutingModule,
-    AppMaterialModule
+    AppMaterialModule,
+    AppCoreModule
   ],
   providers: [],
   bootstrap: [AppPmComponent]
