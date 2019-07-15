@@ -430,13 +430,13 @@
             <button mat-icon-button (click)="showSearch()">
               <mat-icon color="primary" title="search">search</mat-icon>
             </button>
-            <button mat-button class="more-btn" [matMenuTriggerFor]="menu" >
+            <button mat-button class="more-btn" [matMenuTriggerFor]="menu" *ngIf="user" >
               <!--<mat-icon>more_vert</mat-icon>     attr.src="{{serverUrl}}{{user.avatarImgUrl}}" width="38" height="38" title="{{user.userName}}"  *ngIf="user"  src="../../../../assets/images/avatar.png"-->
               <img
-                attr.src="{{serverUrl}}{{avatar}}"
+                attr.src="{{serverUrl}}{{user.avatarUrl}}"
                 width="38"
                 height="38"
-                title="bob"
+                title="{{user.username}}"
               />
             </button>
 

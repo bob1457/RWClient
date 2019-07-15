@@ -53,7 +53,7 @@ export class SideNavComponent implements OnInit {
   visible = false;
   sidenavWidth = 17.5; // side nav width when started (default: full-width side nav)
 
-  user: Observable<User>;
+  user: User; // this must be a local variable, NOT an Observable
   avatar = '';
 
   theme$ = 'dark-theme'; // this is default -- selecting theme can be implemented using observable from rxjs... later.
@@ -70,7 +70,8 @@ export class SideNavComponent implements OnInit {
 
   ngOnInit() {
     debugger;
-    this.user = this.store.pipe(select(getUserInfo));
+    this.store.pipe(select(getUserInfo)).subscribe((userData) => { this.user = userData; console.log(userData); }
+    );
     this.avatar = JSON.parse(localStorage.getItem('avatar'));
   }
 
