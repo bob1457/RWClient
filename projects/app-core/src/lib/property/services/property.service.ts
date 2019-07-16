@@ -47,7 +47,7 @@ export class PropertyService {
   }
 
   getPropertyList() {
-    return this.http.get<Property[]>(`${this.baseUrl}/property/all`);
+    return this.http.get<Property[]>(`${this.baseUrl}/property/all`); // return type could be <Property[]>?
   }
 
   getPropertyDetails() {
