@@ -17,7 +17,7 @@ export class PropertyHomeComponent implements OnInit {
   }
 
   getPropertyList() {
-    return this.propertyService.findAll().subscribe(pList => this.list = pList);
+    return this.propertyService.getPropertyList().subscribe(pList => this.list = pList);
   }
 
 }

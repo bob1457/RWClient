@@ -8,31 +8,33 @@ import { Observable } from 'rxjs';
 // })
 export class AppCoreService<T, ID> {
 
+  endPoint = 'http://localhost:21799';
+
   constructor(
     protected http: HttpClient,
-    protected baseUrl: string
+    protected url: string // will be passed in from child class
   ) { }
 
   // ************************************************************
     // Generic CRUD operations
     // ************************************************************
     save(t: T): Observable<T>{
-      return this.http.post<T>(`${this.baseUrl}`, t);
+      return this.http.post<T>(`${this.endPoint}/${this.url}`, t);
     }
 
     findOne(id: ID) {
-      return this.http.get<T>(`${this.baseUrl}/${id}`);
+      return this.http.get<T>(`${this.endPoint}/${this.url}/${id}`);
     }
 
     findAll() {
-      return this.http.get<T[]>(`${this.baseUrl}`);
+      return this.http.get<T[]>(`${this.endPoint}/${this.url}`);
     }
 
     update(t: T) {
-      return this.http.post<T>(`${this.baseUrl}`, t);
+      return this.http.post<T>(`${this.endPoint}/${this.url}`, t);
     }
 
     delete(id: ID) {
-      return this.http.delete<T>(`${this.baseUrl}/${id}`);
+      return this.http.delete<T>(`${this.endPoint}/${this.url}/${id}`);
     }
 }
