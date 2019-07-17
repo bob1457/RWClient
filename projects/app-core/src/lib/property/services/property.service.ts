@@ -1,5 +1,5 @@
 import { AppCoreService } from './../../app-core.service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHandler, HttpHeaderResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Property } from '../models/property.model';
 import { Observable } from 'rxjs';
@@ -23,8 +23,14 @@ import { Observable } from 'rxjs';
 export class PropertyService {
 
   baseUrl = 'http://localhost:21799';
-
+  // baseUrl = 'http://localhost:19807/api'; // for testing
   propertyList: Property[];
+
+  // token = localStorage.getItem('currentUser');
+
+  // authHeader(headers: Headers) {
+  //   headers.append('Authorization', 'Bearer ' + this.token );
+  // }
 
   constructor(protected http: HttpClient) { // Not use generic service due to the complexity of the domain model
 
@@ -47,6 +53,9 @@ export class PropertyService {
   }
 
   getPropertyList() {
+    debugger;
+    // const headers: any  = new Headers();
+    // headers.append('Authorization', 'Bearer ' + this.token);
     return this.http.get<Property[]>(`${this.baseUrl}/property/all`); // return type could be <Property[]>?
   }
 

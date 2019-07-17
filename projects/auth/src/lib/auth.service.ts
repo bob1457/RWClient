@@ -24,7 +24,8 @@ export class AuthService {
   }
 
   getToken(): string {
-    return localStorage.getItem('token');
+    return localStorage.getItem('currentUser');
+    // return JSON.stringify(localStorage.getItem('currentUser'));
   }
 
   logIn(user): Observable<any> { // it is email before, now try to use username, instead.
@@ -34,6 +35,7 @@ export class AuthService {
     return this.httpClient.post<any>(url, user)
     .pipe(map(response => {
       localStorage.setItem('currentUser', JSON.stringify(response.token));
+      localStorage.setItem('token', JSON.stringify(response.token));
       localStorage.setItem('username', JSON.stringify(response.user.userName));
       localStorage.setItem('avatar', JSON.stringify(response.user.avatarImgUrl));
       return response;

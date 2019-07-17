@@ -14,10 +14,13 @@ export class PropertyHomeComponent implements OnInit {
   list: Property[];
 
   ngOnInit() {
+    debugger;
+    return this.propertyService.getPropertyList().subscribe((pList: Property[]) => {this.list = pList; console.log(pList)});
   }
 
   getPropertyList() {
-    return this.propertyService.getPropertyList().subscribe(pList => this.list = pList);
+    debugger;
+    return this.propertyService.getPropertyList().subscribe((pList: Property[]) => {this.list = pList; });
   }
 
 }

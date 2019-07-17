@@ -57,8 +57,8 @@ import { StoreRouterConnectingModule, RouterStateSerializer, routerReducer, Rout
     })
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass:JwtInterceptor, multi: true},
-    {provide: RouterStateSerializer, useClass: fromStore.CustomSerializer}
+    { provide: HTTP_INTERCEPTORS, useClass:JwtInterceptor, multi: true },
+    { provide: RouterStateSerializer, useClass: fromStore.CustomSerializer }
   ],
   bootstrap: [AppComponent]
 })
