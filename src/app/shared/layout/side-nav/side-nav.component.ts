@@ -72,8 +72,8 @@ export class SideNavComponent implements OnInit {
 
   ngOnInit() {
     debugger;
-    this.store.pipe(select(getUserInfo)).subscribe((userData) => { this.user = userData; console.log(userData); } );
-    // select single state then use async pipe in template for sub/unsub using *ngIf which returns a boolean value
+    this.store.pipe(select(getUserInfo)).subscribe((userData) => { this.user = userData;  } );
+    // select single state then use async pipe in template for sub/unsub using *ngIf which returns a boolean value // console.log(userData);
     // this.avatar$ = this.store.select(ustate => ustate.user.avatarUrl);
     this.avatar = JSON.parse(localStorage.getItem('avatar'));
   }
@@ -91,11 +91,11 @@ export class SideNavComponent implements OnInit {
   increase() {
     this.sidenavWidth = 17.5;
     this.SideToggleButtonDisplay = '';
-    console.log('increase sidenav width');
+    // console.log('increase sidenav width');
   }
   decrease(){
     this.sidenavWidth = 4;
-    console.log('decrease sidenav width');
+    // console.log('decrease sidenav width');
   }
 
   changeSideNav() {
@@ -109,7 +109,7 @@ export class SideNavComponent implements OnInit {
       this.ToggleButtonDisplay = 'none';
       this.SideToggleButtonDisplay = '';
     }
-    console.log('side nav width changed to ' + this.sidenavWidth);
+    // console.log('side nav width changed to ' + this.sidenavWidth);
   }
 
   private getMode(mediaChange: MediaChange): string {

@@ -22,6 +22,7 @@ import { environment } from 'src/environments/environment';
 import { StoreDevtoolsModule} from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule, RouterStateSerializer, routerReducer, RouterState } from '@ngrx/router-store';
+import { PropertyEffects } from 'projects/property-manager/src/app/store/effects/property.effects';
 
 
 @NgModule({
@@ -35,7 +36,7 @@ import { StoreRouterConnectingModule, RouterStateSerializer, routerReducer, Rout
     AppMaterialModule,
     ManageModule,
     SharedModule,
-    EffectsModule.forRoot([AuthEffects]),
+    EffectsModule.forRoot([AuthEffects, PropertyEffects]),
     StoreModule.forRoot({router: routerReducer},
       {
         runtimeChecks: {

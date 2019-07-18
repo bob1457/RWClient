@@ -54,8 +54,7 @@ export class PropertyService {
 
   getPropertyList() {
     debugger;
-    // const headers: any  = new Headers();
-    // headers.append('Authorization', 'Bearer ' + this.token);
+
     return this.http.get<Property[]>(`${this.baseUrl}/property/all`); // return type could be <Property[]>?
   }
 
