@@ -2,7 +2,7 @@ import { createAction, props } from '@ngrx/store';
 
 import { Property } from '@lib/app-core';
 
-
+debugger;
 /**
  * Get Property List Actions
  */
@@ -38,17 +38,19 @@ export const getPropertyDetailsSuccess = createAction(
 
 export const getPropertyDetailsFailure = createAction(
   '[Property] Get Property Details Failure',
-  props<{payload: any}>()
+  // props<{payload: any}>()
+  (errorMessage = 'Error loading property details') => {
+    return ({ payload: { errorMessage } });
+  }
 );
 
 /**
  * Create Property Actions
  */
 
-export const addProperty = createAction(
-  '[Property] Add Property',
-  props<{payload: any}>()
-);
+export default createAction('[Property] Add Property', props<{
+  payload: any;
+}>());
 
 export const addPropertySuccess = createAction(
   '[Property] Add Property Success',

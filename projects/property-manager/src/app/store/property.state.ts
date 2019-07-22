@@ -7,6 +7,7 @@ export interface PropertyState {
   loaded: boolean | false;
   properties: Property[] | null;
   property: Property | null;
+  errorMessage: string | null;
 }
 
 export const reducer = {
