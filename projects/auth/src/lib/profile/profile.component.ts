@@ -1,4 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Store, select } from '@ngrx/store';
+import { AuthState } from '../store/auth.state';
+
+import { User } from '../models';
+import { getUserInfo } from '../store/auth.reducers';
+
 
 @Component({
   selector: 'lib-profile',
@@ -7,9 +13,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor() { }
+  user: User;
+
+  constructor(private store: Store<AuthState>) { }
 
   ngOnInit() {
+    debugger;
+    this.store.pipe(select(getUserInfo)).subscribe(userData => {this.user = userData; console.log(this.user); });
+
   }
 
 }

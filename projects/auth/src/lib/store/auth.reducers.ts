@@ -49,7 +49,8 @@ switch (action.type) {
             username: action.payload.user.userName,
             firstname: action.payload.user.firstName,
             lastname: action.payload.user.lastName,
-            avatarUrl: action.payload.user.avatarImgUrl
+            avatarUrl: action.payload.user.avatarImgUrl,
+            role: action.payload.user.userRole
           },
           errorMessage: null
         };
