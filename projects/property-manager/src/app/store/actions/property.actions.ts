@@ -3,8 +3,9 @@ import { createAction, props } from '@ngrx/store';
 import { Property } from '@lib/app-core';
 
 
-
-
+/**
+ * Get Property List Actions
+ */
 export const getPropertyList = createAction(
   '[Property] Get Property List'
 );
@@ -15,14 +16,34 @@ export const getPropertyListSuccess = createAction(
 );
 
 export const getPropertyListFailure = createAction(
-  '[Property] Add Property Failure',
+  '[Property] Get Property List Failure',
   // props<{payload: any}>()
   (errorMessage = 'Error loading property list') => {
     return ({ payload: { errorMessage } });
   }
 );
 
+/**
+ * Get Property Details Actions
+ */
+export const getPropertyDetails = createAction(
+  '[Property] Get Property Details',
+  props<{payload: number}>()
+);
 
+export const getPropertyDetailsSuccess = createAction(
+  '[Property] Get Property Details Success',
+  props<{payload: Property}>()
+);
+
+export const getPropertyDetailsFailure = createAction(
+  '[Property] Get Property Details Failure',
+  props<{payload: any}>()
+);
+
+/**
+ * Create Property Actions
+ */
 
 export const addProperty = createAction(
   '[Property] Add Property',
@@ -39,4 +60,4 @@ export const addPropertyFailure = createAction(
   // props<{payload: any}>()
   (errorMessage = 'Error adding property') => ({ payload: { errorMessage }})
 
-  );
+);

@@ -25,6 +25,7 @@ export class PropertyService {
   baseUrl = 'http://localhost:21799';
   // baseUrl = 'http://localhost:19807/api'; // for testing
   propertyList: Property[];
+  property: Property;
 
   // token = localStorage.getItem('currentUser');
 
@@ -32,11 +33,7 @@ export class PropertyService {
   //   headers.append('Authorization', 'Bearer ' + this.token );
   // }
 
-  constructor(protected http: HttpClient) { // Not use generic service due to the complexity of the domain model
-
-  }
-
-
+  constructor(protected http: HttpClient) { }// Not use generic service due to the complexity of the domain model
 
   // Property operations
 
@@ -58,64 +55,9 @@ export class PropertyService {
     return this.http.get<Property[]>(`${this.baseUrl}/property/all`); // return type could be <Property[]>?
   }
 
-  getPropertyDetails() {
-
-  }
-
-  updatePropertyStatus() {
-
-  }
-
-  // Owner operations
-
-  addNewOwnerToProperty() {
-
-  }
-
-  addExistingOwnerToProperty() {
-
-  }
-
-  getOwnersByProperty() {
-
-  }
-
-  getOwnerDetails() {
-
-  }
-
-  removeOwner() {
-
-  }
-
-  updateOwner() {
-
-  }
-
-  // Management contract operations
-
-  addContract() {
-
-  }
-
-  updateContract() {
-
-  }
-
-  getContractDetails() {
-
-  }
-
-  getContractListForProperty() {
-
-  }
-
-  addManagementFees() {
-
-  }
-
-  getFeePaymentHistory() {
-
+  getPropertyDetails(id: number) {
+    // return this.http.get<Property>(`${this.baseUrl}/property/${id});
+    return this.http.get<Property[]>(`${this.baseUrl}/property/${id}`);
   }
 
 }
