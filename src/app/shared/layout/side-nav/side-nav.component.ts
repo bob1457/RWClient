@@ -72,7 +72,7 @@ export class SideNavComponent implements OnInit {
 
   ngOnInit() {
     debugger;
-    this.store.pipe(select(getUserInfo)).subscribe((userData) => { this.user = userData;  } );
+    this.store.pipe(select(getUserInfo)).subscribe((userData) => { this.user = JSON.parse(localStorage.getItem('auth')); localStorage.setItem('auth', JSON.stringify(userData)) } );
     // select single state then use async pipe in template for sub/unsub using *ngIf which returns a boolean value // console.log(userData);
     // this.avatar$ = this.store.select(ustate => ustate.user.avatarUrl);
     this.avatar = JSON.parse(localStorage.getItem('avatar'));
