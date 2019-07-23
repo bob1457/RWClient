@@ -49,7 +49,11 @@ switch (action.type) {
             username: action.payload.user.userName,
             firstname: action.payload.user.firstName,
             lastname: action.payload.user.lastName,
-            avatarUrl: action.payload.user.avatarImgUrl
+            avatarUrl: action.payload.user.avatarImgUrl,
+            telephone: action.payload.user.telephone1,
+            email: action.payload.user.email,
+            joindate: action.payload.user.joinDate,
+            socialmedia: action.payload.user.socialMediaContact1
           },
           errorMessage: null
         };
