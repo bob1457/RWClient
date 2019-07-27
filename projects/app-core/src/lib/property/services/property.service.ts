@@ -41,7 +41,15 @@ export class PropertyService {
 
   }
 
-  updateSProperty() {
+  updateProperty() {
+
+  }
+
+  updatePropertyStatus() {
+
+  }
+
+  assignPm() {
 
   }
 
@@ -49,6 +57,12 @@ export class PropertyService {
 
   }
 
+  addProperty(property: Property) {
+    debugger;
+    return this.http.post<Property>(`${this.baseUrl}/property/add`, {name: 'Blob'});
+  }
+
+  // return this.http.post<Property>(`${this.baseUrl}/property/all);
   getPropertyList() {
     debugger;
 

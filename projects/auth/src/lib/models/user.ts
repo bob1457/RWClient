@@ -10,4 +10,5 @@ export interface User {
   email?: string;
   socialmedia?: string;
   joindate?: Date;
+  role?: string;
 }

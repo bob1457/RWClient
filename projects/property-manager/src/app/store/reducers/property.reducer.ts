@@ -53,6 +53,31 @@ on(PropertyActions.getPropertyDetails, (state) => ({
       property: null,
       errorMessage: 'Failed to load property details'
     });
+  }),
+
+  on(PropertyActions.addProperty, (state) => {
+    return ({
+      ...state,
+      loading: true
+      // property: payload
+    });
+  }),
+
+  on(PropertyActions.addPropertySuccess, (state, {payload}) => {
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      property: payload
+    });
+  }),
+
+  on(PropertyActions.addPropertyFailure, (state) => {
+    return ({
+      ...state,
+      loading: true,
+      errorMessage: 'Failed to add property'
+    });
   })
 
 );

@@ -59,20 +59,31 @@ export class PropertyEffects {
     )
   );
 
-  // getPropertyDetails$ = createEffect(() =>
-  //   this.actions$.pipe(
-  //     ofType(PropertyActions.getPropertyDetails),
-  //     mergeMap(() =>
-  //     this.propertyService.getPropertyDetails().pipe(
+  addProperty$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(PropertyActions.addProperty),
+      // tap(() => console.log('got here: ')),
+      map(action => action.payload),
+      switchMap((payload) =>
+        this.propertyService.addProperty(payload).pipe(
+          tap(() => console.log('called property service: ' + payload)),
+          map((property: Property) => ({
+            type: '[Property] Add Property Success',
+            payload: property
+          })),
+          // tap(res => {console.log('response: ' + res); }),
+          catchError(
+            err => {
+              return of('[Property] Add Property Failure', err.error);
+            } // EMPTY
+          )
+        )
+      )
+    )
+  );
 
-  //     )
-  //     )
-  //     ),
-  //     catchError(
-  //       err => {
-  //         return of('[Property] Get Property List Failure', err.error);
-  //      )
-  //   );
+
 
 
 
