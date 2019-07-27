@@ -64,11 +64,13 @@ on(PropertyActions.getPropertyDetails, (state) => ({
   }),
 
   on(PropertyActions.addPropertySuccess, (state, {payload}) => {
+    debugger;
     return ({
       ...state,
       loading: false,
       loaded: true,
-      property: payload
+      properties: [...state.properties, payload ] // ,
+      // property: payload
     });
   }),
 

@@ -84,9 +84,4 @@ export class PropertyEffects {
   );
 
 
-
-
-
-
-
 }

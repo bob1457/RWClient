@@ -1,8 +1,9 @@
 import { PropertyState } from './../store/property.state';
-import { PropertyService } from '@lib/app-core';
+import { Property } from '@lib/app-core';
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { getPropertyDetails, addProperty } from '../store/actions/property.actions';
+// import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-property-list',
@@ -11,144 +12,14 @@ import { getPropertyDetails, addProperty } from '../store/actions/property.actio
 })
 export class PropertyListComponent implements OnInit {
 
-  // test data
-
-  property: any = [
-    {
-    //   propertyName: 'PNE Old Timer 3',
-    //   propertyDesc: 'Single two layer family home in PNE area3',
-    //   Type: 'Apartment',
-    //   strataCouncilId: 0,
-    //   propertyManagerUserName: 'bob',
-    //   propertyLogoImgUrl: '',
-    //   propertyVideoUrl: '',
-    //   propertyBuildYear: 1909,
-    //   isActive: true,
-    //   isShared: true,
-    //   furnishingId: null,
-    //   Status: 'Rented',
-    //   isBasementSuite: true,
-    //   propertyOwnerId: 2,
-    //   ownerStreetNumber: '15686 107 Avenue',
-    //   ownerCity: 'Surrey',
-    // ownerSateProv: "BC",
-    // ownerZipPostCode: 'V4N 3H8',
-    // ownerCountry: 'Canada',
-    // isSameAddress: false,
-
-    //   propertySuiteNumber: '',
-    //   propertyNumber: 124563,
-    //   propertyStreet: 'Oxford Street',
-    //   propertyCity: 'Vancouver',
-    //   propertyStateProvince: 'BC',
-    //   propertyCountry: 'Canada',
-    //   propertyZipPostCode: 'V4N 3J2',
-
-    //   stove: true,
-    //   refrigerator: true,
-    //   dishwasher: false,
-    //   airConditioner: false,
-    //   laundry: true,
-    //   blindsCurtain: true,
-    //   furniture: false,
-    //   tvinternet: false,
-    //   commonFacility: false,
-    //   securitySystem: true,
-    //   utilityIncluded: false,
-    //   fireAlarmSystem: true,
-    //   others: null,
-    //   facilityNotes: 'N/A',
-
-    //   numberOfBedrooms: 4,
-    //   numberOfBathrooms: 2,
-    //   numberOfLayers: 2,
-    //   numberOfParking: 2,
-    //   basementAvailable: false,
-    //   totalLivingArea: 2450,
-
-    //   featureNotes: 'N/A',
-    //     userName: 'notset',
-    //   firstName: 'Edward',
-    //   lastName: 'Yuan',
-    //   contactEmail: 'edy2021@gmail.com',
-    //   contactTelephone1: '613-547-7878',
-    //   contactTelephone2: '',
-    //   onlineAccessEnbaled: false,
-    //   userAvartaImgUrl: '',
-
-    //   roleId: 2,
-    //   notes: 'added with client app'
-    "propertyName": "PNE Old Timer 3",
-    "propertyDesc": "Single two layer family home in PNE area3",
-    "Type": "Apartment",
-    "strataCouncilId": 0,
-    "propertyManagerUserName": "bob",
-    "propertyLogoImgUrl": "",
-    "propertyVideoUrl": "",
-    "propertyBuildYear": 1909,
-    "isActive": true,
-    "isShared": true,
-    "furnishingId": null,
-    "Status": "Rented",
-    "isBasementSuite": true,
-    "propertyOwnerId": 2,
-    "ownerStreetNumber": "15686 107 Avenue",
-    "ownerCity": "Surrey",
-	"ownerSateProv": "BC",
-	"ownerZipPostCode": "V4N 3H8",
-	"ownerCountry": "Canada",
-	"isSameAddress": false,
-
-    "propertySuiteNumber": "",
-    "propertyNumber": "124563",
-    "propertyStreet": "Oxford Street",
-    "propertyCity": "Vancouver",
-    "propertyStateProvince": "BC",
-    "propertyCountry": "Canada",
-    "propertyZipPostCode": "V4N 3J2",
-
-    "stove": true,
-    "refrigerator": true,
-    "dishwasher": false,
-    "airConditioner": false,
-    "laundry": true,
-    "blindsCurtain": true,
-    "furniture": false,
-    "tvinternet": false,
-    "commonFacility": false,
-    "securitySystem": true,
-    "utilityIncluded": false,
-    "fireAlarmSystem": true,
-    "others": null,
-    "facilityNotes": "N/A",
-
-    "numberOfBedrooms": 4,
-    "numberOfBathrooms": 2,
-    "numberOfLayers": 2,
-    "numberOfParking": 2,
-    "basementAvailable": false,
-    "totalLivingArea": 2450,
-
-    "featureNotes": "N/A",
-
-    "userName": "notset",
-    "firstName": "Edward",
-    "lastName": "Yuan",
-    "contactEmail": "edy2021@gmail.com",
-    "contactTelephone1": "613-547-7878",
-    "contactTelephone2": "",
-    "onlineAccessEnbaled": false,
-    "userAvartaImgUrl": "",
-
-    "roleId": 2,
-    "notes": ""
-    }
-  ];
-
+  baseUrl = 'http://localhost:21799';
 
   propertyId: any = 1;
 
-  constructor(private store: Store<PropertyState>) { }
+  constructor(private store: Store<PropertyState> // ,
+              // private http: HttpClient,
+              // private propertyService: PropertyService
+              ) { }
 
   ngOnInit() {
   }
@@ -159,9 +30,106 @@ export class PropertyListComponent implements OnInit {
   }
 
   AddProperty() {
+
+  const property: Property = {
+    propertyName: 'string',
+    propertyDesc: 'string',
+    type: 0,
+    propertyManagerUserName: 'string',
+    propertyLogoImgUrl: 'string',
+    propertyVideoUrl: 'string',
+    propertyBuildYear: 0,
+    isActive: true,
+    isShared: true,
+    status: 0,
+    isBasementSuite: true,
+    createdDate: '2019-07-27T19:37:57.799Z',
+    updateDate: '2019-07-27T19:37:57.799Z',
+    propertyAddressId: 0,
+    propertyFeatureId: 0,
+    propertyFacilityId: 0,
+    propertyOwnerId: 0,
+    propertySuiteNumber: 'string',
+    propertyNumber: 'string',
+    propertyStreet: 'string',
+    propertyCity: 'string',
+    propertyStateProvince: 'string',
+    propertyCountry: 'string',
+    propertyZipPostCode: 'string',
+    gpslongitudeValue: 'string',
+    gpslatitudeValue: 'string',
+    stove: true,
+    refrigerator: true,
+    dishwasher: true,
+    airConditioner: true,
+    laundry: true,
+    blindsCurtain: true,
+    furniture: true,
+    tvinternet: true,
+    commonFacility: true,
+    securitySystem: true,
+    utilityIncluded: true,
+    fireAlarmSystem: true,
+    others: 'string',
+    facilityNotes: 'string',
+    numberOfBedrooms: 0,
+    numberOfBathrooms: 0,
+    numberOfLayers: 0,
+    numberOfParking: 0,
+    basementAvailable: true,
+    totalLivingArea: 0,
+    featureNotes: 'string',
+    userName: 'string',
+    firstName: 'string',
+    lastName: 'string',
+    contactEmail: 'string',
+    contactTelephone1: 'string',
+    contactTelephone2: 'string',
+    onlineAccessEnbaled: true,
+    userAvartaImgUrl: 'string',
+    roleId: 0,
+    notes: 'string',
+    ownerStreetNumber: 'string',
+    ownerCity: 'string',
+    ownerStateProv: 'string',
+    ownerZipPostCode: 'string',
+    ownerCountry: 'string',
+    isSameAddress: true,
+    ownerAddress: {},
+    propertyAddress: {},
+    propertyFacility: {
+      stove: true,
+      refrigerator: true,
+      dishwasher: true,
+      airConditioner: true,
+      laundry: true,
+      blindsCurtain: true,
+      furniture: true,
+      tvinternet: true,
+      commonFacility: true,
+      securitySystem: true,
+      utilityIncluded: true,
+      fireAlarmSystem: true,
+      others: 'string',
+      notes: 'string'
+    },
+    propertyFeature: {
+      numberOfBedrooms: 0,
+      numberOfBathrooms: 0,
+      numberOfLayers: 0,
+      numberOfParking: 0,
+      basementAvailable: true,
+      totalLivingArea: 0,
+      isShared: true,
+      notes: 'string'
+    }
+  };
+
     debugger;
-    return this.store.dispatch(addProperty(this.property));
-  }
+  return this.store.dispatch(addProperty({payload: property}));
+    // return this.http.post<Property>(`${this.baseUrl}/property/add`, property);
+    // return this.propertyService.addProperty(property);
+}
 
 
 

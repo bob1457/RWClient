@@ -3,6 +3,7 @@ import { createAction, props } from '@ngrx/store';
 import { Property } from '@lib/app-core';
 import { PropertyOwner } from 'projects/app-core/src/lib/property/models/property-owner.model';
 
+
 debugger;
 /**
  * Get Property List Actions
@@ -51,7 +52,7 @@ export const getPropertyDetailsFailure = createAction(
 
 export const addProperty = createAction(
   '[Property] Add Property',
-  props<{payload: any}>()
+  props<{payload: Property}>()
 );
 
 export const addPropertySuccess = createAction(
