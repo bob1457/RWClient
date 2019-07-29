@@ -3,7 +3,7 @@ import { Property } from '@lib/app-core';
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { getPropertyDetails, addProperty } from '../store/actions/property.actions';
-// import { HttpClient } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-property-list',
@@ -16,9 +16,7 @@ export class PropertyListComponent implements OnInit {
 
   propertyId: any = 1;
 
-  constructor(private store: Store<PropertyState> // ,
-              // private http: HttpClient,
-              // private propertyService: PropertyService
+  constructor(private store: Store<PropertyState>
               ) { }
 
   ngOnInit() {
@@ -125,10 +123,9 @@ export class PropertyListComponent implements OnInit {
     }
   };
 
-    debugger;
+  debugger;
   return this.store.dispatch(addProperty({payload: property}));
-    // return this.http.post<Property>(`${this.baseUrl}/property/add`, property);
-    // return this.propertyService.addProperty(property);
+
 }
 
 
