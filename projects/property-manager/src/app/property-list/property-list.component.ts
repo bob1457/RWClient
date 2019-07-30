@@ -30,7 +30,7 @@ export class PropertyListComponent implements OnInit {
   AddProperty() {
 
   const property: Property = {
-    propertyName: 'string',
+    propertyName: 'Real Property',
     propertyDesc: 'string',
     type: 0,
     propertyManagerUserName: 'string',
@@ -92,35 +92,35 @@ export class PropertyListComponent implements OnInit {
     ownerStateProv: 'string',
     ownerZipPostCode: 'string',
     ownerCountry: 'string',
-    isSameAddress: true,
-    ownerAddress: {},
-    propertyAddress: {},
-    propertyFacility: {
-      stove: true,
-      refrigerator: true,
-      dishwasher: true,
-      airConditioner: true,
-      laundry: true,
-      blindsCurtain: true,
-      furniture: true,
-      tvinternet: true,
-      commonFacility: true,
-      securitySystem: true,
-      utilityIncluded: true,
-      fireAlarmSystem: true,
-      others: 'string',
-      notes: 'string'
-    },
-    propertyFeature: {
-      numberOfBedrooms: 0,
-      numberOfBathrooms: 0,
-      numberOfLayers: 0,
-      numberOfParking: 0,
-      basementAvailable: true,
-      totalLivingArea: 0,
-      isShared: true,
-      notes: 'string'
-    }
+    isSameAddress: true // ,
+    // ownerAddress: {},
+    // propertyAddress: {},
+    // propertyFacility: {
+    //   stove: true,
+    //   refrigerator: true,
+    //   dishwasher: true,
+    //   airConditioner: true,
+    //   laundry: true,
+    //   blindsCurtain: true,
+    //   furniture: true,
+    //   tvinternet: true,
+    //   commonFacility: true,
+    //   securitySystem: true,
+    //   utilityIncluded: true,
+    //   fireAlarmSystem: true,
+    //   others: 'string',
+    //   notes: 'string'
+    // },
+    // propertyFeature: {
+    //   numberOfBedrooms: 0,
+    //   numberOfBathrooms: 0,
+    //   numberOfLayers: 0,
+    //   numberOfParking: 0,
+    //   basementAvailable: true,
+    //   totalLivingArea: 0,
+    //   isShared: true,
+    //   notes: 'string'
+    // }
   };
 
   debugger;
