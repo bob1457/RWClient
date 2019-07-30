@@ -30,6 +30,7 @@ export class PropertyListComponent implements OnInit {
   AddProperty() {
 
   const property: Property = {
+    id: 0,
     propertyName: 'Real Property',
     propertyDesc: 'string',
     type: 0,
@@ -41,8 +42,8 @@ export class PropertyListComponent implements OnInit {
     isShared: true,
     status: 0,
     isBasementSuite: true,
-    createdDate: '2019-07-27T19:37:57.799Z',
-    updateDate: '2019-07-27T19:37:57.799Z',
+    // createdDate: '2019-07-27T19:37:57.799Z',
+    // updateDate: '2019-07-27T19:37:57.799Z',
     propertyAddressId: 0,
     propertyFeatureId: 0,
     propertyFacilityId: 0,

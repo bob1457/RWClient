@@ -1,3 +1,4 @@
+import { PropertyStatus } from '../models/property-state.model';
 import { AppCoreService } from './../../app-core.service';
 import { HttpClient, HttpHandler, HttpHeaderResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -37,30 +38,33 @@ export class PropertyService {
 
   // Property operations
 
-  createProperty() {   //  : Observable<any> to be return type if necessary
-
+  addProperty(property: Property) {
+    debugger;
+    return this.http.post<Property>(`${this.baseUrl}/property/add`, property);
   }
 
-  updateProperty() {
-
+  updateProperty(property: Property) {
+    debugger;
+    return this.http.post(`${this.baseUrl}/property/update`, property);
   }
 
-  updatePropertyStatus() {
-
+  updatePropertyStatus(status: PropertyStatus) {
+    debugger;
+    return this.http.post(`${this.baseUrl}/property/update`, status);
   }
 
   assignPm() {
 
   }
 
-  removeProperty() {
-
-  }
-
-  addProperty(property: Property) {
+  removeProperty(property: any) {
     debugger;
-    return this.http.post<Property>(`${this.baseUrl}/property/add`, property);
+    return this.http.post(`${this.baseUrl}/property/remove`, property);
   }
+
+
+
+
 
   // return this.http.post<Property>(`${this.baseUrl}/property/all);
   getPropertyList() {
@@ -71,7 +75,7 @@ export class PropertyService {
 
   getPropertyDetails(id: number) {
     // return this.http.get<Property>(`${this.baseUrl}/property/${id});
-    return this.http.get<Property[]>(`${this.baseUrl}/property/${id}`);
+    return this.http.get<Property>(`${this.baseUrl}/property/${id}`);
   }
 
 }

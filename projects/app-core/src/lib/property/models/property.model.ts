@@ -11,8 +11,8 @@ export interface Property {
     isShared: boolean;
     status: number;
     isBasementSuite: boolean;
-    createdDate: Date;
-    updateDate: Date;
+    // createdDate: string;
+    // updateDate: string;
     propertyAddressId: number;
     propertyFeatureId: number;
     propertyFacilityId: number;

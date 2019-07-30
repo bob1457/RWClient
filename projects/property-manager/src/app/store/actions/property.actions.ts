@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 
-import { Property } from '@lib/app-core';
+import { Property, PropertyStatus } from '@lib/app-core';
 import { PropertyOwner } from 'projects/app-core/src/lib/property/models/property-owner.model';
 
 
@@ -65,6 +65,43 @@ export const addPropertyFailure = createAction(
   // props<{payload: any}>()
   (errorMessage = 'Error adding property') => ({ payload: { errorMessage }})
 
+);
+
+/**
+ * Update Property Actions
+ */
+
+export const updateProperty = createAction(
+  '[Property] Update Property',
+  props<{payload: Property}>()
+);
+
+export const updatePropertySuccess = createAction(
+  '[Property] Update Property Success',
+  props<{payload: Property}>()
+);
+
+export const updatePropertyFailure = createAction(
+  '[Property] Update Property Failure',
+  // props<{payload: any}>()
+  (errorMessage = 'Error adding property') => ({ payload: { errorMessage }})
+
+);
+
+export const updatePropertyStatus = createAction(
+  '[Property] Update Property Status',
+  props<{payload: PropertyStatus}>()
+);
+
+export const updatePropertyStatusSuccess = createAction(
+  '[Property] Update Property Status',
+  props<{payload: PropertyStatus}>()
+);
+
+export const updatePropertyStatusFailure = createAction(
+  '[Property] Update Property Status',
+  // props<{payload: PropertyStatus}>()
+  (errorMessage = 'Error adding property') => ({ payload: { errorMessage }})
 );
 
 
