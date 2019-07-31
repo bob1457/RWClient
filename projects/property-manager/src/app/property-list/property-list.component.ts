@@ -2,7 +2,7 @@ import { PropertyState } from './../store/property.state';
 import { Property } from '@lib/app-core';
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { getPropertyDetails, addProperty } from '../store/actions/property.actions';
+import { getPropertyDetails, addProperty, updateProperty } from '../store/actions/property.actions';
 
 
 @Component({
@@ -27,7 +27,7 @@ export class PropertyListComponent implements OnInit {
     return this.store.dispatch(getPropertyDetails({payload: id}));
   }
 
-  AddProperty() {
+  AddProperty(ppt: Property) { // ppt is the input parameter, ignored in unit testing
 
   const property: Property = {
     id: 0,
@@ -126,6 +126,62 @@ export class PropertyListComponent implements OnInit {
 
   debugger;
   return this.store.dispatch(addProperty({payload: property}));
+
+}
+
+UpdateProperty() {
+  const property: any = {
+    propertyId: 67,
+    propertyName: 'Update REAL new',
+    propertyDesc: 'update',
+    type: 0,
+    propertyManagerId: 0,
+    propertyLogoImgUrl: 'string',
+    propertyVideoUrl: 'string',
+    propertyBuildYear: 0,
+    isActive: true,
+    isShared: true,
+    furnishingId: 0,
+    status: 0,
+    isBasementSuite: true,
+    propertySuiteNumber: 'string',
+    propertyNumber: '1234',
+    propertyStreet: 'string',
+    propertyCity: 'string',
+    propertyStateProvince: 'string',
+    propertyCountry: 'string',
+    propertyZipPostCode: 'string',
+    stove: true,
+    refrigerator: true,
+    dishwasher: true,
+    airConditioner: true,
+    laundry: true,
+    blindsCurtain: true,
+    furniture: true,
+    tvinternet: true,
+    commonFacility: true,
+    securitySystem: true,
+    utilityIncluded: true,
+    fireAlarmSystem: true,
+    others: 'string',
+    facilityNotes: 'string',
+    numberOfBedrooms: 0,
+    numberOfBathrooms: 0,
+    numberOfLayers: 2,
+    numberOfParking: 0,
+    basementAvailable: true,
+    totalLivingArea: 0,
+    featureNotes: 'string'
+  };
+  debugger;
+  return this.store.dispatch(updateProperty({payload: property}))
+}
+
+UpdatePropertyStatus() {
+
+}
+
+RemoveProperty() {
 
 }
 

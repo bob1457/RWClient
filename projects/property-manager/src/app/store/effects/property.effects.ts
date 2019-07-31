@@ -1,6 +1,7 @@
+import { error } from './../../../../../auth/src/lib/store/auth.reducers';
 import { Injectable } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
-import { PropertyService, Property } from '@lib/app-core';
+import { PropertyService, Property, PropertyStatus } from '@lib/app-core';
 import { mergeMap, catchError, map, tap, switchMap } from 'rxjs/operators';
 import { EMPTY, of } from 'rxjs';
 
@@ -18,7 +19,7 @@ export class PropertyEffects {
       // ofType('[Property] Get Property List'),
       ofType(PropertyActions.getPropertyList),
       // tap(() => console.log('got here')),
-      mergeMap(() =>
+      switchMap(() =>
         this.propertyService.getPropertyList().pipe(
           map((properties: Property[]) => ({
             type: '[Property] Get Property List Success',
@@ -33,7 +34,7 @@ export class PropertyEffects {
         )
       )
     )
-  );
+  ); //mergeMap was used
 
   getPropertyDetails$ = createEffect(() =>
     this.actions$.pipe(
@@ -51,8 +52,8 @@ export class PropertyEffects {
           // tap(res => {console.log('response: ' + res); }),
           catchError(
             err => {
-              return of('[Property] Get Property Details Failure', err.error);
-            } // EMPTY
+              return of(PropertyActions.getPropertyListFailure([err.error]));
+            } // EMPTY // return of('[Property] Get Property Details Failure', err.error);
           )
         )
       )
@@ -76,6 +77,79 @@ export class PropertyEffects {
           catchError(
             err => {
               return of('[Property] Add Property Failure', err.error);
+            } // EMPTY
+          )
+        )
+      )
+    )
+  );
+
+  updateProperty$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(PropertyActions.updateProperty),
+      // tap(() => console.log('got here: ')),
+      map(action => action.payload),
+      switchMap((payload) =>
+        this.propertyService.updateProperty(payload).pipe(
+          tap(() => console.log('called property service for update: ' + payload)),
+          map((property: Property) => ({
+            type: '[Property] Update Property Success',
+            payload: property
+          })),
+          // tap(res => {console.log('response: ' + res); }),
+          catchError(
+            err => {
+              return of('[Property] Update Property Failure', err.error);
+            } // EMPTY
+          )
+        )
+      )
+    )
+  );
+
+  updatePropertyStatus$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(PropertyActions.updatePropertyStatus),
+      // tap(() => console.log('got here: ')),
+      map(action => action.payload),
+      switchMap((payload) =>
+        this.propertyService.updatePropertyStatus(payload).pipe(
+          // tap(() => console.log('called property service: ' + payload)),
+          map((status: PropertyStatus) => ({
+            type: '[Property] Update Property Status Success',
+            payload: status
+          })),
+          // tap(res => {console.log('response: ' + res); }),
+          catchError(
+            err => {
+              return of('[Property] Update Property Status Failure', err.error);
+            } // EMPTY
+          )
+        )
+      )
+    )
+  );
+
+
+  removeProperty$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(PropertyActions.removeProperty),
+      // tap(() => console.log('got here: ')),
+      map(action => action.payload),
+      switchMap((payload) =>
+        this.propertyService.removeProperty(payload).pipe(
+          // tap(() => console.log('called property service: ' + payload)),
+          map((status: PropertyStatus) => ({
+            type: '[Property] Update Property Status Success',
+            payload: status
+          })),
+          // tap(res => {console.log('response: ' + res); }),
+          catchError(
+            err => {
+              return of('[Property] Update Property Status Failure', err.error);
             } // EMPTY
           )
         )

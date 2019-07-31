@@ -105,6 +105,23 @@ export const updatePropertyStatusFailure = createAction(
 );
 
 
+export const removeProperty = createAction(
+  '[Property] Remove Property Status',
+  props<{payload: any}>()
+);
+
+export const removePropertySuccess = createAction(
+  '[Property] Remove Property Status',
+  props<{payload: any}>()
+);
+
+export const removePropertyFailure = createAction(
+  '[Property] Remove Property Status',
+  // props<{payload: PropertyStatus}>()
+  (errorMessage = 'Error adding property') => ({ payload: { errorMessage }})
+);
+
+
 /**
  * Get Property Owner List Actions
  */
