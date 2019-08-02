@@ -94,11 +94,17 @@ on(PropertyActions.getPropertyDetails, (state) => ({
   on(PropertyActions.updatePropertySuccess, (state, {payload}) => {
     debugger;
     const index = state.properties.findIndex(x => x.id === payload.id);
+
+    const updatedPorperties = state.properties.map(
+      item => payload.id === item.id ? payload : item
+    );
+
+
     return ({
       ...state,
       loading: false,
       loaded: true,
-      properties: [...state.property[index], payload ] // ,
+      properties: updatedPorperties // [...state.property[index], payload ] // ,
       // property: payload
     });
   }),
