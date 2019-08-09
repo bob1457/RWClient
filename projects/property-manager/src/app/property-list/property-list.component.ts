@@ -27,7 +27,7 @@ export class PropertyListComponent implements OnInit {
     return this.store.dispatch(getPropertyDetails({payload: id}));
   }
 
-  AddProperty(ppt: Property) { // ppt is the input parameter, ignored in unit testing
+  AddProperty() { // ppt is the input parameter, ignored in unit testing   ppt: Property
 
   const property: Property = {
     id: 0,
@@ -131,7 +131,7 @@ export class PropertyListComponent implements OnInit {
 
 UpdateProperty() {
   const property: any = {
-    propertyId: 1004,
+    propertyId: 10,
     propertyName: 'Last Update REAL',
     propertyDesc: 'update again!!!',
     type: 0,
