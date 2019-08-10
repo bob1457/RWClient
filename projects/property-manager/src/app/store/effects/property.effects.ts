@@ -6,6 +6,7 @@ import { mergeMap, catchError, map, tap, switchMap } from 'rxjs/operators';
 import { EMPTY, of } from 'rxjs';
 
 import * as PropertyActions from '../actions/property.actions';
+import { PropertyActive } from 'projects/app-core/src/lib/property/models/property-active.model';
 
 @Injectable()
 export class PropertyEffects {
@@ -116,8 +117,8 @@ export class PropertyEffects {
       map(action => action.payload),
       switchMap((payload) =>
         this.propertyService.updatePropertyStatus(payload).pipe(
-          // tap(() => console.log('called property service: ' + payload)),
-          map((status: PropertyStatus) => ({
+          tap(() => console.log('called property service for status change: ' + payload)),
+          map((status: Property) => ({ // PropertyStatus
             type: '[Property] Update Property Status Success',
             payload: status
           })),
@@ -142,14 +143,14 @@ export class PropertyEffects {
       switchMap((payload) =>
         this.propertyService.removeProperty(payload).pipe(
           // tap(() => console.log('called property service: ' + payload)),
-          map((status: PropertyStatus) => ({
-            type: '[Property] Update Property Status Success',
-            payload: status
+          map((active: Property) => ({ // PropertyActive
+            type: '[Property] Remove Property Success',
+            payload: active
           })),
           // tap(res => {console.log('response: ' + res); }),
           catchError(
             err => {
-              return of('[Property] Update Property Status Failure', err.error);
+              return of('[Property] Remove Property Failure', err.error);
             } // EMPTY
           )
         )

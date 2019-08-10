@@ -2,7 +2,7 @@ import { PropertyState } from './../store/property.state';
 import { Property } from '@lib/app-core';
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { getPropertyDetails, addProperty, updateProperty } from '../store/actions/property.actions';
+import { getPropertyDetails, addProperty, updateProperty, updatePropertyStatus, removeProperty } from '../store/actions/property.actions';
 
 
 @Component({
@@ -131,7 +131,7 @@ export class PropertyListComponent implements OnInit {
 
 UpdateProperty() {
   const property: any = {
-    propertyId: 10,
+    propertyId: 1003,
     propertyName: 'Last Update REAL',
     propertyDesc: 'update again!!!',
     type: 0,
@@ -142,7 +142,7 @@ UpdateProperty() {
     isActive: true,
     isShared: true,
     furnishingId: 0,
-    status: 0,
+    status: 1,
     isBasementSuite: true,
     propertySuiteNumber: '101',
     propertyNumber: '9876',
@@ -178,11 +178,25 @@ UpdateProperty() {
 }
 
 UpdatePropertyStatus() {
+  const propertyStatus: any = {
+    id: 1003,
+    status: 2
+  };
+
+  debugger;
+  return this.store.dispatch(updatePropertyStatus({payload: propertyStatus}));
+
 
 }
 
 RemoveProperty() {
+  const propertyToRemove: any = {
+    propertyId: 1002,
+    active: false
+  };
 
+  debugger;
+  return this.store.dispatch(removeProperty({payload: propertyToRemove}));
 }
 
 

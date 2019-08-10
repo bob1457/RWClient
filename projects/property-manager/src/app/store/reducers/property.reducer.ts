@@ -126,11 +126,19 @@ on(PropertyActions.getPropertyDetails, (state) => ({
   }),
 
   on(PropertyActions.updatePropertyStatusSuccess, (state, {payload}) => {
+    debugger;
     const index = state.properties.findIndex(x => x.id === payload.id);
+    // state.properties[index] = payload;
+    // state.properties[index].status = payload.status;
+
+    const updatedPorperties = state.properties.map(
+      item => payload.id === item.id ? payload : item
+    );
+
     return ({
       ...state,
       loading: false,
-      properties: [...state.property[index].status, payload.status]
+      properties: updatedPorperties // [...state.property[index], payload]
     });
   }),
 
@@ -153,11 +161,12 @@ on(PropertyActions.getPropertyDetails, (state) => ({
 
   on(PropertyActions.removePropertySuccess, (state, {payload}) => {
     debugger;
-    const index = state.properties.findIndex(x => x.id === payload.propertyId);
+    // const index = state.properties.findIndex(x => x.id === payload.propertyId);
+
     return ({
       ...state,
       loading: false,
-      properties: [...state.property[index].isActive, payload.isActive]
+      properties: [...state.properties.filter(x => x.id !== payload.propertyId )] // [...state.property[index].isActive, payload.isActive]
     });
   }),
 
@@ -166,7 +175,7 @@ on(PropertyActions.getPropertyDetails, (state) => ({
       ...state,
       loading: false,
       // property: payload
-      errorMessage: 'Failed to update property status'
+      errorMessage: 'Failed to remove property status'
     });
   })
 

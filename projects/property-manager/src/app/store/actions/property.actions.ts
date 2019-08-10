@@ -1,7 +1,7 @@
 import { createAction, props } from '@ngrx/store';
 
 import { Property, PropertyStatus } from '@lib/app-core';
-import { PropertyOwner } from 'projects/app-core/src/lib/property/models/property-owner.model';
+import { PropertyOwner } from '@lib/app-core';
 
 
 debugger;
@@ -90,16 +90,16 @@ export const updatePropertyFailure = createAction(
 
 export const updatePropertyStatus = createAction(
   '[Property] Update Property Status',
-  props<{payload: PropertyStatus}>()
+  props<{payload: Property}>() // PropertyStatus
 );
 
 export const updatePropertyStatusSuccess = createAction(
-  '[Property] Update Property Status',
-  props<{payload: PropertyStatus}>()
+  '[Property] Update Property Status Success',
+  props<{payload: Property}>()
 );
 
 export const updatePropertyStatusFailure = createAction(
-  '[Property] Update Property Status',
+  '[Property] Update Property Status Failure',
   // props<{payload: PropertyStatus}>()
   (errorMessage = 'Error adding property') => ({ payload: { errorMessage }})
 );
@@ -111,14 +111,14 @@ export const removeProperty = createAction(
 );
 
 export const removePropertySuccess = createAction(
-  '[Property] Remove Property Status',
+  '[Property] Remove Property Success',
   props<{payload: any}>()
 );
 
 export const removePropertyFailure = createAction(
-  '[Property] Remove Property Status',
+  '[Property] Remove Property Failure',
   // props<{payload: PropertyStatus}>()
-  (errorMessage = 'Error adding property') => ({ payload: { errorMessage }})
+  (errorMessage = 'Error removing property') => ({ payload: { errorMessage }})
 );
 
 

@@ -6,14 +6,16 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppMkComponent } from './app.component';
 import { RouterModule, Routes } from '@angular/router';
+import { PropertyListingComponent } from './property-listing/property-listing.component';
 
 const routes: Routes = [
-  // { path: '', component: PropertyHomeComponent}
+  { path: '', component: PropertyListingComponent}
 ];
 
 @NgModule({
   declarations: [
-    AppMkComponent
+    AppMkComponent,
+    PropertyListingComponent
   ],
   imports: [
     // BrowserModule,

@@ -50,7 +50,7 @@ export class PropertyService {
 
   updatePropertyStatus(status: PropertyStatus) {
     debugger;
-    return this.http.post(`${this.baseUrl}/property/update`, status);
+    return this.http.post(`${this.baseUrl}/property/status/state`, status);
   }
 
   assignPm() {
