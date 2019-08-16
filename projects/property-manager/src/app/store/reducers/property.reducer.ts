@@ -1,17 +1,23 @@
-import { GetStatus } from './../../../../../auth/src/lib/store/auth.actions';
-import { loading } from "./../../../../../auth/src/lib/store/auth.reducers";
-import { createReducer, Action, createFeatureSelector, on } from "@ngrx/store";
-import { PropertyState } from "../property.state";
+import { Property } from './../../../../../../dist/app-core/lib/property/models/property.model.d';
+import { createReducer, Action, createFeatureSelector, on } from '@ngrx/store';
+import { PropertyState } from '../property.state';
 
-import * as PropertyActions from "../actions/property.actions";
+import * as PropertyActions from '../actions/property.actions';
+import { EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 
-export const initialState: PropertyState = {
+const adapter: EntityAdapter<Property> = createEntityAdapter<Property>();
+
+// tslint:disable-next-line:one-variable-per-declaration
+export const initialState: PropertyState = adapter.getInitialState ({
   loading: false,
   loaded: false,
   properties: null,
   property: null,
+  owners: null,
+  selectedOwner: null,
   errorMessage: null
-};
+});
+
 debugger;
 const propertyReducer = createReducer(
   initialState,

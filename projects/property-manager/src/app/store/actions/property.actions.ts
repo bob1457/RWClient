@@ -142,3 +142,27 @@ export const getPropertyOwnerListFailure = createAction(
     return ({ payload: { errorMessage } });
   }
 );
+
+/**
+ * Add Property Owner Actions
+ */
+
+export const addPropertyOwner = createAction(
+  '[Property] Add Property Owner',
+  props<{payload: PropertyOwner}>()
+);
+
+export const addPropertyOwnerSuccess = createAction(
+  '[Property] Add Property Owner Success',
+  props<{payload: PropertyOwner}>()
+);
+
+export const addPropertyOwnerFailure = createAction(
+  '[Property] Add Property Owner Failure',
+  // props<{payload: PropertyOwner}>()
+  (errorMessage = 'Error adding property owner') => ({ payload: { errorMessage }})
+);
+
+/**
+ * Update Property Owner Actions
+ */

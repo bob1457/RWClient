@@ -4,6 +4,7 @@ import { HttpClient, HttpHandler, HttpHeaderResponse, HttpHeaders } from '@angul
 import { Injectable } from '@angular/core';
 import { Property } from '../models/property.model';
 import { Observable } from 'rxjs';
+import { PropertyOwner } from '../models/property-owner.model';
 
 @Injectable({
   providedIn: 'root'
@@ -58,17 +59,13 @@ export class PropertyService {
   }
 
   removeProperty(property: any) {
-    debugger;
+    // debugger;
     return this.http.post(`${this.baseUrl}/property/remove`, property);
   }
 
-
-
-
-
   // return this.http.post<Property>(`${this.baseUrl}/property/all);
   getPropertyList() {
-    debugger;
+    // debugger;
 
     return this.http.get<Property[]>(`${this.baseUrl}/property/all`); // return type could be <Property[]>?
   }
@@ -77,5 +74,33 @@ export class PropertyService {
     // return this.http.get<Property>(`${this.baseUrl}/property/${id});
     return this.http.get<Property>(`${this.baseUrl}/property/${id}`);
   }
+
+
+  addOwner(owner: PropertyOwner) {
+    debugger;
+    return this.http.post(`${this.baseUrl}/property/addOwner`, owner);
+  }
+
+  removeOwner(owner:any) {
+    debugger;
+    return this.http.post(`${this.baseUrl}/property/remove`, owner);
+  }
+
+  updateOwner(owner: PropertyOwner) {
+    debugger;
+    return this.http.post(`${this.baseUrl}/property/remove`, owner);
+  }
+
+  getPropertyOwnerList() {
+    // debugger;
+
+    return this.http.get<PropertyOwner[]>(`${this.baseUrl}/property/owners`); // return type could be <Property[]>?
+  }
+
+  getPropertyOwnerDetails(id: number) {
+    // return this.http.get<Property>(`${this.baseUrl}/property/${id});
+    return this.http.get<PropertyOwner>(`${this.baseUrl}/property/owner/${id}`);
+  }
+
 
 }

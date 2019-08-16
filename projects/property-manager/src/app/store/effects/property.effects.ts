@@ -1,7 +1,7 @@
 import { error } from './../../../../../auth/src/lib/store/auth.reducers';
 import { Injectable } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
-import { PropertyService, Property, PropertyStatus } from '@lib/app-core';
+import { PropertyService, Property, PropertyStatus, PropertyOwner } from '@lib/app-core';
 import { mergeMap, catchError, map, tap, switchMap } from 'rxjs/operators';
 import { EMPTY, of } from 'rxjs';
 
@@ -53,7 +53,7 @@ export class PropertyEffects {
           // tap(res => {console.log('response: ' + res); }),
           catchError(
             err => {
-              return of(PropertyActions.getPropertyListFailure([err.error]));
+              return of(PropertyActions.getPropertyDetailsFailure([err.error]));
             } // EMPTY // return of('[Property] Get Property Details Failure', err.error);
           )
         )
@@ -151,6 +151,28 @@ export class PropertyEffects {
           catchError(
             err => {
               return of('[Property] Remove Property Failure', err.error);
+            } // EMPTY
+          )
+        )
+      )
+    )
+  );
+
+  getPropertyOwnerList$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(PropertyActions.getPropertyOwnerList),
+      tap(() => console.log('got here to call service for retrieving owners')),
+      switchMap(() =>
+        this.propertyService.getPropertyOwnerList().pipe(
+          map((owners: PropertyOwner[]) => ({
+            type: '[Property] Get Property Owner List Success',
+            payload: owners
+          })),
+          // tap(res => {console.log('response: ' + res); }),
+          catchError(
+            err => {
+              return of('[Property] Get Property Owner List Failure', err.error);
             } // EMPTY
           )
         )
