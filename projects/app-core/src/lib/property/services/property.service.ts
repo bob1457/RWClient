@@ -65,7 +65,7 @@ export class PropertyService {
 
   // return this.http.post<Property>(`${this.baseUrl}/property/all);
   getPropertyList() {
-    // debugger;
+    debugger;
 
     return this.http.get<Property[]>(`${this.baseUrl}/property/all`); // return type could be <Property[]>?
   }
@@ -92,7 +92,7 @@ export class PropertyService {
   }
 
   getPropertyOwnerList() {
-    // debugger;
+    debugger;
 
     return this.http.get<PropertyOwner[]>(`${this.baseUrl}/property/owners`); // return type could be <Property[]>?
   }

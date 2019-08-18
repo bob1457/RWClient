@@ -131,7 +131,7 @@ export const getPropertyOwnerList = createAction(
 );
 
 export const getPropertyOwnerListSuccess = createAction(
-  '[Property] Get Property List Success',
+  '[Property] Get Property Owner List Success',
   props<{payload: PropertyOwner[]}>()
 );
 

@@ -183,6 +183,21 @@ on(PropertyActions.getPropertyDetails, (state) => ({
       // property: payload
       errorMessage: 'Failed to remove property status'
     });
+  }),
+
+  on(PropertyActions.getPropertyOwnerList, state => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+  on(PropertyActions.getPropertyOwnerListSuccess, (state, { payload }) => {
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      owners: payload
+    });
   })
 
 );
@@ -193,6 +208,7 @@ on(PropertyActions.getPropertyDetails, (state) => ({
  */
 
 export const getPropertyList = (state: PropertyState) => state.properties;
+export const getPropertyOwnerList = (state: PropertyState) => state.owners;
 
 export function reducer(state: PropertyState | undefined, action: Action) {
   return propertyReducer(state, action);

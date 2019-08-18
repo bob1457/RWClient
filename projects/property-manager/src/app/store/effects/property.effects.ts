@@ -19,7 +19,7 @@ export class PropertyEffects {
     this.actions$.pipe(
       // ofType('[Property] Get Property List'),
       ofType(PropertyActions.getPropertyList),
-      // tap(() => console.log('got here')),
+      tap(() => console.log('got here for property list!!!')),
       switchMap(() =>
         this.propertyService.getPropertyList().pipe(
           map((properties: Property[]) => ({
