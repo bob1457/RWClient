@@ -1,5 +1,5 @@
 import { Property } from './../../../../../../dist/app-core/lib/property/models/property.model.d';
-import { createReducer, Action, createFeatureSelector, on } from '@ngrx/store';
+import { createReducer, Action, createFeatureSelector, on, createSelector } from '@ngrx/store';
 import { PropertyState } from '../property.state';
 
 import * as PropertyActions from '../actions/property.actions';
@@ -206,12 +206,16 @@ on(PropertyActions.getPropertyDetails, (state) => ({
  *
  * State Selectors
  */
+export const selectPropertyState = createFeatureSelector<PropertyState>('property');
 
 export const getPropertyList = (state: PropertyState) => state.properties;
-export const getPropertyOwnerList = (state: PropertyState) => state.owners;
+export const getOwnerList = (state: PropertyState) => state.owners;
+
+export const ownerList = createSelector(selectPropertyState, getOwnerList);
+export const propertyList = createSelector(selectPropertyState, getPropertyList);
 
 export function reducer(state: PropertyState | undefined, action: Action) {
   return propertyReducer(state, action);
 }
 
-export const selectPropertyState = createFeatureSelector<PropertyState>('property');
+
