@@ -2,7 +2,7 @@ import { PropertyService, PropertyOwner } from '@lib/app-core';
 import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { PropertyState } from '../store/property.state';
-import { getPropertyOwnerList } from '../store/actions/property.actions';
+import { getPropertyOwnerList, getPropertyOwnerDetails } from '../store/actions/property.actions';
 import {ownerList } from '../store/reducers/property.reducer';
 
 @Component({
@@ -29,6 +29,11 @@ export class OwnerListComponent implements OnInit {
     // .subscribe((oList: PropertyOwner[]) => {this.list = oList; console.log(this.list); });
 
     return this.store.pipe(select(ownerList)).subscribe(olist => {this.list = olist; console.log(this.list); });
+  }
+
+  getOwnerDetails(id: number) {
+    debugger;
+    return this.store.dispatch(getPropertyOwnerDetails({payload: id}));
   }
 
 }

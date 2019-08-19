@@ -25,9 +25,12 @@ export class PropertyOwnerService {
 
   updateOwner() {}
 
-  getOwnerListByProperty() {}
+  getPropertyOwnerList() {}
 
-  getOwnerDetails() {}
+  getPropertyDetails(id: number) {
+    // return this.http.get<Property>(`${this.baseUrl}/property/${id});
+    return this.http.get<PropertyOwner>(`${this.baseUrl}/property/owner/${id}`);
+  }
 
 
 

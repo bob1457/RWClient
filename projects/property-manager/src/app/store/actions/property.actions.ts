@@ -138,10 +138,34 @@ export const getPropertyOwnerListSuccess = createAction(
 export const getPropertyOwnerListFailure = createAction(
   '[Property] Get Property List Failure',
   // props<{payload: any}>()
-  (errorMessage = 'Error loading property list') => {
+  (errorMessage = 'Error loading property Owner list') => {
     return ({ payload: { errorMessage } });
   }
 );
+
+
+/**
+ * Get Property Owner Details Actions
+ */
+
+export const getPropertyOwnerDetails = createAction(
+  '[Property] Get Property Owner Details',
+  props<{payload: number}>()
+);
+
+export const getPropertyOwnerDetailsSuccess = createAction(
+  '[Property] Get Property Owner Details Success',
+  props<{payload: PropertyOwner}>()
+);
+
+export const getPropertyOwnerDetailsFailure = createAction(
+  '[Property] Get Property Owner Details Failure',
+  // props<{payload: any}>()
+  (errorMessage = 'Error loading property Owner Details') => {
+    return ({ payload: { errorMessage } });
+  }
+);
+
 
 /**
  * Add Property Owner Actions

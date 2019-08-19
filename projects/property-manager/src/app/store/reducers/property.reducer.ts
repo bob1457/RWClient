@@ -198,6 +198,31 @@ on(PropertyActions.getPropertyDetails, (state) => ({
       loaded: true,
       owners: payload
     });
+  }),
+
+  on(PropertyActions.getPropertyOwnerDetails, (state) => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+  on(PropertyActions.getPropertyOwnerDetailsSuccess, (state, { payload }) => {
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      selectedOwner: payload
+    });
+  }),
+
+  on(PropertyActions.getPropertyOwnerDetailsFailure, (state) => {
+    return ({
+      ...state,
+      loading: false,
+      loaded: false,
+      selectedOwner: null,
+      errorMessage: 'Failed to load property owner details'
+    });
   })
 
 );

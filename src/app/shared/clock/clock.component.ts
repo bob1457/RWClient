@@ -41,7 +41,8 @@ export class ClockComponent implements OnInit {
         /* Values of this Observable (like a stream) will be Date objects of the current Date */
         map(() => new Date()),
         /*
-        Share the Observable and replay the latest value if it has one yet, so we call the source (in this case setInterval) only once, not one per each subscriber.
+        Share the Observable and replay the latest value if it has one yet,
+        so we call the source (in this case setInterval) only once, not one per each subscriber.
         Good practice when you know you have multiple subscribers, to avoid multiple API requests etc.
          */
         shareReplay()
@@ -59,6 +60,12 @@ export class ClockComponent implements OnInit {
       map(date => DEG_PER_SEC * date.getUTCSeconds() - 90),
       distinctUntilChanged()
     );
+
+    // Display digital clock
+    setInterval(() => {
+      this.myDate = new Date();
+   }, 1000);
+
   }
 
   ngOnDestroy() {
