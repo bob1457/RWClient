@@ -1,4 +1,3 @@
-import { error } from './../../../../../auth/src/lib/store/auth.reducers';
 import { Injectable } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
 import { PropertyService, PropertyOwnerService, Property, PropertyStatus, PropertyOwner } from '@lib/app-core';
@@ -7,6 +6,7 @@ import { EMPTY, of } from 'rxjs';
 
 import * as PropertyActions from '../actions/property.actions';
 import { PropertyActive } from 'projects/app-core/src/lib/property/models/property-active.model';
+
 
 
 
@@ -184,7 +184,7 @@ export class PropertyEffects {
   );
 
 
-  getPropertyOwneretails$ = createEffect(() =>
+  getPropertyOwnerDetails$ = createEffect(() =>
     this.actions$.pipe(
       // ofType('[Property] Get Property List'),
       ofType(PropertyActions.getPropertyOwnerDetails),
@@ -207,4 +207,53 @@ export class PropertyEffects {
       )
     )
   );
+
+  addPropertyOwner$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(PropertyActions.addPropertyOwner),
+      // tap(() => console.log('got here: ')),
+      map(action => action.payload),
+      switchMap((payload) =>
+        this.propertyOwnerService.addPropertyOwner(payload).pipe( // this.propertyService.addOwner(payload).pipe(
+          tap(() => console.log('called property owner service to add owner: ' + payload)),
+          map(( owner: PropertyOwner) => ({
+            type: '[Property] Add Property Owner Success',
+            payload: owner
+          })),
+          // tap(res => {console.log('response: ' + res); }),
+          catchError(
+            err => {
+              return of('[Property] Add Property Owner Failure', err.error);
+            } // EMPTY
+          )
+        )
+      )
+    )
+  );
+
+
+  // addPropertyOwner$ = createEffect(() =>
+  //   this.actions$.pipe(
+  //     // ofType('[Property] Get Property List'),
+  //     ofType(PropertyActions.addPropertyOwner),
+  //     // tap(() => console.log('got here: ')),
+  //     map(action => action.payload),
+  //     switchMap((payload) =>
+  //       this.propertyOwnerService.addPropertyOwner(payload).pipe(
+  //         tap(() => console.log('called property owner service: ' + payload)),
+  //         map((owner: PropertyOwner) => ({
+  //           type: '[Property] Add Property Owner Success',
+  //           payload: owner
+  //         })),
+  //         // tap(res => {console.log('response: ' + res); }),
+  //         catchError(
+  //           err => {
+  //             return of('[Property] Add Property Owner Failure', err.error);
+  //           } // EMPTY
+  //         )
+  //       )
+  //     )
+  //   )
+  // );
 }

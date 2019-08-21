@@ -81,14 +81,14 @@ export class PropertyService {
     return this.http.post(`${this.baseUrl}/property/addOwner`, owner);
   }
 
-  removeOwner(owner:any) {
+  removeOwner(owner: any) {
     debugger;
     return this.http.post(`${this.baseUrl}/property/remove`, owner);
   }
 
   updateOwner(owner: PropertyOwner) {
     debugger;
-    return this.http.post(`${this.baseUrl}/property/remove`, owner);
+    return this.http.post(`${this.baseUrl}/property/update`, owner);
   }
 
   getPropertyOwnerList() {

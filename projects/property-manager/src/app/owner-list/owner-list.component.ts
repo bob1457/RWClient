@@ -2,7 +2,7 @@ import { PropertyService, PropertyOwner } from '@lib/app-core';
 import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { PropertyState } from '../store/property.state';
-import { getPropertyOwnerList, getPropertyOwnerDetails } from '../store/actions/property.actions';
+import { getPropertyOwnerList, getPropertyOwnerDetails, addPropertyOwner } from '../store/actions/property.actions';
 import {ownerList } from '../store/reducers/property.reducer';
 
 @Component({
@@ -34,6 +34,33 @@ export class OwnerListComponent implements OnInit {
   getOwnerDetails(id: number) {
     debugger;
     return this.store.dispatch(getPropertyOwnerDetails({payload: id}));
+  }
+
+  addOwner() { // owner: PropertyOwner
+    const owner: PropertyOwner = {
+      propertyOwnerId: 0,
+      propertyId: 1004,
+      userName: 'NotSet',
+      firstName: 'Janny',
+      lastName: 'Lu',
+      contactEmail: 'jannylu@gmail.com',
+      contactTelephone1: '604-976-1235',
+      contactTelephone2: '',
+      onlineAccessEnbaled: false,
+      userAvartaImgUrl: '',
+      isActive: true,
+      roleId: 2,
+      notes: 'New ower added',
+      streetNumber: '234 Main Street',
+      city: 'Vancouver',
+      stateProv: 'BC',
+      zipPostCode: 'V3V 2V2',
+      country: 'Canada'
+    };
+
+    debugger;
+
+    return this.store.dispatch(addPropertyOwner({payload: owner}));
   }
 
 }

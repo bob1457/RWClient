@@ -223,6 +223,33 @@ on(PropertyActions.getPropertyDetails, (state) => ({
       selectedOwner: null,
       errorMessage: 'Failed to load property owner details'
     });
+  }),
+
+  on(PropertyActions.addPropertyOwner, (state) => {
+    return ({
+      ...state,
+      loading: true
+      // property: payload
+    });
+  }),
+
+  on(PropertyActions.addPropertyOwnerSuccess, (state, {payload}) => {
+    debugger;
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      owners: [...state.owners, payload ] // ,
+      // property: payload
+    });
+  }),
+
+  on(PropertyActions.addPropertyOwnerFailure, (state) => {
+    return ({
+      ...state,
+      loading: true,
+      errorMessage: 'Failed to add property'
+    });
   })
 
 );

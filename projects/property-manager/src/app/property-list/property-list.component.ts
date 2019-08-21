@@ -174,7 +174,7 @@ UpdateProperty() {
     featureNotes: 'string'
   };
   debugger;
-  return this.store.dispatch(updateProperty({payload: property}))
+  return this.store.dispatch(updateProperty({payload: property}));
 }
 
 UpdatePropertyStatus() {
