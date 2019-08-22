@@ -1,5 +1,5 @@
 export interface PropertyOwner {
-  // id: number;
+  id: number;
   propertyOwnerId: number;
   propertyId: number;
   userName: string;

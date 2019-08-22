@@ -265,20 +265,20 @@ on(PropertyActions.getPropertyDetails, (state) => ({
 
 
 
-  // on(PropertyActions.getContractList, state => ({
-  //   ...state,
-  //   loading: true,
-  //   loaded: false
-  // })),
+  on(PropertyActions.getContractList, state => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
 
-  // on(PropertyActions.getContractListSuccess, (state, { payload }) => {
-  //   return ({
-  //     ...state,
-  //     loading: false,
-  //     loaded: true,
-  //     contracts: payload
-  //   });
-  // }),
+  on(PropertyActions.getContractListSuccess, (state, { payload }) => {
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      contracts: payload
+    });
+  }),
 
 // on(PropertyActions.getContractDetails, (state) => ({
 //     ...state,
