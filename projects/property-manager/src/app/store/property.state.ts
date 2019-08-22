@@ -1,3 +1,4 @@
+import { ManagementContract } from './../../../../app-core/src/lib/property/models/management-contract.model';
 import { Property, PropertyOwner } from '@lib/app-core';
 import * as property from './reducers';
 import { createFeatureSelector } from '@ngrx/store';
@@ -10,6 +11,8 @@ export interface PropertyState  extends  EntityState<Property> { //
   property: Property | null;
   owners: PropertyOwner[] | null;
   selectedOwner: PropertyOwner | null;
+  contracts: ManagementContract[] | null;
+  selectedContract: ManagementContract | null;
   errorMessage: string | null;
 }
 

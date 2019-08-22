@@ -15,6 +15,8 @@ export const initialState: PropertyState = adapter.getInitialState ({
   property: null,
   owners: null,
   selectedOwner: null,
+  contracts: null,
+  selectedContract: null,
   errorMessage: null
 });
 

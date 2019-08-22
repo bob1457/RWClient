@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
-import { PropertyService, PropertyOwnerService, Property, PropertyStatus, PropertyOwner } from '@lib/app-core';
+import { PropertyService, PropertyOwnerService, ManagementContractService, Property,
+  ManagementContract, PropertyStatus, PropertyOwner } from '@lib/app-core';
 import { mergeMap, catchError, map, tap, switchMap } from 'rxjs/operators';
 import { EMPTY, of } from 'rxjs';
 
@@ -15,7 +16,8 @@ export class PropertyEffects {
   constructor(
     private actions$: Actions,
     private propertyService: PropertyService,
-    private propertyOwnerService: PropertyOwnerService
+    private propertyOwnerService: PropertyOwnerService,
+    private contractService: ManagementContractService
   ) {}
 
   getPropertyList$ = createEffect(() =>
@@ -232,28 +234,52 @@ export class PropertyEffects {
     )
   );
 
+  updatePropertyOwner$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(PropertyActions.updatePropertyOwner),
+      // tap(() => console.log('got here: ')),
+      map(action => action.payload),
+      switchMap((payload) =>
+        this.propertyOwnerService.updateOwner(payload).pipe(
+          tap(() => console.log('called property service for update: ' + payload)),
+          map((owner: PropertyOwner) => ({
+            type: '[Property] Update Property Owner Success',
+            payload: owner
+          })),
+          // tap(res => {console.log('response: ' + res); }),
+          catchError(
+            err => {
+              return of('[Property] Update Property Failure', err.error);
+            } // EMPTY
+          )
+        )
+      )
+    )
+  );
 
-  // addPropertyOwner$ = createEffect(() =>
-  //   this.actions$.pipe(
-  //     // ofType('[Property] Get Property List'),
-  //     ofType(PropertyActions.addPropertyOwner),
-  //     // tap(() => console.log('got here: ')),
-  //     map(action => action.payload),
-  //     switchMap((payload) =>
-  //       this.propertyOwnerService.addPropertyOwner(payload).pipe(
-  //         tap(() => console.log('called property owner service: ' + payload)),
-  //         map((owner: PropertyOwner) => ({
-  //           type: '[Property] Add Property Owner Success',
-  //           payload: owner
-  //         })),
-  //         // tap(res => {console.log('response: ' + res); }),
-  //         catchError(
-  //           err => {
-  //             return of('[Property] Add Property Owner Failure', err.error);
-  //           } // EMPTY
-  //         )
-  //       )
-  //     )
-  //   )
-  // );
+
+  getContractList$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(PropertyActions.getContractList),
+      // tap(() => console.log('got here to call service for retrieving contracts')),
+      switchMap(() =>
+        this.contractService.getManagementContractList().pipe(
+          map((contracts: ManagementContract[]) => ({
+            type: '[Property] Get Contract List Success',
+            payload: contracts
+          })),
+          // tap(res => {console.log('response: ' + res); }),
+          catchError(
+            err => {
+              return of('[[Property] Get Contract List Failure', err.error);
+            } // EMPTY
+          )
+        )
+      )
+    )
+  );
+
+
 }

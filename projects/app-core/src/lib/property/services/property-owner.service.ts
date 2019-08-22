@@ -33,7 +33,7 @@ export class PropertyOwnerService {
 
   updateOwner(owner: PropertyOwner) {
     debugger;
-    return this.http.post<PropertyOwner>(`${this.baseUrl}/property/update`, owner);
+    return this.http.post<PropertyOwner>(`${this.baseUrl}/property/owner/update`, owner);
   }
 
   getPropertyOwnerList() {

@@ -1,3 +1,4 @@
+import { ManagementContract } from './../../../../../app-core/src/lib/property/models/contract';
 import { createAction, props } from '@ngrx/store';
 
 import { Property, PropertyStatus } from '@lib/app-core';
@@ -191,4 +192,64 @@ export const addPropertyOwnerFailure = createAction(
  * Update Property Owner Actions
  */
 
+export const updatePropertyOwner = createAction(
+  '[Property] Update Property',
+  props<{payload: PropertyOwner}>()
+);
+
+export const updatePropertyOwnerSuccess = createAction(
+  '[Property] Update Property Owner Success',
+  props<{payload: PropertyOwner}>()
+);
+
+export const updatePropertyOwnerFailure = createAction(
+  '[Property] Update Property Owner Failure',
+  // props<{payload: any}>()
+  (errorMessage = 'Error updating property Owner') => ({ payload: { errorMessage }})
+
+);
+
+
+/**
+ * Get Management Contract List Actions
+ */
+export const getContractList = createAction(
+  '[Property] Get Contract List'
+);
+
+export const getContractListSuccess = createAction(
+  '[Property] Get Contract List Success',
+  props<{payload: ManagementContract[]}>()
+);
+
+export const getContractListFailure = createAction(
+  '[Property] Get Contract List Failure',
+  // props<{payload: any}>()
+  (errorMessage = 'Error loading contract list') => {
+    return ({ payload: { errorMessage } });
+  }
+);
+
+
+/**
+ * Get Management Contract Details Actions
+ */
+
+export const getPContractDetails = createAction(
+    '[Property] Get Contract Details',
+    props<{payload: number}>()
+  );
+
+export const getContractDetailsSuccess = createAction(
+    '[Property] Get Contract Details Success',
+    props<{payload: ManagementContract}>()
+  );
+
+export const getContractDetailsFailure = createAction(
+    '[Property] Get Property Details Failure',
+    // props<{payload: any}>()
+    (errorMessage = 'Error loading Contract details') => {
+      return ({ payload: { errorMessage } });
+    }
+  );
 
