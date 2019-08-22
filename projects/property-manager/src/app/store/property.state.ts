@@ -1,10 +1,9 @@
-import { ManagementContract } from './../../../../app-core/src/lib/property/models/management-contract.model';
-import { Property, PropertyOwner } from '@lib/app-core';
+import { Property, PropertyOwner, ManagementContract} from '@lib/app-core';
 import * as property from './reducers';
 import { createFeatureSelector } from '@ngrx/store';
 import { createEntityAdapter, EntityState, EntityAdapter } from '@ngrx/entity';
 
-export interface PropertyState  extends  EntityState<Property> { //
+export interface PropertyState   { //extends  EntityState<Property>
   loading: boolean | false;
   loaded: boolean | false;
   properties: Property[] | null;

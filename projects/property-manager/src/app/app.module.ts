@@ -13,6 +13,7 @@ import { StoreModule } from '@ngrx/store';
 import { reducer } from './store/reducers';
 import { PropertyEffects } from './store/effects/property.effects';
 import { OwnerListComponent } from './owner-list/owner-list.component';
+import { ContractListComponent } from './contract-list/contract-list.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { OwnerListComponent } from './owner-list/owner-list.component';
     PropertyHomeComponent,
     PropertyListComponent,
     PropertyDetailsComponent,
-    OwnerListComponent
+    OwnerListComponent,
+    ContractListComponent
   ],
   imports: [
     BrowserModule,

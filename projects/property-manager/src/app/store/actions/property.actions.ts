@@ -235,7 +235,7 @@ export const getContractListFailure = createAction(
  * Get Management Contract Details Actions
  */
 
-export const getPContractDetails = createAction(
+export const getContractDetails = createAction(
     '[Property] Get Contract Details',
     props<{payload: number}>()
   );
@@ -253,3 +253,39 @@ export const getContractDetailsFailure = createAction(
     }
   );
 
+/**
+ * Add Property Management Contract Actions
+ */
+
+export const addManagementContract = createAction(
+  '[Property] Add Management Contract',
+  props<{payload: ManagementContract}>()
+);
+
+export const addManagementContractSuccess = createAction(
+  '[Property] Add Management Contract Success',
+  props<{payload: ManagementContract}>()
+);
+
+export const addManagementContractFailure = createAction(
+  '[Property] Add Management Contract Failure',
+  // props<{payload: PropertyOwner}>()
+  (errorMessage = 'Error adding management contract') => ({ payload: { errorMessage }})
+);
+
+export const updateContract = createAction(
+  '[Property] Update Contract',
+  props<{payload: ManagementContract}>()
+);
+
+export const updateContractSuccess = createAction(
+  '[Property] Update Contract Success',
+  props<{payload: ManagementContract}>()
+);
+
+export const updateContractFailure = createAction(
+  '[Property] Update Contract Failure',
+  // props<{payload: any}>()
+  (errorMessage = 'Error updating management contract') => ({ payload: { errorMessage }})
+
+);

@@ -1,3 +1,4 @@
+import { ContractListComponent } from './contract-list/contract-list.component';
 import { AppMaterialModule } from '@lib/app-material';
 // import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -13,7 +14,8 @@ import { OwnerListComponent } from './owner-list/owner-list.component';
 
 const routes: Routes = [
   { path: '', component: PropertyHomeComponent},
-  { path: 'owners', component: OwnerListComponent }
+  { path: 'owners', component: OwnerListComponent },
+  { path: 'contracts', component: ContractListComponent }
 ];
 
 @NgModule({
@@ -22,7 +24,8 @@ const routes: Routes = [
     PropertyHomeComponent,
     PropertyListComponent,
     PropertyDetailsComponent,
-    OwnerListComponent
+    OwnerListComponent,
+    ContractListComponent
   ],
   imports: [
     // BrowserModule,

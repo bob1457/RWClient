@@ -281,5 +281,28 @@ export class PropertyEffects {
     )
   );
 
+  addManagementContract$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(PropertyActions.addManagementContract),
+      // tap(() => console.log('got here: ')),
+      map(action => action.payload),
+      switchMap((payload) =>
+        this.contractService.addManagementContract(payload).pipe( // this.propertyService.addOwner(payload).pipe(
+          tap(() => console.log('called property owner service to add contract: ' + payload)),
+          map(( contract: ManagementContract) => ({
+            type: '[Property] Add Management Contract Success',
+            payload: contract
+          })),
+          // tap(res => {console.log('response: ' + res); }),
+          catchError(
+            err => {
+              return of('[Property] Add Management Contract Failure', err.error);
+            } // EMPTY
+          )
+        )
+      )
+    )
+  );
 
 }

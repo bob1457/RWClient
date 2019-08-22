@@ -5,10 +5,10 @@ import { PropertyState } from '../property.state';
 import * as PropertyActions from '../actions/property.actions';
 import { EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 
-const adapter: EntityAdapter<Property> = createEntityAdapter<Property>();
+// const adapter: EntityAdapter<Property> = createEntityAdapter<Property>();
 
 // tslint:disable-next-line:one-variable-per-declaration
-export const initialState: PropertyState = adapter.getInitialState ({
+export const initialState: PropertyState =  { // adapter.getInitialState
   loading: false,
   loaded: false,
   properties: null,
@@ -18,7 +18,7 @@ export const initialState: PropertyState = adapter.getInitialState ({
   contracts: null,
   selectedContract: null,
   errorMessage: null
-});
+};
 
 debugger;
 const propertyReducer = createReducer(
@@ -103,7 +103,7 @@ on(PropertyActions.getPropertyDetails, (state) => ({
     debugger;
     const index = state.properties.findIndex(x => x.id === payload.id);
 
-    const updatedPorperties = state.properties.map(
+    const updatedProperties = state.properties.map(
       item => payload.id === item.id ? payload : item
     );
 
@@ -112,7 +112,7 @@ on(PropertyActions.getPropertyDetails, (state) => ({
       ...state,
       loading: false,
       loaded: true,
-      properties: updatedPorperties // [...state.property[index], payload ] // ,
+      properties: updatedProperties // [...state.property[index], payload ] // ,
       // property: payload
     });
   }),
@@ -139,14 +139,14 @@ on(PropertyActions.getPropertyDetails, (state) => ({
     // state.properties[index] = payload;
     // state.properties[index].status = payload.status;
 
-    const updatedPorperties = state.properties.map(
+    const updatedProperties = state.properties.map(
       item => payload.id === item.id ? payload : item
     );
 
     return ({
       ...state,
       loading: false,
-      properties: updatedPorperties // [...state.property[index], payload]
+      properties: updatedProperties // [...state.property[index], payload]
     });
   }),
 
@@ -252,8 +252,119 @@ on(PropertyActions.getPropertyDetails, (state) => ({
       loading: true,
       errorMessage: 'Failed to add property'
     });
-  })
+  }),
 
+
+
+
+
+
+
+
+
+
+
+
+  // on(PropertyActions.getContractList, state => ({
+  //   ...state,
+  //   loading: true,
+  //   loaded: false
+  // })),
+
+  // on(PropertyActions.getContractListSuccess, (state, { payload }) => {
+  //   return ({
+  //     ...state,
+  //     loading: false,
+  //     loaded: true,
+  //     contracts: payload
+  //   });
+  // }),
+
+// on(PropertyActions.getContractDetails, (state) => ({
+//     ...state,
+//     loading: true,
+//     loaded: false
+//   })),
+
+//   on(PropertyActions.getContractDetailsSuccess, (state, { payload }) => {
+//     return ({
+//       ...state,
+//       loading: false,
+//       loaded: true,
+//       selectedContract: payload
+//     });
+//   }),
+
+//   on(PropertyActions.getPropertyDetailsFailure, (state) => {
+//     return ({
+//       ...state,
+//       loading: false,
+//       loaded: false,
+//       selectedContract: null,
+//       errorMessage: 'Failed to load contract details'
+//     });
+//   }),
+
+//   on(PropertyActions.addPropertyOwner, (state) => {
+//     return ({
+//       ...state,
+//       loading: true
+//       // property: payload
+//     });
+//   }),
+
+//   on(PropertyActions.addManagementContractSuccess, (state, {payload}) => {
+//     debugger;
+//     return ({
+//       ...state,
+//       loading: false,
+//       loaded: true,
+//       contracts: [...state.contracts, payload ] // ,
+//       // property: payload
+//     });
+//   }),
+
+//   on(PropertyActions.addManagementContractFailure, (state) => {
+//     return ({
+//       ...state,
+//       loading: true,
+//       errorMessage: 'Failed to add property'
+//     });
+//   }),
+
+
+//   on(PropertyActions.updateContract, (state) => {
+//     return ({
+//       ...state,
+//       loading: true
+//       // property: payload
+//     });
+//   }),
+
+//   on(PropertyActions.updateContractSuccess, (state, {payload}) => {
+//     debugger;
+
+//     const updatedContracts = state.contracts.map(
+//       item => payload.id === item.id ? payload : item
+//     );
+
+
+//     return ({
+//       ...state,
+//       loading: false,
+//       loaded: true,
+//       contracts: updatedContracts // [...state.property[index], payload ] // ,
+//       // property: payload
+//     });
+//   }),
+
+//   on(PropertyActions.updatePropertyFailure, (state) => {
+//     return ({
+//       ...state,
+//       loading: true,
+//       errorMessage: 'Failed to update contract'
+//     });
+//   }),
 );
 
 /**

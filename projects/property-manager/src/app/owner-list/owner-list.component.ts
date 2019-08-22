@@ -46,7 +46,7 @@ export class OwnerListComponent implements OnInit {
       contactEmail: 'jannylu@gmail.com',
       contactTelephone1: '604-976-1235',
       contactTelephone2: '',
-      onlineAccessEnbaled: false,
+      onlineAccessEnabled: false,
       userAvartaImgUrl: '',
       isActive: true,
       roleId: 2,
