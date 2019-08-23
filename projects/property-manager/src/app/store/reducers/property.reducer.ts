@@ -280,6 +280,16 @@ on(PropertyActions.getPropertyDetails, (state) => ({
     });
   }),
 
+  on(PropertyActions.getContractListFailure, (state) => {
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      contracts: null,
+      errorMessage: 'Failed to load contract details'
+    });
+  }),
+
 // on(PropertyActions.getContractDetails, (state) => ({
 //     ...state,
 //     loading: true,
