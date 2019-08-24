@@ -1,7 +1,6 @@
-import { ManagementContract } from './../../../../../app-core/src/lib/property/models/contract';
 import { createAction, props } from '@ngrx/store';
 
-import { Property, PropertyStatus } from '@lib/app-core';
+import { Property, PropertyStatus, ManagementContract } from '@lib/app-core';
 import { PropertyOwner } from '@lib/app-core';
 
 

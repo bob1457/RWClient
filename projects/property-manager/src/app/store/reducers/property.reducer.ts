@@ -290,91 +290,91 @@ on(PropertyActions.getPropertyDetails, (state) => ({
     });
   }),
 
-// on(PropertyActions.getContractDetails, (state) => ({
-//     ...state,
-//     loading: true,
-//     loaded: false
-//   })),
+on(PropertyActions.getContractDetails, (state) => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
 
-//   on(PropertyActions.getContractDetailsSuccess, (state, { payload }) => {
-//     return ({
-//       ...state,
-//       loading: false,
-//       loaded: true,
-//       selectedContract: payload
-//     });
-//   }),
+  on(PropertyActions.getContractDetailsSuccess, (state, { payload }) => {
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      selectedContract: payload
+    });
+  }),
 
-//   on(PropertyActions.getPropertyDetailsFailure, (state) => {
-//     return ({
-//       ...state,
-//       loading: false,
-//       loaded: false,
-//       selectedContract: null,
-//       errorMessage: 'Failed to load contract details'
-//     });
-//   }),
+  on(PropertyActions.getPropertyDetailsFailure, (state) => {
+    return ({
+      ...state,
+      loading: false,
+      loaded: false,
+      selectedContract: null,
+      errorMessage: 'Failed to load contract details'
+    });
+  }),
 
-//   on(PropertyActions.addPropertyOwner, (state) => {
-//     return ({
-//       ...state,
-//       loading: true
-//       // property: payload
-//     });
-//   }),
+  on(PropertyActions.addPropertyOwner, (state) => {
+    return ({
+      ...state,
+      loading: true
+      // property: payload
+    });
+  }),
 
-//   on(PropertyActions.addManagementContractSuccess, (state, {payload}) => {
-//     debugger;
-//     return ({
-//       ...state,
-//       loading: false,
-//       loaded: true,
-//       contracts: [...state.contracts, payload ] // ,
-//       // property: payload
-//     });
-//   }),
+  on(PropertyActions.addManagementContractSuccess, (state, {payload}) => {
+    debugger;
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      contracts: [...state.contracts, payload ] // ,
+      // property: payload
+    });
+  }),
 
-//   on(PropertyActions.addManagementContractFailure, (state) => {
-//     return ({
-//       ...state,
-//       loading: true,
-//       errorMessage: 'Failed to add property'
-//     });
-//   }),
-
-
-//   on(PropertyActions.updateContract, (state) => {
-//     return ({
-//       ...state,
-//       loading: true
-//       // property: payload
-//     });
-//   }),
-
-//   on(PropertyActions.updateContractSuccess, (state, {payload}) => {
-//     debugger;
-
-//     const updatedContracts = state.contracts.map(
-//       item => payload.id === item.id ? payload : item
-//     );
+  on(PropertyActions.addManagementContractFailure, (state) => {
+    return ({
+      ...state,
+      loading: true,
+      errorMessage: 'Failed to add contract'
+    });
+  }),
 
 
-//     return ({
-//       ...state,
-//       loading: false,
-//       loaded: true,
-//       contracts: updatedContracts // [...state.property[index], payload ] // ,
-//       // property: payload
-//     });
-//   }),
+  on(PropertyActions.updateContract, (state) => {
+    return ({
+      ...state,
+      loading: true
+      // property: payload
+    });
+  }),
 
-//   on(PropertyActions.updatePropertyFailure, (state) => {
-//     return ({
-//       ...state,
-//       loading: true,
-//       errorMessage: 'Failed to update contract'
-//     });
-//   }),
+  on(PropertyActions.updateContractSuccess, (state, {payload}) => {
+    debugger;
+
+    const updatedContracts = state.contracts.map(
+      item => payload.id === item.id ? payload : item
+    );
+
+
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      contracts: updatedContracts // [...state.property[index], payload ] // ,
+      // property: payload
+    });
+  }),
+
+  on(PropertyActions.updatePropertyFailure, (state) => {
+    return ({
+      ...state,
+      loading: true,
+      errorMessage: 'Failed to update contract'
+    });
+  }),
 );
 
 /**

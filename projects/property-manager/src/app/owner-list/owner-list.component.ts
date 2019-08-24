@@ -38,6 +38,7 @@ export class OwnerListComponent implements OnInit {
 
   addOwner() { // owner: PropertyOwner
     const owner: PropertyOwner = {
+      id: 0,
       propertyOwnerId: 0,
       propertyId: 1004,
       userName: 'NotSet',

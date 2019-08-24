@@ -281,6 +281,30 @@ export class PropertyEffects {
     )
   );
 
+  getContractDetails$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(PropertyActions.getContractDetails),
+      tap(() => console.log('got here for contract details: ')),
+      map(action => action.payload),
+      switchMap((payload) =>
+        this.contractService.getManagementContractDetails(payload).pipe(
+          // tap(() => console.log('got here 2: ' + payload)),
+          map((contract: ManagementContract) => ({
+            type: '[Property] Get Contract Details Success',
+            payload: contract
+          })),
+          // tap(res => {console.log('response: ' + res); }),
+          catchError(
+            err => {
+              return of(PropertyActions.getContractDetailsFailure([err.error]));
+            } // EMPTY // return of('[Property] Get Property Details Failure', err.error);
+          )
+        )
+      )
+    )
+  );
+
   addManagementContract$ = createEffect(() =>
     this.actions$.pipe(
       // ofType('[Property] Get Property List'),
@@ -298,6 +322,30 @@ export class PropertyEffects {
           catchError(
             err => {
               return of('[Property] Add Management Contract Failure', err.error);
+            } // EMPTY
+          )
+        )
+      )
+    )
+  );
+
+  updateContract$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(PropertyActions.updateContract),
+      // tap(() => console.log('got here: ')),
+      map(action => action.payload),
+      switchMap((payload) =>
+        this.contractService.updateManagementContract(payload).pipe(
+          tap(() => console.log('called contract service for update: ' + payload)),
+          map((contract: ManagementContract) => ({
+            type: '[Property] Update Contract Success',
+            payload: contract
+          })),
+          // tap(res => {console.log('response: ' + res); }),
+          catchError(
+            err => {
+              return of('[Property] Update Contract Failure', err.error);
             } // EMPTY
           )
         )

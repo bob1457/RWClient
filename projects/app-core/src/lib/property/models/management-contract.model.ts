@@ -1,10 +1,11 @@
 export interface ManagementContract {
+  id: number;
   ManagementContractTitle: string;
-  StartDate: Date;
-  EndDate: Date;
+  StartDate: string;
+  EndDate: string;
   PlacementFeeScale: string;
   ManagementFeeScale: string;
-  ContractSignDate: Date;
+  ContractSignDate: string;
   PropertyId: number;
   ManagementContractDocUrl: string;
   ManagementContractType: number;
