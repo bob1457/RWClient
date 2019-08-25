@@ -52,9 +52,9 @@ export class ContractListComponent implements OnInit {
   updateContract() {
     const contract: any = {
       id: 1,
-      ManagementContractTitle: 'Updated contract',
-      StartDate: '2019-09-01T19:50:09.124Z',
-      EndDate: '2020-09-30T19:50:09.124Z',
+      ManagementContractTitle: 'Newly Updated contract',
+      StartDate: '2019-09-15T19:50:09.124Z',
+      EndDate: '2020-10-15T19:50:09.124Z',
       PlacementFeeScale: '100%',
       ManagementFeeScale: '10%',
       // ContractSignDate: '2019-08-23T19:50:09.124Z',

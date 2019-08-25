@@ -94,7 +94,8 @@ on(PropertyActions.getPropertyDetails, (state) => ({
   on(PropertyActions.updateProperty, (state) => {
     return ({
       ...state,
-      loading: true
+      loading: true,
+      loaded: false
       // property: payload
     });
   }),
@@ -128,7 +129,8 @@ on(PropertyActions.getPropertyDetails, (state) => ({
   on(PropertyActions.updatePropertyStatus, (state) => {
     return ({
       ...state,
-      loading: true
+      loading: true,
+      loaded: false
       // property: payload
     });
   }),
@@ -318,7 +320,8 @@ on(PropertyActions.getContractDetails, (state) => ({
   on(PropertyActions.addPropertyOwner, (state) => {
     return ({
       ...state,
-      loading: true
+      loading: true,
+      loaded: false
       // property: payload
     });
   }),
@@ -346,7 +349,8 @@ on(PropertyActions.getContractDetails, (state) => ({
   on(PropertyActions.updateContract, (state) => {
     return ({
       ...state,
-      loading: true
+      loading: true,
+      loaded: false
       // property: payload
     });
   }),
