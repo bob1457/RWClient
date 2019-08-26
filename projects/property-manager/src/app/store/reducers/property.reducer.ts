@@ -14,6 +14,7 @@ export const initialState: PropertyState =  { // adapter.getInitialState
   properties: null,
   property: null,
   owners: null,
+  ownersOfProperty: null,
   selectedOwner: null,
   contracts: null,
   selectedContract: null,
@@ -256,6 +257,68 @@ on(PropertyActions.getPropertyDetails, (state) => ({
     });
   }),
 
+  on(PropertyActions.updatePropertyOwner, (state) => {
+    return ({
+      ...state,
+      loading: true,
+      loaded: false
+      // property: payload
+    });
+  }),
+
+  on(PropertyActions.updatePropertyOwnerSuccess, (state, {payload}) => {
+    debugger;
+    // const index = state.owners.findIndex(x => x.id === payload.id);
+
+    const updatedOwners = state.owners.map(
+      item => payload.id === item.id ? payload : item
+    );
+
+
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      owners: updatedOwners // [...state.property[index], payload ] // ,
+      // property: payload
+    });
+  }),
+
+  on(PropertyActions.updatePropertyOwnerFailure, (state) => {
+    return ({
+      ...state,
+      loading: true,
+      errorMessage: 'Failed to update property owner'
+    });
+  }),
+
+  on(PropertyActions.removePropertyOwner, (state) => {
+    return ({
+      ...state,
+      loading: true
+      // property: payload
+    });
+  }),
+
+  on(PropertyActions.removePropertyOwnerSuccess, (state, {payload}) => {
+    debugger;
+    // const index = state.properties.findIndex(x => x.id === payload.propertyId);
+
+    return ({
+      ...state,
+      loading: false,
+      owners: [...state.owners.filter(x => x.id !== payload.propertyOwnerId )] // [...state.property[index].isActive, payload.isActive]
+    });
+  }),
+
+  on(PropertyActions.removePropertyOwnerFailure, (state) => {
+    return ({
+      ...state,
+      loading: false,
+      // property: payload
+      errorMessage: 'Failed to remove property owner'
+    });
+  }),
 
 
 
@@ -389,9 +452,15 @@ export const selectPropertyState = createFeatureSelector<PropertyState>('propert
 
 export const getPropertyList = (state: PropertyState) => state.properties;
 export const getOwnerList = (state: PropertyState) => state.owners;
+export const getContractList = (state: PropertyState) => state.contracts;
 
 export const ownerList = createSelector(selectPropertyState, getOwnerList);
 export const propertyList = createSelector(selectPropertyState, getPropertyList);
+export const contractList = createSelector(selectPropertyState, getContractList);
+
+
+
+
 
 export function reducer(state: PropertyState | undefined, action: Action) {
   return propertyReducer(state, action);

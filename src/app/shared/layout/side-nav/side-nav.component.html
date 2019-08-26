@@ -39,7 +39,15 @@
                 <mat-icon style="color:brown;" matListIcon>layers</mat-icon>
                 <a matLine [routerLinkActive]="['active']">Properties</a>
                         <button mat-icon-button (click)="showInfo(link)">
-                  <!--<mat-icon>info</mat-icon>-->
+                  <!--<mat-icon>info</mat-icon><span class="badge" >{{n}}</span>
+                  <span matBadge="{{n}}" matBadgeColor="primary" matBadgeOverlap="false"></span>-->
+                  <mat-chip style="background-color: red;
+                  padding: 3px;
+                  color: yellow;
+                  padding-right: 5px;
+                  border-radius: 50%;
+                  border: 0 transparent;
+                  font-size: 12px;">{{n}}</mat-chip>
                 </button>
                     </mat-list-item>
                     </mat-expansion-panel-header>
@@ -49,6 +57,7 @@
                             <mat-icon style="color: rgb(72, 173, 219)" [routerLink]="['/Manage/property']" [routerLinkActive]="['active']" matListIcon>list_alt</mat-icon>
                             <a matLine [routerLink]="['/Manage/property']" [routerLinkActive]="['active']">All List</a
                 >
+                <!-- <span style="color: rgb(241, 150, 57); margin-top: 25px;" matBadge="{{n}}" matBadgeColor="primary" matBadgeOverlap="false"></span> -->
                 <button mat-icon-button (click)="showInfo(link)">
                   <!--<mat-icon>info</mat-icon>  -->
                 </button>

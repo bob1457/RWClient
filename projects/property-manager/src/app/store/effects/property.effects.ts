@@ -258,6 +258,30 @@ export class PropertyEffects {
     )
   );
 
+  removePropertyOwner$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(PropertyActions.removePropertyOwner),
+      // tap(() => console.log('got here: ')),
+      map(action => action.payload),
+      switchMap((payload) =>
+        this.propertyOwnerService.removeOwner(payload).pipe(
+          tap(() => console.log('called property owner service: ' + payload)),
+          map((owner: any) => ({ // PropertyActive
+            type: '[Property] Remove Property Owner Success' // ,
+            // payload: owner
+          })),
+          // tap(res => {console.log('response: ' + res); }),
+          catchError(
+            err => {
+              return of('[Property] Remove Property Owner Failure', err.error);
+            } // EMPTY
+          )
+        )
+      )
+    )
+  );
+
 
   getContractList$ = createEffect(() =>
     this.actions$.pipe(

@@ -104,7 +104,9 @@ export const updatePropertyStatusFailure = createAction(
   (errorMessage = 'Error adding property') => ({ payload: { errorMessage }})
 );
 
-
+/**
+ * Remove Prooperty Actions
+ */
 export const removeProperty = createAction(
   '[Property] Remove Property Status',
   props<{payload: any}>()
@@ -192,13 +194,13 @@ export const addPropertyOwnerFailure = createAction(
  */
 
 export const updatePropertyOwner = createAction(
-  '[Property] Update Property',
+  '[Property] Update Property Owner',
   props<{payload: PropertyOwner}>()
 );
 
 export const updatePropertyOwnerSuccess = createAction(
   '[Property] Update Property Owner Success',
-  props<{payload: PropertyOwner}>()
+  props<{payload: any}>()
 );
 
 export const updatePropertyOwnerFailure = createAction(
@@ -208,6 +210,24 @@ export const updatePropertyOwnerFailure = createAction(
 
 );
 
+/**
+ * Remove Property Owner From Property Actions
+ */
+export const removePropertyOwner = createAction(
+  '[Property] Remove Property Owner',
+  props<{payload: any}>()
+);
+
+export const removePropertyOwnerSuccess = createAction(
+  '[Property] Remove Property Owner Success',
+  props<{payload: any}>()
+);
+
+export const removePropertyOwnerFailure = createAction(
+  '[Property] Remove Property Owner Failure',
+  // props<{payload: PropertyStatus}>()
+  (errorMessage = 'Error removing property owner') => ({ payload: { errorMessage }})
+);
 
 /**
  * Get Management Contract List Actions

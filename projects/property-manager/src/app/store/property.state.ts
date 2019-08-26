@@ -9,6 +9,7 @@ export interface PropertyState   { //extends  EntityState<Property>
   properties: Property[] | null;
   property: Property | null;
   owners: PropertyOwner[] | null;
+  ownersOfProperty: PropertyOwner[] | null;
   selectedOwner: PropertyOwner | null;
   contracts: ManagementContract[] | null;
   selectedContract: ManagementContract | null;

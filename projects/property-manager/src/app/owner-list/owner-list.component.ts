@@ -2,7 +2,7 @@ import { PropertyService, PropertyOwner } from '@lib/app-core';
 import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { PropertyState } from '../store/property.state';
-import { getPropertyOwnerList, getPropertyOwnerDetails, addPropertyOwner } from '../store/actions/property.actions';
+import { getPropertyOwnerList, getPropertyOwnerDetails, addPropertyOwner, updatePropertyOwner, removePropertyOwner } from '../store/actions/property.actions';
 import {ownerList } from '../store/reducers/property.reducer';
 
 @Component({
@@ -62,6 +62,44 @@ export class OwnerListComponent implements OnInit {
     debugger;
 
     return this.store.dispatch(addPropertyOwner({payload: owner}));
+  }
+
+  updateOwner() {
+    const owner: any = {
+      id: 2,
+      // propertyOwnerId: 0,
+      propertyId: 1002,
+      userName: 'NotSet',
+      firstName: 'John X.',
+      lastName: 'Lu',
+      contactEmail: 'jlu@gmail.com',
+      contactTelephone1: '604-976-1235',
+      contactTelephone2: '',
+      onlineAccessEnabled: false,
+      userAvartaImgUrl: '',
+      isActive: true,
+      roleId: 2,
+      notes: 'Ower UPDATED again',
+      streetNumber: '8989 Main Street',
+      city: 'Vancouver',
+      stateProv: 'BC',
+      zipPostCode: 'V3V 2V2',
+      country: 'Canada'
+    };
+
+    debugger;
+
+    return this.store.dispatch(updatePropertyOwner({payload: owner}));
+  }
+
+  removeOwner() {
+    const ownerToRemove: any = {
+      propertyId: 1003,
+      propertyOwnerId: 6
+    };
+
+    debugger;
+    return this.store.dispatch(removePropertyOwner({payload: ownerToRemove}));
   }
 
 }
