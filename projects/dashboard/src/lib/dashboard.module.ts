@@ -8,6 +8,8 @@ import { DashhomeComponent } from './dashhome/dashhome.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { reducer } from './store/dash.reducer';
 import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { DashboardEffects } from './store/dash.effects';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,8 @@ import { StoreModule } from '@ngrx/store';
     LayoutModule,
     HttpClientModule,
     AppMaterialModule,
-    StoreModule.forFeature('dashboard', reducer)
+    StoreModule.forFeature('dashboard', reducer),
+    EffectsModule.forFeature([DashboardEffects])
   ],
   exports: [
     DashboardComponent,

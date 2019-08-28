@@ -8,6 +8,6 @@ import * as fromDash from '@lib/dashboard';
 export interface AppState {
   auth: fromAuth.AuthState;
   property: fromProperty.PropertyState;
-  dash: fromDash.DashState;
+  dashboard: fromDash.DashState;
   router: RouterState;
 }

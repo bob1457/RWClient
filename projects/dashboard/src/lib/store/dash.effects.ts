@@ -8,7 +8,7 @@ import { switchMap, map, tap, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 
 @Injectable()
-export class PropertyEffects {
+export class DashboardEffects {
 
   constructor(
     private actions$: Actions,
