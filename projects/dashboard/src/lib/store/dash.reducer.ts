@@ -33,8 +33,56 @@ const dashReducer = createReducer(
       loaded: true,
       properties: payload
     });
+  }),
+
+  on(DashActions.getPropertyOwnerList, state => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+  on(DashActions.getPropertyOwnerListSuccess, (state, { payload }) => {
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      owners: payload
+    });
+  }),
+
+  on(DashActions.getPropertyOwnerListFailure, (state) => ({
+    ...state,
+    loading: true,
+    loaded: false,
+    errorMessage: 'Failed to load property owners'
+  })),
+
+  on(DashActions.getContractList, state => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+  on(DashActions.getContractListSuccess, (state, { payload }) => {
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      contracts: payload
+    });
+  }),
+
+  on(DashActions.getContractListFailure, (state) => {
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      contracts: null,
+      errorMessage: 'Failed to load contract details'
+    });
   })
-)
+
+);
 
 
 
