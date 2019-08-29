@@ -11,6 +11,7 @@ export interface DashState {
   owners: PropertyOwner[];
   contracts: ManagementContract[];
   tenants: any[];
+  leases: any[];
   errorMessage: string;
 }
 

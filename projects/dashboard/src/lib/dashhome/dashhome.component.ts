@@ -40,6 +40,9 @@ export class DashhomeComponent {
   ngOnInit() {
     this.breakpoint = (window.innerWidth <= 640) ? 2 : 1;
     debugger;
+
+    // getPropertyList();
+    // getPropertyOwnerList();
     // return this.store.dispatch(getPropertyOwnerList()) ;
     return this.store.dispatch(getContractList()) ;
   }
@@ -47,5 +50,13 @@ export class DashhomeComponent {
   onResize(event) {
     this.breakpoint = (event.target.innerWidth <= 640) ? 2 : 1;
   }
+
+  // getPropertyList() {
+  //   return this.store.dispatch(getPropertyList()) ;
+  // }
+
+  // getPropertyOwnerList() {
+  //   return this.store.dispatch(getPropertyOwnerList()) ;
+  // }
 
 }

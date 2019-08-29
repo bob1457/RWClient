@@ -8,8 +8,15 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
+  breakpoint: number;
 
   constructor(private breakpointObserver: BreakpointObserver){}
-  ngOnInit() { }
+  ngOnInit() {
+    this.breakpoint = (window.innerWidth <= 640) ? 2 : 1;
+  }
+
+  onResize(event) {
+    this.breakpoint = (event.target.innerWidth <= 640) ? 2 : 1;
+  }
 
 }

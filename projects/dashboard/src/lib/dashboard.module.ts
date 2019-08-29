@@ -10,11 +10,21 @@ import { reducer } from './store/dash.reducer';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { DashboardEffects } from './store/dash.effects';
+import { DashPropertyComponent } from './dash-property/dash-property.component';
+import { DashOwnerComponent } from './dash-owner/dash-owner.component';
+import { DashContractComponent } from './dash-contract/dash-contract.component';
+import { DashTenantComponent } from './dash-tenant/dash-tenant.component';
+import { DashLeaseComponent } from './dash-lease/dash-lease.component';
 
 @NgModule({
   declarations: [
     DashboardComponent,
-    DashhomeComponent
+    DashhomeComponent,
+    DashPropertyComponent,
+    DashOwnerComponent,
+    DashContractComponent,
+    DashTenantComponent,
+    DashLeaseComponent
   ],
   imports: [
     BrowserModule,

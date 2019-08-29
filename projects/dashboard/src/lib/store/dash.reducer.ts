@@ -9,7 +9,8 @@ export const initialState: DashState =  { // adapter.getInitialState
   properties: null,
   owners: null,
   contracts: null,
-  tenants: name,
+  tenants: null,
+  leases: null,
   errorMessage: null
 };
 
