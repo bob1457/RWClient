@@ -1,3 +1,5 @@
+import { PropertyOwner } from './property-owner.model';
+
 export interface Property {
     id: number;
     propertyName: string;
@@ -63,4 +65,5 @@ export interface Property {
     ownerZipPostCode: string;
     ownerCountry: string;
     isSameAddress: boolean;
+    ownerList: PropertyOwner[];
 }

@@ -13,7 +13,7 @@ export const initialState: PropertyState =  { // adapter.getInitialState
   loaded: false,
   properties: null,
   property: null,
-  owners: null,
+  // owners: null,
   ownersOfProperty: null,
   selectedOwner: null,
   contracts: null,
@@ -51,7 +51,8 @@ on(PropertyActions.getPropertyDetails, (state) => ({
       ...state,
       loading: false,
       loaded: true,
-      property: payload
+      property: payload,
+      ownersOfProperty: payload.ownerList
     });
   }),
 

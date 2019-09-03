@@ -14,6 +14,8 @@ export class PropertyDetailsComponent implements OnInit {
 
   propertyId: any = 1;
 
+  ownersForProperty: any[] ;
+
   ngOnInit() {
     // debugger;
     // return this.store.dispatch(getPropertyDetails(this.propertyId))
