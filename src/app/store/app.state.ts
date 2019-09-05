@@ -1,4 +1,4 @@
-import { PropertyState } from './../../../projects/property-manager/src/app/store/property.state';
+// import { PropertyState } from './../../../projects/property-manager/src/app/store/property.state';
 // import { RouterReducerState } from '@ngrx/router-store';
 import { RouterState } from './router.reducer';
 import * as fromAuth from '@lib/auth'; // ../../../projects/auth/src/lib/store/auth.state';

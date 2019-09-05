@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ManagementContract } from 'projects/app-core/src/lib/property/models/contract';
+import { ManagementContract } from 'projects/app-core/src/lib/property/models/management-contract.model';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({

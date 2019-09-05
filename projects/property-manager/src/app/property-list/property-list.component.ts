@@ -94,7 +94,8 @@ export class PropertyListComponent implements OnInit {
     ownerZipPostCode: 'string',
     ownerCountry: 'string',
     isSameAddress: true ,
-    ownerList: null
+    ownerList: null,
+    contractList: null
     // ownerAddress: {},
     // propertyAddress: {},
     // propertyFacility: {

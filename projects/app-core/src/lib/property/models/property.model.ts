@@ -1,4 +1,5 @@
 import { PropertyOwner } from './property-owner.model';
+import { ManagementContract } from './management-contract.model';
 
 export interface Property {
     id: number;
@@ -66,4 +67,5 @@ export interface Property {
     ownerCountry: string;
     isSameAddress: boolean;
     ownerList: PropertyOwner[];
+    contractList: ManagementContract[];
 }

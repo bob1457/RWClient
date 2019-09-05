@@ -1,4 +1,3 @@
-import { Property } from './../../../../../../dist/app-core/lib/property/models/property.model.d';
 import { createReducer, Action, createFeatureSelector, on, createSelector } from '@ngrx/store';
 import { PropertyState } from '../property.state';
 
@@ -17,6 +16,7 @@ export const initialState: PropertyState =  { // adapter.getInitialState
   ownersOfProperty: null,
   selectedOwner: null,
   contracts: null,
+  contractsForProperty: null,
   selectedContract: null,
   errorMessage: null
 };
@@ -47,12 +47,14 @@ on(PropertyActions.getPropertyDetails, (state) => ({
   })),
 
   on(PropertyActions.getPropertyDetailsSuccess, (state, { payload }) => {
+    debugger;
     return ({
       ...state,
       loading: false,
       loaded: true,
       property: payload,
-      ownersOfProperty: payload.ownerList
+      ownersOfProperty: payload.ownerList, // ,
+      contractsForProperty: payload.contractList
     });
   }),
 
