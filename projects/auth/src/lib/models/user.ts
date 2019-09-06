@@ -6,12 +6,9 @@ export interface User {
   avatarUrl?: string;
   firstname?: string;
   lastname?: string;
-<<<<<<< HEAD
-=======
   telephone?: string;
   email?: string;
   socialmedia?: string;
   joindate?: Date;
->>>>>>> dev
   role?: string;
 }
