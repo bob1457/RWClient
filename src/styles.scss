@@ -1,10 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
-@import './app/shared/styles/font-awesone/css/all.css';
 
-html, body { height: 100%; overflow-x: hidden}
+@import './app/shared/styles/font-awesone/css/all.css';
+html,
+body {
+    height: 100%;
+    overflow-x: hidden
+}
+
+
 /*
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 */
+
 body {
     margin: 0;
     padding: 0;
@@ -21,4 +28,8 @@ body {
     -ms-text-size-adjust: 100%;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+
+app-tool-bar {
+    width: 100%;
 }

@@ -4,14 +4,17 @@ import { PropertyListComponent } from './property-list/property-list.component';
 import { PropertyDetailsComponent } from './property-details/property-details.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { OwnerListComponent } from './owner-list/owner-list.component';
 
 
-const routes: Routes = [
-  { path: 'property', component: PropertyHomeComponent,
-    children: [
-      {path: 'list', component: PropertyListComponent}
-    ]
-  }
+const routes: Routes = [ // only for standalone app
+  // { path: 'property', component: PropertyHomeComponent,
+  //   children: [
+  //     {path: 'list', component: PropertyListComponent},
+  //     {path: 'owners', component: OwnerListComponent}
+  //   ]
+  // },
+  // { path: 'owners', component: OwnerListComponent }
 ];
 
 @NgModule({

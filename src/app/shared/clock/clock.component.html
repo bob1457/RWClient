@@ -8,14 +8,14 @@
     <div class="hand second-hand" [style.transform]="'rotate(' + (secDegrees$ | async) + 'deg)'"></div>
 </div>
 
-<p style="margin-top: 80px;
+<div style="margin-top: 20px;
 text-align: center;
 font-family: inherit;
 color: #80f1ad;
 font-size: .7em;">
     <!-- H Deg:	{{hourDegrees$|async}} -->
     {{ myDate | date: "medium" }}
-</p>
+</div>
 <!-- <p>
 M Deg:{{minDegrees$|async}}
 </p>

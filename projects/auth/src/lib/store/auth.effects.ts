@@ -67,10 +67,13 @@ export class AuthEffects {
     exhaustMap((credits: Authentication) =>
       this.authService.logIn(credits).pipe(
         mergeMap((data: User) => [
-          new AuthActions.LogInSuccess(data) //,
+          new AuthActions.LogInSuccess(data) // ,
           // console.log('received: ', data)
           // new RouterActions.Go({path: '/Manage'})
+          // localStorage.setItem('user', JSON.stringify(data))
+          // tap(data => {localStorage.setItem('auth', JSON.stringify(data))})
         ]),
+        // tap(userDate => localStorage.setItem('auth', JSON.stringify(userDate))),
         catchError((err: HttpErrorResponse) => of(new LogInFailure(err.error)))
       ))
   );
@@ -163,7 +166,8 @@ export class AuthEffects {
   public LogOut: Observable<Action> = this.actions.pipe(
     ofType(AuthActionTypes.LOGOUT),
     tap((user) => {
-      localStorage.removeItem('currentUser');
+      // localStorage.removeItem('currentUser');
+      localStorage.clear();
       this.router.navigate(['./']);
       // this.store.dispatch(new fromRouter.Go({ path: ['/Manage']}));
     })

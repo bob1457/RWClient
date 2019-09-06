@@ -1,9 +1,4 @@
-<lib-dashhome></lib-dashhome>
-
-<!--
-
-
-
+<!-- <lib-dashhome></lib-dashhome> -->
 
 
 
@@ -17,11 +12,11 @@
                   <mat-card-title>
                       Indicators
                       <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
-            <mat-icon>more_vert</mat-icon>
-          </button>
+                        <mat-icon>more_vert</mat-icon>
+                      </button>
                       <mat-menu #menu="matMenu" xPosition="before">
-                          <button mat-menu-item>Expand</button>
-                          <button mat-menu-item>Remove</button>
+                        <button mat-menu-item>Expand</button>
+                        <button mat-menu-item>Remove</button>
                       </mat-menu>
                   </mat-card-title>
               </mat-card-header>
@@ -32,8 +27,8 @@
           </mat-card>
       </mat-grid-tile>
 
-      <mat-grid-tile [colspan]="breakpoint" [rowspan]="2" (window:resize)="onResize($event)">
-          <mat-card class="dashboard-card">
+       <mat-grid-tile [colspan]="breakpoint" [rowspan]="2" (window:resize)="onResize($event)">
+        <!--  <mat-card class="dashboard-card">
               <mat-card-header>
                   <mat-card-title>
                       Properties
@@ -52,11 +47,13 @@
 
                   </div>
               </mat-card-content>
-          </mat-card>
+          </mat-card> -->
+          <lib-dash-property></lib-dash-property>
       </mat-grid-tile>
 
+
       <mat-grid-tile [colspan]="breakpoint" [rowspan]="1" (window:resize)="onResize($event)">
-          <mat-card class="dashboard-card">
+          <!-- <mat-card class="dashboard-card">
               <mat-card-header>
                   <mat-card-title>
                       Leases & Rentals
@@ -75,11 +72,13 @@
                   </div>
 
               </mat-card-content>
-          </mat-card>
+          </mat-card> -->
+          <lib-dash-lease></lib-dash-lease>
       </mat-grid-tile>
 
+
       <mat-grid-tile [colspan]="breakpoint" [rowspan]="1" (window:resize)="onResize($event)">
-          <mat-card class="dashboard-card">
+          <!-- <mat-card class="dashboard-card">
               <mat-card-header>
                   <mat-card-title>
                       Others
@@ -96,9 +95,11 @@
                   <div>Others</div>
 
               </mat-card-content>
-          </mat-card>
+          </mat-card> -->
+          <lib-dash-owner></lib-dash-owner>
       </mat-grid-tile>
 
   </mat-grid-list>
 </div>
--->
+
+

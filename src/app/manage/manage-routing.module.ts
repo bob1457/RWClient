@@ -20,7 +20,9 @@ const routes: Routes = [
       { path: 'profile', component: ProfileComponent},
       // { path: 'property', loadChildren: '../../../projects/property-manager/src/app/app.module-export#AppPmModule'}
       // tslint:disable-next-line:max-line-length
-      { path: 'property', loadChildren: () => import('../../../projects/property-manager/src/app/app.module-export').then(m => m.AppPmModule)}
+      { path: 'property', loadChildren: () => import('../../../projects/property-manager/src/app/app.module-export').then(m => m.AppPmModule)},
+      // tslint:disable-next-line:max-line-length
+      { path: 'marketing', loadChildren: () => import('../../../projects/marketing-manager/src/app/app.module export').then(m => m.AppMkModule)}
     ]
   }
 ];

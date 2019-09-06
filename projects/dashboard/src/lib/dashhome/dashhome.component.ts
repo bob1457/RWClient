@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
+import { getPropertyList, getPropertyOwnerList, getContractList } from '../store/dash.actions';
+import { DashState } from '../store/dash.state';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'lib-dashhome',
@@ -32,14 +35,28 @@ export class DashhomeComponent {
     })
   );
 */
-  constructor() {}
+  constructor(private store: Store<DashState>) {}
 
   ngOnInit() {
     this.breakpoint = (window.innerWidth <= 640) ? 2 : 1;
+    debugger;
+
+    // getPropertyList();
+    // getPropertyOwnerList();
+    // return this.store.dispatch(getPropertyOwnerList()) ;
+    return this.store.dispatch(getContractList()) ;
   }
 
   onResize(event) {
     this.breakpoint = (event.target.innerWidth <= 640) ? 2 : 1;
   }
+
+  // getPropertyList() {
+  //   return this.store.dispatch(getPropertyList()) ;
+  // }
+
+  // getPropertyOwnerList() {
+  //   return this.store.dispatch(getPropertyOwnerList()) ;
+  // }
 
 }
