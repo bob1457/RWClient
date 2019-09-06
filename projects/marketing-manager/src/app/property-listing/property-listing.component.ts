@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { PropertyListingState } from '../store/marketing.state';
+import { getPropertyListing } from '../store/actions/marketing.actions';
 
 @Component({
   selector: 'app-property-listing',
@@ -7,9 +10,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PropertyListingComponent implements OnInit {
 
-  constructor() { }
+  constructor(private store: Store<PropertyListingState>) { }
 
   ngOnInit() {
+    debugger;
+    // return this.propertyService.getPropertyList().subscribe((pList: Property[]) => {this.list = pList; console.log(pList)});
+    return this.store.dispatch(getPropertyListing())  ;
   }
 
 }
