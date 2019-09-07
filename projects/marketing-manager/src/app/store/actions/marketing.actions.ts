@@ -4,7 +4,7 @@ import { PropertyListing } from '@lib/app-core';
 
 debugger;
 /**
- * Get Property List Actions
+ * Get Property Listing Actions
  */
 export const getPropertyListing = createAction(
   '[Marketing] Get Property Listing'

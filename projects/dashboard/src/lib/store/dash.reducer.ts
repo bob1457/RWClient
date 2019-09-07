@@ -9,6 +9,7 @@ export const initialState: DashState =  { // adapter.getInitialState
   properties: null,
   owners: null,
   contracts: null,
+  listings: null,
   tenants: null,
   leases: null,
   errorMessage: null
@@ -81,7 +82,30 @@ const dashReducer = createReducer(
       contracts: null,
       errorMessage: 'Failed to load contract details'
     });
-  })
+  }),
+
+  on(DashActions.getPropertyListing, state => {
+    return ({
+      ...state,
+      loading: true,
+      loaded: false
+    });
+  }),
+
+  on(DashActions.getPropertyListingSuccess, (state, { payload }) => {
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      listings: payload
+    });
+  }),
+
+  on(DashActions.getPropertyOwnerListFailure, state => ({
+    ...state,
+    loading: true,
+    loaded: false
+  }))
 
 );
 

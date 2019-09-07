@@ -11,6 +11,8 @@ import { PropertyListingComponent } from './property-listing/property-listing.co
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { MarketingEffects } from './store/effects/marketing.effects';
+import { ListingDetailsComponent } from './listing-details/listing-details.component';
+import { MarketingHomeComponent } from './marketing-home/marketing-home.component';
 
 const routes: Routes = [
   { path: '', component: PropertyListingComponent}
@@ -19,7 +21,9 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AppMkComponent,
-    PropertyListingComponent
+    PropertyListingComponent,
+    MarketingHomeComponent,
+    ListingDetailsComponent
   ],
   imports: [
     // BrowserModule,

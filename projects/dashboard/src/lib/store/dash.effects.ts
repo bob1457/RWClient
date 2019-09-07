@@ -83,5 +83,27 @@ export class DashboardEffects {
     )
   );
 
+  // getPropertyListing$ = createEffect(() =>
+  //   this.actions$.pipe(
+  //     // ofType('[Property] Get Property List'),
+  //     ofType(DashActions.getContractList),
+  //     tap(() => console.log('got here to call service for retrieving contracts from dashboard lib')),
+  //     switchMap(() =>
+  //       this.dashService.getManagementContractList().pipe(
+  //         map((contracts: ManagementContract[]) => ({
+  //           type: '[Property] Get Contract List Success',
+  //           payload: contracts
+  //         })),
+  //         // tap(res => {console.log('response: ' + res); }),
+  //         catchError(
+  //           err => {
+  //             return of('[[Property] Get Contract List Failure', err.error);
+  //           } // EMPTY
+  //         )
+  //       )
+  //     )
+  //   )
+  // );
+
 
 }

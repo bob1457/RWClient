@@ -2,6 +2,7 @@ import { createFeatureSelector } from '@ngrx/store';
 import { ManagementContract } from '../models/management-contract.model';
 import { Property } from '../models/property.model';
 import { PropertyOwner } from '../models/property-owner.model';
+import { PropertyListing } from '@lib/app-core';
 
 
 export interface DashState {
@@ -10,6 +11,7 @@ export interface DashState {
   properties: Property[];
   owners: PropertyOwner[];
   contracts: ManagementContract[];
+  listings: PropertyListing[];
   tenants: any[];
   leases: any[];
   errorMessage: string;
