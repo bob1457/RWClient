@@ -4,6 +4,7 @@ import { ManagementContract } from '../models/management-contract.model';
 import { HttpClient } from '@angular/common/http';
 import { Property } from '../models/property.model';
 import { PropertyOwner } from '../models/property-owner.model';
+import { PropertyListing } from '../models/property-listing.model';
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +29,11 @@ export class DashboardService {
   getManagementContractList() {
     debugger;
     return this.http.get<ManagementContract[]>(`${this.baseUrl}/property/contracts`);
+  }
+
+  getAllPropertyListings() {
+    debugger;
+    return this.http.get<PropertyListing[]>(`${this.baseUrl}/listings`);
   }
 
   getLeaseAgreementList() {

@@ -15,6 +15,7 @@ import { DashOwnerComponent } from './dash-owner/dash-owner.component';
 import { DashContractComponent } from './dash-contract/dash-contract.component';
 import { DashTenantComponent } from './dash-tenant/dash-tenant.component';
 import { DashLeaseComponent } from './dash-lease/dash-lease.component';
+import { DashListingComponent } from './dash-listing/dash-listing.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { DashLeaseComponent } from './dash-lease/dash-lease.component';
     DashOwnerComponent,
     DashContractComponent,
     DashTenantComponent,
-    DashLeaseComponent
+    DashLeaseComponent,
+    DashListingComponent
   ],
   imports: [
     BrowserModule,
