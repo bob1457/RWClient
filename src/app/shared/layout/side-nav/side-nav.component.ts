@@ -47,29 +47,29 @@ export class SideNavComponent implements OnInit {
   isAdmin = true;
   n = 13;
 
-  link = "";
+  link = '';
 
-  mode = "side";
+  mode = 'side';
   opened = true;
 
   media$: Observable<MediaChange>;
 
   watcher: Subscription;
-  activeMediaQuery = "";
+  activeMediaQuery = '';
 
-  ToggleButtonDisplay = "none";
-  SideToggleButtonDisplay = "";
+  ToggleButtonDisplay = 'none';
+  SideToggleButtonDisplay = '';
 
-  OpenButtonDisplay = "none";
+  OpenButtonDisplay = 'none';
   visible = false;
   sidenavWidth = 17.5; // side nav width when started (default: full-width side nav)
 
   // user: Observable<string>; // this must be a local variable, NOT an Observable
   user: User;
-  avatar = "";
+  avatar = '';
   avatar$: Observable<string>;
 
-  theme$ = "dark-theme"; // this is default -- selecting theme can be implemented using observable from rxjs... later.
+  theme$ = 'dark-theme'; // this is default -- selecting theme can be implemented using observable from rxjs... later.
 
   constructor(
     public mediaObserver: MediaObserver,
@@ -129,48 +129,48 @@ export class SideNavComponent implements OnInit {
   changeSideNav() {
     if (this.sidenavWidth === 17.5) {
       this.sidenavWidth = 4; // mini side nav
-      this.ToggleButtonDisplay = "none";
+      this.ToggleButtonDisplay = 'none';
       this.SideToggleButtonDisplay = "none";
     } else {
       this.sidenavWidth = 17.5; // full width side nav
-      this.ToggleButtonDisplay = "none";
-      this.SideToggleButtonDisplay = "";
+      this.ToggleButtonDisplay = 'none';
+      this.SideToggleButtonDisplay = '';
     }
     // console.log('side nav width changed to ' + this.sidenavWidth);
   }
 
   private getMode(mediaChange: MediaChange): string {
     // set mode based on a breakpoint
-    if (this.mediaObserver.isActive("gt-sm")) {
-      return "side";
+    if (this.mediaObserver.isActive('gt-sm')) {
+      return 'side';
     } else {
-      return "over";
+      return 'over';
     }
   }
 
   private showHideOpenButton(mediaChange: MediaChange): string {
-    if (this.mediaObserver.isActive("gt-sm")) {
-      return "none"; // hidden
+    if (this.mediaObserver.isActive('gt-sm')) {
+      return 'none'; // hidden
     } else {
       return ""; // show
     }
   }
 
   private getOpened(mediaChange: MediaChange): any {
-    if (this.mediaObserver.isActive("gt-sm")) {
-      return "true";
+    if (this.mediaObserver.isActive('gt-sm')) {
+      return 'true';
     } else {
       // this.show_logo = true;
-      return "false";
+      return 'false';
     }
   }
 
   changeDark() {
-    this.theme$ = "dark-theme";
+    this.theme$ = 'dark-theme';
   }
 
   changeLight() {
-    this.theme$ = "light-theme";
+    this.theme$ = 'light-theme';
   }
 
   logout(): void {

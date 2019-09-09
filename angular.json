@@ -557,6 +557,122 @@
           }
         }
       }
+    },
+    "lease-manager": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/lease-manager",
+      "sourceRoot": "projects/lease-manager/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/lease-manager",
+            "index": "projects/lease-manager/src/index.html",
+            "main": "projects/lease-manager/src/main.ts",
+            "polyfills": "projects/lease-manager/src/polyfills.ts",
+            "tsConfig": "projects/lease-manager/tsconfig.app.json",
+            "assets": [
+              "projects/lease-manager/src/favicon.ico",
+              "projects/lease-manager/src/assets"
+            ],
+            "styles": [
+              "projects/lease-manager/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/lease-manager/src/environments/environment.ts",
+                  "with": "projects/lease-manager/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "lease-manager:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "lease-manager:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "lease-manager:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/lease-manager/src/test.ts",
+            "polyfills": "projects/lease-manager/src/polyfills.ts",
+            "tsConfig": "projects/lease-manager/tsconfig.spec.json",
+            "karmaConfig": "projects/lease-manager/karma.conf.js",
+            "assets": [
+              "projects/lease-manager/src/favicon.ico",
+              "projects/lease-manager/src/assets"
+            ],
+            "styles": [
+              "projects/lease-manager/src/styles.scss"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/lease-manager/tsconfig.app.json",
+              "projects/lease-manager/tsconfig.spec.json",
+              "projects/lease-manager/e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/lease-manager/e2e/protractor.conf.js",
+            "devServerTarget": "lease-manager:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "lease-manager:serve:production"
+            }
+          }
+        }
+      }
     }
   },
   "defaultProject": "RWClient"
