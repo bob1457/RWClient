@@ -35,7 +35,9 @@ const propertyLeaseReducer = createReducer(
       loaded: true,
       leases: payload
     });
-  }));
+  }))
+
+  ;
 
 
 

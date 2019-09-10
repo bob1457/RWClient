@@ -8,6 +8,7 @@ import { Property } from '../models/property.model';
 import { switchMap, map, tap, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { PropertyOwner } from '../models/property-owner.model';
+import { PropertyLease } from '../models/property-lease.model';
 
 @Injectable()
 export class DashboardEffects {
@@ -76,6 +77,28 @@ export class DashboardEffects {
           catchError(
             err => {
               return of('[[Property] Get Contract List Failure', err.error);
+            } // EMPTY
+          )
+        )
+      )
+    )
+  );
+
+  getAllLeases$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(DashActions.getAllLeases),
+      tap(() => console.log('got here for property leases!!! from dash')),
+      switchMap(() =>
+        this.dashService.getLeaseAgreementList().pipe(
+          map((leases: PropertyLease[]) => ({
+            type: '[Leases] Get all leases Success',
+            payload: leases
+          })),
+          // tap(res => {console.log('response: ' + res); }),
+          catchError(
+            err => {
+              return of('[Leases] Get all leases Failure', err.error);
             } // EMPTY
           )
         )

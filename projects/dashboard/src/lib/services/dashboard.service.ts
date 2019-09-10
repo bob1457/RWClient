@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { Property } from '../models/property.model';
 import { PropertyOwner } from '../models/property-owner.model';
 import { PropertyListing } from '../models/property-listing.model';
+import { PropertyLease } from '../models/property-lease.model';
 
 @Injectable({
   providedIn: 'root'
@@ -37,7 +38,8 @@ export class DashboardService {
   }
 
   getLeaseAgreementList() {
-
+    debugger;
+    return this.http.get<PropertyLease[]>(`${this.baseUrl}/leases`);
   }
 
   getTenantList() {

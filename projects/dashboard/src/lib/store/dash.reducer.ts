@@ -105,7 +105,22 @@ const dashReducer = createReducer(
     ...state,
     loading: true,
     loaded: false
-  }))
+  })),
+
+  on(DashActions.getAllLeases, state => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+  on(DashActions.getAllLeasesSuccess, (state, { payload }) => {
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      leases: payload
+    });
+  })
 
 );
 
