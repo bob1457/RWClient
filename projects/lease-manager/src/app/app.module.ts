@@ -8,11 +8,13 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { reducer } from './store/reducers/lease.reducers';
 import { LeaseEffects } from './store/effects/lease.effects';
+import { AllTenantsComponent } from './all-tenants/all-tenants.component';
 
 @NgModule({
   declarations: [
     AppLMComponent,
-    AllLeasesComponent
+    AllLeasesComponent,
+    AllTenantsComponent
   ],
   imports: [
     BrowserModule,

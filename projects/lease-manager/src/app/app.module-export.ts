@@ -8,6 +8,8 @@ import { AppLMComponent } from './app.component';
 import { Routes, RouterModule } from '@angular/router';
 
 import { AllLeasesComponent } from './all-leases/all-leases.component';
+import { AllTenantsComponent } from './all-tenants/all-tenants.component';
+
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
@@ -15,13 +17,15 @@ import { reducer } from './store/reducers/lease.reducers';
 import { LeaseEffects } from './store/effects/lease.effects';
 
 const routes: Routes = [
-  { path: '', component: AllLeasesComponent }
+  { path: '', component: AllLeasesComponent },
+  { path: 'tenants', component: AllTenantsComponent}
 ];
 
 @NgModule({
   declarations: [
     AppLMComponent,
-    AllLeasesComponent
+    AllLeasesComponent,
+    AllTenantsComponent
   ],
   imports: [
     // BrowserModule,
