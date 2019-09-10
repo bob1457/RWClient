@@ -84,6 +84,28 @@ export class DashboardEffects {
     )
   );
 
+  getPropertyListing$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(DashActions.getPropertyListing),
+      tap(() => console.log('got here for (marketing) property listing from dash lib')),
+      switchMap(() =>
+        this.dashService.getAllPropertyListings().pipe(
+          map((listings: Property[]) => ({
+            type: '[Marketing] Get Property Listing Success',
+            payload: listings
+          })),
+          tap(res => {console.log('response: ' + res); }),
+          catchError(
+            err => {
+              return of('[[Marketing] Get Property Listing Failure', err.error);
+            } // EMPTY
+          )
+        )
+      )
+    )
+  );
+
   getAllLeases$ = createEffect(() =>
     this.actions$.pipe(
       // ofType('[Property] Get Property List'),
