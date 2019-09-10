@@ -1,5 +1,5 @@
 import { PropertyLeaseState } from '../lease-state';
-import { createReducer, on } from '@ngrx/store';
+import { createReducer, on, Action } from '@ngrx/store';
 import * as LeaseActions from '../actions/lease.actions';
 
 
@@ -19,7 +19,7 @@ export const initialState: PropertyLeaseState =  { // adapter.getInitialState
 };
 
 debugger;
-const propertyListingReducer = createReducer(
+const propertyLeaseReducer = createReducer(
   initialState,
 
   on(LeaseActions.getAllLeases, state => ({
@@ -33,6 +33,13 @@ const propertyListingReducer = createReducer(
       ...state,
       loading: false,
       loaded: true,
-      listings: payload
+      leases: payload
     });
   }));
+
+
+
+
+export function reducer(state: PropertyLeaseState | undefined, action: Action) {
+    return propertyLeaseReducer(state, action);
+  }

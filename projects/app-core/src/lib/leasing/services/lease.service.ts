@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { PropertyLease } from '@lib/dashboard/lib/models/property-lease.model';
+import { PropertyLease } from '../models/property-lease.model';
 
 @Injectable({
   providedIn: 'root'

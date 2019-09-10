@@ -2,19 +2,25 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import { AppLMComponent } from './app.component';
 import { AllLeasesComponent } from './all-leases/all-leases.component';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { reducer } from './store/reducers/lease.reducers';
+import { LeaseEffects } from './store/effects/lease.effects';
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppLMComponent,
     AllLeasesComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    StoreModule.forFeature('lease', reducer),
+    EffectsModule.forFeature([LeaseEffects])
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppLMComponent]
 })
 export class AppModule { }

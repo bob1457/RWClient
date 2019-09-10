@@ -8,6 +8,11 @@ import { AppLMComponent } from './app.component';
 import { Routes, RouterModule } from '@angular/router';
 
 import { AllLeasesComponent } from './all-leases/all-leases.component';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+
+import { reducer } from './store/reducers/lease.reducers';
+import { LeaseEffects } from './store/effects/lease.effects';
 
 const routes: Routes = [
   { path: '', component: AllLeasesComponent }
@@ -22,7 +27,9 @@ const routes: Routes = [
     // BrowserModule,
     CommonModule,
     AppMaterialModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    StoreModule.forFeature('lease', reducer),
+    EffectsModule.forFeature([LeaseEffects])
     // AppRoutingModule
   ],
   providers: [],
