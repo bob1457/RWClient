@@ -8,7 +8,7 @@ export const initialState: PropertyLeaseState =  { // adapter.getInitialState
   loading: false,
   loaded: false,
   leases: null,
-  // property: null,
+  tenants: null,
   // owners: null,
   // ownersOfProperty: null,
   // selectedOwner: null,
@@ -35,9 +35,24 @@ const propertyLeaseReducer = createReducer(
       loaded: true,
       leases: payload
     });
-  }))
+  }),
 
-  ;
+  on(LeaseActions.getAllTenants, state => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+  on(LeaseActions.getAllTenantsSuccess, (state, { payload }) => {
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      tenants: payload
+    });
+  }),
+
+  );
 
 
 

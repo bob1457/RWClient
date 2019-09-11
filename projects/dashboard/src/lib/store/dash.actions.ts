@@ -4,6 +4,7 @@ import { PropertyOwner } from '../models/property-owner.model';
 import { ManagementContract } from '../models/management-contract.model';
 import { PropertyListing } from '@lib/app-core';
 import { PropertyLease } from '../models/property-lease.model';
+import { PropertyTenant } from '../models/property-tenant.model';
 
 debugger;
 /**
@@ -101,6 +102,26 @@ export const getAllLeasesSuccess = createAction(
 
 export const getPAllLeasesFailure = createAction(
   '[Leases] Get all leases Failure',
+  // props<{payload: any}>()
+  (errorMessage = 'Error loading property listing') => {
+    return ({ payload: { errorMessage } });
+  }
+);
+
+/**
+ * Get Property Leasing Tenants Actions
+ */
+export const getAllTenants = createAction(
+  '[Leases] Get all tenants'
+);
+
+export const getAllTenantsSuccess = createAction(
+  '[Leases] Get all tenants Success',
+  props<{payload: PropertyTenant[]}>()
+);
+
+export const getAllTenantsFailure = createAction(
+  '[Leases] Get all tenants Failure',
   // props<{payload: any}>()
   (errorMessage = 'Error loading property listing') => {
     return ({ payload: { errorMessage } });

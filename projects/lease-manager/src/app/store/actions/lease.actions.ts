@@ -1,5 +1,6 @@
 import { createAction, props } from '@ngrx/store';
-import { PropertyLease } from '@lib/app-core';
+import { PropertyLease, PropertyTenant } from '@lib/app-core';
+
 
 
 /**
@@ -21,3 +22,24 @@ export const getPAllLeasesFailure = createAction(
     return ({ payload: { errorMessage } });
   }
 );
+
+/**
+ * Get Property Leasing Tenants Actions
+ */
+export const getAllTenants = createAction(
+  '[Leases] Get all tenants'
+);
+
+export const getAllTenantsSuccess = createAction(
+  '[Leases] Get all tenants Success',
+  props<{payload: PropertyTenant[]}>()
+);
+
+export const getAllTenantsFailure = createAction(
+  '[Leases] Get all tenants Failure',
+  // props<{payload: any}>()
+  (errorMessage = 'Error loading property listing') => {
+    return ({ payload: { errorMessage } });
+  }
+);
+

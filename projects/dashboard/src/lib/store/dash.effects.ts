@@ -9,6 +9,7 @@ import { switchMap, map, tap, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { PropertyOwner } from '../models/property-owner.model';
 import { PropertyLease } from '../models/property-lease.model';
+import { PropertyTenant } from '@lib/app-core';
 
 @Injectable()
 export class DashboardEffects {
@@ -128,27 +129,29 @@ export class DashboardEffects {
     )
   );
 
-  // getPropertyListing$ = createEffect(() =>
-  //   this.actions$.pipe(
-  //     // ofType('[Property] Get Property List'),
-  //     ofType(DashActions.getContractList),
-  //     tap(() => console.log('got here to call service for retrieving contracts from dashboard lib')),
-  //     switchMap(() =>
-  //       this.dashService.getManagementContractList().pipe(
-  //         map((contracts: ManagementContract[]) => ({
-  //           type: '[Property] Get Contract List Success',
-  //           payload: contracts
-  //         })),
-  //         // tap(res => {console.log('response: ' + res); }),
-  //         catchError(
-  //           err => {
-  //             return of('[[Property] Get Contract List Failure', err.error);
-  //           } // EMPTY
-  //         )
-  //       )
-  //     )
-  //   )
-  // );
+  getTenantListing$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(DashActions.getAllTenants),
+      tap(() => console.log('got here for (marketing) property tenants from dash lib')),
+      switchMap(() =>
+        this.dashService.getTenantList().pipe(
+          map((tenants: PropertyTenant[]) => ({
+            type: '[Leases] Get all tenants Success',
+            payload: tenants
+          })),
+          tap(res => {console.log('response: ' + res); }),
+          catchError(
+            err => {
+              return of('[Leases] Get all tenants Failure', err.error);
+            } // EMPTY
+          )
+        )
+      )
+    )
+  );
+
+
 
 
 }

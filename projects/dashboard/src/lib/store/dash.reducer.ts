@@ -120,6 +120,31 @@ const dashReducer = createReducer(
       loaded: true,
       leases: payload
     });
+  }),
+
+  on(DashActions.getAllTenants, state => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+  on(DashActions.getAllTenantsSuccess, (state, { payload }) => {
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      tenants: payload
+    });
+  }),
+
+  on(DashActions.getAllTenantsFailure, (state) => {
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      tenants: null,
+      errorMessage: 'Failed to load contract details'
+    });
   })
 
 );
