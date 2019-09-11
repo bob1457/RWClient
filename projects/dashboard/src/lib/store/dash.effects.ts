@@ -77,7 +77,7 @@ export class DashboardEffects {
           // tap(res => {console.log('response: ' + res); }),
           catchError(
             err => {
-              return of('[[Property] Get Contract List Failure', err.error);
+              return of('[Property] Get Contract List Failure', err.error);
             } // EMPTY
           )
         )
@@ -99,7 +99,7 @@ export class DashboardEffects {
           tap(res => {console.log('response: ' + res); }),
           catchError(
             err => {
-              return of('[[Marketing] Get Property Listing Failure', err.error);
+              return of('[Marketing] Get Property Listing Failure', err.error);
             } // EMPTY
           )
         )

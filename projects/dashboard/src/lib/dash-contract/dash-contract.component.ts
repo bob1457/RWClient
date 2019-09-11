@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { DashState } from '../store/dash.state';
-import { getAllLeases } from '../store/dash.actions';
+import { getAllLeases, getContractList } from '../store/dash.actions';
 
 @Component({
   selector: 'lib-dash-contract',
@@ -18,7 +18,7 @@ export class DashContractComponent implements OnInit {
     this.breakpoint = (window.innerWidth <= 640) ? 2 : 1;
     debugger;
     // return this.store.dispatch(getPropertyOwnerList()) ;
-    return this.store.dispatch(getAllLeases()) ;
+    return this.store.dispatch(getContractList()) ;
   }
 
 }
