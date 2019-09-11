@@ -9,11 +9,29 @@
 </div>
 <div style="margin-left: 135px;clear: right;font-size: .9em;font-style: italic;color: #75a3ea;">Shower</div>
 <div style="margin-left: 85px;">
-    <select name="city" style="background: grey; color: white;">
+    <!-- <select name="city" style="background: grey; color: white;">
         <option value="1">Surrey</option>
         <option value="2">Vancouver</option>
         <option value="4">N. Vancouver</option>
         <option value="3">Coquitlam</option>
         <option value="4">Burnaby</option>
-      </select>
+      </select> -->
+      <button mat-icon-button [matMenuTriggerFor]="selectCity">
+        <mat-icon color="primary" title="Select City">open_with</mat-icon>
+      </button>
+      <span style="margin-left: 10px;">Surrey</span>
+      <mat-menu #selectCity="matMenu" [overlapTrigger]="false" style="background: transparent;">
+         <button mat-menu-item>
+                  <!--<mat-icon style="color: black;">dialpad</mat-icon>
+                    <i class="far fa-user-circle" style="color: #09af00"></i>-->
+         <span>&nbsp; Burnaby</span><br />
+        </button>
+        <button mat-menu-item (click)="logout()">
+                  <!--<mat-icon style="color: black;">notifications_off</mat-icon>
+                  <i class="fas fa-sign-out-alt" style="color: #e9176b"></i>-->
+          <span>&nbsp; Vancouver</span>
+        </button>
+
+      </mat-menu>
 </div>
+
