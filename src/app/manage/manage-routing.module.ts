@@ -23,7 +23,9 @@ const routes: Routes = [
       { path: 'property', loadChildren: () => import('../../../projects/property-manager/src/app/app.module-export').then(m => m.AppPmModule)},
       // tslint:disable-next-line:max-line-length
       { path: 'marketing', loadChildren: () => import('../../../projects/marketing-manager/src/app/app.module export').then(m => m.AppMkModule)},
-      { path: 'lease', loadChildren:() => import('../../../projects/lease-manager/src/app/app.module-export').then(m => m.AppLMModule)}
+      { path: 'lease', loadChildren: () => import('../../../projects/lease-manager/src/app/app.module-export').then(m => m.AppLMModule)},
+      // tslint:disable-next-line:max-line-length
+      { path: 'main', loadChildren: () => import('../../../projects/business-manager/src/app/app.module-export').then(m => m.AppBmModule)}
     ]
   }
 ];

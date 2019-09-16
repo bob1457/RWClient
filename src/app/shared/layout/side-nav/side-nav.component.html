@@ -214,14 +214,22 @@
                                             <mat-icon style="color: rgb(27, 214, 27);" matListIcon>widgets</mat-icon>
                                             <a matLine [routerLinkActive]="['active']">Management</a>
                                             <button mat-icon-button (click)="showInfo(link)">
-                  <!--<mat-icon>info</mat-icon>-->
-                </button>
+                                              <!--<mat-icon>info</mat-icon>-->
+                                            </button>
                                         </mat-list-item>
                                     </mat-expansion-panel-header>
                                     <mat-list>
                                         <mat-list-item>
-                                            <mat-icon style="color: rgb(72, 173, 219)" [routerLink]="['/manage/task_list']" [routerLinkActive]="['active']" matListIcon>dialpad</mat-icon>
-                                            <a matLine [routerLink]="['/Manage/task_list']" [routerLinkActive]="['active']">Task List</a
+                                            <mat-icon style="color: rgb(72, 173, 219)" [routerLink]="['/Manage/main']" [routerLinkActive]="['active']" matListIcon>view_module</mat-icon>
+                                            <a matLine [routerLink]="['/Manage/main']" [routerLinkActive]="['active']">Main Panel</a
+                >
+                <button mat-icon-button (click)="showInfo(link)">
+                  <!--<mat-icon>info</mat-icon>-->
+                </button>
+              </mat-list-item>
+                                        <mat-list-item>
+                                            <mat-icon style="color: rgb(72, 173, 219)" [routerLink]="['/Manage/task']" [routerLinkActive]="['active']" matListIcon>dialpad</mat-icon>
+                                            <a matLine [routerLink]="['/Manage/task']" [routerLinkActive]="['active']">Task List</a
                 >
                 <button mat-icon-button (click)="showInfo(link)">
                   <!--<mat-icon>info</mat-icon>-->

@@ -673,6 +673,122 @@
           }
         }
       }
+    },
+    "business-manager": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/business-manager",
+      "sourceRoot": "projects/business-manager/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/business-manager",
+            "index": "projects/business-manager/src/index.html",
+            "main": "projects/business-manager/src/main.ts",
+            "polyfills": "projects/business-manager/src/polyfills.ts",
+            "tsConfig": "projects/business-manager/tsconfig.app.json",
+            "assets": [
+              "projects/business-manager/src/favicon.ico",
+              "projects/business-manager/src/assets"
+            ],
+            "styles": [
+              "projects/business-manager/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/business-manager/src/environments/environment.ts",
+                  "with": "projects/business-manager/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "business-manager:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "business-manager:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "business-manager:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/business-manager/src/test.ts",
+            "polyfills": "projects/business-manager/src/polyfills.ts",
+            "tsConfig": "projects/business-manager/tsconfig.spec.json",
+            "karmaConfig": "projects/business-manager/karma.conf.js",
+            "assets": [
+              "projects/business-manager/src/favicon.ico",
+              "projects/business-manager/src/assets"
+            ],
+            "styles": [
+              "projects/business-manager/src/styles.scss"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/business-manager/tsconfig.app.json",
+              "projects/business-manager/tsconfig.spec.json",
+              "projects/business-manager/e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/business-manager/e2e/protractor.conf.js",
+            "devServerTarget": "business-manager:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "business-manager:serve:production"
+            }
+          }
+        }
+      }
     }
   },
   "defaultProject": "RWClient"

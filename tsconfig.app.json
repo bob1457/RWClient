@@ -8,7 +8,8 @@
     "src/**/*.ts",
     "./projects/property-manager/src/**/*.ts",
     "./projects/marketing-manager/src/**/*.ts",
-    "./projects/lease-manager/src/**/*.ts"
+    "./projects/lease-manager/src/**/*.ts",
+    "./projects/business-manager/src/**/*.ts"
   ],
   "exclude": [
     "dist",
@@ -29,7 +30,12 @@
     "./projects/lease-manager/src/**/*spec.ts",
     "./projects/lease-manager/src/app/app.module.ts",
     "./projects/lease-manager/src/main.ts",
-    "./projects/lease-manager/src/test.ts"
+    "./projects/lease-manager/src/test.ts",
+
+    "./projects/business-manager/src/**/*spec.ts",
+    "./projects/business-manager/src/app/app.module.ts",
+    "./projects/business-manager/src/main.ts",
+    "./projects/business-manager/src/test.ts"
 
   ]
 }
