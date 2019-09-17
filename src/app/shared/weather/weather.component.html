@@ -19,17 +19,45 @@
       <button mat-icon-button [matMenuTriggerFor]="selectCity">
         <mat-icon color="primary" title="Select City">open_with</mat-icon>
       </button>
-      <span style="margin-left: 10px;">Surrey</span>
+      <span style="margin-left: 10px;">{{weatherData.name}}</span>
       <mat-menu #selectCity="matMenu" [overlapTrigger]="false" style="background: transparent;">
-         <button mat-menu-item>
+         <button mat-menu-item (click)="getWeather('Burnaby')">
                   <!--<mat-icon style="color: black;">dialpad</mat-icon>
                     <i class="far fa-user-circle" style="color: #09af00"></i>-->
-         <span>&nbsp; Burnaby</span><br />
+         <span>&nbsp; Burnaby, CA</span><br />
         </button>
-        <button mat-menu-item (click)="logout()">
+        <button mat-menu-item (click)="getWeather('Surrey')">
                   <!--<mat-icon style="color: black;">notifications_off</mat-icon>
                   <i class="fas fa-sign-out-alt" style="color: #e9176b"></i>-->
-          <span>&nbsp; Vancouver</span>
+          <span>&nbsp; Surrey, CA</span>
+        </button>
+        <!-- <button mat-menu-item (click)="getWeather('Surrey')">
+                  
+          <span>&nbsp; White Rock, CA</span>
+        </button> -->
+        <button mat-menu-item (click)="getWeather('North Vancouver')">
+                  <!--<mat-icon style="color: black;">notifications_off</mat-icon>
+                  <i class="fas fa-sign-out-alt" style="color: #e9176b"></i>-->
+          <span>&nbsp; N. Vancouver, CA</span>
+        </button>
+        <!-- <button mat-menu-item (click)="getWeather('North Vancouver')">
+                 
+          <span>&nbsp; W. Vancouver, CA</span>
+        </button> -->
+        <button mat-menu-item (click)="getWeather('Coquitlam')">
+                  <!--<mat-icon style="color: black;">notifications_off</mat-icon>
+                  <i class="fas fa-sign-out-alt" style="color: #e9176b"></i>-->
+          <span>&nbsp; Coquitlam, CA</span>
+        </button>
+        <button mat-menu-item (click)="getWeather('Langley')">
+                  <!--<mat-icon style="color: black;">notifications_off</mat-icon>
+                  <i class="fas fa-sign-out-alt" style="color: #e9176b"></i>-->
+          <span>&nbsp; Langley, CA</span>
+        </button>
+        <button mat-menu-item (click)="getWeather('Richmond')">
+                  <!--<mat-icon style="color: black;">notifications_off</mat-icon>
+                  <i class="fas fa-sign-out-alt" style="color: #e9176b"></i>-->
+          <span>&nbsp; Richmond, CA</span>
         </button>
 
       </mat-menu>
