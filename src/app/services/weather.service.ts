@@ -19,11 +19,11 @@ export class WeatherService {
     // var city = {
 
     // };
-    
+
     let cityId: string = ''; // '6159905';
 
     const uri = this.baseUri;
-    
+
     switch (city) {
       case 'Surrey':
         cityId = '6159905'
@@ -52,15 +52,17 @@ export class WeatherService {
       case 'Coquitlam':
         cityId = '5927689'
         break;
-    
+
       default:
         break;
     }
 
     console.log(cityId);
-    
 
     return this.http.get(`${uri}${cityId}&appid=${this.apiKey}`); // Surrey, CA
+
+    // tslint:disable-next-line:max-line-length
+    // return this.http.get(`https://api.openweathermap.org/data/2.5/weather?id=${cityId}&appid=${this.apiKey}`)
 
   }
 

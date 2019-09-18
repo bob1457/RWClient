@@ -8,15 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WeatherComponent implements OnInit {
 
+  public weatherData: any;
+  public iconCode = ''; // this.weatherData.weather[0].icon;
+  public iconUrl = 'http://openweathermap.org/img/w/' + this.iconCode + '.png';
+
   constructor(private weatherService: WeatherService) { }
 
   ngOnInit() {
-    this.weatherService.getWeather('Surrey').subscribe(data => this.weatherData = data);
+    debugger;
+    // tslint:disable-next-line:max-line-length
+    this.weatherService.getWeather('Surrey').subscribe(data => {this.weatherData = data; this.iconCode = this.weatherData.weather[0].icon; });
   }
-
-  city: string
-
-  public weatherData: any;
 
   getWeather(city:string) {
     debugger;
