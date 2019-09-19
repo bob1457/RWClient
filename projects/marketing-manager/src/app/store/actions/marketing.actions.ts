@@ -22,3 +22,24 @@ export const getPropertyListingFailure = createAction(
     return ({ payload: { errorMessage } });
   }
 );
+
+/**
+ * Get Property Listing Details Actions
+ */
+export const getPropertyListingDetails = createAction(
+  '[Marketing] Get Property Listing Details',
+  props<{payload: number}>()
+);
+
+export const getPropertyListingDetailsSuccess = createAction(
+  '[Marketing] Get Property Listing Details Success',
+  props<{payload: PropertyListing}>()
+);
+
+export const getPropertyListingDetailsFailure = createAction(
+  '[Marketing] Get Property List Details Failure',
+  // props<{payload: any}>()
+  (errorMessage = 'Error loading property Details listing') => {
+    return ({ payload: { errorMessage } });
+  }
+);

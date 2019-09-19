@@ -9,17 +9,19 @@ import { AppBmComponent } from './app.component';
 import { RouterModule, Routes } from '@angular/router';
 
 import { ManageHomeComponent } from './manage-home/manage-home.component';
+import { CalenderComponent } from './calender/calender.component';
 
 const routes: Routes = [
   { path: '', component: ManageHomeComponent},
-  // { path: 'owners', component: OwnerListComponent },
+  { path: 'calendar', component: CalenderComponent }
   // { path: 'contracts', component: ContractListComponent }
 ];
 
 @NgModule({
   declarations: [
     AppBmComponent,
-    ManageHomeComponent
+    ManageHomeComponent,
+    CalenderComponent
   ],
   imports: [
     // BrowserModule,

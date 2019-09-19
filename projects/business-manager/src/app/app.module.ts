@@ -4,11 +4,13 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppBmComponent } from './app.component';
 import { ManageHomeComponent } from './manage-home/manage-home.component';
+import { CalenderComponent } from './calender/calender.component';
 
 @NgModule({
   declarations: [
     AppBmComponent,
-    ManageHomeComponent
+    ManageHomeComponent,
+    CalenderComponent
   ],
   imports: [
     BrowserModule,
