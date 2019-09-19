@@ -16,7 +16,10 @@ export class MarketingService {
     return this.http.get<PropertyListing[]>(`${this.baseUrl}/listings`);
   }
 
-  getPropertyListingDetails() {}
+  getPropertyListingDetails(id: number) {
+    debugger;
+    return this.http.get<PropertyListing>(`${this.baseUrl}/listing/${id}`);
+  }
 
   addPropertyListing() {}
 

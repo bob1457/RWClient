@@ -7,7 +7,7 @@ export const initialState: PropertyListingState =  { // adapter.getInitialState
   loading: false,
   loaded: false,
   listings: null,
-  // property: null,
+  listing: null,
   // owners: null,
   // ownersOfProperty: null,
   // selectedOwner: null,
@@ -33,6 +33,21 @@ const propertyListingReducer = createReducer(
       loading: false,
       loaded: true,
       listings: payload
+    });
+  }),
+
+  on(ListingActions.getPropertyListingDetails, state => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+  on(ListingActions.getPropertyListingDetailsSuccess, (state, { payload }) => {
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      listing: payload
     });
   })
 
