@@ -82,5 +82,28 @@ export class MarketingEffects {
     )
   );
 
+  updatePropertyListing$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(ListingActions.updatePropertyListing),
+      tap(() => console.log('got here to update property listing !!!')),
+      map(action => action.payload),
+      switchMap((payload) =>
+        this.marketingService.updatePropertyListing(payload).pipe(
+          map((listing: PropertyListing) => ({
+            type: '[Marketing] Update Property Listing Success',
+            payload: listing
+          })),
+          // tap(res => {console.log('response: ' + res); }),
+          catchError(
+            err => {
+              return of('[Marketing] Update Property Listing Failure', err.error);
+            } // EMPTY
+          )
+        )
+      )
+    )
+  );
+
 
 }

@@ -52,7 +52,7 @@ export class PropertyListingComponent implements OnInit {
   UpdatePropertyListing() {
 
     const listing: any = {
-      id: 2,
+      id: 3,
       title: 'Updated Listing',
       rentalPropertyId: 8,
       listingDesc: 'Newly listed ...',
