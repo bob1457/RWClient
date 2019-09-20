@@ -16,7 +16,7 @@ export const getPropertyListingSuccess = createAction(
 );
 
 export const getPropertyListingFailure = createAction(
-  '[Marketing] Get Property List Failure',
+  '[Marketing] Get Property Listing Failure',
   // props<{payload: any}>()
   (errorMessage = 'Error loading property listing') => {
     return ({ payload: { errorMessage } });
@@ -42,4 +42,46 @@ export const getPropertyListingDetailsFailure = createAction(
   (errorMessage = 'Error loading property Details listing') => {
     return ({ payload: { errorMessage } });
   }
+);
+
+/**
+ * Add Property Listing Actions
+ */
+
+export const addPropertyListing = createAction(
+  '[Marketing] Add Property Listing',
+  props<{payload: PropertyListing}>()
+);
+
+export const addPropertyListingSuccess = createAction(
+  '[Marketing] Add Property Listing Success',
+  props<{payload: PropertyListing}>()
+);
+
+export const addPropertyListingFailure = createAction(
+  '[Property] Add Property Listing Failure',
+  // props<{payload: any}>()
+  (errorMessage = 'Error adding property') => ({ payload: { errorMessage }})
+
+);
+
+/**
+ * Update Property Listing Actions
+ */
+
+export const updatePropertyListing = createAction(
+  '[Marketing] Update Property Listing',
+  props<{payload: PropertyListing}>()
+);
+
+export const updatePropertyListingSuccess = createAction(
+  '[Marketing] Update Property Listing Success',
+  props<{payload: PropertyListing}>()
+);
+
+export const updatePropertyListingFailure = createAction(
+  '[Property] Update Property Listing Failure',
+  // props<{payload: any}>()
+  (errorMessage = 'Error updating property') => ({ payload: { errorMessage }})
+
 );

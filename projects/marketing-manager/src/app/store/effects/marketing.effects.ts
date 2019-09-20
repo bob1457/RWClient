@@ -59,5 +59,28 @@ export class MarketingEffects {
     )
   );
 
+  addPropertyListing$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(ListingActions.addPropertyListing),
+      tap(() => console.log('got here to add property listing !!!')),
+      map(action => action.payload),
+      switchMap((payload) =>
+        this.marketingService.addPropertyListing(payload).pipe(
+          map((listing: PropertyListing) => ({
+            type: '[Marketing] Add Property Listing Success',
+            payload: listing
+          })),
+          // tap(res => {console.log('response: ' + res); }),
+          catchError(
+            err => {
+              return of('[Marketing] Add Property Listing Failure', err.error);
+            } // EMPTY
+          )
+        )
+      )
+    )
+  );
+
 
 }

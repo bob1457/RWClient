@@ -21,9 +21,15 @@ export class MarketingService {
     return this.http.get<PropertyListing>(`${this.baseUrl}/listing/${id}`);
   }
 
-  addPropertyListing() {}
+  addPropertyListing(Listing: PropertyListing) {
+    debugger;
+    return this.http.post<PropertyListing>(`${this.baseUrl}/listing/add`, Listing);
+  }
 
-  updatePropertyListing() {}
+  updatePropertyListing(Listing: PropertyListing) {
+    debugger;
+    return this.http.post(`${this.baseUrl}/listing/update`, Listing);
+  }
 
   addImagesToListing() {}
 

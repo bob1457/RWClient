@@ -21,4 +21,31 @@ export class LeaseService {
     debugger;
     return this.http.get<PropertyTenant[]>(`${this.baseUrl}/tenants`);
   }
+
+  getLeaseDetails(id: number) {
+    debugger;
+    return this.http.get<PropertyLease>(`${this.baseUrl}/lease/${id}`);
+  }
+
+  getTenantDetails(id:number) {
+    debugger;
+    return this.http.get<PropertyTenant>(`${this.baseUrl}/tenant/${id}`);
+  }
+
+  addLease(lease: PropertyLease) {
+    debugger;
+    return this.http.post<PropertyLease>(`${this.baseUrl}/lease/add`, lease);
+  }
+
+  updateLease(lease: PropertyLease) {
+    debugger;
+    return this.http.post<PropertyLease>(`${this.baseUrl}/lease/update`, lease);
+  }
+
+  updateTenant(tenant: PropertyTenant) {
+    debugger;
+    return this.http.post<PropertyTenant>(`${this.baseUrl}/lease/tenant/update`, tenant);
+  }
+
+
 }

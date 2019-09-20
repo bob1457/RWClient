@@ -21,6 +21,9 @@ debugger;
 const propertyListingReducer = createReducer(
   initialState,
 
+  /**
+   * Get property listing
+   */
   on(ListingActions.getPropertyListing, state => ({
     ...state,
     loading: true,
@@ -36,6 +39,10 @@ const propertyListingReducer = createReducer(
     });
   }),
 
+  /**
+   * Get property listing details
+   */
+
   on(ListingActions.getPropertyListingDetails, state => ({
     ...state,
     loading: true,
@@ -49,8 +56,49 @@ const propertyListingReducer = createReducer(
       loaded: true,
       listing: payload
     });
-  })
+  }),
 
+
+  /**
+   * Add property listing
+   */
+  on(ListingActions.addPropertyListing, state => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+  on(ListingActions.addPropertyListingSuccess, (state, { payload }) => {
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      listings: [...state.listings, payload ]
+    });
+  }),
+
+
+  /**
+   * Add property listing
+   */
+  on(ListingActions.updatePropertyListing, state => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+  on(ListingActions.updatePropertyListingSuccess, (state, { payload }) => {
+
+    const updatedListings = state.listings.map(
+      item => payload.id === item.id ? payload : item
+    );
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      listings: updatedListings // [...state.listings, payload ]
+    });
+  })
 
 );
 
