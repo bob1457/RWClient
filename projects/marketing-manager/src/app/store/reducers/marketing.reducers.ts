@@ -8,6 +8,8 @@ export const initialState: PropertyListingState =  { // adapter.getInitialState
   loaded: false,
   listings: null,
   listing: null,
+  applications: null,
+  application: null,
   // owners: null,
   // ownersOfProperty: null,
   // selectedOwner: null,
@@ -97,6 +99,24 @@ const propertyListingReducer = createReducer(
       loading: false,
       loaded: true,
       listings: updatedListings // [...state.listings, payload ]
+    });
+  }),
+
+  /**
+   * Get rental applications
+   */
+  on(ListingActions.getRentalApplicationList, state => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+  on(ListingActions.getRentalApplicationListSuccess, (state, { payload }) => {
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      applications: payload
     });
   })
 

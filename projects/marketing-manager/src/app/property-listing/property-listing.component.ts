@@ -17,7 +17,7 @@ export class PropertyListingComponent implements OnInit {
   ngOnInit() {
     debugger;
     // return this.propertyService.getPropertyList().subscribe((pList: Property[]) => {this.list = pList; console.log(pList)});
-    return this.store.dispatch(getPropertyListing())  ;
+    return this.store.dispatch(getPropertyListing());
   }
 
   GetPropertyListingDetails(id: number) {

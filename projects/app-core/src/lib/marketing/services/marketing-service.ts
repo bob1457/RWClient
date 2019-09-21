@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { PropertyListing } from '../models/property-listing.model';
+import { RentalApplication } from '../models/rental-application.model';
 
 @Injectable({
   providedIn: 'root'
@@ -29,6 +30,11 @@ export class MarketingService {
   updatePropertyListing(Listing: PropertyListing) {
     debugger;
     return this.http.post(`${this.baseUrl}/listing/update`, Listing);
+  }
+
+  getAllRentalApplications() {
+    debugger;
+    return this.http.get<RentalApplication[]>(`${this.baseUrl}/applications`);
   }
 
   addImagesToListing() {}

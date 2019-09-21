@@ -1,5 +1,3 @@
-import { DecimalPipe } from '@angular/common';
-
 export interface PropertyListing {
   id: number;
   title: string;

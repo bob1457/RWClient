@@ -1,5 +1,4 @@
-import { propertyList } from './../../../../property-manager/src/app/store/reducers/property.reducer';
-import { PropertyListing } from '@lib/app-core';
+import { PropertyListing, RentalApplication } from '@lib/app-core';
 import * as marketing from './reducers';
 import { createFeatureSelector } from '@ngrx/store';
 
@@ -9,8 +8,9 @@ export interface PropertyListingState   { //extends  EntityState<Property>
   loaded: boolean | false;
   listings: PropertyListing[] | null;
   listing: PropertyListing | null;
-  // property: Property | null;
-  // owners: PropertyOwner[] | null;
+  applications: RentalApplication[] | null;
+  application: RentalApplication | null;
+
   // ownersOfProperty: PropertyOwner[] | null;
   // selectedOwner: PropertyOwner | null;
   // contracts: ManagementContract[] | null;

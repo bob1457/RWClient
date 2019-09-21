@@ -1,5 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import { PropertyListing } from '@lib/app-core';
+import { RentalApplication } from 'projects/app-core/src/public-api';
 
 
 debugger;
@@ -84,4 +85,24 @@ export const updatePropertyListingFailure = createAction(
   // props<{payload: any}>()
   (errorMessage = 'Error updating property') => ({ payload: { errorMessage }})
 
+);
+
+/**
+ * Get all rental application List Actions
+ */
+export const getRentalApplicationList = createAction(
+  '[Marketing] Get Rental Applications'
+);
+
+export const getRentalApplicationListSuccess = createAction(
+  '[Marketing] Get Rental Applications Success',
+  props<{payload: RentalApplication[]}>()
+);
+
+export const getRentalApplicationListFailure = createAction(
+  '[Marketing] Get Rental Applications Failure',
+  // props<{payload: any}>()
+  (errorMessage = 'Error loading property listing') => {
+    return ({ payload: { errorMessage } });
+  }
 );

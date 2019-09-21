@@ -13,9 +13,11 @@ import { EffectsModule } from '@ngrx/effects';
 import { MarketingEffects } from './store/effects/marketing.effects';
 import { ListingDetailsComponent } from './listing-details/listing-details.component';
 import { MarketingHomeComponent } from './marketing-home/marketing-home.component';
+import { ApplicationListComponent } from './application-list/application-list.component';
 
 const routes: Routes = [
-  { path: '', component: PropertyListingComponent}
+  { path: '', component: PropertyListingComponent},
+  { path: 'applications', component: ApplicationListComponent}
 ];
 
 @NgModule({
@@ -23,7 +25,8 @@ const routes: Routes = [
     AppMkComponent,
     PropertyListingComponent,
     MarketingHomeComponent,
-    ListingDetailsComponent
+    ListingDetailsComponent,
+    ApplicationListComponent
   ],
   imports: [
     // BrowserModule,
