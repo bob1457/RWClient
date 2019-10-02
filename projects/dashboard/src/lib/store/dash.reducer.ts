@@ -1,6 +1,6 @@
 import * as DashActions from './dash.actions';
 import { DashState } from './dash.state';
-import { createReducer, Action, on} from '@ngrx/store';
+import { createReducer, Action, on, createFeatureSelector, createSelector} from '@ngrx/store';
 
 
 export const initialState: DashState =  { // adapter.getInitialState
@@ -149,10 +149,19 @@ const dashReducer = createReducer(
 
 );
 
+/**
+ *
+ * Selectors
+ */
 
+// Getting read-only data managed by current "Reducer"
+const AllProperties = (state: DashState) => state.properties;
 
+// Select required slice of state
+export const getPropertyStatus = createFeatureSelector<DashState>('property');
 
-
+// Select the attribute of the state in the slice
+export const PropertyList = createSelector(getPropertyStatus, AllProperties);
 
 
 

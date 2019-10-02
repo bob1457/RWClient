@@ -43,40 +43,36 @@
                         <button mat-icon-button (click)="showInfo(link)">
                   <!--<mat-icon>info</mat-icon><span class="badge" >{{n}}</span>
                   <span matBadge="{{n}}" matBadgeColor="primary" matBadgeOverlap="false"></span>-->
-                  <mat-chip style="background-color: red;
-                  padding: 3px;
-                  color: yellow;
-                  padding-right: 5px;
-                  border-radius: 50%;
-                  border: 0 transparent;
-                  font-size: 12px;">{{n}}</mat-chip>
-                </button>
+                          <!-- <mat-chip style="background-color: red;
+                          padding: 3px;
+                          color: yellow;
+                          padding-right: 5px;
+                          border-radius: 50%;
+                          border: 0 transparent;
+                          font-size: 12px;">{{n}}</mat-chip> -->
+                        </button>
                     </mat-list-item>
                     </mat-expansion-panel-header>
                     <mat-list>
                         <mat-list-item>
                             <!---->
                             <mat-icon style="color: rgb(72, 173, 219)" [routerLink]="['/Manage/property']" [routerLinkActive]="['active']" matListIcon>list_alt</mat-icon>
-                            <a matLine [routerLink]="['/Manage/property']" [routerLinkActive]="['active']">All List</a
-                >
-                <!-- <span style="color: rgb(241, 150, 57); margin-top: 25px;" matBadge="{{n}}" matBadgeColor="primary" matBadgeOverlap="false"></span> -->
-                <button mat-icon-button (click)="showInfo(link)">
-                  <!--<mat-icon>info</mat-icon>  -->
-                </button>
-              </mat-list-item>
-              <mat-list-item>
-                <mat-icon
-                  style="color: rgb(58, 212, 66);"
-                  [routerLink]="['/Manage/property/owners']"
-                  [routerLinkActive]="['active']"
-                  matListIcon
-                  >person</mat-icon
-                >
-                <a
-                  matLine
-                  [routerLink]="['/Manage/property/owners']"
-                  [routerLinkActive]="['active']"
-                  >Landlords</a
+
+                            <a matLine [routerLink]="['/Manage/property']" [routerLinkActive]="['active']">All List</a>
+                            <mat-chip style="background-color: red;
+                            color: yellow;
+                            padding-right: 5px;
+                            padding-left:1px;
+                            border-radius: 50%;
+                            border: 0 transparent;
+                            font-size: 12px;">{{n}}
+                            </mat-chip>
+                            <!-- <span style="color: rgb(241, 150, 57); margin-top: 25px;" matBadge="{{n}}" matBadgeColor="primary" matBadgeOverlap="false"></span> -->
+
+                        </mat-list-item>
+                        <mat-list-item>
+                            <mat-icon style="color: rgb(58, 212, 66);" [routerLink]="['/Manage/property/owners']" [routerLinkActive]="['active']" matListIcon>person</mat-icon>
+                            <a matLine [routerLink]="['/Manage/property/owners']" [routerLinkActive]="['active']">Landlords</a
                 >
                 <button mat-icon-button (click)="showInfo(link)">
                   <!--<mat-icon>info</mat-icon>-->

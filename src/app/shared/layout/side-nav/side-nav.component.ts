@@ -1,48 +1,48 @@
-import * as fromAuth from "@lib/auth";
-import { Store, select } from "@ngrx/store";
-import { Component, OnInit } from "@angular/core";
-import { MediaObserver, MediaChange } from "@angular/flex-layout";
-import { Router } from "@angular/router";
-import { Observable, Subscription, from } from "rxjs";
+import * as fromAuth from '@lib/auth';
+import { Store, select } from '@ngrx/store';
+import { Component, OnInit } from '@angular/core';
+import { MediaObserver, MediaChange } from '@angular/flex-layout';
+import { Router } from '@angular/router';
+import { Observable, Subscription, from } from 'rxjs';
 import {
   trigger,
   state,
   style,
   animate,
   transition
-} from "@angular/animations";
-import { getUserInfo } from "projects/auth/src/public-api";
-import { User } from "@lib/auth";
+} from '@angular/animations';
+import { getUserInfo } from '@lib/auth';
+import { User } from '@lib/auth';
 
 @Component({
-  selector: "app-side-nav",
-  templateUrl: "./side-nav.component.html",
-  styleUrls: ["./side-nav.component.scss"],
+  selector: 'app-side-nav',
+  templateUrl: './side-nav.component.html',
+  styleUrls: ['./side-nav.component.scss'],
   animations: [
-    trigger("changeSideBarSize", [
+    trigger('changeSideBarSize', [
       state(
-        "decrease",
+        'decrease',
         style({
-          width: "64px",
-          transform: "translateX(-80%)"
+          width: '64px',
+          transform: 'translateX(-80%)'
         })
       ),
       state(
-        "increase",
+        'increase',
         style({
-          width: "280px",
-          transform: "translateX(0%)"
+          width: '280px',
+          transform: 'translateX(0%)'
         })
       ),
       // transition('* => *', animate('2000ms')),
-      transition("* => *", animate(2000))
+      transition('* => *', animate(2000))
     ])
   ]
 })
 export class SideNavComponent implements OnInit {
-  serverUrl = "http://localhost:58088/";
+  serverUrl = 'http://localhost:58088/';
 
-  currentState = "increase";
+  currentState = 'increase';
 
   isAdmin = true;
   n = 13;
@@ -104,6 +104,8 @@ export class SideNavComponent implements OnInit {
     // select single state then use async pipe in template for sub/unsub using *ngIf which returns a boolean value // console.log(userData);
     // this.avatar$ = this.store.select(ustate => ustate.user.avatarUrl);
     this.avatar = JSON.parse(localStorage.getItem('avatar'));
+
+
   }
 
   showSearch() {
@@ -118,7 +120,7 @@ export class SideNavComponent implements OnInit {
 
   increase() {
     this.sidenavWidth = 17.5;
-    this.SideToggleButtonDisplay = "";
+    this.SideToggleButtonDisplay = '';
     // console.log('increase sidenav width');
   }
   decrease() {
@@ -130,7 +132,7 @@ export class SideNavComponent implements OnInit {
     if (this.sidenavWidth === 17.5) {
       this.sidenavWidth = 4; // mini side nav
       this.ToggleButtonDisplay = 'none';
-      this.SideToggleButtonDisplay = "none";
+      this.SideToggleButtonDisplay = 'none';
     } else {
       this.sidenavWidth = 17.5; // full width side nav
       this.ToggleButtonDisplay = 'none';
@@ -152,7 +154,7 @@ export class SideNavComponent implements OnInit {
     if (this.mediaObserver.isActive('gt-sm')) {
       return 'none'; // hidden
     } else {
-      return ""; // show
+      return ''; // show
     }
   }
 

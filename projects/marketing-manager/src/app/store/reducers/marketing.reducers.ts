@@ -118,6 +118,25 @@ const propertyListingReducer = createReducer(
       loaded: true,
       applications: payload
     });
+  }),
+
+  /**
+   * Get rental application details
+   */
+
+  on(ListingActions.getRentalApplicationDetails, state => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+  on(ListingActions.getRentalApplicationDetailsSuccess, (state, { payload }) => {
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      application: payload
+    });
   })
 
 );

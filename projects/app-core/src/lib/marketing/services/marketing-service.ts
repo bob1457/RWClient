@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { PropertyListing } from '../models/property-listing.model';
 import { RentalApplication } from '../models/rental-application.model';
+import { PropertyImg } from '../models/property-img.model';
 
 @Injectable({
   providedIn: 'root'
@@ -37,7 +38,20 @@ export class MarketingService {
     return this.http.get<RentalApplication[]>(`${this.baseUrl}/applications`);
   }
 
-  addImagesToListing() {}
+  getRentalApplicationDetails(id: number) {
+    debugger;
+    return this.http.get<RentalApplication>(`${this.baseUrl}/application/${id}`);
+  }
+
+  addImagesToListing(img: PropertyImg) {
+    debugger;
+    return this.http.post(`${this.baseUrl}/listing/addimg`, img);
+  }
+
+  removeImagesToListing(img: any) {
+    debugger;
+    return this.http.post(`${this.baseUrl}/listing/removeimg`, img);
+  }
 
   deletePropertyListing() {}
 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { PropertyListingState } from '../store/marketing.state';
-import { getRentalApplicationList } from '../store/actions/marketing.actions';
+import { getRentalApplicationList, getRentalApplicationDetails } from '../store/actions/marketing.actions';
 
 @Component({
   selector: 'app-application-list',
@@ -15,6 +15,11 @@ export class ApplicationListComponent implements OnInit {
   ngOnInit() {
     debugger;
     return this.store.dispatch(getRentalApplicationList())  ;
+  }
+
+  GetApplicationDetails(id: number) {
+    debugger;
+    return this.store.dispatch(getRentalApplicationDetails({payload: id}));
   }
 
 }

@@ -106,3 +106,24 @@ export const getRentalApplicationListFailure = createAction(
     return ({ payload: { errorMessage } });
   }
 );
+
+/**
+ * Get all rental application Details Actions
+ */
+export const getRentalApplicationDetails = createAction(
+  '[Marketing] Get Rental Application Details',
+  props<{payload: number}>()
+);
+
+export const getRentalApplicationDetailsSuccess = createAction(
+  '[Marketing] Get Rental Application Details Success',
+  props<{payload: RentalApplication}>()
+);
+
+export const getRentalApplicationDetailsFailure = createAction(
+  '[Marketing] Get Rental Application Details Failure',
+  // props<{payload: any}>()
+  (errorMessage = 'Error loading application details') => {
+    return ({ payload: { errorMessage } });
+  }
+);
