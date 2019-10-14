@@ -506,13 +506,20 @@
               <button
                 [routerLink]="['/Manage/profile']"
                 mat-menu-item
-                style="margin-top: -8px;height: 100px;"
+                style="margin-top: -8px;
+                height: 50px;
+                background: #e1e2e1;"
               >
                 <mat-icon style="color: black;">account_circle</mat-icon>
                 <!--<i class="far fa-user-circle" style="color: #09af00;"></i>-->
                 <span>&nbsp; My Account</span><br />
-                <span style="margin-left: 30px;">{{user.username}} {{user.role}}</span>
+
               </button>
+              <span style="margin-left: 25px;
+              color: #2e60ac;
+              margin-top: 15px;
+              display: inline-block;
+              font-size: .8em;">{{user.firstname}} {{user.lastname}} -- <span style="font-style: italic">{{user.role}}</span></span>
               <hr>
               <button mat-menu-item>
                 <!--disabled-->

@@ -43,6 +43,11 @@ export class MarketingService {
     return this.http.get<RentalApplication>(`${this.baseUrl}/application/${id}`);
   }
 
+  approveApplication(applicaton: any) {
+    debugger;
+    return this.http.post(`${this.baseUrl}/application/approve`, applicaton);
+  }
+
   addImagesToListing(img: PropertyImg) {
     debugger;
     return this.http.post(`${this.baseUrl}/listing/addimg`, img);
@@ -53,9 +58,15 @@ export class MarketingService {
     return this.http.post(`${this.baseUrl}/listing/removeimg`, img);
   }
 
-  deletePropertyListing() {}
+  deletePropertyListing(listing: any) {
+    debugger;
+    return this.http.post(`${this.baseUrl}/listing/remove`, listing);
+  }
 
-  changeListingStatus() {}
+  changeListingStatus(listing: any) {
+    debugger;
+    return this.http.post(`${this.baseUrl}/listing/status`, listing);
+  }
 
   addOpenHouse() {}
 
