@@ -81,7 +81,7 @@ export const getPropertyListingSuccess = createAction(
 );
 
 export const getPropertyListingFailure = createAction(
-  '[Marketing] Get Property List Failure',
+  '[Marketing] Get Property Listing Failure',
   // props<{payload: any}>()
   (errorMessage = 'Error loading property listing') => {
     return ({ payload: { errorMessage } });

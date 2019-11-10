@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { DashState } from '../store/dash.state';
-import { getAllLeases, getContractList } from '../store/dash.actions';
+import { getContractList } from '../store/dash.actions';
 
 @Component({
   selector: 'lib-dash-contract',

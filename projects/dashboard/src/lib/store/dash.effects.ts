@@ -96,7 +96,7 @@ export class DashboardEffects {
             type: '[Marketing] Get Property Listing Success',
             payload: listings
           })),
-          tap(res => {console.log('response: ' + res); }),
+          // tap(res => {console.log('response: ' + res); }),
           catchError(
             err => {
               return of('[Marketing] Get Property Listing Failure', err.error);
