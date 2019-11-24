@@ -11,6 +11,7 @@ import { PropertyDetailsComponent } from './property-details/property-details.co
 import { StoreModule } from '@ngrx/store';
 import { reducer } from './store/reducers';
 import { OwnerListComponent } from './owner-list/owner-list.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 const routes: Routes = [
   { path: '', component: PropertyHomeComponent},
@@ -31,6 +32,7 @@ const routes: Routes = [
     // BrowserModule,
     CommonModule,
     AppMaterialModule,
+    FlexLayoutModule,
     RouterModule.forChild(routes),
     StoreModule.forFeature('property', reducer)
   ],
