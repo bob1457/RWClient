@@ -1,18 +1,57 @@
 <!-- <p>
   profile works!
 </p> -->
-<div class="container">
+<form fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" #f="ngForm" (ngSubmit)="onSubmit(f)" class="profile-form">
+    <mat-form-field class="profile-full-width">
+        <span class="iocn-pos" matPrefix><mat-icon>person</mat-icon> &nbsp;</span>
+        <input type="text" matInput placeholder="Your first name" ngModel name="fname" [ngModel]="user.firstname" #fnameInput="ngModel" fname>
+        <!-- {{firstName}} -->
 
-    <div class="content" fxLayout="row" fxLayout.xs="column" fxFlexFill>
+        <!-- <mat-hint>Should be a valid email address</mat-hint>
+      <mat-error *ngIf="emailInput.hasError('required')">Email is required</mat-error>
+      <mat-error *ngIf="!emailInput.hasError('required')">Email is invalid</mat-error> -->
+    </mat-form-field>
+
+    <mat-form-field class="profile-full-width">
+        <span class="iocn-pos" matPrefix><mat-icon>person</mat-icon> &nbsp;</span>
+        <input type="text" matInput placeholder="Your last name" ngModel name="lname" [ngModel]="user.lastname" #fnameInput="ngModel" lname>
+        <!-- <mat-hint>Should be a valid email address</mat-hint>
+      <mat-error *ngIf="emailInput.hasError('required')">Email is required</mat-error>
+      <mat-error *ngIf="!emailInput.hasError('required')">Email is invalid</mat-error> -->
+    </mat-form-field>
+
+    <mat-form-field class="profile-full-width">
+        <span class="iocn-pos" matPrefix><mat-icon>email</mat-icon> &nbsp;</span>
+        <input type="email" matInput placeholder="Your email" ngModel name="email" [ngModel]="user.email" #emailInput="ngModel" email>
+        <!-- <mat-hint>Should be a valid email address</mat-hint>
+      <mat-error *ngIf="emailInput.hasError('required')">Email is required</mat-error>
+      <mat-error *ngIf="!emailInput.hasError('required')">Email is invalid</mat-error> -->
+    </mat-form-field>
+
+    <mat-form-field class="profile-full-width">
+        <span class="iocn-pos" matPrefix><mat-icon>phone</mat-icon> &nbsp;</span>
+        <input type="text" matInput placeholder="Your telephone number" ngModel name="tel" [ngModel]="user.telephone" #telInput="ngModel" fname>
+        <!-- <mat-hint>Should be a valid email address</mat-hint>
+      <mat-error *ngIf="emailInput.hasError('required')">Email is required</mat-error>
+      <mat-error *ngIf="!emailInput.hasError('required')">Email is invalid</mat-error> -->
+    </mat-form-field>
+
+    <mat-form-field class="profile-full-width">
+        <span class="iocn-pos" matPrefix><mat-icon>mobile_friendly</mat-icon> &nbsp;</span>
+        <input type="text" matInput placeholder="Your social media contact" ngModel name="contact" #contactInput="ngModel" contact>
+        <!-- <mat-hint>Should be a valid email address</mat-hint>
+      <mat-error *ngIf="emailInput.hasError('required')">Email is required</mat-error>
+      <mat-error *ngIf="!emailInput.hasError('required')">Email is invalid</mat-error> -->
+    </mat-form-field>
 
 
-        <div fxFlex="30" class="sec2">
-            second-section
-        </div>
-        <div fxFlex="70" class="sec3" fxFlex.xs="15">
-            third-section
-        </div>
 
+
+
+    <!-- <mat-checkbox color="primary" ngModel name="agree" required>Agree to the terms and conditions</mat-checkbox> -->
+    <div fxLayout="row" fxLayoutGap="7px" style="align-self: flex-end;">
+        <button type="submit" mat-raised-button color="primary" [disabled]="f.invalid || !f.dirty">UPDATE</button>
+        <button mat-raised-button color="accent">CANCEL</button>
     </div>
 
-</div>
+</form>

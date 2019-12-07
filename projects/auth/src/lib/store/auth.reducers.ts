@@ -53,6 +53,7 @@ switch (action.type) {
             telephone: action.payload.user.telephone1,
             email: action.payload.user.email,
             joindate: action.payload.user.joinDate,
+            lastlogin: action.payload.user.lastlogon,
             socialmedia: action.payload.user.socialMediaContact1,
             role: action.payload.user.userRole
           },

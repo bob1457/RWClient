@@ -12,7 +12,7 @@
 }
 
 .profile-header-image {
-    background-image: url('../../assets/imgs/profile.png');
+    background-image: url('../../../assets/imgs/profile.png');
     background-size: cover;
 }
 

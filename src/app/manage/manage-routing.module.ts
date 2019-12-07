@@ -2,7 +2,7 @@ import { AuthGuard } from './../helpers/auth.guard';
 
 // import { DashboardComponent } from './../../../projects/dashboard/src/lib/dashboard.component';
 // import { ProfileComponent } from './../../../projects/auth/src/lib/profile/profile.component';
-import { ProfileComponent } from '@lib/auth';
+import { ProfileComponent, ProfileHomeComponent } from '@lib/auth';
 // import { ProfileComponent } from '../../../projects/auth/src/lib/profile/profile.component';
 import { HomeComponent } from './home/home.component';
 import { NgModule } from '@angular/core';
@@ -17,7 +17,7 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full'},
       { path: 'dashboard', component: DashboardComponent},
-      { path: 'profile', component: ProfileComponent},
+      { path: 'profile', component: ProfileHomeComponent},
       // { path: 'property', loadChildren: '../../../projects/property-manager/src/app/app.module-export#AppPmModule'}
       // tslint:disable-next-line:max-line-length
       { path: 'property', loadChildren: () => import('../../../projects/property-manager/src/app/app.module-export').then(m => m.AppPmModule)},

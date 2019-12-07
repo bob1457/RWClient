@@ -11,8 +11,8 @@ import {
   animate,
   transition
 } from '@angular/animations';
-import { getUserInfo } from '@lib/auth';
-import { User } from '@lib/auth';
+import { getUserInfo, User } from '@lib/auth';
+// import {  } from '@lib/auth';
 
 @Component({
   selector: 'app-side-nav',
@@ -92,7 +92,7 @@ export class SideNavComponent implements OnInit {
       // localStorage.setItem('auth', JSON.stringify(userData));
 
       console.log(userData);
-      if(userData == null) {
+      if (userData == null) {
         this.user = JSON.parse(localStorage.getItem('auth'));
         console.log(this.user);
       } else {
