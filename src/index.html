@@ -10,6 +10,7 @@
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet">
 
     <style type="text/css">
         body,
@@ -18,7 +19,7 @@
             margin: 0;
             padding: 0;
         }
-        
+
         .app-loading {
             position: relative;
             display: flex;
@@ -29,7 +30,7 @@
             /* background-color: rgb(252, 112, 217); */
             background-color: #424242;
         }
-        
+
         .app-loading .spinner {
             height: 200px;
             width: 200px;
@@ -42,7 +43,7 @@
             right: 0;
             margin: auto;
         }
-        
+
         .app-loading .spinner .path {
             stroke-dasharray: 1, 200;
             stroke-dashoffset: 0;
@@ -50,13 +51,13 @@
             stroke-linecap: round;
             stroke: #ddd;
         }
-        
+
         @keyframes rotate {
             100% {
                 transform: rotate(360deg);
             }
         }
-        
+
         @keyframes dash {
             0% {
                 stroke-dasharray: 1, 200;

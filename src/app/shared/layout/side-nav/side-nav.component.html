@@ -484,6 +484,7 @@
                 width="38"
                 height="38"
                 title="{{ user.username }}"
+                style="border-radius: 50%;"
               />
             </button>
 
@@ -568,7 +569,7 @@
             </mat-menu>
           </mat-toolbar>
         </div>
-        <div class="main-container">
+        <div class="main-container" > <!-- [ngStyle.lg]="{'margin-top': '25px'}" -->
           <!-- Manage UI component -->
           <router-outlet></router-outlet>
         </div>

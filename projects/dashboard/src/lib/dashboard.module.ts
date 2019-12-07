@@ -16,6 +16,7 @@ import { DashContractComponent } from './dash-contract/dash-contract.component';
 import { DashTenantComponent } from './dash-tenant/dash-tenant.component';
 import { DashLeaseComponent } from './dash-lease/dash-lease.component';
 import { DashListingComponent } from './dash-listing/dash-listing.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,9 @@ import { DashListingComponent } from './dash-listing/dash-listing.component';
     BrowserModule,
     LayoutModule,
     HttpClientModule,
+    FlexLayoutModule,
     AppMaterialModule,
+    LayoutModule,
     StoreModule.forFeature('dashboard', reducer),
     EffectsModule.forFeature([DashboardEffects])
   ],

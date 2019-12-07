@@ -11,5 +11,6 @@ export interface User {
   socialmedia?: string;
   joindate?: Date;
   lastlogin?: Date;
+  lastupdated?: Date;
   role?: string;
 }

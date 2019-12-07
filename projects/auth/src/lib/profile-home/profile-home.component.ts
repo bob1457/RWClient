@@ -13,6 +13,8 @@ import { getUserInfo } from '../store/auth.reducers';
 })
 export class ProfileHomeComponent implements OnInit {
 
+  serverUrl = 'http://localhost:58088/';
+
   user: User;
 
   rolename = '';

@@ -2,8 +2,14 @@ import { PropertyService, PropertyOwner } from '@lib/app-core';
 import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { PropertyState } from '../store/property.state';
-import { getPropertyOwnerList, getPropertyOwnerDetails, addPropertyOwner, updatePropertyOwner, removePropertyOwner } from '../store/actions/property.actions';
+import { getPropertyOwnerList,
+         getPropertyOwnerDetails,
+         addPropertyOwner,
+         updatePropertyOwner,
+         removePropertyOwner } from '../store/actions/property.actions';
 import {ownerList } from '../store/reducers/property.reducer';
+import { MatTableDataSource } from '@angular/material';
+// import { MatTableDataSource } from '@lib/app-material';
 
 @Component({
   selector: 'app-owner-list',
@@ -11,6 +17,8 @@ import {ownerList } from '../store/reducers/property.reducer';
   styleUrls: ['./owner-list.component.scss']
 })
 export class OwnerListComponent implements OnInit {
+
+  public dataSource = new MatTableDataSource<any>();
 
   constructor(
     private propertyService: PropertyService,
