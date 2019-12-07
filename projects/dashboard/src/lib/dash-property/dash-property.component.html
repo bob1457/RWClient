@@ -3,24 +3,68 @@
 </p> -->
 
 <!-- <mat-grid-tile [colspan]="breakpoint" [rowspan]="2" (window:resize)="onResize($event)"> -->
-  <mat-card class="dashboard-card">
-      <mat-card-header>
-          <mat-card-title>
-              Properties
-              <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
+<mat-card class="dashboard-card">
+    <mat-card-header style="background: #fafafa; padding: 5px;">
+        <div mat-card-avatar class="card-header-img"></div>
+        <mat-card-title>
+            Property Management
+            <!-- <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
                 <mat-icon>more_vert</mat-icon>
               </button>
               <mat-menu #menu="matMenu" xPosition="before">
                   <button mat-menu-item>Expand</button>
                   <button mat-menu-item>Remove</button>
-              </mat-menu>
-          </mat-card-title>
-      </mat-card-header>
-      <mat-card-content class="dashboard-card-content">
+              </mat-menu> -->
+        </mat-card-title>
+        <mat-card-subtitle>Currently managed properties</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content class="dashboard-card-content">
 
-          <div>
-              <!-- <app-property></app-property> -->
-          </div>
-      </mat-card-content>
-  </mat-card>
+        <div>
+            <!-- <app-property></app-property> -->
+            <div [@.disabled]="true">
+                <mat-tab-group>
+                    <mat-tab>
+                        <ng-template mat-tab-label>
+                            <i class="material-icons">
+                            account_balance
+                    </i> &nbsp;&nbsp;
+                            <span>Property</span>
+                        </ng-template>
+
+                        <div fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="15px" style="height: 340px;">
+                            <mat-card style="width: 15%; padding: 0; margin-top: 15px; margin-left: 10px;" [ngStyle.xs]="{'width': '25%'}">
+                                <!-- *ngFor="let property of properties" title="{{property.status }}"-->
+                                <mat-card-header>
+                                    <div mat-card-avatar class="card-header-img">
+                                        <!-- <img style="margin-top: -8px;" src="../../assets/imgs/house.png" width="40px" height="40px"> -->
+                                        <i class="material-icons"> <!--[style.color]="property.status == 'rented' ? 'green': property.status == 'pending'? 'orange' :'red'" {{property.propertyName}}-->
+                                home
+                                </i>
+                                    </div>
+                                    <mat-card-title style="font-size: 12px;margin-top: 15px;" [ngStyle.xs]="{'font-size': '9px'}">10621 Surrey</mat-card-title>
+                                    <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
+                                    <!-- <div fxHide.xs style="margin-top: 10px;">10621 158A St.</div> -->
+                                </mat-card-header>
+                                <img src="../../../assets/images/10621.jpg" alt="Photo of a Shiba Inu" width="100%" height="auto">
+                                <mat-card-content>
+                                    <p>More information</p>
+                                </mat-card-content>
+                                <!-- <mat-card-actions>
+                          <button mat-button>LIKE</button>
+                          <button mat-button>SHARE</button>
+                       </mat-card-actions> -->
+                            </mat-card>
+                        </div>
+
+                    </mat-tab>
+                    <mat-tab label="Contract">
+                        <!-- <app-change-pass></app-change-pass> -->
+                        Management Contrcts
+                    </mat-tab>
+                </mat-tab-group>
+            </div>
+        </div>
+    </mat-card-content>
+</mat-card>
 <!-- </mat-grid-tile> -->
