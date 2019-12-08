@@ -69,8 +69,8 @@ export class SideNavComponent implements OnInit {
   avatar = '';
   avatar$: Observable<string>;
 
-  theme$ = 'dark-theme'; // this is default -- selecting theme can be implemented using observable from rxjs... later.
-
+  // theme$ = 'dark-theme'; // this is default -- selecting theme can be implemented using observable from rxjs... later.
+  theme$ = 'dark-theme';
   constructor(
     public mediaObserver: MediaObserver,
     private router: Router,
