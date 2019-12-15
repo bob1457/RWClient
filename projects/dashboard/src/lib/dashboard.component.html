@@ -17,7 +17,7 @@
                         </mat-menu>
                     </mat-card-title>
                 </mat-card-header> -->
-                <div class="card_banner" style="background: #9a67ea;" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center" fxLayoutGap.lg="20px" fxLayoutGap.xs="-5px" [ngStyle.xs]="{'margin-top': '20px'}">
+                <!-- <div class="card_banner" style="background: #9a67ea;" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center" fxLayoutGap.lg="20px" fxLayoutGap.xs="-5px">
                     <div>
                         <img src="../../../assets/images/house.png" [ngStyle.xs]="{'margin-top': '20px'}">
                     </div>
@@ -26,15 +26,17 @@
                     </div>
                 </div>
                 <mat-card-content class="dashboard-card-content card_content" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="start center" fxLayoutGap.lg="20px" fxLayoutGap.xs="-5px">
-                    <!-- <div>All indicators/charts 1</div> -->
+
                     <div fxFlex="50%" style="text-align: center;">
                         <span style="padding-left: 10px; font-weight: bold;">Managed Properties</span>
                     </div>
-                    <div div fxFlex="50%" style="font-size: 3em; font-weight: 700; color: #676565;">
-                        24
+                    <div div fxFlex="50%" style="font-size: 3em; font-weight: 700; color: #676565;" *ngIf="$propertyList">
+
+                        {{($propertyList | async).length}}
                     </div>
-                    <!-- {{list.length}} *ngIf="list"-->
-                </mat-card-content>
+
+                </mat-card-content> -->
+                <lib-indicator-property [propertyList]="$propertyList | async"></lib-indicator-property>
             </mat-card>
         </mat-grid-tile>
         <mat-grid-tile [colspan]="bp1" [rowspan]="1">
@@ -51,7 +53,7 @@
                         </mat-menu>
                     </mat-card-title>
                 </mat-card-header> -->
-                <div class="card_banner" style="background: #ff9800;" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center" fxLayoutGap.lg="20px" fxLayoutGap.xs="-5px" [ngStyle.xs]="{'margin-top': '20px'}">
+                <!-- <div class="card_banner" style="background: #ff9800;" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center" fxLayoutGap.lg="20px" fxLayoutGap.xs="-5px">
                     <div>
                         <img src="../../assets/images/customers.png" [ngStyle.xs]="{'margin-top': '20px'}">
                     </div>
@@ -60,14 +62,15 @@
                     </div>
                 </div>
                 <mat-card-content class="dashboard-card-content card_content" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="start center" fxLayoutGap.lg="20px" fxLayoutGap.xs="-5px">
-                    <!-- <div>All indicators/charts 2</div> -->
+
                     <div fxFlex="50%" style="text-align: center;">
                         <span style="padding-left: 10px; font-weight: bold;">Managed Contracts</span>
                     </div>
                     <div div fxFlex="50%" style="font-size: 3em; font-weight: 700; color: #676565;">
                         25
                     </div>
-                </mat-card-content>
+                </mat-card-content> -->
+                <lib-indicator-contract [contractList]="contractList$ | async"></lib-indicator-contract>
             </mat-card>
         </mat-grid-tile>
         <mat-grid-tile [colspan]="bp1" [rowspan]="1">
@@ -84,23 +87,7 @@
                         </mat-menu>
                     </mat-card-title>
                 </mat-card-header> -->
-                <div class="card_banner" style="background: #64b5f6;" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center" fxLayoutGap.lg="20px" fxLayoutGap.xs="-5px" [ngStyle.xs]="{'margin-top': '20px'}">
-                    <div>
-                        <img src="../../assets/images/users.png" [ngStyle.xs]="{'margin-top': '20px'}">
-                    </div>
-                    <div>
-                        <h3>TENANTS</h3>
-                    </div>
-                </div>
-                <mat-card-content class="dashboard-card-content card_content" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="start center" fxLayoutGap.lg="20px" fxLayoutGap.xs="-5px">
-                    <!-- <div>All indicators/charts 3</div> -->
-                    <div fxFlex="50%" style="text-align: center;">
-                        <span style="padding-left: 10px; font-weight: bold;">Managed Tenants</span>
-                    </div>
-                    <div div fxFlex="50%" style="font-size: 3em; font-weight: 700; color: #676565;">
-                        43
-                    </div>
-                </mat-card-content>
+                <lib-indicator-tenants [tenantList]="tenantList$ | async"></lib-indicator-tenants>
             </mat-card>
         </mat-grid-tile>
         <mat-grid-tile [colspan]="bp1" [rowspan]="1">
@@ -117,7 +104,7 @@
                         </mat-menu>
                     </mat-card-title>
                 </mat-card-header> -->
-                <div class="card_banner" style="background: #81c784;" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center" fxLayoutGap.lg="20px" fxLayoutGap.xs="-5px" [ngStyle.xs]="{'margin-top': '20px'}">
+                <!-- <div class="card_banner" style="background: #81c784;" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center" fxLayoutGap.lg="20px" fxLayoutGap.xs="-5px">
                     <div>
                         <img src="../../assets/images/rentals.png" [ngStyle.xs]="{'margin-top': '20px'}">
                     </div>
@@ -126,14 +113,15 @@
                     </div>
                 </div>
                 <mat-card-content class="dashboard-card-content card_content" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="start center" fxLayoutGap.lg="20px" fxLayoutGap.xs="-5px">
-                    <!-- <div>All indicators/charts 4</div> -->
+
                     <div fxFlex="50%" style="text-align: center;">
                         <span style="padding-left: 10px; font-weight: bold;">Managed Rentals</span>
                     </div>
                     <div div fxFlex="50%" style="font-size: 3em; font-weight: 700; color: #676565;">
                         19
                     </div>
-                </mat-card-content>
+                </mat-card-content> -->
+                <lib-indicator-rentals [rentalList]="rentalList$ | async"></lib-indicator-rentals>
             </mat-card>
         </mat-grid-tile>
 

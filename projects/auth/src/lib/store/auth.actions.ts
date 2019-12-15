@@ -1,3 +1,5 @@
+// import { updateContractSuccess, updatePropertyFailure } from './../../../../property-manager/src/app/store/actions/property.actions';
+// import { AuthActionTypes } from './auth.actions';
 // The single event that precisely describes “What Happened” with custom “Type” , and it typically s a string.
 
 import { Action } from '@ngrx/store';
@@ -13,7 +15,13 @@ export enum AuthActionTypes {
   SIGNUP_SUCCESS = '[Auth] Signup Success',
   SIGNUP_FAILURE = '[Auth] Signup Failure',
   LOGOUT = '[Auth] Logout',
-  GET_STATUS = '[Auth] GetStatus'
+  GET_STATUS = '[Auth] GetStatus',
+  UPDATE_AVATAR = '[Auth] Update Avatar',
+  UPDATE_AVATAR_SUCCESS = '[Auth] Update Avatar Success',
+  UPDATE_AVATAR_FAILURE = '[Auth] Update Avatar Failure',
+  UPDATE_PROFILE = '[Auth] Update Profile',
+  UPDATE_PROFILE_SUCCESS = '[Auth] Update Profile Success',
+  UPDATE_PROFILE_FAILURE = '[Auth] Update Profile Failure'
 }
 
 // Implement all actions types defined above
@@ -58,6 +66,38 @@ export class GetStatus implements Action {
   readonly type = AuthActionTypes.GET_STATUS;
 }
 
+
+
+export class UpdateAvatar implements Action {
+  readonly type = AuthActionTypes.UPDATE_AVATAR;
+  constructor(public payload: any) {}
+}
+
+export class UpdateAvatarSuccess implements Action {
+  readonly type = AuthActionTypes.UPDATE_AVATAR_SUCCESS;
+  constructor(public payload: any) {}
+}
+
+export class UpdateAvatarFailure implements Action {
+  readonly type = AuthActionTypes.UPDATE_AVATAR_FAILURE;
+  constructor(public payload: any) {}
+}
+
+
+export class UpdateProfile implements Action {
+  readonly type = AuthActionTypes.UPDATE_PROFILE;
+}
+
+export class UpdateProfileSuccess implements Action {
+  readonly type = AuthActionTypes.UPDATE_PROFILE_SUCCESS;
+  constructor(public payload: any) {}
+}
+
+export class UpdateProfileFailure implements Action {
+  readonly type = AuthActionTypes.UPDATE_PROFILE_FAILURE;
+  constructor(public payload: any) {}
+}
+
 // Export all actions
 //
 export type All =
@@ -68,4 +108,11 @@ export type All =
   | SignUpSuccess
   | SignUpFailure
   | LogOut
-  | GetStatus;
+  | GetStatus
+  | UpdateAvatar
+  | UpdateAvatarSuccess
+  | UpdateAvatarFailure
+  | UpdateProfile
+  | UpdateProfileSuccess
+  | UpdateProfileFailure;
+

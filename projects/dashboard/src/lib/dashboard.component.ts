@@ -1,6 +1,13 @@
+import { DashState } from './store/dash.state';
 import { Component, OnInit } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { Property } from './models/property.model';
+import { Store, select } from '@ngrx/store';
+import { PropertyList, ContractList, TenantList, RentalList } from './store/dash.reducer';
+import { getPropertyList } from './store/dash.actions';
+import { PropertyService, ManagementContract, PropertyTenant, PropertyLease } from '@lib/app-core';
 
 @Component({
   selector: 'lib-dashboard',
@@ -13,12 +20,23 @@ export class DashboardComponent implements OnInit {
   bp2: number;
   bp1: number;
 
-  constructor(private breakpointObserver: BreakpointObserver){}
+  $propertyList: Observable<Property[]>;
+  contractList$: Observable<ManagementContract[]>;
+  tenantList$: Observable<PropertyTenant[]>;
+  rentalList$: Observable<PropertyLease[]>;
+  // list: Property[];
+  loading: boolean;
+
+  constructor(private breakpointObserver: BreakpointObserver, private store: Store<DashState>, private propertyService: PropertyService){}
   ngOnInit() {
     this.breakpoint = (window.innerWidth <= 640) ? 4 : 1;
     this.bp = (window.innerWidth <= 640) ? 4 : 2;
     this.bp2 = (window.innerWidth <= 640) ? 4 : 3;
     this.bp1 = (window.innerWidth <= 640) ? 2 : 1;
+
+    this.store.dispatch(getPropertyList()) ;
+
+    this.getAllPropertyList();
   }
 
   onResize(event) {
@@ -26,6 +44,23 @@ export class DashboardComponent implements OnInit {
     this.bp = (window.innerWidth <= 640) ? 4 : 2;
     this.bp2 = (window.innerWidth <= 640) ? 4 : 3;
     this.bp1 = (window.innerWidth <= 640) ? 2 : 1;
+  }
+
+  getAllPropertyList() {
+    // debugger;
+    this.$propertyList = this.store.select(PropertyList);
+    this.contractList$ = this.store.select(ContractList);
+    this.tenantList$ = this.store.select(TenantList);
+    this.rentalList$ = this.store.select(RentalList);
+    // this.store.pipe(select(PropertyList)).subscribe((pList: Property[]) => {
+    //   this.list = pList;
+    //   console.log(pList);
+    // });
+    // this.propertyService.getPropertyList().subscribe((properties:Property[]) => {
+    //   this.list = properties;
+    //   console.log('All properties: ' + this.list);
+    // });
+
   }
 
 }

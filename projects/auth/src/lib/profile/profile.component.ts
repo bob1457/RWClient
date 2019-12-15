@@ -1,3 +1,4 @@
+import { ProfileService } from './../services/profile.service';
 import { Component, OnInit, Input } from '@angular/core';
 
 import { Store, select } from '@ngrx/store';
@@ -17,7 +18,8 @@ export class ProfileComponent implements OnInit {
   // user: User;
   @Input() user: User;
 
-  constructor(private store: Store<AuthState>) { }
+  constructor(private store: Store<AuthState>,
+              private profileService: ProfileService) { }
 
   ngOnInit() {
     debugger;
@@ -31,6 +33,8 @@ export class ProfileComponent implements OnInit {
 
   onSubmit(form: NgForm) {
     console.log(form.value);
+    this.profileService.updateProfile(form.value);
+
   }
 
 

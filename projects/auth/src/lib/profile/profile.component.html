@@ -4,7 +4,12 @@
 <form fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" #f="ngForm" (ngSubmit)="onSubmit(f)" class="profile-form">
     <mat-form-field class="profile-full-width">
         <span class="iocn-pos" matPrefix><mat-icon>person</mat-icon> &nbsp;</span>
-        <input type="text" matInput placeholder="Your first name" ngModel name="fname" [ngModel]="user.firstname" #fnameInput="ngModel" fname>
+        <input hidden type="text" matInput placeholder="Your username" ngModel name="usertName" [ngModel]="user.username" #fnameInput="ngModel" uname>
+    </mat-form-field>
+
+    <mat-form-field class="profile-full-width">
+        <span class="iocn-pos" matPrefix><mat-icon>person</mat-icon> &nbsp;</span>
+        <input type="text" matInput placeholder="Your first name" ngModel name="firstName" [ngModel]="user.firstname" #fnameInput="ngModel" fname>
         <!-- {{firstName}} -->
 
         <!-- <mat-hint>Should be a valid email address</mat-hint>
@@ -14,7 +19,7 @@
 
     <mat-form-field class="profile-full-width">
         <span class="iocn-pos" matPrefix><mat-icon>person</mat-icon> &nbsp;</span>
-        <input type="text" matInput placeholder="Your last name" ngModel name="lname" [ngModel]="user.lastname" #fnameInput="ngModel" lname>
+        <input type="text" matInput placeholder="Your last name" ngModel name="lastName" [ngModel]="user.lastname" #fnameInput="ngModel" lname>
         <!-- <mat-hint>Should be a valid email address</mat-hint>
       <mat-error *ngIf="emailInput.hasError('required')">Email is required</mat-error>
       <mat-error *ngIf="!emailInput.hasError('required')">Email is invalid</mat-error> -->
@@ -28,21 +33,29 @@
       <mat-error *ngIf="!emailInput.hasError('required')">Email is invalid</mat-error> -->
     </mat-form-field>
 
-    <mat-form-field class="profile-full-width">
-        <span class="iocn-pos" matPrefix><mat-icon>phone</mat-icon> &nbsp;</span>
-        <input type="text" matInput placeholder="Your telephone number" ngModel name="tel" [ngModel]="user.telephone" #telInput="ngModel" fname>
-        <!-- <mat-hint>Should be a valid email address</mat-hint>
-      <mat-error *ngIf="emailInput.hasError('required')">Email is required</mat-error>
-      <mat-error *ngIf="!emailInput.hasError('required')">Email is invalid</mat-error> -->
-    </mat-form-field>
+    <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center" fxLayoutGap="10px" style="width: 70%;">
+        <mat-form-field class="profile-full-width" style="width: 100%;">
+            <span class="iocn-pos" matPrefix><mat-icon>phone</mat-icon> &nbsp;</span>
+            <input type="text" matInput placeholder="Primary telephone number" ngModel name="telephone1" [ngModel]="user.telephone" #telInput="ngModel" tel1>
+        </mat-form-field>
 
-    <mat-form-field class="profile-full-width">
-        <span class="iocn-pos" matPrefix><mat-icon>mobile_friendly</mat-icon> &nbsp;</span>
-        <input type="text" matInput placeholder="Your social media contact" ngModel name="contact" #contactInput="ngModel" contact>
-        <!-- <mat-hint>Should be a valid email address</mat-hint>
-      <mat-error *ngIf="emailInput.hasError('required')">Email is required</mat-error>
-      <mat-error *ngIf="!emailInput.hasError('required')">Email is invalid</mat-error> -->
-    </mat-form-field>
+        <mat-form-field class="profile-full-width" style="width: 100%;">
+            <span class="iocn-pos" matPrefix><mat-icon>phone</mat-icon> &nbsp;</span>
+            <input type="text" matInput placeholder="Secondary telephone number" ngModel name="telephone2" [ngModel]="user.telephone" #telInput="ngModel" tel2>
+        </mat-form-field>
+
+    </div>
+
+    <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center" fxLayoutGap="10px" style="width: 70%;">
+        <mat-form-field class="profile-full-width" style="width: 100%;">
+            <span class="iocn-pos" matPrefix><mat-icon>mobile_friendly</mat-icon> &nbsp;</span>
+            <input type="text" matInput placeholder="Primary social media contact" ngModel name="socialMediaContact1" #contactInput="ngModel" contact1>
+        </mat-form-field>
+        <mat-form-field class="profile-full-width" style="width: 100%;">
+            <span class="iocn-pos" matPrefix><mat-icon>mobile_friendly</mat-icon> &nbsp;</span>
+            <input type="text" matInput placeholder="Secondary social media contact" ngModel name="socialMediaContact1" #contactInput="ngModel" contact2>
+        </mat-form-field>
+    </div>
 
 
 

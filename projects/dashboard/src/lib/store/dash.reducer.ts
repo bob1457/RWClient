@@ -3,6 +3,7 @@ import { DashState } from './dash.state';
 import { createReducer, Action, on, createFeatureSelector, createSelector} from '@ngrx/store';
 
 
+
 export const initialState: DashState =  { // adapter.getInitialState
   loading: false,
   loaded: false,
@@ -155,13 +156,23 @@ const dashReducer = createReducer(
  */
 
 // Getting read-only data managed by current "Reducer"
+const loading = (state: DashState) => state.loading;
 const AllProperties = (state: DashState) => state.properties;
+const AllContracts = (state: DashState) => state.contracts;
+const AllTenants = (state: DashState) => state.tenants;
+const AllRentals = (state: DashState) => state.leases;
 
 // Select required slice of state
-export const getPropertyStatus = createFeatureSelector<DashState>('property');
+export const getDashState = createFeatureSelector<DashState>('dashboard');
 
 // Select the attribute of the state in the slice
-export const PropertyList = createSelector(getPropertyStatus, AllProperties);
+export const PropertyList = createSelector(getDashState, AllProperties);
+export const ContractList = createSelector(getDashState, AllContracts);
+export const TenantList = createSelector(getDashState, AllTenants);
+export const RentalList = createSelector(getDashState, AllRentals);
+
+
+export const loadingStatus = createSelector(getDashState, loading);
 
 
 

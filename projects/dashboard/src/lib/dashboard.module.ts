@@ -17,6 +17,10 @@ import { DashTenantComponent } from './dash-tenant/dash-tenant.component';
 import { DashLeaseComponent } from './dash-lease/dash-lease.component';
 import { DashListingComponent } from './dash-listing/dash-listing.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { IndicatorPropertyComponent } from './indicator-property/indicator-property.component';
+import { IndicatorContractComponent } from './indicator-contract/indicator-contract.component';
+import { IndicatorTenantsComponent } from './indicator-tenants/indicator-tenants.component';
+import { IndicatorRentalsComponent } from './indicator-rentals/indicator-rentals.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +31,11 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     DashContractComponent,
     DashTenantComponent,
     DashLeaseComponent,
-    DashListingComponent
+    DashListingComponent,
+    IndicatorPropertyComponent,
+    IndicatorContractComponent,
+    IndicatorTenantsComponent,
+    IndicatorRentalsComponent
   ],
   imports: [
     BrowserModule,
