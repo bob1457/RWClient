@@ -150,7 +150,7 @@
               </div>
           </mat-card-content>
       </mat-card> -->
-            <lib-dash-property></lib-dash-property>
+            <lib-dash-property [propertyList]="$propertyList | async"></lib-dash-property>
         </mat-grid-tile>
 
 
@@ -175,7 +175,7 @@
 
           </mat-card-content>
       </mat-card> -->
-            <lib-dash-lease></lib-dash-lease>
+            <lib-dash-lease [tenants]="tenantList$ | async"></lib-dash-lease>
         </mat-grid-tile>
 
 

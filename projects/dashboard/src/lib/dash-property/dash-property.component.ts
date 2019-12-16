@@ -1,7 +1,7 @@
 
 // import { propertyList } from './../../../../property-manager/src/app/store/reducers/property.reducer';
 import { Observable } from 'rxjs';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { DashState } from '../store/dash.state';
 import { getPropertyList, getContractList } from '../store/dash.actions';
@@ -17,30 +17,32 @@ export class DashPropertyComponent implements OnInit {
 
   breakpoint: number;
 
-  $propertyList: Observable<Property[]>;  //Property[];
+  // $propertyList: Observable<Property[]>;  //Property[];
+  @Input() propertyList: Property[];
 
   constructor(private store: Store<DashState>) { }
 
   ngOnInit() {
     this.breakpoint = (window.innerWidth <= 640) ? 2 : 1;
-    debugger;
+    // debugger;
     // this.store.dispatch(getPropertyList()) ;
-    this.store.dispatch(getContractList());
+    // this.store.dispatch(getContractList());
+    // this.getPropertyList();
   }
 
   onResize(event) {
     this.breakpoint = (event.target.innerWidth <= 640) ? 2 : 1;
   }
 
-  getPropertyList() {
-    this.$propertyList = this.store.select(PropertyList);
-    // this.store.pipe(select(getPropertyList)).subscribe((pList:Property[]) => {
-    //   this.propertyList = pList;
-    // });
-  }
+  // getPropertyList() {
+  //   this.$propertyList = this.store.select(PropertyList);
+  //   // this.store.pipe(select(getPropertyList)).subscribe((pList:Property[]) => {
+  //   //   this.propertyList = pList;
+  //   // });
+  // }
 
-  getContractList() {
+  // getContractList() {
 
-  }
+  // }
 
 }
