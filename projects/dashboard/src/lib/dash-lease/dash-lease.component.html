@@ -70,8 +70,27 @@
                         </i> &nbsp;&nbsp; -->
                         <span class="tab-label">Rentals</span>
                     </ng-template>
-                    <div class="container" fxLayout="column" fxLayoutAlign="start" fxLayoutGap="1%" fxFlexFill>
+                    <!-- <div class="container" fxLayout="column" fxLayoutAlign="start" fxLayoutGap="1%" fxFlexFill>
                         Rental Agreement
+                    </div> -->
+                    <div class="container" fxLayout="column" fxLayoutAlign="start" fxLayoutGap="1%" fxFlexFill>
+                        <mat-grid-list cols="1" rowHeight="85px">
+                            <mat-grid-tile *ngFor="let rental of rentals">
+                                <mat-card class="user-card">
+                                    <mat-card-header>
+                                        <div mat-card-avatar>
+                                            <img class="rental-avatar" src="../../assets/images/doc.png">
+                                        </div>
+                                        <mat-card-title style="font-size: .85em; font-weight: bold;">{{rental.leaseTitle}}</mat-card-title>
+                                        <!-- <mat-card-subtitle style="font-size: 12px;">{{user.role | uppercase}}</mat-card-subtitle> -->
+                                        <div style="margin-left: 25px;font-size: 12px;">Details: <br>{{rental.leaseDesc}}</div>
+                                    </mat-card-header>
+                                </mat-card>
+                            </mat-grid-tile>
+                        </mat-grid-list>
+
+
+
                     </div>
                 </mat-tab>
             </mat-tab-group>

@@ -2,9 +2,9 @@
   profile works!
 </p> -->
 <form fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" #f="ngForm" (ngSubmit)="onSubmit(f)" class="profile-form">
-    <mat-form-field class="profile-full-width">
+    <mat-form-field class="profile-full-width" style="display: none;">
         <span class="iocn-pos" matPrefix><mat-icon>person</mat-icon> &nbsp;</span>
-        <input hidden type="text" matInput placeholder="Your username" ngModel name="usertName" [ngModel]="user.username" #fnameInput="ngModel" uname>
+        <input type="text" matInput placeholder="Your username" ngModel name="userName" [ngModel]="user.username" #fnameInput="ngModel" uname>
     </mat-form-field>
 
     <mat-form-field class="profile-full-width">
@@ -36,28 +36,60 @@
     <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center" fxLayoutGap="10px" style="width: 70%;">
         <mat-form-field class="profile-full-width" style="width: 100%;">
             <span class="iocn-pos" matPrefix><mat-icon>phone</mat-icon> &nbsp;</span>
-            <input type="text" matInput placeholder="Primary telephone number" ngModel name="telephone1" [ngModel]="user.telephone" #telInput="ngModel" tel1>
+            <input type="text" matInput placeholder="Primary telephone number" ngModel name="telephone1" [ngModel]="user.telephone1" #telInput="ngModel" tel1>
         </mat-form-field>
 
         <mat-form-field class="profile-full-width" style="width: 100%;">
             <span class="iocn-pos" matPrefix><mat-icon>phone</mat-icon> &nbsp;</span>
-            <input type="text" matInput placeholder="Secondary telephone number" ngModel name="telephone2" [ngModel]="user.telephone" #telInput="ngModel" tel2>
+            <input type="text" matInput placeholder="Secondary telephone number" ngModel name="telephone2" [ngModel]="user.telephone2" #telInput="ngModel" tel2>
         </mat-form-field>
 
     </div>
 
     <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center" fxLayoutGap="10px" style="width: 70%;">
         <mat-form-field class="profile-full-width" style="width: 100%;">
-            <span class="iocn-pos" matPrefix><mat-icon>mobile_friendly</mat-icon> &nbsp;</span>
-            <input type="text" matInput placeholder="Primary social media contact" ngModel name="socialMediaContact1" #contactInput="ngModel" contact1>
+            <span class="iocn-pos" matPrefix><mat-icon>dialpad</mat-icon> &nbsp;</span>
+            <input type="text" matInput placeholder="Primary social media contact" ngModel name="socialMediaContact1" [ngModel]="user.socialmedia1" #contactInput="ngModel" contact1>
         </mat-form-field>
         <mat-form-field class="profile-full-width" style="width: 100%;">
-            <span class="iocn-pos" matPrefix><mat-icon>mobile_friendly</mat-icon> &nbsp;</span>
-            <input type="text" matInput placeholder="Secondary social media contact" ngModel name="socialMediaContact1" #contactInput="ngModel" contact2>
+            <span class="iocn-pos" matPrefix><mat-icon>dialpad</mat-icon> &nbsp;</span>
+            <input type="text" matInput placeholder="Secondary social media contact" ngModel name="socialMediaContact2" [ngModel]="user.socialmedia2" #contactInput="ngModel" contact2>
         </mat-form-field>
     </div>
 
+    <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center" fxLayoutGap="10px" style="width: 70%;">
+        <mat-form-field class="profile-full-width" style="width: 100%;">
+            <span class="iocn-pos" matPrefix><mat-icon>mobile_friendly</mat-icon> &nbsp;</span>
+            <input type="text" matInput placeholder="Address: Number and Street" ngModel name="addressstreet" [ngModel]="user.addressstreet" #contactInput="ngModel" contact1>
+        </mat-form-field>
+        <mat-form-field class="profile-full-width" style="width: 100%;">
+            <span class="iocn-pos" matPrefix><mat-icon>mobile_friendly</mat-icon> &nbsp;</span>
+            <input type="text" matInput placeholder="Address: City" ngModel name="addresscity" [ngModel]="user.addresscity" #contactInput="ngModel" contact2>
+        </mat-form-field>
+    </div>
 
+    <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center" fxLayoutGap="10px" style="width: 70%;">
+        <mat-form-field class="profile-full-width" style="width: 100%;">
+            <span class="iocn-pos" matPrefix><mat-icon>mobile_friendly</mat-icon> &nbsp;</span>
+            <input type="text" matInput placeholder="Address: Province/State" ngModel name="addressProvstate" [ngModel]="user.addressprovstate" #contactInput="ngModel" contact1>
+        </mat-form-field>
+        <mat-form-field class="profile-full-width" style="width: 100%;">
+            <span class="iocn-pos" matPrefix><mat-icon>mobile_friendly</mat-icon> &nbsp;</span>
+            <input type="text" matInput placeholder="Address: Post/Zip Code" ngModel name="addresspostzipcode" [ngModel]="user.addresspostzipcode" #contactInput="ngModel" contact2>
+        </mat-form-field>
+    </div>
+
+    <mat-form-field class="profile-full-width">
+        <span class="iocn-pos" matPrefix><mat-icon>mobile_friendly</mat-icon> &nbsp;</span>
+        <input type="text" matInput placeholder="Address: Country" ngModel name="addresscountry" [ngModel]="user.addresscountry" #emailInput="ngModel" country>
+        <!-- <mat-form-field>
+            <mat-label>Country</mat-label>
+            <mat-select [(value)]="selected">
+                <mat-option value="CA">Canada</mat-option>
+                <mat-option value="US">United States</mat-option>
+            </mat-select>
+        </mat-form-field> -->
+    </mat-form-field>
 
 
 

@@ -7,6 +7,8 @@ import { DashState } from '../store/dash.state';
 import { getPropertyList, getContractList } from '../store/dash.actions';
 import { Property } from '../models/property.model';
 import { PropertyList } from '../store/dash.reducer';
+import { PropertyOwner } from '../models/property-owner.model';
+import { ManagementContract } from '../models/management-contract.model';
 
 @Component({
   selector: 'lib-dash-property',
@@ -19,6 +21,8 @@ export class DashPropertyComponent implements OnInit {
 
   // $propertyList: Observable<Property[]>;  //Property[];
   @Input() propertyList: Property[];
+  @Input() ownerList: PropertyOwner[];
+  @Input() contractList: ManagementContract[];
 
   constructor(private store: Store<DashState>) { }
 
@@ -28,6 +32,7 @@ export class DashPropertyComponent implements OnInit {
     // this.store.dispatch(getPropertyList()) ;
     // this.store.dispatch(getContractList());
     // this.getPropertyList();
+    console.log('passed: ' + this.ownerList);
   }
 
   onResize(event) {

@@ -50,13 +50,20 @@ switch (action.type) {
             firstname: action.payload.user.firstName,
             lastname: action.payload.user.lastName,
             avatarUrl: action.payload.user.avatarImgUrl,
-            telephone: action.payload.user.telephone1,
+            telephone1: action.payload.user.telephone1,
+            telephone2: action.payload.user.telephone2,
             email: action.payload.user.email,
             joindate: action.payload.user.joinDate,
             lastlogin: action.payload.user.lastLogOn,
             lastupdated: action.payload.user.lastUpdated,
-            socialmedia: action.payload.user.socialMediaContact1,
-            role: action.payload.user.userRole
+            socialmedia1: action.payload.user.socialMediaContact1,
+            socialmedia2: action.payload.user.socialMediaContact2,
+            role: action.payload.user.userRole,
+            addressstreet: action.payload.user.addressStreet,
+            addresscity: action.payload.user.addressCity,
+            addressprovstate: action.payload.user.addressStateProv,
+            addresspostzipcode: action.payload.user.addressZipPostCode,
+            addresscountry: action.payload.user.addressCountry
           },
           errorMessage: null
         };
@@ -142,12 +149,19 @@ switch (action.type) {
             firstname: action.payload.user.firstName,
             lastname: action.payload.user.lastName,
             avatarUrl: action.payload.user.avatarImgUrl,
-            telephone: action.payload.user.telephone1,
+            telephone1: action.payload.user.telephone1,
+            telephone2: action.payload.user.telephone2,
             email: action.payload.user.email,
             joindate: action.payload.user.joinDate,
             lastlogin: action.payload.user.lastLogOn,
             lastupdated: action.payload.user.lastUpdated,
-            socialmedia: action.payload.user.socialMediaContact1,
+            socialmedia1: action.payload.user.socialMediaContact1,
+            socialmedia2: action.payload.user.socialMediaContact2,
+            addressstreet: action.payload.user.addressStreet,
+            addresscity: action.payload.user.addressCity,
+            addressprovstate: action.payload.user.addressStateProv,
+            addresspostzipcode: action.payload.user.addressZipPostCode,
+            addresscountry: action.payload.user.addressCountry
             // role: action.payload.user.userRole
           },
           errorMessage: null

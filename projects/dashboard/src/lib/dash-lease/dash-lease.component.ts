@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import { DashState } from '../store/dash.state';
 import { getAllLeases, getAllTenants } from '../store/dash.actions';
 import { PropertyTenant } from '../models/property-tenant.model';
+import { PropertyLease } from '../models/property-lease.model';
 
 @Component({
   selector: 'lib-dash-lease',
@@ -14,6 +15,7 @@ export class DashLeaseComponent implements OnInit {
   breakpoint: number;
 
   @Input() tenants: PropertyTenant[];
+  @Input() rentals: PropertyLease[];
 
   constructor(private store: Store<DashState>) { }
 

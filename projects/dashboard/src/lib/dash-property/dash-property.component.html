@@ -31,7 +31,7 @@
                             <!-- <i class="material-icons" style="color: black;">
                               account_balance
                             </i> &nbsp;&nbsp; -->
-                            <span style="color: black;">Property</span>
+                            <span style="color: black;">Properties</span>
                         </ng-template>
 
                         <div fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="15px" style="height: 340px;">
@@ -60,7 +60,24 @@
                         </div>
 
                     </mat-tab>
-                    <mat-tab label="Contract">
+                    <mat-tab label="Owners">
+                        <div fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="15px" style="height: 340px;">
+                            <mat-card style="width: 15%; padding: 0; margin-top: 15px; margin-left: 10px;" [ngStyle.xs]="{'width': '25%'}" *ngFor="let owner of ownerList">
+                                <!-- *ngFor="let property of properties" -->
+
+                                <img src="../../assets/images/avatar.png" class="user-avatar" alt="owner">
+                                <mat-card-content>
+                                    <p style="margin-top: 10px; font-weight: bold;">{{owner.firstName}} {{owner.lastName | uppercase}}</p>
+                                </mat-card-content>
+                                <!-- <mat-card-actions>
+                          <button mat-button>LIKE</button>
+                          <button mat-button>SHARE</button>
+                       </mat-card-actions> -->
+                            </mat-card>
+                        </div>
+
+                    </mat-tab>
+                    <mat-tab label="Contracts">
                         <!-- <app-change-pass></app-change-pass> -->
                         <ng-template mat-tab-label>
                             <!-- <i class="material-icons" style="color: black;">
@@ -68,6 +85,31 @@
                             </i> &nbsp;&nbsp; -->
                             <span style="color: black;">Management Contrcts</span>
                         </ng-template>
+                        <div fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="15px" style="height: 340px;">
+                            <mat-card style="width: 15%; padding: 0; margin-top: 15px; margin-left: 10px;" [ngStyle.xs]="{'width': '25%'}" *ngFor="let contract of contractList">
+                                <!-- *ngFor="let property of properties" -->
+                                <mat-card-header class="contract-header">
+                                    <div mat-card-avatar style="margin-top: 10px;">
+                                        <!-- <img style="margin-top: -8px;" src="../../assets/imgs/house.png" width="40px" height="40px"> -->
+                                        <i class="material-icons" title="{{contract.isActive }}" [style.color]="contract.isActive == true ? 'green': 'orange'">
+                                    list_alt
+                                </i>
+                                    </div>
+                                    <mat-card-title style="font-size: 12px;margin-top: 15px;" [ngStyle.xs]="{'font-size': '9px'}">{{contract.managementContractTitle}}</mat-card-title>
+                                    <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
+                                    <!-- <div fxHide.xs style="margin-top: 10px;">10621 158A St.</div> -->
+                                </mat-card-header>
+
+                                <mat-card-content class="contract-content">
+                                    <p>Property: <br>{{contract.propertyName}}</p>
+                                    <p>Signed on: <br>{{contract.contractSignDate | mediumDate}}</p>
+                                </mat-card-content>
+                                <!-- <mat-card-actions>
+                          <button mat-button>LIKE</button>
+                          <button mat-button>SHARE</button>
+                       </mat-card-actions> -->
+                            </mat-card>
+                        </div>
 
                     </mat-tab>
                 </mat-tab-group>

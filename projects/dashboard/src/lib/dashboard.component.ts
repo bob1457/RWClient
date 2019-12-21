@@ -5,9 +5,10 @@ import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Property } from './models/property.model';
 import { Store, select } from '@ngrx/store';
-import { PropertyList, ContractList, TenantList, RentalList } from './store/dash.reducer';
-import { getPropertyList, getAllLeases, getAllTenants, getContractList } from './store/dash.actions';
+import { PropertyList, ContractList, TenantList, RentalList, OwnerList } from './store/dash.reducer';
+import { getPropertyList, getAllLeases, getAllTenants, getContractList, getPropertyOwnerList } from './store/dash.actions';
 import { PropertyService, ManagementContract, PropertyTenant, PropertyLease } from '@lib/app-core';
+import { PropertyOwner } from './models/property-owner.model';
 
 @Component({
   selector: 'lib-dashboard',
@@ -24,6 +25,7 @@ export class DashboardComponent implements OnInit {
   contractList$: Observable<ManagementContract[]>;
   tenantList$: Observable<PropertyTenant[]>;
   rentalList$: Observable<PropertyLease[]>;
+  ownerList$: Observable<PropertyOwner[]>;
   // list: Property[];
   loading: boolean;
 
@@ -38,6 +40,7 @@ export class DashboardComponent implements OnInit {
     this.store.dispatch(getAllLeases());
     this.store.dispatch(getAllTenants());
     this.store.dispatch(getContractList());
+    this.store.dispatch(getPropertyOwnerList());
 
     this.getAllPropertyList();
   }
@@ -50,11 +53,12 @@ export class DashboardComponent implements OnInit {
   }
 
   getAllPropertyList() {
-    // debugger;
+    debugger;
     this.$propertyList = this.store.select(PropertyList);
     this.contractList$ = this.store.select(ContractList);
     this.tenantList$ = this.store.select(TenantList);
     this.rentalList$ = this.store.select(RentalList);
+    this.ownerList$ = this.store.select(OwnerList);
 
 
     // this.store.pipe(select(PropertyList)).subscribe((pList: Property[]) => {

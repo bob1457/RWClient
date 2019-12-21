@@ -8,7 +8,8 @@ import { Profile } from '../models/profile';
 })
 export class ProfileService {
 
-  serverUrl = 'https://localhost:44336/api/Profile/update';
+  // serverUrl = 'https://localhost:44336/api/Profile/update';
+  serverUrl = 'http://localhost:58088/api/Profile/update';
 
   constructor(private httpClient: HttpClient) { }
 

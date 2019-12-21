@@ -161,6 +161,7 @@ const AllProperties = (state: DashState) => state.properties;
 const AllContracts = (state: DashState) => state.contracts;
 const AllTenants = (state: DashState) => state.tenants;
 const AllRentals = (state: DashState) => state.leases;
+const AllOwners = (state: DashState) => state.owners;
 
 // Select required slice of state
 export const getDashState = createFeatureSelector<DashState>('dashboard');
@@ -170,6 +171,7 @@ export const PropertyList = createSelector(getDashState, AllProperties);
 export const ContractList = createSelector(getDashState, AllContracts);
 export const TenantList = createSelector(getDashState, AllTenants);
 export const RentalList = createSelector(getDashState, AllRentals);
+export const OwnerList = createSelector(getDashState, AllOwners);
 
 
 export const loadingStatus = createSelector(getDashState, loading);

@@ -7,6 +7,7 @@ import { AuthState } from '../store/auth.state';
 import { User } from '../models';
 import { getUserInfo } from '../store/auth.reducers';
 import { NgForm } from '@angular/forms';
+import { subscribeOn } from 'rxjs/operators';
 
 @Component({
   selector: 'lib-profile',
@@ -17,6 +18,9 @@ export class ProfileComponent implements OnInit {
 
   // user: User;
   @Input() user: User;
+
+  selected = 'CA';
+  msg = '';
 
   constructor(private store: Store<AuthState>,
               private profileService: ProfileService) { }
@@ -33,7 +37,11 @@ export class ProfileComponent implements OnInit {
 
   onSubmit(form: NgForm) {
     console.log(form.value);
-    this.profileService.updateProfile(form.value);
+    this.profileService.updateProfile(form.value).
+    subscribe((res) => {
+      this.msg = res.toString();
+      console.log('profile updated....');
+    });
 
   }
 

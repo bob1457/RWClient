@@ -115,6 +115,12 @@
     flex-shrink: 0;
 }
 
+.rental-avatar {
+    height: 40px;
+    width: 40px;
+    flex-shrink: 0;
+}
+
 .mat-tab-group {
     height: 390px;
 }
