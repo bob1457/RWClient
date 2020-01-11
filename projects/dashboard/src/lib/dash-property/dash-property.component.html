@@ -27,11 +27,11 @@
             <div [@.disabled]="true">
                 <mat-tab-group>
                     <mat-tab style="background: #f5f5f5;">
-                        <ng-template mat-tab-label>
+                        <ng-template mat-tab-label *ngIf="propertyList">
                             <!-- <i class="material-icons" style="color: black;">
                               account_balance
                             </i> &nbsp;&nbsp; -->
-                            <span style="color: black;">Properties</span>
+                            <span style="color: black;">Properties ({{propertyList.length}})</span>
                         </ng-template>
 
                         <div fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="15px" style="height: 340px;">
@@ -60,7 +60,13 @@
                         </div>
 
                     </mat-tab>
-                    <mat-tab label="Owners">
+                    <mat-tab>
+                        <ng-template mat-tab-label *ngIf="ownerList">
+                            <!-- <i class="material-icons" style="color: black;">
+                            line_weight
+                        </i> &nbsp;&nbsp; -->
+                            <span style="color: black;">Property Owners ({{ownerList.length}})</span>
+                        </ng-template>
                         <div fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="15px" style="height: 340px;">
                             <mat-card style="width: 15%; padding: 0; margin-top: 15px; margin-left: 10px;" [ngStyle.xs]="{'width': '25%'}" *ngFor="let owner of ownerList">
                                 <!-- *ngFor="let property of properties" -->
@@ -79,11 +85,11 @@
                     </mat-tab>
                     <mat-tab label="Contracts">
                         <!-- <app-change-pass></app-change-pass> -->
-                        <ng-template mat-tab-label>
+                        <ng-template mat-tab-label *ngIf="contractList">
                             <!-- <i class="material-icons" style="color: black;">
                                 line_weight
                             </i> &nbsp;&nbsp; -->
-                            <span style="color: black;">Management Contrcts</span>
+                            <span style="color: black;">Management Contrcts ({{contractList.length}})</span>
                         </ng-template>
                         <div fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="15px" style="height: 340px;">
                             <mat-card style="width: 15%; padding: 0; margin-top: 15px; margin-left: 10px;" [ngStyle.xs]="{'width': '25%'}" *ngFor="let contract of contractList">
@@ -102,7 +108,7 @@
 
                                 <mat-card-content class="contract-content">
                                     <p>Property: <br>{{contract.propertyName}}</p>
-                                    <p>Signed on: <br>{{contract.contractSignDate | mediumDate}}</p>
+                                    <p>Signed on: <br>{{contract.contractSignDate }} | mediumDate</p>
                                 </mat-card-content>
                                 <!-- <mat-card-actions>
                           <button mat-button>LIKE</button>

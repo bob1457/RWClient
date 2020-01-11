@@ -10,6 +10,7 @@ import { of } from 'rxjs';
 import { PropertyOwner } from '../models/property-owner.model';
 import { PropertyLease } from '../models/property-lease.model';
 import { PropertyTenant } from '@lib/app-core';
+import { PropertyListing } from '../models/property-listing.model';
 
 @Injectable()
 export class DashboardEffects {
@@ -92,7 +93,7 @@ export class DashboardEffects {
       tap(() => console.log('got here for (marketing) property listing from dash lib')),
       switchMap(() =>
         this.dashService.getAllPropertyListings().pipe(
-          map((listings: Property[]) => ({
+          map((listings: PropertyListing[]) => ({
             type: '[Marketing] Get Property Listing Success',
             payload: listings
           })),
