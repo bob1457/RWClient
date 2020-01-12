@@ -13,6 +13,7 @@ export const initialState: DashState =  { // adapter.getInitialState
   listings: null,
   tenants: null,
   leases: null,
+  applications: null,
   errorMessage: null
 };
 
@@ -146,6 +147,31 @@ const dashReducer = createReducer(
       tenants: null,
       errorMessage: 'Failed to load contract details'
     });
+  }),
+
+  on(DashActions.getRentalApplicationList, state => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+  on(DashActions.getRentalApplicationListSuccess, (state, { payload }) => {
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      applications: payload
+    });
+  }),
+
+  on(DashActions.getRentalApplicationListFailure, (state) => {
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      applications: null,
+      errorMessage: 'Failed to load contract details'
+    });
   })
 
 );
@@ -163,6 +189,9 @@ const AllTenants = (state: DashState) => state.tenants;
 const AllRentals = (state: DashState) => state.leases;
 const AllOwners = (state: DashState) => state.owners;
 
+const AllListings = (state: DashState) => state.listings;
+const AllRentalApps = (state: DashState) => state.applications;
+
 // Select required slice of state
 export const getDashState = createFeatureSelector<DashState>('dashboard');
 
@@ -172,6 +201,9 @@ export const ContractList = createSelector(getDashState, AllContracts);
 export const TenantList = createSelector(getDashState, AllTenants);
 export const RentalList = createSelector(getDashState, AllRentals);
 export const OwnerList = createSelector(getDashState, AllOwners);
+
+export const MarketingList = createSelector(getDashState, AllListings);
+export const RentalAppList = createSelector(getDashState, AllRentalApps);
 
 
 export const loadingStatus = createSelector(getDashState, loading);

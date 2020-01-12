@@ -5,10 +5,12 @@ import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Property } from './models/property.model';
 import { Store, select } from '@ngrx/store';
-import { PropertyList, ContractList, TenantList, RentalList, OwnerList } from './store/dash.reducer';
-import { getPropertyList, getAllLeases, getAllTenants, getContractList, getPropertyOwnerList } from './store/dash.actions';
-import { PropertyService, ManagementContract, PropertyTenant, PropertyLease } from '@lib/app-core';
+import { PropertyList, ContractList, TenantList, RentalList, OwnerList, MarketingList, RentalAppList } from './store/dash.reducer';
+// tslint:disable-next-line:max-line-length
+import { getPropertyList, getAllLeases, getAllTenants, getContractList, getPropertyOwnerList, getRentalApplicationList } from './store/dash.actions';
+import { PropertyService, ManagementContract, PropertyTenant, PropertyLease, RentalApplication } from '@lib/app-core';
 import { PropertyOwner } from './models/property-owner.model';
+import { PropertyListing } from './models/property-listing.model';
 
 @Component({
   selector: 'lib-dashboard',
@@ -26,7 +28,9 @@ export class DashboardComponent implements OnInit {
   tenantList$: Observable<PropertyTenant[]>;
   rentalList$: Observable<PropertyLease[]>;
   ownerList$: Observable<PropertyOwner[]>;
-  // list: Property[];
+  marketingList$: Observable<PropertyListing[]>;
+  rentalAppList$: Observable<RentalApplication[]>;
+
   loading: boolean;
 
   constructor(private breakpointObserver: BreakpointObserver, private store: Store<DashState>, private propertyService: PropertyService){}
@@ -41,6 +45,7 @@ export class DashboardComponent implements OnInit {
     this.store.dispatch(getAllTenants());
     this.store.dispatch(getContractList());
     this.store.dispatch(getPropertyOwnerList());
+    this.store.dispatch(getRentalApplicationList());
 
     this.getAllPropertyList();
   }
@@ -59,6 +64,8 @@ export class DashboardComponent implements OnInit {
     this.tenantList$ = this.store.select(TenantList);
     this.rentalList$ = this.store.select(RentalList);
     this.ownerList$ = this.store.select(OwnerList);
+    this.marketingList$ = this.store.select(MarketingList);
+    this.rentalAppList$ = this.store.select(RentalAppList);
 
 
     // this.store.pipe(select(PropertyList)).subscribe((pList: Property[]) => {

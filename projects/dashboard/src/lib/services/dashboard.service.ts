@@ -7,6 +7,7 @@ import { PropertyOwner } from '../models/property-owner.model';
 import { PropertyListing } from '../models/property-listing.model';
 import { PropertyLease } from '../models/property-lease.model';
 import { PropertyTenant } from '../models/property-tenant.model';
+import { RentalApplication } from '@lib/app-core';
 
 @Injectable({
   providedIn: 'root'
@@ -46,6 +47,11 @@ export class DashboardService {
   getTenantList() {
     debugger;
     return this.http.get<PropertyTenant[]>(`${this.baseUrl}/tenants`);
+  }
+
+  getRentalApplicationList() {
+    debugger;
+    return this.http.get<RentalApplication[]>(`${this.baseUrl}/applications`);
   }
 
 

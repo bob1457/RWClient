@@ -9,7 +9,7 @@ import { switchMap, map, tap, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { PropertyOwner } from '../models/property-owner.model';
 import { PropertyLease } from '../models/property-lease.model';
-import { PropertyTenant } from '@lib/app-core';
+import { PropertyTenant, RentalApplication } from '@lib/app-core';
 import { PropertyListing } from '../models/property-listing.model';
 
 @Injectable()
@@ -152,7 +152,26 @@ export class DashboardEffects {
     )
   );
 
-
+  getRentalApplications$ = createEffect(() =>
+            this.actions$.pipe(
+              ofType(DashActions.getRentalApplicationList),
+              tap(() => console.log(' get here for rental app from dash lib')),
+              switchMap(() =>
+                this.dashService.getRentalApplicationList().pipe(
+                  map((applicaitons: RentalApplication[]) => ({
+                    type: '[Marketing] Get Rental Application List Success',
+                    payload: applicaitons
+                })),
+                tap(res => { console.log('response: ' + res); }),
+                catchError(
+                  err => {
+                    return of('[Leases] Get all applications Failure', err.error);
+                  }
+                )
+              )
+            )
+          )
+  );
 
 
 }

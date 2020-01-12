@@ -92,7 +92,7 @@
                             <span style="color: black;">Management Contrcts ({{contractList.length}})</span>
                         </ng-template>
                         <div fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="15px" style="height: 340px;">
-                            <mat-card style="width: 15%; padding: 0; margin-top: 15px; margin-left: 10px;" [ngStyle.xs]="{'width': '25%'}" *ngFor="let contract of contractList">
+                            <mat-card style="width: 15%; padding: 0; margin-top: 15px; margin-left: 10px; max-height: 220px;" [ngStyle.xs]="{'width': '25%'}" *ngFor="let contract of contractList">
                                 <!-- *ngFor="let property of properties" -->
                                 <mat-card-header class="contract-header">
                                     <div mat-card-avatar style="margin-top: 10px;">
@@ -108,7 +108,7 @@
 
                                 <mat-card-content class="contract-content">
                                     <p>Property: <br>{{contract.propertyName}}</p>
-                                    <p>Signed on: <br>{{contract.contractSignDate }} | mediumDate</p>
+                                    <p>Signed on: <br>{{contract.contractSignDate | date }}</p>
                                 </mat-card-content>
                                 <!-- <mat-card-actions>
                           <button mat-button>LIKE</button>

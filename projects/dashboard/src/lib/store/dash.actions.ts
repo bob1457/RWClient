@@ -5,6 +5,7 @@ import { ManagementContract } from '../models/management-contract.model';
 import { PropertyListing } from '@lib/app-core';
 import { PropertyLease } from '../models/property-lease.model';
 import { PropertyTenant } from '../models/property-tenant.model';
+import { RentalApplication } from '../models/application.model';
 
 debugger;
 /**
@@ -124,6 +125,26 @@ export const getAllTenantsFailure = createAction(
   '[Leases] Get all tenants Failure',
   // props<{payload: any}>()
   (errorMessage = 'Error loading property listing') => {
+    return ({ payload: { errorMessage } });
+  }
+);
+
+/**
+ * Get Property Rental Application Actions
+ */
+
+export const getRentalApplicationList = createAction(
+   '[Marketing] Get Rental Application List'
+);
+
+export const getRentalApplicationListSuccess = createAction(
+  '[Marketing] Get Rental Application List Success',
+  props<{payload: RentalApplication[]}> ()
+);
+
+export const getRentalApplicationListFailure = createAction(
+  '[Marketing] Get Rental Application List Failure',
+  (errorMessage = 'Error loading rental application list') => {
     return ({ payload: { errorMessage } });
   }
 );
