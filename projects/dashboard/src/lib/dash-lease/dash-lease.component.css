@@ -135,3 +135,7 @@
 .tab-label {
     color: black;
 }
+
+.mat-tab-header-pagination-chevron {
+    border-color: rgb(44, 43, 43);
+}
