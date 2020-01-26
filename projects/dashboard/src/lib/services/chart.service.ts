@@ -11,7 +11,12 @@ export class ChartService {
 
   constructor(private http: HttpClient) { }
 
+  // Property Management Pie Chart Data
   getPieChartData() {
     return this.http.get<PieChartData[]>(`${this.baseUrl}/Charts/piechart`);
+  }
+
+  getMarketingPieChartData() {
+    return this.http.get<PieChartData[]>(`${this.baseUrl}/Charts/marketing/piechart`);
   }
 }

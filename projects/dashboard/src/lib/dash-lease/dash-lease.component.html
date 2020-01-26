@@ -42,7 +42,7 @@
                         <!-- <i class="material-icons" style="color: black;">
                             account_circle
                         </i> &nbsp;&nbsp; -->
-                        <span class="tab-label">Tenants</span>
+                        <span class="tab-label">Tenants <span *ngIf="tenants">({{tenants.length}})</span></span>
                     </ng-template>
                     <div class="container" fxLayout="column" fxLayoutAlign="start" fxLayoutGap="1%" fxFlexFill>
                         <mat-grid-list cols="1" rowHeight="85px">
@@ -68,7 +68,7 @@
                         <!-- <i class="material-icons" style="color: black;">
                             assignment
                         </i> &nbsp;&nbsp; -->
-                        <span class="tab-label">Rentals</span>
+                        <span class="tab-label">Rentals <span *ngIf="rentals">({{rentals.length}})</span></span>
                     </ng-template>
                     <!-- <div class="container" fxLayout="column" fxLayoutAlign="start" fxLayoutGap="1%" fxFlexFill>
                         Rental Agreement

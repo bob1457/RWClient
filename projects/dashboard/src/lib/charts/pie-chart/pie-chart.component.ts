@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 import { ChartType, ChartOptions } from 'chart.js';
 import { Label } from 'ng2-charts';
@@ -16,8 +16,11 @@ export class PieChartComponent implements OnInit {
 
   chartData: PieChartData[];
 
-  Data = [];
-  Label = [];
+  // Data = [];
+  // Label = [];
+  @Input() Data = [];
+  @Input() Label = [];
+  @Input() Colors = [];
 
   public pieChartOptions: ChartOptions = {
     responsive: true,
@@ -40,11 +43,12 @@ export class PieChartComponent implements OnInit {
   public pieChartType: ChartType = 'pie';
   public pieChartLegend = true;
   public pieChartPlugins = [pluginDataLabels];
-  public pieChartColors = [
-    {
-      backgroundColor: ['rgba(255,0,0,0.7)', 'rgba(0,255,0,0.73)', 'rgba(0,0,255,0.7)'],
-    },
-  ];
+  public pieChartColors = [];
+  // [
+  //   {
+  //     backgroundColor: ['rgba(255,0,0,0.7)', 'rgba(0,255,0,0.73)', 'rgba(0,0,255,0.7)'],
+  //   },
+  // ];
 
   constructor(private dashboardService: DashboardService,
               private chartService: ChartService) { }
@@ -55,21 +59,23 @@ export class PieChartComponent implements OnInit {
 
 
   getPieChartData() {
-    this.chartService.getPieChartData()
-    .subscribe((result: PieChartData[]) => {
-      // this.chartData = result;
-      // console.log(this.chartData);
-      // console.log(result);
-      result.forEach(x => {
-        this.Data.push(x.count);
-        this.Label.push(x.status);
-      });
-      console.log(this.Data);
-      console.log(this.Label);
-    });
+    // this.chartService.getPieChartData()
+    // .subscribe((result: PieChartData[]) => {
+    //   // this.chartData = result;
+    //   // console.log(this.chartData);
+    //   // console.log(result);
+    //   result.forEach(x => {
+    //     this.Data.push(x.count);
+    //     this.Label.push(x.status);
+    //   });
+    //   console.log(this.Data);
+    //   console.log(this.Label);
+    //   console.log(this.Colors);
+    // });
 
     this.pieChartData = this.Data;
     this.pieChartLabels = this.Label;
+    this.pieChartColors = this.Colors;
   }
 
 }
