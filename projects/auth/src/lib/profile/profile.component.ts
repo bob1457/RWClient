@@ -20,7 +20,9 @@ export class ProfileComponent implements OnInit {
   @Input() user: User;
 
   selected = 'CA';
-  msg = '';
+  loading = false;
+  showMsg = false;
+  uesr: User;
 
   constructor(private store: Store<AuthState>,
               private profileService: ProfileService) { }
@@ -36,10 +38,25 @@ export class ProfileComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
+    debugger;
+    this.loading = true;
     console.log(form.value);
     this.profileService.updateProfile(form.value).
-    subscribe((res) => {
-      this.msg = res.toString();
+    subscribe(() => {
+      // this.user = res;
+      this.showMsg = true;
+      this.loading = false;
+
+      console.log(this.showMsg);
+      console.log(this.user);
+      console.log(this.loading);
+
+      setTimeout(() => {
+        this.showMsg = false;
+        // this.disabled = null;
+        console.log(this.showMsg);
+      }, 2000);
+
       console.log('profile updated....');
     });
 
