@@ -22,7 +22,7 @@ export class ProfileComponent implements OnInit {
   selected = 'CA';
   loading = false;
   showMsg = false;
-  uesr: User;
+  // uesr: User;
 
   constructor(private store: Store<AuthState>,
               private profileService: ProfileService) { }
@@ -42,7 +42,7 @@ export class ProfileComponent implements OnInit {
     this.loading = true;
     console.log(form.value);
     this.profileService.updateProfile(form.value).
-    subscribe(() => {
+    subscribe(() => { // res
       // this.user = res;
       this.showMsg = true;
       this.loading = false;
