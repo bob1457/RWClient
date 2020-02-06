@@ -2,8 +2,8 @@
   dash-tenant works!
 </p> -->
 
-<mat-card class="dashboard-card">
-    <mat-card-header>
+<mat-card class="dashboard-card" style="overflow-x: scroll; overflow-y: hidden;">
+    <!-- <mat-card-header>
         <mat-card-title>
             Tenants
             <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
@@ -14,11 +14,11 @@
                 <button mat-menu-item>Remove</button>
             </mat-menu>
         </mat-card-title>
-    </mat-card-header>
+    </mat-card-header> -->
     <mat-card-content class="dashboard-card-content">
+        <lib-bar-chart [chartData]="chartData" [chartLabel]="chartLabel"></lib-bar-chart>
+        <!-- <div>
 
-        <div>
-
-        </div>
+        </div> -->
     </mat-card-content>
 </mat-card>

@@ -19,4 +19,8 @@ export class ChartService {
   getMarketingPieChartData() {
     return this.http.get<PieChartData[]>(`${this.baseUrl}/Charts/marketing/piechart`);
   }
+
+  getBarChartData() {
+    return this.http.get(`${this.baseUrl}/Charts/marketing/barchart`);
+  }
 }
