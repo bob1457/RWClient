@@ -8,6 +8,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { SideNavComponent } from './layout/side-nav/side-nav.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { ClockComponent } from './clock/clock.component';
+import { WeatherComponent } from './weather/weather.component';
 // import { ToolbarComponent } from './layout/toolbar/toolbar.component';
 
 
@@ -17,6 +18,7 @@ const routes: Routes = [];
     SideNavComponent,
     FooterComponent,
     ClockComponent,
+    WeatherComponent,
     // ToolbarComponent
   ],
   imports: [

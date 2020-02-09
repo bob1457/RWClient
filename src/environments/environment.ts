@@ -3,7 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  weatherApiKey: '5913dc5791f1c134dee45807e4192940', // OpenWeatherMap api
+  // weatherApiKey: '3396569b4df442909e0203014190809', // Apixu weather api
+  weatherBaseUri: 'https://cors-anywhere.herokuapp.com/https://api.openweathermap.org/data/2.5/weather?id='
 };
 
 /*

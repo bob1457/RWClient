@@ -13,13 +13,17 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 import { reducer } from './store/auth.reducers';
 import { EffectsModule } from '@ngrx/effects';
+import { ProfileHomeComponent } from './profile-home/profile-home.component';
+import { ChangePassComponent } from './change-pass/change-pass.component';
 
 @NgModule({
   declarations: [
     AuthComponent,
     LoginComponent,
     RegisterComponent,
-    ProfileComponent
+    ProfileComponent,
+    ProfileHomeComponent,
+    ChangePassComponent
   ],
   imports: [
     BrowserModule,

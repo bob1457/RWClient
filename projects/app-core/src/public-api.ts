@@ -19,5 +19,10 @@ export * from './lib/property/models/property-owner.model';
 export * from './lib/property/models/management-contract.model';
 
 export * from './lib/marketing/models/property-listing.model';
+export * from './lib/marketing/models/rental-application.model';
 export * from './lib/marketing/services/marketing-service';
+
+export * from './lib/leasing/models/property-lease.model';
+export * from './lib/leasing/models/property-tenant.model';
+export * from './lib/leasing/services/lease.service';
 

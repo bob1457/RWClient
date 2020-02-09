@@ -16,6 +16,7 @@ export class PropertyHomeComponent implements OnInit {
               private store: Store<PropertyState>) { }
 
   list: Property[];
+  serverUri = 'http://localhost:19807/';
 
   ngOnInit() {
     debugger;

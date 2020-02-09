@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { DashState } from '../store/dash.state';
-import { getContractList } from '../store/dash.actions';
+import { getAllLeases, getAllTenants } from '../store/dash.actions';
+import { PropertyTenant } from '../models/property-tenant.model';
+import { PropertyLease } from '../models/property-lease.model';
 
 @Component({
   selector: 'lib-dash-lease',
@@ -12,13 +14,17 @@ export class DashLeaseComponent implements OnInit {
 
   breakpoint: number;
 
+  @Input() tenants: PropertyTenant[];
+  @Input() rentals: PropertyLease[];
+
   constructor(private store: Store<DashState>) { }
 
   ngOnInit() {
     this.breakpoint = (window.innerWidth <= 640) ? 2 : 1;
     debugger;
     // return this.store.dispatch(getPropertyOwnerList()) ;
-    return this.store.dispatch(getContractList()) ;
+    this.store.dispatch(getAllLeases()) ;
+    this.store.dispatch(getAllTenants());
   }
 
   onResize(event) {

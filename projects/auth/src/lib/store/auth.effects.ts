@@ -173,4 +173,21 @@ export class AuthEffects {
     })
   );
 
+@Effect()
+updateAvatar$: Observable<Action> = this.actions.pipe(
+  ofType<AuthActions.UpdateAvatar>(AuthActionTypes.LOGIN),
+  map((action: AuthActions.UpdateAvatar) => action.payload),
+  exhaustMap((credits: Authentication) =>
+    this.authService.logIn(credits).pipe(
+      mergeMap((data: User) => [
+        new AuthActions.LogInSuccess(data) // ,
+        // console.log('received: ', data)
+        // new RouterActions.Go({path: '/Manage'})
+        // localStorage.setItem('user', JSON.stringify(data))
+        // tap(data => {localStorage.setItem('auth', JSON.stringify(data))})
+      ]),
+      // tap(userDate => localStorage.setItem('auth', JSON.stringify(userDate))),
+      catchError((err: HttpErrorResponse) => of(new LogInFailure(err.error)))
+    ))
+  );
 }

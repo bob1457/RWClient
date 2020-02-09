@@ -23,6 +23,7 @@ import { StoreDevtoolsModule} from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule, RouterStateSerializer, routerReducer, RouterState } from '@ngrx/router-store';
 import { PropertyEffects } from 'projects/property-manager/src/app/store/effects/property.effects';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import { PropertyEffects } from 'projects/property-manager/src/app/store/effects
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    FlexLayoutModule,
     AppMaterialModule,
     ManageModule,
     SharedModule,
