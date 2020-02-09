@@ -46,7 +46,7 @@ export class BarChartComponent implements OnInit {
 
   getChartData() {
     this.barChartLabels = this.chartLabel;
-    this.barChartData = [{ data: this.chartData, label: 'Rented'}];
+    this.barChartData = [{ data: this.chartData, label: 'All Properties'}];
 
     console.log(this.barChartData);
     console.log(this.barChartLabels);
