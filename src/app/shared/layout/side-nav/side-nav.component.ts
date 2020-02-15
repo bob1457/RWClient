@@ -98,14 +98,13 @@ export class SideNavComponent implements OnInit {
       console.log(userData);
       if (userData == null) {
         this.user = JSON.parse(localStorage.getItem('auth'));
+        this.role = this.user.role;
         console.log(this.user);
       } else {
         this.user = userData;
         localStorage.setItem('auth', JSON.stringify(userData));
+        this.role = userData.role;
       }
-
-      this.role = userData.role;
-      console.log(this.role);
 
     });
     // select single state then use async pipe in template for sub/unsub using *ngIf which returns a boolean value // console.log(userData);
