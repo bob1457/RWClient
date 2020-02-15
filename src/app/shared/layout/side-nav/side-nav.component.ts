@@ -73,6 +73,8 @@ export class SideNavComponent implements OnInit {
   // theme$ = 'light-theme';
   theme$ = 'dark-theme';
 
+  role = '';
+
   constructor(
     public mediaObserver: MediaObserver,
     private router: Router,
@@ -101,6 +103,9 @@ export class SideNavComponent implements OnInit {
         this.user = userData;
         localStorage.setItem('auth', JSON.stringify(userData));
       }
+
+      this.role = userData.role;
+      console.log(this.role);
 
     });
     // select single state then use async pipe in template for sub/unsub using *ngIf which returns a boolean value // console.log(userData);
