@@ -14,6 +14,8 @@ import {
 import { getUserInfo, User } from '@lib/auth';
 // import {  } from '@lib/auth';
 
+import { PropertyList, ContractList, TenantList, RentalList, OwnerList, MarketingList, RentalAppList } from '@lib/dashboard';
+
 @Component({
   selector: 'app-side-nav',
   templateUrl: './side-nav.component.html',
@@ -40,7 +42,7 @@ import { getUserInfo, User } from '@lib/auth';
   ]
 })
 export class SideNavComponent implements OnInit {
-  serverUrl = 'http://localhost:58088/';
+  // serverUrl = 'http://localhost:58088/';
 
   currentState = 'increase';
 
@@ -48,6 +50,10 @@ export class SideNavComponent implements OnInit {
   n = 13;
 
   link = '';
+
+  property: any[] = [];
+  owners: any[] = [];
+  contracts: any[] = [];
 
   mode = 'side';
   opened = true;
@@ -70,8 +76,8 @@ export class SideNavComponent implements OnInit {
   avatar$: Observable<string>;
 
   // theme$ = 'dark-theme'; // this is default -- selecting theme can be implemented using observable from rxjs... later.
-  // theme$ = 'light-theme';
-  theme$ = 'dark-theme';
+  theme$ = 'light-theme';
+  // theme$ = 'dark-theme';
 
   role = '';
 
@@ -94,6 +100,18 @@ export class SideNavComponent implements OnInit {
     this.store.pipe(select(getUserInfo)).subscribe(userData => { // this.user = userData;
       // this.user = JSON.parse(localStorage.getItem('auth'));
       // localStorage.setItem('auth', JSON.stringify(userData));
+
+      this.store.pipe(select(PropertyList)).subscribe(data => {
+        this.property = data;
+      });
+
+      this.store.pipe(select(OwnerList)).subscribe(data => {
+        this.owners = data;
+      });
+
+      this.store.pipe(select(ContractList)).subscribe(data => {
+        this.contracts = data;
+      });
 
       console.log(userData);
       if (userData == null) {

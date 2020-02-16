@@ -8,3 +8,4 @@ export * from './lib/dashboard.module';
 export * from './lib/dashhome/dashhome.component';
 
 export * from './lib/store/dash.state';
+export * from './lib/store/dash.reducer';

@@ -5,10 +5,10 @@
 <div [class]="theme$">
     <mat-drawer-container class="app-container" autosize>
         <mat-drawer #drawer class="app-sidenav" style="padding:0;" [opened]="opened" [mode]="mode" fxLayout="column" [ngStyle]="{ 'width.em': sidenavWidth }" (mouseenter)="increase()">
-            <div fxLayout="row" color="primary" style="height: 150px; overflow-x: hidden">
+            <div fxLayout="row" color="primary" style="height: 150px; overflow-x: hidden;background-color: #373737;">
                 <!--background-color: cadetblue;-->
                 <button mat-icon-button style="float: right;margin-right: 16px;" (click)="changeSideNav()">
-                <mat-icon style="margin-right: -10px;">menu</mat-icon>
+                <mat-icon style="margin-right: -10px; color:white;">menu</mat-icon>
               </button>
 
                 <div class="brand" style="width: 100%;">
@@ -27,10 +27,10 @@
             <main class="side" *ngIf="role === 'pm'; else client">
                 <mat-nav-list>
                     <mat-list-item style="margin-top: -10px;">
-                        <mat-icon style="color: aqua;" [routerLink]="['/manage/dash_ui']" [routerLinkActive]="['active']" matListIcon>palette</mat-icon>
+                        <mat-icon style="color: #525656;" [routerLink]="['/manage/dash_ui']" [routerLinkActive]="['active']" matListIcon>palette</mat-icon>
                         <!--<div><i class="fas fa-tachometer-alt" style="float: left;"></i></div>-->
                         <a matLine [routerLink]="['/Manage/dashboard']" [routerLinkActive]="['active']">Dashboard</a>
-                        <button mat-icon-button (click)="showInfo(link)">
+                        <button mat-icon-button style="color:green" (click)="showInfo(link)">
               <!----><mat-icon>info</mat-icon>
                     </button>
                     </mat-list-item>
@@ -57,76 +57,80 @@
                                 <!---->
                                 <mat-icon style="color: rgb(72, 173, 219)" [routerLink]="['/Manage/property']" [routerLinkActive]="['active']" matListIcon>list_alt</mat-icon>
 
-                                <a matLine [routerLink]="['/Manage/property']" [routerLinkActive]="['active']">All List</a>
-                                <mat-chip style="background-color: red;
-                            color: yellow;
-                            padding-right: 5px;
-                            padding-left:1px;
-                            border-radius: 50%;
-                            border: 0 transparent;
-                            font-size: 12px;">{{n}}
+                                <a matLine [routerLink]="['/Manage/property']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }">Properties</a>
+                                <mat-chip *ngIf="property" title="{{property.length}}" style="background-color: red;
+                                  color: yellow;
+                                  padding-right: 7px;
+                                  padding-left:7px;
+                                  /* border-radius: 50%; */
+                                  border: 0 transparent;
+                                  font-size: 12px;">{{property.length}}
                                 </mat-chip>
                                 <!-- <span style="color: rgb(241, 150, 57); margin-top: 25px;" matBadge="{{n}}" matBadgeColor="primary" matBadgeOverlap="false"></span> -->
 
                             </mat-list-item>
                             <mat-list-item>
                                 <mat-icon style="color: rgb(58, 212, 66);" [routerLink]="['/Manage/property/owners']" [routerLinkActive]="['active']" matListIcon>person</mat-icon>
-                                <a matLine [routerLink]="['/Manage/property/owners']" [routerLinkActive]="['active']">Landlords</a
-                >
-                <button mat-icon-button (click)="showInfo(link)">
-                  <!--<mat-icon>info</mat-icon>-->
-                </button>
-              </mat-list-item>
-              <mat-list-item>
-                <mat-icon
-                  style="color: rgb(189, 219, 20);"
-                  [routerLink]="['/Manage/property/contracts']"
-                  [routerLinkActive]="['active']"
-                  matListIcon
-                  >assignment</mat-icon
-                >
-                <a
-                  matLine
-                  [routerLink]="['/Manage/property/contracts']"
-                  [routerLinkActive]="['active']"
-                  >Contracts</a
-                >
-                <button mat-icon-button (click)="showInfo(link)">
-                  <!--<mat-icon>info</mat-icon>-->
-                </button>
-              </mat-list-item>
-            </mat-list>
-          </mat-expansion-panel>
+                                <a matLine [routerLink]="['/Manage/property/owners']" [routerLinkActive]="['active']">Landlords</a>
+                                <mat-chip *ngIf="owners" title="{{owners.length}}" style="background-color: rgb(126, 16, 230);
+                                  color: yellow;
+                                  padding-right: 7px;
+                                  padding-left:7px;
+                                  /* border-radius: 50%; */
+                                  border: 0 transparent;
+                                  font-size: 12px;">{{owners.length}}
+                                </mat-chip>
+                                <!-- <button mat-icon-button (click)="showInfo(link)"> -->
+                                <!--<mat-icon>info</mat-icon>
+                                </button>-->
+                            </mat-list-item>
+                            <mat-list-item>
+                                <mat-icon style="color: rgb(189, 219, 20);" [routerLink]="['/Manage/property/contracts']" [routerLinkActive]="['active']" matListIcon>assignment</mat-icon>
+                                <a matLine [routerLink]="['/Manage/property/contracts']" [routerLinkActive]="['active']">Contracts</a>
+                                <mat-chip *ngIf="contracts" title="{{contracts.length}}" style="background-color: rgb(16, 230, 16);
+                                  color: yellow;
+                                  padding-right: 7px;
+                                  padding-left:7px;
+                                  /* border-radius: 50%; */
+                                  border: 0 transparent;
+                                  font-size: 12px;">{{contracts.length}}
+                                </mat-chip>
+                                <!--<button mat-icon-button (click)="showInfo(link)">
+                  <mat-icon>info</mat-icon>
+                </button>-->
+                            </mat-list-item>
+                        </mat-list>
+                    </mat-expansion-panel>
 
-          <mat-expansion-panel>
-            <mat-expansion-panel-header>
-                <mat-list-item style="margin-left: -22px;">
-                  <mat-icon style="color:rgb(33, 196, 160);" matListIcon>library_books</mat-icon>
-                  <a matLine [routerLinkActive]="['active']">Leases</a>
+                    <mat-expansion-panel>
+                        <mat-expansion-panel-header>
+                            <mat-list-item style="margin-left: -22px;">
+                                <mat-icon style="color:rgb(12, 28, 224);" matListIcon>library_books</mat-icon>
+                                <a matLine [routerLinkActive]="['active']">Leases</a>
                                 <button mat-icon-button (click)="showInfo(link)">
                       <!--<mat-icon>info</mat-icon>-->
                   </button>
                             </mat-list-item>
 
-                            </mat-expansion-panel-header>
-                            <mat-list>
-                                <mat-list-item>
-                                    <mat-icon style="color: rgb(129, 43, 86);" [routerLink]="['/Manage/lease']" [routerLinkActive]="['active']" matListIcon>vertical_split</mat-icon>
-                                    <a matLine [routerLink]="['/Manage/lease']" [routerLinkActive]="['active']">All List</a>
-                                    <button mat-icon-button (click)="showInfo(link)">
+                        </mat-expansion-panel-header>
+                        <mat-list>
+                            <mat-list-item>
+                                <mat-icon style="color: rgb(129, 43, 86);" [routerLink]="['/Manage/lease']" [routerLinkActive]="['active']" matListIcon>vertical_split</mat-icon>
+                                <a matLine [routerLink]="['/Manage/lease']" [routerLinkActive]="['active']">All List</a>
+                                <button mat-icon-button (click)="showInfo(link)">
                           <!--<mat-icon>info</mat-icon>-->
                      </button>
-                                </mat-list-item>
+                            </mat-list-item>
 
-                                <mat-list-item>
-                                    <mat-icon style="color: rgb(189, 219, 20);" [routerLink]="['/Manage/lease/tenants']" [routerLinkActive]="['active']" matListIcon>people</mat-icon>
-                                    <a matLine [routerLink]="['/Manage/lease/tenants']" [routerLinkActive]="['active']">Tenants</a>
-                                    <button mat-icon-button (click)="showInfo(link)">
+                            <mat-list-item>
+                                <mat-icon style="color: rgb(189, 219, 20);" [routerLink]="['/Manage/lease/tenants']" [routerLinkActive]="['active']" matListIcon>people</mat-icon>
+                                <a matLine [routerLink]="['/Manage/lease/tenants']" [routerLinkActive]="['active']">Tenants</a>
+                                <button mat-icon-button (click)="showInfo(link)">
                       <!--<mat-icon>info</mat-icon>-->
                  </button>
-                                </mat-list-item>
+                            </mat-list-item>
 
-                            </mat-list>
+                        </mat-list>
                     </mat-expansion-panel>
 
                     <!-- <mat-list-item>
@@ -206,7 +210,7 @@
                             <mat-expansion-panel>
                                 <mat-expansion-panel-header>
                                     <mat-list-item style="margin-left: -22px;">
-                                        <mat-icon style="color: rgb(27, 214, 27);" matListIcon>widgets</mat-icon>
+                                        <mat-icon style="color: rgb(12, 136, 12);" matListIcon>widgets</mat-icon>
                                         <a matLine [routerLinkActive]="['active']">Management</a>
                                         <button mat-icon-button (click)="showInfo(link)">
                                               <!--<mat-icon>info</mat-icon>-->
@@ -287,7 +291,7 @@
           </mat-list-item>
           <mat-list-item>
             <mat-icon
-              style="color: greenyellow"
+              style="color: #5d0920"
               [routerLink]="['/manage/documentation']"
               [routerLinkActive]="['active']"
               matListIcon
@@ -327,7 +331,7 @@
               </mat-list-item>
               <mat-list-item>
                 <mat-icon
-                  style="color: rgb(189, 219, 20);"
+                  style="color: rgb(11, 162, 234);"
                   [routerLink]="['/manage/reporting']"
                   [routerLinkActive]="['active']"
                   matListIcon
