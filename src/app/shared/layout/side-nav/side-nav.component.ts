@@ -42,7 +42,7 @@ import { PropertyList, ContractList, TenantList, RentalList, OwnerList, Marketin
   ]
 })
 export class SideNavComponent implements OnInit {
-  // serverUrl = 'http://localhost:58088/';
+  serverUrl = 'http://localhost:58088/';
 
   currentState = 'increase';
 
