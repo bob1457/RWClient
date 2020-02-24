@@ -36,8 +36,8 @@ import { PropertyList, ContractList, TenantList, RentalList, OwnerList, Marketin
           transform: 'translateX(0%)'
         })
       ),
-      // transition('* => *', animate('2000ms')),
-      transition('* => *', animate(2000))
+      transition('decrease => increase', animate('2000ms')),
+      transition('increase => decrease', animate('2000ms'))
     ])
   ]
 })

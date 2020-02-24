@@ -24,12 +24,13 @@
                     <!--possiblly margin-top:-20px;-->
                 </div>
             </div>
-            <main class="side" *ngIf="role === 'pm'; else client">
+            <main [@changeSideBarSize]="currentState" class="side" *ngIf="role === 'pm'; else client">
                 <mat-nav-list>
                     <mat-list-item style="margin-top: -10px;">
                         <mat-icon style="color: #525656;" [routerLink]="['/manage/dash_ui']" [routerLinkActive]="['active']" matListIcon>palette</mat-icon>
                         <!--<div><i class="fas fa-tachometer-alt" style="float: left;"></i></div>-->
-                        <a matLine [routerLink]="['/Manage/dashboard']" [routerLinkActive]="['active']">Dashboard</a>
+                        <a fxHide.xs fxShow.lg matLine [routerLink]="['/Manage/dashboard']" [routerLinkActive]="['active']">Dashboard</a>
+                        <a fxShow.xs fxHide.lg matLine [routerLink]="['/Manage/dashboard']" [routerLinkActive]="['active']" (click)="drawer.toggle()">Dashboard</a>
                         <button mat-icon-button style="color:green" (click)="showInfo(link)">
               <!----><mat-icon>info</mat-icon>
                     </button>
