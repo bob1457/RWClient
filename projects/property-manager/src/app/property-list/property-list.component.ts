@@ -20,7 +20,7 @@ export class PropertyListComponent implements OnInit {
 
   list: Property[];
   // tslint:disable-next-line: max-line-length
-  displayedColumns: string[] = ['icon', 'id', 'propertyName', 'propertyNumber', 'propertyType1', 'isActive', 'createdDate', 'updateDate', 'action'];
+  displayedColumns: string[] = ['icon', 'id', 'propertyName', 'propertyNumber', 'propertyType1', 'status', 'createdDate', 'updateDate', 'action'];
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: false}) sort: MatSort;
 
@@ -52,6 +52,10 @@ export class PropertyListComponent implements OnInit {
   GetPropertyDetails(id: any) {
     debugger;
     return this.store.dispatch(getPropertyDetails({payload: id}));
+  }
+
+  public doFilter = (value: string) => {
+    this.dataSource.filter = value.trim().toLocaleLowerCase();
   }
 
   AddProperty() { // ppt is the input parameter, ignored in unit testing   ppt: Property
