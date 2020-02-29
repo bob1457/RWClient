@@ -7,9 +7,7 @@
         <mat-drawer #drawer class="app-sidenav" style="padding:0;" [opened]="opened" [mode]="mode" fxLayout="column" [ngStyle]="{ 'width.em': sidenavWidth }" (mouseenter)="increase()">
             <div fxLayout="row" color="primary" style="height: 150px; overflow-x: hidden;background-color: #373737;">
                 <!--background-color: cadetblue;-->
-                <button mat-icon-button style="float: right;margin-right: 16px;" (click)="changeSideNav()">
-                <mat-icon style="margin-right: -10px; color:white;">menu</mat-icon>
-              </button>
+
 
                 <div class="brand" style="width: 100%;">
                     <span [style.display]="SideToggleButtonDisplay">
@@ -23,6 +21,9 @@
                     <img src="../../../../assets/images/R.png" width="35px;" style="margin-right: 40px; margin-top: 10px;float: right;" />
                     <!--possiblly margin-top:-20px;-->
                 </div>
+                <button mat-icon-button style="float: right;margin-right: 16px;" (click)="changeSideNav()">
+                  <mat-icon style="color:white;">menu</mat-icon>
+                </button>
             </div>
             <main [@changeSideBarSize]="currentState" class="side" *ngIf="role === 'pm'; else client">
                 <mat-nav-list>
