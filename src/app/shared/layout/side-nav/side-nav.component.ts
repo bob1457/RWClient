@@ -210,4 +210,9 @@ export class SideNavComponent implements OnInit {
   }
 
   showInfo(link: any) {}
+
+  GetList(){
+    this.router.navigateByUrl('/Manage/property/propertylist');
+    console.log('going to load list...');
+  }
 }

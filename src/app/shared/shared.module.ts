@@ -10,6 +10,7 @@ import { FooterComponent } from './layout/footer/footer.component';
 import { ClockComponent } from './clock/clock.component';
 import { WeatherComponent } from './weather/weather.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 // import { ToolbarComponent } from './layout/toolbar/toolbar.component';
 
 
@@ -20,6 +21,7 @@ const routes: Routes = [];
     FooterComponent,
     ClockComponent,
     WeatherComponent,
+    BreadcrumbsComponent,
     // ToolbarComponent
   ],
   imports: [
@@ -31,7 +33,8 @@ const routes: Routes = [];
     RouterModule.forChild(routes)
   ],
   exports: [
-    SideNavComponent
+    SideNavComponent,
+    BreadcrumbsComponent
   ]
 })
 export class SharedModule { }

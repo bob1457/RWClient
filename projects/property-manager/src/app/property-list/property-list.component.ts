@@ -1,8 +1,10 @@
 import { PropertyState } from './../store/property.state';
-import { Property } from '@lib/app-core';
-import { Component, OnInit } from '@angular/core';
+import { Property, PropertyService } from '@lib/app-core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
 import { Store } from '@ngrx/store';
 import { getPropertyDetails, addProperty, updateProperty, updatePropertyStatus, removeProperty } from '../store/actions/property.actions';
+import { MatPaginator, MatSort } from '@angular/material';
 
 
 @Component({
@@ -16,10 +18,35 @@ export class PropertyListComponent implements OnInit {
 
   propertyId: any = 1;
 
-  constructor(private store: Store<PropertyState>
-              ) { }
+  list: Property[];
+  // tslint:disable-next-line: max-line-length
+  displayedColumns: string[] = ['icon', 'id', 'propertyName', 'propertyNumber', 'propertyType1', 'isActive', 'createdDate', 'updateDate', 'action'];
+  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: false}) sort: MatSort;
+
+  constructor(private propertyService: PropertyService,
+              private store: Store<PropertyState>) { }
+
+  dataSource = new MatTableDataSource<Property>();
 
   ngOnInit() {
+    this.getPropertyList();
+  }
+
+  getPropertyList() {
+    debugger;
+    return this.propertyService.getPropertyList()
+    .subscribe((pList: Property[]) => {
+      this.list = pList;
+      console.log(this.list);
+      this.dataSource.data = pList;
+      console.log(this.dataSource.data);
+    });
+  }
+
+  ngAfterViewInit(): void {
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
   }
 
   GetPropertyDetails(id: any) {
