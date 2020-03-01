@@ -1,5 +1,5 @@
 import { PropertyService, PropertyOwner } from '@lib/app-core';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { PropertyState } from '../store/property.state';
 import { getPropertyOwnerList,
@@ -8,7 +8,7 @@ import { getPropertyOwnerList,
          updatePropertyOwner,
          removePropertyOwner } from '../store/actions/property.actions';
 import {ownerList } from '../store/reducers/property.reducer';
-import { MatTableDataSource } from '@angular/material';
+import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 // import { MatTableDataSource } from '@lib/app-material';
 
 @Component({
@@ -18,17 +18,24 @@ import { MatTableDataSource } from '@angular/material';
 })
 export class OwnerListComponent implements OnInit {
 
-  public dataSource = new MatTableDataSource<any>();
+  list: PropertyOwner[];
+
+  // tslint:disable-next-line:max-line-length
+  displayedColumns: string[] = ['icon', 'id', 'firstName', 'contactEmail', 'contactTelephone1', 'address', 'created', 'modified', 'action'];
+
+  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: false}) sort: MatSort;
 
   constructor(
     private propertyService: PropertyService,
     private store: Store<PropertyState>) { }
 
-  list: PropertyOwner[];
+  dataSource = new MatTableDataSource<PropertyOwner>();
 
   ngOnInit() {
     debugger;
-    return this.store.dispatch(getPropertyOwnerList());
+    // return this.store.dispatch(getPropertyOwnerList());
+    this.getOwnerList();
   }
 
   getOwnerList() {
@@ -36,12 +43,28 @@ export class OwnerListComponent implements OnInit {
     // return this.propertyService.getPropertyOwnerList()
     // .subscribe((oList: PropertyOwner[]) => {this.list = oList; console.log(this.list); });
 
-    return this.store.pipe(select(ownerList)).subscribe(olist => {this.list = olist; console.log(this.list); });
+    // return this.store.pipe(select(ownerList))
+    return this.propertyService.getPropertyOwnerList()
+    .subscribe(olist => {
+      this.list = olist;
+      this.dataSource.data = olist;
+      console.log(this.list);
+      console.log(this.dataSource.data);
+    });
   }
 
   getOwnerDetails(id: number) {
     debugger;
     return this.store.dispatch(getPropertyOwnerDetails({payload: id}));
+  }
+
+  public doFilter = (value: string) => {
+    this.dataSource.filter = value.trim().toLocaleLowerCase();
+  }
+
+  ngAfterViewInit(): void {
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
   }
 
   addOwner() { // owner: PropertyOwner

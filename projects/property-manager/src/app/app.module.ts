@@ -15,6 +15,10 @@ import { PropertyEffects } from './store/effects/property.effects';
 import { OwnerListComponent } from './owner-list/owner-list.component';
 import { ContractListComponent } from './contract-list/contract-list.component';
 import { AddPropertyComponent } from './add-property/add-property.component';
+import { AddOwnerComponent } from './add-owner/add-owner.component';
+import { AddContractComponent } from './add-contract/add-contract.component';
+import { ContractDetailsComponent } from './contract-details/contract-details.component';
+import { OwnerDetailsComponent } from './owner-details/owner-details.component';
 
 
 @NgModule({
@@ -25,7 +29,11 @@ import { AddPropertyComponent } from './add-property/add-property.component';
     PropertyDetailsComponent,
     OwnerListComponent,
     ContractListComponent,
-    AddPropertyComponent
+    AddPropertyComponent,
+    AddOwnerComponent,
+    AddContractComponent,
+    ContractDetailsComponent,
+    OwnerDetailsComponent
   ],
   imports: [
     BrowserModule,

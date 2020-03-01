@@ -13,12 +13,16 @@ import { reducer } from './store/reducers';
 import { OwnerListComponent } from './owner-list/owner-list.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AddPropertyComponent } from './add-property/add-property.component';
+import { AddOwnerComponent } from './add-owner/add-owner.component';
+import { AddContractComponent } from './add-contract/add-contract.component';
 
 const routes: Routes = [
   { path: '', component: PropertyHomeComponent,
     children: [
       { path: 'propertylist', component: PropertyListComponent},
       { path: 'addproperty', component: AddPropertyComponent},
+      { path: 'addowner', component: AddOwnerComponent},
+      { path: 'addcontract', component: AddContractComponent},
       { path: 'owners', component: OwnerListComponent},
       { path: 'contracts', component: ContractListComponent }
     ]
@@ -30,7 +34,9 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AppPmComponent,
+    AddContractComponent,
     AddPropertyComponent,
+    AddOwnerComponent,
     PropertyHomeComponent,
     PropertyListComponent,
     PropertyDetailsComponent,
