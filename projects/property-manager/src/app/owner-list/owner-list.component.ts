@@ -68,31 +68,31 @@ export class OwnerListComponent implements OnInit {
   }
 
   addOwner() { // owner: PropertyOwner
-    const owner: PropertyOwner = {
-      id: 0,
-      propertyOwnerId: 0,
-      propertyId: 1004,
-      userName: 'NotSet',
-      firstName: 'Janny',
-      lastName: 'Lu',
-      contactEmail: 'jannylu@gmail.com',
-      contactTelephone1: '604-976-1235',
-      contactTelephone2: '',
-      onlineAccessEnabled: false,
-      userAvartaImgUrl: '',
-      isActive: true,
-      roleId: 2,
-      notes: 'New ower added',
-      streetNumber: '234 Main Street',
-      city: 'Vancouver',
-      stateProv: 'BC',
-      zipPostCode: 'V3V 2V2',
-      country: 'Canada'
-    };
+    // const owner: PropertyOwner = {
+    //   id: 0,
+    //   propertyOwnerId: 0,
+    //   propertyId: 1004,
+    //   userName: 'NotSet',
+    //   firstName: 'Janny',
+    //   lastName: 'Lu',
+    //   contactEmail: 'jannylu@gmail.com',
+    //   contactTelephone1: '604-976-1235',
+    //   contactTelephone2: '',
+    //   onlineAccessEnabled: false,
+    //   userAvartaImgUrl: '',
+    //   isActive: true,
+    //   roleId: 2,
+    //   notes: 'New ower added',
+    //   streetNumber: '234 Main Street',
+    //   city: 'Vancouver',
+    //   stateProv: 'BC',
+    //   zipPostCode: 'V3V 2V2',
+    //   country: 'Canada'
+    // };
 
-    debugger;
+    // debugger;
 
-    return this.store.dispatch(addPropertyOwner({payload: owner}));
+    // return this.store.dispatch(addPropertyOwner({payload: owner}));
   }
 
   updateOwner() {

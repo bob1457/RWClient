@@ -13,9 +13,11 @@ export interface PropertyOwner {
   isActive: boolean;
   roleId: number;
   notes: string;
-  streetNumber: string;
-  city: string;
-  stateProv: string;
-  zipPostCode: string;
-  country: string;
+  address : {
+    streetNumber: string;
+    city: string;
+    stateProv: string;
+    zipPostCode: string;
+    country: string;
+  }  
 }

@@ -1,9 +1,10 @@
 import { ManagementContract } from '@lib/app-core';
 import { ManagementContractService } from './../../../../app-core/src/lib/property/services/management-contract.service';
 import { PropertyState } from './../store/property.state';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { getContractList, getContractDetails, addManagementContract, updateContract } from '../store/actions/property.actions';
 import { Store } from '@ngrx/store';
+import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 
 @Component({
   selector: 'app-contract-list',
@@ -12,16 +13,38 @@ import { Store } from '@ngrx/store';
 })
 export class ContractListComponent implements OnInit {
 
+  list: ManagementContract[];
+  displayedColumns: string[] = ['icon', 'id', 'managementContractTitle', 'propertyName', 'managementContractType', 'startDate', 'endDate', 'contractSignDate',  'action'];
+
+  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: false}) sort: MatSort;
+
   constructor(private store: Store<PropertyState>,
               private contractService: ManagementContractService) { }
 
+  dataSource = new MatTableDataSource<ManagementContract>();
+
   ngOnInit() {
     debugger;
-    return this.store.dispatch(getContractList());
+    // return this.store.dispatch(getContractList());
+    this.getContractList();
   }
 
   getContractList() {
+    this.contractService.getManagementContractList()
+      .subscribe(clist => {
+        this.dataSource.data = clist;
+        console.log(this.dataSource.data);
+    })
+  }
 
+  public doFilter = (value: string) => {
+    this.dataSource.filter = value.trim().toLocaleLowerCase();
+  }
+
+  ngAfterViewInit(): void {
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
   }
 
   getContractDetails(id: number) {

@@ -70,8 +70,8 @@
                     <ng-container matColumnDef="address">
                         <th class="table-header-text" style="text-align: center;" mat-header-cell *matHeaderCellDef> Address </th>
                         <td mat-cell *matCellDef="let element">
-                            <!-- {{element.streetNumber}} {{element.city}}, {{element.stateProvince}}, {{element.zipPostCode}} -->
-                            {{element.address}}
+                            {{element.streetNumber}} {{element.city}}, {{element.stateProvince}}, {{element.zipPostCode}}
+                            <!-- {{element.address}} -->
                         </td>
                     </ng-container>
 
@@ -100,7 +100,7 @@
                         <td mat-cell *matCellDef="let element">
                             <i style="border: 2px solid;
                       padding: 3px;
-                      border-radius: 50%; color: chocolate;" class="material-icons">
+                      border-radius: 50%; color: rgb(42, 30, 210);" class="material-icons">
                       person
                     </i>
                         </td>
@@ -122,6 +122,8 @@
 
                 </table>
             </div>
+            <div fxFlex="10%" fxLayoutAlign="end"></div>
+            <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 25]"></mat-paginator>
         </div>
     </mat-card-content>
 </mat-card>
