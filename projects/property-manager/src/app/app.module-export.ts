@@ -15,16 +15,21 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { AddPropertyComponent } from './add-property/add-property.component';
 import { AddOwnerComponent } from './add-owner/add-owner.component';
 import { AddContractComponent } from './add-contract/add-contract.component';
+import { OwnerDetailsComponent } from './owner-details/owner-details.component';
+import { ContractDetailsComponent } from './contract-details/contract-details.component';
 
 const routes: Routes = [
   { path: '', component: PropertyHomeComponent,
     children: [
       { path: 'propertylist', component: PropertyListComponent},
+      { path: 'propertydetails/:id', component: PropertyDetailsComponent},
       { path: 'addproperty', component: AddPropertyComponent},
       { path: 'addowner', component: AddOwnerComponent},
       { path: 'addcontract', component: AddContractComponent},
       { path: 'owners', component: OwnerListComponent},
-      { path: 'contracts', component: ContractListComponent }
+      { path: 'ownerdetails/:id', component: OwnerDetailsComponent},
+      { path: 'contracts', component: ContractListComponent },
+      { path: 'contractdetails/:id', component: ContractDetailsComponent},
     ]
   },
   // { path: 'owners', component: OwnerListComponent,  outlet: 'property'},
@@ -41,7 +46,9 @@ const routes: Routes = [
     PropertyListComponent,
     PropertyDetailsComponent,
     OwnerListComponent,
-    ContractListComponent
+    OwnerDetailsComponent,
+    ContractListComponent,
+    ContractDetailsComponent
   ],
   imports: [
     // BrowserModule,

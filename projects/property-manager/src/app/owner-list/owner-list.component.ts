@@ -8,7 +8,11 @@ import { getPropertyOwnerList,
          updatePropertyOwner,
          removePropertyOwner } from '../store/actions/property.actions';
 import {ownerList } from '../store/reducers/property.reducer';
+// import { OwnerList } from '@lib/dashboard';
+// import { PropertyList, ContractList, TenantList, RentalList, ownerList, MarketingList, RentalAppList } from '../store/reducers/property.reducer';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
+import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
 // import { MatTableDataSource } from '@lib/app-material';
 
 @Component({
@@ -18,7 +22,12 @@ import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 })
 export class OwnerListComponent implements OnInit {
 
-  list: PropertyOwner[];
+  // list: PropertyOwner[];
+  owners$: Observable<PropertyOwner[]>;
+  list: any[];
+  id: number;
+
+  ownerList$: Observable<PropertyOwner[]>;
 
   // tslint:disable-next-line:max-line-length
   displayedColumns: string[] = ['icon', 'id', 'firstName', 'contactEmail', 'contactTelephone1', 'address', 'created', 'modified', 'action'];
@@ -28,13 +37,16 @@ export class OwnerListComponent implements OnInit {
 
   constructor(
     private propertyService: PropertyService,
-    private store: Store<PropertyState>) { }
+    private store: Store<PropertyState>,
+    private actRoute: ActivatedRoute) { 
+      this.id = this.actRoute.snapshot.params.id;
+    }
 
   dataSource = new MatTableDataSource<PropertyOwner>();
 
   ngOnInit() {
     debugger;
-    // return this.store.dispatch(getPropertyOwnerList());
+    this.store.dispatch(getPropertyOwnerList());
     this.getOwnerList();
   }
 
@@ -44,13 +56,29 @@ export class OwnerListComponent implements OnInit {
     // .subscribe((oList: PropertyOwner[]) => {this.list = oList; console.log(this.list); });
 
     // return this.store.pipe(select(ownerList))
-    return this.propertyService.getPropertyOwnerList()
-    .subscribe(olist => {
-      this.list = olist;
-      this.dataSource.data = olist;
-      console.log(this.list);
-      console.log(this.dataSource.data);
-    });
+    
+    // return this.propertyService.getPropertyOwnerList()
+    // .subscribe(olist => {
+    //   this.list = olist;
+    //   this.dataSource.data = olist;
+    //   console.log(this.list);
+    //   console.log(this.dataSource.data);
+    // });
+    // this.ownerList$ = 
+    // this.store.pipe(select(ownerList)).subscribe(data => {
+    //   this.list = data;
+    //   this.dataSource.data = data;
+    // });
+    // this.ownerList$ = this.store.select(ownerList)
+    // .subscribe(data => {
+    //   console.log(data);
+    // });   
+    
+    this.store.pipe(select(ownerList))
+    .subscribe(data => {
+      this.list = data;
+      this.dataSource.data = this.list;
+    })
   }
 
   getOwnerDetails(id: number) {

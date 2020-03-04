@@ -2,9 +2,11 @@ import { PropertyState } from './../store/property.state';
 import { Property, PropertyService } from '@lib/app-core';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { Store } from '@ngrx/store';
-import { getPropertyDetails, addProperty, updateProperty, updatePropertyStatus, removeProperty } from '../store/actions/property.actions';
+import { Store, select } from '@ngrx/store';
+import { getPropertyList, getPropertyDetails, addProperty, updateProperty, updatePropertyStatus, removeProperty } from '../store/actions/property.actions';
+import { propertyList} from '../store/reducers/property.reducer';
 import { MatPaginator, MatSort } from '@angular/material';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -19,6 +21,7 @@ export class PropertyListComponent implements OnInit {
   propertyId: any = 1;
 
   list: Property[];
+  propertyList$: Observable<Property[]>;
   // tslint:disable-next-line: max-line-length
   displayedColumns: string[] = ['icon', 'id', 'propertyName', 'propertyNumber', 'propertyType1', 'status', 'createdDate', 'updateDate', 'action'];
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
@@ -30,7 +33,20 @@ export class PropertyListComponent implements OnInit {
   dataSource = new MatTableDataSource<Property>();
 
   ngOnInit() {
-    this.getPropertyList();
+    // this.getPropertyList();
+    // this.propertyList$ = 
+    // this.store.select(propertyList);
+    this.store.dispatch(getPropertyList());
+    // this.propertyList$ = 
+    
+    // debugger;
+    this.store.pipe(
+      select(propertyList)).subscribe(data => { 
+        this.list = data ;
+        console.log(data);
+        this.dataSource.data = this.list;
+        console.log(this.dataSource.data);
+      });    
   }
 
   getPropertyList() {

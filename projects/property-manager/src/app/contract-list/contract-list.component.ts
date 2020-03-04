@@ -3,8 +3,10 @@ import { ManagementContractService } from './../../../../app-core/src/lib/proper
 import { PropertyState } from './../store/property.state';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { getContractList, getContractDetails, addManagementContract, updateContract } from '../store/actions/property.actions';
-import { Store } from '@ngrx/store';
+import { contractList } from '../store/reducers/property.reducer';
+import { Store, select } from '@ngrx/store';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-contract-list',
@@ -14,6 +16,8 @@ import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 export class ContractListComponent implements OnInit {
 
   list: ManagementContract[];
+  contractList$: Observable<ManagementContract[]>;
+
   displayedColumns: string[] = ['icon', 'id', 'managementContractTitle', 'propertyName', 'managementContractType', 'startDate', 'endDate', 'contractSignDate',  'action'];
 
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
@@ -26,15 +30,22 @@ export class ContractListComponent implements OnInit {
 
   ngOnInit() {
     debugger;
-    // return this.store.dispatch(getContractList());
+    this.store.dispatch(getContractList());
     this.getContractList();
+    // this.contractList$ = this.store.select(contractList);
   }
 
   getContractList() {
-    this.contractService.getManagementContractList()
-      .subscribe(clist => {
-        this.dataSource.data = clist;
-        console.log(this.dataSource.data);
+    // this.contractService.getManagementContractList()
+    //   .subscribe(clist => {
+    //     this.dataSource.data = clist;
+    //     console.log(this.dataSource.data);
+    // })
+    debugger;
+    this.store.pipe(select(contractList))
+    .subscribe(data => {
+      this.list = data;
+      this.dataSource.data = this.list;
     })
   }
 

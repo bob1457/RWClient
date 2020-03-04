@@ -177,7 +177,8 @@ export class PropertyEffects {
           // tap(res => {console.log('response: ' + res); }),
           catchError(
             err => {
-              return of('[Property] Get Property Owner List Failure', err.error);
+              // return of('[Property] Get Property Owner List Failure', err.error);
+              return of(PropertyActions.getPropertyOwnerListFailure(err.error));
             } // EMPTY
           )
         )

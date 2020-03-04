@@ -101,17 +101,7 @@ export class SideNavComponent implements OnInit {
       // this.user = JSON.parse(localStorage.getItem('auth'));
       // localStorage.setItem('auth', JSON.stringify(userData));
 
-      this.store.pipe(select(PropertyList)).subscribe(data => {
-        this.property = data;
-      });
-
-      this.store.pipe(select(OwnerList)).subscribe(data => {
-        this.owners = data;
-      });
-
-      this.store.pipe(select(ContractList)).subscribe(data => {
-        this.contracts = data;
-      });
+      
 
       console.log(userData);
       if (userData == null) {
@@ -125,6 +115,19 @@ export class SideNavComponent implements OnInit {
       }
 
     });
+    
+    this.store.pipe(select(PropertyList)).subscribe(data => {
+        this.property = data;
+      });
+
+    this.store.pipe(select(OwnerList)).subscribe(data => {
+        this.owners = data;
+      });
+
+    this.store.pipe(select(ContractList)).subscribe(data => {
+        this.contracts = data;
+      });
+      
     // select single state then use async pipe in template for sub/unsub using *ngIf which returns a boolean value // console.log(userData);
     // this.avatar$ = this.store.select(ustate => ustate.user.avatarUrl);
     this.avatar = JSON.parse(localStorage.getItem('avatar'));
