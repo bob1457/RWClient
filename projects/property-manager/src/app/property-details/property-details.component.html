@@ -2,7 +2,46 @@
   property-details works!
 </p>
 <p>Property ID: {{id}}</p> -->
+<div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="1%" fxFlexFill>
+  <!-- <div>
+    <div fxFlex="10%" fxLayoutAlign="end">
+      <i class="far fa-arrow-alt-circle-left" style="cursor: pointer; color: seagreen; font-size: 1.5em;" (click)="goBack()"></i>
+    </div>
+  </div> -->
+  <div fxFlex="30%"  fxLayout="column" class="avatar_sec" fxLayoutAlign="start center">
+    <img src="http://placehold.it/120x120" style="border-radius: 50%;" >
+  </div>
+  <div fxFlex="70%">
+    <mat-card class="property-details-card">
+      <mat-card-header style="background-color: #f5f5f5;">
+        <div mat-card-avatar class="property-details-header-image">
+            <i class="material-icons" style="font-size: 2.5em;color: #e64a19; margin-left: 5px;">
+            account_balance
+          </i>
+            <!-- <img src="../../assets/images/pmgmnt.png" height="40px" width="40px"> -->
+        </div>
+        <mat-card-title>Rental Property: </mat-card-title>
+        <mat-card-subtitle>Address: </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content class="property-details-card-content">
+      <form fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" [formGroup]="form"  (ngSubmit)="submit()">
+        <div>
 
-<mat-card class="property-details-card">
+        </div>
+        <mat-form-field class="property-full-width">
+          <span class="iocn-pos" matPrefix><mat-icon>person</mat-icon> &nbsp;</span>
+          <input type="text" id="propertyName" formControlName="propertyName" matInput placeholder="Property Name" >
+          <!-- {{firstName}} -->
 
-</mat-card>
+          <!-- <mat-hint>Should be a valid email address</mat-hint>
+        <mat-error *ngIf="emailInput.hasError('required')">Email is required</mat-error>
+        <mat-error *ngIf="!emailInput.hasError('required')">Email is invalid</mat-error> -->
+      </mat-form-field>
+
+      </form>
+    </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+
+

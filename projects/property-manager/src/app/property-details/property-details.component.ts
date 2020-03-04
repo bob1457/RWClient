@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import { PropertyState } from '../store/property.state';
 import { getPropertyDetails } from '../store/actions/property.actions';
 import { ActivatedRoute } from '@angular/router';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-property-details',
@@ -11,8 +12,11 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class PropertyDetailsComponent implements OnInit {
 
+  form: FormGroup;
+
   constructor(private store: Store<PropertyState>,
-              private actRoute: ActivatedRoute) { 
+              private actRoute: ActivatedRoute,
+              private formBuilder: FormBuilder) { 
                 this.id = this.actRoute.snapshot.params.id;
                 console.log(this.id);
               }
@@ -25,6 +29,18 @@ export class PropertyDetailsComponent implements OnInit {
   ngOnInit() {
     // debugger;
     // return this.store.dispatch(getPropertyDetails(this.propertyId))
+
+    this.form = this.formBuilder.group({
+      propertyName: ['']
+    })
+  }
+
+  submit() {
+
+  }
+
+  goBack() {
+    
   }
 
 }

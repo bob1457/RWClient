@@ -17,6 +17,7 @@ import { AddOwnerComponent } from './add-owner/add-owner.component';
 import { AddContractComponent } from './add-contract/add-contract.component';
 import { OwnerDetailsComponent } from './owner-details/owner-details.component';
 import { ContractDetailsComponent } from './contract-details/contract-details.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [
   { path: '', component: PropertyHomeComponent,
@@ -41,7 +42,7 @@ const routes: Routes = [
     AppPmComponent,
     AddContractComponent,
     AddPropertyComponent,
-    AddOwnerComponent,
+    AddOwnerComponent,    
     PropertyHomeComponent,
     PropertyListComponent,
     PropertyDetailsComponent,
@@ -55,6 +56,8 @@ const routes: Routes = [
     CommonModule,
     AppMaterialModule,
     FlexLayoutModule,
+    FormsModule,
+    ReactiveFormsModule,
     RouterModule.forChild(routes),
     StoreModule.forFeature('property', reducer)
   ],
