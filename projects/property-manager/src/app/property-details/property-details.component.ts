@@ -12,7 +12,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class PropertyDetailsComponent implements OnInit {
 
-  form: FormGroup;
+  detailsForm: FormGroup;
 
   constructor(private store: Store<PropertyState>,
               private actRoute: ActivatedRoute,
@@ -30,7 +30,7 @@ export class PropertyDetailsComponent implements OnInit {
     // debugger;
     // return this.store.dispatch(getPropertyDetails(this.propertyId))
 
-    this.form = this.formBuilder.group({
+    this.detailsForm = this.formBuilder.group({
       propertyName: ['']
     })
   }
@@ -40,7 +40,7 @@ export class PropertyDetailsComponent implements OnInit {
   }
 
   goBack() {
-    
+
   }
 
 }

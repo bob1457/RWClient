@@ -18,6 +18,9 @@ import { AddContractComponent } from './add-contract/add-contract.component';
 import { OwnerDetailsComponent } from './owner-details/owner-details.component';
 import { ContractDetailsComponent } from './contract-details/contract-details.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PropertyDetailsBasicComponent } from './property-details-basic/property-details-basic.component';
+import { PropertyDetailsFacilitiesComponent } from './property-details-facilities/property-details-facilities.component';
+import { PropertyDetailsFeaturesComponent } from './property-details-features/property-details-features.component';
 
 const routes: Routes = [
   { path: '', component: PropertyHomeComponent,
@@ -46,6 +49,9 @@ const routes: Routes = [
     PropertyHomeComponent,
     PropertyListComponent,
     PropertyDetailsComponent,
+    PropertyDetailsBasicComponent,
+    PropertyDetailsFacilitiesComponent,
+    PropertyDetailsFeaturesComponent,
     OwnerListComponent,
     OwnerDetailsComponent,
     ContractListComponent,
