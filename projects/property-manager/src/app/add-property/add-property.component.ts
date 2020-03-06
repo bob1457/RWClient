@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-add-property',
@@ -7,9 +8,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddPropertyComponent implements OnInit {
 
-  constructor() { }
+  addForm: FormGroup;
+
+  types: any[] = [
+    {value: '1', viewValue: 'New'},
+    {value: '2', viewValue: 'Renewal'}
+  ];
+
+  constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit() {
+
+    this.addForm = this.formBuilder.group({
+      propertyName: ['', Validators.required],
+      startDate: ['', Validators.required],
+      type: ['New']
+    })
   }
 
 }

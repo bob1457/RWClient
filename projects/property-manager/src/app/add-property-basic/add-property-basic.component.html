@@ -1,0 +1,15 @@
+<!-- <p>
+  add-property-basic works!
+</p> -->
+
+<div [formGroup]="addForm">
+    <mat-form-field>
+        <input matInput type="text" placeholder="Property Name" formControlName="propertyName" id="title">
+        <!-- <mat-hint align="end">Not more then 60 characters long.</mat-hint>
+        <mat-error *ngIf="hasError('title', 'required')">Name is required</mat-error>
+        <mat-error *ngIf="hasError('title', 'maxlength')">You have more than 60 characters</mat-error> -->
+    </mat-form-field>  
+    <div>
+        <button mat-button matStepperNext type="button">Next</button>
+      </div>  
+</div>

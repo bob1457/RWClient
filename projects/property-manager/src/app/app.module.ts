@@ -22,6 +22,10 @@ import { OwnerDetailsComponent } from './owner-details/owner-details.component';
 import { PropertyDetailsBasicComponent } from './property-details-basic/property-details-basic.component';
 import { PropertyDetailsFeaturesComponent } from './property-details-features/property-details-features.component';
 import { PropertyDetailsFacilitiesComponent } from './property-details-facilities/property-details-facilities.component';
+import { AddPropertyFacilitiesComponent } from './add-property-facilities/add-property-facilities.component';
+import { AddPropertyFeaturesComponent } from './add-property-features/add-property-features.component';
+import { AddPropertyBasicComponent } from './add-property-basic/add-property-basic.component';
+import { AddPropertyFinishComponent } from './add-property-finish/add-property-finish.component';
 
 
 @NgModule({
@@ -39,7 +43,11 @@ import { PropertyDetailsFacilitiesComponent } from './property-details-facilitie
     OwnerDetailsComponent,
     PropertyDetailsBasicComponent,
     PropertyDetailsFeaturesComponent,
-    PropertyDetailsFacilitiesComponent
+    PropertyDetailsFacilitiesComponent,
+    AddPropertyFacilitiesComponent,
+    AddPropertyFeaturesComponent,
+    AddPropertyBasicComponent,
+    AddPropertyFinishComponent
   ],
   imports: [
     BrowserModule,

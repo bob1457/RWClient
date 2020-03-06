@@ -21,6 +21,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PropertyDetailsBasicComponent } from './property-details-basic/property-details-basic.component';
 import { PropertyDetailsFacilitiesComponent } from './property-details-facilities/property-details-facilities.component';
 import { PropertyDetailsFeaturesComponent } from './property-details-features/property-details-features.component';
+import { AddPropertyBasicComponent } from './add-property-basic/add-property-basic.component';
+import { AddPropertyFeaturesComponent } from './add-property-features/add-property-features.component';
+import { AddPropertyFacilitiesComponent } from './add-property-facilities/add-property-facilities.component';
+import { AddPropertyFinishComponent } from './add-property-finish/add-property-finish.component';
 
 const routes: Routes = [
   { path: '', component: PropertyHomeComponent,
@@ -45,6 +49,10 @@ const routes: Routes = [
     AppPmComponent,
     AddContractComponent,
     AddPropertyComponent,
+    AddPropertyBasicComponent,
+    AddPropertyFeaturesComponent,
+    AddPropertyFacilitiesComponent,
+    AddPropertyFinishComponent,
     AddOwnerComponent,    
     PropertyHomeComponent,
     PropertyListComponent,
