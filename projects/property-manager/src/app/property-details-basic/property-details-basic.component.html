@@ -1,8 +1,8 @@
 <!-- <p>
   property-details-basic works!
 </p> -->
-<div [formGroup]="detailsForm" fxLayout="column">
-  <mat-form-field class="property-full-width">
+<div [formGroup]="detailsForm" fxLayout="column" fxLayoutAlign="start center">
+  <mat-form-field class="property-full-width" style="margin-top: 25px;">
     <span class="iocn-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
     <input type="text" id="propertyName" formControlName="propertyName" matInput placeholder="Property Name" >
     <!-- {{firstName}} -->

@@ -17,7 +17,8 @@ export class AddPropertyFinishComponent implements OnInit {
   }
 
   submit(addFormvalue) { // Add validation here...for all fields if any
-    console.log(addFormvalue)    
+    console.log(addFormvalue);
+    alert(addFormvalue);
     this.location.back();
   }
 
