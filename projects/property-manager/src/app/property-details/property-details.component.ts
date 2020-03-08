@@ -41,15 +41,15 @@ export class PropertyDetailsComponent implements OnInit {
     this.detailsForm = this.formBuilder.group({
       propertyId: ['', Validators.required],
       propertyName: ['', Validators.required],
-      propertyDesc: [],
+      propertyDesc: [''],
       propertyType1: ['', Validators.required],
 
       propertyLogoImgUrl: [''],
-      propertyVideoUrl: [],
+      propertyVideoUrl: [''],
       propertyBuildYear: [''],
-      isActive: [],
+      isActive: [''],
       isShared: [''],
-      status: [],
+      status: [''],
       isBasementSuite: [false],
 
       propertySuiteNumber: [''],
@@ -85,22 +85,26 @@ export class PropertyDetailsComponent implements OnInit {
       totalLivingArea: ['', Validators.required],
       featureNotes: [''],
 
-      creationDate: [],
-      updateDate: []
+      creationDate: [''],
+      updateDate: [''],
+      ownerList: this.formBuilder.group({
+        userName: [''],
+        firstName: ['', Validators.required],
+        lastName: ['', Validators.required],
+        contactEmail: ['', Validators.required],
+        contactTelephone1: ['', Validators.required],
+        contactTelephone2: [''],
+        onlineAccessEnbaled: [false],
+        userAvartaImgUrl: [''],
 
-      // firstName: ['', Validators.required],
-      // lastName: ['', Validators.required],
-      // contactEmail: ['', Validators.required],
-      // contactTelephone1: ['', Validators.required],
-      // contactTelephone2: [''],
-      // onlineAccessEnbaled: [false],
-      // userAvartaImgUrl: [''],
-
-      // ownerStreetNumber: ['', Validators.required],
-      // ownerCity: ['', Validators.required],
-      // ownerStateProv: ['', Validators.required],
-      // ownerZipPostCode: ['', Validators.required],
-      // ownerCountry: ['', Validators.required]
+        address: this.formBuilder.group({
+          ownerStreetNumber: ['', Validators.required],
+          ownerCity: ['', Validators.required],
+          ownerStateProv: ['', Validators.required],
+          ownerZipPostCode: ['', Validators.required],
+          ownerCountry: ['', Validators.required]
+        })
+      })
 
     });
 
@@ -134,7 +138,7 @@ export class PropertyDetailsComponent implements OnInit {
     this.propertyService.getPropertyDetails(id)
         .subscribe(data => {
           this.property = data;
-          this.detailsForm.setValue(data);
+          this.detailsForm.patchValue(data);
     });
   }
 

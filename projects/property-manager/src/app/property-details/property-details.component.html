@@ -17,7 +17,12 @@
             <img src="http://placehold.it/50x50">
         </div>
         <div style="margin-top: 25px;">
-            <span>Owner Information</span>
+            <span style="font-weight: 500;">Owner Information</span>
+            <ul class="owner-list">
+                <li *ngFor="let owner of property.ownerList" style="margin-left: -40px;">
+                    {{owner.firstName}} {{owner.lastName}} <a href="" style="cursor: pointer;">details</a>
+                </li>
+            </ul>
         </div>
         <div class="date-time">
             <p>
