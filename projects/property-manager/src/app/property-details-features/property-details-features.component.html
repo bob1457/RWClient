@@ -1,14 +1,14 @@
 <!-- <p>
   property-details-features works!
 </p> -->
-<form [formGroup]="detailsForm" fxLayout="column" fxLayoutAlign="start center">
-  <mat-form-field class="property-full-width">
-    <span class="iocn-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
-    <input type="text" id="propertyName" formControlName="propertyName" matInput placeholder="Property Name" >
-    <!-- {{firstName}} -->
+<div [formGroup]="detailsForm" fxLayout="column" fxLayoutAlign="start center">
+    <mat-form-field class="property-full-width">
+        <span class="iocn-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
+        <input type="text" id="numberOfBedrooms" formControlName="numberOfBedrooms" matInput placeholder="Number of Bedrooms" name="numberOfBedrooms">
+        <!-- {{firstName}} -->
 
-    <!-- <mat-hint>Should be a valid email address</mat-hint>
+        <!-- <mat-hint>Should be a valid email address</mat-hint>
     <mat-error *ngIf="emailInput.hasError('required')">Email is required</mat-error>
     <mat-error *ngIf="!emailInput.hasError('required')">Email is invalid</mat-error> -->
-  </mat-form-field>
-</form>
+    </mat-form-field>
+</div>

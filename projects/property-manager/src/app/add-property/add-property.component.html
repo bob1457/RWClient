@@ -7,12 +7,13 @@
             <i class="material-icons" style="font-size: 2.5em;color: #3d5afe; margin-left: 5px;">
           format_indent_increase
       </i>
-            <!-- <img src="../../assets/images/pmgmnt.png" height="40px" width="40px"> -->
+            <!-- <img src="../../assets/images/pmgmnt.png" height="40px" width="40px"> (ngSubmit)="onSubmit()"-->
         </div>
         <mat-card-title>Add New Property</mat-card-title>
         <mat-card-subtitle>Add new property</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content class="property-add-card-content">
+
         <form [formGroup]="addForm">
 
             <mat-horizontal-stepper #stepper>
@@ -22,22 +23,22 @@
                     </ng-template>
                     <app-add-property-basic [addForm]="addForm"></app-add-property-basic>
                 </mat-step>
-                <mat-step [stepControl]="addForm" >
+                <mat-step [stepControl]="addForm">
                     <ng-template matStepLabel>
-                      <span><b style="color:green">Features</b></span>
+                        <span><b style="color:green">Features</b></span>
                     </ng-template>
                     <app-add-property-features [addForm]="addForm"></app-add-property-features>
                 </mat-step>
-                <mat-step [stepControl]="addForm" >
+                <mat-step [stepControl]="addForm">
                     <ng-template matStepLabel>
-                      <span><b style="color:green">Facilities</b></span>
+                        <span><b style="color:green">Facilities</b></span>
                     </ng-template>
                     <app-add-property-facilities [addForm]="addForm"></app-add-property-facilities>
-                </mat-step>                
-                <mat-step [stepControl]="addForm" >
+                </mat-step>
+                <mat-step [stepControl]="addForm">
                     <ng-template matStepLabel>
-                      <span><b style="color:green">Finish</b></span>
-                    </ng-template>                    
+                        <span><b style="color:green">Finish</b></span>
+                    </ng-template>
                     <app-add-property-finish [addForm]="addForm"></app-add-property-finish>
                 </mat-step>
 

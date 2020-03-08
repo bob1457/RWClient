@@ -23,7 +23,7 @@ export class AddPropertyComponent implements OnInit {
       propertyName: ['', Validators.required],
       startDate: ['', Validators.required],
       type: ['New']
-    })
+    });
   }
 
 }

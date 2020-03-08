@@ -16,9 +16,10 @@ export class AddPropertyFinishComponent implements OnInit {
   ngOnInit() {
   }
 
-  submit(addFormvalue) { // Add validation here...for all fields if any
-    console.log(addFormvalue);
-    alert(addFormvalue);
+  submit(formValue) { // Add validation here...for all fields if any
+    debugger;
+    console.log(this.addForm);
+    console.log(formValue);
     this.location.back();
   }
 
