@@ -457,12 +457,25 @@ export const getPropertyList = (state: PropertyState) => state.properties;
 export const getOwnerList = (state: PropertyState) => state.owners;
 export const getContractList = (state: PropertyState) => state.contracts;
 export const getPropertyDetails = (state: PropertyState) => state.property;
+export const getOwnerDetails = (state: PropertyState) => state.selectedOwner;
+
+
 
 export const ownerList = createSelector(selectPropertyState, getOwnerList);
 export const propertyList = createSelector(selectPropertyState, getPropertyList);
 export const contractList = createSelector(selectPropertyState, getContractList);
 // export const propertyDetails = (id: any) => createSelector(selectPropertyState, getPropertyList => getPropertyList[id]);
 export const propertyDetrails = createSelector(selectPropertyState, getPropertyDetails);
+// export const ownerDetails = (id: any) => createSelector(getOwnerDetails, (ownerList) => {
+//   if (ownerList) {
+//     return ownerList.find(item => {
+//       return item.id === id;
+//     });
+//     } else {
+//     return {};
+//   }
+//   });
+export const ownerDetails = createSelector(selectPropertyState, getOwnerDetails);
 
 
 

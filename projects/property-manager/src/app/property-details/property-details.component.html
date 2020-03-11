@@ -43,8 +43,8 @@
           </i>
                     <!-- <img src="../../assets/images/pmgmnt.png " height="40px " width="40px "> *ngIf="property*ngIf="detailsForm.value"-->
                 </div>
-                <mat-card-title>Rental Property: </mat-card-title>
-                <mat-card-subtitle>Address: </mat-card-subtitle>
+                <mat-card-title>Rental Property: {{property.propertyName}}</mat-card-title>
+                <mat-card-subtitle>Address: {{property.propertyNumber}} {{property.propertyNumber}} {{property.propertyStreet}} {{property.propertyCity}} {{property.propertyStateProvince}} {{property.propertyZipPostCode}}</mat-card-subtitle>
             </mat-card-header>
             <mat-card-content class="property-details-card-content">
                 <form novalidate fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" [formGroup]="detailsForm" (ngSubmit)="submit()">

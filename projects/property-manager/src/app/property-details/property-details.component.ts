@@ -114,7 +114,13 @@ export class PropertyDetailsComponent implements OnInit {
     this.store.pipe(select(propertyDetrails))
         .subscribe(data => {
           this.property = data;
-          this.detailsForm.patchValue(data);
+          if (data == null){
+            this.getPropertyDetailsByService(this.id);
+          }
+          else {
+            this.detailsForm.patchValue(data);
+          }
+          
           console.log(data);
     });
   }
@@ -125,21 +131,29 @@ export class PropertyDetailsComponent implements OnInit {
     // this.property$ =
 
     // User store to select the state
-    //
-    // this.store.pipe(select(propertyDetrails))
-    // .subscribe(data => {
-    //   this.property = data;
-    //   this.detailsForm.patchValue(data);
-    //   console.log(data);
-    // });
+    
+    this.store.pipe(select(propertyDetrails))
+    .subscribe(data => {
+      this.property = data;
+      this.detailsForm.patchValue(data);
+      console.log(data);
+    });
 
 
     // User servie directlty the first time when the compowent loads
+    // this.propertyService.getPropertyDetails(id)
+    //     .subscribe(data => {
+    //       this.property = data;
+    //       this.detailsForm.patchValue(data);
+    // });
+  }
+
+  getPropertyDetailsByService (id: number) {
     this.propertyService.getPropertyDetails(id)
         .subscribe(data => {
           this.property = data;
           this.detailsForm.patchValue(data);
-    });
+        });
   }
 
   selectPropertyDetails() {
