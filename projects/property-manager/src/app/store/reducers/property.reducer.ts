@@ -4,6 +4,7 @@ import { PropertyState } from '../property.state';
 import * as PropertyActions from '../actions/property.actions';
 import { EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 
+
 // const adapter: EntityAdapter<Property> = createEntityAdapter<Property>();
 
 // tslint:disable-next-line:one-variable-per-declaration
@@ -458,6 +459,7 @@ export const getOwnerList = (state: PropertyState) => state.owners;
 export const getContractList = (state: PropertyState) => state.contracts;
 export const getPropertyDetails = (state: PropertyState) => state.property;
 export const getOwnerDetails = (state: PropertyState) => state.selectedOwner;
+export const getContractDetails = (state: PropertyState) => state.selectedContract;
 
 
 
@@ -476,6 +478,7 @@ export const propertyDetrails = createSelector(selectPropertyState, getPropertyD
 //   }
 //   });
 export const ownerDetails = createSelector(selectPropertyState, getOwnerDetails);
+export const contractDetails = createSelector(selectPropertyState, getContractDetails);
 
 
 
