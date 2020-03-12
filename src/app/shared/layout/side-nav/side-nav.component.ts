@@ -14,6 +14,8 @@ import {
 import { getUserInfo, User } from '@lib/auth';
 // import {  } from '@lib/auth';
 
+import * as sparkmd5 from 'spark-md5';
+
 import { PropertyList, ContractList, TenantList, RentalList, OwnerList, MarketingList, RentalAppList } from '@lib/dashboard';
 
 @Component({
@@ -75,6 +77,9 @@ export class SideNavComponent implements OnInit {
   avatar = '';
   avatar$: Observable<string>;
 
+  hash:any = null;  
+  gravatar = '';
+
   // theme$ = 'dark-theme'; // this is default -- selecting theme can be implemented using observable from rxjs... later.
   theme$ = 'light-theme';
   // theme$ = 'dark-theme';
@@ -131,6 +136,9 @@ export class SideNavComponent implements OnInit {
     // select single state then use async pipe in template for sub/unsub using *ngIf which returns a boolean value // console.log(userData);
     // this.avatar$ = this.store.select(ustate => ustate.user.avatarUrl);
     this.avatar = JSON.parse(localStorage.getItem('avatar'));
+
+    this.hash = sparkmd5.hash(this.user.email);
+    this.gravatar = this.createIdenticon(this.hash);
 
 
   }
@@ -217,5 +225,9 @@ export class SideNavComponent implements OnInit {
   GetList(){
     this.router.navigateByUrl('/Manage/property/propertylist');
     console.log('going to load list...');
+  }
+
+  createIdenticon(emailHash: any): string {
+    return 'https://www.gravatar.com/avatar/' + emailHash + '?d=identicon';
   }
 }

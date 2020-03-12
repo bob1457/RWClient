@@ -473,12 +473,19 @@
               <!--  | async is used for single state selection -->
               <!--<mat-icon>more_vert</mat-icon>     attr.src="{{serverUrl}}{{user.avatarImgUrl}}" width="38" height="38" title="{{user.userName}}"  *ngIf="user"  src="../../../../assets/images/avatar.png"-->
               <img
-                attr.src="{{ serverUrl }}{{ user.avatarUrl }}"
+              [src]="gravatar" *ngIf="gravatar"
                 width="38"
                 height="38"
                 title="{{ user.username }}"
                 style="border-radius: 50%;"
               />
+              <!-- <img
+                attr.src="{{ serverUrl }}{{ user.avatarUrl }}"
+                width="38"
+                height="38"
+                title="{{ user.username }}"
+                style="border-radius: 50%;"
+              /> -->
             </button>
 
                         <button mat-icon-button [matMenuTriggerFor]="thememMenu">

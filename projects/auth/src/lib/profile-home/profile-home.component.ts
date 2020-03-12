@@ -7,6 +7,8 @@ import { Store, select } from '@ngrx/store';
 import * as fromAuth from '../store/auth.state';
 import { getUserInfo } from '../store/auth.reducers';
 
+import * as sparkmd5 from 'spark-md5';
+
 @Component({
   selector: 'lib-profile-home',
   templateUrl: './profile-home.component.html',
@@ -23,6 +25,11 @@ export class ProfileHomeComponent implements OnInit {
   loading = false;
   uploadMsg = '';
   shiowMsg = false;
+
+
+  hash:any = null;
+  // email = '';
+  gravatar = '';
 
   public progress: number;
   public message: string;
@@ -57,6 +64,10 @@ export class ProfileHomeComponent implements OnInit {
         break;
       }
     });
+
+    this.hash = sparkmd5.hash(this.user.email);
+    this.gravatar = this.createIdenticon(this.hash);
+
   }
 
 
@@ -103,6 +114,10 @@ export class ProfileHomeComponent implements OnInit {
 
 
 
+  }
+
+  createIdenticon(emailHash: any): string {
+    return 'https://www.gravatar.com/avatar/' + emailHash + '?d=identicon';
   }
 
 }
