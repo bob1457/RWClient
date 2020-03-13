@@ -18,6 +18,11 @@ export class ContractDetailsComponent implements OnInit {
   detailsForm: FormGroup;;
   contract: ManagementContract;
 
+  contract$ = this.store.pipe(select(contractDetails))
+              .subscribe(data => {
+                this.contract = data;
+              });
+
   constructor(private actRoute: ActivatedRoute,
               private store: Store<PropertyState>,
               private formBuilder: FormBuilder,
@@ -41,23 +46,23 @@ export class ContractDetailsComponent implements OnInit {
       propertyName: [''],
       managementContractDocUrl: [false],
       managementContractType: [''],
-      isActive: [''],      
+      isActive: [''],
       notes: [''],
 
       created: [''],
       updated: ['']
-    })
+    });
 
-    this.store.pipe(select(contractDetails))
-              .subscribe(data => {
-                this.contract = data;
-                if (data == null){
-                  this.getContractDetails(this.id);
-                }
-                else {
-                  this.detailsForm.patchValue(data);
-                }
-              })
+    // this.store.pipe(select(contractDetails))
+    //           .subscribe(data => {
+    //             this.contract = data;
+    //             if (data == null){
+    //               this.getContractDetails(this.id);
+    //             }
+    //             else {
+    //               this.detailsForm.patchValue(data);
+    //             }
+    //           });
 
   }
 

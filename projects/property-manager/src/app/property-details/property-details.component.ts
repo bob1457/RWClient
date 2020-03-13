@@ -15,7 +15,15 @@ import { propertyDetrails } from '../store/reducers';
 })
 export class PropertyDetailsComponent implements OnInit {
 
-  detailsForm: FormGroup;
+detailsForm: FormGroup;
+
+ property$ = this.store.pipe(select(propertyDetrails))
+        .subscribe(data => {
+          this.property = data;
+          // this.detailsForm.patchValue(data);
+          console.log(data);
+    })
+    ;
 
   constructor(private store: Store<PropertyState>,
               private router: Router,
@@ -31,7 +39,11 @@ export class PropertyDetailsComponent implements OnInit {
   // property$: Observable<Property[]>;
   property: Property;
 
+  // property$: Observable<Property>;
+
   ownersForProperty: any[] ;
+
+
 
   ngOnInit() {
     // debugger;
@@ -111,18 +123,17 @@ export class PropertyDetailsComponent implements OnInit {
     // this.selectPropertyDetails();
 
     // Then select the state from the store, re-set to the form
-    this.store.pipe(select(propertyDetrails))
-        .subscribe(data => {
-          this.property = data;
-          if (data == null){
-            this.getPropertyDetailsByService(this.id);
-          }
-          else {
-            this.detailsForm.patchValue(data);
-          }
-          
-          console.log(data);
-    });
+    // this.store.pipe(select(propertyDetrails))
+    //     .subscribe(data => {
+    //       this.property = data;
+    //       if (data == null){
+    //         this.getPropertyDetailsByService(this.id);
+    //       }
+    //       else {
+    //         this.detailsForm.patchValue(data);
+    //       }
+    //       console.log(data);
+    // });
   }
 
   GetPropertyDetails(id: any) {
@@ -131,13 +142,13 @@ export class PropertyDetailsComponent implements OnInit {
     // this.property$ =
 
     // User store to select the state
-    
-    this.store.pipe(select(propertyDetrails))
-    .subscribe(data => {
-      this.property = data;
-      this.detailsForm.patchValue(data);
-      console.log(data);
-    });
+
+    // this.store.pipe(select(propertyDetrails))
+    // .subscribe(data => {
+    //   this.property = data;
+    //   this.detailsForm.patchValue(data);
+    //   console.log(data);
+    // });
 
 
     // User servie directlty the first time when the compowent loads
@@ -148,13 +159,13 @@ export class PropertyDetailsComponent implements OnInit {
     // });
   }
 
-  getPropertyDetailsByService (id: number) {
-    this.propertyService.getPropertyDetails(id)
-        .subscribe(data => {
-          this.property = data;
-          this.detailsForm.patchValue(data);
-        });
-  }
+  // getPropertyDetailsByService (id: number) {
+  //   this.propertyService.getPropertyDetails(id)
+  //       .subscribe(data => {
+  //         this.property = data;
+  //         this.detailsForm.patchValue(data);
+  //       });
+  // }
 
   selectPropertyDetails() {
     debugger;
