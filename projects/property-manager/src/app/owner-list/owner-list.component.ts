@@ -30,7 +30,7 @@ export class OwnerListComponent implements OnInit {
   ownerList$: Observable<PropertyOwner[]>;
 
   // tslint:disable-next-line:max-line-length
-  displayedColumns: string[] = ['icon', 'id', 'firstName', 'contactEmail', 'contactTelephone1', 'address', 'created', 'modified', 'action'];
+  displayedColumns: string[] = ['icon', 'id', 'firstName', 'contactEmail', 'contactTelephone1', 'address', 'created', 'updated', 'action'];
 
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: false}) sort: MatSort;
@@ -38,7 +38,7 @@ export class OwnerListComponent implements OnInit {
   constructor(
     private propertyService: PropertyService,
     private store: Store<PropertyState>,
-    private actRoute: ActivatedRoute) { 
+    private actRoute: ActivatedRoute) {
       this.id = this.actRoute.snapshot.params.id;
     }
 
@@ -56,7 +56,7 @@ export class OwnerListComponent implements OnInit {
     // .subscribe((oList: PropertyOwner[]) => {this.list = oList; console.log(this.list); });
 
     // return this.store.pipe(select(ownerList))
-    
+
     // return this.propertyService.getPropertyOwnerList()
     // .subscribe(olist => {
     //   this.list = olist;
@@ -64,7 +64,7 @@ export class OwnerListComponent implements OnInit {
     //   console.log(this.list);
     //   console.log(this.dataSource.data);
     // });
-    // this.ownerList$ = 
+    // this.ownerList$ =
     // this.store.pipe(select(ownerList)).subscribe(data => {
     //   this.list = data;
     //   this.dataSource.data = data;
@@ -72,8 +72,8 @@ export class OwnerListComponent implements OnInit {
     // this.ownerList$ = this.store.select(ownerList)
     // .subscribe(data => {
     //   console.log(data);
-    // });   
-    
+    // });
+
     this.store.pipe(select(ownerList))
     .subscribe(data => {
       this.list = data;
