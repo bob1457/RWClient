@@ -11,7 +11,7 @@
 }
 
 .property-list-card-content {
-    height: 600px;
+    height: 700px;
     background: #fafafa;
 }
 
@@ -64,4 +64,8 @@ tr.mat-header-row {
 ::ng-deep .mat-sort-header-button {
     margin-left: auto;
     margin-right: auto;
+}
+
+.spacer {
+    flex: 1 1 auto;
 }

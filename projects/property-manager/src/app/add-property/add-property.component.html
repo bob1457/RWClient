@@ -14,9 +14,9 @@
     </mat-card-header>
     <mat-card-content class="property-add-card-content">
 
-        <form [formGroup]="addForm">
+        <form [formGroup]="addForm" class="add-form">
 
-            <mat-horizontal-stepper #stepper>
+            <mat-horizontal-stepper #stepper class="stepper">
                 <mat-step [stepControl]="addForm">
                     <ng-template matStepLabel>
                         <span><b style="color:green">Basic</b></span>
@@ -34,6 +34,12 @@
                         <span><b style="color:green">Facilities</b></span>
                     </ng-template>
                     <app-add-property-facilities [addForm]="addForm"></app-add-property-facilities>
+                </mat-step>
+                <mat-step [stepControl]="addForm">
+                    <ng-template matStepLabel>
+                        <span><b style="color:green">Owner</b></span>
+                    </ng-template>
+                    <app-add-property-owner [addForm]="addForm"></app-add-property-owner>
                 </mat-step>
                 <mat-step [stepControl]="addForm">
                     <ng-template matStepLabel>

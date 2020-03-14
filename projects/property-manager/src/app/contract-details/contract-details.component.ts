@@ -70,13 +70,13 @@ export class ContractDetailsComponent implements OnInit {
     this.store.dispatch(getContractDetails({payload: id}));
   }
 
-  getContractDetailsByService (id: number) {
-    this.contractService.getManagementContractDetails(id)
-                        .subscribe(data => {
-                          this.contract = data;
-                          this.detailsForm.patchValue(data);
-                        })
-  }
+  // getContractDetailsByService (id: number) {
+  //   this.contractService.getManagementContractDetails(id)
+  //                       .subscribe(data => {
+  //                         this.contract = data;
+  //                         this.detailsForm.patchValue(data);
+  //                       })
+  // }
 
 
   goBack() {

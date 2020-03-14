@@ -10,7 +10,24 @@
     </div>
     <div fxFlex="20%" fxLayout="column" class="avatar_sec" fxLayoutAlign="start center">
         <img src="http://placehold.it/120x120" style="border-radius: 50%;" width="120px" height="120px">
+        <div style="margin-top: 25px;">
+            <span style="font-weight: 500;">Owned Property</span>
+            <ul class="property-list">
+                <li *ngFor="let property of owner.ownerProperty" style="margin-left: -40px;">
+                    {{property.property.propertyName}} <a href="" style="cursor: pointer;">details</a>
+                </li>
+            </ul>
+        </div>
+        <div class="date-time">
+            <p>
+                Created: {{owner.created | date }}
+            </p>
+            <p style="margin-top: -10px;">
+                Updated: {{owner.modified | date }}
+            </p>
+        </div>
     </div>
+
     <div fxFlex="70%">
         <mat-card class="owner-details-card">
             <mat-card-header style="background-color: #f5f5f5; ">

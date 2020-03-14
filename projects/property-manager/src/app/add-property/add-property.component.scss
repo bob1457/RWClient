@@ -7,3 +7,25 @@
     height: 600px;
     background: #fafafa;
 }
+
+.add-form {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.stepper {
+    background: #fafafa;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+::ng-deep .mat-horizontal-stepper-header-container {
+    border-bottom: solid 2px grey;
+}
+
+::ng-deep .mat-step-header .mat-step-icon {
+    // background-color: rgba(88, 87, 87, 0.54) !important;
+    color: white !important;
+}

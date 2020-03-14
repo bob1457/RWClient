@@ -2,14 +2,79 @@
   add-property-basic works!
 </p> -->
 
-<div [formGroup]="addForm">
-    <mat-form-field>
-        <input matInput type="text" placeholder="Property Name" formControlName="propertyName" id="title">
-        <!-- <mat-hint align="end">Not more then 60 characters long.</mat-hint>
+<div [formGroup]="addForm" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="1%">
+    <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center" fxLayoutGap="1%" fxFlexFill>
+        <div style="width: 59%;">
+            <mat-form-field style="margin-top: 50px;width: 70%;">
+                <input matInput type="text" placeholder="Property Name" formControlName="propertyName" id="title">
+                <!-- <mat-hint align="end">Not more then 60 characters long.</mat-hint>
         <mat-error *ngIf="hasError('title', 'required')">Name is required</mat-error>
         <mat-error *ngIf="hasError('title', 'maxlength')">You have more than 60 characters</mat-error> -->
-    </mat-form-field>  
-    <div>
-        <button mat-button matStepperNext type="button">Next</button>
-      </div>  
+            </mat-form-field>
+            <mat-form-field style="width: 70%;">
+                <!-- <input matInput type="text" placeholder="Property Name" formControlName="propertyName" id="title"> -->
+                <mat-label>Description</mat-label>
+                <textarea matInput></textarea>
+                <!-- <mat-hint align="end">Not more then 60 characters long.</mat-hint>
+      <mat-error *ngIf="hasError('title', 'required')">Name is required</mat-error>
+      <mat-error *ngIf="hasError('title', 'maxlength')">You have more than 60 characters</mat-error> -->
+            </mat-form-field>
+            <mat-form-field style="width: 70%;">
+                <input matInput type="text" placeholder="Property Name" formControlName="propertyName" id="title">
+                <!-- <mat-hint align="end">Not more then 60 characters long.</mat-hint>
+    <mat-error *ngIf="hasError('title', 'required')">Name is required</mat-error>
+    <mat-error *ngIf="hasError('title', 'maxlength')">You have more than 60 characters</mat-error> -->
+            </mat-form-field>
+            <mat-form-field style="width: 70%;">
+                <input matInput type="text" placeholder="Property Name" formControlName="propertyName" id="title">
+                <!-- <mat-hint align="end">Not more then 60 characters long.</mat-hint>
+    <mat-error *ngIf="hasError('title', 'required')">Name is required</mat-error>
+    <mat-error *ngIf="hasError('title', 'maxlength')">You have more than 60 characters</mat-error> -->
+            </mat-form-field>
+            <mat-form-field style="width: 70%;">
+                <input matInput type="text" placeholder="Property Name" formControlName="propertyName" id="title">
+                <!-- <mat-hint align="end">Not more then 60 characters long.</mat-hint>
+    <mat-error *ngIf="hasError('title', 'required')">Name is required</mat-error>
+    <mat-error *ngIf="hasError('title', 'maxlength')">You have more than 60 characters</mat-error> -->
+            </mat-form-field>
+        </div>
+        <div style="width: 59%;">
+            <mat-form-field style="margin-top: 50px; width: 70%;">
+                <input matInput type="text" placeholder="Property Name" formControlName="propertyName" id="title">
+                <!-- <mat-hint align="end">Not more then 60 characters long.</mat-hint>
+        <mat-error *ngIf="hasError('title', 'required')">Name is required</mat-error>
+        <mat-error *ngIf="hasError('title', 'maxlength')">You have more than 60 characters</mat-error> -->
+            </mat-form-field>
+            <mat-form-field style="width: 70%;">
+                <!-- <input matInput type="text" placeholder="Property Name" formControlName="propertyName" id="title"> -->
+                <mat-label>Description</mat-label>
+                <textarea matInput></textarea>
+                <!-- <mat-hint align="end">Not more then 60 characters long.</mat-hint>
+    <mat-error *ngIf="hasError('title', 'required')">Name is required</mat-error>
+    <mat-error *ngIf="hasError('title', 'maxlength')">You have more than 60 characters</mat-error> -->
+            </mat-form-field>
+            <mat-form-field style="width: 70%;">
+                <input matInput type="text" placeholder="Property Name" formControlName="propertyName" id="title">
+                <!-- <mat-hint align="end">Not more then 60 characters long.</mat-hint>
+  <mat-error *ngIf="hasError('title', 'required')">Name is required</mat-error>
+  <mat-error *ngIf="hasError('title', 'maxlength')">You have more than 60 characters</mat-error> -->
+            </mat-form-field>
+            <mat-form-field style="width: 70%;">
+                <input matInput type="text" placeholder="Property Name" formControlName="propertyName" id="title">
+                <!-- <mat-hint align="end">Not more then 60 characters long.</mat-hint>
+  <mat-error *ngIf="hasError('title', 'required')">Name is required</mat-error>
+  <mat-error *ngIf="hasError('title', 'maxlength')">You have more than 60 characters</mat-error> -->
+            </mat-form-field>
+            <mat-form-field style="width: 70%;">
+                <input matInput type="text" placeholder="Property Name" formControlName="propertyName" id="title">
+                <!-- <mat-hint align="end">Not more then 60 characters long.</mat-hint>
+  <mat-error *ngIf="hasError('title', 'required')">Name is required</mat-error>
+  <mat-error *ngIf="hasError('title', 'maxlength')">You have more than 60 characters</mat-error> -->
+            </mat-form-field>
+        </div>
+    </div>
+
+    <div class="step-button">
+        <button mat-raised-button matStepperNext type="button" style="float: right;background: #64b5f6; color: white;">Next</button>
+    </div>
 </div>

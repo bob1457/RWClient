@@ -1,22 +1,18 @@
-import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute, Router } from "@angular/router";
-import { FormGroup, FormBuilder, Validators } from "@angular/forms";
-import { Store, select } from "@ngrx/store";
-import { PropertyState } from "../store/property.state";
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Store, select } from '@ngrx/store';
+import { PropertyState } from '../store/property.state';
 // import { getPropertyOwnerDetails } from '../store/actions/property.actions';
 import {
-  ownerDetails,
-  selectPropertyState,
-  ownerList
-} from "../store/reducers";
-import { PropertyOwner, PropertyService } from "@lib/app-core";
-import { getPropertyOwnerDetails } from "../store/actions/property.actions";
-import { Observable } from "rxjs";
+  ownerDetails} from '../store/reducers';
+import { PropertyOwner } from '@lib/app-core';
+import { getPropertyOwnerDetails } from '../store/actions/property.actions';
 
 @Component({
-  selector: "app-owner-details",
-  templateUrl: "./owner-details.component.html",
-  styleUrls: ["./owner-details.component.scss"]
+  selector: 'app-owner-details',
+  templateUrl: './owner-details.component.html',
+  styleUrls: ['./owner-details.component.scss']
 })
 export class OwnerDetailsComponent implements OnInit {
   detailsForm: FormGroup;
@@ -33,9 +29,7 @@ export class OwnerDetailsComponent implements OnInit {
     private store: Store<PropertyState>,
     private actRoute: ActivatedRoute,
     private router: Router,
-    private formBuilder: FormBuilder,
-    private propertyService: PropertyService
-  ) {
+    private formBuilder: FormBuilder  ) {
     this.id = this.actRoute.snapshot.params.id;
     // this.store.dispatch(getPropertyOwnerDetails({payload: this.id}));
   }
@@ -45,35 +39,35 @@ export class OwnerDetailsComponent implements OnInit {
     this.getOwnerDetails(this.id);
 
     this.detailsForm = this.formBuilder.group({
-      id: [""],
-      userName: [""],
-      firstName: ["", Validators.required],
-      lastName: ["", Validators.required],
-      contactEmail: ["", Validators.required],
-      contactTelephone1: ["", Validators.required],
-      contactTelephone2: [""],
+      id: [''],
+      userName: [''],
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      contactEmail: ['', Validators.required],
+      contactTelephone1: ['', Validators.required],
+      contactTelephone2: [''],
       onlineAccessEnbaled: [false],
-      userAvartaImgUrl: [""],
-      isActive: [""],
-      roleId: [""],
-      notes: [""],
+      userAvartaImgUrl: [''],
+      isActive: [''],
+      roleId: [''],
+      notes: [''],
 
-      created: [""],
-      modified: [""],
+      created: [''],
+      modified: [''],
 
       ownerProperty: this.formBuilder.group({
-        propertyId: ["", Validators.required],
+        propertyId: ['', Validators.required],
         propertyOwnerId: [],
         property: this.formBuilder.group({
-          propertyName: ["", Validators.required],
-          propertyDesc: [""],
-          propertyType1: ["", Validators.required],
-          propertyLogoImgUrl: [""],
-          propertyVideoUrl: [""],
-          propertyBuildYear: [""],
-          isActive: [""],
-          isShared: [""],
-          status: [""],
+          propertyName: ['', Validators.required],
+          propertyDesc: [''],
+          propertyType1: ['', Validators.required],
+          propertyLogoImgUrl: [''],
+          propertyVideoUrl: [''],
+          propertyBuildYear: [''],
+          isActive: [''],
+          isShared: [''],
+          status: [''],
           isBasementSuite: [false]
         })
 
@@ -109,14 +103,14 @@ export class OwnerDetailsComponent implements OnInit {
     this.store.dispatch(getPropertyOwnerDetails({ payload: id }));
   }
 
-  getOnwerDetailsByService(id: number) {
-    return this.propertyService.getPropertyOwnerDetails(id).subscribe(data => {
-      this.owner = data;
-      this.detailsForm.patchValue(data);
-    });
-  }
+  // getOnwerDetailsByService(id: number) {
+  //   return this.propertyService.getPropertyOwnerDetails(id).subscribe(data => {
+  //     this.owner = data;
+  //     this.detailsForm.patchValue(data);
+  //   });
+  // }
 
   goBack() {
-    this.router.navigate(["/Manage/property/owners"]);
+    this.router.navigate(['/Manage/property/owners']);
   }
 }

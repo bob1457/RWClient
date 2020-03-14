@@ -25,6 +25,7 @@ import { AddPropertyBasicComponent } from './add-property-basic/add-property-bas
 import { AddPropertyFeaturesComponent } from './add-property-features/add-property-features.component';
 import { AddPropertyFacilitiesComponent } from './add-property-facilities/add-property-facilities.component';
 import { AddPropertyFinishComponent } from './add-property-finish/add-property-finish.component';
+import { AddPropertyOwnerComponent } from './add-property-owner/add-property-owner.component';
 
 const routes: Routes = [
   { path: '', component: PropertyHomeComponent,
@@ -52,8 +53,9 @@ const routes: Routes = [
     AddPropertyBasicComponent,
     AddPropertyFeaturesComponent,
     AddPropertyFacilitiesComponent,
+    AddPropertyOwnerComponent,
     AddPropertyFinishComponent,
-    AddOwnerComponent,    
+    AddOwnerComponent,
     PropertyHomeComponent,
     PropertyListComponent,
     PropertyDetailsComponent,

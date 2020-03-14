@@ -5,7 +5,6 @@ import { getPropertyDetails } from '../store/actions/property.actions';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Property, PropertyService } from '@lib/app-core';
-import { Observable } from 'rxjs';
 import { propertyDetrails } from '../store/reducers';
 
 @Component({

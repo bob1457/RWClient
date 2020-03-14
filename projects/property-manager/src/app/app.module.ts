@@ -26,6 +26,7 @@ import { AddPropertyFacilitiesComponent } from './add-property-facilities/add-pr
 import { AddPropertyFeaturesComponent } from './add-property-features/add-property-features.component';
 import { AddPropertyBasicComponent } from './add-property-basic/add-property-basic.component';
 import { AddPropertyFinishComponent } from './add-property-finish/add-property-finish.component';
+import { AddPropertyOwnerComponent } from './add-property-owner/add-property-owner.component';
 
 
 @NgModule({
@@ -47,7 +48,8 @@ import { AddPropertyFinishComponent } from './add-property-finish/add-property-f
     AddPropertyFacilitiesComponent,
     AddPropertyFeaturesComponent,
     AddPropertyBasicComponent,
-    AddPropertyFinishComponent
+    AddPropertyFinishComponent,
+    AddPropertyOwnerComponent
   ],
   imports: [
     BrowserModule,
