@@ -165,8 +165,9 @@ border-bottom: 1px solid red!important;
 }
 
 :host .active {
-    color: #30fbfb;
+    color: #1976d2;
     font-size: 1.05em;
+    font-weight: bold;
 }
 
 .mat-list-text {
@@ -174,9 +175,11 @@ border-bottom: 1px solid red!important;
     font-size: .85em;
 }
 
-.mat-nav-list a:hover {
+.mat-nav-list a:hover,
+.mat-nav-list .active {
     text-decoration: none;
-    color: #30fbfb;
+    color: #5e55de;
+    font-weight: bold;
 }
 
 
@@ -215,4 +218,8 @@ border-bottom: 1px solid red!important;
     text-align: center;
     margin-top: -28px;
     margin-left: -12px;
+}
+
+::ng-deep .mat-drawer-inner-container {
+    overflow-x: hidden !important;
 }

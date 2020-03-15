@@ -16,6 +16,7 @@ export class BarChartComponent implements OnInit {
   @Input() chartLabel = [];
 
   @Input() chartData2 = [];
+  // @Input() chartLabel2 = [];
 
 
   public barChartOptions: ChartOptions = {
@@ -46,8 +47,12 @@ export class BarChartComponent implements OnInit {
 
   getChartData() {
     this.barChartLabels = this.chartLabel;
-    this.barChartData = [{ data: this.chartData, label: 'All Properties'}];
+    this.barChartData = [
+      { data: this.chartData, label: 'Rented'},
+      { data: this.chartData2, label: 'Listed'} // [3,6,0,2,0,0,1,0,0,0]
+    ];
 
+    console.log(this.chartData2);
     console.log(this.barChartData);
     console.log(this.barChartLabels);
   }

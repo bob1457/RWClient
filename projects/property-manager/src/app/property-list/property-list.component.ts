@@ -1,8 +1,12 @@
 import { PropertyState } from './../store/property.state';
-import { Property } from '@lib/app-core';
-import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { getPropertyDetails, addProperty, updateProperty, updatePropertyStatus, removeProperty } from '../store/actions/property.actions';
+import { Property, PropertyService } from '@lib/app-core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
+import { Store, select } from '@ngrx/store';
+import { getPropertyList, getPropertyDetails, addProperty, updateProperty, updatePropertyStatus, removeProperty } from '../store/actions/property.actions';
+import { propertyList} from '../store/reducers/property.reducer';
+import { MatPaginator, MatSort } from '@angular/material';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -16,15 +20,58 @@ export class PropertyListComponent implements OnInit {
 
   propertyId: any = 1;
 
-  constructor(private store: Store<PropertyState>
-              ) { }
+  list: Property[];
+  propertyList$: Observable<Property[]>;
+  // tslint:disable-next-line: max-line-length
+  displayedColumns: string[] = ['icon', 'id', 'propertyName', 'propertyNumber', 'propertyType1', 'status', 'createdDate', 'updateDate', 'action'];
+  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: false}) sort: MatSort;
+
+  constructor(private propertyService: PropertyService,
+              private store: Store<PropertyState>) { }
+
+  dataSource = new MatTableDataSource<Property>();
 
   ngOnInit() {
+    // this.getPropertyList();
+    // this.propertyList$ = 
+    // this.store.select(propertyList);
+    this.store.dispatch(getPropertyList());
+    // this.propertyList$ = 
+    
+    // debugger;
+    this.store.pipe(
+      select(propertyList)).subscribe(data => { 
+        this.list = data ;
+        console.log(data);
+        this.dataSource.data = this.list;
+        console.log(this.dataSource.data);
+      });    
+  }
+
+  getPropertyList() {
+    debugger;
+    return this.propertyService.getPropertyList()
+    .subscribe((pList: Property[]) => {
+      this.list = pList;
+      console.log(this.list);
+      this.dataSource.data = pList;
+      console.log(this.dataSource.data);
+    });
+  }
+
+  ngAfterViewInit(): void {
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
   }
 
   GetPropertyDetails(id: any) {
     debugger;
     return this.store.dispatch(getPropertyDetails({payload: id}));
+  }
+
+  public doFilter = (value: string) => {
+    this.dataSource.filter = value.trim().toLocaleLowerCase();
   }
 
   AddProperty() { // ppt is the input parameter, ignored in unit testing   ppt: Property

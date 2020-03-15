@@ -10,11 +10,12 @@ import { ManageRoutingModule } from './manage-routing.module';
 import { HomeComponent } from './home/home.component';
 
 import { SharedModule } from '../shared/shared.module';
+import { BreadcrumbsComponent } from '../shared/breadcrumbs/breadcrumbs.component';
 
 
 @NgModule({
   declarations: [
-    HomeComponent
+    HomeComponent    
   ],
   imports: [
     CommonModule,
@@ -25,7 +26,7 @@ import { SharedModule } from '../shared/shared.module';
     DashboardModule
   ],
   exports: [
-    HomeComponent
+    HomeComponent    
   ]
 })
 export class ManageModule { }

@@ -4,6 +4,7 @@ import { PropertyService, Property } from '@lib/app-core';
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { getPropertyList } from '../store/actions/property.actions';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-property-home',
@@ -13,7 +14,8 @@ import { getPropertyList } from '../store/actions/property.actions';
 export class PropertyHomeComponent implements OnInit {
 
   constructor(private propertyService: PropertyService,
-              private store: Store<PropertyState>) { }
+              private store: Store<PropertyState>,
+              private router: Router) { }
 
   list: Property[];
   serverUri = 'http://localhost:19807/';
@@ -21,13 +23,17 @@ export class PropertyHomeComponent implements OnInit {
   ngOnInit() {
     debugger;
     // return this.propertyService.getPropertyList().subscribe((pList: Property[]) => {this.list = pList; console.log(pList)});
-    return this.store.dispatch(getPropertyList())  ;
+    // return 
+    this.store.dispatch(getPropertyList())  ;
     // propertyService.getPropertyList().subscribe((pList: Property[]) => {this.list = pList; console.log(pList)});
+    // this.router.navigateByUrl('/Manage/property/propertylist');
+    console.log(this.router.url); 
   }
 
-  getPropertyList() {
-    debugger;
-    return this.propertyService.getPropertyList().subscribe((pList: Property[]) => {this.list = pList; });
-  }
+  // MOVED to property-list component
+  // getPropertyList() {
+  //   debugger;
+  //   return this.propertyService.getPropertyList().subscribe((pList: Property[]) => {this.list = pList; });
+  // }
 
 }

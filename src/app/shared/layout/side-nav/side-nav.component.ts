@@ -14,6 +14,10 @@ import {
 import { getUserInfo, User } from '@lib/auth';
 // import {  } from '@lib/auth';
 
+import * as sparkmd5 from 'spark-md5';
+
+import { PropertyList, ContractList, TenantList, RentalList, OwnerList, MarketingList, RentalAppList } from '@lib/dashboard';
+
 @Component({
   selector: 'app-side-nav',
   templateUrl: './side-nav.component.html',
@@ -34,8 +38,8 @@ import { getUserInfo, User } from '@lib/auth';
           transform: 'translateX(0%)'
         })
       ),
-      // transition('* => *', animate('2000ms')),
-      transition('* => *', animate(2000))
+      transition('decrease => increase', animate('2000ms')),
+      transition('increase => decrease', animate('2000ms'))
     ])
   ]
 })
@@ -48,6 +52,10 @@ export class SideNavComponent implements OnInit {
   n = 13;
 
   link = '';
+
+  property: any[] = [];
+  owners: any[] = [];
+  contracts: any[] = [];
 
   mode = 'side';
   opened = true;
@@ -69,9 +77,14 @@ export class SideNavComponent implements OnInit {
   avatar = '';
   avatar$: Observable<string>;
 
+  hash:any = null;  
+  gravatar = '';
+
   // theme$ = 'dark-theme'; // this is default -- selecting theme can be implemented using observable from rxjs... later.
-  // theme$ = 'light-theme';
-  theme$ = 'dark-theme';
+  theme$ = 'light-theme';
+  // theme$ = 'dark-theme';
+
+  role = '';
 
   constructor(
     public mediaObserver: MediaObserver,
@@ -93,19 +106,39 @@ export class SideNavComponent implements OnInit {
       // this.user = JSON.parse(localStorage.getItem('auth'));
       // localStorage.setItem('auth', JSON.stringify(userData));
 
+      
+
       console.log(userData);
       if (userData == null) {
         this.user = JSON.parse(localStorage.getItem('auth'));
+        this.role = this.user.role;
         console.log(this.user);
       } else {
         this.user = userData;
         localStorage.setItem('auth', JSON.stringify(userData));
+        this.role = userData.role;
       }
 
     });
+    
+    this.store.pipe(select(PropertyList)).subscribe(data => {
+        this.property = data;
+      });
+
+    this.store.pipe(select(OwnerList)).subscribe(data => {
+        this.owners = data;
+      });
+
+    this.store.pipe(select(ContractList)).subscribe(data => {
+        this.contracts = data;
+      });
+      
     // select single state then use async pipe in template for sub/unsub using *ngIf which returns a boolean value // console.log(userData);
     // this.avatar$ = this.store.select(ustate => ustate.user.avatarUrl);
     this.avatar = JSON.parse(localStorage.getItem('avatar'));
+
+    this.hash = sparkmd5.hash(this.user.email);
+    this.gravatar = this.createIdenticon(this.hash);
 
 
   }
@@ -188,4 +221,13 @@ export class SideNavComponent implements OnInit {
   }
 
   showInfo(link: any) {}
+
+  GetList(){
+    this.router.navigateByUrl('/Manage/property/propertylist');
+    console.log('going to load list...');
+  }
+
+  createIdenticon(emailHash: any): string {
+    return 'https://www.gravatar.com/avatar/' + emailHash + '?d=identicon';
+  }
 }

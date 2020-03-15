@@ -23,4 +23,8 @@ export class ChartService {
   getBarChartData() {
     return this.http.get(`${this.baseUrl}/Charts/marketing/barchart`);
   }
+
+  getBarChartData2() {
+    return this.http.get(`${this.baseUrl}/Charts/marketing/barchart2`);
+  }
 }

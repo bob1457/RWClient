@@ -14,6 +14,19 @@ import { reducer } from './store/reducers';
 import { PropertyEffects } from './store/effects/property.effects';
 import { OwnerListComponent } from './owner-list/owner-list.component';
 import { ContractListComponent } from './contract-list/contract-list.component';
+import { AddPropertyComponent } from './add-property/add-property.component';
+import { AddOwnerComponent } from './add-owner/add-owner.component';
+import { AddContractComponent } from './add-contract/add-contract.component';
+import { ContractDetailsComponent } from './contract-details/contract-details.component';
+import { OwnerDetailsComponent } from './owner-details/owner-details.component';
+import { PropertyDetailsBasicComponent } from './property-details-basic/property-details-basic.component';
+import { PropertyDetailsFeaturesComponent } from './property-details-features/property-details-features.component';
+import { PropertyDetailsFacilitiesComponent } from './property-details-facilities/property-details-facilities.component';
+import { AddPropertyFacilitiesComponent } from './add-property-facilities/add-property-facilities.component';
+import { AddPropertyFeaturesComponent } from './add-property-features/add-property-features.component';
+import { AddPropertyBasicComponent } from './add-property-basic/add-property-basic.component';
+import { AddPropertyFinishComponent } from './add-property-finish/add-property-finish.component';
+import { AddPropertyOwnerComponent } from './add-property-owner/add-property-owner.component';
 
 
 @NgModule({
@@ -23,7 +36,20 @@ import { ContractListComponent } from './contract-list/contract-list.component';
     PropertyListComponent,
     PropertyDetailsComponent,
     OwnerListComponent,
-    ContractListComponent
+    ContractListComponent,
+    AddPropertyComponent,
+    AddOwnerComponent,
+    AddContractComponent,
+    ContractDetailsComponent,
+    OwnerDetailsComponent,
+    PropertyDetailsBasicComponent,
+    PropertyDetailsFeaturesComponent,
+    PropertyDetailsFacilitiesComponent,
+    AddPropertyFacilitiesComponent,
+    AddPropertyFeaturesComponent,
+    AddPropertyBasicComponent,
+    AddPropertyFinishComponent,
+    AddPropertyOwnerComponent
   ],
   imports: [
     BrowserModule,
