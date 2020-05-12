@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { PropertyOwnerService, PropertyOwner } from '@lib/app-core';
 
 @Component({
   selector: 'app-add-property',
@@ -15,7 +16,9 @@ export class AddPropertyComponent implements OnInit {
     {value: '2', viewValue: 'Renewal'}
   ];
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder, private ownerService: PropertyOwnerService) { }
+
+  owners: PropertyOwner[];
 
   ngOnInit() {
 
@@ -84,6 +87,12 @@ export class AddPropertyComponent implements OnInit {
 
       ownerOption: []
     });
+
+    // this.ownerService.getPropertyOwnerList()
+    // .subscribe( owners => {
+    //   this.owners = owners;
+    //   console.log(this.owners);
+    // });
   }
 
 }

@@ -61,9 +61,9 @@
                                     <mat-form-field class="property-full-width" style="margin-top: 25px;">
                                         <span class="icon-pos" matPrefix><mat-icon>swap_calls</mat-icon> &nbsp;</span>
                                         <input readonly type="text" id="propertyId" formControlName="propertyId" matInput placeholder="Property ID" [ngModel]="property.propertyId">
-                                        
+
                                     </mat-form-field>
-                                    <mat-form-field class="property-full-width" >
+                                    <mat-form-field class="property-full-width">
                                         <span class="icon-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
                                         <input type="text" id="propertyName" formControlName="propertyName" matInput placeholder="Property Name" [ngModel]="property.propertyName" name="propertyName">
                                         <!-- {{firstName}} -->
@@ -76,80 +76,80 @@
                                         <mat-label>Description</mat-label>
                                         <textarea matInput formControlName="propertyDesc" [ngModel]="property.propertyDesc"></textarea>
                                     </mat-form-field>
-                                    
+
                                     <!-- <mat-form-field class="property-full-width">
                                         <span class="icon-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
-                                        <input type="text" id="propertyName" formControlName="propertyName" matInput placeholder="Property Name">                                        
+                                        <input type="text" id="propertyName" formControlName="propertyName" matInput placeholder="Property Name">
                                     </mat-form-field> -->
-                                    <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center" fxLayoutGap="10px" style="width: 75%;">                                                                           
+                                    <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center" fxLayoutGap="10px" style="width: 75%;">
                                         <mat-form-field class="property-full-width" style="width:20%">
-                                            <mat-label>Property Type</mat-label>                                        
-                                                <mat-select [(value)]="current" id="propertyType1" formControlName="propertyType1" [ngModel]="property.propertyType1">
-                                                    <!-- <mat-option>None</mat-option> -->
-                                                    <mat-option value="SingleHouse">SingleHouse</mat-option>
-                                                    <mat-option value="Apartment">Apartment</mat-option>
-                                                    <mat-option value="TownHouse">TownHouse</mat-option>
-                                                    <mat-option value="Others">Others</mat-option>
-                                                </mat-select>
+                                            <mat-label>Property Type</mat-label>
+                                            <mat-select [(value)]="current" id="propertyType1" formControlName="propertyType1" [ngModel]="property.propertyType1">
+                                                <!-- <mat-option>None</mat-option> -->
+                                                <mat-option value="SingleHouse">SingleHouse</mat-option>
+                                                <mat-option value="Apartment">Apartment</mat-option>
+                                                <mat-option value="TownHouse">TownHouse</mat-option>
+                                                <mat-option value="Others">Others</mat-option>
+                                            </mat-select>
                                         </mat-form-field>
                                         <mat-form-field class="property-full-width" style="margin-top: 25px; width: 10%;">
                                             <span class="icon-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
-                                            <input type="text" id="propertyBuildYear" formControlName="propertyBuildYear" matInput placeholder="Property Build Year" [ngModel]="property.propertyBuildYear" >                                            
+                                            <input type="text" id="propertyBuildYear" formControlName="propertyBuildYear" matInput placeholder="Property Build Year" [ngModel]="property.propertyBuildYear">
                                         </mat-form-field>
                                         <mat-checkbox formControlName="isShared" [ngModel]="property.isShared" [(checked)]="shared" class="property-full-width">Shared</mat-checkbox>
                                         <mat-checkbox formControlName="isBasementSuite" [ngModel]="property.isBasementSuite" class="property-full-width">Basement</mat-checkbox>
                                         <mat-form-field class="property-full-width">
-                                            <mat-label>Rental Status</mat-label>                                        
-                                                <mat-select [(value)]="status" id="status" formControlName="status" [ngModel]="property.status">
-                                                    <!-- <mat-option>None</mat-option> -->
-                                                    <mat-option value="Rented">Rented</mat-option>
-                                                    <mat-option value="Vacant">Vacant</mat-option>
-                                                    <mat-option value="Pending">Pending</mat-option>
-                                                    <mat-option value="Others">Others</mat-option>
-                                                </mat-select>
+                                            <mat-label>Rental Status</mat-label>
+                                            <mat-select [(value)]="status" id="status" formControlName="status" [ngModel]="property.status">
+                                                <!-- <mat-option>None</mat-option> -->
+                                                <mat-option value="Rented">Rented</mat-option>
+                                                <mat-option value="Vacant">Vacant</mat-option>
+                                                <mat-option value="Pending">Pending</mat-option>
+                                                <mat-option value="Others">Others</mat-option>
+                                            </mat-select>
                                         </mat-form-field>
-                                    </div>    
+                                    </div>
                                     <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px" style="width: 75%;">
                                         <mat-form-field style="width: 10%;" class="property-full-width3">
                                             <span class="icon-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
                                             <input type="text" id="propertySuiteNumber" formControlName="propertySuiteNumber" matInput placeholder="Suite #" [ngModel]="property.propertySuiteNumber">
-                                            
+
                                         </mat-form-field>
                                         <mat-form-field style="width: 25%;" class="property-full-width3">
                                             <span class="icon-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
                                             <input type="text" id="propertyNumber" formControlName="propertyNumber" matInput placeholder="Property Street Number" [ngModel]="property.propertyNumber">
-                                            
+
                                         </mat-form-field>
-                                        <mat-form-field  class="property-full-width3">
+                                        <mat-form-field style="width: 35%;" class="property-full-width3">
                                             <span class="icon-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
                                             <input type="text" id="propertyStreet" formControlName="propertyStreet" matInput placeholder="Property Street Number" [ngModel]="property.propertyStreet">
-                                            
+
                                         </mat-form-field>
-                                        <mat-form-field class="property-full-width3">
+                                        <mat-form-field style="width: 25%;" class="property-full-width3">
                                             <span class="icon-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
                                             <input type="text" id="propertyCity" formControlName="propertyCity" matInput placeholder="Property Street Number" [ngModel]="property.propertyCity">
-                                            
+
                                         </mat-form-field>
-                                    
+
                                     </div>
-                                    
+
                                     <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center" fxLayoutGap="10px" style="width: 75%;">
                                         <mat-form-field class="property-full-width">
                                             <span class="icon-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
                                             <input type="text" id="propertyStateProvince" formControlName="propertyStateProvince" matInput placeholder="Province/State" [ngModel]="property.propertyStateProvince">
-                                            
+
                                         </mat-form-field>
                                         <mat-form-field class="property-full-width">
                                             <span class="icon-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
                                             <input type="text" id="propertyZipPostCode" formControlName="propertyZipPostCode" matInput placeholder="Post/Zip Code" [ngModel]="property.propertyZipPostCode">
-                                            
+
                                         </mat-form-field>
                                         <mat-form-field class="property-full-width">
                                             <span class="icon-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
                                             <input type="text" id="propertyCountry" formControlName="propertyCountry" matInput placeholder="Country" [ngModel]="property.propertyCountry">
-                                            
+
                                         </mat-form-field>
-                                        
+
                                     </div>
                                     <mat-form-field class="property-full-width">
                                         <mat-label>Notes</mat-label>
@@ -171,68 +171,68 @@
                                     <span class="line"></span>
                                     <div fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="center center" fxLayoutGap="10px" style="max-width:75%;margin-top: 25px;">
                                         <mat-form-field class="property-full-width" fxFlex="20" style="margin-top: 25px;">
-                                        <span class="icon-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
-                                        <input type="text" id="numberOfBedrooms" formControlName="numberOfBedrooms" matInput placeholder="Number of Bedrooms" [ngModel]="property.numberOfBedrooms">
-                                            
+                                            <span class="icon-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
+                                            <input type="text" id="numberOfBedrooms" formControlName="numberOfBedrooms" matInput placeholder="Number of Bedrooms" [ngModel]="property.numberOfBedrooms">
+
                                         </mat-form-field>
                                         <mat-form-field class="property-full-width" fxFlex="20" style="margin-top: 25px;">
                                             <span class="icon-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
                                             <input type="text" id="numberOfBathrooms" formControlName="numberOfBathrooms" matInput placeholder="Number of Bathrooms" [ngModel]="property.numberOfBathrooms">
-                                            
+
                                         </mat-form-field>
                                         <mat-form-field class="property-full-width" fxFlex="20" style="margin-top: 25px;">
                                             <span class="icon-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
                                             <input type="text" id="numberOfLayers" formControlName="numberOfLayers" matInput placeholder="Number of Layers" [ngModel]="property.numberOfLayers">
-                                            
+
                                         </mat-form-field>
                                         <mat-form-field class="property-full-width" fxFlex="20" style="margin-top: 25px;">
                                             <span class="icon-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
                                             <input type="text" id="numberOfParking" formControlName="numberOfParking" matInput placeholder="Number of Parking" [ngModel]="property.numberOfParking">
-                                            
+
                                         </mat-form-field>
 
                                     </div>
                                     <div style="margin-top: 25px;">
                                         <h5>Property Facilities</h5>
-                                    </div>                                    
+                                    </div>
                                     <span class="line"></span>
                                     <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="start center" fxLayoutGap="10px" style="width:75%;">
                                         <div fxLayout="column" fxLayoutAlign="start center" fxFlex="30" fxLayoutGap="10px">
                                             <mat-checkbox formControlName="stove" [ngModel]="property.stove" class="property-full-width">Stove</mat-checkbox>
                                             <mat-checkbox formControlName="refrigerator" [ngModel]="property.refrigerator" class="property-full-width">Refrigerator</mat-checkbox>
-                                            <mat-checkbox formControlName="dishwasher" [ngModel]="property.dishwasher"  class="property-full-width">Dish Washer</mat-checkbox>
+                                            <mat-checkbox formControlName="dishwasher" [ngModel]="property.dishwasher" class="property-full-width">Dish Washer</mat-checkbox>
                                             <mat-checkbox formControlName="airConditioner" [ngModel]="property.airConditioner" class="property-full-width">Air Conditioner</mat-checkbox>
                                         </div>
-                                        <div fxLayout="column" fxLayoutAlign="start center"  fxFlex="30" fxLayoutGap="10px">
+                                        <div fxLayout="column" fxLayoutAlign="start center" fxFlex="30" fxLayoutGap="10px">
                                             <mat-checkbox formControlName="laundry" [ngModel]="property.laundry" class="property-full-width">Laundry</mat-checkbox>
                                             <mat-checkbox formControlName="blindsCurtain" [ngModel]="property.blindsCurtain" class="property-full-width">Window Blinds</mat-checkbox>
-                                            <mat-checkbox formControlName="furniture" [ngModel]="property.furniture"  class="property-full-width">Furniture</mat-checkbox>
+                                            <mat-checkbox formControlName="furniture" [ngModel]="property.furniture" class="property-full-width">Furniture</mat-checkbox>
                                             <mat-checkbox formControlName="tvinternet" [ngModel]="property.tvinternet" class="property-full-width">TV/Internet</mat-checkbox>
                                         </div>
-                                        <div fxLayout="column" fxLayoutAlign="start center"  fxFlex="30" fxLayoutGap="10px">
+                                        <div fxLayout="column" fxLayoutAlign="start center" fxFlex="30" fxLayoutGap="10px">
                                             <mat-checkbox formControlName="commonFacility" [ngModel]="property.commonFacility" class="property-full-width">Common Area</mat-checkbox>
                                             <mat-checkbox formControlName="securitySystem" [ngModel]="property.securitySystem" class="property-full-width">Security/Alarm</mat-checkbox>
-                                            <mat-checkbox formControlName="fireAlarmSystem" [ngModel]="property.fireAlarmSystem"  class="property-full-width">Fire/Smoke Detectors</mat-checkbox>
+                                            <mat-checkbox formControlName="fireAlarmSystem" [ngModel]="property.fireAlarmSystem" class="property-full-width">Fire/Smoke Detectors</mat-checkbox>
                                             <mat-checkbox formControlName="utilityIncluded" [ngModel]="property.utilityIncluded" class="property-full-width">Utility</mat-checkbox>
                                         </div>
                                     </div>
                                     <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="start center" fxLayoutGap="10px" style="width:75%;margin-top: 25px;">
-                                        <div fxLayout="column" fxLayoutAlign="start center"  fxFlex="50" fxLayoutGap="10px">
+                                        <div fxLayout="column" fxLayoutAlign="start center" fxFlex="50" fxLayoutGap="10px">
                                             <mat-form-field class="property-full-width" style="width: 90%;">
                                                 <mat-label>Others</mat-label>
                                                 <textarea matInput formControlName="others" [ngModel]="property.others"></textarea>
                                             </mat-form-field>
                                         </div>
-                                        <div fxLayout="column" fxLayoutAlign="start center"  fxFlex="50" fxLayoutGap="10px;margin-top: 25px;">
+                                        <div fxLayout="column" fxLayoutAlign="start center" fxFlex="50" fxLayoutGap="10px;margin-top: 25px;">
                                             <mat-form-field class="property-full-width" style="width: 90%;">
                                                 <mat-label>Notes</mat-label>
                                                 <textarea matInput formControlName="facilityNotes" [ngModel]="property.facilityNotes"></textarea>
                                             </mat-form-field>
                                         </div>
                                     </div>
-                                    
+
                                 </div>
-                                
+
                             </mat-tab>
                             <!-- <mat-tab label="Facilities" style="background: #f5f5f5;">
                                 <app-property-details-facilities [detailsForm]="detailsForm" fxLayout="column"></app-property-details-facilities>
