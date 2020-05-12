@@ -38,8 +38,8 @@
                     <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="Filter">
                 </mat-form-field>
                 <mat-radio-group aria-label="Select an option" style="margin-top: 13px;margin-left: 25px;padding-right: 5px;">
-                    <mat-radio-button value="1" style="padding-right: 10px;">Option 1</mat-radio-button>
-                    <mat-radio-button value="2">Option 2</mat-radio-button>
+                    <mat-radio-button value="1" checked style="padding-right: 10px;">Active</mat-radio-button>
+                    <mat-radio-button value="0">All</mat-radio-button>
                 </mat-radio-group>
                 <span class="spacer"></span>
                 <button [routerLink]="['/Manage/property/addproperty']" mat-button mat-mini-fab style="background: #3d5afe;color: white;">

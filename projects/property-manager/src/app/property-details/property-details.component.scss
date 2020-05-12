@@ -24,6 +24,10 @@
     width: 75%;
 }
 
+.property-full-width2 {
+    width: 100%;
+}
+
 .date-time {
     margin-top: 30px;
     font-size: .75em;
@@ -33,4 +37,26 @@
 .owner-list {
     list-style-type: none;
     margin-top: 10px;
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+}
+
+.line {
+    display:block;
+    border:none;
+    color:white;
+    height:1px;
+    background:black;
+    background: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 350, from(#98243a), to(#fff));
+    width: 75%;
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+.icon-pos {
+    vertical-align: middle;
 }

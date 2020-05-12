@@ -80,7 +80,7 @@ export class PropertyListComponent implements OnInit {
     id: 0,
     propertyName: 'Real Property',
     propertyDesc: 'string',
-    type: 0,
+    propertyType1: '',
     propertyManagerUserName: 'string',
     propertyLogoImgUrl: 'string',
     propertyVideoUrl: 'string',

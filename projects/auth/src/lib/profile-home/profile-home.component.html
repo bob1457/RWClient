@@ -10,12 +10,12 @@
     <div fxFlex="25%" fxLayout="column" style="background: transparent;">
         <div fxLayout="column" class="avatar_sec" fxLayoutAlign="center center">
             <div *ngIf="user">
-                <img [src]="gravatar" *ngIf="gravatar" style="border-radius: 50%; border: 4px solid white; margin-left: 15px; margin-top: 20px; width: 200px; height: 200px;" title="{{ user.username }}">
+                <img [src]="gAvatar? gravatar : imgUrl" *ngIf="gravatar" style="border-radius: 50%; border: 4px solid white; margin-left: 15px; margin-top: 20px; width: 200px; height: 200px;" title="{{ user.username }}">
                 <!-- <img attr.src="{{serverUrl}}{{user.avatarUrl}}" style="border-radius: 50%; border: 4px solid white; margin-left: 15px; margin-top: 20px; width: 200px; height: 200px;" title="{{ user.username }}">                 -->
             </div>
 
 
-            <a fxHide.xs (click)="openInput()" class="up-icon" style="margin-left:150px;" title="update avatar">
+            <a *ngIf="!gAvatar" fxHide.xs (click)="openInput()" class="up-icon" style="margin-left:150px;" title="update avatar">
                 <!-- <i class="material-icons">
                   publish  attr.src="{{serverUrl}}{{user.avatarUrl}}"
                   </i> -->
@@ -23,8 +23,14 @@
                 <i class="fas fa-arrow-circle-up"></i>
                 <img *ngIf="loading" style="width: 20px; height: 20px; margin-left: 20px;" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
                 />
-                <span *ngIf="shiowMsg">{{uploadMsg}}</span>
+                <span style="font-size: small;margin-left: 25px;" *ngIf="showMsg">{{uploadMsg}}</span>
             </a>
+
+            <mat-radio-group aria-label="Select an option" (change)="AvatarTypeChange($event)" style="margin-top: 30px;">
+                <mat-radio-button value="1" checked style="margin-right: 20px;">Gravatar</mat-radio-button>
+                <mat-radio-button value="2">Custom</mat-radio-button>
+            </mat-radio-group>
+
             <div style="margin-left: 20px; margin-top: 15px;">
                 <span><span style="font-style: italic;">Join at</span>: {{user.joindate | date }}</span>
                 <br />

@@ -37,6 +37,10 @@ detailsForm: FormGroup;
   id: number;
   // property$: Observable<Property[]>;
   property: Property;
+  current = '';
+  shared = '';
+  basement = '';
+  
 
   // property$: Observable<Property>;
 
@@ -133,6 +137,12 @@ detailsForm: FormGroup;
     //       }
     //       console.log(data);
     // });
+
+    // this.current = this.property.propertyType1;
+    // console.log(this.current);
+    // this.shared = this.property.isShared.toString();
+    // this.basement = this.property.isBasementSuite.toString();
+    console.log(this.basement);
   }
 
   GetPropertyDetails(id: any) {

@@ -17,6 +17,8 @@ import { getUserInfo, User } from '@lib/auth';
 import * as sparkmd5 from 'spark-md5';
 
 import { PropertyList, ContractList, TenantList, RentalList, OwnerList, MarketingList, RentalAppList } from '@lib/dashboard';
+import { StateService } from 'projects/auth/src/public-api';
+
 
 @Component({
   selector: 'app-side-nav',
@@ -79,6 +81,8 @@ export class SideNavComponent implements OnInit {
 
   hash:any = null;  
   gravatar = '';
+  imgUrl:any = null;
+  gAvatar = true;
 
   // theme$ = 'dark-theme'; // this is default -- selecting theme can be implemented using observable from rxjs... later.
   theme$ = 'light-theme';
@@ -89,6 +93,7 @@ export class SideNavComponent implements OnInit {
   constructor(
     public mediaObserver: MediaObserver,
     private router: Router,
+    private stateService: StateService,
     private store: Store<fromAuth.AuthState>
   ) {
     this.watcher = mediaObserver.media$.subscribe(
@@ -99,6 +104,14 @@ export class SideNavComponent implements OnInit {
       }
     );
   }
+
+  newUrl$ = this.stateService.currentUrl$
+      .subscribe(data => {
+        this.gAvatar = false;
+        this.imgUrl = data;
+        this.imgUrl = localStorage.getItem('newAvatarUrl');
+        console.log(this.imgUrl);
+  })
 
   ngOnInit() {
     debugger;
@@ -139,6 +152,16 @@ export class SideNavComponent implements OnInit {
 
     this.hash = sparkmd5.hash(this.user.email);
     this.gravatar = this.createIdenticon(this.hash);
+
+    // Update avatar when upload new custom image
+    this.stateService.currentUrl$    
+      .subscribe(data => {
+        this.gAvatar = false;
+        console.log(this.gAvatar);
+        this.imgUrl = data;
+        this.imgUrl = localStorage.getItem('newAvatarUrl');
+        console.log(this.imgUrl);
+    })
 
 
   }
