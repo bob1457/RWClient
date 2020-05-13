@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { PropertyOwnerService, PropertyOwner } from '@lib/app-core';
+import * as fromAuth from '@lib/auth';
+import { Store, select } from '@ngrx/store';
+import { getUserInfo } from '@lib/auth';
 
 @Component({
   selector: 'app-add-property',
@@ -15,10 +18,11 @@ export class AddPropertyComponent implements OnInit {
     {value: '1', viewValue: 'New'},
     {value: '2', viewValue: 'Renewal'}
   ];
-
-  constructor(private formBuilder: FormBuilder, private ownerService: PropertyOwnerService) { }
+  // private ownerService: PropertyOwnerService
+  constructor(private formBuilder: FormBuilder, private store: Store<fromAuth.AuthState>) { }
 
   owners: PropertyOwner[];
+  currentUser;
 
   ngOnInit() {
 
@@ -87,6 +91,8 @@ export class AddPropertyComponent implements OnInit {
       isSameAddress: [false],
       notes: [],
 
+      propertyManagerUserName: [],
+
       ownerOption: []
     });
 
@@ -95,6 +101,11 @@ export class AddPropertyComponent implements OnInit {
     //   this.owners = owners;
     //   console.log(this.owners);
     // });
+debugger;
+    this.store.pipe(select(getUserInfo))
+    .subscribe(user => this.currentUser = user);
+
+    this.addForm.get('propertyManagerUserName').setValue(this.currentUser.username);
   }
 
 }
