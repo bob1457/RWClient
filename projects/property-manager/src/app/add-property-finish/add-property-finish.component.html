@@ -33,9 +33,9 @@
                 </tr>
                 <tr>
                     <td><span class="bold">Shared:</span> </td>
-                    <td>{{addForm.get("isShared").value}}</td>
+                    <td>{{addForm.get("isShared").value | yesNo}}</td>
                     <td><span class="bold">Basedment: </span></td>
-                    <td>{{addForm.get("isBasementSuite").value}}</td>
+                    <td>{{addForm.get("isBasementSuite").value | yesNo}}</td>
                 </tr>
                 <tr>
                     <td><span class="bold">Living Area(sqFT): </span></td>
@@ -85,7 +85,7 @@
                 </tr>
                 <tr>
                     <td><span class="bold">Same as the propertyOwner Address: </span></td>
-                    <td>{{addForm.get("isSameAddress").value}}</td>
+                    <td>{{addForm.get("isSameAddress").value | yesNo }}</td>
                 </tr>
                 <tr>
                     <td><span class="bold">Owner Address: </span></td>
@@ -117,39 +117,39 @@
           </tr> -->
                 <tr>
                     <td><span class="bold">Stove:</span> </td>
-                    <td>{{addForm.get("stove").value}}</td>
+                    <td>{{addForm.get("stove").value | yesNo}}</td>
                     <td><span class="bold">Frigde: </span></td>
-                    <td>{{addForm.get("refrigerator").value}}</td>
+                    <td>{{addForm.get("refrigerator").value | yesNo}}</td>
                 </tr>
                 <tr>
                     <td><span class="bold">Dishwasher: </span></td>
-                    <td>{{addForm.get("dishwasher").value}}</td>
+                    <td>{{addForm.get("dishwasher").value | yesNo}}</td>
                     <td><span class="bold">Air Conditoner: </span></td>
-                    <td>{{addForm.get("airConditioner").value}}</td>
+                    <td>{{addForm.get("airConditioner").value | yesNo}}</td>
                 </tr>
                 <tr>
                     <td><span class="bold">Laundry:</span> </td>
-                    <td>{{addForm.get("laundry").value}}</td>
+                    <td>{{addForm.get("laundry").value | yesNo}}</td>
                     <td><span class="bold">Win. Blinds: </span></td>
-                    <td>{{addForm.get("blindsCurtain").value}}</td>
+                    <td>{{addForm.get("blindsCurtain").value | yesNo}}</td>
                 </tr>
                 <tr>
                     <td><span class="bold">Furniture: </span></td>
-                    <td>{{addForm.get("furniture").value}}</td>
+                    <td>{{addForm.get("furniture").value | yesNo}}</td>
                     <td><span class="bold">TV/Internet: </span></td>
-                    <td>{{addForm.get("tvinternet").value}}</td>
+                    <td>{{addForm.get("tvinternet").value | yesNo }}</td>
                 </tr>
                 <tr>
                     <td><span class="bold">Utilities:</span> </td>
-                    <td>{{addForm.get("utilityIncluded").value}}</td>
+                    <td>{{addForm.get("utilityIncluded").value | yesNo}}</td>
                     <td><span class="bold">Fire/Smoke Alarm: </span></td>
-                    <td>{{addForm.get("fireAlarmSystem").value}}</td>
+                    <td>{{addForm.get("fireAlarmSystem").value | yesNo}}</td>
                 </tr>
                 <tr>
                     <td><span class="bold">Ccommon Facility: </span></td>
-                    <td>{{addForm.get("commonFacility").value}}</td>
+                    <td>{{addForm.get("commonFacility").value | yesNo}}</td>
                     <td><span class="bold">Security: </span></td>
-                    <td>{{addForm.get("securitySystem").value}}</td>
+                    <td>{{addForm.get("securitySystem").value | yesNo}}</td>
                 </tr>
             </table>
         </div>

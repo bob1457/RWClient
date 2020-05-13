@@ -73,6 +73,7 @@ export class AddPropertyComponent implements OnInit {
       totalLivingArea: ['', Validators.required],
       featureNotes: [''],
 
+      propertyOwnerId: [0],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       contactEmail: ['', Validators.required],
@@ -84,6 +85,7 @@ export class AddPropertyComponent implements OnInit {
       ownerZipPostCode: [''],
       ownerCountry: [''],
       isSameAddress: [false],
+      notes: [],
 
       ownerOption: []
     });
