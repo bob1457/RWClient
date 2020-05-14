@@ -13,8 +13,8 @@ export class AddContractComponent implements OnInit {
 
   // properties: Property[];
   properties: any = [
-    { value: '1', viewValue: '621 Coquitlam'},
-    { value: '2', viewValue: '1307 Surrey'}
+    { id: '1', propertyName: '621 Coquitlam'},
+    { id: '2', propertyName: '1307 Surrey'}
   ];
 
   constructor(private formBuilder: FormBuilder) { }
@@ -33,6 +33,10 @@ export class AddContractComponent implements OnInit {
 
 
     });
+  }
+
+  onChange(e) {
+
   }
 
 }
