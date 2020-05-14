@@ -40,7 +40,7 @@ export class AddPropertyComponent implements OnInit {
       propertyVideoUrl: [''],
       propertyBuildYear: [''],
       // isActive: [''],
-      isShared: [''],
+      isShared: [false],
       status: [''],
       isBasementSuite: [false],
 
@@ -54,18 +54,18 @@ export class AddPropertyComponent implements OnInit {
       gpslongitudeValue: [''],
       gpslatitudeValue: [''],
 
-      stove: [''],
-      refrigerator: [''],
-      dishwasher: [''],
-      airConditioner: [''],
-      laundry: [''],
-      blindsCurtain: [''],
-      furniture: [''],
-      tvinternet: [''],
-      commonFacility: [''],
-      securitySystem: [''],
-      utilityIncluded: [''],
-      fireAlarmSystem: [''],
+      stove: [true],
+      refrigerator: [true],
+      dishwasher: [false],
+      airConditioner: [false],
+      laundry: [false],
+      blindsCurtain: [false],
+      furniture: [false],
+      tvinternet: [false],
+      commonFacility: [false],
+      securitySystem: [false],
+      utilityIncluded: [false],
+      fireAlarmSystem: [true],
       others: [''],
       facilityNotes: [''],
 
@@ -101,7 +101,7 @@ export class AddPropertyComponent implements OnInit {
     //   this.owners = owners;
     //   console.log(this.owners);
     // });
-debugger;
+// debugger;
     this.store.pipe(select(getUserInfo))
     .subscribe(user => this.currentUser = user);
 

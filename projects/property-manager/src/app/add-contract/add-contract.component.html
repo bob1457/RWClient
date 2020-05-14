@@ -1,3 +1,80 @@
-<p>
+<!-- <p>
   add-contract works!
-</p>
+</p> -->
+<mat-card class="contract-add-card">
+    <mat-card-header style="background-color: #f5f5f5;">
+        <div mat-card-avatar class="property-list-header-image">
+            <i class="material-icons" style="font-size: 2.5em;color: #3d5afe; margin-left: 5px;">
+          note_add
+      </i>
+            <!-- <img src="../../assets/images/pmgmnt.png" height="40px" width="40px"> (ngSubmit)="onSubmit()"-->
+        </div>
+        <mat-card-title>Add New Contract</mat-card-title>
+        <mat-card-subtitle>Add new property contract</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content class="contract-add-card-content">
+        <form [formGroup]="addForm" class="add-form">
+            <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center" fxLayoutGap="1%" fxFlexFill>
+                <div style="width: 59%;">
+                    <!-- <p>part 1</p> -->
+                    <mat-form-field style="margin-top: 25px;width: 90%;">
+                        <span class="icon-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
+                        <input matInput type="text" placeholder="Contract Title" formControlName="managementContractTitle" id="title">
+                        <!-- <mat-hint align="end">Not more then 60 characters long.</mat-hint>
+          <mat-error *ngIf="hasError('title', 'required')">Name is required</mat-error>
+          <mat-error *ngIf="hasError('title', 'maxlength')">You have more than 60 characters</mat-error> -->
+                    </mat-form-field>
+                    <!-- <mat-option>None</mat-option> -->
+                    <!-- <mat-form-field style="width: 70%;">
+                        <mat-label>Contract Type</mat-label>
+                        <mat-select id="propertyType1" formControlName="managementContractType">
+
+                            <mat-option value="New">New</mat-option>
+                            <mat-option value="Renewal">Renewal</mat-option>
+                        </mat-select>
+                    </mat-form-field> -->
+                    <div class="selection">
+                        <mat-radio-group aria-label="Select an option" style="margin-top: 13px; padding-right: 5px;" formControlName="managementContractType" [(ngModel)]="managementContractType">
+                            <mat-radio-button value="existing" checked style="padding-right: 10px;margin-right: 25px;">New</mat-radio-button>
+                            <mat-radio-button value="new">Renewal</mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+
+                    <div fxLayout="row" fxLayout.xs="column" style="width: 90%;">
+                        <mat-form-field style="margin-right: 10px; width: 50%;">
+                            <mat-label>Start Date</mat-label>
+                            <input matInput [matDatepicker]="picker1">
+                            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                            <mat-datepicker #picker1></mat-datepicker>
+                        </mat-form-field>
+                        <mat-form-field style="width: 50%;">
+                            <mat-label>End Date</mat-label>
+                            <input matInput [matDatepicker]="picker2">
+                            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                            <mat-datepicker #picker2></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+
+                    <div fxLayout="row" fxLayout.xs="column" style="width: 90%;">
+                        <mat-form-field style="margin-right: 10px; width: 50%;">
+                            <span class="icon-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
+                            <input matInput type="text" placeholder="Placement Fee" formControlName="placementFeeScale" id="fee">
+                        </mat-form-field>
+                        <mat-form-field style="width: 50%;">
+                            <span class="icon-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
+                            <input matInput type="text" placeholder="Management Fee" formControlName="managementFeeScale" id="fee">
+                        </mat-form-field>
+                    </div>
+                    <!-- <mat-form-field style="width: 70%;">
+                    <input matInput type="text" placeholder="Property Name" formControlName="propertyName" id="title">
+
+                </mat-form-field> -->
+
+                </div>
+                <div style="width: 59%;">
+                    <p>Edit contents</p>
+                </div>
+            </div>
+        </form>
+    </mat-card-content>
+</mat-card>
