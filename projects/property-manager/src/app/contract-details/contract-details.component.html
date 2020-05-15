@@ -25,9 +25,9 @@
             </mat-card-header>
             <mat-card-content class="contract-details-card-content">
                 <div fxLayout="column" fxLayoutAlign="start center">
-                    <form novalidate fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" [formGroup]="detailsForm" (ngSubmit)="submit()" style="width: 100%;">
+                    <form novalidate fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" [formGroup]="detailsForm" (ngSubmit)="submit()" style="width: 100%;margin-top: 25px;">
 
-                        <mat-form-field class="owner-full-width-1" style="margin-top: 25px;">
+                        <mat-form-field style="margin-top: 25px;width: 70%;">
                             <span class="iocn-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
                             <input type="text" id="managementContractTitle" formControlName="managementContractTitle" matInput placeholder="Management Contract Title" [ngModel]="contract.managementContractTitle">
                             <!-- {{firstName}} -->
@@ -36,7 +36,70 @@
                       <mat-error *ngIf="emailInput.hasError('required')">Email is required</mat-error>
                       <mat-error *ngIf="!emailInput.hasError('required')">Email is invalid</mat-error> -->
                         </mat-form-field>
+                        <div class="selection" style="width: 70%;" fxLayoutAlign="start start">
+                            <mat-radio-group style="margin-top: 13px; padding-right: 5px;" formControlName="type" [ngModel]="contract.type">
+                                <mat-radio-button value=1 style="padding-right: 10px;margin-right: 25px;" [checked]="contract.type == 1">New</mat-radio-button>
+                                <mat-radio-button value=2 [checked]="contract.type == 2">Renewal</mat-radio-button>
+                            </mat-radio-group>
+                        </div>
+                        <div fxLayout="row" fxLayout.xs="column" style="width: 70%;">
+                            <mat-form-field style="margin-right: 10px; width: 50%;">
+                                <mat-label>Start Date</mat-label>
+                                <input matInput [matDatepicker]="picker1" formControlName="startDate" [ngModel]="contract.startDate">
+                                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                                <mat-datepicker #picker1></mat-datepicker>
+                            </mat-form-field>
+                            <mat-form-field style="width: 50%;">
+                                <mat-label>End Date</mat-label>
+                                <input matInput [matDatepicker]="picker2" formControlName="endDate" [ngModel]="contract.endDate">
+                                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                                <mat-datepicker #picker2></mat-datepicker>
+                            </mat-form-field>
+                        </div>
 
+                        <div fxLayout="row" fxLayout.xs="column" style="width: 70%;">
+                            <mat-form-field style="margin-right: 10px; width: 50%;">
+                                <span class="icon-pos" matPrefix><mat-icon>attach_money</mat-icon> &nbsp;</span>
+                                <input matInput type="text" placeholder="Placement Fee" formControlName="placementFeeScale" [ngModel]="contract.placementFeeScale" id="fee">
+                            </mat-form-field>
+                            <mat-form-field style="width: 50%;">
+                                <span class="icon-pos" matPrefix><mat-icon>attach_money</mat-icon> &nbsp;</span>
+                                <input matInput type="text" placeholder="Management Fee" formControlName="managementFeeScale" [ngModel]="contract.managementFeeScale" id="fee">
+                            </mat-form-field>
+                        </div>
+                        <div style="width: 70%;" fxLayoutAlign="start start">
+                            <mat-checkbox formControlName="isActive" [ngModel]="contract.isActive" [(checked)]="contract.isActive" class="property-full-width">Active</mat-checkbox>
+                        </div>
+                        <span class="line"></span>
+                        <p></p>
+                        <div fxLayout="row" fxLayout.xs="column" style="width: 70%; margin-top: 25px;">
+                            <div style="width: 50%;">
+                                <h5 style="font-size: 1.25em;">Property Info</h5>
+                                <p>{{contract.property.propertyName}}</p>
+                                <p>
+                                    <span *ngIf="!contract.property.address.propertySuiteNumber == ''">{{contract.property.address.propertySuiteNumber}}-</span> {{contract.property.address.propertyNumber}} {{contract.property.address.propertyStreet}}
+                                </p>
+                                <p>
+                                    {{contract.property.address.propertyCity}} {{contract.property.address.propertyStateProvince}} {{contract.property.address.propertyZipPostCode}}
+                                </p>
+                                <p>
+                                    {{contract.property.address.propertyCountry}}
+                                </p>
+                            </div>
+                            <div style="width: 50%;">
+                                <h5 style="font-size: 1.25em;">Property Owners</h5>
+                                <div>
+                                    <ul class="owner-list" style="margin-left: -40px;">
+                                        <li *ngFor="let owner of contract.property.ownerProperty">
+                                            {{owner.propertyOwner.firstName}} {{owner.propertyOwner.lastName}} <a href="" style="cursor: pointer;">details</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div fxLayout="row" fxLayoutGap="7px" fxLayoutAlign="start center" style="width: 75%;">
+                            <button type="submit" mat-raised-button color="primary">View Contract</button>
+                        </div>
                         <div fxLayout="row" fxLayoutGap="7px" fxLayoutAlign="end center" style="width: 75%;">
                             <!-- <span *ngIf="showMsg" style="color: rgb(189, 150, 25);">Updated successfully!</span>
                 <img *ngIf=" loading" class="pl-2" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="

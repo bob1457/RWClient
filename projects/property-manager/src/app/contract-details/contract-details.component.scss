@@ -8,3 +8,24 @@
     height: 600px;
     background: #fafafa;
 }
+
+.contract-full-width {
+    width: 75%;
+}
+
+.owner-list {
+    list-style-type: none;
+    margin-top: 10px;
+}
+
+.line {
+    display: block;
+    border: none;
+    color: white;
+    height: 1px;
+    background: black;
+    background: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 350, from(#98243a), to(#fff));
+    width: 75%;
+    margin-top: 10px;
+    margin-bottom: 15px;
+}

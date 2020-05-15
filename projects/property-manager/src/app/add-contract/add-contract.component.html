@@ -30,24 +30,24 @@
                         <mat-select id="propertyType1" formControlName="managementContractType">
 
                             <mat-option value="New">New</mat-option>
-                            <mat-option value="Renewal">Renewal</mat-option>
+                            <mat-option value="Renewal">Renewal</mat-option>[(ngModel)]="managementContractType"
                         </mat-select>
                     </mat-form-field> -->
                     <div class="selection">
-                        <mat-radio-group aria-label="Select an option" style="margin-top: 13px; padding-right: 5px;" formControlName="managementContractType" [(ngModel)]="managementContractType">
-                            <mat-radio-button value="existing" checked style="padding-right: 10px;margin-right: 25px;">New</mat-radio-button>
-                            <mat-radio-button value="new">Renewal</mat-radio-button>
+                        <mat-radio-group aria-label="Select an option" style="margin-top: 13px; padding-right: 5px;" formControlName="managementContractType">
+                            <mat-radio-button value=1 checked style="padding-right: 10px;margin-right: 25px;">New</mat-radio-button>
+                            <mat-radio-button value=2>Renewal</mat-radio-button>
                         </mat-radio-group>
                     </div>
 
                     <div fxLayout="row" fxLayout.xs="column" style="width: 90%;">
-                        <mat-form-field style="margin-right: 10px; width: 50%;">
+                        <mat-form-field style="margin-right: 10px; width: 50%;" formControlName="startDate">
                             <mat-label>Start Date</mat-label>
                             <input matInput [matDatepicker]="picker1">
                             <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                             <mat-datepicker #picker1></mat-datepicker>
                         </mat-form-field>
-                        <mat-form-field style="width: 50%;">
+                        <mat-form-field style="width: 50%;" formControlName="endDate">
                             <mat-label>End Date</mat-label>
                             <input matInput [matDatepicker]="picker2">
                             <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>

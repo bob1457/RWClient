@@ -45,7 +45,8 @@ export class ContractDetailsComponent implements OnInit {
       managementFeeScale: ['', Validators.required],
       propertyName: [''],
       managementContractDocUrl: [false],
-      managementContractType: [''],
+      // managementContractType: [''],
+      type:[],
       isActive: [''],
       notes: [''],
 

@@ -28,6 +28,7 @@ import { AddPropertyBasicComponent } from './add-property-basic/add-property-bas
 import { AddPropertyFinishComponent } from './add-property-finish/add-property-finish.component';
 import { AddPropertyOwnerComponent } from './add-property-owner/add-property-owner.component';
 import { YesNoPipe } from './yes-no.pipe';
+import { ContractContentComponent } from './contract-content/contract-content.component';
 
 
 @NgModule({
@@ -51,7 +52,8 @@ import { YesNoPipe } from './yes-no.pipe';
     AddPropertyBasicComponent,
     AddPropertyFinishComponent,
     AddPropertyOwnerComponent,
-    YesNoPipe
+    YesNoPipe,
+    ContractContentComponent
   ],
   imports: [
     BrowserModule,
