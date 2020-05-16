@@ -10,6 +10,17 @@
     </div>
     <div fxFlex="20%" fxLayout="column" class="avatar_sec" fxLayoutAlign="start center">
         <img src="http://placehold.it/120x120" width="120px" height="120px">
+        <div class="date-time">
+            <p>
+                Created: {{contract.created | date }}
+            </p>
+            <p style="margin-top: -10px;">
+                Updated: {{contract.modified | date }}
+            </p>
+            <p style="margin-top: -10px;">
+                Signed: {{contract.contractSignDate | date }}
+            </p>
+        </div>
     </div>
     <div fxFlex="70%">
         <mat-card class="contract-details-card">
@@ -20,8 +31,11 @@
             </i>
                     <!-- <img src="../../assets/images/pmgmnt.png " height="40px " width="40px "> *ngIf="property*ngIf="detailsForm.value"-->
                 </div>
-                <mat-card-title>Management Contract: </mat-card-title>
-                <mat-card-subtitle>Date: </mat-card-subtitle>
+                <mat-card-title>Management Contract: <span style="font-size: .8em; font-style: italic;">{{contract.managementContractTitle}}</span></mat-card-title>
+                <mat-card-subtitle>
+                    Property Address: <span *ngIf="!contract.property.address.propertySuiteNumber == ''">{{contract.property.address.propertySuiteNumber}}-</span> {{contract.property.address.propertyNumber}} {{contract.property.address.propertyStreet}}
+                    {{contract.property.address.propertyCity}} {{contract.property.address.propertyStateProvince}} {{contract.property.address.propertyZipPostCode}}
+                </mat-card-subtitle>
             </mat-card-header>
             <mat-card-content class="contract-details-card-content">
                 <div fxLayout="column" fxLayoutAlign="start center">
@@ -67,8 +81,20 @@
                                 <input matInput type="text" placeholder="Management Fee" formControlName="managementFeeScale" [ngModel]="contract.managementFeeScale" id="fee">
                             </mat-form-field>
                         </div>
-                        <div style="width: 70%;" fxLayoutAlign="start start">
-                            <mat-checkbox formControlName="isActive" [ngModel]="contract.isActive" [(checked)]="contract.isActive" class="property-full-width">Active</mat-checkbox>
+                        <div fxLayout="row" style="width: 70%;" fxLayoutAlign="start start">
+                            <div style="margin-right: 10px; width: 50%;">
+                                <mat-checkbox formControlName="isActive" [ngModel]="contract.isActive" [(checked)]="contract.isActive" class="property-full-width">Active</mat-checkbox>
+                            </div>
+                            <!-- <div style="width: 50%;">
+                                Contract Sign Date: &nbsp; &nbsp; <span style="font-style: italic;">{{contract.contractSignDate | date: mediumDate}}</span>
+                            </div> -->
+                            <mat-form-field style="margin-right: 10px; width: 50%;">
+                                <mat-label>Sign Date</mat-label>
+                                <input matInput [matDatepicker]="picker3" formControlName="contractSignDate" [ngModel]="contract.contractSignDate">
+                                <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+                                <mat-datepicker #picker1></mat-datepicker>
+                            </mat-form-field>
+
                         </div>
                         <span class="line"></span>
                         <p></p>
@@ -76,10 +102,10 @@
                             <div style="width: 50%;">
                                 <h5 style="font-size: 1.25em;">Property Info</h5>
                                 <p>{{contract.property.propertyName}}</p>
-                                <p>
+                                <p style="margin-bottom: 0;">
                                     <span *ngIf="!contract.property.address.propertySuiteNumber == ''">{{contract.property.address.propertySuiteNumber}}-</span> {{contract.property.address.propertyNumber}} {{contract.property.address.propertyStreet}}
                                 </p>
-                                <p>
+                                <p style="margin-bottom: 0;">
                                     {{contract.property.address.propertyCity}} {{contract.property.address.propertyStateProvince}} {{contract.property.address.propertyZipPostCode}}
                                 </p>
                                 <p>
@@ -97,7 +123,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div fxLayout="row" fxLayoutGap="7px" fxLayoutAlign="start center" style="width: 75%;">
+                        <div fxLayout="row" fxLayoutGap="7px" fxLayoutAlign="start center" style="width: 70%;">
                             <button type="submit" mat-raised-button color="primary">View Contract</button>
                         </div>
                         <div fxLayout="row" fxLayoutGap="7px" fxLayoutAlign="end center" style="width: 75%;">
