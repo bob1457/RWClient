@@ -41,15 +41,15 @@
                     </div>
 
                     <div fxLayout="row" fxLayout.xs="column" style="width: 90%;">
-                        <mat-form-field style="margin-right: 10px; width: 50%;" formControlName="startDate">
+                        <mat-form-field style="margin-right: 10px; width: 50%;">
                             <mat-label>Start Date</mat-label>
-                            <input matInput [matDatepicker]="picker1">
+                            <input matInput [matDatepicker]="picker1" formControlName="startDate">
                             <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                             <mat-datepicker #picker1></mat-datepicker>
                         </mat-form-field>
-                        <mat-form-field style="width: 50%;" formControlName="endDate">
+                        <mat-form-field style="width: 50%;">
                             <mat-label>End Date</mat-label>
-                            <input matInput [matDatepicker]="picker2">
+                            <input matInput [matDatepicker]="picker2" formControlName="endDate">
                             <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
                             <mat-datepicker #picker2></mat-datepicker>
                         </mat-form-field>

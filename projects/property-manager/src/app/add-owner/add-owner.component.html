@@ -1,3 +1,66 @@
-<p>
+<!-- <p>
   add-owner works!
-</p>
+</p> -->
+<mat-card class="owner-add-card">
+    <mat-card-header style="background-color: #f5f5f5;">
+        <div mat-card-avatar class="property-list-header-image">
+            <i class="material-icons" style="font-size: 2.5em;color: #1a995e; margin-left: 5px;">
+              person_add
+  </i>
+            <!-- <img src="../../assets/images/pmgmnt.png" height="40px" width="40px"> (ngSubmit)="onSubmit()"-->
+        </div>
+        <mat-card-title>Add Property Owner - <i class="material-icons" style="font-size: 1em;color: #e67214; margin-left: 5px; vertical-align: bottom;"> warning</i>
+            <span style="font-size: .8em; color:#e67214 ;">You can only add existing or new owner to existing rental property!</span>
+        </mat-card-title>
+        <mat-card-subtitle>Add new owner to rental property</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content class="owner-add-card-content">
+        <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="1%" style="width: 90%;">
+            <div fxLayout="row" style="width: 80%;">
+                <div style="width: 50%;margin-top: 35px;">
+                    <mat-form-field style="width: 90%;">
+                        <mat-label>Select Property</mat-label>
+                        <mat-select #mySelect (selectionChange)="onChange(mySelect.value)">
+                            <mat-option *ngFor="let property of properties" [value]="property.id">
+                                {{property.propertyName}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <p></p>
+                    <div *ngIf="selected">
+                        <p style="font-weight: bold;">Property Address</p>
+                        {{address.street}} <br> {{address.city}} {{address.provState}} {{address.postZipCode}} <br> {{address.country}}
+
+                    </div>
+                </div>
+                <div style="width: 50%;margin-top: 35px;">
+                    <form [formGroup]="addForm" class="add-form">
+                        <div class="selection" fxLayout="row">
+                            <mat-radio-group aria-label="Select an option" style="margin-top: 13px;padding-right: 5px;" formControlName="ownerOption" [(ngModel)]="ownerOption">
+                                <mat-radio-button value="existing" checked style="padding-right: 10px;">Add existing property owner</mat-radio-button>
+                                <mat-radio-button value="new">Add a new property owner</mat-radio-button>
+                            </mat-radio-group>
+                            <!-- <p>{{ownerOption}}</p> -->
+                        </div>
+
+                        <div *ngIf="ownerOption == 'existing'" class="selectOwner">
+                            <mat-form-field style="width: 90%;">
+                                <mat-label>Select Property Owner</mat-label>
+                                <mat-select #mySelect2 (selectionChange)="onOwnerChange(mySelect2.value)">
+                                    <mat-option *ngFor="let owner of owners" [value]="owner.id">
+                                        {{owner.firstName}} {{owner.lastName}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+        <form [formGroup]="addForm" class="add-form">
+
+        </form>
+    </mat-card-content>
+</mat-card>
