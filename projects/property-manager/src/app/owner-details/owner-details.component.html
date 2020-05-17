@@ -9,7 +9,7 @@
         </div>
     </div>
     <div fxFlex="20%" fxLayout="column" class="avatar_sec" fxLayoutAlign="start center">
-        <img src="http://placehold.it/120x120" style="border-radius: 50%;" width="120px" height="120px">
+        <img src="../../assets/images/owner2.png" style="border-radius: 50%;" width="120px" height="120px">
         <div style="margin-top: 25px;">
             <span style="font-weight: 500;">Owned Property</span>
             <ul class="property-list">
@@ -37,8 +37,8 @@
             </i>
                     <!-- <img src="../../assets/images/pmgmnt.png " height="40px " width="40px "> *ngIf="property*ngIf="detailsForm.value"-->
                 </div>
-                <mat-card-title>Property Owner: </mat-card-title>
-                <mat-card-subtitle>Contact: </mat-card-subtitle>
+                <mat-card-title>Property Owner: <span style="font-size: .8em; font-style: italic;">{{owner.firstName}} {{owner.lastName}}</span></mat-card-title>
+                <mat-card-subtitle>Contact: {{owner.contactEmail}} {{owner.contactTelephone1}}</mat-card-subtitle>
             </mat-card-header>
             <mat-card-content class="owner-details-card-content">
                 <div fxLayout="column" fxLayoutAlign="start center">
@@ -62,19 +62,46 @@
                   <mat-error *ngIf="emailInput.hasError('required')">Email is required</mat-error>
                   <mat-error *ngIf="!emailInput.hasError('required')">Email is invalid</mat-error> -->
                         </mat-form-field>
-                        <mat-form-field class="owner-full-width">
-                            <mat-label>Description</mat-label>
-                            <textarea matInput></textarea>
-                        </mat-form-field>
+
                         <mat-form-field class="owner-full-width">
                             <span class="iocn-pos" matPrefix><mat-icon>library_books</mat-icon> &nbsp;</span>
                             <input type="text" id="contactEmail" formControlName="contactEmail" matInput placeholder="Contact Email">
-                            <!-- {{firstName}} -->
-
-                            <!-- <mat-hint>Should be a valid email address</mat-hint>
-                  <mat-error *ngIf="emailInput.hasError('required')">Email is required</mat-error>
-                  <mat-error *ngIf="!emailInput.hasError('required')">Email is invalid</mat-error> -->
                         </mat-form-field>
+                        <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="start start" style="width: 75%;">
+                            <mat-form-field class="owner-full-width" fxFlex="50%" style="margin-right: 10px;">
+                                <span class="iocn-pos" matPrefix><mat-icon>library_books</mat-icon> &nbsp;</span>
+                                <input type="text" id="contactEmail" formControlName="contactTelephone1" matInput placeholder="Contact Tel 1" [ngModel]="owner.contactTelephone1">
+                            </mat-form-field>
+                            <mat-form-field class="owner-full-width" fxFlex="50%">
+                                <span class="iocn-pos" matPrefix><mat-icon>library_books</mat-icon> &nbsp;</span>
+                                <input type="text" id="contactEmail" formControlName="contactTelephone2" matInput placeholder="Contact Tel 2" [ngModel]="owner.contactTelephone2">
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="start start" style="width: 75%;">
+                            <div style="margin-right: 10px; width: 50%;">
+                                <mat-checkbox formControlName="isActive" [ngModel]="owner.isActive" [(checked)]="owner.isActive" class="property-full-width">Active</mat-checkbox>
+                            </div>
+                            <div style="margin-right: 10px; width: 50%;">
+                                <mat-checkbox formControlName="onlineAccessEnbaled" [ngModel]="owner.onlineAccessEnbaled" [(checked)]="owner.onlineAccessEnbaled" class="property-full-width">Oneline Access</mat-checkbox>
+                            </div>
+                        </div>
+                        <mat-form-field class="owner-full-width">
+                            <mat-label>Notes</mat-label>
+                            <textarea matInput formControlName="notes" [ngModel]="owner.notes"></textarea>
+                        </mat-form-field>
+                        <div fxLayout="column" fxLayoutAlign="start start" style="width: 75%;">
+                            <h5 style="font-size: 1.25em;">Owner Address</h5>
+                            <p style="margin-bottom: 0;">
+                                {{owner.address.streetNumber}}
+                            </p>
+                            <p style="margin-bottom: 0;">
+                                {{owner.address.city}} {{owner.address.stateProvince}} {{owner.address.zipPostCode}}
+                            </p>
+                            <p>
+                                {{owner.address.country}}
+                            </p>
+                        </div>
+
 
                         <div fxLayout="row" fxLayoutGap="7px" fxLayoutAlign="end center" style="width: 75%;">
                             <!-- <span *ngIf="showMsg" style="color: rgb(189, 150, 25);">Updated successfully!</span>
