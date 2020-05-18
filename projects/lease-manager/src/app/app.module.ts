@@ -9,12 +9,14 @@ import { EffectsModule } from '@ngrx/effects';
 import { reducer } from './store/reducers/lease.reducers';
 import { LeaseEffects } from './store/effects/lease.effects';
 import { AllTenantsComponent } from './all-tenants/all-tenants.component';
+import { LeaseHomeComponent } from './lease-home/lease-home.component';
 
 @NgModule({
   declarations: [
     AppLMComponent,
     AllLeasesComponent,
-    AllTenantsComponent
+    AllTenantsComponent,
+    LeaseHomeComponent
   ],
   imports: [
     BrowserModule,

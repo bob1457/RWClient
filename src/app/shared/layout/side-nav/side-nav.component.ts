@@ -79,7 +79,7 @@ export class SideNavComponent implements OnInit {
   avatar = '';
   avatar$: Observable<string>;
 
-  hash:any = null;  
+  hash:any = null;
   gravatar = '';
   imgUrl:any = null;
   gAvatar = true;
@@ -119,7 +119,7 @@ export class SideNavComponent implements OnInit {
       // this.user = JSON.parse(localStorage.getItem('auth'));
       // localStorage.setItem('auth', JSON.stringify(userData));
 
-      
+
 
       console.log(userData);
       if (userData == null) {
@@ -133,7 +133,7 @@ export class SideNavComponent implements OnInit {
       }
 
     });
-    
+
     this.store.pipe(select(PropertyList)).subscribe(data => {
         this.property = data;
       });
@@ -145,7 +145,7 @@ export class SideNavComponent implements OnInit {
     this.store.pipe(select(ContractList)).subscribe(data => {
         this.contracts = data;
       });
-      
+
     // select single state then use async pipe in template for sub/unsub using *ngIf which returns a boolean value // console.log(userData);
     // this.avatar$ = this.store.select(ustate => ustate.user.avatarUrl);
     this.avatar = JSON.parse(localStorage.getItem('avatar'));
@@ -154,7 +154,7 @@ export class SideNavComponent implements OnInit {
     this.gravatar = this.createIdenticon(this.hash);
 
     // Update avatar when upload new custom image
-    this.stateService.currentUrl$    
+    this.stateService.currentUrl$
       .subscribe(data => {
         this.gAvatar = false;
         console.log(this.gAvatar);
@@ -248,6 +248,14 @@ export class SideNavComponent implements OnInit {
   GetList(){
     this.router.navigateByUrl('/Manage/property/propertylist');
     console.log('going to load list...');
+  }
+
+  GetPropertyListing() {
+    this.router.navigateByUrl('/Manage/marketing/propertylist');
+  }
+
+  GetAllLeases() {
+    this.router.navigateByUrl('/Manage/lease/leases');
   }
 
   createIdenticon(emailHash: any): string {

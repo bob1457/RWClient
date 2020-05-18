@@ -15,17 +15,26 @@ import { EffectsModule } from '@ngrx/effects';
 
 import { reducer } from './store/reducers/lease.reducers';
 import { LeaseEffects } from './store/effects/lease.effects';
+import { LeaseHomeComponent } from './lease-home/lease-home.component';
 
 const routes: Routes = [
-  { path: '', component: AllLeasesComponent },
-  { path: 'tenants', component: AllTenantsComponent}
+  // { path: '', component: AllLeasesComponent },
+  { path: '', component: LeaseHomeComponent,
+    children: [
+      { path: 'leases', component: AllLeasesComponent},
+      { path: 'tenants', component: AllTenantsComponent}
+      // { path: 'applications', component: ApplicationListComponent}
+    ]
+  }//,
+  // { path: 'tenants', component: AllTenantsComponent}
 ];
 
 @NgModule({
   declarations: [
     AppLMComponent,
     AllLeasesComponent,
-    AllTenantsComponent
+    AllTenantsComponent,
+    LeaseHomeComponent
   ],
   imports: [
     // BrowserModule,

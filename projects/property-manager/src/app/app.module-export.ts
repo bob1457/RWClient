@@ -41,7 +41,7 @@ const routes: Routes = [
       { path: 'contracts', component: ContractListComponent },
       { path: 'contractdetails/:id', component: ContractDetailsComponent},
     ]
-  },
+  }//,
   // { path: 'owners', component: OwnerListComponent,  outlet: 'property'},
   // { path: 'contracts', component: ContractListComponent }
 ];

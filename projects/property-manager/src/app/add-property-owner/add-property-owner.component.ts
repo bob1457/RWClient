@@ -48,18 +48,18 @@ export class AddPropertyOwnerComponent implements OnInit {
     this.addForm.get('propertyOwnerId').setValue(id);
 
     this.store.pipe(select(OwnerList)).subscribe(data => {
-      const owner = this.owners.filter( o => o.id === id);
+      const owner = this.owners.find( o => o.id === id);
       console.log(owner);
-      this.addForm.get('firstName').setValue(owner[0].firstName);
-      this.addForm.get('lastName').setValue(owner[0].lastName);
+      this.addForm.get('firstName').setValue(owner.firstName);
+      this.addForm.get('lastName').setValue(owner.lastName);
 
-      this.addForm.get('contactEmail').setValue(owner[0].contactEmail);
-      this.addForm.get('contactTelephone1').setValue(owner[0].contactTelephone1);
-      this.addForm.get('ownerStreetNumber').setValue(owner[0].streetNumber);
-      this.addForm.get('ownerCity').setValue(owner[0].city);
-      this.addForm.get('ownerStateProv').setValue(owner[0].stateProvince);
-      this.addForm.get('ownerZipPostCode').setValue(owner[0].zipPostCode);
-      this.addForm.get('ownerCountry').setValue(owner[0].country);
+      this.addForm.get('contactEmail').setValue(owner.contactEmail);
+      this.addForm.get('contactTelephone1').setValue(owner.contactTelephone1);
+      this.addForm.get('ownerStreetNumber').setValue(owner.streetNumber);
+      this.addForm.get('ownerCity').setValue(owner.city);
+      this.addForm.get('ownerStateProv').setValue(owner.stateProvince);
+      this.addForm.get('ownerZipPostCode').setValue(owner.zipPostCode);
+      this.addForm.get('ownerCountry').setValue(owner.country);
     });
 
 

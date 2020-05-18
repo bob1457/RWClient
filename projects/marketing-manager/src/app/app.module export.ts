@@ -14,10 +14,19 @@ import { MarketingEffects } from './store/effects/marketing.effects';
 import { ListingDetailsComponent } from './listing-details/listing-details.component';
 import { MarketingHomeComponent } from './marketing-home/marketing-home.component';
 import { ApplicationListComponent } from './application-list/application-list.component';
+import { ScreeningComponent } from './screening/screening.component';
 
 const routes: Routes = [
-  { path: '', component: PropertyListingComponent},
-  { path: 'applications', component: ApplicationListComponent}
+  // { path: '', component: PropertyListingComponent},
+  { path: '', component: MarketingHomeComponent,
+    children: [
+      { path: 'propertylist', component: PropertyListingComponent},
+      { path: 'screening', component: ScreeningComponent},
+      { path: 'applications', component: ApplicationListComponent}
+    ]
+
+  }//,
+  // { path: 'applications', component: ApplicationListComponent}
 ];
 
 @NgModule({
@@ -26,7 +35,8 @@ const routes: Routes = [
     PropertyListingComponent,
     MarketingHomeComponent,
     ListingDetailsComponent,
-    ApplicationListComponent
+    ApplicationListComponent,
+    ScreeningComponent
   ],
   imports: [
     // BrowserModule,

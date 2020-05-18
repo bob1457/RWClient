@@ -118,7 +118,7 @@
                         <mat-list>
                             <mat-list-item>
                                 <mat-icon style="color: rgb(129, 43, 86);" [routerLink]="['/Manage/lease']" [routerLinkActive]="['active']" matListIcon>vertical_split</mat-icon>
-                                <a matLine [routerLink]="['/Manage/lease']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }">All List</a>
+                                <a matLine [routerLink]="['/Manage/lease']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }" (click)="GetAllLeases()">All Leases</a>
                                 <button mat-icon-button (click)="showInfo(link)">
                           <!--<mat-icon>info</mat-icon>-->
                      </button>
@@ -172,7 +172,7 @@
                             <mat-list-item>
                                 <!---->
                                 <mat-icon style="color: rgb(72, 173, 219)" [routerLink]="['/Manage/marketing']" [routerLinkActive]="['active']" matListIcon>list_alt</mat-icon>
-                                <a matLine [routerLink]="['/Manage/marketing']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }">Listing</a>
+                                <a matLine [routerLink]="['/Manage/marketing']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }" (click)="GetPropertyListing()">Listing</a>
                                 <button mat-icon-button (click)="showInfo(link)"></button>
                             </mat-list-item>
                             <mat-list-item>
@@ -186,14 +186,14 @@
                 <!---->
                 <mat-icon
                   style="color: rgb(189, 219, 20);"
-                  [routerLink]="['/manage/screening']"
+                  [routerLink]="['/Manage/marketing/screening']"
                   [routerLinkActive]="['active']"
                   matListIcon
                   >open_with</mat-icon
                 >
                 <a
                   matLine
-                  [routerLink]="['/manage/screening']"
+                  [routerLink]="['/Manage/marketing/screening']"
                   [routerLinkActive]="['active']"
                   >Screening</a
                 >
@@ -387,9 +387,9 @@
 
         <div class="panel-wrapper">
             <div class="main-content">
-            <div class="app-sidenav-content">
+                <div class="app-sidenav-content">
                     <!--<app-toolbar></app-toolbar some issues of display and button function, future consideration color="primary" -->
-            <mat-toolbar class="main-toolbar mat-elevation-z2" fxLayout="row" fxLayoutAlign="start center" style="background-color: #dedede">
+                    <mat-toolbar class="main-toolbar mat-elevation-z2" fxLayout="row" fxLayoutAlign="start center" style="background-color: #dedede">
                         <div [style.display]="ToggleButtonDisplay">
                             <div fxLayout="row">
                                 <div class="logo">
