@@ -4,8 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
 import { PropertyState } from '../store/property.state';
 // import { getPropertyOwnerDetails } from '../store/actions/property.actions';
-import {
-  ownerDetails} from '../store/reducers';
+import { ownerDetails} from '../store/reducers';
 import { PropertyOwner } from '@lib/app-core';
 import { getPropertyOwnerDetails } from '../store/actions/property.actions';
 

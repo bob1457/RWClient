@@ -53,14 +53,96 @@
                                 </mat-select>
                             </mat-form-field>
                         </div>
+                        <div *ngIf="ownerOption == 'new'" class="selectOwner">
+                            <div fxLayout="column">
+                                <div [@.disabled]="true">
+                                    <mat-tab-group>
+                                        <mat-tab label="General" style="background: #f5f5f5;">
+                                            <mat-form-field class="property-full-width" style="margin-top: 25px;width: 100%;">
+                                                <span class="icon-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
+                                                <input type="text" id="firstName" formControlName="firstName" matInput placeholder="Owner First Name">
+
+                                            </mat-form-field>
+                                            <mat-form-field class="property-full-width" style="width: 100%;">
+                                                <span class="icon-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
+                                                <input type="text" id="lastName" formControlName="lastName" matInput placeholder="Owner First Name">
+
+                                            </mat-form-field>
+                                            <mat-form-field class="property-full-width" style="width: 100%;">
+                                                <span class="icon-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
+                                                <input type="text" id="emal" formControlName="contactEmail" matInput placeholder="Owner Email">
+
+                                            </mat-form-field>
+                                            <mat-form-field class="property-full-width" style="width: 100%;">
+                                                <span class="icon-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
+                                                <input type="text" id="tel" formControlName="contactTelephone1" matInput placeholder="Owner Telephone">
+
+                                            </mat-form-field>
+                                            <mat-form-field class="property-full-width" style="width: 100%;">
+                                                <!-- <input matInput type="text" placeholder="Property Name" formControlName="propertyName" id="title"> -->
+                                                <mat-label>Notes</mat-label>
+                                                <textarea matInput formControlName="notes"></textarea>
+                                            </mat-form-field>
+                                        </mat-tab>
+                                        <mat-tab label="Address" style="background: #f5f5f5;">
+                                            <div class="selection" fxLayout="column">
+                                                <div style="margin-top: 25px;">
+                                                    <mat-checkbox formControlName=" isSameAddress " (change)="statusChange($event) " class="property-full-width " style="margin-top: 30px; ">Same as Property Address</mat-checkbox>
+                                                </div>
+                                                <div *ngIf="!sameAddress " fxLayout="column ">
+                                                    <mat-form-field class="property-full-width " fxFlex="85 " style="margin-top: 25px; ">
+                                                        <span class="icon-pos " matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
+                                                        <input type="text " id="street " formControlName="ownerStreetNumber " matInput placeholder="Address: Number & Street ">
+
+                                                    </mat-form-field>
+                                                    <div fxLayout="row ">
+                                                        <mat-form-field class="property-full-width " fxFlex="50 ">
+                                                            <span class="icon-pos " matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
+                                                            <input type="text " id="city " formControlName="ownerCity " matInput placeholder="Address: City ">
+
+                                                        </mat-form-field>
+                                                        <mat-form-field class="property-full-width " fxFlex="45 " style="margin-left: 15px; ">
+                                                            <span class="icon-pos " matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
+                                                            <input type="text " id="prov " formControlName="ownerStateProv " matInput placeholder="Address: Province/State ">
+
+                                                        </mat-form-field>
+                                                    </div>
+                                                    <mat-form-field class="property-full-width " fxFlex="85 ">
+                                                        <span class="icon-pos " matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
+                                                        <input type="text " id="post " formControlName="ownerZipPostCode " matInput placeholder="Address: Post/Zip Code ">
+
+                                                    </mat-form-field>
+                                                    <mat-form-field class="property-full-width " fxFlex="85 ">
+                                                        <span class="icon-pos " matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
+                                                        <input type="text " id="country " formControlName="ownerCountry " matInput placeholder="Address: country ">
+
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
+                                        </mat-tab>
+
+                                    </mat-tab-group>
+                                </div>
+
+
+
+
+                            </div>
+                        </div>
+
+                        <div class="submit-button">
+                            <button mat-button type="button" style="float: right;background: #ff5722; color: white;margin-right: 5px;">Cancel</button>
+                            <button mat-button style="float: right;background: #11c447; color: white;" (click)="submit(addForm.value)">Submit</button>
+
+                        </div>
                     </form>
 
                 </div>
             </div>
 
         </div>
-        <form [formGroup]="addForm" class="add-form">
+        <!-- <form [formGroup]="addForm " class="add-form ">
 
-        </form>
+        </form> -->
     </mat-card-content>
 </mat-card>

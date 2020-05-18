@@ -31,6 +31,7 @@ export class AddOwnerComponent implements OnInit {
   };
 
   selected = false;
+  sameAddress = false;
 
 
   constructor(private formBuilder: FormBuilder,
@@ -45,7 +46,8 @@ export class AddOwnerComponent implements OnInit {
       contactTelephone2: [],
       propertyId: [],
 
-      ownerOption: []
+      ownerOption: [],
+      isSameAddress: []
 
     });
 
@@ -83,6 +85,11 @@ export class AddOwnerComponent implements OnInit {
 
   onOwnerChange(id) {
 
+  }
+
+  statusChange(e) {
+    console.log(e.checked);
+    this.sameAddress = e.checked;
   }
 
 }
