@@ -7,13 +7,22 @@ import { AppMaterialModule } from '@lib/app-material';
 
 import { AppBmComponent } from './app.component';
 import { RouterModule, Routes } from '@angular/router';
-
 import { ManageHomeComponent } from './manage-home/manage-home.component';
-import { CalenderComponent } from './calender/calender.component';
+import { TaskListComponent } from './task-list/task-list.component';
+import { MessageComponent } from './message/message.component';
+import { CalendarComponent } from './calendar/calendar.component';
+import { MainComponent } from './main/main.component';
 
 const routes: Routes = [
-  { path: '', component: ManageHomeComponent},
-  { path: 'calendar', component: CalenderComponent }
+  { path: '', component: ManageHomeComponent,
+    children: [
+      { path: 'main', component: MainComponent},
+      { path: 'tasks', component: TaskListComponent},
+      { path: 'calendar', component: CalendarComponent},
+      { path: 'messages', component: MessageComponent}
+    ]
+  }
+  // { path: 'calendar', component: CalenderComponent }
   // { path: 'contracts', component: ContractListComponent }
 ];
 
@@ -21,7 +30,10 @@ const routes: Routes = [
   declarations: [
     AppBmComponent,
     ManageHomeComponent,
-    CalenderComponent
+    MessageComponent,
+    MainComponent,
+    TaskListComponent,
+    CalendarComponent
   ],
   imports: [
     // BrowserModule,

@@ -59,6 +59,11 @@ export class SideNavComponent implements OnInit {
   owners: any[] = [];
   contracts: any[] = [];
 
+  tenant: any[] = [];
+  applicatons: any[] = [];
+  propertyLisitng: any[] = [];
+  rentalList: any[] = [];
+
   mode = 'side';
   opened = true;
 
@@ -144,6 +149,22 @@ export class SideNavComponent implements OnInit {
 
     this.store.pipe(select(ContractList)).subscribe(data => {
         this.contracts = data;
+      });
+
+    this.store.pipe(select(TenantList)).subscribe(data => {
+        this.tenant = data;
+      });
+
+    this.store.pipe(select(RentalList)).subscribe(data => {
+        this.rentalList = data;
+      });
+
+    this.store.pipe(select(MarketingList)).subscribe(data => {
+        this.propertyLisitng = data;
+      });
+
+    this.store.pipe(select(RentalAppList)).subscribe(data => {
+        this.applicatons = data;
       });
 
     // select single state then use async pipe in template for sub/unsub using *ngIf which returns a boolean value // console.log(userData);
@@ -256,6 +277,10 @@ export class SideNavComponent implements OnInit {
 
   GetAllLeases() {
     this.router.navigateByUrl('/Manage/lease/leases');
+  }
+
+  MainHome() {
+    this.router.navigateByUrl('/Manage/main/main');
   }
 
   createIdenticon(emailHash: any): string {

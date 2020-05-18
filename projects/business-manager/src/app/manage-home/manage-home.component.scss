@@ -1,0 +1,20 @@
+.grid-container {
+    margin: 20px;
+}
+
+.title-icon {
+    background: #f7f3f3;
+    padding: 10px;
+    /* text-shadow: 2px 2px; */
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.main-container {
+    overflow-y: auto;
+    overflow-x: hidden;
+    //height: calc(100% - #{$height__main-toolbar});
+    height: 100%;
+    position: relative;
+    // flex: 1;
+    margin-top: 25px;
+}
