@@ -2,7 +2,7 @@ import * as fromAuth from '@lib/auth';
 import { Store, select } from '@ngrx/store';
 import { Component, OnInit } from '@angular/core';
 import { MediaObserver, MediaChange } from '@angular/flex-layout';
-import { Router } from '@angular/router';
+import { Router, Event, NavigationStart, NavigationEnd } from '@angular/router';
 import { Observable, Subscription, from } from 'rxjs';
 import {
   trigger,
@@ -47,6 +47,8 @@ import { StateService } from 'projects/auth/src/public-api';
 })
 export class SideNavComponent implements OnInit {
   serverUrl = 'http://localhost:58088/';
+
+  loadingIndicator = false;
 
   currentState = 'increase';
 
@@ -106,6 +108,16 @@ export class SideNavComponent implements OnInit {
         this.mode = this.getMode(mediaChange);
         this.opened = this.getOpened(mediaChange);
         this.OpenButtonDisplay = this.showHideOpenButton(mediaChange);
+        this.router.events.subscribe((routerEvent: Event) => {
+          if (routerEvent instanceof NavigationStart) {
+            this.loadingIndicator = true;
+          }
+
+          if (routerEvent instanceof NavigationEnd ){
+            this.loadingIndicator = false;
+          }
+
+        });
       }
     );
   }
@@ -116,7 +128,7 @@ export class SideNavComponent implements OnInit {
         this.imgUrl = data;
         this.imgUrl = localStorage.getItem('newAvatarUrl');
         console.log(this.imgUrl);
-  })
+  });
 
   ngOnInit() {
     debugger;
