@@ -8,12 +8,16 @@ import { Store, select } from '@ngrx/store';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { Observable } from 'rxjs';
 
+import { Router, Event, NavigationStart, NavigationEnd } from '@angular/router';
+
 @Component({
   selector: 'app-contract-list',
   templateUrl: './contract-list.component.html',
   styleUrls: ['./contract-list.component.scss']
 })
 export class ContractListComponent implements OnInit {
+
+  loading = false;
 
   list: ManagementContract[];
   contractList$: Observable<ManagementContract[]>;
@@ -24,7 +28,19 @@ export class ContractListComponent implements OnInit {
   @ViewChild(MatSort, {static: false}) sort: MatSort;
 
   constructor(private store: Store<PropertyState>,
-              private contractService: ManagementContractService) { }
+              private router: Router,
+              private contractService: ManagementContractService) {
+                this.router.events.subscribe((routerEvent: Event) => {
+                  if (routerEvent instanceof NavigationStart) {
+                    this.loading = true;
+                  }
+
+                  if (routerEvent instanceof NavigationEnd ){
+                    this.loading = false;
+                  }
+
+                });
+              }
 
   dataSource = new MatTableDataSource<ManagementContract>();
 

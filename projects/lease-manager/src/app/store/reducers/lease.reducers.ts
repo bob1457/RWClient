@@ -1,5 +1,5 @@
 import { PropertyLeaseState } from '../lease-state';
-import { createReducer, on, Action } from '@ngrx/store';
+import { createReducer, on, Action, createFeatureSelector, createSelector } from '@ngrx/store';
 import * as LeaseActions from '../actions/lease.actions';
 
 
@@ -54,6 +54,15 @@ const propertyLeaseReducer = createReducer(
 
   );
 
+/**
+ *
+ * State Selectors
+ */
+export const selectLeaseyState = createFeatureSelector<PropertyLeaseState>('lease');
+
+export const getLeaseList = (state: PropertyLeaseState) => state.leases;
+
+export const leaseList = createSelector(selectLeaseyState, getLeaseList);
 
 
 

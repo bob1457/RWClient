@@ -8,6 +8,8 @@ import { propertyList} from '../store/reducers/property.reducer';
 import { MatPaginator, MatSort } from '@angular/material';
 import { Observable } from 'rxjs';
 
+import { Router, Event, NavigationStart, NavigationEnd } from '@angular/router';
+
 
 @Component({
   selector: 'app-property-list',
@@ -15,6 +17,8 @@ import { Observable } from 'rxjs';
   styleUrls: ['./property-list.component.scss']
 })
 export class PropertyListComponent implements OnInit {
+
+  loadingIndicator = false;
 
   baseUrl = 'http://localhost:21799';
 
@@ -28,25 +32,37 @@ export class PropertyListComponent implements OnInit {
   @ViewChild(MatSort, {static: false}) sort: MatSort;
 
   constructor(private propertyService: PropertyService,
-              private store: Store<PropertyState>) { }
+              private router: Router,
+              private store: Store<PropertyState>) {
+                this.router.events.subscribe((routerEvent: Event) => {
+                  if (routerEvent instanceof NavigationStart) {
+                    this.loadingIndicator = true;
+                  }
+
+                  if (routerEvent instanceof NavigationEnd ){
+                    this.loadingIndicator = false;
+                  }
+
+                });
+              }
 
   dataSource = new MatTableDataSource<Property>();
 
   ngOnInit() {
     // this.getPropertyList();
-    // this.propertyList$ = 
+    // this.propertyList$ =
     // this.store.select(propertyList);
     this.store.dispatch(getPropertyList());
-    // this.propertyList$ = 
-    
+    // this.propertyList$ =
+
     // debugger;
     this.store.pipe(
-      select(propertyList)).subscribe(data => { 
+      select(propertyList)).subscribe(data => {
         this.list = data ;
         console.log(data);
         this.dataSource.data = this.list;
         console.log(this.dataSource.data);
-      });    
+      });
   }
 
   getPropertyList() {
