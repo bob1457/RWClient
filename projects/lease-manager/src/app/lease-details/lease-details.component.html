@@ -1,7 +1,7 @@
 <!-- <p>
-  lease-details works!*ngIf="lease"{{property.propertyName}}
+  lease-details works!{{property.propertyName}}
 </p> -->
-<div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="1%" fxFlexFill>
+<div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="1%" fxFlexFill *ngIf="lease">
     <div>
         <div fxFlex="10%" fxLayoutAlign="end">
             <i class="far fa-arrow-alt-circle-left" title="back to list" style="cursor: pointer; color: seagreen; font-size: 1.5em;" (click)="goBack()"></i>
@@ -37,16 +37,16 @@ account_balance
 </i>
                     <!-- {{property.propertyId}}{{property.propertyName}}<img src="../../assets/images/pmgmnt.png " height="40px " width="40px "> *ngIf="property*ngIf="detailsForm.value"{{property.propertyNumber}} {{property.propertyNumber}} {{property.propertyStreet}} {{property.propertyCity}} {{property.propertyStateProvince}} {{property.propertyZipPostCode}}-->
                 </div>
-                <mat-card-title>Rental Property: ID: - <span style="font-size: .8em; font-style: italic;"></span> </mat-card-title>
+                <mat-card-title>Rental Property: ID: - <span style="font-size: .8em; font-style: italic;">{{lease.id}}</span> </mat-card-title>
                 <mat-card-subtitle>Property Address: </mat-card-subtitle>
             </mat-card-header>
             <mat-card-content class="lease-details-card-content">
                 <form novalidate fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" [formGroup]="detailsForm" (ngSubmit)="submit()">
 
-                    <div fxLayout="column" fxLayoutAlign="start center">
+                    <div fxLayout="column" fxLayoutAlign="start center" style=" width: 75%;">
                         <mat-form-field class="lease-full-width" style="margin-top: 25px;">
                             <span class="icon-pos" matPrefix><mat-icon>swap_calls</mat-icon> &nbsp;</span>
-                            <input readonly type="text" id="leaseId" formControlName="id" matInput placeholder="Lease Agreement ID">
+                            <input readonly type="text" id="leaseId" formControlName="id" matInput placeholder="Lease Agreement ID" [ngModel]="lease.id">
                         </mat-form-field>
                     </div>
                     <!-- [ngModel]="lease.id" -->
