@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { PropertyLeaseState } from '../store/lease-state';
 import { Store, select } from '@ngrx/store';
-import { tenantList } from '../store/reducers';
+import { tenantList, tenantDetails } from '../store/reducers';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { PropertyTenant, LeaseService } from '@lib/app-core';
+import { getTenantDetails } from '../store/actions/lease.actions';
 
 @Component({
   selector: 'app-tenant-details',
@@ -29,6 +30,11 @@ export class TenantDetailsComponent implements OnInit {
 
   ngOnInit() {
     debugger;
+
+    this.GetTenantDetails(this.id);
+
+
+
     // this.store.pipe(select(tenantList))
     //     .subscribe(data => {
     //       this.tenants = data;
@@ -37,11 +43,11 @@ export class TenantDetailsComponent implements OnInit {
     //       // this.tenant = selected;
     //       console.log(this.tenant);
     //     });
-    this.leaseService.getTenantDetails(this.id)
-        .subscribe(data => {
-          this.tenant = data;
-          console.log(this.tenant);
-        });
+    // this.leaseService.getTenantDetails(this.id)
+    //     .subscribe(data => {
+    //       this.tenant = data;
+    //       console.log(this.tenant);
+    //     });
 
     this.detailsForm = this.formBuilder.group({
           id: [],
@@ -56,6 +62,32 @@ export class TenantDetailsComponent implements OnInit {
           isActive: [true]
         });
   }
+
+  GetTenantDetails(id: any) {
+    debugger;
+    // this.store.dispatch(getTenantDetails({payload: id}));
+    // this.property$ =
+
+    // User store to select the state
+
+    this.store.pipe(select(tenantDetails))
+    .subscribe(data => {
+      if (data) { // select data from state store if data exists
+        this.tenant = data;
+        this.detailsForm.patchValue(data);
+      } else {
+        this.store.dispatch(getTenantDetails({payload: id})); // dispatch the action if state has no data
+
+        this.store.pipe(select(tenantDetails)) // select date from state in store
+        .subscribe(tenant => {
+          this.tenant = tenant;
+        });
+      }
+      console.log(data);
+    });
+
+
+}
 
   goBack() {
     this.router.navigate(['/Manage/lease/tenants']);

@@ -83,5 +83,31 @@ export class LeaseEffects {
     )
   );
 
+  getTenantDetails$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(LeaseActions.getTenantDetails),
+      // tap(() => console.log('got here: ')),
+      map(action => action.payload),
+      switchMap((payload) =>
+        this.leaseService.getTenantDetails(payload).pipe(
+          tap(() => console.log('got here for tenant details')),
+          map((tenant: PropertyTenant) => ({
+            // tslint:disable-next-line:max-line-length
+            type: '[Leases] Get Tenant Details Success', // the name of the action(string) must match the string in the Action, case senstive
+            payload: tenant
+          })),
+          tap(res => {console.log('response: ' + res); }),
+          catchError(
+            err => {
+              tap( () => console.log('err'));
+              return of(LeaseActions.getTenantDetailsFailure([err.error]));
+            } // EMPTY // return of('[Property] Get Property Details Failure', err.error);
+          )
+        )
+      )
+    )
+  );
+
 
 }

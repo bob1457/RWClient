@@ -66,5 +66,26 @@ export const getAllTenantsFailure = createAction(
   }
 );
 
+/**
+ * Get Tenant Details Actions
+ */
+export const getTenantDetails = createAction(
+  '[Leases] Get Tenant Details',
+  props<{payload: number}>()
+);
+
+export const getTenantDetailsSuccess = createAction(
+  '[Leases] Get Tenant Details Success',
+  props<{payload: PropertyTenant}>()
+);
+
+export const getTenantDetailsFailure = createAction(
+  '[Leases] Get Tenant Deatils Failure',
+  // props<{payload: any}>()
+  (errorMessage = 'Error loading tenant details') => {
+    return ({ payload: { errorMessage } });
+  }
+);
+
 
 

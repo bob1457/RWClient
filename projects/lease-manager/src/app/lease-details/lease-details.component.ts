@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { PropertyLeaseState } from '../store/lease-state';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LeaseService, PropertyLease } from '@lib/app-core';
 import { getLeaseDetails } from '../store/actions/lease.actions';
+import { leaseDetails } from '../store/reducers';
 
 @Component({
   selector: 'app-lease-details',
@@ -85,6 +86,21 @@ export class LeaseDetailsComponent implements OnInit {
       //   this.detailsForm.patchValue(data);
       //   console.log(data);
       // });
+      this.store.pipe(select(leaseDetails))
+    .subscribe(data => {
+      if (data) { // select data from state store if data exists
+        this.lease = data;
+        this.detailsForm.patchValue(data);
+      } else {
+        this.store.dispatch(getLeaseDetails({payload: id})); // dispatch the action if state has no data
+
+        this.store.pipe(select(leaseDetails)) // select date from state in store
+        .subscribe(lease => {
+          this.lease = lease;
+        });
+      }
+      console.log(data);
+    });
 
   }
 
