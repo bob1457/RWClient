@@ -16,13 +16,24 @@ import { EffectsModule } from '@ngrx/effects';
 import { reducer } from './store/reducers/lease.reducers';
 import { LeaseEffects } from './store/effects/lease.effects';
 import { LeaseHomeComponent } from './lease-home/lease-home.component';
+import { TenantDetailsComponent } from './tenant-details/tenant-details.component';
+import { AddTenantComponent } from './add-tenant/add-tenant.component';
+import { AddLeaseComponent } from './add-lease/add-lease.component';
+import { LeaseDetailsComponent } from './lease-details/lease-details.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { YesNoPipe } from './yes-no.pipe';
 
 const routes: Routes = [
   // { path: '', component: AllLeasesComponent },
   { path: '', component: LeaseHomeComponent,
     children: [
       { path: 'leases', component: AllLeasesComponent},
-      { path: 'tenants', component: AllTenantsComponent}
+      { path: 'tenants', component: AllTenantsComponent},
+      { path: 'leasedetails/:id', component: LeaseDetailsComponent},
+      { path: 'addlease', component: AddLeaseComponent},
+      { path: 'tenantdetails/:id', component: TenantDetailsComponent},
+      { path: 'addtenant', component: AddTenantComponent}
       // { path: 'applications', component: ApplicationListComponent}
     ]
   }//,
@@ -34,12 +45,20 @@ const routes: Routes = [
     AppLMComponent,
     AllLeasesComponent,
     AllTenantsComponent,
-    LeaseHomeComponent
+    LeaseHomeComponent,
+    LeaseDetailsComponent,
+    AddLeaseComponent,
+    AddTenantComponent,
+    TenantDetailsComponent,
+    YesNoPipe
   ],
   imports: [
     // BrowserModule,
     CommonModule,
     AppMaterialModule,
+    FlexLayoutModule,
+    FormsModule,
+    ReactiveFormsModule,
     RouterModule.forChild(routes),
     StoreModule.forFeature('lease', reducer),
     EffectsModule.forFeature([LeaseEffects])

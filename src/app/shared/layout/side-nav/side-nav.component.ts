@@ -17,6 +17,7 @@ import { getUserInfo, User } from '@lib/auth';
 import * as sparkmd5 from 'spark-md5';
 
 import { PropertyList, ContractList, TenantList, RentalList, OwnerList, MarketingList, RentalAppList } from '@lib/dashboard';
+// import { StateService } from '@lib/auth';
 import { StateService } from 'projects/auth/src/public-api';
 
 
@@ -187,14 +188,14 @@ export class SideNavComponent implements OnInit {
     this.gravatar = this.createIdenticon(this.hash);
 
     // Update avatar when upload new custom image
-    this.stateService.currentUrl$
-      .subscribe(data => {
-        this.gAvatar = false;
-        console.log(this.gAvatar);
-        this.imgUrl = data;
-        this.imgUrl = localStorage.getItem('newAvatarUrl');
-        console.log(this.imgUrl);
-    })
+    // this.stateService.currentUrl$
+    //   .subscribe(data => {
+    //     this.gAvatar = false;
+    //     console.log(this.gAvatar);
+    //     this.imgUrl = data;
+    //     this.imgUrl = localStorage.getItem('newAvatarUrl');
+    //     console.log(this.imgUrl);
+    // });
 
 
   }

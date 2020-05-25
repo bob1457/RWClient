@@ -1,0 +1,59 @@
+<!-- <p>
+  lease-details works!*ngIf="lease"{{property.propertyName}}
+</p> -->
+<div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="1%" fxFlexFill>
+    <div>
+        <div fxFlex="10%" fxLayoutAlign="end">
+            <i class="far fa-arrow-alt-circle-left" title="back to list" style="cursor: pointer; color: seagreen; font-size: 1.5em;" (click)="goBack()"></i>
+        </div>
+    </div>
+    <div fxFlex="20%" fxLayout="column" class="avatar_sec" fxLayoutAlign="start center">
+        <img src="../../assets/images/agreement.png" style="border-radius: 50%;margin-top: 20px;" width="120px " height="120px" title="">
+
+        <div style="margin-top: 25px;">
+            <span style="font-weight: 500;">Tenant Information</span>
+            <ul class="owner-list">
+                <!-- <li *ngFor="let owner of property.ownerList" style="margin-left: -40px;">
+            {{owner.firstName}} {{owner.lastName}} <a href="" style="cursor: pointer;">details</a>
+        </li> -->
+            </ul>
+        </div>
+        <div class="date-time">
+            <!-- <p>
+        Created: {{property.creationDate | date }}
+    </p>
+    <p style="margin-top: -10px;">
+        Updated: {{property.updateDate | date }}
+    </p> -->
+        </div>
+
+    </div>
+    <div fxFlex="70%">
+        <mat-card class="lease-details-card ">
+            <mat-card-header style="background-color: #f5f5f5; ">
+                <div mat-card-avatar class="lease-details-header-image ">
+                    <i class="material-icons " style="font-size: 2.5em;color: #e64a19; margin-left: 5px; ">
+account_balance
+</i>
+                    <!-- {{property.propertyId}}{{property.propertyName}}<img src="../../assets/images/pmgmnt.png " height="40px " width="40px "> *ngIf="property*ngIf="detailsForm.value"{{property.propertyNumber}} {{property.propertyNumber}} {{property.propertyStreet}} {{property.propertyCity}} {{property.propertyStateProvince}} {{property.propertyZipPostCode}}-->
+                </div>
+                <mat-card-title>Rental Property: ID: - <span style="font-size: .8em; font-style: italic;"></span> </mat-card-title>
+                <mat-card-subtitle>Property Address: </mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content class="lease-details-card-content">
+                <form novalidate fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" [formGroup]="detailsForm" (ngSubmit)="submit()">
+
+                    <div fxLayout="column" fxLayoutAlign="start center">
+                        <mat-form-field class="lease-full-width" style="margin-top: 25px;">
+                            <span class="icon-pos" matPrefix><mat-icon>swap_calls</mat-icon> &nbsp;</span>
+                            <input readonly type="text" id="leaseId" formControlName="id" matInput placeholder="Lease Agreement ID">
+                        </mat-form-field>
+                    </div>
+                    <!-- [ngModel]="lease.id" -->
+                </form>
+            </mat-card-content>
+        </mat-card>
+    </div>
+
+
+</div>

@@ -4,6 +4,7 @@ import { PropertyState } from '../store/property.state';
 import { Store, select } from '@ngrx/store';
 import { Property, PropertyOwner } from '@lib/app-core';
 import { propertyList, ownerList } from '../store/reducers';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-add-owner',
@@ -35,6 +36,7 @@ export class AddOwnerComponent implements OnInit {
 
 
   constructor(private formBuilder: FormBuilder,
+              private location: Location,
               private store: Store<PropertyState>) { }
 
   ngOnInit() {
@@ -90,6 +92,13 @@ export class AddOwnerComponent implements OnInit {
   statusChange(e) {
     console.log(e.checked);
     this.sameAddress = e.checked;
+  }
+
+  submit(formValue) { // Add validation here...for all fields if any
+    debugger;
+    console.log(this.addForm);
+    console.log(formValue);
+    this.location.back();
   }
 
 }

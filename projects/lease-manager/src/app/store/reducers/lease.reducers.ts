@@ -11,7 +11,8 @@ export const initialState: PropertyLeaseState =  { // adapter.getInitialState
   tenants: null,
   // owners: null,
   // ownersOfProperty: null,
-  // selectedOwner: null,
+  selectedLease: null,
+  selectedTenant: null,
   // contracts: null,
   // contractsForProperty: null,
   // selectedContract: null,
@@ -37,6 +38,23 @@ const propertyLeaseReducer = createReducer(
     });
   }),
 
+  on(LeaseActions.getLeaseDetails, (state) => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+  on(LeaseActions.getLeaseDetailsSuccess, (state, { payload }) => {
+    debugger;
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      selectedLease: payload
+    });
+  }),
+
+
   on(LeaseActions.getAllTenants, state => ({
     ...state,
     loading: true,
@@ -61,8 +79,10 @@ const propertyLeaseReducer = createReducer(
 export const selectLeaseyState = createFeatureSelector<PropertyLeaseState>('lease');
 
 export const getLeaseList = (state: PropertyLeaseState) => state.leases;
+export const getTenantList = (state: PropertyLeaseState) => state.tenants;
 
 export const leaseList = createSelector(selectLeaseyState, getLeaseList);
+export const tenantList = createSelector(selectLeaseyState, getTenantList);
 
 
 

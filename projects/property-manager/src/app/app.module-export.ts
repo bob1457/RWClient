@@ -26,6 +26,7 @@ import { AddPropertyFeaturesComponent } from './add-property-features/add-proper
 import { AddPropertyFacilitiesComponent } from './add-property-facilities/add-property-facilities.component';
 import { AddPropertyFinishComponent } from './add-property-finish/add-property-finish.component';
 import { AddPropertyOwnerComponent } from './add-property-owner/add-property-owner.component';
+import { ContractContentComponent } from './contract-content/contract-content.component';
 import { YesNoPipe } from './yes-no.pipe';
 
 const routes: Routes = [
@@ -67,6 +68,7 @@ const routes: Routes = [
     OwnerDetailsComponent,
     ContractListComponent,
     ContractDetailsComponent,
+    ContractContentComponent,
     YesNoPipe
   ],
   imports: [

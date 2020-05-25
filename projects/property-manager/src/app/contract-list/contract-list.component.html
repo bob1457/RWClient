@@ -17,7 +17,7 @@
 <p>
   <button mat-button color="accent" (click)="updateContract()">Update Contract</button>
 </p> -->
-<div *ngIf="loadingIndicator" class="loadingio-spinner-spinner-vhc1lmfzuvn" style="top: 50%;
+<div *ngIf="loading" class="loadingio-spinner-spinner-vhc1lmfzuvn" style="top: 50%;
       left: 50%;
       position: fixed;
       /* width: 50px; */
@@ -63,7 +63,7 @@
                 <span class="spacer"></span>
                 <button [routerLink]="['/Manage/property/addcontract']" mat-button mat-mini-fab style="background: #3d5afe;color: white;">
           <i class="material-icons" title="Add Contract">
-          add
+            note_add
           </i>
         </button>
             </div>

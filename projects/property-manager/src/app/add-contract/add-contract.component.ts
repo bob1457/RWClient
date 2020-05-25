@@ -4,6 +4,7 @@ import { Property } from '@lib/app-core';
 import { PropertyState } from '../store/property.state';
 import { Store, select } from '@ngrx/store';
 import { propertyList } from '../store/reducers';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-add-contract',
@@ -21,6 +22,7 @@ export class AddContractComponent implements OnInit {
   // ];
 
   constructor(private formBuilder: FormBuilder,
+              private location: Location,
               private store: Store<PropertyState>) { }
 
   ngOnInit() {
@@ -50,6 +52,13 @@ export class AddContractComponent implements OnInit {
     //     .subscribe(res => {
     //       const property = this.properties.filter( p => p.id === id);
     //     });
+  }
+
+  submit(formValue) { // Add validation here...for all fields if any
+    debugger;
+    console.log(this.addForm);
+    console.log(formValue);
+    this.location.back();
   }
 
 }

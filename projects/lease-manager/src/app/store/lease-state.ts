@@ -8,7 +8,8 @@ export interface PropertyLeaseState {
   tenants: PropertyTenant[] | null;
   // owners: PropertyOwner[] | null;
   // ownersOfProperty: PropertyOwner[] | null;
-  // selectedOwner: PropertyOwner | null;
+  selectedLease: PropertyLease | null;
+  selectedTenant: PropertyTenant | null;
   // contracts: ManagementContract[] | null;
   // contractsForProperty: ManagementContract[] | null;
   // selectedContract: ManagementContract | null;

@@ -22,6 +22,7 @@ import { Observable } from 'rxjs';
 })
 export class OwnerListComponent implements OnInit {
 
+  loadingIndicator = false;
   // list: PropertyOwner[];
   owners$: Observable<PropertyOwner[]>;
   list: any[];
