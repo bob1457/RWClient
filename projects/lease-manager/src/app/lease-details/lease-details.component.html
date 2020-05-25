@@ -44,12 +44,98 @@ account_balance
                 <form novalidate fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" [formGroup]="detailsForm" (ngSubmit)="submit()">
 
                     <div fxLayout="column" fxLayoutAlign="start center" style=" width: 75%;">
-                        <mat-form-field class="lease-full-width" style="margin-top: 25px;">
+                        <!-- <mat-form-field class="lease-full-width" style="margin-top: 25px;">
                             <span class="icon-pos" matPrefix><mat-icon>swap_calls</mat-icon> &nbsp;</span>
                             <input readonly type="text" id="leaseId" formControlName="id" matInput placeholder="Lease Agreement ID" [ngModel]="lease.id">
+                        </mat-form-field> -->
+                        <!-- [ngModel]="lease.id" -->
+                        <mat-form-field class="lease-full-width" style="margin-top: 25px;">
+                            <span class="icon-pos" matPrefix><mat-icon>swap_calls</mat-icon> &nbsp;</span>
+                            <input readonly type="text" id="leaseTitle" formControlName="leaseTitle" matInput placeholder="Lease Title" [ngModel]="lease.leaseTitle">
                         </mat-form-field>
+                        <mat-form-field class="lease-full-width">
+                            <span class="icon-pos" matPrefix><mat-icon>swap_calls</mat-icon> &nbsp;</span>
+                            <input readonly type="text" id="leaseDesc" formControlName="leaseDesc" matInput placeholder="Description" [ngModel]="lease.leaseDesc">
+                        </mat-form-field>
+                        <div fxLayout="row" fxLayoutAlign="start start" style="width: 75%;">
+                            <div style="width: 50%;">
+                                <mat-form-field class="lease-full-width">
+                                    <span class="icon-pos" matPrefix><mat-icon>swap_calls</mat-icon> &nbsp;</span>
+                                    <input readonly type="text" id="leaseStartDate" formControlName="leaseStartDate" matInput placeholder="Lease Start Date" [ngModel]="lease.leaseStartDate | date">
+                                </mat-form-field>
+                            </div>
+                            <div style="width: 50%;">
+                                <mat-form-field class="lease-full-width">
+                                    <span class="icon-pos" matPrefix><mat-icon>date_range</mat-icon> &nbsp;</span>
+                                    <input readonly type="text" id="leaseEndDate" formControlName="leaseEndDate" matInput placeholder="Lease End Date" [ngModel]="lease.leaseEndDate | date">
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <div fxLayout="row" fxLayoutAlign="start start" style="width: 75%;">
+                            <div style="width: 50%;">
+                                <mat-form-field class="lease-full-width">
+                                    <span class="icon-pos" matPrefix><mat-icon>swap_calls</mat-icon> &nbsp;</span>
+                                    <input readonly type="text" id="term" formControlName="term" matInput placeholder="Lease Term" [ngModel]="lease.term">
+                                </mat-form-field>
+                            </div>
+                            <div style="width: 50%;">
+                                <mat-form-field class="lease-full-width">
+                                    <span class="icon-pos" matPrefix><mat-icon>swap_calls</mat-icon> &nbsp;</span>
+                                    <input readonly type="text" id="endLeaseCode" formControlName="endLeaseCode" matInput placeholder="End Lease Code" [ngModel]="lease.endLeaseCode">
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+
+
+
+                        <mat-form-field class="lease-full-width">
+                            <span class="icon-pos" matPrefix><mat-icon>swap_calls</mat-icon> &nbsp;</span>
+                            <input readonly type="text" id="rentAmount" formControlName="rentAmount" matInput placeholder="Monthly Rent" [ngModel]="lease.rentAmount | currency:'CAD'">
+                        </mat-form-field>
+
+                        <div fxLayout="row" fxLayoutAlign="start center" style="width: 75%;">
+                            <div style="width: 50%;">
+                                <mat-form-field class="lease-full-width">
+                                    <span class="icon-pos" matPrefix><mat-icon>date_range</mat-icon> &nbsp;</span>
+                                    <input readonly type="text" id="leaseSignDate" formControlName="leaseSignDate" matInput placeholder="Lease Sign Date" [ngModel]="lease.leaseSignDate | date">
+                                </mat-form-field>
+                            </div>
+                            <div style="width: 50%;">
+                                <mat-checkbox formControlName="isActive" [ngModel]="lease.isActive" class="tenant-full-width">Is Active</mat-checkbox>
+                            </div>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="start center" style="width: 75%;">
+                            <div style="width: 50%;">
+                                <mat-checkbox formControlName="isAddendumAvailable" [ngModel]="lease.isAddendumAvailable" class="tenant-full-width">Addendum Available</mat-checkbox>
+                            </div>
+                            <div style="width: 50%;">
+                                <button disabled="lease.isAddendumAvailable" mat-raised-button>View Addendum</button>
+                            </div>
+                        </div>
+
+                        <mat-form-field class="lease-full-width">
+                            <span class="icon-pos" matPrefix><mat-icon>swap_calls</mat-icon> &nbsp;</span>
+                            <input readonly type="text" id="renewTerm" formControlName="renewTerm" matInput placeholder="Renew Terms" [ngModel]="lease.renewTerm">
+                        </mat-form-field>
+
+
+                        <mat-form-field class="lease-full-width">
+                            <span class="icon-pos" matPrefix><mat-icon>swap_calls</mat-icon> &nbsp;</span>
+                            <input readonly type="text" id="notes" formControlName="notes" matInput placeholder="Notes" [ngModel]="lease.notes">
+                        </mat-form-field>
+
                     </div>
-                    <!-- [ngModel]="lease.id" -->
+
+                    <div fxLayout="row" fxLayoutGap="7px" fxLayoutAlign="end center" style="width: 75%;">
+                        <!-- <span *ngIf="showMsg" style="color: rgb(189, 150, 25);">Updated successfully!</span>
+  <img *ngIf=" loading" class="pl-2" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+  /> [disabled]="f.invalid || !f.dirty"-->
+                        <button type="submit" mat-raised-button color="primary">UPDATE</button>
+                        <button mat-raised-button color="accent">CANCEL</button>
+                    </div>
+
                 </form>
             </mat-card-content>
         </mat-card>
