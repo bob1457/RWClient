@@ -89,6 +89,10 @@ export class ListingDetailsComponent implements OnInit {
 
   }
 
+  goBack() {
+    this.router.navigate(['/Manage/marketing/propertylist']);
+  }
+
   // selectPropertyListingDetails() {
   //   debugger;
   //   this.store.pipe(select(propertyListingDetails))
