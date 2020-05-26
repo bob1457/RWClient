@@ -75,17 +75,8 @@ export class LeaseDetailsComponent implements OnInit {
 
     GetLeaseDetails(id: any) {
       debugger;
-      this.store.dispatch(getLeaseDetails({payload: id}));
-      // this.property$ =
+      // this.store.dispatch(getLeaseDetails({payload: id}));
 
-      // User store to select the state
-
-      // this.store.pipe(select(propertyDetrails))
-      // .subscribe(data => {
-      //   this.property = data;
-      //   this.detailsForm.patchValue(data);
-      //   console.log(data);
-      // });
       this.store.pipe(select(leaseDetails))
           .subscribe(data => {
             if (data) { // select data from state store if data exists

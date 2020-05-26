@@ -15,12 +15,14 @@ import { ListingDetailsComponent } from './listing-details/listing-details.compo
 import { MarketingHomeComponent } from './marketing-home/marketing-home.component';
 import { ApplicationListComponent } from './application-list/application-list.component';
 import { ScreeningComponent } from './screening/screening.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 const routes: Routes = [
   // { path: '', component: PropertyListingComponent},
   { path: '', component: MarketingHomeComponent,
     children: [
       { path: 'propertylist', component: PropertyListingComponent},
+      { path: 'listingDetails/:id', component: ListingDetailsComponent},
       { path: 'screening', component: ScreeningComponent},
       { path: 'applications', component: ApplicationListComponent}
     ]
@@ -42,6 +44,7 @@ const routes: Routes = [
     // BrowserModule,
     CommonModule,
     AppMaterialModule,
+    FlexLayoutModule,
     RouterModule.forChild(routes),
     StoreModule.forFeature('marketing', reducer),
     EffectsModule.forFeature([MarketingEffects])

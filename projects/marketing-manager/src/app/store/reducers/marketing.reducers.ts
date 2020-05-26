@@ -1,5 +1,5 @@
 import { PropertyListingState } from '../marketing.state';
-import { createReducer, on, Action } from '@ngrx/store';
+import { createReducer, on, Action, createSelector, createFeatureSelector } from '@ngrx/store';
 import * as ListingActions from '../actions/marketing.actions';
 
 
@@ -145,8 +145,18 @@ const propertyListingReducer = createReducer(
 
 
 // Selectors
+export const selectPropertyListingState = createFeatureSelector<PropertyListingState>('marketing');
 
 
+export const getPropertyListing = (state: PropertyListingState) => state.listings;
+export const getPropertyListingDetails = (state: PropertyListingState) => state.listing;
+export const getPropertyApplications = (state: PropertyListingState) => state.applications;
+export const getPropertyApplicationDetails = (state: PropertyListingState) => state.application;
+
+export const propertyListing = createSelector(selectPropertyListingState, getPropertyListing);
+export const propertyListingDetails = createSelector(selectPropertyListingState, getPropertyListingDetails);
+export const propertyApplications = createSelector(selectPropertyListingState, getPropertyApplications);
+export const propertyApplicationDetails = createSelector(selectPropertyListingState, getPropertyApplicationDetails);
 
 
 export function reducer(state: PropertyListingState | undefined, action: Action) {
