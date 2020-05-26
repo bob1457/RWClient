@@ -14,12 +14,13 @@
             <img src="http://placehold.it/50x50">
         </div>
         <div style="margin-top: 25px;">
-            <span style="font-weight: 500;">Owner Information</span>
-            <ul class="owner-list">
-                <!-- <li *ngFor="let owner of property.ownerList" style="margin-left: -40px;">
-                    {{owner.firstName}} {{owner.lastName}} <a href="" style="cursor: pointer;">details</a>
-                </li> -->
-            </ul>
+            <span style="font-weight: 500;">Property Information</span>
+            <p>
+                {{listing.rentalProperty.propertyName}}
+            </p>
+            <p>
+                {{listing.rentalProperty.address.streetNum}} <br> {{listing.rentalProperty.address.city}} {{listing.rentalProperty.address.stateProvince}} {{listing.rentalProperty.address.zipPostCode}} <br> {{listing.rentalProperty.address.country}}
+            </p>
         </div>
         <div class="date-time">
             <p>
@@ -36,12 +37,12 @@
             <mat-card-header style="background-color: #f5f5f5; ">
                 <div mat-card-avatar class="listing-details-header-image ">
                     <i class="material-icons " style="font-size: 2.5em;color: #e64a19; margin-left: 5px; ">
-                account_balance
-              </i>
+                      format_align_left
+                    </i>
                     <!-- <img src="../../assets/images/pmgmnt.png " height="40px " width="40px "> *ngIf="property*ngIf="detailsForm.value"-->
                 </div>
-                <mat-card-title>Property Listing: ID: {{listing.id}} - <span style="font-size: .8em; font-style: italic;"></span> </mat-card-title>
-                <mat-card-subtitle>Address: </mat-card-subtitle>
+                <mat-card-title>Property Listing: ID: {{listing.id}} - <span style="font-size: .8em; font-style: italic;">{{listing.title}}</span> </mat-card-title>
+                <mat-card-subtitle>Rental Property: {{listing.rentalProperty.propertyName}}</mat-card-subtitle>
             </mat-card-header>
         </mat-card>
     </div>
