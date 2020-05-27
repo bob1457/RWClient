@@ -14,6 +14,7 @@ import { ApplicationListComponent } from './application-list/application-list.co
 import { ScreeningComponent } from './screening/screening.component';
 import { AddListingComponent } from './add-listing/add-listing.component';
 import { ApplicationDetailsComponent } from './application-details/application-details.component';
+import { YesNoPipe } from './yes-no.pipe';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { ApplicationDetailsComponent } from './application-details/application-d
     ApplicationListComponent,
     ScreeningComponent,
     AddListingComponent,
-    ApplicationDetailsComponent
+    ApplicationDetailsComponent,
+    YesNoPipe
   ],
   imports: [
     BrowserModule,

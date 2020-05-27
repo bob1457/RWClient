@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+// import { FormGroup, FormBuilder } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MarketingService } from '@lib/app-core';
@@ -17,12 +17,12 @@ export class ApplicationDetailsComponent implements OnInit {
   id: number;
   application: any;
 
-  detailsForm: FormGroup;
+  // detailsForm: FormGroup;
 
   constructor(private store: Store<PropertyListingState>,
               private router: Router,
               private actRoute: ActivatedRoute,
-              private formBuilder: FormBuilder,
+              // private formBuilder: FormBuilder,
               private propertyService: MarketingService) {
                 this.id = this.actRoute.snapshot.params.id;
                 console.log(this.id);
@@ -31,10 +31,6 @@ export class ApplicationDetailsComponent implements OnInit {
   ngOnInit() {
 
     this.GetApplicationDetails(this.id);
-
-    this.detailsForm = this.formBuilder.group({
-      id: []
-    });
   }
 
   GetApplicationDetails(id: any) {
@@ -52,7 +48,7 @@ export class ApplicationDetailsComponent implements OnInit {
           .subscribe(data => {
             if (data != null && data.id === this.id) { // select data from state store if data exists
               this.application = data;
-              this.detailsForm.patchValue(data);
+              // this.detailsForm.patchValue(data);
             } else {
               this.store.dispatch(getRentalApplicationDetails({payload: id})); // dispatch the action if state has no data
 

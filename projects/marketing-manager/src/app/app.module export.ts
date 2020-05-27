@@ -19,6 +19,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddListingComponent } from './add-listing/add-listing.component';
 import { ApplicationDetailsComponent } from './application-details/application-details.component';
+import { YesNoPipe } from './yes-no.pipe';
 
 const routes: Routes = [
   // { path: '', component: PropertyListingComponent},
@@ -44,7 +45,8 @@ const routes: Routes = [
     MarketingHomeComponent,
     ListingDetailsComponent,
     ApplicationListComponent,
-    ScreeningComponent
+    ScreeningComponent,
+    YesNoPipe
   ],
   imports: [
     // BrowserModule,

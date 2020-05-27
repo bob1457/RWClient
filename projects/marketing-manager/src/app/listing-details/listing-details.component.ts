@@ -73,7 +73,7 @@ export class ListingDetailsComponent implements OnInit {
 
     this.store.pipe(select(propertyListingDetails))
           .subscribe(data => {
-            if (data) { // select data from state store if data exists
+            if (data != null && data.id === this.id) { // select data from state store if data exists
               this.listing = data;
               this.detailsForm.patchValue(data);
             } else {

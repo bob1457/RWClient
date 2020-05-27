@@ -65,7 +65,7 @@
 
                         <mat-form-field class="owner-full-width">
                             <span class="icon-pos" matPrefix><mat-icon>library_books</mat-icon> &nbsp;</span>
-                            <input type="text" id="contactEmail" formControlName="contactEmail" matInput placeholder="Contact Email">
+                            <input type="text" id="contactEmail" formControlName="contactEmail" matInput placeholder="Contact Email" [ngModel]="owner.contactEmail">
                         </mat-form-field>
                         <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="start start" style="width: 75%;">
                             <mat-form-field class="owner-full-width" fxFlex="50%" style="margin-right: 10px;">

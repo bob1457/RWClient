@@ -75,7 +75,7 @@ export class TenantDetailsComponent implements OnInit {
 
     this.store.pipe(select(tenantDetails))
     .subscribe(data => {
-      if (data) { // select data from state store if data exists
+      if (data != null && data.id === this.id) { // select data from state store if data exists
         this.tenant = data;
         this.detailsForm.patchValue(data);
       } else {

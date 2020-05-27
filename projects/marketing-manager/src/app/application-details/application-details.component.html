@@ -13,15 +13,22 @@
             <span style="font-weight: 500;">Rental Property</span>
             <!-- <ul class="property-list">
               <li *ngFor="let property of owner.ownerProperty" style="margin-left: -40px;">
-                  {{property.property.propertyName}} <a href="" style="cursor: pointer;">details</a>
+                   <a href="" style="cursor: pointer;">details</a>
               </li>
           </ul> -->
+            <!-- {{application.rentalApplicant.lastName}} -->
+            <p>
+                {{application.rentalProperty.propertyName}}
+            </p>
+            <p>
+                {{application.rentalProperty.address.streetNum}} <br> {{application.rentalProperty.address.city}} {{application.rentalProperty.address.stateProvince}} {{application.rentalProperty.address.zipPostCode}} <br> {{application.rentalProperty.address.country}}
+            </p>
         </div>
-        <div class="date-time">
+        <!-- <div class="date-time">
             <p>
                 Created: {{application.created | date }}
             </p>
-        </div>
+        </div> -->
     </div>
     <div fxFlex="70%">
         <mat-card class="applicant-details-card">
@@ -32,22 +39,75 @@
             </i>
                     <!-- <img src="../../assets/images/pmgmnt.png " height="40px " width="40px "> *ngIf="property*ngIf="detailsForm.value"-->
                 </div>
-                <mat-card-title>Property Property: <span style="font-size: .8em; font-style: italic;"></span></mat-card-title>
-                <mat-card-subtitle>Contact: {{application.rentalApplicant.firstName}} {{application.rentalApplicant.lastName}} {{application.rentalApplicant.contactEmail}} {{application.rentalApplicant.contactTel}}</mat-card-subtitle>
+                <mat-card-title>Rental Application: ID:<span style="font-size: .8em; font-style: italic;">{{application.id}}</span></mat-card-title>
+                <!-- <mat-card-subtitle>Contact: {{application.rentalApplicant.firstName}} {{application.rentalApplicant.lastName}} {{application.rentalApplicant.contactEmail}} {{application.rentalApplicant.contactTel}}</mat-card-subtitle>-->
+                <mat-card-subtitle>Property: {{application.rentalProperty.propertyName}}</mat-card-subtitle>
             </mat-card-header>
             <mat-card-content class="applicant-details-card-content">
                 <div fxLayout="column" fxLayoutAlign="start center">
-                    <form novalidate fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" [formGroup]="detailsForm" (ngSubmit)="submit()" style="width: 100%;">
-                        <mat-form-field class="owner-full-width-1" style="margin-top: 25px;width: 70%;">
-                            <span class="icon-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
-                            <input type="text" id="id" formControlName="id" matInput placeholder="ID" [ngModel]="application.id">
-                            <!-- {{firstName}} -->
+                    <h6>Rental Application - Status: {{application.status}}</h6>
+                    <table class="app-table">
+                        <tr>
+                            <td class="title-cell">First Name</td>
+                            <td class="value-cell">{{application.rentalApplicant.firstName}}</td>
+                        </tr>
+                        <tr>
+                            <td class="title-cell">Last Name</td>
+                            <td class="value-cell">{{application.rentalApplicant.lastName | uppercase}}</td>
+                        </tr>
+                        <tr>
+                            <td class="title-cell">Telephone/SMS</td>
+                            <td class="value-cell">{{application.rentalApplicant.contactTel}}<span *ngIf="application.rentalApplicant.contactSms != null">/{{application.rentalApplicant.contactSms}}</span></td>
+                        </tr>
+                        <tr>
+                            <td class="title-cell">Email</td>
+                            <td class="value-cell">{{application.rentalApplicant.contactEmail}}</td>
+                        </tr>
+                        <tr>
+                            <td class="title-cell">Annual Income(Gross)</td>
+                            <td class="value-cell">{{application.rentalApplicant.annualIncome}}</td>
+                        </tr>
+                        <tr>
+                            <td class="title-cell">Number of Occupants</td>
+                            <td class="value-cell">{{application.rentalApplicant.numberOfOccupant}}</td>
+                        </tr>
+                        <tr>
+                            <td class="title-cell">With Children</td>
+                            <td class="value-cell">{{application.rentalApplicant.withChildren | yesNo }}</td>
+                        </tr>
+                        <tr>
+                            <td class="title-cell">Immigrantion Status</td>
+                            <td class="value-cell">{{application.rentalApplicant.status}}</td>
+                        </tr>
+                        <tr>
+                            <td class="title-cell">Credit Rating</td>
+                            <td class="value-cell">{{application.rentalApplicant.creditRating}}</td>
+                        </tr>
+                        <tr>
+                            <td class="title-cell">Employment Status</td>
+                            <td class="value-cell">{{application.rentalApplicant.empoyedStatus}}</td>
+                        </tr>
+                        <tr>
+                            <td class="title-cell">Reason to Move</td>
+                            <td class="value-cell">{{application.rentalApplicant.reasonToMove}}</td>
+                        </tr>
 
-                            <!-- <mat-hint>Should be a valid email address</mat-hint>
-          <mat-error *ngIf="emailInput.hasError('required')">Email is required</mat-error>
-          <mat-error *ngIf="!emailInput.hasError('required')">Email is invalid</mat-error> -->
-                        </mat-form-field>
-                    </form>
+                        <tr>
+                            <td class="title-cell">With Co-applicant</td>
+                            <td class="value-cell">{{application.rentalApplicant.withCoApplicant | yesNo }}</td>
+                        </tr>
+                        <!-- <tr>
+                          <td class="title-cell">Last Name</td>
+                          <td class="value-cell">{{application.rentalApplicant.lastName}}</td>
+                      </tr> -->
+                        <tr>
+                            <td class="title-cell">Application Submiited on</td>
+                            <td class="value-cell">{{application.rentalApplicant.created | date}}</td>
+                        </tr>
+                    </table>
+                    <div fxLayout="row" fxLayoutGap="7px" fxLayoutAlign="end center" style="width: 75%;">
+                        <button mat-raised-button color="primary">START SCREENING</button>
+                    </div>
                 </div>
             </mat-card-content>
 

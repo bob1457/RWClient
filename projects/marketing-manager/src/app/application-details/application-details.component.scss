@@ -28,3 +28,21 @@
     font-size: .75em;
     font-style: italic;
 }
+
+.app-table {
+    width: 70%;
+    margin-top: 25px;
+}
+
+.title-cell {
+    width: 30%;
+    height: 30px;
+    padding-bottom: 20px;
+    font-weight: 600;
+}
+
+.value-cell {
+    height: 30px;
+    padding-bottom: 20px;
+    font-weight: 500;
+}
