@@ -15,6 +15,8 @@ export class AllTenantsComponent implements OnInit {
 
   list: PropertyTenant[];
 
+  listView = true;
+
   displayedColumns: string[] = ['icon', 'id', 'Name', 'Telephone', 'Email', 'OnlineAccess', 'Property', 'created', 'modified', 'action'];
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: false}) sort: MatSort;
@@ -46,6 +48,5 @@ export class AllTenantsComponent implements OnInit {
   public doFilter = (value: string) => {
     this.dataSource.filter = value.trim().toLocaleLowerCase();
   }
-
 
 }

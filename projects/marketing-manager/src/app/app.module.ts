@@ -12,6 +12,8 @@ import { EffectsModule } from '@ngrx/effects';
 import { MarketingEffects } from './store/effects/marketing.effects';
 import { ApplicationListComponent } from './application-list/application-list.component';
 import { ScreeningComponent } from './screening/screening.component';
+import { AddListingComponent } from './add-listing/add-listing.component';
+import { ApplicationDetailsComponent } from './application-details/application-details.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { ScreeningComponent } from './screening/screening.component';
     MarketingHomeComponent,
     ListingDetailsComponent,
     ApplicationListComponent,
-    ScreeningComponent
+    ScreeningComponent,
+    AddListingComponent,
+    ApplicationDetailsComponent
   ],
   imports: [
     BrowserModule,

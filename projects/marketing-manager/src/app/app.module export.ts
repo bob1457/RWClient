@@ -16,6 +16,9 @@ import { MarketingHomeComponent } from './marketing-home/marketing-home.componen
 import { ApplicationListComponent } from './application-list/application-list.component';
 import { ScreeningComponent } from './screening/screening.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AddListingComponent } from './add-listing/add-listing.component';
+import { ApplicationDetailsComponent } from './application-details/application-details.component';
 
 const routes: Routes = [
   // { path: '', component: PropertyListingComponent},
@@ -24,7 +27,8 @@ const routes: Routes = [
       { path: 'propertylist', component: PropertyListingComponent},
       { path: 'listingDetails/:id', component: ListingDetailsComponent},
       { path: 'screening', component: ScreeningComponent},
-      { path: 'applications', component: ApplicationListComponent}
+      { path: 'applications', component: ApplicationListComponent},
+      { path: 'applicationDetails/:id', component: ApplicationDetailsComponent}
     ]
 
   }//,
@@ -34,6 +38,8 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AppMkComponent,
+    AddListingComponent,
+    ApplicationDetailsComponent,
     PropertyListingComponent,
     MarketingHomeComponent,
     ListingDetailsComponent,
@@ -45,6 +51,8 @@ const routes: Routes = [
     CommonModule,
     AppMaterialModule,
     FlexLayoutModule,
+    FormsModule,
+    ReactiveFormsModule,
     RouterModule.forChild(routes),
     StoreModule.forFeature('marketing', reducer),
     EffectsModule.forFeature([MarketingEffects])

@@ -1,0 +1,56 @@
+<!-- <p>
+  application-details works!
+</p> -->
+<div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="1%" fxFlexFill *ngIf="application">
+    <div>
+        <div fxFlex="10%" fxLayoutAlign="end">
+            <i class="far fa-arrow-alt-circle-left" title="back to list" style="cursor: pointer; color: seagreen; font-size: 1.5em;" (click)="goBack()"></i>
+        </div>
+    </div>
+    <div fxFlex="20%" fxLayout="column" class="avatar_sec" fxLayoutAlign="start center">
+        <img src="../../assets/images/owner2.png" style="border-radius: 50%;" width="120px" height="120px">
+        <div style="margin-top: 25px;">
+            <span style="font-weight: 500;">Rental Property</span>
+            <!-- <ul class="property-list">
+              <li *ngFor="let property of owner.ownerProperty" style="margin-left: -40px;">
+                  {{property.property.propertyName}} <a href="" style="cursor: pointer;">details</a>
+              </li>
+          </ul> -->
+        </div>
+        <div class="date-time">
+            <p>
+                Created: {{application.created | date }}
+            </p>
+        </div>
+    </div>
+    <div fxFlex="70%">
+        <mat-card class="applicant-details-card">
+            <mat-card-header style="background-color: #f5f5f5; ">
+                <div mat-card-avatar class="applicant-details-header-image ">
+                    <i class="material-icons " style="font-size: 2.5em;color: #e64a19; margin-left: 5px; ">
+              person_add
+            </i>
+                    <!-- <img src="../../assets/images/pmgmnt.png " height="40px " width="40px "> *ngIf="property*ngIf="detailsForm.value"-->
+                </div>
+                <mat-card-title>Property Property: <span style="font-size: .8em; font-style: italic;"></span></mat-card-title>
+                <mat-card-subtitle>Contact: {{application.rentalApplicant.firstName}} {{application.rentalApplicant.lastName}} {{application.rentalApplicant.contactEmail}} {{application.rentalApplicant.contactTel}}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content class="applicant-details-card-content">
+                <div fxLayout="column" fxLayoutAlign="start center">
+                    <form novalidate fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" [formGroup]="detailsForm" (ngSubmit)="submit()" style="width: 100%;">
+                        <mat-form-field class="owner-full-width-1" style="margin-top: 25px;width: 70%;">
+                            <span class="icon-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
+                            <input type="text" id="id" formControlName="id" matInput placeholder="ID" [ngModel]="application.id">
+                            <!-- {{firstName}} -->
+
+                            <!-- <mat-hint>Should be a valid email address</mat-hint>
+          <mat-error *ngIf="emailInput.hasError('required')">Email is required</mat-error>
+          <mat-error *ngIf="!emailInput.hasError('required')">Email is invalid</mat-error> -->
+                        </mat-form-field>
+                    </form>
+                </div>
+            </mat-card-content>
+
+        </mat-card>
+    </div>
+</div>

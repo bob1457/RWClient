@@ -126,5 +126,28 @@ export class MarketingEffects {
     )
   );
 
+  getRentalApplicationDetails$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(ListingActions.getRentalApplicationDetails),
+      tap(() => console.log('got here for rental application details !!!')),
+      map(action => action.payload),
+      switchMap((payload) =>
+        this.marketingService.getRentalApplicationDetails(payload).pipe(
+          map((application: RentalApplication) => ({
+            type: '[Marketing] Get Rental Application Details Success',
+            payload: application
+          })),
+          // tap(res => {console.log('response: ' + res); }),
+          catchError(
+            err => {
+              return of('[Marketing] Get Property Listing Details Failure', err.error);
+            } // EMPTY
+          )
+        )
+      )
+    )
+  );
+
 
 }

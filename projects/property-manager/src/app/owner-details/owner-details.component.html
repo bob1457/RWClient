@@ -45,7 +45,7 @@
                     <form novalidate fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" [formGroup]="detailsForm" (ngSubmit)="submit()" style="width: 100%;">
 
                         <mat-form-field class="owner-full-width-1" style="margin-top: 25px;">
-                            <span class="iocn-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
+                            <span class="icon-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
                             <input type="text" id="firstName" formControlName="firstName" matInput placeholder="First Name" [ngModel]="owner.firstName" name="firstName">
                             <!-- {{firstName}} -->
 
@@ -54,7 +54,7 @@
                   <mat-error *ngIf="!emailInput.hasError('required')">Email is invalid</mat-error> -->
                         </mat-form-field>
                         <mat-form-field class="owner-full-width" style="margin-top: 25px;">
-                            <span class="iocn-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
+                            <span class="icon-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
                             <input type="text" id="lastName" formControlName="lastName" matInput placeholder="Last Name" [ngModel]="owner.lastName" name="lastName">
                             <!-- {{firstName}} -->
 
@@ -64,16 +64,16 @@
                         </mat-form-field>
 
                         <mat-form-field class="owner-full-width">
-                            <span class="iocn-pos" matPrefix><mat-icon>library_books</mat-icon> &nbsp;</span>
+                            <span class="icon-pos" matPrefix><mat-icon>library_books</mat-icon> &nbsp;</span>
                             <input type="text" id="contactEmail" formControlName="contactEmail" matInput placeholder="Contact Email">
                         </mat-form-field>
                         <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="start start" style="width: 75%;">
                             <mat-form-field class="owner-full-width" fxFlex="50%" style="margin-right: 10px;">
-                                <span class="iocn-pos" matPrefix><mat-icon>library_books</mat-icon> &nbsp;</span>
+                                <span class="icon-pos" matPrefix><mat-icon>library_books</mat-icon> &nbsp;</span>
                                 <input type="text" id="contactEmail" formControlName="contactTelephone1" matInput placeholder="Contact Tel 1" [ngModel]="owner.contactTelephone1">
                             </mat-form-field>
                             <mat-form-field class="owner-full-width" fxFlex="50%">
-                                <span class="iocn-pos" matPrefix><mat-icon>library_books</mat-icon> &nbsp;</span>
+                                <span class="icon-pos" matPrefix><mat-icon>library_books</mat-icon> &nbsp;</span>
                                 <input type="text" id="contactEmail" formControlName="contactTelephone2" matInput placeholder="Contact Tel 2" [ngModel]="owner.contactTelephone2">
                             </mat-form-field>
                         </div>

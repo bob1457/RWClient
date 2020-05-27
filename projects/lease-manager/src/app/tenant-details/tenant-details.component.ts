@@ -17,6 +17,9 @@ export class TenantDetailsComponent implements OnInit {
   id: number;
   tenant: PropertyTenant;
 
+  list = true;
+  grid = false;
+
   detailsForm: FormGroup;
 
   constructor(private store: Store<PropertyLeaseState>,

@@ -89,6 +89,10 @@ export class ListingDetailsComponent implements OnInit {
 
   }
 
+  submit() {
+
+  }
+
   goBack() {
     this.router.navigate(['/Manage/marketing/propertylist']);
   }
