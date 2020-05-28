@@ -1,3 +1,90 @@
-<p>
-  listing-details works!
-</p>
+<!-- <p>
+  listing-details works! *ngIf="listing"
+</p> -->
+<div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="1%" fxFlexFill *ngIf="!(loading$ | async) && listing else spinner">
+    <div fxFlex="10%" fxLayoutAlign="end">
+        <i class="far fa-arrow-alt-circle-left" title="back to list" style="cursor: pointer; color: seagreen; font-size: 1.5em;" (click)="goBack()"></i>
+    </div>
+    <div fxFlex="20%" fxLayout="column" class="avatar_sec" fxLayoutAlign="start center">
+        <img src="../../assets/images/10621.jpg" style="border-radius: 50%;margin-top: 20px;" width="120px " height="120px" title="">
+        <div class="images">
+            <img src="http://placehold.it/50x50">
+            <img src="http://placehold.it/50x50">
+            <img src="http://placehold.it/50x50">
+            <img src="http://placehold.it/50x50">
+        </div>
+        <div style="margin-top: 25px;">
+            <span style="font-weight: 500;">Property Information</span>
+            <p>
+                {{listing.rentalProperty.propertyName}}
+            </p>
+            <p>
+                {{listing.rentalProperty.address.streetNum}} <br> {{listing.rentalProperty.address.city}} {{listing.rentalProperty.address.stateProvince}} {{listing.rentalProperty.address.zipPostCode}} <br> {{listing.rentalProperty.address.country}}
+            </p>
+        </div>
+        <div class="date-time">
+            <p>
+                Created: {{listing.created | date }}
+            </p>
+            <p style="margin-top: -10px;">
+                Updated: {{listing.modified | date }}
+            </p>
+        </div>
+
+    </div>
+    <div fxFlex="70%">
+        <mat-card class="listing-details-card ">
+            <mat-card-header style="background-color: #f5f5f5; ">
+                <div mat-card-avatar class="listing-details-header-image ">
+                    <i class="material-icons " style="font-size: 2.5em;color: #e64a19; margin-left: 5px; ">
+                      format_align_left
+                    </i>
+                    <!-- <img src="../../assets/images/pmgmnt.png " height="40px " width="40px "> *ngIf="property*ngIf="detailsForm.value"-->
+                </div>
+                <mat-card-title>Property Listing: ID: {{listing.id}} - <span style="font-size: .8em; font-style: italic;">{{listing.title}}</span> </mat-card-title>
+                <mat-card-subtitle>Rental Property: {{listing.rentalProperty.propertyName}}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content class="listing-details-card-content">
+                <form novalidate fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" [formGroup]="detailsForm" (ngSubmit)="submit()">
+                    <div fxLayout="column" fxLayoutAlign="start center" style=" width: 75%;">
+                        <mat-form-field class="listing-full-width" style="margin-top: 25px;">
+                            <span class=" icon-pos " matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
+                            <input type="text" id="id " formControlName="id" matInput placeholder="Listing Id " [ngModel]="listing.id">
+                        </mat-form-field>
+                        <mat-form-field class="listing-full-width ">
+                            <span class="icon-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
+                            <input type="text" id="title" formControlName="title" matInput placeholder="Listing Title" [ngModel]="listing.title">
+                        </mat-form-field>
+                        <mat-form-field class="listing-full-width ">
+                            <!-- <span class="icon-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span> -->
+                            <textarea type="text" style="height: 80px;" id="listingDesc" formControlName="listingDesc" matInput placeholder="Listing Description" [ngModel]="listing.listingDesc"></textarea>
+                        </mat-form-field>
+                        <mat-form-field class="listing-full-width ">
+                            <span class="icon-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
+                            <input type="text" id="monthlyRent" formControlName="monthlyRent" matInput placeholder="Monthly Rent" [ngModel]="listing.monthlyRent | currency:'CAD'">
+                        </mat-form-field>
+                        <mat-checkbox formControlName="isActive" [ngModel]="listing.isActive" class="listing-full-width">Published/Listed</mat-checkbox>
+                        <mat-form-field class="listing-full-width ">
+                            <span class="icon-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
+                            <textarea type="text" id="bote" formControlName="note" matInput placeholder="Note" [ngModel]="listing.note"></textarea>
+                        </mat-form-field>
+                    </div>
+
+                    <div fxLayout="row" fxLayoutGap="7px" fxLayoutAlign="end center" style="width: 75%;">
+                        <!-- <span *ngIf="showMsg" style="color: rgb(189, 150, 25);">Updated successfully!</span>
+      <img *ngIf=" loading" class="pl-2" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+      /> [disabled]="f.invalid || !f.dirty"-->
+                        <button type="submit" mat-raised-button color="primary">UPDATE</button>
+                        <button mat-raised-button color="accent">CANCEL</button>
+                    </div>
+
+                </form>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>
+<!-- {{property.propertyNumber}} {{property.propertyNumber}} {{property.propertyStreet}} {{property.propertyCity}} {{property.propertyStateProvince}} {{property.propertyZipPostCode}} -->
+
+<ng-template #spinner>
+    <app-loading></app-loading>
+</ng-template>

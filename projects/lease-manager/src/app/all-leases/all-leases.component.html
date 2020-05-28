@@ -1,3 +1,142 @@
-<p>
-  all-leases works!
-</p>
+<!-- <p>
+  all-leases works!list
+</p> -->
+<mat-card class="lease-list-card" *ngIf="!(loading$ | async); else spinner">
+
+
+    <mat-card-header style="background-color: #f5f5f5;">
+        <div mat-card-avatar class="lease-list-header-image">
+            <i class="material-icons" style="font-size: 2.5em;color: #e64a19; margin-left: 5px;">
+              list_alt
+      </i>
+            <!-- <img src="../../assets/images/pmgmnt.png" height="40px" width="40px"> -->
+        </div>
+        <mat-card-title>Lease/Rental Agreement ({{list.length}})</mat-card-title>
+        <mat-card-subtitle>All rental properties under management</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content class="lease-list-card-content">
+        <div class="container text-center" fxLayout="column" fxLayoutAlign="start" fxLayoutGap="1%" fxFlexFill>
+            <div fxLayout="row" fxLayoutAlign="end" style="margin-bottom: 1%;
+            flex-direction: row;
+            box-sizing: border-box;
+            display: flex;
+            place-content: stretch flex-end;
+            align-items: stretch;">
+                <mat-form-field fxLayout fxLayoutAlign="start center">
+                    <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="Filter">
+                </mat-form-field>
+                <mat-radio-group aria-label="Select an option" style="margin-top: 13px;margin-left: 25px;padding-right: 5px;">
+                    <mat-radio-button value="1" checked style="padding-right: 10px;">Active</mat-radio-button>
+                    <mat-radio-button value="0">All</mat-radio-button>
+                </mat-radio-group>
+                <span class="spacer"></span>
+                <button [routerLink]="['/Manage/lease/addlease']" mat-button mat-mini-fab style="background: #3d5afe;color: white;">
+            <i class="material-icons" title="Add Lease Agreement">
+              playlist_add
+            </i>
+          </button>
+            </div>
+            <!-- loading spinnier -->
+            <div fxLayoutAlign="center">
+                <table mat-table [dataSource]="dataSource" matSort class="my-table mat-elevation-z8" style="width: 100%;">
+                    <!--[dataSource] ="dataSource"(click)="openDialog('Add',{})"-->
+                    <!-- Id Column -->
+                    <ng-container matColumnDef="id">
+                        <th class="table-header-text" style="text-align: center;" mat-header-cell *matHeaderCellDef> ID </th>
+                        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                    </ng-container>
+
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="leaseTitle">
+                        <th class="table-header-text" mat-header-cell *matHeaderCellDef mat-sort-header> Title </th>
+                        <td mat-cell *matCellDef="let element"> {{element.leaseTitle}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="term">
+                        <th class="table-header-text" style="text-align: center;" mat-header-cell *matHeaderCellDef> Term </th>
+                        <td mat-cell *matCellDef="let element">
+                            {{element.term}}
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="rentAmount">
+                        <th class="table-header-text" mat-header-cell *matHeaderCellDef mat-sort-header> Rent Amount </th>
+                        <td mat-cell *matCellDef="let element"> {{element.rentAmount | currency:'CAD'}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="leaseStartDate">
+                        <th class="table-header-text" style="margin-left: auto;margin-right: auto;" mat-header-cell *matHeaderCellDef mat-sort-header> Start Date </th>
+                        <td mat-cell *matCellDef="let element"> {{element.leaseStartDate | date}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="leaseEndDate">
+                        <th class="table-header-text" style="margin-left: auto;margin-right: auto;" mat-header-cell *matHeaderCellDef mat-sort-header> End Date </th>
+                        <td mat-cell *matCellDef="let element"> {{element.leaseEndDate | date}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="created">
+                        <th class="table-header-text" style="margin-left: auto;margin-right: auto;" mat-header-cell *matHeaderCellDef mat-sort-header> Create On </th>
+                        <td mat-cell *matCellDef="let element"> {{element.created | date }} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="modified">
+                        <th class="table-header-text" style="margin-left: auto;margin-right: auto;" mat-header-cell *matHeaderCellDef mat-sort-header> Updated On </th>
+                        <td mat-cell *matCellDef="let element"> {{element.modified | date }} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="icon">
+                        <th mat-header-cell *matHeaderCellDef></th>
+                        <td mat-cell *matCellDef="let element">
+                            <i style="border: 2px solid;
+                      padding: 3px;
+                      border-radius: 50%;" class="material-icons" [style.color]="element.status == 'Rented' ? 'green': element.status == 'Pending'? 'orange' :'red'">
+                      house
+                    </i>
+                        </td>
+                    </ng-container>
+                    <!-- style="font-size: 1.5em; color: red;" -->
+                    <!-- Action Column -->
+                    <ng-container matColumnDef="action">
+                        <th mat-header-cell *matHeaderCellDef></th>
+                        <td mat-cell *matCellDef="let element" class="action-link">
+                            <!-- <a (click)="openDialog('Update',element)">Edit</a> |
+        <a (click)="openDialog('Delete',element)">Delete</a> ['/details', 1]-->
+                            <button routerLink="/Manage/lease/leasedetails/{{element.id}}" mat-raised-button color="primary">Details</button> &nbsp;
+                            <!-- <button mat-raised-button color="accent" (click)="openDialog('Delete',element)">Delete</button> -->
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                </table>
+
+
+            </div>
+        </div>
+
+    </mat-card-content>
+
+</mat-card>
+<ng-template #spinner>
+    <div class="loadingio-spinner-spinner-vhc1lmfzuvn" style="top: 50%;
+  left: 50%;
+  position: fixed;
+  z-index: 1000;">
+        <div class="ldio-ugrhztjm33r">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+</ng-template>

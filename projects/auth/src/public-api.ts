@@ -3,6 +3,7 @@
  */
 
 export * from './lib/auth.service';
+export * from './lib/services/state.service';
 export * from './lib/auth.component';
 export * from './lib/auth.module';
 

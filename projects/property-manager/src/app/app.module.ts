@@ -27,6 +27,9 @@ import { AddPropertyFeaturesComponent } from './add-property-features/add-proper
 import { AddPropertyBasicComponent } from './add-property-basic/add-property-basic.component';
 import { AddPropertyFinishComponent } from './add-property-finish/add-property-finish.component';
 import { AddPropertyOwnerComponent } from './add-property-owner/add-property-owner.component';
+import { YesNoPipe } from './yes-no.pipe';
+import { ContractContentComponent } from './contract-content/contract-content.component';
+import { LoadingComponent } from './loading/loading.component';
 
 
 @NgModule({
@@ -49,7 +52,10 @@ import { AddPropertyOwnerComponent } from './add-property-owner/add-property-own
     AddPropertyFeaturesComponent,
     AddPropertyBasicComponent,
     AddPropertyFinishComponent,
-    AddPropertyOwnerComponent
+    AddPropertyOwnerComponent,
+    YesNoPipe,
+    ContractContentComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,

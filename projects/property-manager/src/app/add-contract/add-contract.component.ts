@@ -1,4 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Property } from '@lib/app-core';
+import { PropertyState } from '../store/property.state';
+import { Store, select } from '@ngrx/store';
+import { propertyList } from '../store/reducers';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-add-contract',
@@ -7,9 +13,52 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddContractComponent implements OnInit {
 
-  constructor() { }
+  addForm: FormGroup;
+
+  properties: Property[];
+  // properties: any = [
+  //   { id: '1', propertyName: '621 Coquitlam'},
+  //   { id: '2', propertyName: '1307 Surrey'}
+  // ];
+
+  constructor(private formBuilder: FormBuilder,
+              private location: Location,
+              private store: Store<PropertyState>) { }
 
   ngOnInit() {
+
+    this.addForm = this.formBuilder.group({
+      managementContractTitle: ['', Validators.required],
+      managementContractType: ['New'],
+      startDate: [''],
+      endDate: [''],
+      propertyId: [],
+      placementFeeScale: [''],
+      managementFeeScale: [''],
+      signDate: [''],
+      notes: ['']
+    });
+
+    this.store.pipe(select(propertyList))
+    .subscribe(data => this.properties = data);
+  }
+
+  onChange(id) {
+    console.log(id);
+    this.addForm.get('propertyId').setValue(id);
+    console.log(this.addForm.get('propertyId').value);
+
+    // this.store.pipe(select(propertyList))
+    //     .subscribe(res => {
+    //       const property = this.properties.filter( p => p.id === id);
+    //     });
+  }
+
+  submit(formValue) { // Add validation here...for all fields if any
+    debugger;
+    console.log(this.addForm);
+    console.log(formValue);
+    this.location.back();
   }
 
 }

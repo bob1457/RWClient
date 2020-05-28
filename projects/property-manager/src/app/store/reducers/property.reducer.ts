@@ -454,6 +454,8 @@ on(PropertyActions.getContractDetails, (state) => ({
  */
 export const selectPropertyState = createFeatureSelector<PropertyState>('property');
 
+export const getLoadingStatus = (state: PropertyState) => state.loading;
+
 export const getPropertyList = (state: PropertyState) => state.properties;
 export const getOwnerList = (state: PropertyState) => state.owners;
 export const getContractList = (state: PropertyState) => state.contracts;
@@ -461,7 +463,7 @@ export const getPropertyDetails = (state: PropertyState) => state.property;
 export const getOwnerDetails = (state: PropertyState) => state.selectedOwner;
 export const getContractDetails = (state: PropertyState) => state.selectedContract;
 
-
+export const loadingStatus = createSelector(selectPropertyState, getLoadingStatus);
 
 export const ownerList = createSelector(selectPropertyState, getOwnerList);
 export const propertyList = createSelector(selectPropertyState, getPropertyList);

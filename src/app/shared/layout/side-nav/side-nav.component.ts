@@ -2,7 +2,7 @@ import * as fromAuth from '@lib/auth';
 import { Store, select } from '@ngrx/store';
 import { Component, OnInit } from '@angular/core';
 import { MediaObserver, MediaChange } from '@angular/flex-layout';
-import { Router } from '@angular/router';
+import { Router, Event, NavigationStart, NavigationEnd } from '@angular/router';
 import { Observable, Subscription, from } from 'rxjs';
 import {
   trigger,
@@ -17,6 +17,9 @@ import { getUserInfo, User } from '@lib/auth';
 import * as sparkmd5 from 'spark-md5';
 
 import { PropertyList, ContractList, TenantList, RentalList, OwnerList, MarketingList, RentalAppList } from '@lib/dashboard';
+// import { StateService } from '@lib/auth';
+import { StateService } from 'projects/auth/src/public-api';
+
 
 @Component({
   selector: 'app-side-nav',
@@ -46,6 +49,8 @@ import { PropertyList, ContractList, TenantList, RentalList, OwnerList, Marketin
 export class SideNavComponent implements OnInit {
   serverUrl = 'http://localhost:58088/';
 
+  loadingIndicator = false;
+
   currentState = 'increase';
 
   isAdmin = true;
@@ -56,6 +61,11 @@ export class SideNavComponent implements OnInit {
   property: any[] = [];
   owners: any[] = [];
   contracts: any[] = [];
+
+  tenant: any[] = [];
+  applicatons: any[] = [];
+  propertyLisitng: any[] = [];
+  rentalList: any[] = [];
 
   mode = 'side';
   opened = true;
@@ -77,8 +87,10 @@ export class SideNavComponent implements OnInit {
   avatar = '';
   avatar$: Observable<string>;
 
-  hash:any = null;  
+  hash:any = null;
   gravatar = '';
+  imgUrl:any = null;
+  gAvatar = true;
 
   // theme$ = 'dark-theme'; // this is default -- selecting theme can be implemented using observable from rxjs... later.
   theme$ = 'light-theme';
@@ -89,6 +101,7 @@ export class SideNavComponent implements OnInit {
   constructor(
     public mediaObserver: MediaObserver,
     private router: Router,
+    private stateService: StateService,
     private store: Store<fromAuth.AuthState>
   ) {
     this.watcher = mediaObserver.media$.subscribe(
@@ -96,9 +109,27 @@ export class SideNavComponent implements OnInit {
         this.mode = this.getMode(mediaChange);
         this.opened = this.getOpened(mediaChange);
         this.OpenButtonDisplay = this.showHideOpenButton(mediaChange);
+        this.router.events.subscribe((routerEvent: Event) => {
+          if (routerEvent instanceof NavigationStart) {
+            this.loadingIndicator = true;
+          }
+
+          if (routerEvent instanceof NavigationEnd ){
+            this.loadingIndicator = false;
+          }
+
+        });
       }
     );
   }
+
+  newUrl$ = this.stateService.currentUrl$
+      .subscribe(data => {
+        this.gAvatar = false;
+        this.imgUrl = data;
+        this.imgUrl = localStorage.getItem('newAvatarUrl');
+        console.log(this.imgUrl);
+  });
 
   ngOnInit() {
     debugger;
@@ -106,7 +137,7 @@ export class SideNavComponent implements OnInit {
       // this.user = JSON.parse(localStorage.getItem('auth'));
       // localStorage.setItem('auth', JSON.stringify(userData));
 
-      
+
 
       console.log(userData);
       if (userData == null) {
@@ -120,7 +151,7 @@ export class SideNavComponent implements OnInit {
       }
 
     });
-    
+
     this.store.pipe(select(PropertyList)).subscribe(data => {
         this.property = data;
       });
@@ -132,13 +163,39 @@ export class SideNavComponent implements OnInit {
     this.store.pipe(select(ContractList)).subscribe(data => {
         this.contracts = data;
       });
-      
+
+    this.store.pipe(select(TenantList)).subscribe(data => {
+        this.tenant = data;
+      });
+
+    this.store.pipe(select(RentalList)).subscribe(data => {
+        this.rentalList = data;
+      });
+
+    this.store.pipe(select(MarketingList)).subscribe(data => {
+        this.propertyLisitng = data;
+      });
+
+    this.store.pipe(select(RentalAppList)).subscribe(data => {
+        this.applicatons = data;
+      });
+
     // select single state then use async pipe in template for sub/unsub using *ngIf which returns a boolean value // console.log(userData);
     // this.avatar$ = this.store.select(ustate => ustate.user.avatarUrl);
     this.avatar = JSON.parse(localStorage.getItem('avatar'));
 
     this.hash = sparkmd5.hash(this.user.email);
     this.gravatar = this.createIdenticon(this.hash);
+
+    // Update avatar when upload new custom image
+    // this.stateService.currentUrl$
+    //   .subscribe(data => {
+    //     this.gAvatar = false;
+    //     console.log(this.gAvatar);
+    //     this.imgUrl = data;
+    //     this.imgUrl = localStorage.getItem('newAvatarUrl');
+    //     console.log(this.imgUrl);
+    // });
 
 
   }
@@ -225,6 +282,18 @@ export class SideNavComponent implements OnInit {
   GetList(){
     this.router.navigateByUrl('/Manage/property/propertylist');
     console.log('going to load list...');
+  }
+
+  GetPropertyListing() {
+    this.router.navigateByUrl('/Manage/marketing/propertylist');
+  }
+
+  GetAllLeases() {
+    this.router.navigateByUrl('/Manage/lease/leases');
+  }
+
+  MainHome() {
+    this.router.navigateByUrl('/Manage/main/main');
   }
 
   createIdenticon(emailHash: any): string {

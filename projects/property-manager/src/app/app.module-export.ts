@@ -26,6 +26,9 @@ import { AddPropertyFeaturesComponent } from './add-property-features/add-proper
 import { AddPropertyFacilitiesComponent } from './add-property-facilities/add-property-facilities.component';
 import { AddPropertyFinishComponent } from './add-property-finish/add-property-finish.component';
 import { AddPropertyOwnerComponent } from './add-property-owner/add-property-owner.component';
+import { ContractContentComponent } from './contract-content/contract-content.component';
+import { YesNoPipe } from './yes-no.pipe';
+import { LoadingComponent } from './loading/loading.component';
 
 const routes: Routes = [
   { path: '', component: PropertyHomeComponent,
@@ -40,7 +43,7 @@ const routes: Routes = [
       { path: 'contracts', component: ContractListComponent },
       { path: 'contractdetails/:id', component: ContractDetailsComponent},
     ]
-  },
+  }//,
   // { path: 'owners', component: OwnerListComponent,  outlet: 'property'},
   // { path: 'contracts', component: ContractListComponent }
 ];
@@ -65,7 +68,10 @@ const routes: Routes = [
     OwnerListComponent,
     OwnerDetailsComponent,
     ContractListComponent,
-    ContractDetailsComponent
+    ContractDetailsComponent,
+    ContractContentComponent,
+    YesNoPipe,
+    LoadingComponent
   ],
   imports: [
     // BrowserModule,

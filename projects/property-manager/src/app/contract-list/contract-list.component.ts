@@ -3,10 +3,12 @@ import { ManagementContractService } from './../../../../app-core/src/lib/proper
 import { PropertyState } from './../store/property.state';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { getContractList, getContractDetails, addManagementContract, updateContract } from '../store/actions/property.actions';
-import { contractList } from '../store/reducers/property.reducer';
+import { contractList, loadingStatus } from '../store/reducers/property.reducer';
 import { Store, select } from '@ngrx/store';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { Observable } from 'rxjs';
+
+import { Router, Event, NavigationStart, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-contract-list',
@@ -14,6 +16,10 @@ import { Observable } from 'rxjs';
   styleUrls: ['./contract-list.component.scss']
 })
 export class ContractListComponent implements OnInit {
+
+  loading = false;
+
+  loading$: Observable<boolean>;
 
   list: ManagementContract[];
   contractList$: Observable<ManagementContract[]>;
@@ -24,12 +30,26 @@ export class ContractListComponent implements OnInit {
   @ViewChild(MatSort, {static: false}) sort: MatSort;
 
   constructor(private store: Store<PropertyState>,
-              private contractService: ManagementContractService) { }
+              private router: Router,
+              private contractService: ManagementContractService) {
+                this.router.events.subscribe((routerEvent: Event) => {
+                  if (routerEvent instanceof NavigationStart) {
+                    this.loading = true;
+                  }
+
+                  if (routerEvent instanceof NavigationEnd ){
+                    this.loading = false;
+                  }
+
+                });
+              }
 
   dataSource = new MatTableDataSource<ManagementContract>();
 
   ngOnInit() {
     debugger;
+    this.loading$ = this.store.pipe(select(loadingStatus));
+
     this.store.dispatch(getContractList());
     this.getContractList();
     // this.contractList$ = this.store.select(contractList);

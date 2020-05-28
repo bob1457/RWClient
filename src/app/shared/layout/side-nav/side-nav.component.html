@@ -3,6 +3,28 @@
 </p>
 -->
 <div [class]="theme$">
+    <div *ngIf="loadingIndicator" class="loadingio-spinner-spinner-vhc1lmfzuvn" style="top: 50%;
+    left: 50%;
+    position: fixed;
+    /* width: 50px; */
+    /* height: 50px; */
+    /* color: red; */
+    z-index: 1000;">
+        <div class="ldio-ugrhztjm33r">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
     <mat-drawer-container class="app-container" autosize>
         <mat-drawer #drawer class="app-sidenav" style="padding:0;" [opened]="opened" [mode]="mode" fxLayout="column" [ngStyle]="{ 'width.em': sidenavWidth }" (mouseenter)="increase()">
             <div fxLayout="row" color="primary" style="height: 150px; overflow-x: hidden;background-color: #373737;">
@@ -118,18 +140,35 @@
                         <mat-list>
                             <mat-list-item>
                                 <mat-icon style="color: rgb(129, 43, 86);" [routerLink]="['/Manage/lease']" [routerLinkActive]="['active']" matListIcon>vertical_split</mat-icon>
-                                <a matLine [routerLink]="['/Manage/lease']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }">All List</a>
-                                <button mat-icon-button (click)="showInfo(link)">
-                          <!--<mat-icon>info</mat-icon>-->
-                     </button>
+                                <a matLine [routerLink]="['/Manage/lease']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }" (click)="GetAllLeases()">All Leases</a>
+                                <mat-chip *ngIf="rentalList" title="{{rentalList.length}}" style="background-color: rgb(17, 92, 55);
+                                  color: rgb(228, 241, 33);
+                                  padding-right: 7px;
+                                  padding-left:7px;
+                                  /* border-radius: 50%; */
+                                  border: 0 transparent;
+                                  font-size: 12px;">{{rentalList.length}}
+                                </mat-chip>
+                                <!-- <button mat-icon-button (click)="showInfo(link)"> -->
+
+                                <!--<mat-icon>info</mat-icon>
+                                </button>-->
                             </mat-list-item>
 
                             <mat-list-item>
                                 <mat-icon style="color: rgb(189, 219, 20);" [routerLink]="['/Manage/lease/tenants']" [routerLinkActive]="['active']" matListIcon>people</mat-icon>
                                 <a matLine [routerLink]="['/Manage/lease/tenants']" [routerLinkActive]="['active']">Tenants</a>
-                                <button mat-icon-button (click)="showInfo(link)">
-                      <!--<mat-icon>info</mat-icon>-->
-                 </button>
+                                <mat-chip *ngIf="tenant" title="{{tenant.length}}" style="background-color: rgb(92, 17, 29);
+                                  color: rgb(215, 219, 207);
+                                  padding-right: 7px;
+                                  padding-left:7px;
+                                  /* border-radius: 50%; */
+                                  border: 0 transparent;
+                                  font-size: 12px;">{{tenant.length}}
+                                </mat-chip>
+                                <!-- <button mat-icon-button (click)="showInfo(link)"> -->
+                                <!--<mat-icon>info</mat-icon>
+                                </button>-->
                             </mat-list-item>
 
                         </mat-list>
@@ -172,30 +211,35 @@
                             <mat-list-item>
                                 <!---->
                                 <mat-icon style="color: rgb(72, 173, 219)" [routerLink]="['/Manage/marketing']" [routerLinkActive]="['active']" matListIcon>list_alt</mat-icon>
-                                <a matLine [routerLink]="['/Manage/marketing']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }">Listing</a>
-                                <button mat-icon-button (click)="showInfo(link)"></button>
+                                <a matLine [routerLink]="['/Manage/marketing']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }" (click)="GetPropertyListing()">Listing</a>
+                                <mat-chip *ngIf="propertyLisitng" title="{{propertyLisitng.length}}" style="background-color: rgb(230, 16, 34);
+                                  color: rgb(195, 214, 26);
+                                  padding-right: 7px;
+                                  padding-left:7px;
+                                  /* border-radius: 50%; */
+                                  border: 0 transparent;
+                                  font-size: 12px;">{{propertyLisitng.length}}
+                                </mat-chip>
+                                <!-- <button mat-icon-button (click)="showInfo(link)"></button> -->
                             </mat-list-item>
                             <mat-list-item>
                                 <!---->
                                 <mat-icon style="color: rgb(58, 212, 66);" [routerLink]="['/Manage/marketing/applications']" [routerLinkActive]="['active']" matListIcon>open_in_browser</mat-icon>
-                                <a matLine [routerLink]="['/Manage/marketing/applications']" [routerLinkActive]="['active']">Applications</a
-                >
-                <button mat-icon-button (click)="showInfo(link)"></button>
-              </mat-list-item>
-              <mat-list-item>
-                <!---->
-                <mat-icon
-                  style="color: rgb(189, 219, 20);"
-                  [routerLink]="['/manage/screening']"
-                  [routerLinkActive]="['active']"
-                  matListIcon
-                  >open_with</mat-icon
-                >
-                <a
-                  matLine
-                  [routerLink]="['/manage/screening']"
-                  [routerLinkActive]="['active']"
-                  >Screening</a
+                                <a matLine [routerLink]="['/Manage/marketing/applications']" [routerLinkActive]="['active']">Applications</a>
+                                <mat-chip *ngIf="applicatons" title="{{applicatons.length}}" style="background-color: rgb(30, 16, 230);
+                                  color: rgb(214, 154, 26);
+                                  padding-right: 7px;
+                                  padding-left:7px;
+                                  /* border-radius: 50%; */
+                                  border: 0 transparent;
+                                  font-size: 12px;">{{applicatons.length}}
+                                </mat-chip>
+                                <!-- <button mat-icon-button (click)="showInfo(link)"></button> -->
+                            </mat-list-item>
+                            <mat-list-item>
+                                <!---->
+                                <mat-icon style="color: rgb(189, 219, 20);" [routerLink]="['/Manage/marketing/screening']" [routerLinkActive]="['active']" matListIcon>open_with</mat-icon>
+                                <a matLine [routerLink]="['/Manage/marketing/screening']" [routerLinkActive]="['active']">Screening</a
                 >
                 <button mat-icon-button (click)="showInfo(link)"></button>
               </mat-list-item>
@@ -222,15 +266,15 @@
                                 <mat-list>
                                     <mat-list-item>
                                         <mat-icon style="color: rgb(72, 173, 219)" [routerLink]="['/Manage/main']" [routerLinkActive]="['active']" matListIcon>view_module</mat-icon>
-                                        <a matLine [routerLink]="['/Manage/main']" [routerLinkActive]="['active']">Main Panel</a
+                                        <a matLine [routerLink]="['/Manage/main']" [routerLinkActive]="['active']" (click)="MainHome()">Main Panel</a
                 >
                 <button mat-icon-button (click)="showInfo(link)">
                   <!--<mat-icon>info</mat-icon>-->
                 </button>
               </mat-list-item>
                                         <mat-list-item>
-                                            <mat-icon style="color: rgb(72, 173, 219)" [routerLink]="['/Manage/task']" [routerLinkActive]="['active']" matListIcon>dialpad</mat-icon>
-                                            <a matLine [routerLink]="['/Manage/task']" [routerLinkActive]="['active']">Task List</a
+                                            <mat-icon style="color: rgb(72, 173, 219)" [routerLink]="['/Manage/main/tasks']" [routerLinkActive]="['active']" matListIcon>dialpad</mat-icon>
+                                            <a matLine [routerLink]="['/Manage/main/tasks']" [routerLinkActive]="['active']">Task List</a
                 >
                 <button mat-icon-button (click)="showInfo(link)">
                   <!--<mat-icon>info</mat-icon>-->
@@ -258,14 +302,14 @@
               <mat-list-item>
                 <mat-icon
                   style="color: rgb(189, 219, 20);"
-                  [routerLink]="['/manage/messages']"
+                  [routerLink]="['/Manage/main/messages']"
                   [routerLinkActive]="['active']"
                   matListIcon
                   >email</mat-icon
                 >
                 <a
                   matLine
-                  [routerLink]="['/manage/messages']"
+                  [routerLink]="['/Manage/main/messages']"
                   [routerLinkActive]="['active']"
                   >Mail Inbox</a
                 >
@@ -471,7 +515,7 @@
             </button>
                         <button mat-button class="more-btn" [matMenuTriggerFor]="menu" *ngIf="user">
               <!--  | async is used for single state selection -->
-              <!--<mat-icon>more_vert</mat-icon>     attr.src="{{serverUrl}}{{user.avatarImgUrl}}" width="38" height="38" title="{{user.userName}}"  *ngIf="user"  src="../../../../assets/images/avatar.png"-->
+              <!--<mat-icon>more_vert</mat-icon>  gAvatar? gravatar : imgUrl   attr.src="{{serverUrl}}{{user.avatarImgUrl}}" width="38" height="38" title="{{user.userName}}"  *ngIf="user"  src="../../../../assets/images/avatar.png"-->
               <img
               [src]="gravatar" *ngIf="gravatar"
                 width="38"
@@ -559,14 +603,18 @@
               <!--&nbsp;
               color="accent" color="primary"--->
             </mat-menu>
-          </mat-toolbar>
+            </mat-toolbar>
           <!--  -->
-        </div>
+            </div>
         <!-- Breadcrumbs will be implement in the future -->
         <!-- <app-breadcrumbs style="margin-left: 35px;"></app-breadcrumbs> -->
         <div class="main-container" *ngIf="role === 'pm'; else nonpm"> <!-- [ngStyle.lg]="{'margin-top': '25px'}" -->
           <!-- Manage UI component -->
-          <!-- <app-breadcrumbs></app-breadcrumbs> -->
+          <!-- <app-breadcrumbs></app-breadcrumbs> *ngIf="loadingIndicator" -->
+          <!-- <div class="spinner"></div> -->
+          <!-- <div class="loadingio-spinner-spinner-vhc1lmfzuvn"><div class="ldio-ugrhztjm33r">
+            <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+          </div></div> -->
           <router-outlet></router-outlet>
         </div>
         <ng-template class="main-container" #nonpm>

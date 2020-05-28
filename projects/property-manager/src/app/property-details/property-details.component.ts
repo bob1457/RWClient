@@ -5,7 +5,8 @@ import { getPropertyDetails } from '../store/actions/property.actions';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Property, PropertyService } from '@lib/app-core';
-import { propertyDetrails } from '../store/reducers';
+import { propertyDetrails, loadingStatus } from '../store/reducers';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-property-details',
@@ -14,7 +15,9 @@ import { propertyDetrails } from '../store/reducers';
 })
 export class PropertyDetailsComponent implements OnInit {
 
-detailsForm: FormGroup;
+  detailsForm: FormGroup;
+
+  loading$: Observable<boolean>;
 
  property$ = this.store.pipe(select(propertyDetrails))
         .subscribe(data => {
@@ -37,6 +40,10 @@ detailsForm: FormGroup;
   id: number;
   // property$: Observable<Property[]>;
   property: Property;
+  current = '';
+  shared = '';
+  basement = '';
+
 
   // property$: Observable<Property>;
 
@@ -46,6 +53,7 @@ detailsForm: FormGroup;
 
   ngOnInit() {
     // debugger;
+    this.loading$ = this.store.pipe(select(loadingStatus));
     // returnthis.store.dispatch(getPropertyDetails(this.propertyId))
     this.GetPropertyDetails(this.id);
 
@@ -133,6 +141,12 @@ detailsForm: FormGroup;
     //       }
     //       console.log(data);
     // });
+
+    // this.current = this.property.propertyType1;
+    // console.log(this.current);
+    // this.shared = this.property.isShared.toString();
+    // this.basement = this.property.isBasementSuite.toString();
+    console.log(this.basement);
   }
 
   GetPropertyDetails(id: any) {

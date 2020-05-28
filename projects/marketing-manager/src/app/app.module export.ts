@@ -14,24 +14,49 @@ import { MarketingEffects } from './store/effects/marketing.effects';
 import { ListingDetailsComponent } from './listing-details/listing-details.component';
 import { MarketingHomeComponent } from './marketing-home/marketing-home.component';
 import { ApplicationListComponent } from './application-list/application-list.component';
+import { ScreeningComponent } from './screening/screening.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AddListingComponent } from './add-listing/add-listing.component';
+import { ApplicationDetailsComponent } from './application-details/application-details.component';
+import { YesNoPipe } from './yes-no.pipe';
+import { LoadingComponent } from './loading/loading.component';
 
 const routes: Routes = [
-  { path: '', component: PropertyListingComponent},
-  { path: 'applications', component: ApplicationListComponent}
+  // { path: '', component: PropertyListingComponent},
+  { path: '', component: MarketingHomeComponent,
+    children: [
+      { path: 'propertylist', component: PropertyListingComponent},
+      { path: 'listingDetails/:id', component: ListingDetailsComponent},
+      { path: 'screening', component: ScreeningComponent},
+      { path: 'applications', component: ApplicationListComponent},
+      { path: 'applicationDetails/:id', component: ApplicationDetailsComponent}
+    ]
+
+  }//,
+  // { path: 'applications', component: ApplicationListComponent}
 ];
 
 @NgModule({
   declarations: [
     AppMkComponent,
+    AddListingComponent,
+    ApplicationDetailsComponent,
     PropertyListingComponent,
     MarketingHomeComponent,
     ListingDetailsComponent,
-    ApplicationListComponent
+    ApplicationListComponent,
+    ScreeningComponent,
+    YesNoPipe,
+    LoadingComponent
   ],
   imports: [
     // BrowserModule,
     CommonModule,
     AppMaterialModule,
+    FlexLayoutModule,
+    FormsModule,
+    ReactiveFormsModule,
     RouterModule.forChild(routes),
     StoreModule.forFeature('marketing', reducer),
     EffectsModule.forFeature([MarketingEffects])

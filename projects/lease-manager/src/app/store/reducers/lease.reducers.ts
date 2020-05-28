@@ -1,5 +1,5 @@
 import { PropertyLeaseState } from '../lease-state';
-import { createReducer, on, Action } from '@ngrx/store';
+import { createReducer, on, Action, createFeatureSelector, createSelector } from '@ngrx/store';
 import * as LeaseActions from '../actions/lease.actions';
 
 
@@ -11,7 +11,8 @@ export const initialState: PropertyLeaseState =  { // adapter.getInitialState
   tenants: null,
   // owners: null,
   // ownersOfProperty: null,
-  // selectedOwner: null,
+  selectedLease: null,
+  selectedTenant: null,
   // contracts: null,
   // contractsForProperty: null,
   // selectedContract: null,
@@ -22,6 +23,9 @@ debugger;
 const propertyLeaseReducer = createReducer(
   initialState,
 
+  /**
+   * Get lease data
+   */
   on(LeaseActions.getAllLeases, state => ({
     ...state,
     loading: true,
@@ -36,6 +40,26 @@ const propertyLeaseReducer = createReducer(
       leases: payload
     });
   }),
+
+  on(LeaseActions.getLeaseDetails, (state) => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+  on(LeaseActions.getLeaseDetailsSuccess, (state, { payload }) => {
+    debugger;
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      selectedLease: payload
+    });
+  }),
+
+  /**
+   * Get Tenant Data
+   */
 
   on(LeaseActions.getAllTenants, state => ({
     ...state,
@@ -52,8 +76,43 @@ const propertyLeaseReducer = createReducer(
     });
   }),
 
+  on(LeaseActions.getTenantDetails, (state) => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+  on(LeaseActions.getTenantDetailsSuccess, (state, { payload }) => {
+    debugger;
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      selectedTenant: payload
+    });
+  }),
+
   );
 
+/**
+ *
+ * State Selectors
+ */
+export const selectLeaseyState = createFeatureSelector<PropertyLeaseState>('lease');
+
+export const getLoadingStatus = (state: PropertyLeaseState) => state.loading;
+
+export const getLeaseList = (state: PropertyLeaseState) => state.leases;
+export const getTenantList = (state: PropertyLeaseState) => state.tenants;
+export const getLeaseDetails = (state: PropertyLeaseState) => state.selectedLease;
+export const getTenantDetails = (state: PropertyLeaseState) => state.selectedTenant;
+
+export const loadingStatus = createSelector(selectLeaseyState, getLoadingStatus);
+
+export const leaseList = createSelector(selectLeaseyState, getLeaseList);
+export const tenantList = createSelector(selectLeaseyState, getTenantList);
+export const leaseDetails = createSelector(selectLeaseyState, getLeaseDetails);
+export const tenantDetails = createSelector(selectLeaseyState, getTenantDetails);
 
 
 

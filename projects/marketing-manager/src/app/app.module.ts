@@ -11,6 +11,11 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { MarketingEffects } from './store/effects/marketing.effects';
 import { ApplicationListComponent } from './application-list/application-list.component';
+import { ScreeningComponent } from './screening/screening.component';
+import { AddListingComponent } from './add-listing/add-listing.component';
+import { ApplicationDetailsComponent } from './application-details/application-details.component';
+import { YesNoPipe } from './yes-no.pipe';
+import { LoadingComponent } from './loading/loading.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +23,12 @@ import { ApplicationListComponent } from './application-list/application-list.co
     PropertyListingComponent,
     MarketingHomeComponent,
     ListingDetailsComponent,
-    ApplicationListComponent
+    ApplicationListComponent,
+    ScreeningComponent,
+    AddListingComponent,
+    ApplicationDetailsComponent,
+    YesNoPipe,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,

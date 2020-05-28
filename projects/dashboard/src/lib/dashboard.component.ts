@@ -33,7 +33,10 @@ export class DashboardComponent implements OnInit {
 
   loading: boolean;
 
-  constructor(private breakpointObserver: BreakpointObserver, private store: Store<DashState>, private propertyService: PropertyService){}
+  constructor(private breakpointObserver: BreakpointObserver,
+              private store: Store<DashState>,
+              private propertyService: PropertyService) {}
+
   ngOnInit() {
     this.breakpoint = (window.innerWidth <= 640) ? 4 : 1;
     this.bp = (window.innerWidth <= 640) ? 4 : 2;

@@ -1,0 +1,120 @@
+<!-- <p>
+  application-details works!
+</p> -->
+<div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="1%" fxFlexFill *ngIf="!(loading$ | async) && application else spinner">
+    <div>
+        <div fxFlex="10%" fxLayoutAlign="end">
+            <i class="far fa-arrow-alt-circle-left" title="back to list" style="cursor: pointer; color: seagreen; font-size: 1.5em;" (click)="goBack()"></i>
+        </div>
+    </div>
+    <div fxFlex="20%" fxLayout="column" class="avatar_sec" fxLayoutAlign="start center">
+        <img src="../../assets/images/owner2.png" style="border-radius: 50%;" width="120px" height="120px">
+        <div style="margin-top: 25px;">
+            <span style="font-weight: 500;">Rental Property</span>
+            <!-- <ul class="property-list">
+              <li *ngFor="let property of owner.ownerProperty" style="margin-left: -40px;">
+                   <a href="" style="cursor: pointer;">details</a>
+              </li>
+          </ul> -->
+            <!-- {{application.rentalApplicant.lastName}} -->
+            <p>
+                {{application.rentalProperty.propertyName}}
+            </p>
+            <p>
+                {{application.rentalProperty.address.streetNum}} <br> {{application.rentalProperty.address.city}} {{application.rentalProperty.address.stateProvince}} {{application.rentalProperty.address.zipPostCode}} <br> {{application.rentalProperty.address.country}}
+            </p>
+        </div>
+        <!-- <div class="date-time">
+            <p>
+                Created: {{application.created | date }}
+            </p>
+        </div> -->
+    </div>
+    <div fxFlex="70%">
+        <mat-card class="applicant-details-card">
+            <mat-card-header style="background-color: #f5f5f5; ">
+                <div mat-card-avatar class="applicant-details-header-image ">
+                    <i class="material-icons " style="font-size: 2.5em;color: #e64a19; margin-left: 5px; ">
+              person_add
+            </i>
+                    <!-- <img src="../../assets/images/pmgmnt.png " height="40px " width="40px "> *ngIf="property*ngIf="detailsForm.value"-->
+                </div>
+                <mat-card-title>Rental Application: ID:<span style="font-size: .8em; font-style: italic;">{{application.id}}</span></mat-card-title>
+                <!-- <mat-card-subtitle>Contact: {{application.rentalApplicant.firstName}} {{application.rentalApplicant.lastName}} {{application.rentalApplicant.contactEmail}} {{application.rentalApplicant.contactTel}}</mat-card-subtitle>-->
+                <mat-card-subtitle>Property: {{application.rentalProperty.propertyName}}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content class="applicant-details-card-content">
+                <div fxLayout="column" fxLayoutAlign="start center">
+                    <h6>Rental Application - Status: {{application.status}}</h6>
+                    <table class="app-table">
+                        <tr>
+                            <td class="title-cell">First Name</td>
+                            <td class="value-cell">{{application.rentalApplicant.firstName}}</td>
+                        </tr>
+                        <tr>
+                            <td class="title-cell">Last Name</td>
+                            <td class="value-cell">{{application.rentalApplicant.lastName | uppercase}}</td>
+                        </tr>
+                        <tr>
+                            <td class="title-cell">Telephone/SMS</td>
+                            <td class="value-cell">{{application.rentalApplicant.contactTel}}<span *ngIf="application.rentalApplicant.contactSms != null">/{{application.rentalApplicant.contactSms}}</span></td>
+                        </tr>
+                        <tr>
+                            <td class="title-cell">Email</td>
+                            <td class="value-cell">{{application.rentalApplicant.contactEmail}}</td>
+                        </tr>
+                        <tr>
+                            <td class="title-cell">Annual Income(Gross)</td>
+                            <td class="value-cell">{{application.rentalApplicant.annualIncome}}</td>
+                        </tr>
+                        <tr>
+                            <td class="title-cell">Number of Occupants</td>
+                            <td class="value-cell">{{application.rentalApplicant.numberOfOccupant}}</td>
+                        </tr>
+                        <tr>
+                            <td class="title-cell">With Children</td>
+                            <td class="value-cell">{{application.rentalApplicant.withChildren | yesNo }}</td>
+                        </tr>
+                        <tr>
+                            <td class="title-cell">Immigrantion Status</td>
+                            <td class="value-cell">{{application.rentalApplicant.status}}</td>
+                        </tr>
+                        <tr>
+                            <td class="title-cell">Credit Rating</td>
+                            <td class="value-cell">{{application.rentalApplicant.creditRating}}</td>
+                        </tr>
+                        <tr>
+                            <td class="title-cell">Employment Status</td>
+                            <td class="value-cell">{{application.rentalApplicant.empoyedStatus}}</td>
+                        </tr>
+                        <tr>
+                            <td class="title-cell">Reason to Move</td>
+                            <td class="value-cell">{{application.rentalApplicant.reasonToMove}}</td>
+                        </tr>
+
+                        <tr>
+                            <td class="title-cell">With Co-applicant</td>
+                            <td class="value-cell">{{application.rentalApplicant.withCoApplicant | yesNo }}</td>
+                        </tr>
+                        <!-- <tr>
+                          <td class="title-cell">Last Name</td>
+                          <td class="value-cell">{{application.rentalApplicant.lastName}}</td>
+                      </tr> -->
+                        <tr>
+                            <td class="title-cell">Application Submiited on</td>
+                            <td class="value-cell">{{application.rentalApplicant.created | date}}</td>
+                        </tr>
+                    </table>
+                    <div fxLayout="row" fxLayoutGap="7px" fxLayoutAlign="end center" style="width: 75%;">
+                        <button mat-raised-button color="primary">START SCREENING</button>
+                    </div>
+                </div>
+            </mat-card-content>
+
+        </mat-card>
+    </div>
+</div>
+
+<ng-template #spinner>
+    <app-loading></app-loading>
+</ng-template>

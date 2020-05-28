@@ -1,9 +1,14 @@
 import { updatePropertyListing } from './../store/actions/marketing.actions';
-import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Store, select } from '@ngrx/store';
 import { PropertyListingState } from '../store/marketing.state';
 import { getPropertyListing, getPropertyListingDetails, addPropertyListing } from '../store/actions/marketing.actions';
-import { PropertyListing } from '@lib/app-core';
+import { PropertyListing, MarketingService } from '@lib/app-core';
+import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { Router, Event, NavigationStart, NavigationEnd } from '@angular/router';
+import { propertyList } from 'projects/property-manager/src/app/store/reducers';
+import { propertyListing, loadingStatus } from '../store/reducers';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-property-listing',
@@ -12,13 +17,61 @@ import { PropertyListing } from '@lib/app-core';
 })
 export class PropertyListingComponent implements OnInit {
 
-  constructor(private store: Store<PropertyListingState>) { }
+  list: PropertyListing[];
+
+  loading$: Observable<boolean>;
+
+  // tslint:disable-next-line: max-line-length
+  displayedColumns: string[] = ['icon', 'id', 'title', 'listingDesc', 'propertyName', 'isActive', 'createdDate', 'updateDate', 'action'];
+  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: false}) sort: MatSort;
+
+  dataSource = new MatTableDataSource<PropertyListing>();
+
+  loadingIndicator = false;
+
+  constructor(private store: Store<PropertyListingState>,
+              private marketingService: MarketingService,
+              private router: Router ) {
+                this.router.events.subscribe((routerEvent: Event) => {
+                  if (routerEvent instanceof NavigationStart) {
+                    this.loadingIndicator = true;
+                  }
+
+                  if (routerEvent instanceof NavigationEnd ){
+                    this.loadingIndicator = false;
+                  }
+
+                });
+               }
 
   ngOnInit() {
     debugger;
+
+    this.loading$ = this.store.pipe(select(loadingStatus));
+
     // return this.propertyService.getPropertyList().subscribe((pList: Property[]) => {this.list = pList; console.log(pList)});
-    return this.store.dispatch(getPropertyListing());
+    this.store.dispatch(getPropertyListing());
+
+    this.store.pipe(
+      select(propertyListing)).subscribe(data => {
+        this.list = data ;
+        console.log(data);
+        this.dataSource.data = this.list;
+        console.log(this.dataSource.data);
+      });
   }
+
+  ngAfterViewInit(): void {
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
+  }
+
+  public doFilter = (value: string) => {
+    this.dataSource.filter = value.trim().toLocaleLowerCase();
+  }
+
+
 
   GetPropertyListingDetails(id: number) {
     debugger;
