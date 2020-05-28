@@ -56,7 +56,7 @@ const dashReducer = createReducer(
 
   on(DashActions.getPropertyOwnerListFailure, (state) => ({
     ...state,
-    loading: true,
+    loading: false,
     loaded: false,
     errorMessage: 'Failed to load property owners'
   })),
@@ -105,7 +105,7 @@ const dashReducer = createReducer(
 
   on(DashActions.getPropertyOwnerListFailure, state => ({
     ...state,
-    loading: true,
+    loading: false,
     loaded: false
   })),
 

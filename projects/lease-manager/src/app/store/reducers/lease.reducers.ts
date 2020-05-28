@@ -100,10 +100,14 @@ const propertyLeaseReducer = createReducer(
  */
 export const selectLeaseyState = createFeatureSelector<PropertyLeaseState>('lease');
 
+export const getLoadingStatus = (state: PropertyLeaseState) => state.loading;
+
 export const getLeaseList = (state: PropertyLeaseState) => state.leases;
 export const getTenantList = (state: PropertyLeaseState) => state.tenants;
 export const getLeaseDetails = (state: PropertyLeaseState) => state.selectedLease;
 export const getTenantDetails = (state: PropertyLeaseState) => state.selectedTenant;
+
+export const loadingStatus = createSelector(selectLeaseyState, getLoadingStatus);
 
 export const leaseList = createSelector(selectLeaseyState, getLeaseList);
 export const tenantList = createSelector(selectLeaseyState, getTenantList);

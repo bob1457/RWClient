@@ -5,7 +5,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LeaseService, PropertyLease } from '@lib/app-core';
 import { getLeaseDetails } from '../store/actions/lease.actions';
-import { leaseDetails } from '../store/reducers';
+import { leaseDetails, loadingStatus } from '../store/reducers';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-lease-details',
@@ -16,6 +17,8 @@ export class LeaseDetailsComponent implements OnInit {
 
   id: number;
   lease: PropertyLease;
+
+  loading$: Observable<boolean>;
 
   detailsForm: FormGroup;
 
@@ -29,6 +32,8 @@ export class LeaseDetailsComponent implements OnInit {
               }
 
   ngOnInit() {
+
+    this.loading$ = this.store.pipe(select(loadingStatus));
 
     this.GetLeaseDetails(this.id);
 
@@ -75,23 +80,30 @@ export class LeaseDetailsComponent implements OnInit {
 
     GetLeaseDetails(id: any) {
       debugger;
-      // this.store.dispatch(getLeaseDetails({payload: id}));
+      this.store.dispatch(getLeaseDetails({payload: id}));
 
       this.store.pipe(select(leaseDetails))
           .subscribe(data => {
-            if (data != null && data.id === this.id) { // select data from state store if data exists
-              this.lease = data;
-              this.detailsForm.patchValue(data);
-            } else {
-              this.store.dispatch(getLeaseDetails({payload: id})); // dispatch the action if state has no data
-
-              this.store.pipe(select(leaseDetails)) // select date from state in store
-              .subscribe(lease => {
-                this.lease = lease;
-              });
-            }
+            this.lease = data;
+            // this.detailsForm.patchValue(data);
             console.log(data);
-      });
+          });
+
+      // this.store.pipe(select(leaseDetails))
+      //     .subscribe(data => {
+      //       if (data != null && data.id === this.id) { // select data from state store if data exists
+      //         this.lease = data;
+      //         this.detailsForm.patchValue(data);
+      //       } else {
+      //         this.store.dispatch(getLeaseDetails({payload: id})); // dispatch the action if state has no data
+
+      //         this.store.pipe(select(leaseDetails)) // select date from state in store
+      //         .subscribe(lease => {
+      //           this.lease = lease;
+      //         });
+      //       }
+      //       console.log(data);
+      // });
 
   }
 

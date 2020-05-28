@@ -4,7 +4,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Store, select } from '@ngrx/store';
 import { getPropertyList, getPropertyDetails, addProperty, updateProperty, updatePropertyStatus, removeProperty } from '../store/actions/property.actions';
-import { propertyList} from '../store/reducers/property.reducer';
+import { propertyList, loadingStatus} from '../store/reducers/property.reducer';
 import { MatPaginator, MatSort } from '@angular/material';
 import { Observable } from 'rxjs';
 
@@ -19,6 +19,8 @@ import { Router, Event, NavigationStart, NavigationEnd } from '@angular/router';
 export class PropertyListComponent implements OnInit {
 
   loadingIndicator = false;
+
+  loading$: Observable<boolean>;
 
   baseUrl = 'http://localhost:21799';
 
@@ -49,6 +51,8 @@ export class PropertyListComponent implements OnInit {
   dataSource = new MatTableDataSource<Property>();
 
   ngOnInit() {
+
+    this.loading$ = this.store.pipe(select(loadingStatus));
     // this.getPropertyList();
     // this.propertyList$ =
     // this.store.select(propertyList);
@@ -65,16 +69,16 @@ export class PropertyListComponent implements OnInit {
       });
   }
 
-  getPropertyList() {
-    debugger;
-    return this.propertyService.getPropertyList()
-    .subscribe((pList: Property[]) => {
-      this.list = pList;
-      console.log(this.list);
-      this.dataSource.data = pList;
-      console.log(this.dataSource.data);
-    });
-  }
+  // getPropertyList() {
+  //   debugger;
+  //   return this.propertyService.getPropertyList()
+  //   .subscribe((pList: Property[]) => {
+  //     this.list = pList;
+  //     console.log(this.list);
+  //     this.dataSource.data = pList;
+  //     console.log(this.dataSource.data);
+  //   });
+  // }
 
   ngAfterViewInit(): void {
     this.dataSource.sort = this.sort;

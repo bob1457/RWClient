@@ -5,7 +5,8 @@ import { getAllLeases } from '../store/actions/lease.actions';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator, MatSort } from '@angular/material';
 import { PropertyLease } from '@lib/app-core';
-import { leaseList } from '../store/reducers';
+import { leaseList, loadingStatus } from '../store/reducers';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-all-leases',
@@ -13,6 +14,8 @@ import { leaseList } from '../store/reducers';
   styleUrls: ['./all-leases.component.scss']
 })
 export class AllLeasesComponent implements OnInit {
+
+  loading$: Observable<boolean>;
 
   list: PropertyLease[];
 
@@ -28,15 +31,36 @@ export class AllLeasesComponent implements OnInit {
   ngOnInit() {
     debugger;
     // return this.propertyService.getPropertyList().subscribe((pList: Property[]) => {this.list = pList; console.log(pList)});
-    this.store.dispatch(getAllLeases());
+    this.loading$ = this.store.pipe(select(loadingStatus));
 
-    this.store.pipe(
-      select(leaseList)).subscribe(data => {
-        this.list = data ;
-        console.log(data);
-        this.dataSource.data = this.list;
-        console.log(this.dataSource.data);
+    // this.store.dispatch(getAllLeases());
+
+    // this.store.pipe(
+    //   select(leaseList)).subscribe(data => {
+    //     this.list = data ;
+    //     console.log(data);
+    //     this.dataSource.data = this.list;
+    //     console.log(this.dataSource.data);
+    //   });
+    this.store.pipe(select(leaseList))
+          .subscribe(data => {
+            if (data != null) { // select data from state store if data exists
+              this.list = data;
+              this.dataSource.data = this.list;
+              // this.detailsForm.patchValue(data);
+            } else {
+              this.store.dispatch(getAllLeases()); // dispatch the action if state has no data
+
+              this.store.pipe(select(leaseList)) // select date from state in store
+              .subscribe(list => {
+                this.list = list;
+                this.dataSource.data = this.list;
+              });
+            }
+            console.log(data);
       });
+
+
   }
 
   ngAfterViewInit(): void {

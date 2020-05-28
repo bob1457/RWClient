@@ -1,7 +1,7 @@
 <!-- <p>
-  all-tenants works!
+  all-tenants works! *ngIf="list"
 </p> -->
-<div class="tenant-list-card" *ngIf="list">
+<div class="tenant-list-card" *ngIf="!(loading$ | async); else spinner">
     <mat-card class="tenant-list-card ">
         <mat-card-header style="background-color: #f5f5f5;">
             <div mat-card-avatar class="tenant-list-header-image">
@@ -131,6 +131,26 @@
 
         </mat-card-content>
     </mat-card>
-
-
 </div>
+
+<ng-template #spinner>
+    <div class="loadingio-spinner-spinner-vhc1lmfzuvn" style="top: 50%;
+      left: 50%;
+      position: fixed;
+      z-index: 1000;">
+        <div class="ldio-ugrhztjm33r">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+</ng-template>

@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { PropertyLeaseState } from '../store/lease-state';
 import { Store, select } from '@ngrx/store';
-import { tenantList, tenantDetails } from '../store/reducers';
+import { tenantList, tenantDetails, loadingStatus } from '../store/reducers';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { PropertyTenant, LeaseService } from '@lib/app-core';
 import { getTenantDetails } from '../store/actions/lease.actions';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-tenant-details',
@@ -16,6 +17,8 @@ export class TenantDetailsComponent implements OnInit {
 
   id: number;
   tenant: PropertyTenant;
+
+  loading$: Observable<boolean>;
 
   list = true;
   grid = false;
@@ -33,6 +36,8 @@ export class TenantDetailsComponent implements OnInit {
 
   ngOnInit() {
     debugger;
+
+    this.loading$ = this.store.pipe(select(loadingStatus));
 
     this.GetTenantDetails(this.id);
 
@@ -68,26 +73,32 @@ export class TenantDetailsComponent implements OnInit {
 
   GetTenantDetails(id: any) {
     debugger;
-    // this.store.dispatch(getTenantDetails({payload: id}));
+    this.store.dispatch(getTenantDetails({payload: id}));
     // this.property$ =
 
     // User store to select the state
 
     this.store.pipe(select(tenantDetails))
     .subscribe(data => {
-      if (data != null && data.id === this.id) { // select data from state store if data exists
-        this.tenant = data;
-        this.detailsForm.patchValue(data);
-      } else {
-        this.store.dispatch(getTenantDetails({payload: id})); // dispatch the action if state has no data
-
-        this.store.pipe(select(tenantDetails)) // select date from state in store
-        .subscribe(tenant => {
-          this.tenant = tenant;
-        });
-      }
+      this.tenant = data;
       console.log(data);
     });
+
+    // this.store.pipe(select(tenantDetails))
+    // .subscribe(data => {
+    //   if (data != null && data.id === this.id) { // select data from state store if data exists
+    //     this.tenant = data;
+    //     this.detailsForm.patchValue(data);
+    //   } else {
+    //     this.store.dispatch(getTenantDetails({payload: id})); // dispatch the action if state has no data
+
+    //     this.store.pipe(select(tenantDetails)) // select date from state in store
+    //     .subscribe(tenant => {
+    //       this.tenant = tenant;
+    //     });
+    //   }
+    //   console.log(data);
+    // });
 
 
 }
