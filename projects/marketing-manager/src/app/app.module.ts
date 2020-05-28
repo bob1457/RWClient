@@ -16,6 +16,7 @@ import { AddListingComponent } from './add-listing/add-listing.component';
 import { ApplicationDetailsComponent } from './application-details/application-details.component';
 import { YesNoPipe } from './yes-no.pipe';
 import { LoadingComponent } from './loading/loading.component';
+import { ScreeningListComponent } from './screening-list/screening-list.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { LoadingComponent } from './loading/loading.component';
     AddListingComponent,
     ApplicationDetailsComponent,
     YesNoPipe,
-    LoadingComponent
+    LoadingComponent,
+    ScreeningListComponent
   ],
   imports: [
     BrowserModule,

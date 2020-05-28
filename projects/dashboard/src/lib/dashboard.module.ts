@@ -25,6 +25,7 @@ import { IndicatorTenantsComponent } from './indicator-tenants/indicator-tenants
 import { IndicatorRentalsComponent } from './indicator-rentals/indicator-rentals.component';
 import { PieChartComponent } from './charts/pie-chart/pie-chart.component';
 import { BarChartComponent } from './charts/bar-chart/bar-chart.component';
+import { LoadingComponent } from './loading/loading.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { BarChartComponent } from './charts/bar-chart/bar-chart.component';
     IndicatorTenantsComponent,
     IndicatorRentalsComponent,
     PieChartComponent,
-    BarChartComponent
+    BarChartComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,

@@ -21,6 +21,7 @@ import { AddListingComponent } from './add-listing/add-listing.component';
 import { ApplicationDetailsComponent } from './application-details/application-details.component';
 import { YesNoPipe } from './yes-no.pipe';
 import { LoadingComponent } from './loading/loading.component';
+import { ScreeningListComponent } from './screening-list/screening-list.component';
 
 const routes: Routes = [
   // { path: '', component: PropertyListingComponent},
@@ -28,9 +29,11 @@ const routes: Routes = [
     children: [
       { path: 'propertylist', component: PropertyListingComponent},
       { path: 'listingDetails/:id', component: ListingDetailsComponent},
-      { path: 'screening', component: ScreeningComponent},
+      // { path: 'screening', component: ScreeningComponent},
       { path: 'applications', component: ApplicationListComponent},
-      { path: 'applicationDetails/:id', component: ApplicationDetailsComponent}
+      { path: 'applicationDetails/:id', component: ApplicationDetailsComponent},
+      { path: 'screening/:id', component: ScreeningComponent},
+      { path: 'screeninglist', component: ScreeningListComponent}
     ]
 
   }//,
@@ -48,7 +51,8 @@ const routes: Routes = [
     ApplicationListComponent,
     ScreeningComponent,
     YesNoPipe,
-    LoadingComponent
+    LoadingComponent,
+    ScreeningListComponent
   ],
   imports: [
     // BrowserModule,
