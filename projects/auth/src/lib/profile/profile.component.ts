@@ -1,10 +1,6 @@
-<<<<<<< HEAD
-import { Component, OnInit } from '@angular/core';
-=======
 import { ProfileService } from './../services/profile.service';
 import { Component, OnInit, Input } from '@angular/core';
 
->>>>>>> dev
 import { Store, select } from '@ngrx/store';
 import { AuthState } from '../store/auth.state';
 
