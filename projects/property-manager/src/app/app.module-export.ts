@@ -28,6 +28,7 @@ import { AddPropertyFinishComponent } from './add-property-finish/add-property-f
 import { AddPropertyOwnerComponent } from './add-property-owner/add-property-owner.component';
 import { ContractContentComponent } from './contract-content/contract-content.component';
 import { YesNoPipe } from './yes-no.pipe';
+import { LoadingComponent } from './loading/loading.component';
 
 const routes: Routes = [
   { path: '', component: PropertyHomeComponent,
@@ -69,7 +70,8 @@ const routes: Routes = [
     ContractListComponent,
     ContractDetailsComponent,
     ContractContentComponent,
-    YesNoPipe
+    YesNoPipe,
+    LoadingComponent
   ],
   imports: [
     // BrowserModule,

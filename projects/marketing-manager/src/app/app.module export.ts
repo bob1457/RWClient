@@ -20,6 +20,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddListingComponent } from './add-listing/add-listing.component';
 import { ApplicationDetailsComponent } from './application-details/application-details.component';
 import { YesNoPipe } from './yes-no.pipe';
+import { LoadingComponent } from './loading/loading.component';
 
 const routes: Routes = [
   // { path: '', component: PropertyListingComponent},
@@ -46,7 +47,8 @@ const routes: Routes = [
     ListingDetailsComponent,
     ApplicationListComponent,
     ScreeningComponent,
-    YesNoPipe
+    YesNoPipe,
+    LoadingComponent
   ],
   imports: [
     // BrowserModule,

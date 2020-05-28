@@ -7,7 +7,8 @@ import { PropertyListing, MarketingService } from '@lib/app-core';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { Router, Event, NavigationStart, NavigationEnd } from '@angular/router';
 import { propertyList } from 'projects/property-manager/src/app/store/reducers';
-import { propertyListing } from '../store/reducers';
+import { propertyListing, loadingStatus } from '../store/reducers';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-property-listing',
@@ -17,6 +18,8 @@ import { propertyListing } from '../store/reducers';
 export class PropertyListingComponent implements OnInit {
 
   list: PropertyListing[];
+
+  loading$: Observable<boolean>;
 
   // tslint:disable-next-line: max-line-length
   displayedColumns: string[] = ['icon', 'id', 'title', 'listingDesc', 'propertyName', 'isActive', 'createdDate', 'updateDate', 'action'];
@@ -44,6 +47,9 @@ export class PropertyListingComponent implements OnInit {
 
   ngOnInit() {
     debugger;
+
+    this.loading$ = this.store.pipe(select(loadingStatus));
+
     // return this.propertyService.getPropertyList().subscribe((pList: Property[]) => {this.list = pList; console.log(pList)});
     this.store.dispatch(getPropertyListing());
 

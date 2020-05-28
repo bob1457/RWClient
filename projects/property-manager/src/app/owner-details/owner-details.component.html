@@ -1,8 +1,8 @@
 <!-- <p>
-  owner-details works! {{id}}
+  owner-details works! {{id}}*ngIf="owner"
 </p> title="{{property.propertyName}}"*ngIf="property"-->
 
-<div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="1%" fxFlexFill *ngIf="owner">
+<div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="1%" fxFlexFill *ngIf="!(loading$ | async) && owner; else spinner">
     <div>
         <div fxFlex="10%" fxLayoutAlign="end">
             <i class="far fa-arrow-alt-circle-left" title="back to list" style="cursor: pointer; color: seagreen; font-size: 1.5em;" (click)="goBack()"></i>
@@ -118,3 +118,7 @@
         </mat-card>
     </div>
 </div>
+
+<ng-template #spinner>
+    <app-loading></app-loading>
+</ng-template>

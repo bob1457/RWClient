@@ -22,14 +22,14 @@
 </p>
 
 <p>
-    <button mat-button color="accent" (click)="removeOwner()">Remove Owner From Property</button>
+    <button mat-button color="accent" (click)="removeOwner()">Remove Owner From Property</button> *ngIf="list"
 </p>-->
-<mat-card class="owner-list-card" *ngIf="list">
+<mat-card class="owner-list-card" *ngIf="!(loading$ | async) && list; else spinner">
     <mat-card-header style="background-color: #f5f5f5;">
         <div mat-card-avatar class="owner-list-header-image">
             <i class="material-icons" style="font-size: 2.5em;color: #e64a19; margin-left: 5px;">
-        people
-    </i>
+                people
+            </i>
             <!-- <img src="../../assets/images/pmgmnt.png" height="40px" width="40px"> -->
         </div>
         <mat-card-title>Propoerty Owners ({{list.length}})</mat-card-title>
@@ -128,3 +128,7 @@
         </div>
     </mat-card-content>
 </mat-card>
+
+<ng-template #spinner>
+    <app-loading></app-loading>
+</ng-template>

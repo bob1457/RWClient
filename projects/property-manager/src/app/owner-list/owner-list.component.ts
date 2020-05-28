@@ -7,7 +7,7 @@ import { getPropertyOwnerList,
          addPropertyOwner,
          updatePropertyOwner,
          removePropertyOwner } from '../store/actions/property.actions';
-import {ownerList } from '../store/reducers/property.reducer';
+import {ownerList, loadingStatus } from '../store/reducers/property.reducer';
 // import { OwnerList } from '@lib/dashboard';
 // import { PropertyList, ContractList, TenantList, RentalList, ownerList, MarketingList, RentalAppList } from '../store/reducers/property.reducer';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
@@ -22,7 +22,10 @@ import { Observable } from 'rxjs';
 })
 export class OwnerListComponent implements OnInit {
 
-  loadingIndicator = false;
+  // loadingIndicator = false;
+
+  loading$: Observable<boolean>;
+
   // list: PropertyOwner[];
   owners$: Observable<PropertyOwner[]>;
   list: any[];
@@ -47,6 +50,8 @@ export class OwnerListComponent implements OnInit {
 
   ngOnInit() {
     debugger;
+    this.loading$ = this.store.pipe(select(loadingStatus));
+
     this.store.dispatch(getPropertyOwnerList());
     this.getOwnerList();
   }

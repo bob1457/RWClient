@@ -5,7 +5,8 @@ import { PropertyListingState } from '../store/marketing.state';
 import { Store, select } from '@ngrx/store';
 import { Router, ActivatedRoute } from '@angular/router';
 import { getPropertyListingDetails } from '../store/actions/marketing.actions';
-import { propertyListingDetails } from '../store/reducers';
+import { propertyListingDetails, loadingStatus } from '../store/reducers';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-listing-details',
@@ -16,6 +17,8 @@ export class ListingDetailsComponent implements OnInit {
 
   id: number;
   listing: any;
+
+  loading$: Observable<boolean>;
 
   detailsForm: FormGroup;
 
@@ -69,23 +72,32 @@ export class ListingDetailsComponent implements OnInit {
 
   GetPropertyListingDetails(id: any) {
     debugger;
-    // this.store.dispatch(getPropertyListingDetails({payload: id}));
+
+    this.loading$ = this.store.pipe(select(loadingStatus));
+
+    this.store.dispatch(getPropertyListingDetails({payload: id}));
 
     this.store.pipe(select(propertyListingDetails))
-          .subscribe(data => {
-            if (data != null && data.id === this.id) { // select data from state store if data exists
-              this.listing = data;
-              this.detailsForm.patchValue(data);
-            } else {
-              this.store.dispatch(getPropertyListingDetails({payload: id})); // dispatch the action if state has no data
+        .subscribe(data => {
+          this.listing = data;
+          console.log(data);
+    });
 
-              this.store.pipe(select(propertyListingDetails)) // select date from state in store
-              .subscribe(listing => {
-                this.listing = listing;
-              });
-            }
-            console.log(data);
-      });
+    // this.store.pipe(select(propertyListingDetails))
+    //       .subscribe(data => {
+    //         if (data != null && data.id === this.id) { // select data from state store if data exists
+    //           this.listing = data;
+    //           this.detailsForm.patchValue(data);
+    //         } else {
+    //           this.store.dispatch(getPropertyListingDetails({payload: id})); // dispatch the action if state has no data
+
+    //           this.store.pipe(select(propertyListingDetails)) // select date from state in store
+    //           .subscribe(listing => {
+    //             this.listing = listing;
+    //           });
+    //         }
+    //         console.log(data);
+    //   });
 
   }
 

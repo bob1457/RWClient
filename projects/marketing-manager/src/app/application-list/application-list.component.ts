@@ -5,7 +5,8 @@ import { getRentalApplicationList, getRentalApplicationDetails } from '../store/
 import { RentalApplication, MarketingService } from '@lib/app-core';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { Router, Event, NavigationStart, NavigationEnd } from '@angular/router';
-import { propertyApplications } from '../store/reducers';
+import { propertyApplications, loadingStatus } from '../store/reducers';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-application-list',
@@ -15,6 +16,8 @@ import { propertyApplications } from '../store/reducers';
 export class ApplicationListComponent implements OnInit {
 
   list: RentalApplication[];
+
+  loading$: Observable<boolean>;
 
   displayedColumns: string[] = ['icon', 'id', 'name', 'email', 'telephone', 'propertyName', 'occupants', 'appDate', 'action'];
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
@@ -40,6 +43,9 @@ export class ApplicationListComponent implements OnInit {
 
   ngOnInit() {
     debugger;
+
+    this.loading$ = this.store.pipe(select(loadingStatus));
+
     this.store.dispatch(getRentalApplicationList())  ;
 
     this.store.pipe(
@@ -51,10 +57,10 @@ export class ApplicationListComponent implements OnInit {
       });
   }
 
-  GetApplicationDetails(id: number) {
-    debugger;
-    return this.store.dispatch(getRentalApplicationDetails({payload: id}));
-  }
+  // GetApplicationDetails(id: number) {
+  //   debugger;
+  //   return this.store.dispatch(getRentalApplicationDetails({payload: id}));
+  // }
 
   ngAfterViewInit(): void {
     this.dataSource.sort = this.sort;

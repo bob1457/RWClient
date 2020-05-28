@@ -5,7 +5,8 @@ import { PropertyState } from '../store/property.state';
 import { ManagementContractService, ManagementContract } from '@lib/app-core';
 import { getContractDetails } from '../store/actions/property.actions';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { selectPropertyState, contractDetails } from '../store/reducers';
+import { selectPropertyState, contractDetails, loadingStatus } from '../store/reducers';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-contract-details',
@@ -15,6 +16,9 @@ import { selectPropertyState, contractDetails } from '../store/reducers';
 export class ContractDetailsComponent implements OnInit {
 
   id: number;
+
+  loading$: Observable<boolean>;
+
   detailsForm: FormGroup;;
   contract: ManagementContract;
 
@@ -33,6 +37,8 @@ export class ContractDetailsComponent implements OnInit {
    }
 
   ngOnInit() {
+
+    this.loading$ = this.store.pipe(select(loadingStatus));
 
     this.getContractDetails(this.id);
 

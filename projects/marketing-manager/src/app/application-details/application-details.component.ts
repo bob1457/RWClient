@@ -4,8 +4,9 @@ import { Store, select } from '@ngrx/store';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MarketingService } from '@lib/app-core';
 import { PropertyListingState } from '../store/marketing.state';
-import { propertyApplicationDetails } from '../store/reducers';
+import { propertyApplicationDetails, loadingStatus } from '../store/reducers';
 import { getRentalApplicationDetails } from '../store/actions/marketing.actions';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-application-details',
@@ -16,6 +17,8 @@ export class ApplicationDetailsComponent implements OnInit {
 
   id: number;
   application: any;
+
+  loading$: Observable<boolean>;
 
   // detailsForm: FormGroup;
 
@@ -35,30 +38,33 @@ export class ApplicationDetailsComponent implements OnInit {
 
   GetApplicationDetails(id: any) {
     debugger;
-    // this.store.dispatch(getPropertyListingDetails({payload: id}));
+
+    this.loading$ = this.store.pipe(select(loadingStatus));
+
+    this.store.dispatch(getRentalApplicationDetails({payload: id}));
 
     // this.store.dispatch(getRentalApplicationDetails({payload: id})); // dispatch the action if state has no data
 
-    // this.store.pipe(select(propertyApplicationDetails)) // select date from state in store
-    //           .subscribe(app => {
-    //             this.application = app;
-    //           });
-
-    this.store.pipe(select(propertyApplicationDetails))
-          .subscribe(data => {
-            if (data != null && data.id === this.id) { // select data from state store if data exists
-              this.application = data;
-              // this.detailsForm.patchValue(data);
-            } else {
-              this.store.dispatch(getRentalApplicationDetails({payload: id})); // dispatch the action if state has no data
-
-              this.store.pipe(select(propertyApplicationDetails)) // select date from state in store
+    this.store.pipe(select(propertyApplicationDetails)) // select date from state in store
               .subscribe(app => {
                 this.application = app;
               });
-            }
-            console.log(data);
-      });
+
+    // this.store.pipe(select(propertyApplicationDetails))
+    //       .subscribe(data => {
+    //         if (data != null && data.id === this.id) { // select data from state store if data exists
+    //           this.application = data;
+    //           // this.detailsForm.patchValue(data);
+    //         } else {
+    //           this.store.dispatch(getRentalApplicationDetails({payload: id})); // dispatch the action if state has no data
+
+    //           this.store.pipe(select(propertyApplicationDetails)) // select date from state in store
+    //           .subscribe(app => {
+    //             this.application = app;
+    //           });
+    //         }
+    //         console.log(data);
+    //   });
 
   }
 

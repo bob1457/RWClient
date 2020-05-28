@@ -4,9 +4,10 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
 import { PropertyState } from '../store/property.state';
 // import { getPropertyOwnerDetails } from '../store/actions/property.actions';
-import { ownerDetails} from '../store/reducers';
+import { ownerDetails, loadingStatus} from '../store/reducers';
 import { PropertyOwner } from '@lib/app-core';
 import { getPropertyOwnerDetails } from '../store/actions/property.actions';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-owner-details',
@@ -14,6 +15,9 @@ import { getPropertyOwnerDetails } from '../store/actions/property.actions';
   styleUrls: ['./owner-details.component.scss']
 })
 export class OwnerDetailsComponent implements OnInit {
+
+  loading$: Observable<boolean>;
+
   detailsForm: FormGroup;
   owner: PropertyOwner;
 
@@ -35,6 +39,8 @@ export class OwnerDetailsComponent implements OnInit {
 
   ngOnInit() {
     debugger;
+    this.loading$ = this.store.pipe(select(loadingStatus));
+
     this.getOwnerDetails(this.id);
 
     this.detailsForm = this.formBuilder.group({

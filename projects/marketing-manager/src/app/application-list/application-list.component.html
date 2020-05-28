@@ -1,7 +1,7 @@
 <!-- <p>
-  application-list works!
+  application-list works!*ngIf="list"
 </p> -->
-<mat-card class="application-list-card" *ngIf="list">
+<mat-card class="application-list-card" *ngIf="!(loading$ | async) && list; else spinner">
     <mat-card-header style="background-color: #f5f5f5;">
         <div mat-card-avatar class="application-list-header-image">
             <i class="material-icons" style="font-size: 2.5em;color: #e64a19; margin-left: 5px;">
@@ -29,28 +29,7 @@
           </i>
         </button> -->
             </div>
-            <div *ngIf="loadingIndicator" class="loadingio-spinner-spinner-vhc1lmfzuvn" style="top: 50%;
-                  left: 50%;
-                  position: fixed;
-                  /* width: 50px; */
-                  /* height: 50px; */
-                  /* color: red; */
-                  z-index: 1000;">
-                <div class="ldio-ugrhztjm33r">
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                </div>
-            </div>
+
             <div fxLayoutAlign="center">
                 <table mat-table [dataSource]="dataSource" matSort class="my-table mat-elevation-z8" style="width: 100%;">
                     <!--[dataSource] ="dataSource"(click)="openDialog('Add',{})"-->
@@ -127,3 +106,7 @@
     </mat-card-content>
 
 </mat-card>
+
+<ng-template #spinner>
+    <app-loading></app-loading>
+</ng-template>
