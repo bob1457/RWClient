@@ -22,7 +22,7 @@
             </mat-form-field>
             <mat-form-field style="width: 70%;">
                 <mat-label>Property Type</mat-label>
-                <mat-select id="propertyType1" formControlName="propertyType1">
+                <mat-select id="propertyType1" formControlName="type">
                     <mat-option>None</mat-option>
                     <mat-option value="SingleHouse">SingleHouse</mat-option>
                     <mat-option value="Apartment">Apartment</mat-option>
@@ -32,7 +32,7 @@
             </mat-form-field>
             <mat-form-field style="width: 70%;">
                 <span class="icon-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
-                <input matInput type="text" placeholder="Build Year" formControlName="propertyBuildYear" id="year">
+                <input matInput type="number" placeholder="Build Year" formControlName="propertyBuildYear" id="year">
             </mat-form-field>
             <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="10px">
                 <mat-checkbox formControlName="isShared" class="property-full-width">Is Shared</mat-checkbox>
@@ -40,7 +40,7 @@
             </div>
             <mat-form-field style="width: 70%;">
                 <span class="icon-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
-                <input matInput type="text" placeholder="Total Living Area(sqFT)" formControlName="totalLivingArea" id="living">
+                <input matInput type="number" placeholder="Total Living Area(sqFT)" formControlName="totalLivingArea" id="living">
             </mat-form-field>
             <!-- <mat-form-field style="width: 70%;">
                 <input matInput type="text" placeholder="Property Name" formControlName="propertyName" id="title">

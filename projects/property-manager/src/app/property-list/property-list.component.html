@@ -20,7 +20,7 @@
   <button mat-button color="accent" (click) = RemoveProperty()>Remove Property</button>
 </p> -->
 <!-- <div class="grid-container" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="1%" fxFlexFill> *ngIf="list"-->
-<mat-card class="property-list-card" *ngIf="!(loading$ | async); else spinner">
+<mat-card class="property-list-card" *ngIf="!(loading$ | async) && list; else spinner">
     <mat-card-header style="background-color: #f5f5f5;">
         <div mat-card-avatar class="property-list-header-image">
             <i class="material-icons" style="font-size: 2.5em;color: #e64a19; margin-left: 5px;">
@@ -76,9 +76,9 @@
                         <td mat-cell *matCellDef="let element"> {{element.status}} </td>
                     </ng-container>
 
-                    <ng-container matColumnDef="propertyType1">
+                    <ng-container matColumnDef="type">
                         <th class="table-header-text" style="margin-left: auto;margin-right: auto;" mat-header-cell *matHeaderCellDef mat-sort-header> Type </th>
-                        <td mat-cell *matCellDef="let element"> {{element.propertyType1}} </td>
+                        <td mat-cell *matCellDef="let element"> {{element.type}} </td>
                     </ng-container>
 
                     <ng-container matColumnDef="createdDate">

@@ -66,7 +66,7 @@ export class OwnerDetailsComponent implements OnInit {
         property: this.formBuilder.group({
           propertyName: ['', Validators.required],
           propertyDesc: [''],
-          propertyType1: ['', Validators.required],
+          type: ['', Validators.required],
           propertyLogoImgUrl: [''],
           propertyVideoUrl: [''],
           propertyBuildYear: [''],

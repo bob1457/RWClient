@@ -61,7 +61,7 @@ export class PropertyDetailsComponent implements OnInit {
       propertyId: ['', Validators.required],
       propertyName: ['', Validators.required],
       propertyDesc: [''],
-      propertyType1: ['', Validators.required],
+      type: ['', Validators.required],
 
       propertyLogoImgUrl: [''],
       propertyVideoUrl: [''],

@@ -25,7 +25,7 @@
                 </tr>
                 <tr>
                     <td><span class="bold">Type: </span></td>
-                    <td>{{addForm.get("propertyType1").value}}</td>
+                    <td>{{addForm.get("type").value}}</td>
                 </tr>
                 <tr>
                     <td><span class="bold">Build Year: </span></td>
@@ -52,7 +52,7 @@
                 </tr>
             </table>
         </div>
-        <div fxLayout="column" fxLayoutAlign="center center" fxFlex="30" fxLayoutGap="40px">
+        <div fxLayout="column" fxLayoutAlign="center center" fxFlex="30" fxLayoutGap="20px">
             <table style="margin-left: -45px;">
                 <tr>
                     <td><span class="bold">Property Number: </span></td>
@@ -80,8 +80,8 @@
                 </tr>
                 <tr>
                     <td><span class="bold">Owner Name: </span></td>
-                    <td>{{addForm.get("firstName").value}}</td>
-                    <td>{{addForm.get("lastName").value}}</td>
+                    <td>{{addForm.get("firstName").value}} {{addForm.get("lastName").value}}</td>
+                    <!-- <td></td> -->
                 </tr>
                 <tr>
                     <td><span class="bold">Owner Contact: </span></td>
@@ -161,7 +161,7 @@
     </div>
 
 
-
+    <!-- (click)="submit(addForm.value) AddProperty()-->
 
     <div class="step-button">
         <button mat-button style="float: right;background: #11c447; color: white;" (click)="submit(addForm.value)">Submit</button>

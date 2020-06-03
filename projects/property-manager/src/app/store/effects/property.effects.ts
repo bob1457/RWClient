@@ -75,7 +75,7 @@ export class PropertyEffects {
       switchMap((payload) =>
         this.propertyService.addProperty(payload).pipe(
           tap(() => console.log('called property service: ' + payload)),
-          map((property: Property) => ({
+          map((property: any) => ({
             type: '[Property] Add Property Success',
             payload: property
           })),

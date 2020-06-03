@@ -5,7 +5,7 @@ export interface Property {
     id: number;
     propertyName: string;
     propertyDesc: string;
-    propertyType1: string;
+    type: string;
     propertyManagerUserName: string;
     propertyLogoImgUrl: string;
     propertyVideoUrl: string;
