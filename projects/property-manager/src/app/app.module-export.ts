@@ -29,6 +29,8 @@ import { AddPropertyOwnerComponent } from './add-property-owner/add-property-own
 import { ContractContentComponent } from './contract-content/contract-content.component';
 import { YesNoPipe } from './yes-no.pipe';
 import { LoadingComponent } from './loading/loading.component';
+import { MatSortModule, MatPaginatorModule } from '@angular/material';
+// import { MatSortModule } from '@angular/material/sort';
 
 const routes: Routes = [
   { path: '', component: PropertyHomeComponent,
@@ -79,9 +81,14 @@ const routes: Routes = [
     AppMaterialModule,
     FlexLayoutModule,
     FormsModule,
+    MatSortModule,
+    MatPaginatorModule,
     ReactiveFormsModule,
     RouterModule.forChild(routes),
     StoreModule.forFeature('property', reducer)
+  ],
+  exports: [
+    MatSortModule
   ],
   providers: [],
 

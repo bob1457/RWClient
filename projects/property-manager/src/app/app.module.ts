@@ -30,6 +30,7 @@ import { AddPropertyOwnerComponent } from './add-property-owner/add-property-own
 import { YesNoPipe } from './yes-no.pipe';
 import { ContractContentComponent } from './contract-content/contract-content.component';
 import { LoadingComponent } from './loading/loading.component';
+import { MatSortModule, MatPaginator, MatPaginatorModule } from '@angular/material';
 
 
 @NgModule({
@@ -62,6 +63,8 @@ import { LoadingComponent } from './loading/loading.component';
     AppRoutingModule,
     AppMaterialModule,
     AppCoreModule,
+    MatSortModule,
+    MatPaginatorModule,
     StoreModule.forRoot([]),
     StoreModule.forFeature('property', reducer),
     EffectsModule.forFeature([PropertyEffects])
@@ -70,3 +73,4 @@ import { LoadingComponent } from './loading/loading.component';
   bootstrap: [AppPmComponent]
 })
 export class AppModule { }
+

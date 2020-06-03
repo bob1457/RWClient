@@ -22,7 +22,7 @@ export class PropertyListingComponent implements OnInit {
   loading$: Observable<boolean>;
 
   // tslint:disable-next-line: max-line-length
-  displayedColumns: string[] = ['icon', 'id', 'title', 'listingDesc', 'propertyName', 'isActive', 'createdDate', 'updateDate', 'action'];
+  displayedColumns: string[] = ['icon', 'id', 'title', 'listingDesc', 'propertyName', 'isActive', 'created', 'updated', 'action'];
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: false}) sort: MatSort;
 
@@ -59,6 +59,10 @@ export class PropertyListingComponent implements OnInit {
         console.log(data);
         this.dataSource.data = this.list;
         console.log(this.dataSource.data);
+
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
+
       });
   }
 

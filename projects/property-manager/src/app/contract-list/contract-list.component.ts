@@ -66,7 +66,10 @@ export class ContractListComponent implements OnInit {
     .subscribe(data => {
       this.list = data;
       this.dataSource.data = this.list;
-    })
+
+      this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
+    });
   }
 
   public doFilter = (value: string) => {

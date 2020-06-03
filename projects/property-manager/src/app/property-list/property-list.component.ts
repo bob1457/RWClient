@@ -1,6 +1,6 @@
 import { PropertyState } from './../store/property.state';
 import { Property, PropertyService } from '@lib/app-core';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Store, select } from '@ngrx/store';
 import { getPropertyList, getPropertyDetails, addProperty, updateProperty, updatePropertyStatus, removeProperty } from '../store/actions/property.actions';
@@ -16,7 +16,7 @@ import { Router, Event, NavigationStart, NavigationEnd } from '@angular/router';
   templateUrl: './property-list.component.html',
   styleUrls: ['./property-list.component.scss']
 })
-export class PropertyListComponent implements OnInit {
+export class PropertyListComponent implements OnInit, AfterViewInit {
 
   loadingIndicator = false;
 
@@ -66,6 +66,9 @@ export class PropertyListComponent implements OnInit {
         console.log(data);
         this.dataSource.data = this.list;
         console.log(this.dataSource.data);
+
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
       });
   }
 
@@ -93,6 +96,10 @@ export class PropertyListComponent implements OnInit {
   public doFilter = (value: string) => {
     this.dataSource.filter = value.trim().toLocaleLowerCase();
   }
+
+  // customSort(e) {
+  //   console.log(e);
+  // }
 
   AddProperty() { // ppt is the input parameter, ignored in unit testing   ppt: Property
 

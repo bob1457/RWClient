@@ -84,7 +84,10 @@ export class OwnerListComponent implements OnInit {
     .subscribe(data => {
       this.list = data;
       this.dataSource.data = this.list;
-    })
+
+      this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
+    });
   }
 
   getOwnerDetails(id: number) {
