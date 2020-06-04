@@ -55,6 +55,10 @@ export class AllLeasesComponent implements OnInit {
               .subscribe(list => {
                 this.list = list;
                 this.dataSource.data = this.list;
+
+                this.dataSource.sort = this.sort;
+                this.dataSource.paginator = this.paginator;
+
               });
             }
             console.log(data);

@@ -41,6 +41,10 @@ export class AllTenantsComponent implements OnInit {
         console.log(data);
         this.dataSource.data = this.list;
         console.log(this.dataSource.data);
+
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
+
       });
 
   }
