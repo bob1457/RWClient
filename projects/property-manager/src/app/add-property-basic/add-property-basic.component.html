@@ -77,8 +77,16 @@
   <mat-error *ngIf="hasError('title', 'maxlength')">You have more than 60 characters</mat-error> -->
             </mat-form-field>
             <mat-form-field style="width: 70%;">
-                <span class="icon-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
-                <input matInput type="text" placeholder="Province/State" formControlName="propertyStateProvince" id="province">
+                <!-- <span class="icon-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
+                <input matInput type="text" placeholder="Province/State" formControlName="propertyStateProvince" id="province"> -->
+                <mat-label>Provind/State</mat-label>
+                <mat-select id="propertyStateProvince" formControlName="propertyStateProvince">
+                    <!-- <mat-option>None</mat-option> -->
+                    <mat-option value="BC">BC</mat-option>
+                    <mat-option value="AB">ABt</mat-option>
+                    <mat-option value="ON">ON</mat-option>
+                    <mat-option value="QC">QC</mat-option>
+                </mat-select>
                 <!-- <mat-hint align="end">Not more then 60 characters long.</mat-hint>
   <mat-error *ngIf="hasError('title', 'required')">Name is required</mat-error>
   <mat-error *ngIf="hasError('title', 'maxlength')">You have more than 60 characters</mat-error> -->
