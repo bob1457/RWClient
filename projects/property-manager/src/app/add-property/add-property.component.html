@@ -37,13 +37,13 @@
                 </mat-step> [owners]="owners"-->
                 <mat-step [stepControl]="addForm">
                     <ng-template matStepLabel>
-                        <span><b style="color:green">Owner</b></span>
+                        <span><b style="color:green">Add Owner</b></span>
                     </ng-template>
                     <app-add-property-owner [addForm]="addForm"></app-add-property-owner>
                 </mat-step>
                 <mat-step [stepControl]="addForm">
                     <ng-template matStepLabel>
-                        <span><b style="color:green">Finish</b></span>
+                        <span><b style="color:green">Review & Finish</b></span>
                     </ng-template>
                     <app-add-property-finish [addForm]="addForm"></app-add-property-finish>
                 </mat-step>
