@@ -118,8 +118,8 @@ on(PropertyActions.getPropertyDetails, (state) => ({
       ...state,
       loading: false,
       loaded: true,
-      properties: updatedProperties // [...state.property[index], payload ] // ,
-      // property: payload
+      properties: updatedProperties, // [...state.property[index], payload ] // ,
+      property: payload
     });
   }),
 
