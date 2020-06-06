@@ -84,7 +84,7 @@
                                     <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center" fxLayoutGap="10px" style="width: 75%;">
                                         <mat-form-field class="property-full-width" style="width:20%">
                                             <mat-label>Property Type</mat-label>
-                                            <mat-select [(value)]="current" id="type" formControlName="type" [ngModel]="property.type">
+                                            <mat-select [(value)]="current" id="type" formControlName="propertyType1" [ngModel]="property.propertyType1">
                                                 <!-- <mat-option>None</mat-option> -->
                                                 <mat-option value="SingleHouse">SingleHouse</mat-option>
                                                 <mat-option value="Apartment">Apartment</mat-option>
@@ -92,9 +92,9 @@
                                                 <mat-option value="Others">Others</mat-option>
                                             </mat-select>
                                         </mat-form-field>
-                                        <mat-form-field class="property-full-width" style="margin-top: 25px; width: 10%;">
+                                        <mat-form-field class="property-full-width" style="margin-top: 25px; width: 15%;">
                                             <span class="icon-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
-                                            <input type="text" id="propertyBuildYear" formControlName="propertyBuildYear" matInput placeholder="Property Build Year" [ngModel]="property.propertyBuildYear">
+                                            <input type="number" id="propertyBuildYear" formControlName="propertyBuildYear" matInput placeholder="Property Build Year" [ngModel]="property.propertyBuildYear">
                                         </mat-form-field>
                                         <mat-checkbox formControlName="isShared" [ngModel]="property.isShared" [(checked)]="shared" class="property-full-width">Shared</mat-checkbox>
                                         <mat-checkbox formControlName="isBasementSuite" [ngModel]="property.isBasementSuite" class="property-full-width">Basement</mat-checkbox>
@@ -117,17 +117,17 @@
                                         </mat-form-field>
                                         <mat-form-field style="width: 25%;" class="property-full-width3">
                                             <span class="icon-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
-                                            <input type="text" id="propertyNumber" formControlName="propertyNumber" matInput placeholder="Property Street Number" [ngModel]="property.propertyNumber">
+                                            <input type="text" id="propertyNumber" formControlName="propertyNumber" matInput placeholder="Street Number" [ngModel]="property.propertyNumber">
 
                                         </mat-form-field>
                                         <mat-form-field style="width: 35%;" class="property-full-width3">
                                             <span class="icon-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
-                                            <input type="text" id="propertyStreet" formControlName="propertyStreet" matInput placeholder="Property Street Number" [ngModel]="property.propertyStreet">
+                                            <input type="text" id="propertyStreet" formControlName="propertyStreet" matInput placeholder="Street" [ngModel]="property.propertyStreet">
 
                                         </mat-form-field>
                                         <mat-form-field style="width: 25%;" class="property-full-width3">
                                             <span class="icon-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
-                                            <input type="text" id="propertyCity" formControlName="propertyCity" matInput placeholder="Property Street Number" [ngModel]="property.propertyCity">
+                                            <input type="text" id="propertyCity" formControlName="propertyCity" matInput placeholder="City" [ngModel]="property.propertyCity">
 
                                         </mat-form-field>
 
@@ -170,24 +170,29 @@
                                     background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));margin-top: -2px;"> -->
                                     <span class="line"></span>
                                     <div fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="center center" fxLayoutGap="10px" style="max-width:75%;margin-top: 25px;">
-                                        <mat-form-field class="property-full-width" fxFlex="20" style="margin-top: 25px;">
+                                        <mat-form-field class="property-full-width" fxFlex="10" style="margin-top: 25px;">
                                             <span class="icon-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
-                                            <input type="text" id="numberOfBedrooms" formControlName="numberOfBedrooms" matInput placeholder="Number of Bedrooms" [ngModel]="property.numberOfBedrooms">
+                                            <input type="number" id="numberOfBedrooms" formControlName="numberOfBedrooms" matInput placeholder="Bedrooms" [ngModel]="property.numberOfBedrooms">
 
                                         </mat-form-field>
-                                        <mat-form-field class="property-full-width" fxFlex="20" style="margin-top: 25px;">
+                                        <mat-form-field class="property-full-width" fxFlex="10" style="margin-top: 25px;margin-left: -30px;">
                                             <span class="icon-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
-                                            <input type="text" id="numberOfBathrooms" formControlName="numberOfBathrooms" matInput placeholder="Number of Bathrooms" [ngModel]="property.numberOfBathrooms">
+                                            <input type="number" id="numberOfBathrooms" formControlName="numberOfBathrooms" matInput placeholder="Bathrooms" [ngModel]="property.numberOfBathrooms">
 
                                         </mat-form-field>
-                                        <mat-form-field class="property-full-width" fxFlex="20" style="margin-top: 25px;">
+                                        <mat-form-field class="property-full-width" fxFlex="10" style="margin-top: 25px;">
                                             <span class="icon-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
-                                            <input type="text" id="numberOfLayers" formControlName="numberOfLayers" matInput placeholder="Number of Layers" [ngModel]="property.numberOfLayers">
+                                            <input type="number" id="numberOfLayers" formControlName="numberOfLayers" matInput placeholder="Layers" [ngModel]="property.numberOfLayers">
 
                                         </mat-form-field>
-                                        <mat-form-field class="property-full-width" fxFlex="20" style="margin-top: 25px;">
+                                        <mat-form-field class="property-full-width" fxFlex="10" fxLayoutGap="50px" style="margin-top: 25px;">
                                             <span class="icon-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
-                                            <input type="text" id="numberOfParking" formControlName="numberOfParking" matInput placeholder="Number of Parking" [ngModel]="property.numberOfParking">
+                                            <input type="number" id="numberOfParking" formControlName="numberOfParking" matInput placeholder="Parking" [ngModel]="property.numberOfParking">
+
+                                        </mat-form-field>
+                                        <mat-form-field class="property-full-width" fxFlex="15" style="margin-top: 25px;">
+                                            <span class="icon-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
+                                            <input type="number" id="livingArea" formControlName="totalLivingArea" matInput placeholder="Living Area (sqFT)" [ngModel]="property.totalLivingArea">
 
                                         </mat-form-field>
 
@@ -242,8 +247,8 @@
                     <div fxLayout="row" fxLayoutGap="7px" fxLayoutAlign="end center" style="width: 75%;">
                         <!-- <span *ngIf="showMsg" style="color: rgb(189, 150, 25);">Updated successfully!</span>
             <img *ngIf=" loading" class="pl-2" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
-            /> [disabled]="f.invalid || !f.dirty"-->
-                        <button type="submit" mat-raised-button color="primary">UPDATE</button>
+            /> [disabled]="f.invalid || !f.dirty"                      UpdateProperty()       -->
+                        <button type="submit" mat-raised-button color="primary" (click)="submit(detailsForm.value)">UPDATE</button>
                         <button mat-raised-button color="accent">CANCEL</button>
                     </div>
                 </form>

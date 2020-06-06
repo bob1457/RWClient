@@ -7,7 +7,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Property, PropertyService } from '@lib/app-core';
 import { propertyDetrails, loadingStatus } from '../store/reducers';
 import { Observable } from 'rxjs';
-
+import * as PropertyActions from '../store/actions/property.actions';
 @Component({
   selector: 'app-property-details',
   templateUrl: './property-details.component.html',
@@ -61,13 +61,13 @@ export class PropertyDetailsComponent implements OnInit {
       propertyId: ['', Validators.required],
       propertyName: ['', Validators.required],
       propertyDesc: [''],
-      type: ['', Validators.required],
+      propertyType1: [null],
 
       propertyLogoImgUrl: [''],
       propertyVideoUrl: [''],
-      propertyBuildYear: [''],
-      isActive: [''],
-      isShared: [''],
+      propertyBuildYear: [null],
+      isActive: [true],
+      isShared: [false],
       status: [''],
       isBasementSuite: [false],
 
@@ -78,52 +78,53 @@ export class PropertyDetailsComponent implements OnInit {
       propertyStateProvince: ['', Validators.required],
       propertyCountry: ['', Validators.required],
       propertyZipPostCode: ['', Validators.required],
-      gpslongitudeValue: [''],
-      gpslatitudeValue: [''],
+      // gpslongitudeValue: [''],
+      // gpslatitudeValue: [''],
 
-      stove: [''],
-      refrigerator: [''],
-      dishwasher: [''],
-      airConditioner: [''],
-      laundry: [''],
-      blindsCurtain: [''],
-      furniture: [''],
-      tvinternet: [''],
-      commonFacility: [''],
-      securitySystem: [''],
-      utilityIncluded: [''],
-      fireAlarmSystem: [''],
+      stove: [true],
+      refrigerator: [true],
+      dishwasher: [false],
+      airConditioner: [false],
+      laundry: [false],
+      blindsCurtain: [false],
+      furniture: [false],
+      tvinternet: [false],
+      commonFacility: [false],
+      securitySystem: [false],
+      utilityIncluded: [false],
+      fireAlarmSystem: [false],
       others: [''],
       facilityNotes: [''],
 
-      numberOfBedrooms: ['', Validators.required],
-      numberOfBathrooms: ['', Validators.required],
-      numberOfLayers: ['', Validators.required],
-      numberOfParking: ['', Validators.required],
-      basementAvailable: ['', Validators.required],
-      totalLivingArea: ['', Validators.required],
+      numberOfBedrooms: [0],
+      numberOfBathrooms: [0],
+      numberOfLayers: [0],
+      numberOfParking: [0],
+      basementAvailable: [0],
+      totalLivingArea: [0],
       featureNotes: [''],
 
-      creationDate: [''],
-      updateDate: [''],
-      ownerList: this.formBuilder.group({
-        userName: [''],
-        firstName: ['', Validators.required],
-        lastName: ['', Validators.required],
-        contactEmail: ['', Validators.required],
-        contactTelephone1: ['', Validators.required],
-        contactTelephone2: [''],
-        onlineAccessEnbaled: [false],
-        userAvartaImgUrl: [''],
+      // creationDate: [''],
+      // updateDate: [''],
 
-        address: this.formBuilder.group({
-          ownerStreetNumber: ['', Validators.required],
-          ownerCity: ['', Validators.required],
-          ownerStateProv: ['', Validators.required],
-          ownerZipPostCode: ['', Validators.required],
-          ownerCountry: ['', Validators.required]
-        })
-      })
+      // ownerList: this.formBuilder.group({
+      //   userName: [''],
+      //   firstName: [''],
+      //   lastName: [''],
+      //   contactEmail: [''],
+      //   contactTelephone1: [''],
+      //   contactTelephone2: [''],
+      //   onlineAccessEnbaled: [false],
+      //   userAvartaImgUrl: [''],
+
+      //   address: this.formBuilder.group({
+      //     ownerStreetNumber: [''],
+      //     ownerCity: [''],
+      //     ownerStateProv: [''],
+      //     ownerZipPostCode: [''],
+      //     ownerCountry: ['']
+      //   })
+      // })
 
     });
 
@@ -190,12 +191,63 @@ export class PropertyDetailsComponent implements OnInit {
     });
   }
 
-  submit() {
-
+  submit(formValue) {
+    debugger;
+    console.log(formValue);
+    this.store.dispatch(PropertyActions.updateProperty({payload: formValue}));
   }
 
   goBack() {
     this.router.navigate(['/Manage/property/propertylist']);
   }
+
+
+  // UpdateProperty() {
+  //   const property: any = {
+  //     propertyId: 1004,
+  //     propertyName: 'Last Update REAL',
+  //     propertyDesc: 'update again!!!',
+  //     propertyType1: 'SingleHouse',
+  //     propertyManagerId: 0,
+  //     propertyLogoImgUrl: 'string',
+  //     propertyVideoUrl: 'string',
+  //     propertyBuildYear: 0,
+  //     isActive: true,
+  //     isShared: true,
+  //     furnishingId: 0,
+  //     status: 'Rented',
+  //     isBasementSuite: true,
+  //     propertySuiteNumber: '101',
+  //     propertyNumber: '9876',
+  //     propertyStreet: '102 Street',
+  //     propertyCity: 'Surrey',
+  //     propertyStateProvince: 'string',
+  //     propertyCountry: 'string',
+  //     propertyZipPostCode: 'string',
+  //     stove: true,
+  //     refrigerator: true,
+  //     dishwasher: true,
+  //     airConditioner: true,
+  //     laundry: true,
+  //     blindsCurtain: true,
+  //     furniture: true,
+  //     tvinternet: true,
+  //     commonFacility: false,
+  //     securitySystem: true,
+  //     utilityIncluded: true,
+  //     fireAlarmSystem: true,
+  //     others: 'string',
+  //     facilityNotes: 'string',
+  //     numberOfBedrooms: 3,
+  //     numberOfBathrooms: 0,
+  //     numberOfLayers: 2,
+  //     numberOfParking: 1,
+  //     basementAvailable: true,
+  //     totalLivingArea: 0,
+  //     featureNotes: 'string'
+  //   };
+  //   debugger;
+  //   return this.store.dispatch(PropertyActions.updateProperty({payload: property}));
+  // }
 
 }
