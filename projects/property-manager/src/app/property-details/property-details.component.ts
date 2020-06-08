@@ -19,13 +19,19 @@ export class PropertyDetailsComponent implements OnInit {
 
   loading$: Observable<boolean>;
 
- property$ = this.store.pipe(select(propertyDetrails))
+  property$ = this.store.pipe(select(propertyDetrails))
         .subscribe(data => {
           this.property = data;
           // this.detailsForm.patchValue(data);
           console.log(data);
-    })
-    ;
+    });
+
+  // $details = this.store.pipe(select(propertyDetrails))
+  // .subscribe(data => {
+  //   this.property = data;
+  //   // this.detailsForm.setValue(data);
+  //   console.log(data);
+  // });
 
   constructor(private store: Store<PropertyState>,
               private router: Router,
@@ -43,6 +49,9 @@ export class PropertyDetailsComponent implements OnInit {
   current = '';
   shared = '';
   basement = '';
+
+  status = false;
+  showMsg = false;
 
 
   // property$: Observable<Property>;
@@ -153,6 +162,8 @@ export class PropertyDetailsComponent implements OnInit {
   GetPropertyDetails(id: any) {
     debugger;
     this.store.dispatch(getPropertyDetails({payload: id}));
+
+    // this.selectPropertyDetails();
     // this.property$ =
 
     // User store to select the state
@@ -191,10 +202,32 @@ export class PropertyDetailsComponent implements OnInit {
     });
   }
 
-  submit(formValue) {
+  submit() { //formValue
     debugger;
-    console.log(formValue);
-    this.store.dispatch(PropertyActions.updateProperty({payload: formValue}));
+    // console.log(formValue);
+    this.loading$ = this.store.pipe(select(loadingStatus));
+    // console.log(this.detailsForm.value);
+    try {
+      this.store.dispatch(PropertyActions.updateProperty({payload: this.detailsForm.value}));
+      this.showMsg = true;
+    } catch (err) {
+      console.log(err); // show error message
+    }
+
+    // this.loading$.subscribe(res => this.status = res);
+    // if (!this.status === false) {
+    // this.showMsg = true; // may need re-factor
+    // }
+
+    setTimeout(() => {
+      this.showMsg = false;
+      // this.disabled = null;
+      console.log(this.showMsg);
+    }, 2000);
+
+    //
+    // this.propertyService.updateProperty(formValue)
+    // .subscribe(data => this.detailsForm.patchValue(data)); // call service directly instead of dispatching the action
   }
 
   goBack() {
