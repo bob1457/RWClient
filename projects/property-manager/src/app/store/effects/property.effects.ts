@@ -104,11 +104,12 @@ export class PropertyEffects {
             payload: property
           })),
           // tap(res => {console.log('response: ' + res); }),
-          catchError(
-            err => {
-              return of('[Property] Update Property Failure', err.error);
-            } // EMPTY
-          )
+          // catchError(
+          //   err => {
+          //     return of('[Property] Update Property Failure', err.error);
+          //   } // EMPTY
+          // )
+          catchError(error => of(PropertyActions.addPropertyFailure(error.message)))
         )
       )
     )

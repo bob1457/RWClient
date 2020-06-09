@@ -35,7 +35,15 @@ export class DashboardComponent implements OnInit {
 
   constructor(private breakpointObserver: BreakpointObserver,
               private store: Store<DashState>,
-              private propertyService: PropertyService) {}
+              private propertyService: PropertyService) {
+                this.$propertyList = this.store.select(PropertyList);
+                this.contractList$ = this.store.select(ContractList);
+                this.tenantList$ = this.store.select(TenantList);
+                this.rentalList$ = this.store.select(RentalList);
+                this.ownerList$ = this.store.select(OwnerList);
+                this.marketingList$ = this.store.select(MarketingList);
+                this.rentalAppList$ = this.store.select(RentalAppList);
+              }
 
   ngOnInit() {
     this.breakpoint = (window.innerWidth <= 640) ? 4 : 1;
@@ -50,7 +58,7 @@ export class DashboardComponent implements OnInit {
     this.store.dispatch(getPropertyOwnerList());
     this.store.dispatch(getRentalApplicationList());
 
-    this.getAllPropertyList();
+    // this.getAllPropertyList();
   }
 
   onResize(event) {

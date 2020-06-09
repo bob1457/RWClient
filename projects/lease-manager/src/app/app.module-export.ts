@@ -23,6 +23,8 @@ import { LeaseDetailsComponent } from './lease-details/lease-details.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { YesNoPipe } from './yes-no.pipe';
+import { LoadingComponent } from './loading/loading.component';
+
 
 const routes: Routes = [
   // { path: '', component: AllLeasesComponent },
@@ -47,6 +49,7 @@ const routes: Routes = [
     AllTenantsComponent,
     LeaseHomeComponent,
     LeaseDetailsComponent,
+    LoadingComponent,
     AddLeaseComponent,
     AddTenantComponent,
     TenantDetailsComponent,

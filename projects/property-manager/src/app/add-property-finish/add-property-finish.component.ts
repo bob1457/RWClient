@@ -22,11 +22,11 @@ export class AddPropertyFinishComponent implements OnInit {
   ngOnInit() {
   }
 
-  submit(formValue) { // Add validation here...for all fields if any
+  submit() { // Add validation here...for all fields if any formValue
     debugger;
-    console.log(this.addForm);
-    console.log(formValue);
-    this.store.dispatch(PropertyActions.addProperty({payload: formValue}));
+    console.log(this.addForm.value);
+    // console.log(formValue);
+    this.store.dispatch(PropertyActions.addProperty({payload: this.addForm.value}));
     this.location.back();
   }
 

@@ -7,14 +7,14 @@
             <i class="material-icons" style="font-size: 2.5em;color: #3d5afe; margin-left: 5px;">
               library_add
             </i>
-            <!-- <img src="../../assets/images/pmgmnt.png" height="40px" width="40px"> (ngSubmit)="onSubmit()"-->
+            <!-- <img src="../../assets/images/pmgmnt.png" height="40px" width="40px">(ngSubmit)="submit()" (ngSubmit)="onSubmit()"-->
         </div>
         <mat-card-title>Add New Property</mat-card-title>
         <mat-card-subtitle>Add new property</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content class="property-add-card-content">
 
-        <form [formGroup]="addForm" class="add-form">
+        <form novalidate [formGroup]="addForm" class="add-form">
 
             <mat-horizontal-stepper #stepper class="stepper">
                 <mat-step [stepControl]="addForm">

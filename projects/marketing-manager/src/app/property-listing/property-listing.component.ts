@@ -43,6 +43,18 @@ export class PropertyListingComponent implements OnInit {
                   }
 
                 });
+
+                this.store.pipe(
+                  select(propertyListing)).subscribe(data => {
+                    this.list = data ;
+                    console.log(data);
+                    this.dataSource.data = this.list;
+                    console.log(this.dataSource.data);
+
+                    this.dataSource.sort = this.sort;
+                    this.dataSource.paginator = this.paginator;
+
+                  });
                }
 
   ngOnInit() {
@@ -53,17 +65,17 @@ export class PropertyListingComponent implements OnInit {
     // return this.propertyService.getPropertyList().subscribe((pList: Property[]) => {this.list = pList; console.log(pList)});
     this.store.dispatch(getPropertyListing());
 
-    this.store.pipe(
-      select(propertyListing)).subscribe(data => {
-        this.list = data ;
-        console.log(data);
-        this.dataSource.data = this.list;
-        console.log(this.dataSource.data);
+    // this.store.pipe(
+    //   select(propertyListing)).subscribe(data => {
+    //     this.list = data ;
+    //     console.log(data);
+    //     this.dataSource.data = this.list;
+    //     console.log(this.dataSource.data);
 
-        this.dataSource.sort = this.sort;
-        this.dataSource.paginator = this.paginator;
+    //     this.dataSource.sort = this.sort;
+    //     this.dataSource.paginator = this.paginator;
 
-      });
+    //   });
   }
 
   ngAfterViewInit(): void {

@@ -39,6 +39,18 @@ export class ApplicationListComponent implements OnInit {
                     this.loadingIndicator = false;
                   }
                 });
+
+                this.store.pipe(
+                  select(propertyApplications)).subscribe(data => {
+                    this.list = data ;
+                    console.log(data);
+                    this.dataSource.data = this.list;
+                    console.log(this.dataSource.data);
+
+                    this.dataSource.sort = this.sort;
+                    this.dataSource.paginator = this.paginator;
+                  }
+                  );
               }
 
   ngOnInit() {
@@ -48,16 +60,17 @@ export class ApplicationListComponent implements OnInit {
 
     this.store.dispatch(getRentalApplicationList())  ;
 
-    this.store.pipe(
-      select(propertyApplications)).subscribe(data => {
-        this.list = data ;
-        console.log(data);
-        this.dataSource.data = this.list;
-        console.log(this.dataSource.data);
+    // this.store.pipe(
+    //   select(propertyApplications)).subscribe(data => {
+    //     this.list = data ;
+    //     console.log(data);
+    //     this.dataSource.data = this.list;
+    //     console.log(this.dataSource.data);
 
-        this.dataSource.sort = this.sort;
-        this.dataSource.paginator = this.paginator;
-      });
+    //     this.dataSource.sort = this.sort;
+    //     this.dataSource.paginator = this.paginator;
+    //   }
+    //   );
   }
 
   // GetApplicationDetails(id: number) {

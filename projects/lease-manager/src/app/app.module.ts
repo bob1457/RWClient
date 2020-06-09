@@ -15,6 +15,7 @@ import { AddLeaseComponent } from './add-lease/add-lease.component';
 import { AddTenantComponent } from './add-tenant/add-tenant.component';
 import { TenantDetailsComponent } from './tenant-details/tenant-details.component';
 import { YesNoPipe } from './yes-no.pipe';
+import { LoadingComponent } from './loading/loading.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { YesNoPipe } from './yes-no.pipe';
     AddLeaseComponent,
     AddTenantComponent,
     TenantDetailsComponent,
-    YesNoPipe
+    YesNoPipe,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,
