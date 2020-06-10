@@ -54,18 +54,22 @@ export class AddOwnerComponent implements OnInit {
       contactEmail: [],
       contactTelephone1: [],
       contactTelephone2: [],
+      isActive: [true],
+      onlineAccessEnabled: [false],
+      roleId: [2],
+      userName: ['NotSet'],
       propertyId: [],
-      propertyOwnerId: [],
+      propertyOwnerId: [0],
 
       ownerOption: [],
       isSameAddress: [],
       notes: [],
 
-      ownerStreetNumber: [],
-      ownerCity: [],
-      ownerStateProv: [],
-      ownerZipPostCode : [],
-      ownerCountry : []
+      streetNumber: [],
+      city: [],
+      stateProv: [],
+      zipPostCode : [],
+      country : []
 
 
     });
@@ -129,6 +133,12 @@ export class AddOwnerComponent implements OnInit {
   submit() { // Add validation here...for all fields if anyformValue
     debugger;
     console.log(this.addForm.value);
+    if(this.addForm.get('ownerOption').value === true) {
+      this.addForm.get('isActive').setValue(true);
+      this.addForm.get('onlineAccessEnabled').setValue(false);
+      this.addForm.get('userName').setValue('NotSet');
+      this.addForm.get('roleId').setValue(2);
+    }
     // console.log(formValue);
     this.store.dispatch(PropertyActions.addPropertyOwner({payload: this.addForm.value}));
 
