@@ -94,10 +94,10 @@ export class AddOwnerComponent implements OnInit {
     this.sameAddress = e.checked;
   }
 
-  submit(formValue) { // Add validation here...for all fields if any
+  submit() { // Add validation here...for all fields if anyformValue
     debugger;
-    console.log(this.addForm);
-    console.log(formValue);
+    console.log(this.addForm.value);
+    // console.log(formValue);
     this.location.back();
   }
 
