@@ -67,7 +67,7 @@
                         </i> &nbsp;&nbsp; -->
                             <span style="color: black;">Property Owners <span *ngIf="ownerList">({{ownerList.length}})</span></span>
                         </ng-template>
-                        <div fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="15px" style="height: 340px;">
+                        <div fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="15px" style="height: 340px;" *ngIf="!(loading$ | async) && contractList; else spinner">
                             <mat-card style="width: 15%; padding: 0; margin-top: 15px; margin-left: 10px;" [ngStyle.xs]="{'width': '25%'}" *ngFor="let owner of ownerList">
                                 <!-- *ngFor="let property of properties" -->
 
@@ -124,3 +124,7 @@
     </mat-card-content>
 </mat-card>
 <!-- </mat-grid-tile> -->
+
+<ng-template #spinner>
+    <lib-loading></lib-loading>
+</ng-template>

@@ -6,7 +6,7 @@ import { Store, select } from '@ngrx/store';
 import { DashState } from '../store/dash.state';
 import { getPropertyList, getContractList } from '../store/dash.actions';
 import { Property } from '../models/property.model';
-import { PropertyList } from '../store/dash.reducer';
+import { PropertyList, loadingStatus } from '../store/dash.reducer';
 import { PropertyOwner } from '../models/property-owner.model';
 import { ManagementContract } from '../models/management-contract.model';
 
@@ -16,6 +16,8 @@ import { ManagementContract } from '../models/management-contract.model';
   styleUrls: ['./dash-property.component.css']
 })
 export class DashPropertyComponent implements OnInit {
+
+  loading$: Observable<boolean>;
 
   breakpoint: number;
 
@@ -27,6 +29,9 @@ export class DashPropertyComponent implements OnInit {
   constructor(private store: Store<DashState>) { }
 
   ngOnInit() {
+
+    this.loading$ = this.store.pipe(select(loadingStatus));
+
     this.breakpoint = (window.innerWidth <= 640) ? 2 : 1;
     // debugger;
     // this.store.dispatch(getPropertyList()) ;
