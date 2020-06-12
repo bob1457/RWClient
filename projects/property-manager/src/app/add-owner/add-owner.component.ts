@@ -133,7 +133,7 @@ export class AddOwnerComponent implements OnInit {
   submit() { // Add validation here...for all fields if anyformValue
     debugger;
     console.log(this.addForm.value);
-    if(this.addForm.get('ownerOption').value === true) {
+    if(this.addForm.get('ownerOption').value === 'new') { // may not be necessary, they are initilized in form group
       this.addForm.get('isActive').setValue(true);
       this.addForm.get('onlineAccessEnabled').setValue(false);
       this.addForm.get('userName').setValue('NotSet');

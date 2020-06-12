@@ -44,6 +44,12 @@
                 <div fxLayout="column" fxLayoutAlign="start center">
                     <form novalidate fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" [formGroup]="detailsForm" (ngSubmit)="submit()" style="width: 100%;">
 
+                        <mat-form-field class="owner-full-width-1" style="display: none;">
+                            <span class="icon-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
+                            <input type="text" id="id" formControlName="id" matInput placeholder="Id" [ngModel]="owner.id" name="id">
+
+                        </mat-form-field>
+
                         <mat-form-field class="owner-full-width-1" style="margin-top: 25px;">
                             <span class="icon-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
                             <input type="text" id="firstName" formControlName="firstName" matInput placeholder="First Name" [ngModel]="owner.firstName" name="firstName">
@@ -90,16 +96,38 @@
                             <textarea matInput formControlName="notes" [ngModel]="owner.notes"></textarea>
                         </mat-form-field>
                         <div fxLayout="column" fxLayoutAlign="start start" style="width: 75%;">
-                            <h5 style="font-size: 1.25em;">Owner Address</h5>
-                            <p style="margin-bottom: 0;">
-                                {{owner.address.streetNumber}}
-                            </p>
-                            <p style="margin-bottom: 0;">
-                                {{owner.address.city}} {{owner.address.stateProvince}} {{owner.address.zipPostCode}}
-                            </p>
-                            <p>
-                                {{owner.address.country}}
-                            </p>
+                            <h5 style="font-size: 1.25em;">Owner Address <a mat-button style="font-size: .8em;" (click)="EditAddress()"><span *ngIf="!editAddress">Edit</span><span *ngIf="editAddress">Cancel</span></a></h5>
+                            <div *ngIf="!editAddress">
+                                <p style="margin-bottom: 0;">
+                                    {{owner.address.streetNumber}}
+                                </p>
+                                <p style="margin-bottom: 0;">
+                                    {{owner.address.city}} {{owner.address.stateProvince}} {{owner.address.zipPostCode}}
+                                </p>
+                                <p>
+                                    {{owner.address.country}}
+                                </p>
+                            </div>
+                            <div *ngIf="editAddress" fxLayout="row">
+                                <mat-form-field class="owner-full-width" fxFlex="20%">
+                                    <input type="text" id="streetNumber" formControlName="streetNumber" matInput placeholder="Street & Number" [ngModel]="owner.address.streetNumber" name="streetNumber">
+                                </mat-form-field>
+                                <mat-form-field class="owner-full-width" fxFlex="15%">
+                                    <input type="text" id="city" formControlName="city" matInput placeholder="City" [ngModel]="owner.address.city" name="city">
+                                </mat-form-field>
+                                <mat-form-field class="owner-full-width" fxFlex="10%">
+                                    <input type="text" id="city" formControlName="stateProvince" matInput placeholder="Province/State" [ngModel]="owner.address.stateProvince" name="state">
+                                </mat-form-field>
+                                <mat-form-field class="owner-full-width" fxFlex="10%">
+                                    <input type="text" id="city" formControlName="zipPostCode" matInput placeholder="Post/Zip Code" [ngModel]="owner.address.zipPostCode" name="postcode">
+                                </mat-form-field>
+                                <mat-form-field class="owner-full-width" fxFlex="10%">
+                                    <input type="text" id="city" formControlName="country" matInput placeholder="Country" [ngModel]="owner.address.country" name="postcode">
+                                </mat-form-field>
+
+
+                            </div>
+
                         </div>
 
 

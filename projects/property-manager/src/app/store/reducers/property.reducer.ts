@@ -283,8 +283,8 @@ on(PropertyActions.getPropertyDetails, (state) => ({
       ...state,
       loading: false,
       loaded: true,
-      owners: updatedOwners // [...state.property[index], payload ] // ,
-      // property: payload
+      owners: updatedOwners, // [...state.property[index], payload ] // ,
+      selectedOwner: payload
     });
   }),
 
