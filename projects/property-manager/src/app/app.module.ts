@@ -31,6 +31,10 @@ import { YesNoPipe } from './yes-no.pipe';
 import { ContractContentComponent } from './contract-content/contract-content.component';
 import { LoadingComponent } from './loading/loading.component';
 import { MatSortModule, MatPaginator, MatPaginatorModule } from '@angular/material';
+import { ContractHeaderComponent } from './contract-header/contract-header.component';
+import { ContractFooterComponent } from './contract-footer/contract-footer.component';
+import { ContractContentEditorComponent } from './contract-content-editor/contract-content-editor.component';
+import { ContractViewComponent } from './contract-view/contract-view.component';
 
 
 @NgModule({
@@ -56,7 +60,11 @@ import { MatSortModule, MatPaginator, MatPaginatorModule } from '@angular/materi
     AddPropertyOwnerComponent,
     YesNoPipe,
     ContractContentComponent,
-    LoadingComponent
+    LoadingComponent,
+    ContractHeaderComponent,
+    ContractFooterComponent,
+    ContractContentEditorComponent,
+    ContractViewComponent
   ],
   imports: [
     BrowserModule,

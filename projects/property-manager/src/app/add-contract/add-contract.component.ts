@@ -5,6 +5,7 @@ import { PropertyState } from '../store/property.state';
 import { Store, select } from '@ngrx/store';
 import { propertyList } from '../store/reducers';
 import { Location } from '@angular/common';
+import { addManagementContract } from '../store/actions/property.actions';
 
 @Component({
   selector: 'app-add-contract',
@@ -20,6 +21,7 @@ export class AddContractComponent implements OnInit {
   //   { id: '1', propertyName: '621 Coquitlam'},
   //   { id: '2', propertyName: '1307 Surrey'}
   // ];
+  edit = false;
 
   constructor(private formBuilder: FormBuilder,
               private location: Location,
@@ -54,11 +56,20 @@ export class AddContractComponent implements OnInit {
     //     });
   }
 
-  submit(formValue) { // Add validation here...for all fields if any
+  EditContent() {
+
+    this.edit = !this.edit;
+  }
+
+  submit() { // Add validation here...for all fields if anyformValue
     debugger;
-    console.log(this.addForm);
-    console.log(formValue);
+    console.log(this.addForm.value);
+
+    this.store.dispatch(addManagementContract({payload: this.addForm.value}));
     this.location.back();
   }
 
+  cancel() {
+    this.location.back();
+  }
 }

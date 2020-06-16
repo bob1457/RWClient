@@ -30,6 +30,10 @@ import { ContractContentComponent } from './contract-content/contract-content.co
 import { YesNoPipe } from './yes-no.pipe';
 import { LoadingComponent } from './loading/loading.component';
 import { MatSortModule, MatPaginatorModule } from '@angular/material';
+import { ContractHeaderComponent } from './contract-header/contract-header.component';
+import { ContractFooterComponent } from './contract-footer/contract-footer.component';
+import { ContractContentEditorComponent } from './contract-content-editor/contract-content-editor.component';
+import { ContractViewComponent } from './contract-view/contract-view.component';
 // import { MatSortModule } from '@angular/material/sort';
 
 const routes: Routes = [
@@ -44,6 +48,7 @@ const routes: Routes = [
       { path: 'ownerdetails/:id', component: OwnerDetailsComponent},
       { path: 'contracts', component: ContractListComponent },
       { path: 'contractdetails/:id', component: ContractDetailsComponent},
+      { path: 'contractview/:id', component: ContractViewComponent}
     ]
   }//,
   // { path: 'owners', component: OwnerListComponent,  outlet: 'property'},
@@ -73,7 +78,11 @@ const routes: Routes = [
     ContractDetailsComponent,
     ContractContentComponent,
     YesNoPipe,
-    LoadingComponent
+    LoadingComponent,
+    ContractHeaderComponent,
+    ContractFooterComponent,
+    ContractContentEditorComponent,
+    ContractViewComponent
   ],
   imports: [
     // BrowserModule,

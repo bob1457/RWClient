@@ -13,7 +13,7 @@
         <mat-card-subtitle>Add new property contract</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content class="contract-add-card-content">
-        <form [formGroup]="addForm" class="add-form">
+        <form [formGroup]="addForm" class="add-form" (ngSubmit)="submit()">
             <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center start" fxLayoutGap="1%" fxFlexFill>
                 <div style="width: 59%;">
                     <!-- <p>part 1</p> -->
@@ -84,14 +84,29 @@
                 </mat-form-field> -->
 
                 </div>
-                <div style="width: 59%;">
-                    <p>Edit contents</p>
+                <div style="width: 59%;" fxLayout="column">
+                    <h5 style="font-size: 1.5em;
+                    margin-top: 20px;
+                    font-variant: all-petite-caps;">contract contents &nbsp;
+                        <span>
+                      <a mat-button style="font-size: .8em;" (click)="EditContent()">
+                        <span *ngIf="!edit">Edit</span><span *ngIf="edit">Cancel</span>
+                        </a>
+                        </span>
+                    </h5>
+                    <div class="content" *ngIf="!edit">
+                        <app-contract-content></app-contract-content>
+                    </div>
+                    <div class="content" *ngIf="edit">
+                        <app-contract-content-editor></app-contract-content-editor>
+                    </div>
+
                 </div>
             </div>
             <div class="submit-button">
-                <button mat-button type="button" style="float: right;background: #ff5722; color: white;margin-right: 5px;">Cancel</button>
-                <button mat-button style="float: right;background: #11c447; color: white;" (click)="submit(addForm.value)">Submit</button>
-
+                <button mat-button type="button" style="float: right;background: #ff5722; color: white;margin-right: 5px;" (click)="cancel()">Cancel</button>
+                <button mat-button style="float: right;background: #11c447; color: white;">Submit</button>
+                <!-- (click)="submit(addForm.value)" -->
             </div>
         </form>
     </mat-card-content>

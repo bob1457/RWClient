@@ -34,6 +34,8 @@ export class ContractDetailsComponent implements OnInit {
               private contractService: ManagementContractService) {
     this.id = this.actRoute.snapshot.params.id;
     console.log(this.id);
+    this.store.pipe(select(contractDetails))
+              .subscribe(data => this.contract = data);
    }
 
   ngOnInit() {
@@ -86,6 +88,9 @@ export class ContractDetailsComponent implements OnInit {
   //                       })
   // }
 
+  viewContract() {
+    console.log('show contract');
+  }
 
   goBack() {
     this.router.navigate(['/Manage/property/contracts']);

@@ -18,6 +18,14 @@
     margin-top: 10px;
 }
 
+.content {
+    border: 1px solid;
+    padding: 10px;
+    height: 500px;
+    background: #ecebeb;
+    overflow-y: auto;
+}
+
 .submit-button {
     align-items: end;
     /* align-content: end; */
