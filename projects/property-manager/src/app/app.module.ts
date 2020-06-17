@@ -35,6 +35,7 @@ import { ContractHeaderComponent } from './contract-header/contract-header.compo
 import { ContractFooterComponent } from './contract-footer/contract-footer.component';
 import { ContractContentEditorComponent } from './contract-content-editor/contract-content-editor.component';
 import { ContractViewComponent } from './contract-view/contract-view.component';
+import { TypePipe } from './type.pipe';
 
 
 @NgModule({
@@ -64,7 +65,8 @@ import { ContractViewComponent } from './contract-view/contract-view.component';
     ContractHeaderComponent,
     ContractFooterComponent,
     ContractContentEditorComponent,
-    ContractViewComponent
+    ContractViewComponent,
+    TypePipe
   ],
   imports: [
     BrowserModule,

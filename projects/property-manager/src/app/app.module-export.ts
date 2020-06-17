@@ -34,6 +34,7 @@ import { ContractHeaderComponent } from './contract-header/contract-header.compo
 import { ContractFooterComponent } from './contract-footer/contract-footer.component';
 import { ContractContentEditorComponent } from './contract-content-editor/contract-content-editor.component';
 import { ContractViewComponent } from './contract-view/contract-view.component';
+import { TypePipe } from './type.pipe';
 // import { MatSortModule } from '@angular/material/sort';
 
 const routes: Routes = [
@@ -78,6 +79,7 @@ const routes: Routes = [
     ContractDetailsComponent,
     ContractContentComponent,
     YesNoPipe,
+    TypePipe,
     LoadingComponent,
     ContractHeaderComponent,
     ContractFooterComponent,

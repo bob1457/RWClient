@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-contract-header',
@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContractHeaderComponent implements OnInit {
 
+  @Input() user;
+  @Input() contract;
+
   constructor() { }
 
   ngOnInit() {
+    debugger;
+    console.log(this.user);
+    console.log(this.contract);
   }
 
 }
