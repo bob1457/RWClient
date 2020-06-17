@@ -425,6 +425,7 @@ on(PropertyActions.getContractDetails, (state) => ({
   on(PropertyActions.updateContractSuccess, (state, {payload}) => {
     debugger;
 
+    // Load updated item to the list
     const updatedContracts = state.contracts.map(
       item => payload.id === item.id ? payload : item
     );
@@ -434,8 +435,8 @@ on(PropertyActions.getContractDetails, (state) => ({
       ...state,
       loading: false,
       loaded: true,
-      contracts: updatedContracts // [...state.property[index], payload ] // ,
-      // property: payload
+      contracts: updatedContracts, // [...state.property[index], payload ] // ,
+      selectedContract: payload
     });
   }),
 

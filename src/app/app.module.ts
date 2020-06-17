@@ -43,7 +43,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
       {
         runtimeChecks: {
           strictActionImmutability: true,
-          strictActionSerializability: true,
+          strictActionSerializability: false,
           strictStateImmutability: true,
           strictStateSerializability: true
         }

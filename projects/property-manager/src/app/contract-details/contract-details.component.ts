@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Store, select } from '@ngrx/store';
 import { PropertyState } from '../store/property.state';
 import { ManagementContractService, ManagementContract } from '@lib/app-core';
-import { getContractDetails } from '../store/actions/property.actions';
+import { getContractDetails, updateContract } from '../store/actions/property.actions';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { selectPropertyState, contractDetails, loadingStatus } from '../store/reducers';
 import { Observable } from 'rxjs';
@@ -87,6 +87,12 @@ export class ContractDetailsComponent implements OnInit {
   //                         this.detailsForm.patchValue(data);
   //                       })
   // }
+
+  submit() {
+    debugger;
+    console.log(this.detailsForm.value);
+    this.store.dispatch(updateContract({payload: this.detailsForm.value}));
+  }
 
   viewContract() {
     console.log('show contract');
