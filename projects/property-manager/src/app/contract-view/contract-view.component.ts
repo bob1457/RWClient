@@ -9,6 +9,9 @@ import { getUserInfo, User } from '@lib/auth';
 // import {jsPDF} from 'jspdf';
 
 import * as jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
+import * as html2pdf from 'html2pdf.js';
+
 @Component({
   selector: 'app-contract-view',
   templateUrl: './contract-view.component.html',
@@ -46,6 +49,30 @@ export class ContractViewComponent implements OnInit {
 
   download() {
     debugger;
+
+    const element = document.getElementById('pdfdoc');
+
+    // html2canvas(element).then((canvas) => {
+    //   var imgData = canvas.toDataURL('image/png');
+
+    //   var doc = new jsPDF();
+
+    //   doc.addImage(imgData, 0, 0, 200, 500);
+
+    //   doc.save('doc.pdf');
+
+    // });
+
+    const options = {
+      margin:       1,
+      filename:     'myfile.pdf',
+      image:        { type: 'jpeg', quality: 0.98 },
+      html2canvas:  { scale: 2 },
+      jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+    };
+
+    html2pdf().from(element).set(options).save();
+    /*
     const doc = new jsPDF();
 
     const specialElementHandlers = {
@@ -64,6 +91,7 @@ export class ContractViewComponent implements OnInit {
     const fileName = this.contract.ManagementContractTitle; // undefined?
 
     doc.save('contract.pdf');
+    */
   }
 
 }
