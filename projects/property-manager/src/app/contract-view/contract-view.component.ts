@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import  { Location } from '@angular/common';
+import { Location } from '@angular/common';
 import { Store, select } from '@ngrx/store';
 import { PropertyState } from '../store/property.state';
 import { ManagementContract } from '@lib/app-core';
@@ -20,7 +20,8 @@ import * as html2pdf from 'html2pdf.js';
 export class ContractViewComponent implements OnInit {
 
   id: number;
-  contract: ManagementContract;
+  contract: any; // ManagementContract;
+  contractTitle = '';
   pm: User;
 
   @ViewChild('pdfdoc', {static: false}) pdfdoc: ElementRef;
@@ -36,7 +37,11 @@ export class ContractViewComponent implements OnInit {
   ngOnInit() {
     debugger;
     this.store.pipe(select(contractDetails))
-              .subscribe(data => this.contract = data);
+              .subscribe(data => {
+                this.contract = data;
+                this.contractTitle = data.ManagementContractTitle;
+                console.log(this.contractTitle);
+              });
     this.store.pipe(select(getUserInfo))
               .subscribe(user => {
                 this.pm = user;
@@ -49,6 +54,10 @@ export class ContractViewComponent implements OnInit {
 
   download() {
     debugger;
+
+    let date = new Date()
+
+    let timestamp = `${date.getFullYear()} ${date.getMonth() + 1} ${date.getDate()}`;
 
     const element = document.getElementById('pdfdoc');
 
@@ -65,7 +74,7 @@ export class ContractViewComponent implements OnInit {
 
     const options = {
       margin:       1,
-      filename:     'myfile.pdf',
+      filename:     this.contract.managementContractTitle + '_' + timestamp + '_contract.pdf',
       image:        { type: 'jpeg', quality: 0.98 },
       html2canvas:  { scale: 2 },
       jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }

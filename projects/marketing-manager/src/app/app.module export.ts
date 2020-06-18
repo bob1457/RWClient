@@ -29,6 +29,7 @@ const routes: Routes = [
     children: [
       { path: 'propertylist', component: PropertyListingComponent},
       { path: 'listingDetails/:id', component: ListingDetailsComponent},
+      { path: 'addListing', component: AddListingComponent},
       // { path: 'screening', component: ScreeningComponent},
       { path: 'applications', component: ApplicationListComponent},
       { path: 'applicationDetails/:id', component: ApplicationDetailsComponent},

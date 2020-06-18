@@ -18,6 +18,11 @@ export class MarketingService {
     return this.http.get<PropertyListing[]>(`${this.baseUrl}/listings`);
   }
 
+  getAllRentalProperties() {
+    debugger;
+    return this.http.get<any[]>(`${this.baseUrl}/listings/allrentalproperties`);
+  }
+
   getPropertyListingDetails(id: number) {
     debugger;
     return this.http.get<PropertyListing>(`${this.baseUrl}/listing/${id}`);

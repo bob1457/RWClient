@@ -1,0 +1,41 @@
+.listing-add-card {
+    width: 100%;
+    background: transparent;
+}
+
+.listing-add-card-content {
+    height: 600px;
+    background: #fafafa;
+}
+
+.add-form {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.selection {
+    margin-top: 10px;
+}
+
+.submit-button {
+    align-items: end;
+    /* align-content: end; */
+    /* float: right; */
+    /* float: left; */
+    width: 100%;
+    margin-top: 35px;
+}
+
+.content {
+    border: 1px solid #afaeae;
+    padding: 10px;
+    height: 500px;
+    background: #f8f6f6;
+    overflow-y: auto;
+}
+
+.form-field {
+    width: 90%;
+    margin-left: 35px;
+}
