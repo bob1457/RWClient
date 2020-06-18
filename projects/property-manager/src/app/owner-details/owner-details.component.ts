@@ -69,7 +69,7 @@ export class OwnerDetailsComponent implements OnInit {
       city: [],
       stateProvince: [],
       zipPostCode : [],
-      country : [] //,
+      country : [],
 
       // address: this.formBuilder.group({
       //   streetNumber: [''],
@@ -125,8 +125,22 @@ export class OwnerDetailsComponent implements OnInit {
 
   submit() {
     debugger;
+
+    // set form value for owner address
+
+    if (!this.editAddress) {
+      this.detailsForm.patchValue({
+      streetNumber: this.owner.address.streetNumber,
+      city: this.owner.address.city,
+      stateProvince: this.owner.address.stateProv,
+      zipPostCode: this.owner.address.zipPostCode,
+      country: this.owner.address.country
+
+    });
+    }
+
     console.log(this.detailsForm.value);
-    // console.log(formValue);
+
     this.store.dispatch(PropertyActions.updatePropertyOwner({payload: this.detailsForm.value}));
 
   }
