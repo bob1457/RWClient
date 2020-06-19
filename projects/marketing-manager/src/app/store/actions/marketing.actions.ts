@@ -24,6 +24,25 @@ export const getPropertyListingFailure = createAction(
   }
 );
 
+export const getAllRentalProperties = createAction(
+  '[Marketing] Get All Rental Properties'
+);
+
+export const getAllRentalPropertiesSuccess = createAction(
+  '[Marketing] Get All Rental Properties Success',
+  props<{payload: PropertyListing[]}>()
+);
+
+export const getAllRentalPropertiesFailure = createAction(
+  '[Marketing] Get All Rental Properties Failure',
+  // props<{payload: any}>()
+  (errorMessage = 'Error loading rental properties') => {
+    return ({ payload: { errorMessage } });
+  }
+);
+
+
+
 /**
  * Get Property Listing Details Actions
  */

@@ -35,6 +35,26 @@ export class MarketingEffects {
     )
   );
 
+
+  getAllRentalProperties$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(ListingActions.getAllRentalProperties),
+      tap(() => console.log('got here for rental property list!')),
+      switchMap(() =>
+        this.marketingService.getAllRentalProperties().pipe(
+          map((rentalp: any[]) => ({
+            type: '[Marketing] Get All Rental Properties Success',
+            payload: rentalp
+          })),
+          // tap(res => {console.log('response: ' + res); }),
+          catchError(error => of(ListingActions.getAllRentalPropertiesFailure(error.message)))
+        )
+      )
+    )
+  );
+
+
   getPropertyListingDetails$ = createEffect(() =>
     this.actions$.pipe(
       // ofType('[Property] Get Property List'),

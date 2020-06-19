@@ -10,6 +10,7 @@ export const initialState: PropertyListingState =  { // adapter.getInitialState
   listing: null,
   applications: null,
   application: null,
+  rentalproperties: null,
   // owners: null,
   // ownersOfProperty: null,
   // selectedOwner: null,
@@ -40,6 +41,34 @@ const propertyListingReducer = createReducer(
       listings: payload
     });
   }),
+
+
+
+
+  /**
+   * Get all rental properties
+   */
+
+
+  on(ListingActions.getAllRentalProperties, state => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+
+  on(ListingActions.getAllRentalPropertiesSuccess, (state, { payload }) => {
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      rentalproperties: payload
+    });
+  }),
+
+
+
+
 
   /**
    * Get property listing details
@@ -154,11 +183,13 @@ export const getPropertyListing = (state: PropertyListingState) => state.listing
 export const getPropertyListingDetails = (state: PropertyListingState) => state.listing;
 export const getPropertyApplications = (state: PropertyListingState) => state.applications;
 export const getPropertyApplicationDetails = (state: PropertyListingState) => state.application;
+export const getAllRentalProperties = (state: PropertyListingState) => state.rentalproperties;
 
 export const propertyListing = createSelector(selectPropertyListingState, getPropertyListing);
 export const propertyListingDetails = createSelector(selectPropertyListingState, getPropertyListingDetails);
 export const propertyApplications = createSelector(selectPropertyListingState, getPropertyApplications);
 export const propertyApplicationDetails = createSelector(selectPropertyListingState, getPropertyApplicationDetails);
+export const allRentalProperties = createSelector(selectPropertyListingState, getAllRentalProperties);
 
 export const loadingStatus = createSelector(selectPropertyListingState, getLoadingStatus);
 
