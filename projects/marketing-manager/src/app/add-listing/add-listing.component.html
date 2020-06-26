@@ -15,38 +15,74 @@
         <mat-card-subtitle>Add new property listing</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content class="listing-add-card-content">
-        <form [formGroup]="addForm" class="add-form" (ngSubmit)="submit()">
-            <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center start" fxLayoutGap="1%" fxFlexFill>
-                <div style="width: 50%;">
-                    <mat-form-field style="margin-top: 25px;width: 90%;margin-left: 35px;">
-                        <span class="icon-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
-                        <input matInput type="text" placeholder="Listing Title" formControlName="propertyName" id="title">
-                    </mat-form-field>
-                    <mat-form-field class="form-field">
-                        <mat-label>Select Rental Property</mat-label>
-                        <mat-select #mySelect (selectionChange)="onChange(mySelect.value)">
-                            <mat-option *ngFor="let property of rentalProperties" [value]="property.id">
-                                {{property.propertyName}}
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                </div>
-                <div style="width: 50%;" fxLayout="column">
-                    <div class="content">
-                        <div fxLayout="column" fxLayoutAlign="center" class="container">
-                            <mat-form-field style="width: 100%;height: 450px;">
+        <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="1%" style="width: 90%;">
+            <div style="width: 90%;">
+                <form fxLayout="column" novalidate [formGroup]="addForm" class="add-form" (ngSubmit)="submit()">
+                    <div fxLayout="row" fxLayout.xs="column">
+                        <div fxLayout="column" style="margin-top: 35px;" fxFlex="50" fxflex.xs="85">
+                            <mat-form-field style="width: 90%;">
+                                <mat-label>Select Rental Property to be Listed</mat-label>
+                                <mat-select #mySelect (selectionChange)="onChange(mySelect.value)">
+                                    <mat-option *ngFor="let property of rentalProperties" [value]="property.id">
+                                        {{property.propertyName}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field class="property-full-width" style="width: 90%;">
+                                <span class="icon-pos " matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
+                                <mat-label>Listing Title</mat-label>
+                                <input type="text " id="title " formControlName="title" matInput placeholder="Listing Title">
+                            </mat-form-field>
+                            <mat-form-field class="property-full-width " style="width: 90%;">
+                                <span class="icon-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
+                                <mat-label>Monthly Rent ($)</mat-label>
+                                <input type="number " id="monthlyRent" formControlName="monthlyRent" matInput placeholder="Monthly Rent">
+                            </mat-form-field>
+                            <mat-form-field class="property-full-width" style="width: 90%;">
                                 <!-- <input matInput type="text" placeholder="Property Name" formControlName="propertyName" id="title"> -->
-                                <mat-label>Listing Description - click here to type</mat-label>
-                                <textarea matInput style="height: 450px;"></textarea>
-                                <!-- <mat-hint align="end">Not more then 60 characters long.</mat-hint>
-                <mat-error *ngIf="hasError('title', 'required')">Name is required</mat-error>
-                <mat-error *ngIf="hasError('title', 'maxlength')">You have more than 60 characters</mat-error> [(value)]="current"-->
+                                <mat-label>Notes</mat-label>
+                                <textarea matInput formControlName="notes" style="height: 50px; overflow-y: auto;"></textarea>
+                            </mat-form-field>
+                            <mat-form-field class="property-full-width " style="width: 90%;">
+                                <span class="icon-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
+                                <mat-label>Contact Name</mat-label>
+                                <input type="text " id="contactName" formControlName="contactName" matInput placeholder="Contact Name">
+                            </mat-form-field>
+                            <mat-form-field class="property-full-width " style="width: 90%;">
+                                <span class="icon-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
+                                <mat-label>Contact Email</mat-label>
+                                <input type="text " id="contactEmail" formControlName="contactEmail" matInput placeholder="Monthly Rent">
+                            </mat-form-field>
+                            <mat-form-field class="property-full-width " style="width: 90%;">
+                                <span class="icon-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
+                                <mat-label>Contact Telephone</mat-label>
+                                <input type="text " id="contactTel" formControlName="contactTel" matInput placeholder="Contact Telephone">
+                            </mat-form-field>
+                            <mat-form-field class="property-full-width " style="width: 90%;">
+                                <span class="icon-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
+                                <mat-label>Contact SMS Texting</mat-label>
+                                <input type="text " id="contactSMS" formControlName="contactSMS" matInput placeholder="Contact SMS Texting">
+                            </mat-form-field>
+                        </div>
+                        <div style="margin-top: 35px;" fxFlex="50" fxflex.xs="85">
+                            <mat-form-field class="property-full-width" style="width: 100%;">
+                                <!-- <input matInput type="text" placeholder="Property Name" formControlName="propertyName" id="title"> -->
+                                <mat-label>Listing Description</mat-label>
+                                <textarea matInput formControlName="listingDesc" style="height: 350px; overflow-y: auto;"></textarea>
                             </mat-form-field>
                         </div>
                     </div>
-                </div>
+
+                    <div class="submit-button">
+                        <button mat-button style="float: right;background: #ff5722; color: white;margin-right: 5px;">Cancel</button>
+                        <button mat-button type="submit" style="float: right;background: #11c447; color: white;">Submit</button>
+
+                    </div>
+                </form>
             </div>
-        </form>
+        </div>
+
+
 
     </mat-card-content>
 </mat-card>

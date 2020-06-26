@@ -4,7 +4,7 @@
 }
 
 .listing-add-card-content {
-    height: 600px;
+    min-height: 600px;
     background: #fafafa;
 }
 
@@ -38,4 +38,8 @@
 .form-field {
     width: 90%;
     margin-left: 35px;
+}
+
+.icon-pos {
+    vertical-align: middle;
 }

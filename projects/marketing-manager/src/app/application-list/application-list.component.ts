@@ -19,7 +19,7 @@ export class ApplicationListComponent implements OnInit {
 
   loading$: Observable<boolean>;
 
-  displayedColumns: string[] = ['icon', 'id', 'name', 'email', 'telephone', 'propertyName', 'occupants', 'appDate', 'action'];
+  displayedColumns: string[] = ['icon', 'id', 'applicatnFirstName', 'applicatnLastName', 'email', 'telephone', 'propertyName', 'occupants', 'appliedDate', 'action'];
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: false}) sort: MatSort;
 
@@ -47,8 +47,9 @@ export class ApplicationListComponent implements OnInit {
                     this.dataSource.data = this.list;
                     console.log(this.dataSource.data);
 
-                    this.dataSource.sort = this.sort;
-                    this.dataSource.paginator = this.paginator;
+                    setTimeout(() =>  {this.dataSource.paginator = this.paginator; this.dataSource.sort = this.sort;});
+                    
+                   
                   }
                   );
               }
@@ -71,6 +72,8 @@ export class ApplicationListComponent implements OnInit {
     //     this.dataSource.paginator = this.paginator;
     //   }
     //   );
+
+    
   }
 
   // GetApplicationDetails(id: number) {

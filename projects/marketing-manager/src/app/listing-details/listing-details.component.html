@@ -61,7 +61,7 @@
                         </mat-form-field>
                         <mat-form-field class="listing-full-width ">
                             <span class="icon-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
-                            <input type="text" id="monthlyRent" formControlName="monthlyRent" matInput placeholder="Monthly Rent" [ngModel]="listing.monthlyRent | currency:'CAD'">
+                            <input type="number" id="monthlyRent" formControlName="monthlyRent" matInput placeholder="Monthly Rent (CAD$)" [ngModel]="listing.monthlyRent">
                         </mat-form-field>
                         <mat-checkbox formControlName="isActive" [ngModel]="listing.isActive" class="listing-full-width">Published/Listed</mat-checkbox>
                         <mat-form-field class="listing-full-width ">

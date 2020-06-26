@@ -32,21 +32,21 @@
                 </div>
                 <div fxLayoutAlign="start">
                     <a (click)="listView = true" style="cursor: pointer;">
-                        <i class="material-icons " style="font-size: 2.5em;color: #3412ad; margin-left: 5px; border: 1px black solid; " title="List View">
+                        <i class="material-icons " style="font-size: 1.5em;color: #3412ad; margin-left: 5px; border: 1px black solid; " title="List View">
                       list_alt
                     </i>
                     </a>
                     <a (click)="listView = false" style="cursor: pointer;">
-                        <i class="material-icons " style="font-size: 2.5em;color: #830f2c; margin-left: 5px; border: 1px black solid;" title="Grid View">
+                        <i class="material-icons " style="font-size: 1.5em;color: #830f2c; margin-left: 5px; border: 1px black solid;" title="Grid View">
                         apps
                       </i>
                     </a>
                     <span style="margin-left: 25px;
-                    margin-top: 10px;
-                    font-size: 1.25em;" *ngIf="listView">List View</span>
+                    margin-top: 3px;
+                    font-size: 1.0em;" *ngIf="listView">List View</span>
                     <span style="margin-left: 25px;
-                    margin-top: 10px;
-                    font-size: 1.25em;" *ngIf="!listView">Grid View</span>
+                    margin-top: 3px;
+                    font-size: 1.0em;" *ngIf="!listView">Grid View</span>
                 </div>
                 <div fxLayoutAlign="center">
                     <div *ngIf="listView" style="width: 100%;">

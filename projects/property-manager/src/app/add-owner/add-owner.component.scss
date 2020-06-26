@@ -4,7 +4,7 @@
 }
 
 .owner-add-card-content {
-    height: 600px;
+    min-height: 600px;
     background: #fafafa;
 }
 
@@ -25,4 +25,8 @@
     /* float: left; */
     width: 100%;
     margin-top: 35px;
+}
+
+.icon-pos {
+    vertical-align: middle;
 }

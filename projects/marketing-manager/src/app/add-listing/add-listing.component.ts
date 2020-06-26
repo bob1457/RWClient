@@ -35,8 +35,16 @@ export class AddListingComponent implements OnInit {
     this.store.dispatch(getAllRentalProperties());
 
     this.addForm = this.formBuilder.group({
-      id: [],
-      propertyName: []
+      rentalPropertyId: [],
+      title: [],
+      listingDesc: [],
+      monthlyRent: [],
+      notes: [],
+      contactName: [],
+      contactTel: [],
+      contactEmail: [],
+      contactSMS: [],
+      contactOther: []
     });
   }
 

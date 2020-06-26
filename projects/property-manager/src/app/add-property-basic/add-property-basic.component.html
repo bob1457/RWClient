@@ -4,7 +4,7 @@
 
 <div [formGroup]="addForm" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="1%">
     <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center" fxLayoutGap="1%" fxFlexFill>
-        <div style="width: 59%;">
+        <div fxFlex="50" fxFlex.xs="90">
             <mat-form-field style="margin-top: 25px;width: 70%;">
                 <span class="icon-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
                 <input matInput type="text" placeholder="Property Name" formControlName="propertyName" id="title">
@@ -48,7 +48,7 @@
             </mat-form-field> -->
 
         </div>
-        <div style="width: 59%;">
+        <div fxFlex="50" fxFlex.xs="90">
             <div fxLayout="row wrap" fxLayoutAlign="start start" fxLayoutGap="10px" style="margin-top: 50px;">
                 <mat-form-field style="margin-top: 50px; width: 30%;">
                     <span class="icon-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
