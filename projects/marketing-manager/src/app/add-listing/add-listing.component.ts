@@ -5,7 +5,7 @@ import { PropertyListingState } from '../store/marketing.state';
 import { Location } from '@angular/common';
 import { MarketingService } from '@lib/app-core';
 import { allRentalProperties } from '../store/reducers';
-import { getAllRentalProperties } from '../store/actions/marketing.actions';
+import { getAllRentalProperties, addPropertyListing } from '../store/actions/marketing.actions';
 
 @Component({
   selector: 'app-add-listing',
@@ -49,8 +49,16 @@ export class AddListingComponent implements OnInit {
   }
 
 
-  onChange() {
+  onChange(id) {
+    console.log('id', id);
+    this.addForm.get('rentalPropertyId').setValue(id);
 
+  }
+
+  submit() {
+    debugger;
+    console.log('form data: ', this.addForm.value);
+    this.store.dispatch(addPropertyListing({payload: this.addForm.value}));
   }
 
 }

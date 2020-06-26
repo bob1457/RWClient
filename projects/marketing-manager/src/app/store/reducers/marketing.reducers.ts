@@ -127,7 +127,8 @@ const propertyListingReducer = createReducer(
       ...state,
       loading: false,
       loaded: true,
-      listings: updatedListings // [...state.listings, payload ]
+      listings: updatedListings, // [...state.listings, payload ]
+      listing: payload
     });
   }),
 

@@ -4,7 +4,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { PropertyListingState } from '../store/marketing.state';
 import { Store, select } from '@ngrx/store';
 import { Router, ActivatedRoute } from '@angular/router';
-import { getPropertyListingDetails } from '../store/actions/marketing.actions';
+import { getPropertyListingDetails, updatePropertyListing } from '../store/actions/marketing.actions';
 import { propertyListingDetails, loadingStatus } from '../store/reducers';
 import { Observable } from 'rxjs';
 
@@ -17,6 +17,7 @@ export class ListingDetailsComponent implements OnInit {
 
   id: number;
   listing: any;
+  editContact = false;
 
   loading$: Observable<boolean>;
 
@@ -45,25 +46,33 @@ export class ListingDetailsComponent implements OnInit {
       created: [],
       modified: [],
 
-      rentalProperty: this.formBuilder.group({
-        propertyName: [],
-        propertyType: [],
-        propertyBuildYear: [],
-        isShared: [],
-        status: [],
-        isBasementSuite: [false],
+      rentalPropertyId: [],
 
+      contactName: [],
+      contactTel: [],
+      contactEmail: [],
+      contactSMS: []
 
-        address: this.formBuilder.group({
-          streetNum: [],
-          city: []
-        })
-      }),
+      // rentalProperty: this.formBuilder.group({
+      //   propertyName: [],
+      //   propertyType: [],
+      //   propertyBuildYear: [],
+      //   isShared: [],
+      //   status: [],
+      //   isBasementSuite: [false],
 
-      contact: this.formBuilder.group({
-        contactName: [],
-        contactTel: []
-      })
+      //   address: this.formBuilder.group({
+      //     streetNum: [],
+      //     city: []
+      //   })
+      // }) //,
+
+      // contact: this.formBuilder.group({
+      //   contactName: [],
+      //   contactTel: [],
+      //   contactEmail: [],
+      //   contactSMS: []
+      // })
 
     });
 
@@ -102,7 +111,25 @@ export class ListingDetailsComponent implements OnInit {
   }
 
   submit() {
+    debugger;
+    if (!this.editContact) {
+      this.detailsForm.patchValue({
+        contactName: this.listing.contact.contactName,
+        contactEmail: this.listing.contact.contactEmail,
+        contactTel: this.listing.contact.contactTel,
+        contactSMS: this.listing.contact.contactSMS,
+      });
 
+    }
+    this.detailsForm.get('rentalPropertyId').setValue(this.listing.rentalPropertyId);
+    console.log('form data', this.detailsForm.value);
+
+    this.store.dispatch(updatePropertyListing({payload: this.detailsForm.value}));
+
+  }
+
+  EditContact() {
+    this.editContact = !this.editContact;
   }
 
   goBack() {

@@ -46,7 +46,7 @@
             </mat-card-header>
             <mat-card-content class="listing-details-card-content">
                 <form novalidate fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" [formGroup]="detailsForm" (ngSubmit)="submit()">
-                    <div fxLayout="column" fxLayoutAlign="start center" style=" width: 75%;">
+                    <div fxLayout="column" fxLayoutAlign="start center" style=" width: 100%;">
                         <mat-form-field class="listing-full-width" style="margin-top: 25px;">
                             <span class=" icon-pos " matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
                             <input type="text" id="id " formControlName="id" matInput placeholder="Listing Id " [ngModel]="listing.id">
@@ -68,6 +68,40 @@
                             <span class="icon-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
                             <textarea type="text" id="bote" formControlName="note" matInput placeholder="Note" [ngModel]="listing.note"></textarea>
                         </mat-form-field>
+                    </div>
+
+                    <div fxLayout="column" fxLayoutAlign="start start" style="width: 75%;">
+                        <h5 style="font-size: 1.15em;">Listing Contact <a mat-button style="font-size: .8em;" (click)="EditContact()"><span *ngIf="!editContact">Edit</span><span *ngIf="editContact">Cancel</span></a></h5>
+                        <div *ngIf="!editContact">
+                            <p style="margin-bottom: 0;">
+                                {{listing.contact.contactName}}
+                            </p>
+                            <p style="margin-bottom: 0;">
+                                Email: &nbsp;&nbsp;{{listing.contact.contactEmail}} &nbsp; Tel: &nbsp;&nbsp;{{listing.contact.contactTel}}
+                            </p>
+                            <p>
+                                Text: &nbsp;&nbsp;{{listing.contact.contactSMS}}
+                            </p>
+                        </div>
+                    </div>
+                    <div *ngIf="editContact" fxLayout="row" style="width: 75%;">
+                        <mat-form-field class="owner-full-width" fxFlex="25%" style="margin-right: 8px;">
+                            <input type="text" id="contactName" formControlName="contactName" matInput placeholder="Contact Name" [ngModel]="listing.contact.contactName" name="contactName">
+                        </mat-form-field>
+                        <mat-form-field class="owner-full-width" fxFlex="25%" style="margin-right: 8px;">
+                            <input type="text" id="contactEmail" formControlName="contactEmail" matInput placeholder="contact Email" [ngModel]="listing.contact.contactEmail" name="email">
+                        </mat-form-field>
+                        <mat-form-field class="owner-full-width" fxFlex="20%" style="margin-right: 8px;">
+                            <input type="text" id="contactTel" formControlName="contactTel" matInput placeholder="contact Tel" [ngModel]="listing.contact.contactTel">
+                        </mat-form-field>
+                        <mat-form-field class="owner-full-width" fxFlex="20%">
+                            <input type="text" id="contactSMS" formControlName="contactSMS" matInput placeholder="contactS Text" [ngModel]="listing.contact.contactSMS">
+                        </mat-form-field>
+                        <!-- <mat-form-field class="owner-full-width" fxFlex="10%">
+                          <input type="text" id="city" formControlName="country" matInput placeholder="Country" [ngModel]="owner.address.country">
+                      </mat-form-field> -->
+
+
                     </div>
 
                     <div fxLayout="row" fxLayoutGap="7px" fxLayoutAlign="end center" style="width: 75%;">
