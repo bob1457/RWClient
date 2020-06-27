@@ -11,6 +11,7 @@ export const initialState: PropertyListingState =  { // adapter.getInitialState
   applications: null,
   application: null,
   rentalproperties: null,
+  propertyImgList: null,
   // owners: null,
   // ownersOfProperty: null,
   // selectedOwner: null,
@@ -129,6 +130,37 @@ const propertyListingReducer = createReducer(
       loaded: true,
       listings: updatedListings, // [...state.listings, payload ]
       listing: payload
+    });
+  }),
+
+  /**
+   *  Upload property image
+   */
+
+  on(ListingActions.uploadPropertyImage, state => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+  on(ListingActions.uploadPropertyImageSuccess, (state, { payload }) => {
+    debugger;
+    const imgList = state.propertyImgList.map(
+      item => payload.id === item.id ? payload : item
+    );
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      propertyImgList: imgList
+    });
+  }),
+
+  on(ListingActions.uploadPropertyImageFailure, (state) => {
+    return ({
+      ...state,
+      loading: false,
+      errorMessage: 'Failed to upload property image'
     });
   }),
 

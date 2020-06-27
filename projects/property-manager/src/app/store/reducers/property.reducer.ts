@@ -126,7 +126,7 @@ on(PropertyActions.getPropertyDetails, (state) => ({
   on(PropertyActions.updatePropertyFailure, (state) => {
     return ({
       ...state,
-      loading: true,
+      loading: false,
       errorMessage: 'Failed to update property'
     });
   }),

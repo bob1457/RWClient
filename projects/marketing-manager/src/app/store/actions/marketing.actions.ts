@@ -1,6 +1,7 @@
 import { createAction, props } from '@ngrx/store';
-import { PropertyListing } from '@lib/app-core';
+import { PropertyListing, PropertyImg } from '@lib/app-core';
 import { RentalApplication } from 'projects/app-core/src/public-api';
+
 
 
 debugger;
@@ -41,6 +42,26 @@ export const getAllRentalPropertiesFailure = createAction(
   }
 );
 
+/**
+ * Upload property images
+ */
+
+export const uploadPropertyImage = createAction(
+  '[Marketing] Upload Property Image',
+  props<{payload: any, rentalPropertyId: any}>()
+);
+
+export const uploadPropertyImageSuccess = createAction(
+  '[Marketing] Upload Property Image Success',
+  props<{payload: any}>()
+);
+
+export const uploadPropertyImageFailure = createAction(
+  '[Property] Upload Property Image Failure',
+  // props<{payload: any}>()
+  (errorMessage = 'Error uploading property image') => ({ payload: { errorMessage }})
+
+);
 
 
 /**

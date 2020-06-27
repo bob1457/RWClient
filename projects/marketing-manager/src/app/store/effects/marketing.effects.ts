@@ -124,6 +124,31 @@ export class MarketingEffects {
     )
   );
 
+  uploadPropertyImage$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(ListingActions.uploadPropertyImage),
+      tap(() => console.log('got here to upload property image !!!')),
+      // tslint:disable-next-line: no-unused-expression
+      // map(action => {action.payload, action.rentalPropertyId; }),
+      switchMap((action) =>
+        this.marketingService.uploadPropertyImages(action.payload, action.rentalPropertyId).pipe(
+          map((propertyImg: any) => ({
+            type: '[Marketing] Upload Property Image Success',
+            payload: propertyImg
+          })),
+          // tap(res => {console.log('response: ' + res); }),
+          // catchError(
+          //   err => {
+          //     return of('[Marketing] Update Property Listing Failure', err.error);
+          //   } // EMPTY
+          // )
+          catchError(error => of(ListingActions.uploadPropertyImageFailure(error.message)))
+        )
+      )
+    )
+  );
+
   getRentalApplications$ = createEffect(() =>
     this.actions$.pipe(
       // ofType('[Property] Get Property List'),

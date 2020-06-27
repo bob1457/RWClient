@@ -4,7 +4,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { PropertyListingState } from '../store/marketing.state';
 import { Store, select } from '@ngrx/store';
 import { Router, ActivatedRoute } from '@angular/router';
-import { getPropertyListingDetails, updatePropertyListing } from '../store/actions/marketing.actions';
+import { getPropertyListingDetails, updatePropertyListing, uploadPropertyImage } from '../store/actions/marketing.actions';
 import { propertyListingDetails, loadingStatus } from '../store/reducers';
 import { Observable } from 'rxjs';
 
@@ -18,6 +18,7 @@ export class ListingDetailsComponent implements OnInit {
   id: number;
   listing: any;
   editContact = false;
+  serverUrl = 'http://localhost:63899/';
 
   loading$: Observable<boolean>;
 
@@ -110,6 +111,10 @@ export class ListingDetailsComponent implements OnInit {
 
   }
 
+  openInput() {
+    document.getElementById('fileInput').click();
+  }
+
   submit() {
     debugger;
     if (!this.editContact) {
@@ -134,6 +139,11 @@ export class ListingDetailsComponent implements OnInit {
 
   goBack() {
     this.router.navigate(['/Manage/marketing/propertylist']);
+  }
+
+  onChange( files ) {
+    debugger;
+    this.store.dispatch(uploadPropertyImage({payload: files, rentalPropertyId: this.listing.rentalPropertyId}));
   }
 
   // selectPropertyListingDetails() {

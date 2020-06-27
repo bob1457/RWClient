@@ -73,6 +73,24 @@ export class MarketingService {
     return this.http.post(`${this.baseUrl}/listing/status`, listing);
   }
 
+  uploadPropertyImages(files, id: any) {
+    debugger;
+
+    if (files.length === 0) {
+      return;
+    }
+
+    // const fileToUpload = files[0] as File;
+    let fileToUpload = <File> files[0];
+
+    const formData = new FormData();
+    formData.append('file', fileToUpload, fileToUpload.name);
+    formData.append('rentalPropertyId', id);
+
+    return this.http.post(`${this.baseUrl}/listing/addimg`, formData);
+
+  }
+
   addOpenHouse() {}
 
   updateOpenHouse() {}

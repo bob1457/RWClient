@@ -11,6 +11,7 @@ export interface PropertyListingState   { // extends  EntityState<Property>
   applications: RentalApplication[] | null;
   application: RentalApplication | null;
   rentalproperties: any[] | null;
+  propertyImgList: any[] | null;
 
   // ownersOfProperty: PropertyOwner[] | null;
   // selectedOwner: PropertyOwner | null;

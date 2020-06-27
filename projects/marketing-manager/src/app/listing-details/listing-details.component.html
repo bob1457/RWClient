@@ -8,11 +8,28 @@
     <div fxFlex="20%" fxLayout="column" class="avatar_sec" fxLayoutAlign="start center">
         <img src="../../assets/images/10621.jpg" style="border-radius: 50%;margin-top: 20px;" width="120px " height="120px" title="">
         <div class="images">
+            <ul style="list-style-type: none;margin-left: -50px;">
+                <li *ngFor="let img of listing.rentalProperty.propertyImg" style="display: inline;">
+                    <img attr.src={{serverUrl}}{{img.propertyImgUrl}} width="45px" height="45px">
+                </li>
+            </ul>
+            <!-- <img src="http://placehold.it/50x50">
             <img src="http://placehold.it/50x50">
-            <img src="http://placehold.it/50x50">
-            <img src="http://placehold.it/50x50">
-            <img src="http://placehold.it/50x50">
+            <img src="http://placehold.it/50x50">-->
+            <a (click)="openInput()" class="up-icon" style="margin-left:0px;" title="update property image">
+                <!-- <i class="material-icons">
+                publish  attr.src="{{serverUrl}}{{user.avatarUrl}}"
+                </i> -->
+                <!--*ngIf="loading | async" -->
+                <i class="fas fa-arrow-circle-up"></i>
+                <span>&nbsp; Add Image</span>
+
+            </a>
+
         </div>
+
+        <input #file id="fileInput" (change)="onChange(file.files)" hidden type="file">
+
         <div style="margin-top: 25px;">
             <span style="font-weight: 500;">Property Information</span>
             <p>
