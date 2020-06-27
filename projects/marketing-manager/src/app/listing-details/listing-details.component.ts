@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PropertyListing, MarketingService } from '@lib/app-core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { PropertyListingState } from '../store/marketing.state';
 import { Store, select } from '@ngrx/store';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -143,6 +143,9 @@ export class ListingDetailsComponent implements OnInit {
 
   onChange( files ) {
     debugger;
+    // var control = new FormControl();
+    // const primativeFileList: FileList = control.value;
+    // const cloneFiles = { ...primativeFileList};
     this.store.dispatch(uploadPropertyImage({payload: files, rentalPropertyId: this.listing.rentalPropertyId}));
   }
 

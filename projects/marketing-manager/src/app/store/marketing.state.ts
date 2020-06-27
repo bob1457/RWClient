@@ -7,7 +7,7 @@ export interface PropertyListingState   { // extends  EntityState<Property>
   loading: boolean | false;
   loaded: boolean | false;
   listings: PropertyListing[] | null;
-  listing: PropertyListing | null;
+  listing: any | null;
   applications: RentalApplication[] | null;
   application: RentalApplication | null;
   rentalproperties: any[] | null;

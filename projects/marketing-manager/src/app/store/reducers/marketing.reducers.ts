@@ -11,7 +11,7 @@ export const initialState: PropertyListingState =  { // adapter.getInitialState
   applications: null,
   application: null,
   rentalproperties: null,
-  propertyImgList: null,
+  propertyImgList: [''],
   // owners: null,
   // ownersOfProperty: null,
   // selectedOwner: null,
@@ -145,14 +145,16 @@ const propertyListingReducer = createReducer(
 
   on(ListingActions.uploadPropertyImageSuccess, (state, { payload }) => {
     debugger;
-    const imgList = state.propertyImgList.map(
-      item => payload.id === item.id ? payload : item
-    );
+    // const imgList = state.propertyImgList.map(
+    //   item => payload.id === item.id ? payload : item
+    // );
+
     return ({
       ...state,
       loading: false,
       loaded: true,
-      propertyImgList: imgList
+      propertyImgList: [...state.propertyImgList, payload]
+      // propertyImgList: state.listing.rentalProperty.propertyImg.push(payload) // [...state.listing.rentalProperty.propertyImg, payload]
     });
   }),
 
