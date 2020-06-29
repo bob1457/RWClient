@@ -43,6 +43,24 @@ const propertyListingReducer = createReducer(
     });
   }),
 
+   /**
+   * Get property imge list
+   */
+  on(ListingActions.getPropertyImageList, state => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+  on(ListingActions.getPropertyImageListSuccess, (state, { payload }) => {
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      propertyImgList: payload
+    });
+  }),
+
 
 
 
@@ -221,12 +239,14 @@ export const getPropertyListingDetails = (state: PropertyListingState) => state.
 export const getPropertyApplications = (state: PropertyListingState) => state.applications;
 export const getPropertyApplicationDetails = (state: PropertyListingState) => state.application;
 export const getAllRentalProperties = (state: PropertyListingState) => state.rentalproperties;
+export const getPropertyImgList = (state: PropertyListingState) => state.propertyImgList;
 
 export const propertyListing = createSelector(selectPropertyListingState, getPropertyListing);
 export const propertyListingDetails = createSelector(selectPropertyListingState, getPropertyListingDetails);
 export const propertyApplications = createSelector(selectPropertyListingState, getPropertyApplications);
 export const propertyApplicationDetails = createSelector(selectPropertyListingState, getPropertyApplicationDetails);
 export const allRentalProperties = createSelector(selectPropertyListingState, getAllRentalProperties);
+export const propertyImgList = createSelector(selectPropertyListingState, getPropertyImgList);
 
 export const loadingStatus = createSelector(selectPropertyListingState, getLoadingStatus);
 

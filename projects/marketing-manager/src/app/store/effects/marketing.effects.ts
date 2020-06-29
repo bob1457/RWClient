@@ -1,5 +1,5 @@
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { MarketingService, PropertyListing, RentalApplication } from '@lib/app-core';
+import { MarketingService, PropertyListing, RentalApplication, PropertyImg } from '@lib/app-core';
 import { Injectable } from '@angular/core';
 
 import * as ListingActions from '../actions/marketing.actions';
@@ -30,6 +30,29 @@ export class MarketingEffects {
               return of('[Marketing] Get Property Listing Failure', err.error);
             } // EMPTY
           )
+        )
+      )
+    )
+  );
+
+  getPropertyImgList$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(ListingActions.getPropertyImageList),
+      tap(() => console.log('got here for property image list!!!')),
+      switchMap(() =>
+        this.marketingService.getAllPropertyImages().pipe(
+          map((listings: PropertyImg[]) => ({
+            type: '[Marketing] Get Property Image List Success',
+            payload: listings
+          })),
+          // tap(res => {console.log('response: ' + res); }),
+          // catchError(
+          //   err => {
+          //     return of('[Marketing] Get Property Listing Failure', err.error);
+          //   } // EMPTY
+          // )
+          catchError(error => of(ListingActions.getPropertyImageListFailure(error.message)))
         )
       )
     )

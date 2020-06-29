@@ -5,7 +5,7 @@ import { PropertyListingState } from '../store/marketing.state';
 import { Store, select } from '@ngrx/store';
 import { Router, ActivatedRoute } from '@angular/router';
 import { getPropertyListingDetails, updatePropertyListing, uploadPropertyImage } from '../store/actions/marketing.actions';
-import { propertyListingDetails, loadingStatus } from '../store/reducers';
+import { propertyListingDetails, loadingStatus, propertyImgList } from '../store/reducers';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -21,6 +21,7 @@ export class ListingDetailsComponent implements OnInit {
   serverUrl = 'http://localhost:63899/';
 
   loading$: Observable<boolean>;
+  imgList:any[] = [];
 
   detailsForm: FormGroup;
 
@@ -36,6 +37,14 @@ export class ListingDetailsComponent implements OnInit {
   ngOnInit() {
 
     this.GetPropertyListingDetails(this.id);
+
+    debugger;
+
+    this.store.pipe(select(propertyImgList))
+    .subscribe(img => {
+      var pId = this.listing.rentalPropertyId;
+      this.imgList = img.filter(p => p.rentalPropertyId === pId)
+    })
 
     this.detailsForm = this.formBuilder.group({
       id: [],

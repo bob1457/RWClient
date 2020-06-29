@@ -63,6 +63,26 @@ export const uploadPropertyImageFailure = createAction(
 
 );
 
+/**
+ * Get Property Image List Actions
+ */
+export const getPropertyImageList = createAction(
+  '[Marketing] Get Property Image List'
+);
+
+export const getPropertyImageListSuccess = createAction(
+  '[Marketing] Get Property Image List Success',
+  props<{payload: PropertyListing[]}>()
+);
+
+export const getPropertyImageListFailure = createAction(
+  '[Marketing] Get Property Image List Failure',
+  // props<{payload: any}>()
+  (errorMessage = 'Error loading property listing') => {
+    return ({ payload: { errorMessage } });
+  }
+);
+
 
 /**
  * Get Property Listing Details Actions

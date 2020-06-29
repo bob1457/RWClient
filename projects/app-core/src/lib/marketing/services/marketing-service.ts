@@ -91,6 +91,11 @@ export class MarketingService {
 
   }
 
+  getAllPropertyImages() {
+    debugger;
+    return this.http.get<PropertyImg[]>(`${this.baseUrl}/listing/allimgs`);
+  }
+
   addOpenHouse() {}
 
   updateOpenHouse() {}

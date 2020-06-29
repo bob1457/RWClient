@@ -1,4 +1,4 @@
-import { updatePropertyListing } from './../store/actions/marketing.actions';
+import { updatePropertyListing, getPropertyImageList } from './../store/actions/marketing.actions';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { PropertyListingState } from '../store/marketing.state';
@@ -64,6 +64,8 @@ export class PropertyListingComponent implements OnInit {
 
     // return this.propertyService.getPropertyList().subscribe((pList: Property[]) => {this.list = pList; console.log(pList)});
     this.store.dispatch(getPropertyListing());
+
+    this.store.dispatch(getPropertyImageList());
 
     // this.store.pipe(
     //   select(propertyListing)).subscribe(data => {
