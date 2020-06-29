@@ -56,7 +56,8 @@ export class ContractDetailsComponent implements OnInit {
       // managementContractType: [''],
       contractSignDate: [''],
       type:[],
-      isActive: [''],
+      isActive: [true],
+      solicitingOnly: [false],
       notes: [''],
 
       created: [''],
