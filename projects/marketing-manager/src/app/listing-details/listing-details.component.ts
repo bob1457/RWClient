@@ -157,6 +157,14 @@ export class ListingDetailsComponent implements OnInit {
 
     this.store.dispatch(updatePropertyListing({payload: this.detailsForm.value}));
 
+    // this.store.pipe(select(propertyImgList))
+    //             .subscribe(img => {
+    //               if (img == null) {
+
+    //               }
+    //               this.imgList = img; // .filter(p => p.rentalPropertyId === this.listing.rentalPropertyId)
+    //             });
+
   }
 
   EditContact() {
