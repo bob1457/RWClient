@@ -10,7 +10,7 @@
         <div class="images">
             <ul style="list-style-type: none;margin-left: -50px;">
                 <li *ngFor="let img of imgList" style="display: inline;">
-                    <img attr.src={{serverUrl}}{{img.propertyImgUrl}} width="45px" height="45px">
+                    <img attr.src={{serverUrl}}{{img.propertyImgUrl}} width="45px" height="45px" title="{{img.rentalPropertyId}}">
                 </li>
             </ul>
             <!-- <img src="http://placehold.it/50x50">

@@ -32,6 +32,20 @@ export class ListingDetailsComponent implements OnInit {
               private propertyService: MarketingService) {
                 this.id = this.actRoute.snapshot.params.id;
                 console.log(this.id);
+                this.store.pipe(select(propertyListingDetails))
+                    .subscribe(data => {
+                      this.listing = data;  
+                      // localStorage.setItem('listing', JSON.stringify(this.listing));
+                      console.log('list', this.listing);
+                });
+
+                this.store.pipe(select(propertyImgList))
+                .subscribe(img => {
+                  // var pId = localStorage.getItem('listing');
+                  // let pid = JSON.parse(pId).rentalPropertyId;
+                  // console.log('rp id:', pid);
+                  this.imgList = img // .filter(p => p.rentalPropertyId === this.listing.rentalPropertyId)
+                });
                }
 
   ngOnInit() {
@@ -40,11 +54,11 @@ export class ListingDetailsComponent implements OnInit {
 
     debugger;
 
-    this.store.pipe(select(propertyImgList))
-    .subscribe(img => {
-      var pId = this.listing.rentalPropertyId;
-      this.imgList = img.filter(p => p.rentalPropertyId === pId)
-    })
+    // this.store.pipe(select(propertyImgList))
+    // .subscribe(img => {
+    //   var pId = this.listing.rentalPropertyId;
+    //   this.imgList = img.filter(p => p.rentalPropertyId === pId)
+    // })
 
     this.detailsForm = this.formBuilder.group({
       id: [],
@@ -96,11 +110,13 @@ export class ListingDetailsComponent implements OnInit {
 
     this.store.dispatch(getPropertyListingDetails({payload: id}));
 
-    this.store.pipe(select(propertyListingDetails))
-        .subscribe(data => {
-          this.listing = data;
-          console.log(data);
-    });
+    // console.log('rental property id:', this.listing.rentalPropertyId);
+
+    // this.store.pipe(select(propertyListingDetails))
+    //     .subscribe(data => {
+    //       this.listing = data;
+    //       console.log(data);
+    // });
 
     // this.store.pipe(select(propertyListingDetails))
     //       .subscribe(data => {

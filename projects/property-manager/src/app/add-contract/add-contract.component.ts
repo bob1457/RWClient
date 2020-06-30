@@ -37,6 +37,7 @@ export class AddContractComponent implements OnInit {
       propertyId: [],
       placementFeeScale: [''],
       managementFeeScale: [''],
+      solicitingOnly: [false],
       signDate: [''],
       notes: ['']
     });
