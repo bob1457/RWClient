@@ -9,11 +9,19 @@
         <img src="../../assets/images/10621.jpg" style="border-radius: 50%;margin-top: 20px;" width="120px " height="120px" title="">
         <div class="images">
             <ul style="list-style-type: none;margin-left: -50px;">
-                <li *ngFor="let img of imgList" style="display: inline;">
-                    <span *ngIf="img.rentalPropertyId == listing.rentalPropertyId">
+                <div *ngIf="imgList == null">
+                    <li *ngFor="let img of listing.rentalProperty.propertyImg" style="display: inline;">
+                        <img attr.src={{serverUrl}}{{img.propertyImgUrl}} width="45px" height="45px" title="{{img.rentalPropertyId}}">
+                    </li>
+                </div>
+                <div *ngIf="imgList">
+                    <li *ngFor="let img of imgList" style="display: inline;">
+                        <span *ngIf="img.rentalPropertyId == listing.rentalPropertyId">
                       <img attr.src={{serverUrl}}{{img.propertyImgUrl}} width="45px" height="45px" title="{{img.rentalPropertyId}}">
                     </span>
-                </li>
+                    </li>
+                </div>
+
             </ul>
             <!-- <img src="http://placehold.it/50x50">
             <img src="http://placehold.it/50x50">   listing.rentalProperty.propertyImg

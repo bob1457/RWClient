@@ -21,7 +21,7 @@ export class ListingDetailsComponent implements OnInit {
   serverUrl = 'http://localhost:63899/';
 
   loading$: Observable<boolean>;
-  imgList:any[] = [];
+  imgList: any[] = [];
 
   detailsForm: FormGroup;
 
@@ -34,17 +34,17 @@ export class ListingDetailsComponent implements OnInit {
                 console.log(this.id);
                 this.store.pipe(select(propertyListingDetails))
                     .subscribe(data => {
-                      this.listing = data;  
+                      this.listing = data;
                       // localStorage.setItem('listing', JSON.stringify(this.listing));
                       console.log('list', this.listing);
                 });
 
                 this.store.pipe(select(propertyImgList))
                 .subscribe(img => {
-                  // var pId = localStorage.getItem('listing');
-                  // let pid = JSON.parse(pId).rentalPropertyId;
-                  // console.log('rp id:', pid);
-                  this.imgList = img // .filter(p => p.rentalPropertyId === this.listing.rentalPropertyId)
+                  if (img == null) {
+
+                  }
+                  this.imgList = img; // .filter(p => p.rentalPropertyId === this.listing.rentalPropertyId)
                 });
                }
 
@@ -53,6 +53,7 @@ export class ListingDetailsComponent implements OnInit {
     this.GetPropertyListingDetails(this.id);
 
     debugger;
+
 
     // this.store.pipe(select(propertyImgList))
     // .subscribe(img => {
