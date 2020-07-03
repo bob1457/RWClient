@@ -3,13 +3,15 @@ import * as marketing from './reducers';
 import { createFeatureSelector } from '@ngrx/store';
 
 
-export interface PropertyListingState   { //extends  EntityState<Property>
+export interface PropertyListingState   { // extends  EntityState<Property>
   loading: boolean | false;
   loaded: boolean | false;
   listings: PropertyListing[] | null;
-  listing: PropertyListing | null;
+  listing: any | null;
   applications: RentalApplication[] | null;
   application: RentalApplication | null;
+  rentalproperties: any[] | null;
+  propertyImgList: any[] | null;
 
   // ownersOfProperty: PropertyOwner[] | null;
   // selectedOwner: PropertyOwner | null;

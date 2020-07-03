@@ -30,6 +30,12 @@ import { AddPropertyOwnerComponent } from './add-property-owner/add-property-own
 import { YesNoPipe } from './yes-no.pipe';
 import { ContractContentComponent } from './contract-content/contract-content.component';
 import { LoadingComponent } from './loading/loading.component';
+import { MatSortModule, MatPaginator, MatPaginatorModule } from '@angular/material';
+import { ContractHeaderComponent } from './contract-header/contract-header.component';
+import { ContractFooterComponent } from './contract-footer/contract-footer.component';
+import { ContractContentEditorComponent } from './contract-content-editor/contract-content-editor.component';
+import { ContractViewComponent } from './contract-view/contract-view.component';
+import { TypePipe } from './type.pipe';
 
 
 @NgModule({
@@ -55,13 +61,20 @@ import { LoadingComponent } from './loading/loading.component';
     AddPropertyOwnerComponent,
     YesNoPipe,
     ContractContentComponent,
-    LoadingComponent
+    LoadingComponent,
+    ContractHeaderComponent,
+    ContractFooterComponent,
+    ContractContentEditorComponent,
+    ContractViewComponent,
+    TypePipe
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     AppMaterialModule,
     AppCoreModule,
+    MatSortModule,
+    MatPaginatorModule,
     StoreModule.forRoot([]),
     StoreModule.forFeature('property', reducer),
     EffectsModule.forFeature([PropertyEffects])
@@ -70,3 +83,4 @@ import { LoadingComponent } from './loading/loading.component';
   bootstrap: [AppPmComponent]
 })
 export class AppModule { }
+

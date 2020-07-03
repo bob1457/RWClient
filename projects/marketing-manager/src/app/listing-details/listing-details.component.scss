@@ -7,12 +7,13 @@
 }
 
 .listing-details-card-content {
-    height: 600px;
+    min-height: 600px;
     background: #fafafa;
 }
 
 .images {
     margin-top: 25px;
+    width: 80%;
 }
 
 .images img {

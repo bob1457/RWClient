@@ -1,5 +1,5 @@
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { MarketingService, PropertyListing, RentalApplication } from '@lib/app-core';
+import { MarketingService, PropertyListing, RentalApplication, PropertyImg } from '@lib/app-core';
 import { Injectable } from '@angular/core';
 
 import * as ListingActions from '../actions/marketing.actions';
@@ -34,6 +34,49 @@ export class MarketingEffects {
       )
     )
   );
+
+  getPropertyImgList$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(ListingActions.getPropertyImageList),
+      tap(() => console.log('got here for property image list!!!')),
+      switchMap(() =>
+        this.marketingService.getAllPropertyImages().pipe(
+          map((listings: PropertyImg[]) => ({
+            type: '[Marketing] Get Property Image List Success',
+            payload: listings
+          })),
+          // tap(res => {console.log('response: ' + res); }),
+          // catchError(
+          //   err => {
+          //     return of('[Marketing] Get Property Listing Failure', err.error);
+          //   } // EMPTY
+          // )
+          catchError(error => of(ListingActions.getPropertyImageListFailure(error.message)))
+        )
+      )
+    )
+  );
+
+
+  getAllRentalProperties$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(ListingActions.getAllRentalProperties),
+      tap(() => console.log('got here for rental property list!')),
+      switchMap(() =>
+        this.marketingService.getAllRentalProperties().pipe(
+          map((rentalp: any[]) => ({
+            type: '[Marketing] Get All Rental Properties Success',
+            payload: rentalp
+          })),
+          // tap(res => {console.log('response: ' + res); }),
+          catchError(error => of(ListingActions.getAllRentalPropertiesFailure(error.message)))
+        )
+      )
+    )
+  );
+
 
   getPropertyListingDetails$ = createEffect(() =>
     this.actions$.pipe(
@@ -99,6 +142,31 @@ export class MarketingEffects {
               return of('[Marketing] Update Property Listing Failure', err.error);
             } // EMPTY
           )
+        )
+      )
+    )
+  );
+
+  uploadPropertyImage$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(ListingActions.uploadPropertyImage),
+      tap(() => console.log('got here to upload property image !!!')),
+      // tslint:disable-next-line: no-unused-expression
+      // map(action => {action.payload, action.rentalPropertyId; }),
+      switchMap((action) =>
+        this.marketingService.uploadPropertyImages(action.payload, action.rentalPropertyId).pipe(
+          map((propertyImg: any) => ({
+            type: '[Marketing] Upload Property Image Success',
+            payload: propertyImg
+          })),
+          // tap(res => {console.log('response: ' + res); }),
+          // catchError(
+          //   err => {
+          //     return of('[Marketing] Update Property Listing Failure', err.error);
+          //   } // EMPTY
+          // )
+          catchError(error => of(ListingActions.uploadPropertyImageFailure(error.message)))
         )
       )
     )

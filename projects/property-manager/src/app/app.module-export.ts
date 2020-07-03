@@ -29,6 +29,13 @@ import { AddPropertyOwnerComponent } from './add-property-owner/add-property-own
 import { ContractContentComponent } from './contract-content/contract-content.component';
 import { YesNoPipe } from './yes-no.pipe';
 import { LoadingComponent } from './loading/loading.component';
+import { MatSortModule, MatPaginatorModule } from '@angular/material';
+import { ContractHeaderComponent } from './contract-header/contract-header.component';
+import { ContractFooterComponent } from './contract-footer/contract-footer.component';
+import { ContractContentEditorComponent } from './contract-content-editor/contract-content-editor.component';
+import { ContractViewComponent } from './contract-view/contract-view.component';
+import { TypePipe } from './type.pipe';
+// import { MatSortModule } from '@angular/material/sort';
 
 const routes: Routes = [
   { path: '', component: PropertyHomeComponent,
@@ -42,6 +49,7 @@ const routes: Routes = [
       { path: 'ownerdetails/:id', component: OwnerDetailsComponent},
       { path: 'contracts', component: ContractListComponent },
       { path: 'contractdetails/:id', component: ContractDetailsComponent},
+      { path: 'contractview/:id', component: ContractViewComponent}
     ]
   }//,
   // { path: 'owners', component: OwnerListComponent,  outlet: 'property'},
@@ -71,7 +79,12 @@ const routes: Routes = [
     ContractDetailsComponent,
     ContractContentComponent,
     YesNoPipe,
-    LoadingComponent
+    TypePipe,
+    LoadingComponent,
+    ContractHeaderComponent,
+    ContractFooterComponent,
+    ContractContentEditorComponent,
+    ContractViewComponent
   ],
   imports: [
     // BrowserModule,
@@ -79,9 +92,14 @@ const routes: Routes = [
     AppMaterialModule,
     FlexLayoutModule,
     FormsModule,
+    MatSortModule,
+    MatPaginatorModule,
     ReactiveFormsModule,
     RouterModule.forChild(routes),
     StoreModule.forFeature('property', reducer)
+  ],
+  exports: [
+    MatSortModule
   ],
   providers: [],
 

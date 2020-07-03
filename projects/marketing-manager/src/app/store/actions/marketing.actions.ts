@@ -1,6 +1,7 @@
 import { createAction, props } from '@ngrx/store';
-import { PropertyListing } from '@lib/app-core';
+import { PropertyListing, PropertyImg } from '@lib/app-core';
 import { RentalApplication } from 'projects/app-core/src/public-api';
+
 
 
 debugger;
@@ -23,6 +24,65 @@ export const getPropertyListingFailure = createAction(
     return ({ payload: { errorMessage } });
   }
 );
+
+export const getAllRentalProperties = createAction(
+  '[Marketing] Get All Rental Properties'
+);
+
+export const getAllRentalPropertiesSuccess = createAction(
+  '[Marketing] Get All Rental Properties Success',
+  props<{payload: PropertyListing[]}>()
+);
+
+export const getAllRentalPropertiesFailure = createAction(
+  '[Marketing] Get All Rental Properties Failure',
+  // props<{payload: any}>()
+  (errorMessage = 'Error loading rental properties') => {
+    return ({ payload: { errorMessage } });
+  }
+);
+
+/**
+ * Upload property images
+ */
+
+export const uploadPropertyImage = createAction(
+  '[Marketing] Upload Property Image',
+  props<{payload: any, rentalPropertyId: any}>()
+);
+
+export const uploadPropertyImageSuccess = createAction(
+  '[Marketing] Upload Property Image Success',
+  props<{payload: any}>()
+);
+
+export const uploadPropertyImageFailure = createAction(
+  '[Property] Upload Property Image Failure',
+  // props<{payload: any}>()
+  (errorMessage = 'Error uploading property image') => ({ payload: { errorMessage }})
+
+);
+
+/**
+ * Get Property Image List Actions
+ */
+export const getPropertyImageList = createAction(
+  '[Marketing] Get Property Image List'
+);
+
+export const getPropertyImageListSuccess = createAction(
+  '[Marketing] Get Property Image List Success',
+  props<{payload: PropertyListing[]}>()
+);
+
+export const getPropertyImageListFailure = createAction(
+  '[Marketing] Get Property Image List Failure',
+  // props<{payload: any}>()
+  (errorMessage = 'Error loading property listing') => {
+    return ({ payload: { errorMessage } });
+  }
+);
+
 
 /**
  * Get Property Listing Details Actions

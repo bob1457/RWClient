@@ -18,6 +18,11 @@ export class MarketingService {
     return this.http.get<PropertyListing[]>(`${this.baseUrl}/listings`);
   }
 
+  getAllRentalProperties() {
+    debugger;
+    return this.http.get<any[]>(`${this.baseUrl}/listings/allrentalproperties`);
+  }
+
   getPropertyListingDetails(id: number) {
     debugger;
     return this.http.get<PropertyListing>(`${this.baseUrl}/listing/${id}`);
@@ -66,6 +71,29 @@ export class MarketingService {
   changeListingStatus(listing: any) {
     debugger;
     return this.http.post(`${this.baseUrl}/listing/status`, listing);
+  }
+
+  uploadPropertyImages(files, id: any) {
+    debugger;
+
+    if (files.length === 0) {
+      return;
+    }
+
+    // const fileToUpload = files[0] as File;
+    let fileToUpload = <File> files[0];
+
+    const formData = new FormData();
+    formData.append('file', fileToUpload, fileToUpload.name);
+    formData.append('rentalPropertyId', id);
+
+    return this.http.post(`${this.baseUrl}/listing/addimg`, formData);
+
+  }
+
+  getAllPropertyImages() {
+    debugger;
+    return this.http.get<PropertyImg[]>(`${this.baseUrl}/listing/allimgs`);
   }
 
   addOpenHouse() {}

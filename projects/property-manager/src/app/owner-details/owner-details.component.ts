@@ -8,6 +8,7 @@ import { ownerDetails, loadingStatus} from '../store/reducers';
 import { PropertyOwner } from '@lib/app-core';
 import { getPropertyOwnerDetails } from '../store/actions/property.actions';
 import { Observable } from 'rxjs';
+import * as PropertyActions from '../store/actions/property.actions';
 
 @Component({
   selector: 'app-owner-details',
@@ -21,12 +22,14 @@ export class OwnerDetailsComponent implements OnInit {
   detailsForm: FormGroup;
   owner: PropertyOwner;
 
+  editAddress = false;
+
   id: number;
 
-  owner$ = this.store.pipe(select(ownerDetails))
-              .subscribe(data => {
-                this.owner = data;
-          });
+  // owner$ = this.store.pipe(select(ownerDetails))
+  //             .subscribe(data => {
+  //               this.owner = data;
+  //         });
 
   constructor(
     private store: Store<PropertyState>,
@@ -34,6 +37,8 @@ export class OwnerDetailsComponent implements OnInit {
     private router: Router,
     private formBuilder: FormBuilder  ) {
     this.id = this.actRoute.snapshot.params.id;
+    this.store.pipe(select(ownerDetails))
+        .subscribe(data => this.owner = data);
     // this.store.dispatch(getPropertyOwnerDetails({payload: this.id}));
   }
 
@@ -45,45 +50,59 @@ export class OwnerDetailsComponent implements OnInit {
 
     this.detailsForm = this.formBuilder.group({
       id: [''],
-      userName: [''],
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      contactEmail: ['', Validators.required],
-      contactTelephone1: ['', Validators.required],
+      userName: ['NotSet'],
+      firstName: [''],
+      lastName: [''],
+      contactEmail: [''],
+      contactTelephone1: [''],
       contactTelephone2: [''],
       onlineAccessEnbaled: [false],
       userAvartaImgUrl: [''],
-      isActive: [''],
-      roleId: [''],
+      isActive: [true],
+      roleId: [2],
       notes: [''],
 
       created: [''],
       modified: [''],
 
-      ownerProperty: this.formBuilder.group({
-        propertyId: ['', Validators.required],
-        propertyOwnerId: [],
-        property: this.formBuilder.group({
-          propertyName: ['', Validators.required],
-          propertyDesc: [''],
-          propertyType1: ['', Validators.required],
-          propertyLogoImgUrl: [''],
-          propertyVideoUrl: [''],
-          propertyBuildYear: [''],
-          isActive: [''],
-          isShared: [''],
-          status: [''],
-          isBasementSuite: [false]
-        })
+      streetNumber: [],
+      city: [],
+      stateProvince: [],
+      zipPostCode : [],
+      country : [],
 
-        // address: this.formBuilder.group({
-        //   ownerStreetNumber: ['', Validators.required],
-        //   ownerCity: ['', Validators.required],
-        //   ownerStateProv: ['', Validators.required],
-        //   ownerZipPostCode: ['', Validators.required],
-        //   ownerCountry: ['', Validators.required]
-        // })
-      })
+      // address: this.formBuilder.group({
+      //   streetNumber: [''],
+      //   city: [''],
+      //   stateProv: [''],
+      //   zipPostCode: [''],
+      //   country: ['']
+      // })
+
+      // ownerProperty: this.formBuilder.group({
+      //   propertyId: ['', Validators.required],
+      //   propertyOwnerId: [],
+      //   property: this.formBuilder.group({
+      //     propertyName: ['', Validators.required],
+      //     propertyDesc: [''],
+      //     type: ['', Validators.required],
+      //     propertyLogoImgUrl: [''],
+      //     propertyVideoUrl: [''],
+      //     propertyBuildYear: [''],
+      //     isActive: [''],
+      //     isShared: [''],
+      //     status: [''],
+      //     isBasementSuite: [false]
+      //   }),
+
+      //   // address: this.formBuilder.group({
+      //   //   streetNumber: [''],
+      //   //   city: [''],
+      //   //   stateProv: [''],
+      //   //   zipPostCode: [''],
+      //   //   country: ['']
+      //   // })
+      // })
     });
 
     // this.store.pipe(select(ownerDetails)).subscribe(data => {
@@ -104,8 +123,34 @@ export class OwnerDetailsComponent implements OnInit {
     //           });
   }
 
+  submit() {
+    debugger;
+
+    // set form value for owner address
+
+    if (!this.editAddress) {
+      this.detailsForm.patchValue({
+      streetNumber: this.owner.address.streetNumber,
+      city: this.owner.address.city,
+      stateProvince: this.owner.address.stateProv,
+      zipPostCode: this.owner.address.zipPostCode,
+      country: this.owner.address.country
+
+    });
+    }
+
+    console.log(this.detailsForm.value);
+
+    this.store.dispatch(PropertyActions.updatePropertyOwner({payload: this.detailsForm.value}));
+
+  }
+
   getOwnerDetails(id: number) {
     this.store.dispatch(getPropertyOwnerDetails({ payload: id }));
+  }
+
+  EditAddress() {
+    this.editAddress = !this.editAddress;
   }
 
   // getOnwerDetailsByService(id: number) {

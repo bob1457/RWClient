@@ -3,7 +3,7 @@
 </p>
 -->
 <div [class]="theme$">
-    <div *ngIf="loadingIndicator" class="loadingio-spinner-spinner-vhc1lmfzuvn" style="top: 50%;
+    <!-- <div *ngIf="loadingIndicator" class="loadingio-spinner-spinner-vhc1lmfzuvn" style="top: 50%;
     left: 50%;
     position: fixed;
     /* width: 50px; */
@@ -24,7 +24,26 @@
             <div></div>
             <div></div>
         </div>
+    </div> -->
+    <div *ngIf="loadingIndicator" class="loadingio-spinner-spinner-gs3rzselizi" style="top: 50%;
+      left: 50%; position: fixed;
+        z-index: 1000;">
+        <div class=" ldio-jvhfqwp5bye ">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
     </div>
+
     <mat-drawer-container class="app-container" autosize>
         <mat-drawer #drawer class="app-sidenav" style="padding:0;" [opened]="opened" [mode]="mode" fxLayout="column" [ngStyle]="{ 'width.em': sidenavWidth }" (mouseenter)="increase()">
             <div fxLayout="row" color="primary" style="height: 150px; overflow-x: hidden;background-color: #373737;">
@@ -227,7 +246,7 @@
                                 <mat-icon style="color: rgb(58, 212, 66);" [routerLink]="['/Manage/marketing/applications']" [routerLinkActive]="['active']" matListIcon>open_in_browser</mat-icon>
                                 <a matLine [routerLink]="['/Manage/marketing/applications']" [routerLinkActive]="['active']">Applications</a>
                                 <mat-chip *ngIf="applicatons" title="{{applicatons.length}}" style="background-color: rgb(30, 16, 230);
-                                  color: rgb(214, 154, 26);
+                                  color: rgb(243, 241, 237);
                                   padding-right: 7px;
                                   padding-left:7px;
                                   /* border-radius: 50%; */

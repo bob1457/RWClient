@@ -34,14 +34,14 @@ export class AddPropertyComponent implements OnInit {
 
       propertyName: ['', Validators.required],
       propertyDesc: [''],
-      propertyType1: ['', Validators.required],
+      type: ['', Validators.required],
 
       propertyLogoImgUrl: [''],
       propertyVideoUrl: [''],
-      propertyBuildYear: [''],
+      propertyBuildYear: [null],
       // isActive: [''],
       isShared: [false],
-      status: [''],
+      status: [0],
       isBasementSuite: [false],
 
       propertySuiteNumber: [''],
@@ -69,12 +69,12 @@ export class AddPropertyComponent implements OnInit {
       others: [''],
       facilityNotes: [''],
 
-      numberOfBedrooms: ['', Validators.required],
-      numberOfBathrooms: ['', Validators.required],
-      numberOfLayers: ['', Validators.required],
-      numberOfParking: ['', Validators.required],
-      basementAvailable: ['', Validators.required],
-      totalLivingArea: ['', Validators.required],
+      numberOfBedrooms: [null, Validators.required],
+      numberOfBathrooms: [null, Validators.required],
+      numberOfLayers: [null, Validators.required],
+      numberOfParking: [null, Validators.required],
+      basementAvailable: [false, Validators.required],
+      totalLivingArea: [null, Validators.required],
       featureNotes: [''],
 
       propertyOwnerId: [0],
@@ -89,9 +89,9 @@ export class AddPropertyComponent implements OnInit {
       ownerZipPostCode: [''],
       ownerCountry: [''],
       isSameAddress: [false],
-      notes: [],
+      notes: [''],
 
-      propertyManagerUserName: [],
+      propertyManagerUserName: [''],
 
       ownerOption: []
     });

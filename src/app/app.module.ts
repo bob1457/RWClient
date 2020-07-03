@@ -42,8 +42,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     StoreModule.forRoot({router: routerReducer},
       {
         runtimeChecks: {
-          strictActionImmutability: true,
-          strictActionSerializability: true,
+          strictActionImmutability: false,
+          strictActionSerializability: false,
           strictStateImmutability: true,
           strictStateSerializability: true
         }

@@ -118,15 +118,15 @@ on(PropertyActions.getPropertyDetails, (state) => ({
       ...state,
       loading: false,
       loaded: true,
-      properties: updatedProperties // [...state.property[index], payload ] // ,
-      // property: payload
+      properties: updatedProperties, // [...state.property[index], payload ] // ,
+      property: payload
     });
   }),
 
   on(PropertyActions.updatePropertyFailure, (state) => {
     return ({
       ...state,
-      loading: true,
+      loading: false,
       errorMessage: 'Failed to update property'
     });
   }),
@@ -283,8 +283,8 @@ on(PropertyActions.getPropertyDetails, (state) => ({
       ...state,
       loading: false,
       loaded: true,
-      owners: updatedOwners // [...state.property[index], payload ] // ,
-      // property: payload
+      owners: updatedOwners, // [...state.property[index], payload ] // ,
+      selectedOwner: payload
     });
   }),
 
@@ -425,6 +425,7 @@ on(PropertyActions.getContractDetails, (state) => ({
   on(PropertyActions.updateContractSuccess, (state, {payload}) => {
     debugger;
 
+    // Load updated item to the list
     const updatedContracts = state.contracts.map(
       item => payload.id === item.id ? payload : item
     );
@@ -434,8 +435,8 @@ on(PropertyActions.getContractDetails, (state) => ({
       ...state,
       loading: false,
       loaded: true,
-      contracts: updatedContracts // [...state.property[index], payload ] // ,
-      // property: payload
+      contracts: updatedContracts, // [...state.property[index], payload ] // ,
+      selectedContract: payload
     });
   }),
 

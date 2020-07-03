@@ -10,6 +10,8 @@ export const initialState: PropertyListingState =  { // adapter.getInitialState
   listing: null,
   applications: null,
   application: null,
+  rentalproperties: null,
+  propertyImgList: [],
   // owners: null,
   // ownersOfProperty: null,
   // selectedOwner: null,
@@ -40,6 +42,52 @@ const propertyListingReducer = createReducer(
       listings: payload
     });
   }),
+
+   /**
+   * Get property imge list
+   */
+  on(ListingActions.getPropertyImageList, state => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+  on(ListingActions.getPropertyImageListSuccess, (state, { payload }) => {
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      propertyImgList: payload
+    });
+  }),
+
+
+
+
+  /**
+   * Get all rental properties
+   */
+
+
+  on(ListingActions.getAllRentalProperties, state => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+
+  on(ListingActions.getAllRentalPropertiesSuccess, (state, { payload }) => {
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      rentalproperties: payload
+    });
+  }),
+
+
+
+
 
   /**
    * Get property listing details
@@ -98,7 +146,43 @@ const propertyListingReducer = createReducer(
       ...state,
       loading: false,
       loaded: true,
-      listings: updatedListings // [...state.listings, payload ]
+      listings: updatedListings, // [...state.listings, payload ]
+      listing: payload
+    });
+  }),
+
+  /**
+   *  Upload property image
+   */
+
+  on(ListingActions.uploadPropertyImage, state => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+  on(ListingActions.uploadPropertyImageSuccess, (state, { payload }) => {
+    debugger;
+    // const imgList = state.propertyImgList.map(
+    //   item => payload.id === item.id ? payload : item
+    // );
+
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      propertyImgList: [...state.propertyImgList, payload] //,
+      // listing: {
+      //   ...state.listing.rentalProperty.peroptyImg, payload
+      // }
+    });
+  }),
+
+  on(ListingActions.uploadPropertyImageFailure, (state) => {
+    return ({
+      ...state,
+      loading: false,
+      errorMessage: 'Failed to upload property image'
     });
   }),
 
@@ -148,20 +232,25 @@ const propertyListingReducer = createReducer(
 export const selectPropertyListingState = createFeatureSelector<PropertyListingState>('marketing');
 
 export const getLoadingStatus = (state: PropertyListingState) => state.loading;
+export const getLoadedStatus = (state: PropertyListingState) => state.loaded;
 
 
 export const getPropertyListing = (state: PropertyListingState) => state.listings;
 export const getPropertyListingDetails = (state: PropertyListingState) => state.listing;
 export const getPropertyApplications = (state: PropertyListingState) => state.applications;
 export const getPropertyApplicationDetails = (state: PropertyListingState) => state.application;
+export const getAllRentalProperties = (state: PropertyListingState) => state.rentalproperties;
+export const getPropertyImgList = (state: PropertyListingState) => state.propertyImgList;
 
 export const propertyListing = createSelector(selectPropertyListingState, getPropertyListing);
 export const propertyListingDetails = createSelector(selectPropertyListingState, getPropertyListingDetails);
 export const propertyApplications = createSelector(selectPropertyListingState, getPropertyApplications);
 export const propertyApplicationDetails = createSelector(selectPropertyListingState, getPropertyApplicationDetails);
+export const allRentalProperties = createSelector(selectPropertyListingState, getAllRentalProperties);
+export const propertyImgList = createSelector(selectPropertyListingState, getPropertyImgList);
 
 export const loadingStatus = createSelector(selectPropertyListingState, getLoadingStatus);
-
+export const loadedStatus = createSelector(selectPropertyListingState, getLoadedStatus);
 
 export function reducer(state: PropertyListingState | undefined, action: Action) {
   return propertyListingReducer(state, action);

@@ -44,6 +44,15 @@ export class OwnerListComponent implements OnInit {
     private store: Store<PropertyState>,
     private actRoute: ActivatedRoute) {
       this.id = this.actRoute.snapshot.params.id;
+
+      this.store.pipe(select(ownerList))
+          .subscribe(data => {
+            this.list = data;
+            this.dataSource.data = this.list;
+
+            this.dataSource.sort = this.sort;
+            this.dataSource.paginator = this.paginator;
+      });
     }
 
   dataSource = new MatTableDataSource<PropertyOwner>();
@@ -52,8 +61,11 @@ export class OwnerListComponent implements OnInit {
     debugger;
     this.loading$ = this.store.pipe(select(loadingStatus));
 
-    this.store.dispatch(getPropertyOwnerList());
-    this.getOwnerList();
+    if (this.list == null) {
+      this.store.dispatch(getPropertyOwnerList());
+    }
+
+    // this.getOwnerList();
   }
 
   getOwnerList() {
@@ -84,7 +96,10 @@ export class OwnerListComponent implements OnInit {
     .subscribe(data => {
       this.list = data;
       this.dataSource.data = this.list;
-    })
+
+      this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
+    });
   }
 
   getOwnerDetails(id: number) {

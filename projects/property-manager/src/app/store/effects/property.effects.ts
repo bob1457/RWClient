@@ -32,11 +32,12 @@ export class PropertyEffects {
             payload: properties
           })),
           // tap(res => {console.log('response: ' + res); }),
-          catchError(
-            err => {
-              return of('[Property] Get Property List Failure', err.error);
-            } // EMPTY
-          )
+          // catchError(
+          //   err => {
+          //     return of('[Property] Get Property List Failure', err.error);
+          //   } // EMPTY
+          // )
+          catchError(error => of(PropertyActions.getPropertyListFailure(error.message)))
         )
       )
     )
@@ -56,11 +57,12 @@ export class PropertyEffects {
             payload: property
           })),
           // tap(res => {console.log('response: ' + res); }),
-          catchError(
-            err => {
-              return of(PropertyActions.getPropertyDetailsFailure([err.error]));
-            } // EMPTY // return of('[Property] Get Property Details Failure', err.error);
-          )
+          // catchError(
+          //   err => {
+          //     return of(PropertyActions.getPropertyDetailsFailure([err.error]));
+          //   } // EMPTY // return of('[Property] Get Property Details Failure', err.error);
+          // )
+          catchError(error => of(PropertyActions.getPropertyDetailsFailure(error.message)))
         )
       )
     )
@@ -75,16 +77,17 @@ export class PropertyEffects {
       switchMap((payload) =>
         this.propertyService.addProperty(payload).pipe(
           tap(() => console.log('called property service: ' + payload)),
-          map((property: Property) => ({
+          map((property: any) => ({
             type: '[Property] Add Property Success',
             payload: property
           })),
           // tap(res => {console.log('response: ' + res); }),
-          catchError(
-            err => {
-              return of('[Property] Add Property Failure', err.error);
-            } // EMPTY
-          )
+          // catchError(
+          //   err => {
+          //     return of('[Property] Add Property Failure', err.error);
+          //   } // EMPTY
+          // )
+          catchError(error => of(PropertyActions.addPropertyFailure(error.message)))
         )
       )
     )
@@ -104,11 +107,12 @@ export class PropertyEffects {
             payload: property
           })),
           // tap(res => {console.log('response: ' + res); }),
-          catchError(
-            err => {
-              return of('[Property] Update Property Failure', err.error);
-            } // EMPTY
-          )
+          // catchError(
+          //   err => {
+          //     return of('[Property] Update Property Failure', err.error);
+          //   } // EMPTY
+          // )
+          catchError(error => of(PropertyActions.updatePropertyStatusFailure(error.message)))
         )
       )
     )
@@ -128,11 +132,12 @@ export class PropertyEffects {
             payload: status
           })),
           // tap(res => {console.log('response: ' + res); }),
-          catchError(
-            err => {
-              return of('[Property] Update Property Status Failure', err.error);
-            } // EMPTY
-          )
+          // catchError(
+          //   err => {
+          //     return of('[Property] Update Property Status Failure', err.error);
+          //   } // EMPTY
+          // )
+          catchError(error => of(PropertyActions.updatePropertyStatusFailure(error.message)))
         )
       )
     )
@@ -153,11 +158,12 @@ export class PropertyEffects {
             payload: active
           })),
           // tap(res => {console.log('response: ' + res); }),
-          catchError(
-            err => {
-              return of('[Property] Remove Property Failure', err.error);
-            } // EMPTY
-          )
+          // catchError(
+          //   err => {
+          //     return of('[Property] Remove Property Failure', err.error);
+          //   } // EMPTY
+          // )
+          catchError(error => of(PropertyActions.removePropertyFailure(error.message)))
         )
       )
     )
@@ -175,12 +181,13 @@ export class PropertyEffects {
             payload: owners
           })),
           // tap(res => {console.log('response: ' + res); }),
-          catchError(
-            err => {
-              // return of('[Property] Get Property Owner List Failure', err.error);
-              return of(PropertyActions.getPropertyOwnerListFailure(err.error));
-            } // EMPTY
-          )
+          // catchError(
+          //   err => {
+          //     // return of('[Property] Get Property Owner List Failure', err.error);
+          //     return of(PropertyActions.getPropertyOwnerListFailure(err.error));
+          //   } // EMPTY
+          // )
+          catchError(error => of(PropertyActions.getPropertyOwnerListFailure(error.message)))
         )
       )
     )
@@ -201,11 +208,12 @@ export class PropertyEffects {
             payload: owner
           })),
           // tap(res => {console.log('response: ' + res); }),
-          catchError(
-            err => {
-              return of(PropertyActions.getPropertyOwnerDetailsFailure([err.error]));
-            } // EMPTY // return of('[Property] Get Property Details Failure', err.error);
-          )
+          // catchError(
+          //   err => {
+          //     return of(PropertyActions.getPropertyOwnerDetailsFailure([err.error]));
+          //   } // EMPTY // return of('[Property] Get Property Details Failure', err.error);
+          // )
+          catchError(error => of(PropertyActions.getPropertyOwnerDetailsFailure(error.message)))
         )
       )
     )
@@ -225,11 +233,12 @@ export class PropertyEffects {
             payload: owner
           })),
           // tap(res => {console.log('response: ' + res); }),
-          catchError(
-            err => {
-              return of('[Property] Add Property Owner Failure', err.error);
-            } // EMPTY
-          )
+          // catchError(
+          //   err => {
+          //     return of('[Property] Add Property Owner Failure', err.error);
+          //   } // EMPTY
+          // )
+          catchError(error => of(PropertyActions.addPropertyOwnerFailure(error.message)))
         )
       )
     )
@@ -249,11 +258,12 @@ export class PropertyEffects {
             payload: owner
           })),
           // tap(res => {console.log('response: ' + res); }),
-          catchError(
-            err => {
-              return of('[Property] Update Property Failure', err.error);
-            } // EMPTY
-          )
+          // catchError(
+          //   err => {
+          //     return of('[Property] Update Property Failure', err.error);
+          //   } // EMPTY
+          // )
+          catchError(error => of(PropertyActions.updatePropertyOwnerSuccess(error.message)))
         )
       )
     )
@@ -273,11 +283,12 @@ export class PropertyEffects {
             // payload: owner
           })),
           // tap(res => {console.log('response: ' + res); }),
-          catchError(
-            err => {
-              return of('[Property] Remove Property Owner Failure', err.error);
-            } // EMPTY
-          )
+          // catchError(
+          //   err => {
+          //     return of('[Property] Remove Property Owner Failure', err.error);
+          //   } // EMPTY
+          // )
+          catchError(error => of(PropertyActions.removePropertyOwnerFailure(error.message)))
         )
       )
     )
@@ -296,11 +307,12 @@ export class PropertyEffects {
             payload: contracts
           })),
           // tap(res => {console.log('response: ' + res); }),
-          catchError(
-            err => {
-              return of('[[Property] Get Contract List Failure', err.error);
-            } // EMPTY
-          )
+          // catchError(
+          //   err => {
+          //     return of('[[Property] Get Contract List Failure', err.error);
+          //   } // EMPTY
+          // )
+          catchError(error => of(PropertyActions.getContractListFailure(error.message)))
         )
       )
     )
@@ -320,11 +332,12 @@ export class PropertyEffects {
             payload: contract
           })),
           // tap(res => {console.log('response: ' + res); }),
-          catchError(
-            err => {
-              return of(PropertyActions.getContractDetailsFailure([err.error]));
-            } // EMPTY // return of('[Property] Get Property Details Failure', err.error);
-          )
+          // catchError(
+          //   err => {
+          //     return of(PropertyActions.getContractDetailsFailure([err.error]));
+          //   } // EMPTY // return of('[Property] Get Property Details Failure', err.error);
+          // )
+          catchError(error => of(PropertyActions.getContractDetailsFailure(error.message)))
         )
       )
     )
@@ -344,11 +357,12 @@ export class PropertyEffects {
             payload: contract
           })),
           // tap(res => {console.log('response: ' + res); }),
-          catchError(
-            err => {
-              return of('[Property] Add Management Contract Failure', err.error);
-            } // EMPTY
-          )
+          // catchError(
+          //   err => {
+          //     return of('[Property] Add Management Contract Failure', err.error);
+          //   } // EMPTY
+          // )
+          catchError(error => of(PropertyActions.addManagementContractFailure(error.message)))
         )
       )
     )
@@ -368,11 +382,12 @@ export class PropertyEffects {
             payload: contract
           })),
           // tap(res => {console.log('response: ' + res); }),
-          catchError(
-            err => {
-              return of('[Property] Update Contract Failure', err.error);
-            } // EMPTY
-          )
+          // catchError(
+          //   err => {
+          //     return of('[Property] Update Contract Failure', err.error);
+          //   } // EMPTY
+          // )
+          catchError(error => of(PropertyActions.updateContractFailure(error.message)))
         )
       )
     )

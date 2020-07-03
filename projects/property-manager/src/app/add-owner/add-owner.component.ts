@@ -5,6 +5,7 @@ import { Store, select } from '@ngrx/store';
 import { Property, PropertyOwner } from '@lib/app-core';
 import { propertyList, ownerList } from '../store/reducers';
 import { Location } from '@angular/common';
+import * as PropertyActions from '../store/actions/property.actions';
 
 @Component({
   selector: 'app-add-owner',
@@ -17,6 +18,13 @@ export class AddOwnerComponent implements OnInit {
 
   ownerOption = 'existing';
   owners: PropertyOwner[];
+  ownerAddress: any = {
+    street: '',
+    city: '',
+    provState: '',
+    postZipCoe: '',
+    country: ''
+  };
 
   properties: Property[];
   // properties: any = [
@@ -46,10 +54,23 @@ export class AddOwnerComponent implements OnInit {
       contactEmail: [],
       contactTelephone1: [],
       contactTelephone2: [],
+      isActive: [true],
+      onlineAccessEnabled: [false],
+      roleId: [2],
+      userName: ['NotSet'],
       propertyId: [],
+      propertyOwnerId: [0],
 
       ownerOption: [],
-      isSameAddress: []
+      isSameAddress: [],
+      notes: [],
+
+      streetNumber: [],
+      city: [],
+      stateProv: [],
+      zipPostCode : [],
+      country : []
+
 
     });
 
@@ -63,7 +84,7 @@ export class AddOwnerComponent implements OnInit {
         });
   }
 
-  onChange(id) { // aelect property
+  onChange(id) { // select property
     this.selected = true;
     console.log(id);
     this.addForm.get('propertyId').setValue(id);
@@ -85,8 +106,23 @@ export class AddOwnerComponent implements OnInit {
         });
   }
 
-  onOwnerChange(id) {
+  onOwnerChange(id) { // select existing owner
+    debugger;
+    this.store.pipe(select(ownerList))
+    .subscribe(res => {
+      const owner = this.owners.find(o => o.id === id); // const owner: any = this.owners.find(o => o.id === id);
+      this.addForm.get('propertyOwnerId').setValue(owner.id);
+      this.addForm.get('firstName').setValue(owner.firstName);
+      this.addForm.get('lastName').setValue(owner.lastName);
+      this.addForm.get('contactEmail').setValue(owner.contactEmail);
+      this.addForm.get('contactTelephone1').setValue(owner.contactTelephone1);
+      // this.ownerAddress.street = owner.streetNumber;
+      // this.ownerAddress.city = owner.city;
+      // this.ownerAddress.provState = owner.stateProv;
+      // this.ownerAddress.postZipCode = owner.zipPostCode;
+      // this.ownerAddress.country = owner.country;
 
+    });
   }
 
   statusChange(e) {
@@ -94,10 +130,18 @@ export class AddOwnerComponent implements OnInit {
     this.sameAddress = e.checked;
   }
 
-  submit(formValue) { // Add validation here...for all fields if any
+  submit() { // Add validation here...for all fields if anyformValue
     debugger;
-    console.log(this.addForm);
-    console.log(formValue);
+    console.log(this.addForm.value);
+    if(this.addForm.get('ownerOption').value === 'new') { // may not be necessary, they are initilized in form group
+      this.addForm.get('isActive').setValue(true);
+      this.addForm.get('onlineAccessEnabled').setValue(false);
+      this.addForm.get('userName').setValue('NotSet');
+      this.addForm.get('roleId').setValue(2);
+    }
+    // console.log(formValue);
+    this.store.dispatch(PropertyActions.addPropertyOwner({payload: this.addForm.value}));
+
     this.location.back();
   }
 

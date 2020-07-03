@@ -1,3 +1,46 @@
-<p>
-  screening works!
-</p>
+<!-- <p>
+    screening works! {{id}}*ngIf="!(loading$ | async) && property; else spinner"
+</p> -->
+<div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="1%" fxFlexFill>
+    <div>
+        <div fxFlex="10%" fxLayoutAlign="end">
+            <i class="far fa-arrow-alt-circle-left" title="back to list" style="cursor: pointer; color: seagreen; font-size: 1.5em;" (click)="goBack()"></i>
+        </div>
+    </div>
+    <div fxFlex="20%" fxLayout="column" class="avatar_sec" fxLayoutAlign="start center">
+        <img src="../../assets/images/10621.jpg" style="border-radius: 50%;margin-top: 20px;" width="120px " height="120px" title="">
+        <div class="images">
+            <img src="http://placehold.it/50x50">
+            <img src="http://placehold.it/50x50">
+            <img src="http://placehold.it/50x50">
+            <img src="http://placehold.it/50x50">
+        </div>
+        <div style="margin-top: 25px;">
+            <span style="font-weight: 500;">Applicant Information</span> {{id}}
+        </div>
+        <div class="date-time">
+            <p>
+                Applied on:
+            </p>
+
+        </div>
+
+    </div>
+    <div fxFlex="70%">
+        <mat-card class="screening-details-card">
+            <mat-card-header style="background-color: #f5f5f5; ">
+                <div mat-card-avatar class="screening-details-header-image ">
+                    <i class="material-icons " style="font-size: 2.5em;color: #e64a19; margin-left: 5px; ">
+              account_balance
+            </i>
+                    <!-- <img src="../../assets/images/pmgmnt.png " height="40px " width="40px "> *ngIf="property*ngIf="detailsForm.value"{{property.propertyNumber}} {{property.propertyNumber}} {{property.propertyStreet}} {{property.propertyCity}} {{property.propertyStateProvince}} {{property.propertyZipPostCode}}-->
+                </div>
+                <mat-card-title>Rental Applicataion for: - <span style="font-size: .8em; font-style: italic;"></span> </mat-card-title>
+                <mat-card-subtitle>Address: </mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content class="screening-details-card-content">
+
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>

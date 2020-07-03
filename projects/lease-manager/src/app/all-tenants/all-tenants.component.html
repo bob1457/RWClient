@@ -32,21 +32,21 @@
                 </div>
                 <div fxLayoutAlign="start">
                     <a (click)="listView = true" style="cursor: pointer;">
-                        <i class="material-icons " style="font-size: 2.5em;color: #3412ad; margin-left: 5px; border: 1px black solid; " title="List View">
+                        <i class="material-icons " style="font-size: 1.5em;color: #3412ad; margin-left: 5px; border: 1px black solid; " title="List View">
                       list_alt
                     </i>
                     </a>
                     <a (click)="listView = false" style="cursor: pointer;">
-                        <i class="material-icons " style="font-size: 2.5em;color: #830f2c; margin-left: 5px; border: 1px black solid;" title="Grid View">
+                        <i class="material-icons " style="font-size: 1.5em;color: #830f2c; margin-left: 5px; border: 1px black solid;" title="Grid View">
                         apps
                       </i>
                     </a>
                     <span style="margin-left: 25px;
-                    margin-top: 10px;
-                    font-size: 1.25em;" *ngIf="listView">List View</span>
+                    margin-top: 3px;
+                    font-size: 1.0em;" *ngIf="listView">List View</span>
                     <span style="margin-left: 25px;
-                    margin-top: 10px;
-                    font-size: 1.25em;" *ngIf="!listView">Grid View</span>
+                    margin-top: 3px;
+                    font-size: 1.0em;" *ngIf="!listView">Grid View</span>
                 </div>
                 <div fxLayoutAlign="center">
                     <div *ngIf="listView" style="width: 100%;">
@@ -100,10 +100,10 @@
                                 <th mat-header-cell *matHeaderCellDef></th>
                                 <td mat-cell *matCellDef="let element">
                                     <i style="border: 2px solid;
-                  padding: 3px;
-                  border-radius: 50%;" class="material-icons" [style.color]="element.status == 'Rented' ? 'green': element.status == 'Pending'? 'orange' :'red'">
-                  house
-                </i>
+                                      padding: 3px;
+                                      border-radius: 50%;" class="material-icons" [style.color]="element.status == 'Rented' ? 'green': element.status == 'Pending'? 'orange' :'red'">
+                                      house
+                                    </i>
                                 </td>
                             </ng-container>
                             <!-- style="font-size: 1.5em; color: red;" -->
@@ -123,10 +123,16 @@
 
                         </table>
                     </div>
+
+
+
                     <div *ngIf="!listView">
                         grid display
                     </div>
                 </div>
+
+                <span class="spacer"></span>
+                <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 25]"></mat-paginator>
             </div>
 
         </mat-card-content>
@@ -134,23 +140,5 @@
 </div>
 
 <ng-template #spinner>
-    <div class="loadingio-spinner-spinner-vhc1lmfzuvn" style="top: 50%;
-      left: 50%;
-      position: fixed;
-      z-index: 1000;">
-        <div class="ldio-ugrhztjm33r">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
-    </div>
+    <app-loading></app-loading>
 </ng-template>

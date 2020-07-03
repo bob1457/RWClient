@@ -42,6 +42,15 @@ export class ContractListComponent implements OnInit {
                   }
 
                 });
+
+                this.store.pipe(select(contractList))
+                .subscribe(data => {
+                  this.list = data;
+                  this.dataSource.data = this.list;
+
+                  this.dataSource.sort = this.sort;
+                  this.dataSource.paginator = this.paginator;
+                });
               }
 
   dataSource = new MatTableDataSource<ManagementContract>();
@@ -50,8 +59,11 @@ export class ContractListComponent implements OnInit {
     debugger;
     this.loading$ = this.store.pipe(select(loadingStatus));
 
-    this.store.dispatch(getContractList());
-    this.getContractList();
+    if (this.list == null) {
+      this.store.dispatch(getContractList());
+    }
+
+    // this.getContractList();
     // this.contractList$ = this.store.select(contractList);
   }
 
@@ -66,7 +78,10 @@ export class ContractListComponent implements OnInit {
     .subscribe(data => {
       this.list = data;
       this.dataSource.data = this.list;
-    })
+
+      this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
+    });
   }
 
   public doFilter = (value: string) => {

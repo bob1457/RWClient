@@ -4,7 +4,7 @@ import { Store, select } from '@ngrx/store';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MarketingService } from '@lib/app-core';
 import { PropertyListingState } from '../store/marketing.state';
-import { propertyApplicationDetails, loadingStatus } from '../store/reducers';
+import { propertyApplicationDetails, loadingStatus, loadedStatus } from '../store/reducers';
 import { getRentalApplicationDetails } from '../store/actions/marketing.actions';
 import { Observable } from 'rxjs';
 
@@ -19,6 +19,7 @@ export class ApplicationDetailsComponent implements OnInit {
   application: any;
 
   loading$: Observable<boolean>;
+  loaded = false;
 
   // detailsForm: FormGroup;
 
@@ -29,6 +30,12 @@ export class ApplicationDetailsComponent implements OnInit {
               private propertyService: MarketingService) {
                 this.id = this.actRoute.snapshot.params.id;
                 console.log(this.id);
+
+                this.store.pipe(select(propertyApplicationDetails)) // select date from state in store
+                          .subscribe(app => {
+                            this.application = app;
+                });
+
               }
 
   ngOnInit() {
@@ -40,15 +47,17 @@ export class ApplicationDetailsComponent implements OnInit {
     debugger;
 
     this.loading$ = this.store.pipe(select(loadingStatus));
+    this.store.pipe(select(loadedStatus))
+    .subscribe(res => this.loaded = res);
 
     this.store.dispatch(getRentalApplicationDetails({payload: id}));
 
     // this.store.dispatch(getRentalApplicationDetails({payload: id})); // dispatch the action if state has no data
 
-    this.store.pipe(select(propertyApplicationDetails)) // select date from state in store
-              .subscribe(app => {
-                this.application = app;
-              });
+    // this.store.pipe(select(propertyApplicationDetails)) // select date from state in store
+    //           .subscribe(app => {
+    //             this.application = app;
+    //           });
 
     // this.store.pipe(select(propertyApplicationDetails))
     //       .subscribe(data => {
