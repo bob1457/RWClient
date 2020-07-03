@@ -5,7 +5,7 @@ import { getRentalApplicationList, getRentalApplicationDetails } from '../store/
 import { RentalApplication, MarketingService } from '@lib/app-core';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { Router, Event, NavigationStart, NavigationEnd } from '@angular/router';
-import { propertyApplications, loadingStatus } from '../store/reducers';
+import { propertyApplications, loadingStatus, loadedStatus } from '../store/reducers';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -18,6 +18,7 @@ export class ApplicationListComponent implements OnInit {
   list: RentalApplication[];
 
   loading$: Observable<boolean>;
+  loaded = false;
 
   displayedColumns: string[] = ['icon', 'id', 'applicatnFirstName', 'applicatnLastName', 'email', 'telephone', 'propertyName', 'occupants', 'appliedDate', 'action'];
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
@@ -48,8 +49,8 @@ export class ApplicationListComponent implements OnInit {
                     console.log(this.dataSource.data);
 
                     setTimeout(() =>  {this.dataSource.paginator = this.paginator; this.dataSource.sort = this.sort;});
-                    
-                   
+
+
                   }
                   );
               }
@@ -59,7 +60,12 @@ export class ApplicationListComponent implements OnInit {
 
     this.loading$ = this.store.pipe(select(loadingStatus));
 
-    this.store.dispatch(getRentalApplicationList())  ;
+    this.store.select(loadedStatus)
+        .subscribe(res => this.loaded = res);
+
+    if (this.list == null) {
+          this.store.dispatch(getRentalApplicationList())  ;
+        }
 
     // this.store.pipe(
     //   select(propertyApplications)).subscribe(data => {
@@ -73,7 +79,7 @@ export class ApplicationListComponent implements OnInit {
     //   }
     //   );
 
-    
+
   }
 
   // GetApplicationDetails(id: number) {

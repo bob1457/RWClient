@@ -117,9 +117,9 @@ export class ProfileHomeComponent implements OnInit {
       this.loading = false;
       this.uploadMsg = 'Done';
       this.showMsg = true;
-      
+
       setTimeout(() => {
-        this.showMsg = false;        
+        this.showMsg = false;
       }, 2000);
 
     });
@@ -129,11 +129,11 @@ export class ProfileHomeComponent implements OnInit {
     fileReader.readAsDataURL(files[0]);
     fileReader.onload = (_event) => {
       this.imgUrl = fileReader.result;
-      this.stateService.setCurrentUrl(this.imgUrl);      
+      this.stateService.setCurrentUrl(this.imgUrl);
       console.log(this.imgUrl);
       localStorage.setItem('newAvatarUrl', this.imgUrl );
       console.log(localStorage.getItem('newAvatarUrl'));
-    }  
+    }
 
   }
 
@@ -141,7 +141,6 @@ export class ProfileHomeComponent implements OnInit {
   AvatarTypeChange(mrChange: MatRadioChange) {
     console.log(mrChange.value);
     let mrButton: MatRadioButton = mrChange.source;
-    
 
     if (mrChange.value == 2 && mrButton.checked) {
       this.gAvatar = false;
@@ -149,19 +148,17 @@ export class ProfileHomeComponent implements OnInit {
 
       this.emailHash = sparkmd5.hash(this.user.email);
       if (this.imgUrl == null) {
-        // this.imgUrl = 'https://www.gravatar.com/avatar/' + this.emailHash + '?d=identicon'; 
+        // this.imgUrl = 'https://www.gravatar.com/avatar/' + this.emailHash + '?d=identicon';
         this.imgUrl = this.serverUrl + '/' + this.user.avatarUrl;
         this.stateService.currentUrl$ = this.imgUrl;
-      }           
-    }
-    else {
+      }
+    } else {
       this.gAvatar = true;
     }
-    
     console.log(mrButton.checked);
-    
+
  }
- 
+
 
   createIdenticon(emailHash: any): string {
     return 'https://www.gravatar.com/avatar/' + emailHash + '?d=identicon';

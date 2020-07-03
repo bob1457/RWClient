@@ -161,6 +161,7 @@ export class PropertyDetailsComponent implements OnInit {
 
   GetPropertyDetails(id: any) {
     debugger;
+
     this.store.dispatch(getPropertyDetails({payload: id}));
 
     // this.selectPropertyDetails();

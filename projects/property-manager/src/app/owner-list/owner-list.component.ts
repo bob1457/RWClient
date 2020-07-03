@@ -61,7 +61,10 @@ export class OwnerListComponent implements OnInit {
     debugger;
     this.loading$ = this.store.pipe(select(loadingStatus));
 
-    this.store.dispatch(getPropertyOwnerList());
+    if (this.list == null) {
+      this.store.dispatch(getPropertyOwnerList());
+    }
+
     // this.getOwnerList();
   }
 

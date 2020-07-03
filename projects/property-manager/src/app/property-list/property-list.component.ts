@@ -90,7 +90,10 @@ export class PropertyListComponent implements OnInit, AfterViewInit {
 
   GetPropertyDetails(id: any) {
     debugger;
-    return this.store.dispatch(getPropertyDetails({payload: id}));
+    if (this.list == null) {
+      return this.store.dispatch(getPropertyDetails({payload: id}));
+    }
+
   }
 
   public doFilter = (value: string) => {

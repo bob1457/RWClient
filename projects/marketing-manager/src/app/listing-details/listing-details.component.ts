@@ -3,9 +3,10 @@ import { PropertyListing, MarketingService } from '@lib/app-core';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { PropertyListingState } from '../store/marketing.state';
 import { Store, select } from '@ngrx/store';
+import { Location } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { getPropertyListingDetails, updatePropertyListing, uploadPropertyImage } from '../store/actions/marketing.actions';
-import { propertyListingDetails, loadingStatus, propertyImgList } from '../store/reducers';
+import { propertyListingDetails, loadingStatus, propertyImgList, loadedStatus } from '../store/reducers';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -21,13 +22,16 @@ export class ListingDetailsComponent implements OnInit {
   serverUrl = 'http://localhost:63899/';
 
   loading$: Observable<boolean>;
+  loaded = false;
   imgList: any[] = [];
 
   detailsForm: FormGroup;
+  propertyForm: FormGroup;
 
   constructor(private store: Store<PropertyListingState>,
               private router: Router,
               private actRoute: ActivatedRoute,
+              private location: Location,
               private formBuilder: FormBuilder,
               private propertyService: MarketingService) {
                 this.id = this.actRoute.snapshot.params.id;
@@ -101,7 +105,9 @@ export class ListingDetailsComponent implements OnInit {
 
     });
 
-
+    this.propertyForm = this.formBuilder.group({
+      status: ['']
+    });
   }
 
   GetPropertyListingDetails(id: any) {
@@ -109,7 +115,13 @@ export class ListingDetailsComponent implements OnInit {
 
     this.loading$ = this.store.pipe(select(loadingStatus));
 
+    this.store.pipe(select(loadedStatus))
+        .subscribe(res => this.loaded = res);
+
+
     this.store.dispatch(getPropertyListingDetails({payload: id}));
+
+
 
     // console.log('rental property id:', this.listing.rentalPropertyId);
 
@@ -165,6 +177,16 @@ export class ListingDetailsComponent implements OnInit {
     //               this.imgList = img; // .filter(p => p.rentalPropertyId === this.listing.rentalPropertyId)
     //             });
 
+  }
+
+  updateStatus() {
+    debugger;
+    console.log('rental p', this.propertyForm.value);
+
+  }
+
+  cancel() {
+    this.location.back();
   }
 
   EditContact() {

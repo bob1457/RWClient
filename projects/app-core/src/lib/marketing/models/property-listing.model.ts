@@ -3,6 +3,7 @@ export interface PropertyListing {
   title: string;
   rentalPropertyId: number;
   listingDesc: string;
+  originalId: number;
   // listingStatus: string;
   monthlyRent: number;
   notes: string;

@@ -232,6 +232,7 @@ const propertyListingReducer = createReducer(
 export const selectPropertyListingState = createFeatureSelector<PropertyListingState>('marketing');
 
 export const getLoadingStatus = (state: PropertyListingState) => state.loading;
+export const getLoadedStatus = (state: PropertyListingState) => state.loaded;
 
 
 export const getPropertyListing = (state: PropertyListingState) => state.listings;
@@ -249,7 +250,7 @@ export const allRentalProperties = createSelector(selectPropertyListingState, ge
 export const propertyImgList = createSelector(selectPropertyListingState, getPropertyImgList);
 
 export const loadingStatus = createSelector(selectPropertyListingState, getLoadingStatus);
-
+export const loadedStatus = createSelector(selectPropertyListingState, getLoadedStatus);
 
 export function reducer(state: PropertyListingState | undefined, action: Action) {
   return propertyListingReducer(state, action);

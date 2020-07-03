@@ -76,74 +76,99 @@
                 <mat-card-subtitle>Rental Property: {{listing.rentalProperty.propertyName}}</mat-card-subtitle>
             </mat-card-header>
             <mat-card-content class="listing-details-card-content">
-                <form novalidate fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" [formGroup]="detailsForm" (ngSubmit)="submit()">
-                    <div fxLayout="column" fxLayoutAlign="start center" style=" width: 100%;">
-                        <mat-form-field class="listing-full-width" style="margin-top: 25px;">
-                            <span class=" icon-pos " matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
-                            <input type="text" id="id " formControlName="id" matInput placeholder="Listing Id " [ngModel]="listing.id">
-                        </mat-form-field>
-                        <mat-form-field class="listing-full-width ">
-                            <span class="icon-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
-                            <input type="text" id="title" formControlName="title" matInput placeholder="Listing Title" [ngModel]="listing.title">
-                        </mat-form-field>
-                        <mat-form-field class="listing-full-width ">
-                            <!-- <span class="icon-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span> -->
-                            <textarea type="text" style="height: 80px;" id="listingDesc" formControlName="listingDesc" matInput placeholder="Listing Description" [ngModel]="listing.listingDesc"></textarea>
-                        </mat-form-field>
-                        <mat-form-field class="listing-full-width ">
-                            <span class="icon-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
-                            <input type="number" id="monthlyRent" formControlName="monthlyRent" matInput placeholder="Monthly Rent (CAD$)" [ngModel]="listing.monthlyRent">
-                        </mat-form-field>
-                        <mat-checkbox formControlName="isActive" [ngModel]="listing.isActive" class="listing-full-width">Published/Listed</mat-checkbox>
-                        <mat-form-field class="listing-full-width ">
-                            <span class="icon-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
-                            <textarea type="text" id="bote" formControlName="note" matInput placeholder="Note" [ngModel]="listing.note"></textarea>
-                        </mat-form-field>
-                    </div>
+                <div [@.disabled]="true" style="width: 100%;">
+                    <mat-tab-group>
+                        <mat-tab label="General" style="background: #f5f5f5;">
+                            <form novalidate fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" [formGroup]="detailsForm" (ngSubmit)="submit()">
+                                <div fxLayout="column" fxLayoutAlign="start center" style=" width: 100%;">
+                                    <mat-form-field class="listing-full-width" style="margin-top: 25px;">
+                                        <span class=" icon-pos " matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
+                                        <input type="text" readonly id="id " formControlName="id" matInput placeholder="Listing Id " [ngModel]="listing.id">
+                                    </mat-form-field>
+                                    <mat-form-field class="listing-full-width ">
+                                        <span class="icon-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
+                                        <input type="text" id="title" formControlName="title" matInput placeholder="Listing Title" [ngModel]="listing.title">
+                                    </mat-form-field>
+                                    <mat-form-field class="listing-full-width ">
+                                        <!-- <span class="icon-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span> -->
+                                        <textarea type="text" style="height: 80px;" id="listingDesc" formControlName="listingDesc" matInput placeholder="Listing Description" [ngModel]="listing.listingDesc"></textarea>
+                                    </mat-form-field>
+                                    <mat-form-field class="listing-full-width ">
+                                        <span class="icon-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
+                                        <input type="number" id="monthlyRent" formControlName="monthlyRent" matInput placeholder="Monthly Rent (CAD$)" [ngModel]="listing.monthlyRent">
+                                    </mat-form-field>
+                                    <mat-checkbox formControlName="isActive" [ngModel]="listing.isActive" class="listing-full-width">Published/Listed</mat-checkbox>
+                                    <mat-form-field class="listing-full-width ">
+                                        <span class="icon-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
+                                        <textarea type="text" id="bote" formControlName="note" matInput placeholder="Note" [ngModel]="listing.note"></textarea>
+                                    </mat-form-field>
+                                </div>
 
-                    <div fxLayout="column" fxLayoutAlign="start start" style="width: 75%;">
-                        <h5 style="font-size: 1.15em;">Listing Contact <a mat-button style="font-size: .8em;" (click)="EditContact()"><span *ngIf="!editContact">Edit</span><span *ngIf="editContact">Cancel</span></a></h5>
-                        <div *ngIf="!editContact">
-                            <p style="margin-bottom: 0;">
-                                {{listing.contact.contactName}}
-                            </p>
-                            <p style="margin-bottom: 0;">
-                                Email: &nbsp;&nbsp;{{listing.contact.contactEmail}} &nbsp; Tel: &nbsp;&nbsp;{{listing.contact.contactTel}}
-                            </p>
-                            <p>
-                                Text: &nbsp;&nbsp;{{listing.contact.contactSMS}}
-                            </p>
-                        </div>
-                    </div>
-                    <div *ngIf="editContact" fxLayout="row" style="width: 75%;">
-                        <mat-form-field class="owner-full-width" fxFlex="25%" style="margin-right: 8px;">
-                            <input type="text" id="contactName" formControlName="contactName" matInput placeholder="Contact Name" [ngModel]="listing.contact.contactName" name="contactName">
-                        </mat-form-field>
-                        <mat-form-field class="owner-full-width" fxFlex="25%" style="margin-right: 8px;">
-                            <input type="text" id="contactEmail" formControlName="contactEmail" matInput placeholder="contact Email" [ngModel]="listing.contact.contactEmail" name="email">
-                        </mat-form-field>
-                        <mat-form-field class="owner-full-width" fxFlex="20%" style="margin-right: 8px;">
-                            <input type="text" id="contactTel" formControlName="contactTel" matInput placeholder="contact Tel" [ngModel]="listing.contact.contactTel">
-                        </mat-form-field>
-                        <mat-form-field class="owner-full-width" fxFlex="20%">
-                            <input type="text" id="contactSMS" formControlName="contactSMS" matInput placeholder="contactS Text" [ngModel]="listing.contact.contactSMS">
-                        </mat-form-field>
-                        <!-- <mat-form-field class="owner-full-width" fxFlex="10%">
-                          <input type="text" id="city" formControlName="country" matInput placeholder="Country" [ngModel]="owner.address.country">
-                      </mat-form-field> -->
+                                <div fxLayout="column" fxLayoutAlign="start start" style="width: 75%;">
+                                    <h5 style="font-size: 1.15em;">Listing Contact <a mat-button style="font-size: .8em;" (click)="EditContact()"><span *ngIf="!editContact">Edit</span><span *ngIf="editContact">Cancel</span></a></h5>
+                                    <div *ngIf="!editContact">
+                                        <p style="margin-bottom: 0;">
+                                            {{listing.contact.contactName}}
+                                        </p>
+                                        <p style="margin-bottom: 0;">
+                                            Email: &nbsp;&nbsp;{{listing.contact.contactEmail}} &nbsp; Tel: &nbsp;&nbsp;{{listing.contact.contactTel}}
+                                        </p>
+                                        <p>
+                                            Text: &nbsp;&nbsp;{{listing.contact.contactSMS}}
+                                        </p>
+                                    </div>
+                                </div>
+                                <div *ngIf="editContact" fxLayout="row" style="width: 75%;">
+                                    <mat-form-field class="owner-full-width" fxFlex="25%" style="margin-right: 8px;">
+                                        <input type="text" id="contactName" formControlName="contactName" matInput placeholder="Contact Name" [ngModel]="listing.contact.contactName" name="contactName">
+                                    </mat-form-field>
+                                    <mat-form-field class="owner-full-width" fxFlex="25%" style="margin-right: 8px;">
+                                        <input type="text" id="contactEmail" formControlName="contactEmail" matInput placeholder="contact Email" [ngModel]="listing.contact.contactEmail" name="email">
+                                    </mat-form-field>
+                                    <mat-form-field class="owner-full-width" fxFlex="20%" style="margin-right: 8px;">
+                                        <input type="text" id="contactTel" formControlName="contactTel" matInput placeholder="contact Tel" [ngModel]="listing.contact.contactTel">
+                                    </mat-form-field>
+                                    <mat-form-field class="owner-full-width" fxFlex="20%">
+                                        <input type="text" id="contactSMS" formControlName="contactSMS" matInput placeholder="contactS Text" [ngModel]="listing.contact.contactSMS">
+                                    </mat-form-field>
+                                    <!-- <mat-form-field class="owner-full-width" fxFlex="10%">
+                              <input type="text" id="city" formControlName="country" matInput placeholder="Country" [ngModel]="owner.address.country">
+                          </mat-form-field> -->
 
 
-                    </div>
+                                </div>
 
-                    <div fxLayout="row" fxLayoutGap="7px" fxLayoutAlign="end center" style="width: 75%;">
-                        <!-- <span *ngIf="showMsg" style="color: rgb(189, 150, 25);">Updated successfully!</span>
-      <img *ngIf=" loading" class="pl-2" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
-      /> [disabled]="f.invalid || !f.dirty"-->
-                        <button type="submit" mat-raised-button color="primary">UPDATE</button>
-                        <button mat-raised-button color="accent">CANCEL</button>
-                    </div>
+                                <div fxLayout="row" fxLayoutGap="7px" fxLayoutAlign="end center" style="width: 75%; margin-bottom: 25px;">
+                                    <!-- <span *ngIf="showMsg" style="color: rgb(189, 150, 25);">Updated successfully!</span>
+          <img *ngIf=" loading" class="pl-2" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+          /> [disabled]="f.invalid || !f.dirty"-->
+                                    <button type="submit" mat-raised-button color="primary">UPDATE</button>
+                                    <button type="button" mat-raised-button color="accent" (click)="cancel()">CANCEL</button>
+                                </div>
 
-                </form>
+                            </form>
+                        </mat-tab>
+                        <mat-tab label="Rental Property" style="background: #f5f5f5;">
+                            <div fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="10px">
+                                <form [formGroup]="propertyForm" (ngSubmit)="updateStatus()">
+                                    <mat-form-field class="property-full-width">
+                                        <mat-label>Rental Property Status</mat-label>
+                                        <mat-select [(value)]="current" id="status" formControlName="status" [ngModel]="listing.rentalProperty.status | status">
+                                            <!-- <mat-option>None</mat-option> -->
+                                            <mat-option value="NotSet">NotSet</mat-option>
+                                            <mat-option value="Listed">Listed</mat-option>
+                                            <mat-option value="Pending">Pending</mat-option>
+                                            <mat-option value="Rented">Rented</mat-option>
+                                            <mat-option value="Others">Others</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </form>
+                            </div>
+
+                        </mat-tab>
+                    </mat-tab-group>
+                </div>
+
             </mat-card-content>
         </mat-card>
     </div>

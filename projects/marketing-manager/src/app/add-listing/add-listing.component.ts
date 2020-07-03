@@ -61,4 +61,8 @@ export class AddListingComponent implements OnInit {
     this.store.dispatch(addPropertyListing({payload: this.addForm.value}));
   }
 
+  cancel() {
+    this.location.back();
+  }
+
 }

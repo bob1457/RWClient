@@ -22,6 +22,7 @@ import { ApplicationDetailsComponent } from './application-details/application-d
 import { YesNoPipe } from './yes-no.pipe';
 import { LoadingComponent } from './loading/loading.component';
 import { ScreeningListComponent } from './screening-list/screening-list.component';
+import { StatusPipe } from './status.pipe';
 
 const routes: Routes = [
   // { path: '', component: PropertyListingComponent},
@@ -52,6 +53,7 @@ const routes: Routes = [
     ApplicationListComponent,
     ScreeningComponent,
     YesNoPipe,
+    StatusPipe,
     LoadingComponent,
     ScreeningListComponent
   ],
