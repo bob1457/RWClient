@@ -153,6 +153,10 @@ export class ListingDetailsComponent implements OnInit {
     document.getElementById('fileInput').click();
   }
 
+  publish() {
+    
+  }
+
   submit() {
     debugger;
     if (!this.editContact) {

@@ -11,10 +11,17 @@
     <div fxFlex="20%" fxLayout="column" class="avatar_sec" fxLayoutAlign="start center">
         <img src="../../assets/images/10621.jpg" style="border-radius: 50%;margin-top: 20px;" width="120px " height="120px" title="{{property.propertyName}}">
         <div class="images">
+            <!-- <img src="http://placehold.it/50x50">
             <img src="http://placehold.it/50x50">
             <img src="http://placehold.it/50x50">
-            <img src="http://placehold.it/50x50">
-            <img src="http://placehold.it/50x50">
+            <img src="http://placehold.it/50x50"> -->
+            <ul style="list-style-type: none;margin-left: -50px;">
+                <li *ngFor="let img of imgList" style="display: inline;">
+                    <span *ngIf="img.originalId == property.propertyId">
+                  <img attr.src={{serverUrl}}{{img.propertyImgUrl}} width="45px" height="45px" title="{{img.rentalPropertyId}}">
+                </span>
+                </li>                
+            </ul>
         </div>
         <div style="margin-top: 25px;">
             <span style="font-weight: 500;">Owner Information</span>

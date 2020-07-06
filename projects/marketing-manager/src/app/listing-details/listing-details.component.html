@@ -97,11 +97,21 @@
                                         <span class="icon-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
                                         <input type="number" id="monthlyRent" formControlName="monthlyRent" matInput placeholder="Monthly Rent (CAD$)" [ngModel]="listing.monthlyRent">
                                     </mat-form-field>
-                                    <mat-checkbox formControlName="isActive" [ngModel]="listing.isActive" class="listing-full-width">Published/Listed</mat-checkbox>
+                                    
                                     <mat-form-field class="listing-full-width ">
                                         <span class="icon-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
-                                        <textarea type="text" id="bote" formControlName="note" matInput placeholder="Note" [ngModel]="listing.note"></textarea>
+                                        <textarea type="text" id="note" formControlName="note" matInput placeholder="Note" [ngModel]="listing.note"></textarea>
                                     </mat-form-field>
+                                    <div fxLayout="row" fxLayoutAlign="start start" style="width: 75%;">
+                                        <div fxFlex ="35%">
+                                            <mat-checkbox [disabled]="true" formControlName="isActive" [ngModel]="listing.isActive" class="listing-full-width">Published/Listed</mat-checkbox>
+                                        </div>
+                                        <div fxFlex ="40%">
+                                             <button mat-raised-button (click)="publish()">Publish/Unpublish</button>
+                                        </div>
+                                    </div>
+                                    
+                                   
                                 </div>
 
                                 <div fxLayout="column" fxLayoutAlign="start start" style="width: 75%;">

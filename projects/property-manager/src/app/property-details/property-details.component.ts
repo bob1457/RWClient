@@ -8,6 +8,7 @@ import { Property, PropertyService } from '@lib/app-core';
 import { propertyDetrails, loadingStatus } from '../store/reducers';
 import { Observable } from 'rxjs';
 import * as PropertyActions from '../store/actions/property.actions';
+import { propertyImgList } from 'projects/marketing-manager/src/app/store/reducers';
 @Component({
   selector: 'app-property-details',
   templateUrl: './property-details.component.html',
@@ -18,6 +19,8 @@ export class PropertyDetailsComponent implements OnInit {
   detailsForm: FormGroup;
 
   loading$: Observable<boolean>;
+  imgList;
+  serverUrl = 'http://localhost:63899/';
 
   property$ = this.store.pipe(select(propertyDetrails))
         .subscribe(data => {
@@ -40,6 +43,15 @@ export class PropertyDetailsComponent implements OnInit {
               private propertyService: PropertyService) {
                 this.id = this.actRoute.snapshot.params.id;
                 console.log(this.id);
+
+                this.store.pipe(select(propertyImgList))
+                .subscribe(img => {
+                  if (img == null) {
+
+                  }
+                  this.imgList = img; // .filter(p => p.rentalPropertyId === this.listing.rentalPropertyId)
+                  console.log('imgs', this.imgList);
+                });
               }
 
   propertyId: any = 1;

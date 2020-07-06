@@ -9,6 +9,7 @@ import { MatPaginator, MatSort } from '@angular/material';
 import { Observable } from 'rxjs';
 
 import { Router, Event, NavigationStart, NavigationEnd } from '@angular/router';
+import { getPropertyImageList } from 'projects/marketing-manager/src/app/store/actions/marketing.actions';
 
 
 @Component({
@@ -36,6 +37,18 @@ export class PropertyListComponent implements OnInit, AfterViewInit {
   constructor(private propertyService: PropertyService,
               private router: Router,
               private store: Store<PropertyState>) {
+                
+                this.store.pipe(
+                  select(propertyList)).subscribe(data => {
+                    this.list = data ;
+                    console.log(data);
+                    this.dataSource.data = this.list;
+                    console.log(this.dataSource.data);
+            
+                    this.dataSource.sort = this.sort;
+                    this.dataSource.paginator = this.paginator;
+                  });
+
                 this.router.events.subscribe((routerEvent: Event) => {
                   if (routerEvent instanceof NavigationStart) {
                     this.loadingIndicator = true;
@@ -56,20 +69,25 @@ export class PropertyListComponent implements OnInit, AfterViewInit {
     // this.getPropertyList();
     // this.propertyList$ =
     // this.store.select(propertyList);
-    this.store.dispatch(getPropertyList());
+    if (this.list == null) {
+      this.store.dispatch(getPropertyList());
+    }
+
+    // this.store.dispatch(getPropertyImageList());
+    
     // this.propertyList$ =
 
     // debugger;
-    this.store.pipe(
-      select(propertyList)).subscribe(data => {
-        this.list = data ;
-        console.log(data);
-        this.dataSource.data = this.list;
-        console.log(this.dataSource.data);
+    // this.store.pipe(
+    //   select(propertyList)).subscribe(data => {
+    //     this.list = data ;
+    //     console.log(data);
+    //     this.dataSource.data = this.list;
+    //     console.log(this.dataSource.data);
 
-        this.dataSource.sort = this.sort;
-        this.dataSource.paginator = this.paginator;
-      });
+    //     this.dataSource.sort = this.sort;
+    //     this.dataSource.paginator = this.paginator;
+    //   });
   }
 
   // getPropertyList() {
