@@ -129,7 +129,7 @@ const propertyListingReducer = createReducer(
 
 
   /**
-   * Add property listing
+   * Update property listing
    */
   on(ListingActions.updatePropertyListing, state => ({
     ...state,
@@ -150,6 +150,12 @@ const propertyListingReducer = createReducer(
       listing: payload
     });
   }),
+
+  /**
+   *  Updating property listing status
+   */
+
+   
 
   /**
    *  Upload property image
