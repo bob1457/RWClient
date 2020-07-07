@@ -22,7 +22,11 @@ export class AddListingComponent implements OnInit {
               private location: Location,
               private store: Store<PropertyListingState>) {
                 this.store.pipe(select(allRentalProperties))
-                .subscribe(data => this.rentalProperties = data);
+                .subscribe(data => {
+                  if (data != null) {
+                    this.rentalProperties = data.filter(s => s.status === 0);
+                  }
+                });
               }
 
   ngOnInit() {
