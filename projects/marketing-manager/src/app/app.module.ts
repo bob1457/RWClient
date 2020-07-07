@@ -18,6 +18,9 @@ import { YesNoPipe } from './yes-no.pipe';
 import { LoadingComponent } from './loading/loading.component';
 import { ScreeningListComponent } from './screening-list/screening-list.component';
 import { StatusPipe } from './status.pipe';
+import { ListingDetailsSideComponent } from './listing-details-side/listing-details-side.component';
+import { ListingDetailsMainComponent } from './listing-details-main/listing-details-main.component';
+import { ListingDetailsSecondaryComponent } from './listing-details-secondary/listing-details-secondary.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +35,10 @@ import { StatusPipe } from './status.pipe';
     YesNoPipe,
     LoadingComponent,
     ScreeningListComponent,
-    StatusPipe
+    StatusPipe,
+    ListingDetailsSideComponent,
+    ListingDetailsMainComponent,
+    ListingDetailsSecondaryComponent
   ],
   imports: [
     BrowserModule,

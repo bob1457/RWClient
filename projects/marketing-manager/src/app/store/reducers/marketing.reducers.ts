@@ -155,7 +155,25 @@ const propertyListingReducer = createReducer(
    *  Updating property listing status
    */
 
-   
+  on(ListingActions.updatePropertyListingStatus, state => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+  on(ListingActions.updatePropertyListingStatusSuccess, (state, { payload }) => {
+
+    const updatedListings = state.listings.map(
+      item => payload.id === item.id ? payload : item
+    );
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      listings: updatedListings, // [...state.listings, payload ]
+      listing: payload
+    });
+  }),
 
   /**
    *  Upload property image

@@ -22,7 +22,7 @@ export class ListingDetailsComponent implements OnInit {
   serverUrl = 'http://localhost:63899/';
 
   loading$: Observable<boolean>;
-  loaded = false;
+  // loaded = false;
   imgList: any[] = [];
 
   detailsForm: FormGroup;
@@ -106,7 +106,8 @@ export class ListingDetailsComponent implements OnInit {
     });
 
     this.propertyForm = this.formBuilder.group({
-      status: ['']
+      id: [],
+      isActive: ['']
     });
   }
 
@@ -115,8 +116,8 @@ export class ListingDetailsComponent implements OnInit {
 
     this.loading$ = this.store.pipe(select(loadingStatus));
 
-    this.store.pipe(select(loadedStatus))
-        .subscribe(res => this.loaded = res);
+    // this.store.pipe(select(loadedStatus))
+    //     .subscribe(res => this.loaded = res);
 
 
     this.store.dispatch(getPropertyListingDetails({payload: id}));
@@ -154,7 +155,7 @@ export class ListingDetailsComponent implements OnInit {
   }
 
   publish() {
-    
+    // this.store.dispatch(updatePropertyListingStatus(payload:))
   }
 
   submit() {
