@@ -20,7 +20,7 @@
                     <span *ngIf="img.originalId == property.propertyId">
                   <img attr.src={{serverUrl}}{{img.propertyImgUrl}} width="45px" height="45px" title="{{img.rentalPropertyId}}">
                 </span>
-                </li>                
+                </li>
             </ul>
         </div>
         <div style="margin-top: 25px;">
@@ -59,7 +59,7 @@
           </i>
                     <!-- <img src="../../assets/images/pmgmnt.png " height="40px " width="40px "> *ngIf="property*ngIf="detailsForm.value"-->
                 </div>
-                <mat-card-title>Rental Property: ID: {{property.propertyId}} - <span style="font-size: .8em; font-style: italic;">{{property.propertyName}}</span> </mat-card-title>
+                <mat-card-title>Rental Property: ID: {{property.propertyId}} - <span style="font-size: .8em; font-style: italic;">{{property.propertyName}} (Status: {{property.status}})</span> </mat-card-title>
                 <mat-card-subtitle>Address: {{property.propertyNumber}} {{property.propertyNumber}} {{property.propertyStreet}} {{property.propertyCity}} {{property.propertyStateProvince}} {{property.propertyZipPostCode}}</mat-card-subtitle>
             </mat-card-header>
             <mat-card-content class="property-details-card-content">
@@ -116,7 +116,7 @@
                                         <mat-checkbox formControlName="isBasementSuite" [ngModel]="property.isBasementSuite" class="property-full-width">Basement</mat-checkbox>
                                         <mat-form-field class="property-full-width">
                                             <mat-label>Rental Status</mat-label>
-                                            <mat-select [(value)]="status" id="status" formControlName="status" [ngModel]="property.status">
+                                            <mat-select [disabled]="true" [(value)]="status" id="status" formControlName="status" [ngModel]="property.status">
                                                 <!-- <mat-option>None</mat-option> -->
                                                 <mat-option value="Rented">Rented</mat-option>
                                                 <mat-option value="Vacant">Vacant</mat-option>
