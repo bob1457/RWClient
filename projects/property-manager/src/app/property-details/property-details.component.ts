@@ -46,11 +46,10 @@ export class PropertyDetailsComponent implements OnInit {
 
                 this.store.pipe(select(propertyImgList))
                 .subscribe(img => {
-                  if (img == null) {
-
+                  if (img) {
+                    this.imgList = img; // .filter(p => p.rentalPropertyId === this.listing.rentalPropertyId)
+                    console.log('imgs', this.imgList);
                   }
-                  this.imgList = img; // .filter(p => p.rentalPropertyId === this.listing.rentalPropertyId)
-                  console.log('imgs', this.imgList);
                 });
               }
 
@@ -64,6 +63,8 @@ export class PropertyDetailsComponent implements OnInit {
 
   status = false;
   showMsg = false;
+
+  iconImg: any;
 
 
   // property$: Observable<Property>;

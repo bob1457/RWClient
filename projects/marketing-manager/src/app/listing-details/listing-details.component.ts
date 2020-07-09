@@ -42,7 +42,7 @@ export class ListingDetailsComponent implements OnInit {
                     .subscribe(data => {
                       this.listing = data;
                       // localStorage.setItem('listing', JSON.stringify(this.listing));
-                      if (this.listing){
+                      if (this.listing) {
                         this.imgList = this.listing.rentalProperty.propertyImg;
                         this.iconImg = this.imgList.filter((value, index) => index === 0);
                       }
