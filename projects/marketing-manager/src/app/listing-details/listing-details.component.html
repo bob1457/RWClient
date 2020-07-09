@@ -6,7 +6,15 @@
         <i class="far fa-arrow-alt-circle-left" title="back to list" style="cursor: pointer; color: seagreen; font-size: 1.5em;" (click)="goBack()"></i>
     </div>
     <div fxFlex="20%" fxLayout="column" class="avatar_sec" fxLayoutAlign="start center">
-        <img src="../../assets/images/10621.jpg" style="border-radius: 50%;margin-top: 20px;" width="120px " height="120px" title="">
+        <span *ngIf="iconImg; else default">
+          <img attr.src="{{serverUrl}}{{iconImg[0].propertyImgUrl}}" style="border-radius: 50%;margin-top: 20px;" width="120px " height="120px" title="">
+        </span>
+
+        <ng-template #default>
+            <img src="../../assets/images/10621.jpg" style="border-radius: 50%;margin-top: 20px;" width="120px " height="120px" title="">
+        </ng-template>
+
+
         <div class="images">
             <ul style="list-style-type: none;margin-left: -50px;">
                 <li *ngFor="let img of imgList" style="display: inline;">
@@ -14,7 +22,7 @@
                   <img attr.src={{serverUrl}}{{img.propertyImgUrl}} width="45px" height="45px" title="{{img.rentalPropertyId}}">
                 </span>
                 </li>
-                <!-- <div *ngIf="imgList == null">
+                <!-- <div *ngIf="imgList == null">  *ngIf="img.rentalPropertyId == listing.rentalPropertyId"
                     <li *ngFor="let img of listing.rentalProperty.propertyImg" style="display: inline;">
                         <img attr.src={{serverUrl}}{{img.propertyImgUrl}} width="45px" height="45px" title="{{img.rentalPropertyId}}">
                     </li>
@@ -30,7 +38,7 @@
             <!-- <img src="http://placehold.it/50x50">
             <img src="http://placehold.it/50x50">   listing.rentalProperty.propertyImg
             <img src="http://placehold.it/50x50">-->
-            <a (click)="openInput()" class="up-icon" style="margin-left:0px;" title="update property image">
+            <a (click)="openInput()" class="up-icon" style="margin-left:0px;cursor: pointer;" title="update property image">
                 <!-- <i class="material-icons">
                 publish  attr.src="{{serverUrl}}{{user.avatarUrl}}"
                 </i> -->

@@ -25,6 +25,8 @@ export class ListingDetailsComponent implements OnInit {
   // loaded = false;
   imgList: any[] = [];
 
+  iconImg: any;
+
   detailsForm: FormGroup;
   propertyForm: FormGroup;
 
@@ -40,15 +42,25 @@ export class ListingDetailsComponent implements OnInit {
                     .subscribe(data => {
                       this.listing = data;
                       // localStorage.setItem('listing', JSON.stringify(this.listing));
+                      if (this.listing){
+                        this.imgList = this.listing.rentalProperty.propertyImg;
+                        this.iconImg = this.imgList.filter((value, index) => index === 0);
+                      }
+
+                      console.log('imglist', this.imgList);
+                      console.log('iconimg', this.iconImg);
                       console.log('list', this.listing);
+
                 });
 
                 this.store.pipe(select(propertyImgList))
                 .subscribe(img => {
-                  if (img == null) {
-
+                  if (img != null) {
+                    // this.imgList = img; // .filter(p => p.rentalPropeprtyId === this.listing.rentalPropertyId);
+                    // this.iconImg = this.imgList.filter((value, index) => index === 0);
+                    // console.log('iconimg', this.iconImg);
+                    // console.log('imglist', this.imgList);
                   }
-                  this.imgList = img; // .filter(p => p.rentalPropertyId === this.listing.rentalPropertyId)
                 });
                }
 
