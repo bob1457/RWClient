@@ -1,3 +1,41 @@
-<p>
+<!-- <p>
   add-lease works!
-</p>
+</p> -->
+<mat-card class="lease-add-card">
+    <mat-card-header style="background-color: #f5f5f5;">
+        <div mat-card-avatar class="property-list-header-image">
+            <i class="material-icons" style="font-size: 2.5em;color: #0c8f1e; margin-left: 5px;">
+      note_add
+  </i>
+            <!-- <img src="../../assets/images/pmgmnt.png" height="40px" width="40px"> (ngSubmit)="onSubmit()"-->
+        </div>
+        <mat-card-title>Add New Lease/Rental Agreement</mat-card-title>
+        <mat-card-subtitle>Add new lease/rental agreementct</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content class="lease-add-card-content">
+        <form [formGroup]="addForm" class="add-form" (ngSubmit)="submit()">
+            <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center start" fxLayoutGap="1%" fxFlexFill>
+                <div fxFlex="50%" fxFlex.xs="80%">
+                    <mat-form-field style="margin-top: 25px;width: 90%;">
+                        <span class="icon-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
+                        <input matInput type="text" placeholder="Lease Title" formControlName="leaseTitle" id="title">
+                        <!-- <mat-hint align="end">Not more then 60 characters long.</mat-hint>
+<mat-error *ngIf="hasError('title', 'required')">Name is required</mat-error>
+<mat-error *ngIf="hasError('title', 'maxlength')">You have more than 60 characters</mat-error> -->
+                    </mat-form-field>
+                    <mat-form-field style="width: 90%;">
+                        <mat-label>Select Rental Property</mat-label>
+                        <mat-select #mySelect (selectionChange)="onChange(mySelect.value)">
+                            <mat-option *ngFor="let property of properties" [value]="property.id">
+                                {{property.propertyName}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div fxFlex="50%" fxFlex.xs="80%">
+                    second part
+                </div>
+            </div>
+        </form>
+    </mat-card-content>
+</mat-card>

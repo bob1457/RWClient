@@ -45,7 +45,7 @@
             </mat-card-header>
             <mat-card-content class="applicant-details-card-content">
                 <div fxLayout="column" fxLayoutAlign="start center">
-                    <h6>Rental Application - Status: {{application.status}}</h6>
+                    <h6>Rental Application - Status: {{application.status | appStatus}}</h6>
                     <table class="app-table">
                         <tr>
                             <td class="title-cell">First Name</td>

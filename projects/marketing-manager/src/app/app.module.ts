@@ -21,6 +21,7 @@ import { StatusPipe } from './status.pipe';
 import { ListingDetailsSideComponent } from './listing-details-side/listing-details-side.component';
 import { ListingDetailsMainComponent } from './listing-details-main/listing-details-main.component';
 import { ListingDetailsSecondaryComponent } from './listing-details-secondary/listing-details-secondary.component';
+import { AppStatusPipe } from './app-status.pipe';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { ListingDetailsSecondaryComponent } from './listing-details-secondary/li
     StatusPipe,
     ListingDetailsSideComponent,
     ListingDetailsMainComponent,
-    ListingDetailsSecondaryComponent
+    ListingDetailsSecondaryComponent,
+    AppStatusPipe
   ],
   imports: [
     BrowserModule,

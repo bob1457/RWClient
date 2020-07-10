@@ -26,6 +26,7 @@ import { StatusPipe } from './status.pipe';
 import { ListingDetailsSideComponent } from './listing-details-side/listing-details-side.component';
 import { ListingDetailsMainComponent } from './listing-details-main/listing-details-main.component';
 import { ListingDetailsSecondaryComponent } from './listing-details-secondary/listing-details-secondary.component';
+import { AppStatusPipe } from './app-status.pipe';
 
 const routes: Routes = [
   // { path: '', component: PropertyListingComponent},
@@ -61,7 +62,8 @@ const routes: Routes = [
     ScreeningListComponent,
     ListingDetailsSideComponent,
     ListingDetailsMainComponent,
-    ListingDetailsSecondaryComponent
+    ListingDetailsSecondaryComponent,
+    AppStatusPipe
   ],
   imports: [
     // BrowserModule,

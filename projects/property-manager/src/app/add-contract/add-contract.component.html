@@ -13,9 +13,9 @@
         <mat-card-subtitle>Add new property management contract</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content class="contract-add-card-content">
-        <form [formGroup]="addForm" class="add-form" (ngSubmit)="submit()">
+        <form [formGroup]="addForm" class="add-form" (ngSubmit)="submit()" style="min-height: 600px;">
             <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center start" fxLayoutGap="1%" fxFlexFill>
-                <div style="width: 59%;">
+                <div fxFlex='50%' fxFlex.xs='80%'>
                     <!-- <p>part 1</p> -->
                     <mat-form-field style="margin-top: 25px;width: 90%;">
                         <span class="icon-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
@@ -85,15 +85,15 @@
                 </mat-form-field> -->
 
                 </div>
-                <div style="width: 59%;" fxLayout="column">
+                <div fxFlex='50%' fxFlex.xs='80%' fxLayout="column">
                     <h5 style="font-size: 1.5em;
                     margin-top: 20px;
                     font-variant: all-petite-caps;">contract contents &nbsp;
-                        <span>
-                      <a mat-button style="font-size: .8em;" (click)="EditContent()">
-                        <span *ngIf="!edit">Edit</span><span *ngIf="edit">Cancel</span>
-                        </a>
-                        </span>
+                        <!-- <span>
+                          <a mat-button style="font-size: .8em;" (click)="EditContent()">
+                            <span *ngIf="!edit">Edit</span><span *ngIf="edit">Cancel</span>
+                          </a>
+                        </span> -->
                     </h5>
                     <div class="content" *ngIf="!edit">
                         <app-contract-content></app-contract-content>
