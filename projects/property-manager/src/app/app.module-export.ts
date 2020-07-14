@@ -40,7 +40,7 @@ import { TypePipe } from './type.pipe';
 const routes: Routes = [
   { path: '', component: PropertyHomeComponent,
     children: [
-      { path: 'propertylist', component: PropertyListComponent},
+      { path: '', component: PropertyListComponent},
       { path: 'propertydetails/:id', component: PropertyDetailsComponent},
       { path: 'addproperty', component: AddPropertyComponent},
       { path: 'addowner', component: AddOwnerComponent},

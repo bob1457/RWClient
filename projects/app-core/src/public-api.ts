@@ -25,5 +25,7 @@ export * from './lib/marketing/services/marketing-service';
 
 export * from './lib/leasing/models/property-lease.model';
 export * from './lib/leasing/models/property-tenant.model';
+export * from './lib/leasing/models/rental-property.model';
+export * from './lib/leasing/models/new-tenant.model';
 export * from './lib/leasing/services/lease.service';
 

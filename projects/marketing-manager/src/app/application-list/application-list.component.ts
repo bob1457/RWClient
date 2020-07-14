@@ -50,9 +50,8 @@ export class ApplicationListComponent implements OnInit {
 
                     setTimeout(() =>  {this.dataSource.paginator = this.paginator; this.dataSource.sort = this.sort;});
 
-
                   }
-                  );
+                );
               }
 
   ngOnInit() {

@@ -36,12 +36,12 @@ export class LeaseService {
 
   getAllRentalProperties() {
     debugger;
-    return this.http.get<RentalProperty[]>(`${this.baseUrl}/leases/allproperty`);
+    return this.http.get<RentalProperty[]>(`${this.baseUrl}/lease/allproperty`);
   }
 
   getAllNewTenants() {
     debugger;
-    return this.http.get<NewTenant[]>(`${this.baseUrl}/leases/newtenants`);
+    return this.http.get<NewTenant[]>(`${this.baseUrl}/lease/newtenants`);
   }
 
   addLease(lease: PropertyLease) {

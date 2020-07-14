@@ -32,7 +32,7 @@ const routes: Routes = [
   // { path: '', component: PropertyListingComponent},
   { path: '', component: MarketingHomeComponent,
     children: [
-      { path: 'propertylist', component: PropertyListingComponent},
+      { path: '', component: PropertyListingComponent},
       { path: 'listingDetails/:id', component: ListingDetailsComponent},
       { path: 'addListing', component: AddListingComponent},
       // { path: 'screening', component: ScreeningComponent},

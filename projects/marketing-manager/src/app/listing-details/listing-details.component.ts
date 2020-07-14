@@ -211,7 +211,7 @@ export class ListingDetailsComponent implements OnInit {
   }
 
   goBack() {
-    this.router.navigate(['/Manage/marketing/propertylist']);
+    this.router.navigate(['/Manage/marketing/']);
   }
 
   onChange( files ) {

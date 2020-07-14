@@ -30,7 +30,7 @@ const routes: Routes = [
   // { path: '', component: AllLeasesComponent },
   { path: '', component: LeaseHomeComponent,
     children: [
-      { path: 'leases', component: AllLeasesComponent},
+      { path: '', component: AllLeasesComponent},
       { path: 'tenants', component: AllTenantsComponent},
       { path: 'leasedetails/:id', component: LeaseDetailsComponent},
       { path: 'addlease', component: AddLeaseComponent},

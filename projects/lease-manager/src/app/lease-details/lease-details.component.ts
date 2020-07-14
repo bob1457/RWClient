@@ -109,7 +109,7 @@ export class LeaseDetailsComponent implements OnInit {
 
 
   goBack() {
-    this.router.navigate(['/Manage/lease/leases']);
+    this.router.navigate(['/Manage/lease/']);
   }
 
 }

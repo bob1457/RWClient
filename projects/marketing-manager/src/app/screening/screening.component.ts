@@ -12,7 +12,6 @@ import { propertyApplicationDetails } from '../store/reducers';
 export class ScreeningComponent implements OnInit {
 
   id: number;
-
   application: any;
 
   constructor(private router: Router,
@@ -20,6 +19,11 @@ export class ScreeningComponent implements OnInit {
               private store: Store<PropertyListingState>) {
                 this.id = this.actRoute.snapshot.params.id;
                 console.log(this.id);
+
+                this.store.pipe(select(propertyApplicationDetails)) // select date from state in store
+                          .subscribe(app => {
+                            this.application = app;
+                });
               }
 
   ngOnInit() {

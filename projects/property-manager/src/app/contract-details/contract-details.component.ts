@@ -99,6 +99,19 @@ export class ContractDetailsComponent implements OnInit {
     console.log('show contract');
   }
 
+  openInput() {
+    document.getElementById('fileInput').click();
+  }
+
+  onChange( files ) {
+    debugger;
+    console.log('file selected');
+    // var control = new FormControl();
+    // const primativeFileList: FileList = control.value;
+    // const cloneFiles = { ...primativeFileList};
+    // this.store.dispatch(uploadPropertyImage({payload: files, rentalPropertyId: this.listing.rentalPropertyId}));
+  }
+
   goBack() {
     this.router.navigate(['/Manage/property/contracts']);
   }

@@ -268,7 +268,7 @@ export class PropertyDetailsComponent implements OnInit {
   }
 
   goBack() {
-    this.router.navigate(['/Manage/property/propertylist']);
+    this.router.navigate(['/Manage/property/']);
   }
 
 

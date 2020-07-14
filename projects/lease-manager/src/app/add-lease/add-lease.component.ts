@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators  } from '@angular/forms';
-import { Property } from '@lib/app-core';
+import { Property, RentalProperty, LeaseService, NewTenant } from '@lib/app-core';
+import { Observable } from 'rxjs';
+
 
 @Component({
   selector: 'app-add-lease',
@@ -11,15 +13,22 @@ export class AddLeaseComponent implements OnInit {
 
   addForm: FormGroup;
 
-  properties: Property[];
+  properties$: Observable<RentalProperty[]>;
+  newTenants$: Observable<NewTenant[]>;
 
   constructor(private formBuilder: FormBuilder,
-               ) { }
+              private leaseService: LeaseService ) { }
+
+
 
   ngOnInit() {
 
     // this.store.pipe(select(propertyList))
     // .subscribe(data => this.properties = data);
+    debugger;
+
+    this.properties$ = this.leaseService.getAllRentalProperties();
+    this.newTenants$ = this.leaseService.getAllNewTenants();
 
     this.addForm = this.formBuilder.group({
       leaseTitle: [],
@@ -89,6 +98,14 @@ export class AddLeaseComponent implements OnInit {
 
 
     });
+  }
+
+  onPropertyChange(id) {
+    console.log('p', id);
+  }
+
+  onTenantChange(id) {
+    console.log('t', id);
   }
 
 }

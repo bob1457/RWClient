@@ -8,19 +8,38 @@
         </div>
     </div>
     <div fxFlex="20%" fxLayout="column" class="avatar_sec" fxLayoutAlign="start center">
-        <img src="../../assets/images/10621.jpg" style="border-radius: 50%;margin-top: 20px;" width="120px " height="120px" title="">
-        <div class="images">
-            <img src="http://placehold.it/50x50">
-            <img src="http://placehold.it/50x50">
-            <img src="http://placehold.it/50x50">
-            <img src="http://placehold.it/50x50">
+        <img src="../../assets/images/owner2.png" style="border-radius: 50%;" width="120px" height="120px">
+        <div style="margin-top: 25px;width: 100%;">
+            <span style="font-weight: 500;">Applicant Information</span>
         </div>
-        <div style="margin-top: 25px;">
-            <span style="font-weight: 500;">Applicant Information</span> {{id}}
+        <div style="font-size: .85em; margin-top: 25px;">
+            <p>First Name: {{application.rentalApplicant.firstName}}</p>
+            <p>Last Name: {{application.rentalApplicant.lastName}}</p>
+            <p>Contact Telephone: {{application.rentalApplicant.contactTel}}</p>
+            <p>Contact Email: {{application.rentalApplicant.contactEmail}}</p>
         </div>
+
+       
+        <div style="margin-top: 25px;width: 100%;">
+            <span style="font-weight: 500;">Rental Property</span>
+            <!-- <ul class="property-list">
+              <li *ngFor="let property of owner.ownerProperty" style="margin-left: -40px;">
+                   <a href="" style="cursor: pointer;">details</a>
+              </li>
+          </ul> -->
+            <!-- {{application.rentalApplicant.lastName}} -->
+            <p>
+                {{application.rentalProperty.propertyName}}
+            </p>
+            <p>
+                {{application.rentalProperty.address.streetNum}} <br> {{application.rentalProperty.address.city}} {{application.rentalProperty.address.stateProvince}} {{application.rentalProperty.address.zipPostCode}} <br> {{application.rentalProperty.address.country}}
+            </p>
+        </div>
+
+
         <div class="date-time">
             <p>
-                Applied on:
+                Applied on: {{application.created | date}}
             </p>
 
         </div>
@@ -35,11 +54,22 @@
             </i>
                     <!-- <img src="../../assets/images/pmgmnt.png " height="40px " width="40px "> *ngIf="property*ngIf="detailsForm.value"{{property.propertyNumber}} {{property.propertyNumber}} {{property.propertyStreet}} {{property.propertyCity}} {{property.propertyStateProvince}} {{property.propertyZipPostCode}}-->
                 </div>
-                <mat-card-title>Rental Applicataion for: - <span style="font-size: .8em; font-style: italic;"></span> </mat-card-title>
-                <mat-card-subtitle>Address: </mat-card-subtitle>
+                <mat-card-title>Rental Applicataion for: - <span style="font-size: .8em; font-style: italic;">{{application.rentalProperty.propertyName}}</span> </mat-card-title>
+                <mat-card-subtitle><span style="font-weight: bold;">Address</span>: {{application.rentalProperty.address.streetNum}} {{application.rentalProperty.address.city}} {{application.rentalProperty.address.stateProvince}} {{application.rentalProperty.address.zipPostCode}} {{application.rentalProperty.address.country}}</mat-card-subtitle>
             </mat-card-header>
             <mat-card-content class="screening-details-card-content">
-
+                <div [@.disabled]="true" style="width: 100%;">
+                    <mat-tab-group>
+                        <mat-tab label="General" style="background: #f5f5f5;">
+                        </mat-tab>
+                        <mat-tab label="Reference Check" style="background: #f5f5f5;">
+                        </mat-tab>
+                        <mat-tab label="Income Check" style="background: #f5f5f5;">
+                        </mat-tab>
+                        <mat-tab label="Credit Check" style="background: #f5f5f5;">
+                        </mat-tab>
+                    </mat-tab-group>
+                </div>
             </mat-card-content>
         </mat-card>
     </div>
