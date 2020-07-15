@@ -145,6 +145,9 @@ export class LeaseDetailsComponent implements OnInit {
 
   }
 
+  submit() {
+
+  }
 
   goBack() {
     this.router.navigate(['/Manage/lease/']);
