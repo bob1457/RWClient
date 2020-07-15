@@ -24,6 +24,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { YesNoPipe } from './yes-no.pipe';
 import { LoadingComponent } from './loading/loading.component';
+import { TermPipe } from './term.pipe';
 
 
 const routes: Routes = [
@@ -53,7 +54,8 @@ const routes: Routes = [
     AddLeaseComponent,
     AddTenantComponent,
     TenantDetailsComponent,
-    YesNoPipe
+    YesNoPipe,
+    TermPipe
   ],
   imports: [
     // BrowserModule,

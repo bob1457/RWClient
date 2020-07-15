@@ -45,6 +45,9 @@ export class LeaseDetailsComponent implements OnInit {
       leaseEndDate: [''],
       term: [''],
       rentAmount: [''],
+      rentFrequency: [],
+      damageDepositAmount: [],
+      petDepositAmount: [],
       leaseSignDate: [''],
       isActive: [true],
       isAddendumAvailable: [false],
@@ -61,6 +64,36 @@ export class LeaseDetailsComponent implements OnInit {
           zipPostCode: []
         })
       }),
+
+      water: [false],
+      cablevision: [false],
+      electricity: [false],
+      internet: [false],
+      heat: [false],
+      naturalGas: [false],
+      sewageDisposal: [false],
+      snowRemoval: [false],
+      storage: [false],
+      recreationFacility: [false],
+      garbageCollection: [false],
+      recycleServices: [false],
+      kitchenScrapCollection: [false],
+      laundry: [false],
+      freeLaundry: [false],
+      regigerator: [false],
+      dishwasher: [false],
+      stoveOven: [false],
+      windowCovering: [false],
+      furniture: [false],
+      carpets: [false],
+      parkingStall: [false],
+      other: [''],
+
+      numberOfParking: [],
+      // rentCoverage: this.formBuilder.group({
+
+
+      // }),
 
       tenant: this.formBuilder.group({
         firstName: [],
@@ -104,6 +137,11 @@ export class LeaseDetailsComponent implements OnInit {
       //       }
       //       console.log(data);
       // });
+
+  }
+
+
+  viewAgreement() {
 
   }
 

@@ -23,6 +23,13 @@
 <mat-error *ngIf="hasError('title', 'required')">Name is required</mat-error>
 <mat-error *ngIf="hasError('title', 'maxlength')">You have more than 60 characters</mat-error> -->
                     </mat-form-field>
+                    <mat-form-field style="margin-top: 25px;width: 90%;">
+                        <span class="icon-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
+                        <input matInput type="text" placeholder="Description" formControlName="leaseDesc" id="desc">
+                        <!-- <mat-hint align="end">Not more then 60 characters long.</mat-hint>
+<mat-error *ngIf="hasError('title', 'required')">Name is required</mat-error>
+<mat-error *ngIf="hasError('title', 'maxlength')">You have more than 60 characters</mat-error> -->
+                    </mat-form-field>
                     <mat-form-field style="width: 90%;">
                         <mat-label>Select Rental Property</mat-label>
                         <mat-select #mySelect (selectionChange)="onPropertyChange(mySelect.value)">
@@ -56,6 +63,20 @@
 
                         </mat-select>
                     </mat-form-field>
+                    <div fxLayout="row" fxLayout.xs="column" style="width: 90%;">
+                        <mat-form-field fxFlex="50%" fxFlex.xs="90%" style="margin-right: 10px;">
+                            <mat-label>Start Date</mat-label>
+                            <input matInput [matDatepicker]="picker1" formControlName="leaseStartDate">
+                            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                            <mat-datepicker #picker1></mat-datepicker>
+                        </mat-form-field>
+                        <mat-form-field fxFlex="50%" fxFlex.xs="90%" style="margin-right: 10px;">
+                            <mat-label>End Date</mat-label>
+                            <input matInput [matDatepicker]="picker2" formControlName="leaseEndDate">
+                            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                            <mat-datepicker #picker2></mat-datepicker>
+                        </mat-form-field>
+                    </div>
                 </div>
                 <div fxFlex="50%" fxFlex.xs="80%">
                     second part
