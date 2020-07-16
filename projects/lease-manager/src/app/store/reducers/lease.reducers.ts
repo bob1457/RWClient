@@ -92,7 +92,71 @@ const propertyLeaseReducer = createReducer(
     });
   }),
 
-  );
+  /**
+   * Add property lease
+   */
+  on(LeaseActions.addLease, state => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+  on(LeaseActions.addLeaseSuccess, (state, { payload }) => {
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      leases: [...state.leases, payload ]
+    });
+  }),
+
+  on(LeaseActions.addLeaseFailure, (state) => {
+    return ({
+      ...state,
+      loading: false,
+      errorMessage: 'Failed to lease'
+    });
+  }),
+
+  /**
+   * Update property  lease
+   */
+  on(LeaseActions.updateLease, state => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+  on(LeaseActions.updateLeaseSuccess, (state, { payload }) => {
+
+    const updatedLeases = state.leases.map(
+      item => payload.id === item.id ? payload : item
+    );
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      leases: updatedLeases, // [...state.listings, payload ]
+      selectedLease: payload
+    });
+  }),
+
+  // on(LeaseActions.updateTenantSuccess, (state, { payload }) => {
+
+  //   const updatedLeases = state.leases.map(
+  //     item => payload.id === item.id ? payload : item
+  //   );
+  //   return ({
+  //     ...state,
+  //     loading: false,
+  //     loaded: true,
+  //     listings: updatedLeases, // [...state.listings, payload ]
+  //     selectedLease: payload
+  //   });
+  // }),
+
+
+);
 
 /**
  *

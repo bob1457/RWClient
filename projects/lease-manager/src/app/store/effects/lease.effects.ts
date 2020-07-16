@@ -26,11 +26,12 @@ export class LeaseEffects {
             payload: listings
           })),
           // tap(res => {console.log('response: ' + res); }),
-          catchError(
-            err => {
-              return of('[Leases] Get all leases Failure', err.error);
-            } // EMPTY
-          )
+          // catchError(
+          //   err => {
+          //     return of('[Leases] Get all leases Failure', err.error);
+          //   } // EMPTY
+          // )
+          catchError(error => of(LeaseActions.getPAllLeasesFailure(error.message)))// EMPTY
         )
       )
     )
@@ -50,12 +51,13 @@ export class LeaseEffects {
             payload: lease
           })),
           tap(res => {console.log('response: ' + res); }),
-          catchError(
-            err => {
-              tap( () => console.log('err'));
-              return of(LeaseActions.getLeaseDetailsFailure([err.error]));
-            } // EMPTY // return of('[Property] Get Property Details Failure', err.error);
-          )
+          // catchError(
+          //   err => {
+          //     tap( () => console.log('err'));
+          //     return of(LeaseActions.getLeaseDetailsFailure([err.error]));
+          //   } // EMPTY // return of('[Property] Get Property Details Failure', err.error);
+          // )
+          catchError(error => of(LeaseActions.getLeaseDetailsFailure(error.message)))// EMPTY
         )
       )
     )
@@ -73,11 +75,12 @@ export class LeaseEffects {
             payload: tenants
           })),
           // tap(res => {console.log('response: ' + res); }),
-          catchError(
-            err => {
-              return of('[Leases] Get all tenants Failure', err.error);
-            } // EMPTY
-          )
+          // catchError(
+          //   err => {
+          //     return of('[Leases] Get all tenants Failure', err.error);
+          //   }
+          // )
+          catchError(error => of(LeaseActions.getAllTenantsFailure(error.message)))// EMPTY
         )
       )
     )
@@ -98,16 +101,88 @@ export class LeaseEffects {
             payload: tenant
           })),
           tap(res => {console.log('response: ' + res); }),
-          catchError(
-            err => {
-              tap( () => console.log('err'));
-              return of(LeaseActions.getTenantDetailsFailure([err.error]));
-            } // EMPTY // return of('[Property] Get Property Details Failure', err.error);
-          )
+          // catchError(
+          //   err => {
+          //     tap( () => console.log('err'));
+          //     return of(LeaseActions.getTenantDetailsFailure([err.error]));
+          //   } // EMPTY // return of('[Property] Get Property Details Failure', err.error);
+          // )
+          catchError(error => of(LeaseActions.getTenantDetailsFailure(error.message)))
         )
       )
     )
   );
 
+  addPropertyLease$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(LeaseActions.addLease),
+      tap(() => console.log('got here to add property lease !!!')),
+      map(action => action.payload),
+      switchMap((payload) =>
+        this.leaseService.addLease(payload).pipe(
+          map((lease: PropertyLease) => ({
+            type: '[Leases] Add Lease Success',
+            payload: lease
+          })),
+          // tap(res => {console.log('response: ' + res); }),
+          // catchError(
+          //   err => {
+          //     return of('[Marketing] Add Property Listing Failure', err.error);
+          //   } // EMPTY
+          // )
+          catchError(error => of(LeaseActions.addLeaseFailure(error.message)))
+        )
+      )
+    )
+  );
+
+  // addPropertyTenant$ = createEffect(() =>
+  //   this.actions$.pipe(
+  //     // ofType('[Property] Get Property List'),
+  //     ofType(LeaseActions.addTenant),
+  //     tap(() => console.log('got here to add property Tenant !!!')),
+  //     map(action => action.payload),
+  //     switchMap((payload) =>
+  //       this.leaseService.addTenant(payload).pipe(
+  //         map((Tenant: PropertyTenant) => ({
+  //           type: '[Leases] Add Tenant Success',
+  //           payload: Tenant
+  //         })),
+  //         // tap(res => {console.log('response: ' + res); }),
+  //         // catchError(
+  //         //   err => {
+  //         //     return of('[Marketing] Add Property Listing Failure', err.error);
+  //         //   } // EMPTY
+  //         // )
+  //         catchError(error => of(LeaseActions.addTenantFailure(error.message)))
+  //       )
+  //     )
+  //   )
+  // );
+
+  updateLease$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(LeaseActions.updateLease),
+      tap(() => console.log('got here to update property lease !!!')),
+      map(action => action.payload),
+      switchMap((payload) =>
+        this.leaseService.updateLease(payload).pipe(
+          map((lease: PropertyLease) => ({
+            type: '[Leases] Update Lease Success',
+            payload: lease
+          })),
+          // tap(res => {console.log('response: ' + res); }),
+          // catchError(
+          //   err => {
+          //     return of('[Marketing] Update Property Listing Failure', err.error);
+          //   } // EMPTY
+          // )
+          catchError(error => of(LeaseActions.updateLeaseFailure(error.message)))
+        )
+      )
+    )
+  );
 
 }

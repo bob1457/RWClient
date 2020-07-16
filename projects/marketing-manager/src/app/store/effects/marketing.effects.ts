@@ -144,7 +144,7 @@ export class MarketingEffects {
           //     return of('[Marketing] Update Property Listing Failure', err.error);
           //   } // EMPTY
           // )
-          catchError(error => of(ListingActions.updatePropertyListingStatusSuccess(error.message)))
+          catchError(error => of(ListingActions.updatePropertyListingStatusFailure(error.message)))
         )
       )
     )

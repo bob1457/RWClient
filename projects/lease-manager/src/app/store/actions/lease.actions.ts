@@ -87,5 +87,87 @@ export const getTenantDetailsFailure = createAction(
   }
 );
 
+/**
+ * Add Lease Actions
+ */
 
+export const addLease = createAction(
+  '[Leases] Add Lease',
+  props<{payload: PropertyLease}>()
+);
+
+export const addLeaseSuccess = createAction(
+  '[Leases] Add Lease Success',
+  props<{payload: PropertyLease}>()
+);
+
+export const addLeaseFailure = createAction(
+  '[[Leases] Add Lease Failure',
+  // props<{payload: any}>()
+  (errorMessage = 'Error adding lease') => ({ payload: { errorMessage }})
+
+);
+
+/**
+ * Add Tenant Actions
+ */
+
+export const addTenant = createAction(
+  '[Leases] Add Tenant',
+  props<{payload: PropertyTenant}>()
+);
+
+export const addTenantSuccess = createAction(
+  '[Leases] Add Tenant Success',
+  props<{payload: PropertyTenant}>()
+);
+
+export const addTenantFailure = createAction(
+  '[[Leases] Add Tenant Failure',
+  // props<{payload: any}>()
+  (errorMessage = 'Error adding Tenant') => ({ payload: { errorMessage }})
+
+);
+
+/**
+ * Update Lease Actions
+ */
+
+export const updateLease = createAction(
+  '[Leases] Update Lease',
+  props<{payload: PropertyLease}>()
+);
+
+export const updateLeaseSuccess = createAction(
+  '[Leases] Update Lease Success',
+  props<{payload: PropertyLease}>()
+);
+
+export const updateLeaseFailure = createAction(
+  '[Leases] Update Lease Failure',
+  // props<{payload: any}>()
+  (errorMessage = 'Error updating property') => ({ payload: { errorMessage }})
+
+);
+
+/**
+ * Update Lease Actions
+ */
+
+export const updatTenant = createAction(
+  '[Leases] Update Tenant',
+  props<{payload: PropertyLease}>()
+);
+
+export const updateTenantSuccess = createAction(
+  '[Leases] Update Tenant Success',
+  props<{payload: PropertyLease}>()
+);
+
+export const updateTenantFailure = createAction(
+  '[Leases] Update Tenant Failure',
+  // props<{payload: any}>()
+  (errorMessage = 'Error updating property') => ({ payload: { errorMessage }})
+
+);
 

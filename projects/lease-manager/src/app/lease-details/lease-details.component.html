@@ -49,6 +49,11 @@
             </mat-card-header>
             <mat-card-content class="lease-details-card-content">
                 <form novalidate fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" [formGroup]="detailsForm" (ngSubmit)="submit()">
+                    <mat-form-field hidden class="property-full-width" fxFlex="10" fxLayoutGap="50px" style="margin-top: 25px;">
+                        <span class="icon-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
+                        <input type="number" id="id" formControlName="id" matInput [ngModel]="lease.id">
+
+                    </mat-form-field>
                     <div [@.disabled]="true" style="width: 100%;">
                         <mat-tab-group>
                             <mat-tab label="General" style="background: #f5f5f5;">
@@ -91,7 +96,7 @@
                                         <div fxFlex="50%">
                                             <mat-form-field fxFlex="90%">
                                                 <span class="icon-pos" matPrefix><mat-icon>swap_calls</mat-icon> &nbsp;</span>
-                                                <input type="text" id="endLeaseCode" formControlName="endLeaseCode" matInput placeholder="End Lease Code" [ngModel]="lease.endLeaseCode">
+                                                <input type="text" id="endLeaseCode" formControlName="leaseEndCode" matInput placeholder="End Lease Code" [ngModel]="lease.endLeaseCode">
                                             </mat-form-field>
                                         </div>
                                     </div>
@@ -193,9 +198,9 @@
                                 <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="start start" fxLayoutGap="10px" style="width:75%;margin-top: 25px;margin-left:45px ;">
                                     <div fxLayout="column" fxLayoutAlign="start start" fxFlex="30" fxLayoutGap="10px" style="margin-left: 25px;">
                                         <mat-checkbox formControlName="water" [ngModel]="lease.rentCoverage.water" class="property-full-width">Water</mat-checkbox>
-                                        <mat-checkbox formControlName="cablevision" [ngModel]="lease.rentCoverage.cablevision" class="property-full-width">Cable TV</mat-checkbox>
+                                        <mat-checkbox formControlName="cablevison" [ngModel]="lease.rentCoverage.cablevison" class="property-full-width">Cable TV</mat-checkbox>
                                         <mat-checkbox formControlName="electricity" [ngModel]="lease.rentCoverage.electricity" class="property-full-width">Electricity</mat-checkbox>
-                                        <mat-checkbox formControlName="internet" [ngModel]="lease.rentCoverage.internet" class="property-full-width">AInternet</mat-checkbox>
+                                        <mat-checkbox formControlName="internet" [ngModel]="lease.rentCoverage.internet" class="property-full-width">Internet</mat-checkbox>
                                     </div>
                                     <div fxLayout="column" fxLayoutAlign="start start" fxFlex="30" fxLayoutGap="10px">
                                         <mat-checkbox formControlName="heat" [ngModel]="lease.rentCoverage.heat" class="property-full-width">Heat</mat-checkbox>
@@ -213,14 +218,14 @@
                                         <mat-checkbox formControlName="kitchenScrapCollection" [ngModel]="lease.rentCoverage.kitchenScrapCollection" class="property-full-width">Laundry</mat-checkbox>
                                         <mat-checkbox formControlName="laundry" [ngModel]="lease.rentCoverage.laundry" class="property-full-width">Window Blinds</mat-checkbox>
                                         <mat-checkbox formControlName="sewageDisposal" [ngModel]="lease.rentCoverage.sewageDisposal" class="property-full-width">Furniture</mat-checkbox>
-                                        <mat-checkbox formControlName="snowRemoval" [ngModel]="lease.rentCoverage.snowRemoval" class="property-full-width">Snow Removal</mat-checkbox>
+                                        <!-- <mat-checkbox formControlName="snowRemoval" [ngModel]="lease.rentCoverage.snowRemoval" class="property-full-width">Snow Removal</mat-checkbox> -->
                                     </div>
                                 </div>
                                 <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="start start" fxLayoutGap="10px" style="width:75%;margin-top: 25px;margin-left:45px ;">
                                     <div fxLayout="column" fxLayoutAlign="start start" fxFlex="30" fxLayoutGap="10px">
                                         <mat-checkbox formControlName="dishwasher" [ngModel]="lease.rentCoverage.dishwasher" class="property-full-width">Dishwasher</mat-checkbox>
                                         <mat-checkbox formControlName="stoveOven" [ngModel]="lease.rentCoverage.stoveOven" class="property-full-width">Stove/Oven</mat-checkbox>
-                                        <mat-checkbox formControlName="regigerator" [ngModel]="lease.rentCoverage.regigerator" class="property-full-width">Regigerator</mat-checkbox>
+                                        <mat-checkbox formControlName="Regigerator" [ngModel]="lease.rentCoverage.regigerator" class="property-full-width">Refrigerator</mat-checkbox>
                                         <mat-checkbox formControlName="windowCovering" [ngModel]="lease.rentCoverage.windowCovering" class="property-full-width">Window Covering</mat-checkbox>
                                     </div>
                                     <div fxLayout="column" fxLayoutAlign="start start" fxFlex="30" fxLayoutGap="10px">
