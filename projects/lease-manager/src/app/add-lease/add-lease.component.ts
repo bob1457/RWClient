@@ -43,7 +43,7 @@ export class AddLeaseComponent implements OnInit {
 
       rentDueOn: [''],
       leaseAgreementDocUrl: [false],
-      leaseEndCode: [0],
+      leaseEndCode: [],
       // regigerator: [false],
 
       damageDepositAmount: [],
@@ -166,6 +166,11 @@ export class AddLeaseComponent implements OnInit {
 
   onTenantChange(id) {
     console.log('t', id);
+  }
+
+  submit() {
+    debugger;
+    console.log('add form', this.addForm.value);
   }
 
 }
