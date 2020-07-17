@@ -184,6 +184,7 @@
 
                 </div>
                 <div fxFlex="50%" fxFlex.xs="80%" fxLayout="column" fxFlexFill>
+                    <h5 style="font-size: 1.25em; margin-top: 10px;">Rent Coverage</h5>
                     <div fxLayout="row wrap" fxLayoutAlign="start start" fxLayoutGap="10px" style="width:75%;margin-top: 25px;margin-left:45px ;">
                         <div fxLayout="column" fxLayoutAlign="start start" fxFlex="45" fxLayoutGap="10px" style="margin-left: 25px;">
                             <mat-checkbox formControlName="water" class="property-full-width">Water</mat-checkbox>
@@ -226,7 +227,7 @@
                                     <input type="number" id="numberOfLayers" formControlName="numberOfParking" matInput placeholder="Number of Parking">
                                 </mat-form-field>
                             </div>
-                            <!--
+                            <!--readonly
 
                             <mat-form-field class="property-full-width">
                                 <mat-label>Notes</mat-label>
@@ -256,7 +257,7 @@
 <img *ngIf=" loading" class="pl-2" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
 /> [disabled]="f.invalid || !f.dirty"-->
                 <button type="submit" mat-raised-button color="primary">UPDATE</button>
-                <button mat-raised-button color="accent">CANCEL</button>
+                <button type="button" mat-raised-button color="accent" (click)="back()">CANCEL</button>
             </div>
         </form>
     </mat-card-content>

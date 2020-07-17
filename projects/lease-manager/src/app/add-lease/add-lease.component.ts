@@ -2,6 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators  } from '@angular/forms';
 import { Property, RentalProperty, LeaseService, NewTenant } from '@lib/app-core';
 import { Observable } from 'rxjs';
+import { Location }  from '@angular/common';
+import { addLease } from '../store/actions/lease.actions';
+import { PropertyLeaseState } from '../store/lease-state';
+import { Store } from '@ngrx/store';
+import { AuthState, getUserInfo, User } from '@lib/auth';
 
 
 @Component({
@@ -12,12 +17,19 @@ import { Observable } from 'rxjs';
 export class AddLeaseComponent implements OnInit {
 
   addForm: FormGroup;
+  user: User;
 
   properties$: Observable<RentalProperty[]>;
   newTenants$: Observable<NewTenant[]>;
 
   constructor(private formBuilder: FormBuilder,
-              private leaseService: LeaseService ) { }
+              private location: Location,
+              private store: Store<PropertyLeaseState>,
+              private authStore: Store<AuthState>,
+              private leaseService: LeaseService ) {
+                this.authStore.select(getUserInfo)
+                    .subscribe( user => this.user = user);
+              }
 
 
 
@@ -88,8 +100,24 @@ export class AddLeaseComponent implements OnInit {
       carpets: [false],
       parkingStall: [0],
       other: [''],
+      newTenantId: [],
+      numberOfParking: [0],
 
-      numberOfParking: [0] //,
+      agentFirstName: [''],
+      agentLastName: [''],
+      agentContactEmail: [''],
+      contatTel: [''],
+      agentContactOthers:[],
+      isPropertyManage: [true],
+      addressStreetNumber: [],
+      addressCity: [''],
+      addressStateProv: [''],
+      addressZipPostCode: [''],
+      addressCountry: [''],
+
+      onlineAccessEnbaled: [false],
+      userAvartaImgUrl: [''],
+
       // leaseTitle: [],
       // leaseDesc: [],
       // rentalPropertyId: [],
@@ -161,16 +189,39 @@ export class AddLeaseComponent implements OnInit {
   }
 
   onPropertyChange(id) {
+    this.addForm.get('rentalPropertyId').setValue(id);
     console.log('p', id);
   }
 
   onTenantChange(id) {
+    this.addForm.get('newTenantId').setValue(id);
     console.log('t', id);
   }
 
   submit() {
     debugger;
+    // Get user data
+    this.addForm.patchValue({
+      agentFirstName: this.user.firstname,
+
+      agentLastName: this.user.lastname,
+      agentContactEmail: this.user.email,
+      contatTel: this.user.telephone1,
+      // agentContactOthers:[],
+      isPropertyManage: [true],
+      addressStreetNumber: this.user.addressstreet,
+      addressCity: this.user.addresscity,
+      addressStateProv: this.user.addressprovstate,
+      addressZipPostCode: this.user.addresspostzipcode,
+      addressCountry: this.user.addresscountry
+    });
+
     console.log('add form', this.addForm.value);
+    // this.store.dispatch(addLease({payload: this.addForm.value}));
+  }
+
+  back() {
+    this.location.back();
   }
 
 }
