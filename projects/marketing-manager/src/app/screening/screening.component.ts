@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { PropertyListingState } from '../store/marketing.state';
 import { Store, select } from '@ngrx/store';
 import { propertyApplicationDetails } from '../store/reducers';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-screening',
@@ -13,8 +14,10 @@ export class ScreeningComponent implements OnInit {
 
   id: number;
   application: any;
+  addForm: FormGroup;
 
   constructor(private router: Router,
+              private formBuilder: FormBuilder,
               private actRoute: ActivatedRoute,
               private store: Store<PropertyListingState>) {
                 this.id = this.actRoute.snapshot.params.id;
@@ -28,6 +31,15 @@ export class ScreeningComponent implements OnInit {
 
   ngOnInit() {
 
+    this.addForm = this.formBuilder.group({
+      rentalApplicationId: [],
+      referenceCheckScore: [],
+      creditCheckScore: [],
+      incomeCheckScore: [],
+      otherCheckScore: [],
+      notes: ['']
+    });
+
     this.store.pipe(select (propertyApplicationDetails))
         .subscribe(data => {
           this. application = data;
@@ -36,6 +48,10 @@ export class ScreeningComponent implements OnInit {
   }
 
 
+  submit() {
+    debugger;
+    console.log('screen form', this.addForm.value);
+  }
 
 
   goBack() {

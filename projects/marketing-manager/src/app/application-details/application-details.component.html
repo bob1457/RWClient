@@ -106,7 +106,7 @@
                         </tr>
                     </table>
                     <div fxLayout="row" fxLayoutGap="7px" fxLayoutAlign="end center" style="width: 75%;">
-                        <button routerLink="/Manage/marketing/screening/{{application.id}}" mat-raised-button color="primary">START SCREENING</button>
+                        <button [disabled]="application.status == 2" routerLink="/Manage/marketing/screening/{{application.id}}" mat-raised-button color="primary">START SCREENING</button>
                     </div>
                 </div>
             </mat-card-content>

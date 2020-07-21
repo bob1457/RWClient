@@ -19,7 +19,7 @@
             <p>Contact Email: {{application.rentalApplicant.contactEmail}}</p>
         </div>
 
-       
+
         <div style="margin-top: 25px;width: 100%;">
             <span style="font-weight: 500;">Rental Property</span>
             <!-- <ul class="property-list">
@@ -55,20 +55,33 @@
                     <!-- <img src="../../assets/images/pmgmnt.png " height="40px " width="40px "> *ngIf="property*ngIf="detailsForm.value"{{property.propertyNumber}} {{property.propertyNumber}} {{property.propertyStreet}} {{property.propertyCity}} {{property.propertyStateProvince}} {{property.propertyZipPostCode}}-->
                 </div>
                 <mat-card-title>Rental Applicataion for: - <span style="font-size: .8em; font-style: italic;">{{application.rentalProperty.propertyName}}</span> </mat-card-title>
-                <mat-card-subtitle><span style="font-weight: bold;">Address</span>: {{application.rentalProperty.address.streetNum}} {{application.rentalProperty.address.city}} {{application.rentalProperty.address.stateProvince}} {{application.rentalProperty.address.zipPostCode}} {{application.rentalProperty.address.country}}</mat-card-subtitle>
+                <mat-card-subtitle><span style="font-weight: bold;">Address</span>: {{application.rentalProperty.address.streetNum}} {{application.rentalProperty.address.city}} {{application.rentalProperty.address.stateProvince}} {{application.rentalProperty.address.zipPostCode}}
+                    {{application.rentalProperty.address.country}}
+                </mat-card-subtitle>
             </mat-card-header>
             <mat-card-content class="screening-details-card-content">
                 <div [@.disabled]="true" style="width: 100%;">
-                    <mat-tab-group>
-                        <mat-tab label="General" style="background: #f5f5f5;">
-                        </mat-tab>
-                        <mat-tab label="Reference Check" style="background: #f5f5f5;">
-                        </mat-tab>
-                        <mat-tab label="Income Check" style="background: #f5f5f5;">
-                        </mat-tab>
-                        <mat-tab label="Credit Check" style="background: #f5f5f5;">
-                        </mat-tab>
-                    </mat-tab-group>
+                    <form novalidate [formGroup]="addForm" (ngSubmit)="submit()">
+                        <mat-tab-group>
+
+                            <mat-tab label="General" style="background: #f5f5f5;">
+                            </mat-tab>
+                            <mat-tab label="Reference Check" style="background: #f5f5f5;">
+                            </mat-tab>
+                            <mat-tab label="Income Check" style="background: #f5f5f5;">
+                            </mat-tab>
+                            <mat-tab label="Credit Check" style="background: #f5f5f5;">
+                            </mat-tab>
+
+                        </mat-tab-group>
+                        <div fxLayout="row" fxLayoutGap="7px" fxLayoutAlign="end center" style="width: 75%; margin-bottom: 25px;">
+                            <!-- <span *ngIf="showMsg" style="color: rgb(189, 150, 25);">Updated successfully!</span>
+<img *ngIf=" loading" class="pl-2" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+/> [disabled]="f.invalid || !f.dirty"-->
+                            <button type="submit" mat-raised-button color="primary">UPDATE</button>
+                            <button type="button" mat-raised-button color="accent" (click)="cancel()">CANCEL</button>
+                        </div>
+                    </form>
                 </div>
             </mat-card-content>
         </mat-card>
