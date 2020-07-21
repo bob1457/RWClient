@@ -232,10 +232,10 @@
                                         <mat-checkbox formControlName="furniture" [ngModel]="lease.rentCoverage.furniture" class="property-full-width">Furniture</mat-checkbox>
                                         <mat-checkbox formControlName="carpets" [ngModel]="lease.rentCoverage.carpets" class="property-full-width">Carpets</mat-checkbox>
                                         <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px">
-                                            <mat-checkbox formControlName="parkingStall" [ngModel]="lease.rentCoverage.parkingStall" class="property-full-width">Parking Stall</mat-checkbox>
-                                            <mat-form-field class="property-full-width" fxFlex="30" style="margin-top: 25px;">
+                                            <!-- <mat-checkbox formControlName="parkingStall" [ngModel]="lease.rentCoverage.parkingStall" class="property-full-width">Parking Stall</mat-checkbox> -->
+                                            <mat-form-field class="property-full-width" fxFlex="50" style="margin-top: 25px;">
                                                 <span class="icon-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
-                                                <input type="number" id="numberOfLayers" formControlName="numberOfParking" matInput placeholder="Number of Parking" [ngModel]="lease.rentalProperty.numberOfLayers">
+                                                <input type="number" id="numberOfLayers" formControlName="parkingStall" matInput placeholder="Parking Stall" [ngModel]="lease.rentCoverage.parkingStall">
                                             </mat-form-field>
                                         </div>
 

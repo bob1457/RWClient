@@ -82,19 +82,19 @@
                         <div fxFlex="50%">
                             <mat-form-field class="lease-full-width">
                                 <span class="icon-pos" matPrefix><mat-icon>payment</mat-icon> &nbsp;</span>
-                                <input type="text" id="rentAmount" formControlName="rentAmount" matInput placeholder="Monthly Rent(CAD$)">
+                                <input type="number" id="rentAmount" formControlName="rentAmount" matInput placeholder="Monthly Rent(CAD$)">
                             </mat-form-field>
                         </div>
                         <div fxFlex="50%">
                             <mat-form-field style="width: 90%;">
                                 <mat-label>Rent Frequency</mat-label>
-                                <mat-select id="rentDueOn" formControlName="rentDueOn">
+                                <mat-select id="rentFrequency" formControlName="rentFrequency">
                                     <mat-option>None</mat-option>
-                                    <mat-option value="1">Monthly</mat-option>
-                                    <mat-option value="2">Quarterly</mat-option>
-                                    <mat-option value="3">Six Month</mat-option>
-                                    <mat-option value="4">Yearly</mat-option>
-                                    <mat-option value="5">Other</mat-option>
+                                    <mat-option value="Monthly">Monthly</mat-option>
+                                    <mat-option value="Quarterly">Quarterly</mat-option>
+                                    <mat-option value="Six Month">Six Month</mat-option>
+                                    <mat-option value="Yearly">Yearly</mat-option>
+                                    <mat-option value="Other">Other</mat-option>
                                 </mat-select>
                             </mat-form-field>
                             <!-- <mat-form-field class="lease-full-width">
@@ -110,13 +110,14 @@
                                 <mat-label>Rent Due Date</mat-label>
                                 <mat-select id="rentDueOn" formControlName="rentDueOn">
                                     <mat-option>None</mat-option>
-                                    <mat-option value="1">Frist Day of Month</mat-option>
-                                    <mat-option value="2">15th Day of Month</mat-option>
-                                    <mat-option value="3">Last Day of Month</mat-option>
-                                    <mat-option value="4">Other</mat-option>
+                                    <mat-option value="Frist Day of Month">Frist Day of Month</mat-option>
+                                    <mat-option value="15th Day of Month">15th Day of Month</mat-option>
+                                    <mat-option value="Last Day of Month">Last Day of Month</mat-option>
+                                    <mat-option value="Other">Other</mat-option>
                                 </mat-select>
                             </mat-form-field>
-                            <!-- <mat-form-field class="lease-full-width">
+                            <!--</mat-form-field>
+                             <mat-form-field class="lease-full-width">
                                 <span class="icon-pos" matPrefix><mat-icon>payment</mat-icon> &nbsp;</span>
                                 <input type="text" id="rentDueOn" formControlName="rentDueOn" matInput placeholder="Rent Due">
                             </mat-form-field> -->
@@ -138,10 +139,11 @@
                             <mat-form-field style="width: 90%;">
                                 <mat-label>Lease Term</mat-label>
                                 <mat-select id="term" formControlName="term">
-                                    <mat-option>None</mat-option>
-                                    <mat-option value="OneYear">One Year</mat-option>
-                                    <mat-option value="ThreeMonth">Three Month</mat-option>
-                                    <mat-option value="SixMonth">Six Month</mat-option>
+                                    <mat-option [value]=0>None</mat-option>
+                                    <mat-option [value]=1>One Year</mat-option>
+                                    <mat-option [value]=2>Three Month</mat-option>
+                                    <mat-option [value]=3>Six Month</mat-option>
+                                    <mat-option [value]=4>Other</mat-option>
                                 </mat-select>
                             </mat-form-field>
                         </div>
@@ -149,11 +151,11 @@
                             <mat-form-field style="width: 90%;">
                                 <mat-label>Lease End Code</mat-label>
                                 <mat-select id="leaseEndCode" formControlName="leaseEndCode">
-                                    <mat-option value="0">None</mat-option>
-                                    <mat-option value="1">Renew Month by Month</mat-option>
-                                    <mat-option value="2">Renew for other term</mat-option>
-                                    <mat-option value="3">Fixed Term and Renew the Term</mat-option>
-                                    <mat-option value="4">Fixed Term and Vacant</mat-option>
+                                    <mat-option [value]=0>None</mat-option>
+                                    <mat-option [value]=1>Renew Month by Month</mat-option>
+                                    <mat-option [value]=2>Renew for other term</mat-option>
+                                    <mat-option [value]=3>Fixed Term and Renew the Term</mat-option>
+                                    <mat-option [value]=4>Fixed Term and Vacant</mat-option>
                                 </mat-select>
                             </mat-form-field>
                             <!-- <mat-form-field class="lease-full-width">
@@ -167,13 +169,13 @@
                         <div fxFlex="50%">
                             <mat-form-field class="lease-full-width">
                                 <span class="icon-pos" matPrefix><mat-icon>payment</mat-icon> &nbsp;</span>
-                                <input type="text" id="damage" formControlName="damageDepositAmount" matInput placeholder="Damage Deposit(CAD$)">
+                                <input type="number" id="damage" formControlName="damageDepositAmount" matInput placeholder="Damage Deposit(CAD$)">
                             </mat-form-field>
                         </div>
                         <div fxFlex="50%">
                             <mat-form-field class="lease-full-width">
                                 <span class="icon-pos" matPrefix><mat-icon>payment</mat-icon> &nbsp;</span>
-                                <input type="text" id="pet" formControlName="petDepositAmount" matInput placeholder="Pet Deposit(CAD$)">
+                                <input type="number" id="pet" formControlName="petDepositAmount" matInput placeholder="Pet Deposit(CAD$)">
                             </mat-form-field>
                         </div>
                     </div>
@@ -214,17 +216,17 @@
                         <div fxLayout="column" fxLayoutAlign="start start" fxFlex="45" fxLayoutGap="10px">
                             <mat-checkbox formControlName="dishwasher" class="property-full-width">Dishwasher</mat-checkbox>
                             <mat-checkbox formControlName="stoveOven" class="property-full-width">Stove/Oven</mat-checkbox>
-                            <mat-checkbox formControlName="regigerator" class="property-full-width">Refrigerator</mat-checkbox>
+                            <mat-checkbox formControlName="regfrigerator" class="property-full-width">Refrigerator</mat-checkbox>
                             <mat-checkbox formControlName="windowCovering" class="property-full-width">Window Covering</mat-checkbox>
                         </div>
                         <div fxLayout="column" fxLayoutAlign="start start" fxFlex="45" fxLayoutGap="10px">
                             <mat-checkbox formControlName="furniture" class="property-full-width">Furniture</mat-checkbox>
                             <mat-checkbox formControlName="carpets" class="property-full-width">Carpets</mat-checkbox>
                             <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px">
-                                <mat-checkbox formControlName="parkingStall" class="property-full-width">Parking Stall</mat-checkbox>
-                                <mat-form-field class="property-full-width" fxFlex="30" style="margin-top: 25px;">
+                                <!-- <mat-checkbox formControlName="parkingStall" class="property-full-width">Parking Stall</mat-checkbox> -->
+                                <mat-form-field class="property-full-width" fxFlex="50" style="margin-top: 25px;">
                                     <span class="icon-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
-                                    <input type="number" id="numberOfLayers" formControlName="numberOfParking" matInput placeholder="Number of Parking">
+                                    <input type="number" id="numberOfLayers" formControlName="parkingStall" matInput placeholder="Parking Stall">
                                 </mat-form-field>
                             </div>
                             <!--readonly
@@ -256,7 +258,7 @@
                 <!-- <span *ngIf="showMsg" style="color: rgb(189, 150, 25);">Updated successfully!</span>
 <img *ngIf=" loading" class="pl-2" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
 /> [disabled]="f.invalid || !f.dirty"-->
-                <button type="submit" mat-raised-button color="primary">UPDATE</button>
+                <button type="submit" mat-raised-button color="primary">CREATE</button>
                 <button type="button" mat-raised-button color="accent" (click)="back()">CANCEL</button>
             </div>
         </form>

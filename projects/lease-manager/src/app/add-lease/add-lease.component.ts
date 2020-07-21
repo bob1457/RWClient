@@ -39,11 +39,14 @@ export class AddLeaseComponent implements OnInit {
     // .subscribe(data => this.properties = data);
     debugger;
 
+    var today = new Date();
+
+    var date = today.getFullYear() + '-' + (today.getMonth() + 1 ) + '-' + today.getDate();
+
     this.properties$ = this.leaseService.getAllRentalProperties();
     this.newTenants$ = this.leaseService.getAllNewTenants();
 
     this.addForm = this.formBuilder.group({
-      id: [0],
       leaseTitle: [''],
       leaseDesc: [''],
       rentalPropertyId: [0],
@@ -54,19 +57,19 @@ export class AddLeaseComponent implements OnInit {
       rentFrequency: [''],
 
       rentDueOn: [''],
-      leaseAgreementDocUrl: [false],
+      leaseAgreementDocUrl: [''],
       leaseEndCode: [],
       // regigerator: [false],
 
       damageDepositAmount: [],
       petDepositAmount: [],
-      leaseSignDate: [''],
-      isActive: [true],
+      leaseSignDate: [date],
+      isActive: [false],
       isAddendumAvailable: [false],
       // endLeaseCode: [''],
       renewTerm: [''],
       notes: [''],
-
+      newTenantId: [],
       // rentalProperty: this.formBuilder.group({
       //   propertyName: [],
       //   address: this.formBuilder.group({
@@ -91,8 +94,8 @@ export class AddLeaseComponent implements OnInit {
       recycleServices: [false],
       kitchenScrapCollection: [false],
       laundry: [false],
-      freeLaundry: [false],
-      regigerator: [false],
+      // freeLaundry: [false],
+      regfrigerator: [false],
       dishwasher: [false],
       stoveOven: [false],
       windowCovering: [false],
@@ -100,16 +103,16 @@ export class AddLeaseComponent implements OnInit {
       carpets: [false],
       parkingStall: [0],
       other: [''],
-      newTenantId: [],
-      numberOfParking: [0],
+
+
 
       agentFirstName: [''],
       agentLastName: [''],
       agentContactEmail: [''],
       contatTel: [''],
-      agentContactOthers:[],
+      agentContactOthers: [''],
       isPropertyManage: [true],
-      addressStreetNumber: [],
+      addressStreetNumber: [''],
       addressCity: [''],
       addressStateProv: [''],
       addressZipPostCode: [''],
@@ -208,7 +211,7 @@ export class AddLeaseComponent implements OnInit {
       agentContactEmail: this.user.email,
       contatTel: this.user.telephone1,
       // agentContactOthers:[],
-      isPropertyManage: [true],
+      isPropertyManage: true,
       addressStreetNumber: this.user.addressstreet,
       addressCity: this.user.addresscity,
       addressStateProv: this.user.addressprovstate,
@@ -217,7 +220,8 @@ export class AddLeaseComponent implements OnInit {
     });
 
     console.log('add form', this.addForm.value);
-    // this.store.dispatch(addLease({payload: this.addForm.value}));
+    this.store.dispatch(addLease({payload: this.addForm.value}));
+    this.location.back();
   }
 
   back() {
