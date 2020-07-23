@@ -94,11 +94,13 @@
                                             </mat-form-field>
                                         </div>
                                         <div fxFlex="50%">
-                                            <mat-form-field fxFlex="90%">
-                                                <span class="icon-pos" matPrefix><mat-icon>swap_calls</mat-icon> &nbsp;</span>
-                                                <input type="text" id="endLeaseCode" formControlName="leaseEndCode" matInput placeholder="End Lease Code" [ngModel]="lease.endLeaseCode">
+                                            <mat-form-field>
+                                                <span class="icon-pos" matPrefix><mat-icon>notes</mat-icon> &nbsp;</span>
+                                                <input type="text" id="rentDueOn" formControlName="rentDueOn" matInput placeholder="Rent Due On" [ngModel]="lease.rentDueOn">
                                             </mat-form-field>
                                         </div>
+
+
                                     </div>
 
                                     <div fxLayout="row" fxLayoutAlign="start center" style="width: 75%;">
@@ -130,6 +132,13 @@
                                             </mat-form-field>
                                         </div>
                                     </div>
+
+
+                                    <mat-form-field class="lease-full-width">
+                                        <span class="icon-pos" matPrefix><mat-icon>swap_calls</mat-icon> &nbsp;</span>
+                                        <input type="text" id="endLeaseCode" formControlName="leaseEndCode" matInput placeholder="End Lease Code" [ngModel]="lease.endLeaseCode">
+                                    </mat-form-field>
+
 
                                     <!-- <div fxLayout="row" fxLayoutAlign="start center" style="width: 75%;">
                                         <div fxFlex="50%">
