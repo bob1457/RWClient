@@ -155,7 +155,13 @@ export class LeaseDetailsComponent implements OnInit {
 
   submit() {
     debugger;
-    this.detailsForm.patchValue({rentalPropertyId: this.lease.rentalPropertyId});
+    this.detailsForm.patchValue(
+      {
+        rentalPropertyId: this.lease.rentalPropertyId,
+        term: this.lease.term,
+        endLeaseCode: this.lease.endLeaseCode
+      }
+      );
     console.log('form data', this.detailsForm.value);
     this.store.dispatch(updateLease({payload: this.detailsForm.value}));
 
