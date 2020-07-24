@@ -25,6 +25,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { YesNoPipe } from './yes-no.pipe';
 import { LoadingComponent } from './loading/loading.component';
 import { TermPipe } from './term.pipe';
+import { RenewCodePipe } from './renew-code.pipe';
 
 
 const routes: Routes = [
@@ -55,7 +56,8 @@ const routes: Routes = [
     AddTenantComponent,
     TenantDetailsComponent,
     YesNoPipe,
-    TermPipe
+    TermPipe,
+    RenewCodePipe
   ],
   imports: [
     // BrowserModule,

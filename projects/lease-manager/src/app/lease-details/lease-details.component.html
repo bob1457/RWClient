@@ -79,7 +79,7 @@
                                             </mat-form-field>
                                         </div>
                                         <div fxFlex="50%">
-                                            <mat-form-field fxFlex="90%">
+                                            <mat-form-field fxFlex="100%">
                                                 <span class="icon-pos" matPrefix><mat-icon>date_range</mat-icon> &nbsp;</span>
                                                 <input type="text" id="leaseEndDate" formControlName="leaseEndDate" matInput placeholder="Lease End Date" [ngModel]="lease.leaseEndDate | date">
                                             </mat-form-field>
@@ -90,13 +90,31 @@
                                         <div fxFlex="50%">
                                             <mat-form-field fxFlex="90%">
                                                 <span class="icon-pos" matPrefix><mat-icon>swap_calls</mat-icon> &nbsp;</span>
-                                                <input type="text" id="term" formControlName="term" matInput placeholder="Lease Term" [ngModel]="lease.term">
+                                                <input readonly type="text" id="term" formControlName="term" matInput placeholder="Lease Term" [ngModel]="lease.term | term">
+                                                <!-- <mat-form-field style="width: 90%;">
+                                                    <mat-label>Lease Term</mat-label>
+                                                    <mat-select id="term" formControlName="term" [ngModel]="lease.term | term">
+                                                        <mat-option [value]=0>None</mat-option>
+                                                        <mat-option [value]=1>One Year</mat-option>
+                                                        <mat-option [value]=2>Three Month</mat-option>
+                                                        <mat-option [value]=3>Six Month</mat-option>
+                                                        <mat-option [value]=4>Other</mat-option>
+                                                    </mat-select>
+                                                </mat-form-field> -->
                                             </mat-form-field>
                                         </div>
                                         <div fxFlex="50%">
-                                            <mat-form-field>
-                                                <span class="icon-pos" matPrefix><mat-icon>notes</mat-icon> &nbsp;</span>
-                                                <input type="text" id="rentDueOn" formControlName="rentDueOn" matInput placeholder="Rent Due On" [ngModel]="lease.rentDueOn">
+                                            <mat-form-field style="width: 100%;">
+                                                <!-- <span class="icon-pos" matPrefix><mat-icon>notes</mat-icon> &nbsp;</span>
+                                                <input type="text" id="rentDueOn" formControlName="rentDueOn" matInput placeholder="Rent Due On" [ngModel]="lease.rentDueOn"> -->
+                                                <mat-label>Rent Due Date</mat-label>
+                                                <mat-select id="rentDueOn" formControlName="rentDueOn" [ngModel]="lease.rentDueOn">
+                                                    <mat-option>None</mat-option>
+                                                    <mat-option value="First Day of Month">First Day of Month</mat-option>
+                                                    <mat-option value="15th Day of Month">15th Day of Month</mat-option>
+                                                    <mat-option value="Last Day of Month">Last Day of Month</mat-option>
+                                                    <mat-option value="Other">Other</mat-option>
+                                                </mat-select>
                                             </mat-form-field>
                                         </div>
 
@@ -105,13 +123,13 @@
 
                                     <div fxLayout="row" fxLayoutAlign="start center" style="width: 75%;">
                                         <div fxFlex="50%">
-                                            <mat-form-field class="lease-full-width">
+                                            <mat-form-field class="lease-full-width" style="width:90%">
                                                 <span class="icon-pos" matPrefix><mat-icon>payment</mat-icon> &nbsp;</span>
                                                 <input type="text" id="rentAmount" formControlName="rentAmount" matInput placeholder="Monthly Rent(CAD$)" [ngModel]="lease.rentAmount">
                                             </mat-form-field>
                                         </div>
                                         <div fxFlex="50%">
-                                            <mat-form-field class="lease-full-width">
+                                            <mat-form-field class="lease-full-width" style="width:100%">
                                                 <span class="icon-pos" matPrefix><mat-icon>payment</mat-icon> &nbsp;</span>
                                                 <input type="text" id="rentFrequency" formControlName="rentFrequency" matInput placeholder="Rent Frequency" [ngModel]="lease.rentFrequency">
                                             </mat-form-field>
@@ -120,13 +138,13 @@
 
                                     <div fxLayout="row" fxLayoutAlign="start center" style="width: 75%;">
                                         <div fxFlex="50%">
-                                            <mat-form-field class="lease-full-width">
+                                            <mat-form-field class="lease-full-width" style="width:90%">
                                                 <span class="icon-pos" matPrefix><mat-icon>payment</mat-icon> &nbsp;</span>
                                                 <input type="text" id="damage" formControlName="damageDepositAmount" matInput placeholder="Damage Deposit(CAD$)" [ngModel]="lease.damageDepositAmount">
                                             </mat-form-field>
                                         </div>
                                         <div fxFlex="50%">
-                                            <mat-form-field class="lease-full-width">
+                                            <mat-form-field class="lease-full-width" style="width:100%">
                                                 <span class="icon-pos" matPrefix><mat-icon>payment</mat-icon> &nbsp;</span>
                                                 <input type="text" id="pet" formControlName="petDepositAmount" matInput placeholder="Pet Deposit(CAD$)" [ngModel]="lease.petDepositAmount">
                                             </mat-form-field>
@@ -136,7 +154,15 @@
 
                                     <mat-form-field class="lease-full-width">
                                         <span class="icon-pos" matPrefix><mat-icon>swap_calls</mat-icon> &nbsp;</span>
-                                        <input type="text" id="endLeaseCode" formControlName="leaseEndCode" matInput placeholder="End Lease Code" [ngModel]="lease.endLeaseCode">
+                                        <input type="text" id="endLeaseCode" formControlName="endLeaseCode" matInput placeholder="End Lease Code" [ngModel]="lease.endLeaseCode">
+                                        <!-- <mat-label>End Lease</mat-label>
+                                        <mat-select id="endLeaseCode" formControlName="endLeaseCode" [ngModel]="lease.endLeaseCode | renewCode">
+                                            <mat-option [value]=0>None</mat-option>
+                                            <mat-option [value]=1>Renew Month by Month</mat-option>
+                                            <mat-option [value]=2>Renew by Other Term</mat-option>
+                                            <mat-option [value]=3>Fixed Term and Renew by Term</mat-option>
+                                            <mat-option [value]=4>Fixed Term and Vacant</mat-option>
+                                        </mat-select> -->
                                     </mat-form-field>
 
 

@@ -50,7 +50,8 @@ export class LeaseDetailsComponent implements OnInit {
 
       rentDueOn: [''],
       leaseAgreementDocUrl: [false],
-      leaseEndCode: [0],
+      // leaseEndCode: [0],
+      endLeaseCode: [''],
       Regigerator: [false],
 
       damageDepositAmount: [0],
