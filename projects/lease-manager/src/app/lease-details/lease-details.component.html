@@ -154,7 +154,7 @@
 
                                     <mat-form-field class="lease-full-width">
                                         <span class="icon-pos" matPrefix><mat-icon>swap_calls</mat-icon> &nbsp;</span>
-                                        <input type="text" id="endLeaseCode" formControlName="endLeaseCode" matInput placeholder="End Lease Code" [ngModel]="lease.endLeaseCode">
+                                        <input type="text" id="endLeaseCode" formControlName="endLeaseCode" matInput placeholder="End Lease Code" [ngModel]="lease.endLeaseCode  | renewCode">
                                         <!-- <mat-label>End Lease</mat-label>
                                         <mat-select id="endLeaseCode" formControlName="endLeaseCode" [ngModel]="lease.endLeaseCode | renewCode">
                                             <mat-option [value]=0>None</mat-option>

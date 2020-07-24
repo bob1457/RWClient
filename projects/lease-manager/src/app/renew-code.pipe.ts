@@ -9,7 +9,7 @@ export class RenewCodePipe implements PipeTransform {
 
     switch (value) {
       case 0 : {
-        return 'N/A';
+        return 'NotSet';
         break;
       }
       case 1 : {
@@ -29,7 +29,7 @@ export class RenewCodePipe implements PipeTransform {
         break;
       }
       default : {
-        return 'N/A';
+        return 'NotSet';
         break;
       }
     }
