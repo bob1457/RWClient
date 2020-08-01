@@ -6,7 +6,15 @@
         <i class="far fa-arrow-alt-circle-left" title="back to list" style="cursor: pointer; color: seagreen; font-size: 1.5em;" (click)="goBack()"></i>
     </div>
     <div fxFlex="20%" fxLayout="column" class="avatar_sec" fxLayoutAlign="start center">
-        <img src="../../assets/images/10621.jpg" style="border-radius: 50%;margin-top: 20px;" width="120px " height="120px" title="">
+        <span *ngIf="iconImg.length > 0; else default">
+          <img attr.src="{{serverUrl}}{{iconImg[0].propertyImgUrl}}" style="border-radius: 50%;margin-top: 20px;" width="120px " height="120px" title="">
+        </span>
+
+        <ng-template #default>
+            <img src="../../assets/images/10621.jpg" style="border-radius: 50%;margin-top: 20px;" width="120px " height="120px" title="">
+        </ng-template>
+
+
         <div class="images">
             <ul style="list-style-type: none;margin-left: -50px;">
                 <li *ngFor="let img of imgList" style="display: inline;">
@@ -14,7 +22,7 @@
                   <img attr.src={{serverUrl}}{{img.propertyImgUrl}} width="45px" height="45px" title="{{img.rentalPropertyId}}">
                 </span>
                 </li>
-                <!-- <div *ngIf="imgList == null">
+                <!-- <div *ngIf="imgList == null">  *ngIf="img.rentalPropertyId == listing.rentalPropertyId"
                     <li *ngFor="let img of listing.rentalProperty.propertyImg" style="display: inline;">
                         <img attr.src={{serverUrl}}{{img.propertyImgUrl}} width="45px" height="45px" title="{{img.rentalPropertyId}}">
                     </li>
@@ -30,7 +38,7 @@
             <!-- <img src="http://placehold.it/50x50">
             <img src="http://placehold.it/50x50">   listing.rentalProperty.propertyImg
             <img src="http://placehold.it/50x50">-->
-            <a (click)="openInput()" class="up-icon" style="margin-left:0px;" title="update property image">
+            <a (click)="openInput()" class="up-icon" style="margin-left:0px;cursor: pointer;" title="update property image">
                 <!-- <i class="material-icons">
                 publish  attr.src="{{serverUrl}}{{user.avatarUrl}}"
                 </i> -->
@@ -52,6 +60,12 @@
             <p>
                 {{listing.rentalProperty.address.streetNum}} <br> {{listing.rentalProperty.address.city}} {{listing.rentalProperty.address.stateProvince}} {{listing.rentalProperty.address.zipPostCode}} <br> {{listing.rentalProperty.address.country}}
             </p>
+            <p>
+                Status: <span *ngIf="listing.rentalProperty.status != 0; else status">{{listing.rentalProperty.status | status}}</span>
+                <span><ng-template #status>Not Listed</ng-template></span>
+            </p>
+
+
         </div>
         <div class="date-time">
             <p>
@@ -97,11 +111,21 @@
                                         <span class="icon-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
                                         <input type="number" id="monthlyRent" formControlName="monthlyRent" matInput placeholder="Monthly Rent (CAD$)" [ngModel]="listing.monthlyRent">
                                     </mat-form-field>
-                                    <mat-checkbox formControlName="isActive" [ngModel]="listing.isActive" class="listing-full-width">Published/Listed</mat-checkbox>
+
                                     <mat-form-field class="listing-full-width ">
                                         <span class="icon-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
-                                        <textarea type="text" id="bote" formControlName="note" matInput placeholder="Note" [ngModel]="listing.note"></textarea>
+                                        <textarea type="text" id="note" formControlName="note" matInput placeholder="Note" [ngModel]="listing.note"></textarea>
                                     </mat-form-field>
+                                    <div fxLayout="row" fxLayoutAlign="start start" style="width: 75%;">
+                                        <div fxFlex="35%">
+                                            <mat-checkbox formControlName="isActive" [ngModel]="listing.isActive" class="listing-full-width">Published/Listed</mat-checkbox>
+                                        </div>
+                                        <!-- <div fxFlex ="40%">
+                                             <button mat-raised-button (click)="publish()">Publish/Unpublish</button>
+                                        </div> -->
+                                    </div>
+                                    <!-- [disabled]="true" -->
+
                                 </div>
 
                                 <div fxLayout="column" fxLayoutAlign="start start" style="width: 75%;">
@@ -148,25 +172,27 @@
 
                             </form>
                         </mat-tab>
-                        <mat-tab label="Rental Property" style="background: #f5f5f5;">
+                        <!-- <mat-tab label="Rental Property" style="background: #f5f5f5;">
                             <div fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="10px">
                                 <form [formGroup]="propertyForm" (ngSubmit)="updateStatus()">
                                     <mat-form-field class="property-full-width">
                                         <mat-label>Rental Property Status</mat-label>
                                         <mat-select [(value)]="current" id="status" formControlName="status" [ngModel]="listing.rentalProperty.status | status">
-                                            <!-- <mat-option>None</mat-option> -->
+
                                             <mat-option value="NotSet">NotSet</mat-option>
                                             <mat-option value="Listed">Listed</mat-option>
                                             <mat-option value="Pending">Pending</mat-option>
                                             <mat-option value="Rented">Rented</mat-option>
                                             <mat-option value="Others">Others</mat-option>
                                         </mat-select>
+
                                     </mat-form-field>
                                 </form>
                             </div>
 
-                        </mat-tab>
+                        </mat-tab> -->
                     </mat-tab-group>
+                    <!-- <mat-option>None</mat-option> -->
                 </div>
 
             </mat-card-content>

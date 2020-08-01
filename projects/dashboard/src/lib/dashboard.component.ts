@@ -7,10 +7,11 @@ import { Property } from './models/property.model';
 import { Store, select } from '@ngrx/store';
 import { PropertyList, ContractList, TenantList, RentalList, OwnerList, MarketingList, RentalAppList } from './store/dash.reducer';
 // tslint:disable-next-line:max-line-length
-import { getPropertyList, getAllLeases, getAllTenants, getContractList, getPropertyOwnerList, getRentalApplicationList } from './store/dash.actions';
+import { getPropertyList, getAllLeases, getAllTenants, getContractList, getPropertyOwnerList, getRentalApplicationList, getPropertyImageList } from './store/dash.actions';
 import { PropertyService, ManagementContract, PropertyTenant, PropertyLease, RentalApplication } from '@lib/app-core';
 import { PropertyOwner } from './models/property-owner.model';
 import { PropertyListing } from './models/property-listing.model';
+
 
 @Component({
   selector: 'lib-dashboard',
@@ -57,6 +58,8 @@ export class DashboardComponent implements OnInit {
     this.store.dispatch(getContractList());
     this.store.dispatch(getPropertyOwnerList());
     this.store.dispatch(getRentalApplicationList());
+
+    this.store.dispatch(getPropertyImageList());
 
     // this.getAllPropertyList();
   }

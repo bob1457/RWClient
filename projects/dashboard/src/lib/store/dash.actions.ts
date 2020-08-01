@@ -29,6 +29,28 @@ export const getPropertyListFailure = createAction(
 );
 
 /**
+ * Get Property Image List Actions
+ */
+export const getPropertyImageList = createAction(
+  '[Property] Get Property Image List'
+);
+
+export const getPropertyImageListSuccess = createAction(
+  '[Property] Get Property Image List Success',
+  props<{payload: PropertyListing[]}>()
+);
+
+export const getPropertyImageListFailure = createAction(
+  '[Property] Get Property Image List Failure',
+  // props<{payload: any}>()
+  (errorMessage = 'Error loading property listing') => {
+    return ({ payload: { errorMessage } });
+  }
+);
+
+
+
+/**
  * Get Property Owner List Actions
  */
 export const getPropertyOwnerList = createAction(

@@ -129,7 +129,7 @@ const propertyListingReducer = createReducer(
 
 
   /**
-   * Add property listing
+   * Update property listing
    */
   on(ListingActions.updatePropertyListing, state => ({
     ...state,
@@ -138,6 +138,30 @@ const propertyListingReducer = createReducer(
   })),
 
   on(ListingActions.updatePropertyListingSuccess, (state, { payload }) => {
+
+    const updatedListings = state.listings.map(
+      item => payload.id === item.id ? payload : item
+    );
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      listings: updatedListings, // [...state.listings, payload ]
+      listing: payload
+    });
+  }),
+
+  /**
+   *  Updating property listing status
+   */
+
+  on(ListingActions.updatePropertyListingStatus, state => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+  on(ListingActions.updatePropertyListingStatusSuccess, (state, { payload }) => {
 
     const updatedListings = state.listings.map(
       item => payload.id === item.id ? payload : item

@@ -16,6 +16,9 @@ import { AddTenantComponent } from './add-tenant/add-tenant.component';
 import { TenantDetailsComponent } from './tenant-details/tenant-details.component';
 import { YesNoPipe } from './yes-no.pipe';
 import { LoadingComponent } from './loading/loading.component';
+import { AgreementViewComponent } from './agreement-view/agreement-view.component';
+import { TermPipe } from './term.pipe';
+import { RenewCodePipe } from './renew-code.pipe';
 
 @NgModule({
   declarations: [
@@ -28,7 +31,10 @@ import { LoadingComponent } from './loading/loading.component';
     AddTenantComponent,
     TenantDetailsComponent,
     YesNoPipe,
-    LoadingComponent
+    LoadingComponent,
+    AgreementViewComponent,
+    TermPipe,
+    RenewCodePipe
   ],
   imports: [
     BrowserModule,

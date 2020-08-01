@@ -20,10 +20,10 @@ export class ApplicationListComponent implements OnInit {
   loading$: Observable<boolean>;
   loaded = false;
 
-  displayedColumns: string[] = ['icon', 'id', 'applicatnFirstName', 'applicatnLastName', 'email', 'telephone', 'propertyName', 'occupants', 'appliedDate', 'action'];
+  displayedColumns: string[] = ['icon', 'id', 'applicatnFirstName',  'email', 'telephone', 'propertyName', 'occupants', 'status', 'appliedDate', 'action'];
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: false}) sort: MatSort;
-
+// 'applicatnLastName',
   dataSource = new MatTableDataSource<RentalApplication>();
 
   loadingIndicator = false;
@@ -50,9 +50,8 @@ export class ApplicationListComponent implements OnInit {
 
                     setTimeout(() =>  {this.dataSource.paginator = this.paginator; this.dataSource.sort = this.sort;});
 
-
                   }
-                  );
+                );
               }
 
   ngOnInit() {

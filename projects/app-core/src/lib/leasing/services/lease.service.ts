@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { PropertyLease } from '../models/property-lease.model';
 import { PropertyTenant } from '../models/property-tenant.model';
+import { RentalProperty } from '../models/rental-property.model';
+import { NewTenant } from '../models/new-tenant.model';
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +32,16 @@ export class LeaseService {
   getTenantDetails(id:number) {
     debugger;
     return this.http.get<PropertyTenant>(`${this.baseUrl}/tenant/${id}`);
+  }
+
+  getAllRentalProperties() {
+    debugger;
+    return this.http.get<RentalProperty[]>(`${this.baseUrl}/lease/allproperty`);
+  }
+
+  getAllNewTenants() {
+    debugger;
+    return this.http.get<NewTenant[]>(`${this.baseUrl}/lease/newtenants`);
   }
 
   addLease(lease: PropertyLease) {

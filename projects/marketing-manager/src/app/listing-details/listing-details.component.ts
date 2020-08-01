@@ -22,8 +22,10 @@ export class ListingDetailsComponent implements OnInit {
   serverUrl = 'http://localhost:63899/';
 
   loading$: Observable<boolean>;
-  loaded = false;
+  // loaded = false;
   imgList: any[] = [];
+
+  iconImg: any;
 
   detailsForm: FormGroup;
   propertyForm: FormGroup;
@@ -40,15 +42,25 @@ export class ListingDetailsComponent implements OnInit {
                     .subscribe(data => {
                       this.listing = data;
                       // localStorage.setItem('listing', JSON.stringify(this.listing));
+                      if (this.listing) {
+                        this.imgList = this.listing.rentalProperty.propertyImg;
+                        this.iconImg = this.imgList.filter((value, index) => index === 0);
+                      }
+
+                      console.log('imglist', this.imgList);
+                      console.log('iconimg', this.iconImg);
                       console.log('list', this.listing);
+
                 });
 
                 this.store.pipe(select(propertyImgList))
                 .subscribe(img => {
-                  if (img == null) {
-
+                  if (img != null) {
+                    // this.imgList = img; // .filter(p => p.rentalPropeprtyId === this.listing.rentalPropertyId);
+                    // this.iconImg = this.imgList.filter((value, index) => index === 0);
+                    // console.log('iconimg', this.iconImg);
+                    // console.log('imglist', this.imgList);
                   }
-                  this.imgList = img; // .filter(p => p.rentalPropertyId === this.listing.rentalPropertyId)
                 });
                }
 
@@ -106,7 +118,8 @@ export class ListingDetailsComponent implements OnInit {
     });
 
     this.propertyForm = this.formBuilder.group({
-      status: ['']
+      id: [],
+      isActive: ['']
     });
   }
 
@@ -115,8 +128,8 @@ export class ListingDetailsComponent implements OnInit {
 
     this.loading$ = this.store.pipe(select(loadingStatus));
 
-    this.store.pipe(select(loadedStatus))
-        .subscribe(res => this.loaded = res);
+    // this.store.pipe(select(loadedStatus))
+    //     .subscribe(res => this.loaded = res);
 
 
     this.store.dispatch(getPropertyListingDetails({payload: id}));
@@ -151,6 +164,10 @@ export class ListingDetailsComponent implements OnInit {
 
   openInput() {
     document.getElementById('fileInput').click();
+  }
+
+  publish() {
+    // this.store.dispatch(updatePropertyListingStatus(payload:))
   }
 
   submit() {
@@ -194,7 +211,7 @@ export class ListingDetailsComponent implements OnInit {
   }
 
   goBack() {
-    this.router.navigate(['/Manage/marketing/propertylist']);
+    this.router.navigate(['/Manage/marketing/']);
   }
 
   onChange( files ) {

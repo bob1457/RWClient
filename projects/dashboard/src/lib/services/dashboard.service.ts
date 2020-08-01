@@ -8,6 +8,7 @@ import { PropertyListing } from '../models/property-listing.model';
 import { PropertyLease } from '../models/property-lease.model';
 import { PropertyTenant } from '../models/property-tenant.model';
 import { RentalApplication } from '@lib/app-core';
+import { PropertyImg } from '../models/property-img';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,11 @@ export class DashboardService {
     debugger;
 
     return this.http.get<Property[]>(`${this.baseUrl}/property/all`);
+  }
+
+  getAllPropertyImages() {
+    debugger;
+    return this.http.get<PropertyImg[]>(`${this.baseUrl}/listing/allimgs`);
   }
 
   getPropertyOwnerList() {

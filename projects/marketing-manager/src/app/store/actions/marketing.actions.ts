@@ -187,3 +187,23 @@ export const getRentalApplicationDetailsFailure = createAction(
     return ({ payload: { errorMessage } });
   }
 );
+
+/**
+ * Update listing status
+ */
+
+export const updatePropertyListingStatus = createAction(
+  '[Marketing] Update Property Listing Status',
+  props<{payload: any}>()
+);
+// PropertyListing
+export const updatePropertyListingStatusSuccess = createAction(
+  '[Marketing] Update Property Listing Status Success',
+  props<{payload: PropertyListing}>()
+);
+
+export const updatePropertyListingStatusFailure = createAction(
+  '[Property] Update Property Listing Status Failure',
+  // props<{payload: any}>()
+  (errorMessage = 'Error updating property') => ({ payload: { errorMessage }})
+);

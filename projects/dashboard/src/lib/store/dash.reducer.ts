@@ -8,6 +8,7 @@ export const initialState: DashState =  { // adapter.getInitialState
   loading: false,
   loaded: false,
   properties: null,
+  propertyImgList: null,
   owners: null,
   contracts: null,
   listings: null,
@@ -38,6 +39,25 @@ const dashReducer = createReducer(
       properties: payload
     });
   }),
+
+   /**
+   * Get property imge list
+   */
+  on(DashActions.getPropertyImageList, state => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+  on(DashActions.getPropertyImageListSuccess, (state, { payload }) => {
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      propertyImgList: payload
+    });
+  }),
+
 
   on(DashActions.getPropertyOwnerList, state => ({
     ...state,
@@ -192,6 +212,8 @@ const AllOwners = (state: DashState) => state.owners;
 const AllListings = (state: DashState) => state.listings;
 const AllRentalApps = (state: DashState) => state.applications;
 
+export const AllPropertyImgs = (state: DashState) => state.propertyImgList;
+
 // Select required slice of state
 export const getDashState = createFeatureSelector<DashState>('dashboard');
 
@@ -204,7 +226,7 @@ export const OwnerList = createSelector(getDashState, AllOwners);
 
 export const MarketingList = createSelector(getDashState, AllListings);
 export const RentalAppList = createSelector(getDashState, AllRentalApps);
-
+export const PropertyImgList = createSelector(getDashState, AllPropertyImgs);
 
 export const loadingStatus = createSelector(getDashState, loading);
 

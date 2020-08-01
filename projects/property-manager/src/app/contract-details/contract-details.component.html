@@ -96,7 +96,7 @@
                                 <mat-label>Sign Date</mat-label>
                                 <input matInput [matDatepicker]="picker3" formControlName="contractSignDate" [ngModel]="contract.contractSignDate">
                                 <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
-                                <mat-datepicker #picker1></mat-datepicker>
+                                <mat-datepicker #picker3></mat-datepicker>
                             </mat-form-field>
 
                         </div>
@@ -131,7 +131,10 @@
                             </div>
                         </div>
                         <div fxLayout="row" fxLayoutGap="7px" fxLayoutAlign="start center" style="width: 70%;">
-                            <button routerLink="/Manage/property/contractview/{{id}}" mat-raised-button color="primary">View Contract</button>
+                            <button routerLink="/Manage/property/contractview/{{id}}" mat-raised-button color="primary">View Contract</button> &nbsp;
+
+                            <a (click)="openInput()" style="cursor: pointer;"><span class="material-icons" style="vertical-align: bottom;">save</span>&nbsp;Save Signed Contract</a>
+                            <input #file id="fileInput" (change)="onChange(file.files)" hidden type="file">
                         </div>
                         <div fxLayout="row" fxLayoutGap="7px" fxLayoutAlign="end center" style="width: 75%;margin-bottom: 20px;">
                             <!-- <span *ngIf="showMsg" style="color: rgb(189, 150, 25);">Updated successfully!</span>

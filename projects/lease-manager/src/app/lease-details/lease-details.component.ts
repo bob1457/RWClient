@@ -4,7 +4,7 @@ import { PropertyLeaseState } from '../store/lease-state';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LeaseService, PropertyLease } from '@lib/app-core';
-import { getLeaseDetails } from '../store/actions/lease.actions';
+import { getLeaseDetails, updateLease } from '../store/actions/lease.actions';
 import { leaseDetails, loadingStatus } from '../store/reducers';
 import { Observable } from 'rxjs';
 
@@ -16,7 +16,7 @@ import { Observable } from 'rxjs';
 export class LeaseDetailsComponent implements OnInit {
 
   id: number;
-  lease: PropertyLease;
+  lease: any; //PropertyLease;
 
   loading$: Observable<boolean>;
 
@@ -38,36 +38,77 @@ export class LeaseDetailsComponent implements OnInit {
     this.GetLeaseDetails(this.id);
 
     this.detailsForm = this.formBuilder.group({
-      id: [''],
+      id: [0],
       leaseTitle: [''],
       leaseDesc: [''],
+      rentalPropertyId: [0],
       leaseStartDate: [''],
       leaseEndDate: [''],
       term: [''],
-      rentAmount: [''],
+      rentAmount: [0],
+      rentFrequency: [''],
+
+      rentDueOn: [''],
+      leaseAgreementDocUrl: [false],
+      // leaseEndCode: [0],
+      endLeaseCode: [''],
+      Regigerator: [false],
+
+      damageDepositAmount: [0],
+      petDepositAmount: [0],
       leaseSignDate: [''],
       isActive: [true],
       isAddendumAvailable: [false],
-      endLeaseCode: [''],
+      // endLeaseCode: [''],
       renewTerm: [''],
-      notes: [],
+      notes: [''],
 
-      rentalProperty: this.formBuilder.group({
-        propertyName: [],
-        address: this.formBuilder.group({
-          streetNum: [],
-          city: [],
-          stateProvince: [],
-          zipPostCode: []
-        })
-      }),
+      // rentalProperty: this.formBuilder.group({
+      //   propertyName: [],
+      //   address: this.formBuilder.group({
+      //     streetNum: [],
+      //     city: [],
+      //     stateProvince: [],
+      //     zipPostCode: []
+      //   })
+      // }),
 
-      tenant: this.formBuilder.group({
-        firstName: [],
-        lastName: [],
-        contactEmail: [],
-        contactTelephone: []
-      })
+      water: [false],
+      cablevison: [false],
+      electricity: [false],
+      internet: [false],
+      heat: [false],
+      naturalGas: [false],
+      sewageDisposal: [false],
+      snowRemoval: [false],
+      storage: [false],
+      recreationFacility: [false],
+      garbageCollection: [false],
+      recycleServices: [false],
+      kitchenScrapCollection: [false],
+      laundry: [false],
+      freeLaundry: [false],
+      // regigerator: [false],
+      dishwasher: [false],
+      stoveOven: [false],
+      windowCovering: [false],
+      furniture: [false],
+      carpets: [false],
+      parkingStall: [0],
+      other: [''],
+
+      numberOfParking: [0] //,
+      // rentCoverage: this.formBuilder.group({
+
+
+      // }),
+
+      // tenant: this.formBuilder.group({
+      //   firstName: [],
+      //   lastName: [],
+      //   contactEmail: [],
+      //   contactTelephone: []
+      // })
     });
 
       // User servie directlty the first time when the compowent loads
@@ -108,8 +149,26 @@ export class LeaseDetailsComponent implements OnInit {
   }
 
 
+  viewAgreement() {
+
+  }
+
+  submit() {
+    debugger;
+    this.detailsForm.patchValue(
+      {
+        rentalPropertyId: this.lease.rentalPropertyId,
+        term: this.lease.term,
+        endLeaseCode: this.lease.endLeaseCode
+      }
+      );
+    console.log('form data', this.detailsForm.value);
+    this.store.dispatch(updateLease({payload: this.detailsForm.value}));
+
+  }
+
   goBack() {
-    this.router.navigate(['/Manage/lease/leases']);
+    this.router.navigate(['/Manage/lease/']);
   }
 
 }

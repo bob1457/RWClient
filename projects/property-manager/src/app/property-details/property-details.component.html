@@ -9,12 +9,26 @@
         </div>
     </div>
     <div fxFlex="20%" fxLayout="column" class="avatar_sec" fxLayoutAlign="start center">
-        <img src="../../assets/images/10621.jpg" style="border-radius: 50%;margin-top: 20px;" width="120px " height="120px" title="{{property.propertyName}}">
+        <span *ngIf="imgList.length > 0; else default">
+          <img attr.src="{{serverUrl}}{{imgList[0].propertyImgUrl}}" style="border-radius: 50%;margin-top: 20px;" width="120px " height="120px" title="{{property.propertyName}}">
+        </span>
+        <ng-template #default>
+            <img src="../../assets/images/10621.jpg" style="border-radius: 50%;margin-top: 20px;" width="120px " height="120px" title="{{property.propertyName}}">
+        </ng-template>
+
+
         <div class="images">
+            <!-- <img src="http://placehold.it/50x50">
             <img src="http://placehold.it/50x50">
             <img src="http://placehold.it/50x50">
-            <img src="http://placehold.it/50x50">
-            <img src="http://placehold.it/50x50">
+            <img src="http://placehold.it/50x50"> -->
+            <ul style="list-style-type: none;margin-left: -50px;">
+                <li *ngFor="let img of imgList" style="display: inline;">
+                    <span *ngIf="img.originalId == property.propertyId">
+                  <img attr.src={{serverUrl}}{{img.propertyImgUrl}} width="45px" height="45px" title="{{img.rentalPropertyId}}">
+                </span>
+                </li>
+            </ul>
         </div>
         <div style="margin-top: 25px;">
             <span style="font-weight: 500;">Owner Information</span>
@@ -52,7 +66,7 @@
           </i>
                     <!-- <img src="../../assets/images/pmgmnt.png " height="40px " width="40px "> *ngIf="property*ngIf="detailsForm.value"-->
                 </div>
-                <mat-card-title>Rental Property: ID: {{property.propertyId}} - <span style="font-size: .8em; font-style: italic;">{{property.propertyName}}</span> </mat-card-title>
+                <mat-card-title>Rental Property: ID: {{property.propertyId}} - <span style="font-size: .8em; font-style: italic;">{{property.propertyName}} (Status: {{property.status}})</span> </mat-card-title>
                 <mat-card-subtitle>Address: {{property.propertyNumber}} {{property.propertyNumber}} {{property.propertyStreet}} {{property.propertyCity}} {{property.propertyStateProvince}} {{property.propertyZipPostCode}}</mat-card-subtitle>
             </mat-card-header>
             <mat-card-content class="property-details-card-content">
@@ -109,7 +123,7 @@
                                         <mat-checkbox formControlName="isBasementSuite" [ngModel]="property.isBasementSuite" class="property-full-width">Basement</mat-checkbox>
                                         <mat-form-field class="property-full-width">
                                             <mat-label>Rental Status</mat-label>
-                                            <mat-select [(value)]="status" id="status" formControlName="status" [ngModel]="property.status">
+                                            <mat-select [disabled]="true" [(value)]="status" id="status" formControlName="status" [ngModel]="property.status">
                                                 <!-- <mat-option>None</mat-option> -->
                                                 <mat-option value="Rented">Rented</mat-option>
                                                 <mat-option value="Vacant">Vacant</mat-option>

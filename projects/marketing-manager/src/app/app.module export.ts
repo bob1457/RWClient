@@ -23,12 +23,16 @@ import { YesNoPipe } from './yes-no.pipe';
 import { LoadingComponent } from './loading/loading.component';
 import { ScreeningListComponent } from './screening-list/screening-list.component';
 import { StatusPipe } from './status.pipe';
+import { ListingDetailsSideComponent } from './listing-details-side/listing-details-side.component';
+import { ListingDetailsMainComponent } from './listing-details-main/listing-details-main.component';
+import { ListingDetailsSecondaryComponent } from './listing-details-secondary/listing-details-secondary.component';
+import { AppStatusPipe } from './app-status.pipe';
 
 const routes: Routes = [
   // { path: '', component: PropertyListingComponent},
   { path: '', component: MarketingHomeComponent,
     children: [
-      { path: 'propertylist', component: PropertyListingComponent},
+      { path: '', component: PropertyListingComponent},
       { path: 'listingDetails/:id', component: ListingDetailsComponent},
       { path: 'addListing', component: AddListingComponent},
       // { path: 'screening', component: ScreeningComponent},
@@ -55,7 +59,11 @@ const routes: Routes = [
     YesNoPipe,
     StatusPipe,
     LoadingComponent,
-    ScreeningListComponent
+    ScreeningListComponent,
+    ListingDetailsSideComponent,
+    ListingDetailsMainComponent,
+    ListingDetailsSecondaryComponent,
+    AppStatusPipe
   ],
   imports: [
     // BrowserModule,

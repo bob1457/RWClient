@@ -8,6 +8,8 @@ import { Property, PropertyService } from '@lib/app-core';
 import { propertyDetrails, loadingStatus } from '../store/reducers';
 import { Observable } from 'rxjs';
 import * as PropertyActions from '../store/actions/property.actions';
+import { propertyImgList } from 'projects/marketing-manager/src/app/store/reducers';
+import { DashState, PropertyImgList } from '@lib/dashboard';
 @Component({
   selector: 'app-property-details',
   templateUrl: './property-details.component.html',
@@ -18,6 +20,8 @@ export class PropertyDetailsComponent implements OnInit {
   detailsForm: FormGroup;
 
   loading$: Observable<boolean>;
+  imgList;
+  serverUrl = 'http://localhost:63899/';
 
   property$ = this.store.pipe(select(propertyDetrails))
         .subscribe(data => {
@@ -34,24 +38,56 @@ export class PropertyDetailsComponent implements OnInit {
   // });
 
   constructor(private store: Store<PropertyState>,
+              private dashStore: Store<DashState>,
               private router: Router,
               private actRoute: ActivatedRoute,
               private formBuilder: FormBuilder,
               private propertyService: PropertyService) {
                 this.id = this.actRoute.snapshot.params.id;
                 console.log(this.id);
+
+                // this.store.pipe(select(propertyImgList))
+                // .subscribe(img => {
+                //   if (img) {
+                //     this.imgList = img; // .filter(p => p.rentalPropertyId === this.listing.rentalPropertyId)
+                //     console.log('imgs', this.imgList);
+                //   }
+                // });
+
+                this.store.pipe(select(propertyDetrails))
+                  .subscribe(data => {
+                    this.property = data;
+                    // this.detailsForm.patchValue(data);
+                    // if (this.property) {
+                    //   localStorage.setItem('pId', this.property.propertyId);
+                    // }
+                    console.log(data);
+                });
+
+                this.dashStore.pipe(select(PropertyImgList))
+                .subscribe(img => {
+
+// console.log('pid', localStorage.getItem('pId'));
+                  if (img) {
+                    this.imgList = img.filter(p => p.originalId == this.id);
+                    console.log(this.id);
+                    console.log('imgs', this.imgList);
+                  }
+                });
               }
 
   propertyId: any = 1;
   id: number;
   // property$: Observable<Property[]>;
-  property: Property;
+  property: any;
   current = '';
   shared = '';
   basement = '';
 
   status = false;
   showMsg = false;
+
+  iconImg: any;
 
 
   // property$: Observable<Property>;
@@ -232,7 +268,7 @@ export class PropertyDetailsComponent implements OnInit {
   }
 
   goBack() {
-    this.router.navigate(['/Manage/property/propertylist']);
+    this.router.navigate(['/Manage/property/']);
   }
 
 

@@ -91,11 +91,12 @@ export class MarketingEffects {
             payload: listing
           })),
           // tap(res => {console.log('response: ' + res); }),
-          catchError(
-            err => {
-              return of('[Marketing] Get Property Listing Details Failure', err.error);
-            } // EMPTY
-          )
+          // catchError(
+          //   err => {
+          //     return of('[Marketing] Get Property Listing Details Failure', err.error);
+          //   } // EMPTY
+          // )
+          catchError(error => of(ListingActions.getPropertyListingDetailsFailure(error.message)))
         )
       )
     )
@@ -114,11 +115,12 @@ export class MarketingEffects {
             payload: listing
           })),
           // tap(res => {console.log('response: ' + res); }),
-          catchError(
-            err => {
-              return of('[Marketing] Add Property Listing Failure', err.error);
-            } // EMPTY
-          )
+          // catchError(
+          //   err => {
+          //     return of('[Marketing] Add Property Listing Failure', err.error);
+          //   } // EMPTY
+          // )
+          catchError(error => of(ListingActions.addPropertyListingFailure(error.message)))
         )
       )
     )
@@ -137,11 +139,12 @@ export class MarketingEffects {
             payload: listing
           })),
           // tap(res => {console.log('response: ' + res); }),
-          catchError(
-            err => {
-              return of('[Marketing] Update Property Listing Failure', err.error);
-            } // EMPTY
-          )
+          // catchError(
+          //   err => {
+          //     return of('[Marketing] Update Property Listing Failure', err.error);
+          //   } // EMPTY
+          // )
+          catchError(error => of(ListingActions.updatePropertyListingStatusFailure(error.message)))
         )
       )
     )
@@ -184,11 +187,12 @@ export class MarketingEffects {
             payload: applications
           })),
           // tap(res => {console.log('response: ' + res); }),
-          catchError(
-            err => {
-              return of('[Marketing] Get Rental Applications Failure', err.error);
-            } // EMPTY
-          )
+          // catchError(
+          //   err => {
+          //     return of('[Marketing] Get Rental Applications Failure', err.error);
+          //   } // EMPTY
+          // )
+          catchError(error => of(ListingActions.getRentalApplicationListFailure(error.message)))
         )
       )
     )
@@ -207,11 +211,36 @@ export class MarketingEffects {
             payload: application
           })),
           // tap(res => {console.log('response: ' + res); }),
-          catchError(
-            err => {
-              return of('[Marketing] Get Property Listing Details Failure', err.error);
-            } // EMPTY
-          )
+          // catchError(
+          //   err => {
+          //     return of('[Marketing] Get Property Listing Details Failure', err.error);
+          //   } // EMPTY
+          // )
+          catchError(error => of(ListingActions.getRentalApplicationDetailsFailure(error.message)))
+        )
+      )
+    )
+  );
+
+  updatePropertyListingStatus$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(ListingActions.updatePropertyListingStatus),
+      tap(() => console.log('got here to update property listing status!!!')),
+      map(action => action.payload),
+      switchMap((payload) =>
+        this.marketingService.changeListingStatus(payload).pipe(
+          map((listing: PropertyListing) => ({
+            type: '[Marketing] Update Property Listing Status Success',
+            payload: listing
+          })),
+          // tap(res => {console.log('response: ' + res); }),
+          // catchError(
+          //   err => {
+          //     return of('[Marketing] Update Property Listing Failure', err.error);
+          //   } // EMPTY
+          // )
+          catchError(error => of(ListingActions.updatePropertyListingStatusFailure(error.message)))
         )
       )
     )

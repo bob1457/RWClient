@@ -24,13 +24,15 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { YesNoPipe } from './yes-no.pipe';
 import { LoadingComponent } from './loading/loading.component';
+import { TermPipe } from './term.pipe';
+import { RenewCodePipe } from './renew-code.pipe';
 
 
 const routes: Routes = [
   // { path: '', component: AllLeasesComponent },
   { path: '', component: LeaseHomeComponent,
     children: [
-      { path: 'leases', component: AllLeasesComponent},
+      { path: '', component: AllLeasesComponent},
       { path: 'tenants', component: AllTenantsComponent},
       { path: 'leasedetails/:id', component: LeaseDetailsComponent},
       { path: 'addlease', component: AddLeaseComponent},
@@ -53,7 +55,9 @@ const routes: Routes = [
     AddLeaseComponent,
     AddTenantComponent,
     TenantDetailsComponent,
-    YesNoPipe
+    YesNoPipe,
+    TermPipe,
+    RenewCodePipe
   ],
   imports: [
     // BrowserModule,

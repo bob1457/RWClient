@@ -55,6 +55,7 @@ export class PropertyListingComponent implements OnInit {
 
                     this.dataSource.sort = this.sort;
                     this.dataSource.paginator = this.paginator;
+                    // setTimeout(() =>  {this.dataSource.paginator = this.paginator; this.dataSource.sort = this.sort; });
 
                   });
                }
@@ -67,9 +68,9 @@ export class PropertyListingComponent implements OnInit {
     this.store.select(loadedStatus)
     .subscribe( res => this.loaded = res);
 
-    if (this.list == null) {
-       this.store.dispatch(getPropertyListing());
-    }
+    // if (this.list == null) {
+    this.store.dispatch(getPropertyListing());
+    // }
 
     this.store.dispatch(getPropertyImageList());
     // return this.propertyService.getPropertyList().subscribe((pList: Property[]) => {this.list = pList; console.log(pList)});

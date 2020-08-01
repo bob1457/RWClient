@@ -11,6 +11,7 @@ import { PropertyOwner } from '../models/property-owner.model';
 import { PropertyLease } from '../models/property-lease.model';
 import { PropertyTenant, RentalApplication } from '@lib/app-core';
 import { PropertyListing } from '../models/property-listing.model';
+import { PropertyImg } from '../models/property-img';
 
 @Injectable()
 export class DashboardEffects {
@@ -31,12 +32,36 @@ export class DashboardEffects {
             type: '[Property] Get Property List Success',
             payload: properties
           })),
-          tap(res => {console.log('response: ' + res); }),
-          catchError(
-            err => {
-              return of('[Property] Get Property List Failure', err.error);
-            } // EMPTY
-          )
+          // tap(res => {console.log('response: ' + res); }),
+          // catchError(
+          //   err => {
+          //     return of('[Property] Get Property List Failure', err.error);
+          //   } // EMPTY
+          // )
+          catchError(error => of(DashActions.getPropertyListFailure(error.message)))
+        )
+      )
+    )
+  );
+
+  getPropertyImgList$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(DashActions.getPropertyImageList),
+      tap(() => console.log('got here for property image list!!!')),
+      switchMap(() =>
+        this.dashService.getAllPropertyImages().pipe(
+          map((listings: PropertyImg[]) => ({
+            type: '[Property] Get Property Image List Success',
+            payload: listings
+          })),
+          // tap(res => {console.log('response: ' + res); }),
+          // catchError(
+          //   err => {
+          //     return of('[Marketing] Get Property Listing Failure', err.error);
+          //   } // EMPTY
+          // )
+          catchError(error => of(DashActions.getPropertyImageListFailure(error.message)))
         )
       )
     )
@@ -54,11 +79,12 @@ export class DashboardEffects {
             payload: owners
           })),
           // tap(res => {console.log('response: ' + res); }),
-          catchError(
-            err => {
-              return of('[Property] Get Property Owner List Failure', err.error);
-            } // EMPTY
-          )
+          // catchError(
+          //   err => {
+          //     return of('[Property] Get Property Owner List Failure', err.error);
+          //   } // EMPTY
+          // )
+          catchError(error => of(DashActions.getPropertyOwnerListFailure(error.message)))
         )
       )
     )
@@ -76,11 +102,12 @@ export class DashboardEffects {
             payload: contracts
           })),
           // tap(res => {console.log('response: ' + res); }),
-          catchError(
-            err => {
-              return of('[Property] Get Contract List Failure', err.error);
-            } // EMPTY
-          )
+          // catchError(
+          //   err => {
+          //     return of('[Property] Get Contract List Failure', err.error);
+          //   } // EMPTY
+          // )
+          catchError(error => of(DashActions.getContractListFailure(error.message)))
         )
       )
     )
@@ -98,11 +125,12 @@ export class DashboardEffects {
             payload: listings
           })),
           // tap(res => {console.log('response: ' + res); }),
-          catchError(
-            err => {
-              return of('[Marketing] Get Property Listing Failure', err.error);
-            } // EMPTY
-          )
+          // catchError(
+          //   err => {
+          //     return of('[Marketing] Get Property Listing Failure', err.error);
+          //   } // EMPTY
+          // )
+          catchError(error => of(DashActions.getPropertyListingFailure(error.message)))
         )
       )
     )
@@ -120,11 +148,12 @@ export class DashboardEffects {
             payload: leases
           })),
           // tap(res => {console.log('response: ' + res); }),
-          catchError(
-            err => {
-              return of('[Leases] Get all leases Failure', err.error);
-            } // EMPTY
-          )
+          // catchError(
+          //   err => {
+          //     return of('[Leases] Get all leases Failure', err.error);
+          //   } // EMPTY
+          // )
+          catchError(error => of(DashActions.getPAllLeasesFailure(error.message)))
         )
       )
     )
@@ -142,11 +171,12 @@ export class DashboardEffects {
             payload: tenants
           })),
           tap(res => {console.log('response: ' + res); }),
-          catchError(
-            err => {
-              return of('[Leases] Get all tenants Failure', err.error);
-            } // EMPTY
-          )
+          // catchError(
+          //   err => {
+          //     return of('[Leases] Get all tenants Failure', err.error);
+          //   } // EMPTY
+          // )
+          catchError(error => of(DashActions.getAllTenantsFailure(error.message)))
         )
       )
     )
@@ -163,11 +193,12 @@ export class DashboardEffects {
                     payload: applicaitons
                 })),
                 tap(res => { console.log('response: ' + res); }),
-                catchError(
-                  err => {
-                    return of('[Leases] Get all applications Failure', err.error);
-                  }
-                )
+                // catchError(
+                //   err => {
+                //     return of('[Leases] Get all applications Failure', err.error);
+                //   }
+                // )
+                catchError(error => of(DashActions.getRentalApplicationListFailure(error.message)))
               )
             )
           )
