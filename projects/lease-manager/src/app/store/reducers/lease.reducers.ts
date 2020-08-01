@@ -155,6 +155,30 @@ const propertyLeaseReducer = createReducer(
   //   });
   // }),
 
+  /**
+   * Update property  lease
+   */
+  on(LeaseActions.updateTenant, state => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+  on(LeaseActions.updateTenantSuccess, (state, { payload }) => {
+
+    const updatedTenants = state.tenants.map(
+      item => payload.id === item.id ? payload : item
+    );
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      leases: updatedTenants, // [...state.listings, payload ]
+      selectedTenant: payload
+    });
+  }),
+
+
 
 );
 

@@ -154,7 +154,7 @@ export const updateLeaseFailure = createAction(
  * Update Lease Actions
  */
 
-export const updatTenant = createAction(
+export const updateTenant = createAction(
   '[Leases] Update Tenant',
   props<{payload: PropertyLease}>()
 );

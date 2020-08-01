@@ -185,4 +185,28 @@ export class LeaseEffects {
     )
   );
 
+  updateTenant$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(LeaseActions.updateTenant),
+      tap(() => console.log('got here to update property tenant !!!')),
+      map(action => action.payload),
+      switchMap((payload) =>
+        this.leaseService.updateTenant(payload).pipe(
+          map((tenant: PropertyTenant) => ({
+            type: '[Leases] Update Tenant Success',
+            payload: tenant
+          })),
+          // tap(res => {console.log('response: ' + res); }),
+          // catchError(
+          //   err => {
+          //     return of('[Marketing] Update Property Listing Failure', err.error);
+          //   } // EMPTY
+          // )
+          catchError(error => of(LeaseActions.updateTenantFailure(error.message)))
+        )
+      )
+    )
+  );
+
 }

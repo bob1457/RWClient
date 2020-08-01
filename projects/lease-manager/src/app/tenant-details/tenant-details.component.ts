@@ -5,7 +5,7 @@ import { tenantList, tenantDetails, loadingStatus } from '../store/reducers';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { PropertyTenant, LeaseService } from '@lib/app-core';
-import { getTenantDetails } from '../store/actions/lease.actions';
+import { getTenantDetails, updateTenant } from '../store/actions/lease.actions';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -16,7 +16,7 @@ import { Observable } from 'rxjs';
 export class TenantDetailsComponent implements OnInit {
 
   id: number;
-  tenant: PropertyTenant;
+  tenant: any; // PropertyTenant;
 
   loading$: Observable<boolean>;
 
@@ -59,14 +59,15 @@ export class TenantDetailsComponent implements OnInit {
 
     this.detailsForm = this.formBuilder.group({
           id: [],
-          userName: [null],
-          firstName: [],
-          lastName: [],
-          contactEmail: [],
-          contactTelephone: [],
-          contactTelephone2: [],
-          contactOthers: [],
-          onlineAccessEnabled: [false],
+          leaseId: [],
+          userName: [''],
+          firstName: [''],
+          lastName: [''],
+          contactEmail: [''],
+          contactTelephone1: [''],
+          contactTelephone2: [''],
+          contactOthers: [''],
+          onlineAccessEnbaled: [false],
           isActive: [true]
         });
   }
@@ -101,7 +102,13 @@ export class TenantDetailsComponent implements OnInit {
     // });
 
 
-}
+  }
+
+  submit() {
+    this.detailsForm.get('leaseId').setValue(this.tenant.leaseId);
+    console.log('form data', this.detailsForm.value);
+    this.store.dispatch(updateTenant({payload: this.detailsForm.value}));
+  }
 
   goBack() {
     this.router.navigate(['/Manage/lease/tenants']);
