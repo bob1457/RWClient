@@ -26,8 +26,8 @@ export class AddPropertyFinishComponent implements OnInit {
     debugger;
     console.log(this.addForm.value);
     // console.log(formValue);
-    this.store.dispatch(PropertyActions.addProperty({payload: this.addForm.value}));
-    this.location.back();
+    // this.store.dispatch(PropertyActions.addProperty({payload: this.addForm.value}));
+    // this.location.back();
   }
 
 }

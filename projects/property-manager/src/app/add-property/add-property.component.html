@@ -14,7 +14,7 @@
     </mat-card-header>
     <mat-card-content class="property-add-card-content">
 
-        <form novalidate [formGroup]="addForm" class="add-form">
+        <form novalidate [formGroup]="addForm" class="add-form" (ngSubmit)="submit()">
 
             <mat-horizontal-stepper #stepper class="stepper">
                 <mat-step [stepControl]="addForm">
