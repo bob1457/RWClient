@@ -29,7 +29,7 @@ import { AddPropertyOwnerComponent } from './add-property-owner/add-property-own
 import { ContractContentComponent } from './contract-content/contract-content.component';
 import { YesNoPipe } from './yes-no.pipe';
 import { LoadingComponent } from './loading/loading.component';
-import { MatSortModule, MatPaginatorModule } from '@angular/material';
+import { MatSortModule, MatPaginatorModule, MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material';
 import { ContractHeaderComponent } from './contract-header/contract-header.component';
 import { ContractFooterComponent } from './contract-footer/contract-footer.component';
 import { ContractContentEditorComponent } from './contract-content-editor/contract-content-editor.component';
@@ -101,8 +101,9 @@ const routes: Routes = [
   exports: [
     MatSortModule
   ],
-  providers: [],
-
+  providers: [
+    // {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2500, panelClass: ['notif']}}
+  ],
   bootstrap: [AppPmComponent]
 })
 export class AppPmModule { }

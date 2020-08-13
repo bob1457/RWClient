@@ -7,6 +7,7 @@ import { EMPTY, of } from 'rxjs';
 
 import * as PropertyActions from '../actions/property.actions';
 import { PropertyActive } from 'projects/app-core/src/lib/property/models/property-active.model';
+import { MatSnackBar } from '@angular/material';
 
 
 
@@ -16,6 +17,7 @@ export class PropertyEffects {
   constructor(
     private actions$: Actions,
     private propertyService: PropertyService,
+    private snackBar: MatSnackBar,
     private propertyOwnerService: PropertyOwnerService,
     private contractService: ManagementContractService
   ) {}
@@ -258,6 +260,12 @@ export class PropertyEffects {
             payload: owner
           })),
           // tap(res => {console.log('response: ' + res); }),
+
+          tap( () => {
+            // window.alert('done');
+            this.openSnackBar('Owner updated successfully.', '');
+           }), // display notificaiton
+
           // catchError(
           //   err => {
           //     return of('[Property] Update Property Failure', err.error);
@@ -392,5 +400,11 @@ export class PropertyEffects {
       )
     )
   );
+
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 3000,
+    });
+  }
 
 }
