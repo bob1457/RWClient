@@ -26,6 +26,7 @@ export class ListingDetailsComponent implements OnInit {
   imgList: any[] = [];
 
   iconImg: any;
+  addOpenHouse = false;
 
   detailsForm: FormGroup;
   propertyForm: FormGroup;
@@ -231,5 +232,13 @@ export class ListingDetailsComponent implements OnInit {
   //     console.log(data);
   //   });
   // }
+
+  AddOpenHOuse() {
+    this.addOpenHouse = !this.addOpenHouse;
+  }
+
+  updateOpenHouse() {
+
+  }
 
 }
