@@ -212,7 +212,15 @@
                                         </mat-card>
                                     </li>
                                 </ul>
-                                <h6 style="margin-left: 60px;">Registered Viewers</h6>
+                                <h6 style="margin-left: 60px;margin-bottom: 15px;">Registered Viewers</h6>
+                                <ul *ngIf="listing.rentalProperty.openHouse[0].openHouseViewer.length > 0" style="list-style: none;margin-left: 20px;">
+                                    <li *ngFor="let viewer of listing.rentalProperty.openHouse[0].openHouseViewer" style="margin-bottom: 8px;">
+                                        <span style="font-style: italic; font-weight: bold;">{{viewer.firstName}} {{viewer.lastName}}</span> -- Email: {{viewer.contactEmail}}, Tel: {{viewer.contactTel}}
+                                    </li>
+                                </ul>
+                                <p style="margin-left: 60px;" *ngIf="listing.rentalProperty.openHouse[0].openHouseViewer.length == 0">
+                                    No viewers registered at this moment!
+                                </p>
                             </div>
 
                             <div *ngIf="listing.rentalProperty.openHouse.length == 0">
