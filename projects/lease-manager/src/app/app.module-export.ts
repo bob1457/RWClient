@@ -28,6 +28,8 @@ import { AgreementViewComponent } from './agreement-view/agreement-view.componen
 import { TermPipe } from './term.pipe';
 import { RenewCodePipe } from './renew-code.pipe';
 
+// import { CdkColumnDef } from '@angular/cdk/table';
+
 
 const routes: Routes = [
   // { path: '', component: AllLeasesComponent },
@@ -73,7 +75,9 @@ const routes: Routes = [
     EffectsModule.forFeature([LeaseEffects])
     // AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    // CdkColumnDef
+  ],
   bootstrap: [AppLMComponent]
 })
 export class AppLMModule { }

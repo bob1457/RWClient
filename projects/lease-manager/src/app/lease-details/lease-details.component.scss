@@ -88,6 +88,32 @@ hr {
     width: 200px;
 }
 
+.list {
+    list-style: none;
+    width: 90%;
+    margin-top: 20px;
+}
+
+.list th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #4CAF50;
+}
+
+.list tr {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.list tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.list tr:hover {
+    background-color: #ddd;
+}
+
 
 /*
   Loading style

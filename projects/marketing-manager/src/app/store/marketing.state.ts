@@ -1,4 +1,4 @@
-import { PropertyListing, RentalApplication } from '@lib/app-core';
+import { PropertyListing, RentalApplication, OpenHouse } from '@lib/app-core';
 import * as marketing from './reducers';
 import { createFeatureSelector } from '@ngrx/store';
 
@@ -12,6 +12,7 @@ export interface PropertyListingState   { // extends  EntityState<Property>
   application: RentalApplication | null;
   rentalproperties: any[] | null;
   propertyImgList: any[] | null;
+  openHouses: OpenHouse[] | null; // open houses for selected listing
 
   // ownersOfProperty: PropertyOwner[] | null;
   // selectedOwner: PropertyOwner | null;

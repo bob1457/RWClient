@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { PropertyListing } from '../models/property-listing.model';
 import { RentalApplication } from '../models/rental-application.model';
 import { PropertyImg } from '../models/property-img.model';
+import { OpenHouse } from '../models/openHouse.model';
 
 @Injectable({
   providedIn: 'root'
@@ -96,10 +97,16 @@ export class MarketingService {
     return this.http.get<PropertyImg[]>(`${this.baseUrl}/listing/allimgs`);
   }
 
-  addOpenHouse() {}
+  addOpenHouse(data: OpenHouse) {
+    debugger;
+    return this.http.post<OpenHouse>(`${this.baseUrl}/listing/addopenhouse`, data);
+  }
 
-  updateOpenHouse() {}
+  updateOpenHouse(data: any) {
+    debugger;
+    return this.http.post(`${this.baseUrl}/listing/updateopenhouse`, data);
+  }
 
-  addOpenHouseViewer() {}
+  // addOpenHouseViewer() {}
 
 }

@@ -5,8 +5,8 @@ import { PropertyListingState } from '../store/marketing.state';
 import { Store, select } from '@ngrx/store';
 import { Location } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
-import { getPropertyListingDetails, updatePropertyListing, uploadPropertyImage } from '../store/actions/marketing.actions';
-import { propertyListingDetails, loadingStatus, propertyImgList, loadedStatus } from '../store/reducers';
+import { getPropertyListingDetails, updatePropertyListing, uploadPropertyImage, addOpenHouseToListing } from '../store/actions/marketing.actions';
+import { propertyListingDetails, loadingStatus, propertyImgList, loadedStatus, openHouses } from '../store/reducers';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -27,15 +27,18 @@ export class ListingDetailsComponent implements OnInit {
 
   iconImg: any;
   addOpenHouse = false;
+  openhouse: any;
 
   detailsForm: FormGroup;
   propertyForm: FormGroup;
+  addForm: FormGroup;
 
   constructor(private store: Store<PropertyListingState>,
               private router: Router,
               private actRoute: ActivatedRoute,
               private location: Location,
               private formBuilder: FormBuilder,
+              private marketingService: MarketingService,
               private propertyService: MarketingService) {
                 this.id = this.actRoute.snapshot.params.id;
                 console.log(this.id);
@@ -63,6 +66,11 @@ export class ListingDetailsComponent implements OnInit {
                     // console.log('imglist', this.imgList);
                   }
                 });
+
+                this.store.select(openHouses)
+                    .subscribe(data => {
+                      this.openhouse = data;
+                    });
                }
 
   ngOnInit() {
@@ -121,6 +129,15 @@ export class ListingDetailsComponent implements OnInit {
     this.propertyForm = this.formBuilder.group({
       id: [],
       isActive: ['']
+    });
+
+    this.addForm = this.formBuilder.group({
+      rentalPropertyId: [],
+      openhouseDate: [''],
+      isActive: [true],
+      startTime: [''],
+      endTime: [''],
+      notes: ['']
     });
   }
 
@@ -197,6 +214,26 @@ export class ListingDetailsComponent implements OnInit {
 
   }
 
+  AddOpenHouse() {
+    debugger;
+    this.addForm.get('rentalPropertyId').setValue(this.listing.rentalProperty.id);
+    console.log('oh', this.addForm.value);
+    // this.marketingService.addOpenHouse(this.addForm.value)
+    //                      .subscribe(data => {
+    //                        console.log('new oh', data);
+    //                       //  this.listing.rentalProperty.openHouse = [''];
+    //                        console.log('ops-b', this.listing.rentalProperty.openHouse);
+    //                        this.listing.rentalProperty.openHouse.push(data);
+    //                        console.log('ops-a', this.listing.rentalProperty.openHouse);
+    //                      });
+    this.store.dispatch(addOpenHouseToListing({payload: this.addForm.value}));
+    this.addOpenHouse = false;
+    this.store.select(openHouses)
+        .subscribe(data => {
+          this.openhouse = data;
+        });
+  }
+
   updateStatus() {
     debugger;
     console.log('rental p', this.propertyForm.value);
@@ -233,12 +270,16 @@ export class ListingDetailsComponent implements OnInit {
   //   });
   // }
 
-  AddOpenHOuse() {
+  AddOH() {
     this.addOpenHouse = !this.addOpenHouse;
   }
 
   updateOpenHouse() {
 
+  }
+
+  clear() {
+    this.addForm.reset();
   }
 
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { PropertyLeaseState } from '../store/lease-state';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -7,6 +7,7 @@ import { LeaseService, PropertyLease } from '@lib/app-core';
 import { getLeaseDetails, updateLease } from '../store/actions/lease.actions';
 import { leaseDetails, loadingStatus } from '../store/reducers';
 import { Observable } from 'rxjs';
+import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 
 @Component({
   selector: 'app-lease-details',
@@ -21,6 +22,12 @@ export class LeaseDetailsComponent implements OnInit {
   loading$: Observable<boolean>;
 
   detailsForm: FormGroup;
+
+  displayedColumns: string[] = ['icon', 'id', 'rentAmtDue', 'paidAmt', 'rentMonth', 'rentYear', 'paidDate', 'payMethod', 'added', 'action'];
+  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: false}) sort: MatSort;
+
+  dataSource = new MatTableDataSource<PropertyLease>();
 
   constructor(private store: Store<PropertyLeaseState>,
               private router: Router,
@@ -128,6 +135,8 @@ export class LeaseDetailsComponent implements OnInit {
             this.lease = data;
             // this.detailsForm.patchValue(data);
             console.log(data);
+            // this.dataSource.data = this.lease;
+            // console.log('payment', this.dataSource.data);
           });
 
       // this.store.pipe(select(leaseDetails))

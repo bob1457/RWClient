@@ -340,7 +340,32 @@
                             </mat-tab>
 
 
-                            <!-- <mat-tab label="Agent" style="background: #f5f5f5;"></mat-tab> -->
+                            <mat-tab label="Rent Payment" style="background: #f5f5f5;">
+                                <div fxLayoutAlign="center">
+                                    <!-- <ul class="list">
+                                        <li *ngFor="let payment of lease.rentPayment">
+                                            {{payment.id}}
+                                        </li>
+                                    </ul> -->
+                                    <table class="list">
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>Amount Due</th>
+                                            <th>Paid Amount</th>
+                                        </tr>
+                                        <tr *ngFor="let payment of lease.rentPayment">
+                                            <td>{{payment.id}}</td>
+                                            <td>{{payment.scheduledPaymentAmt}}</td>
+                                            <td>{{payment.actualPaymentAmt}}</td>
+                                        </tr>
+
+                                    </table>
+
+
+                                </div>
+
+
+                            </mat-tab>
 
                         </mat-tab-group>
                     </div>

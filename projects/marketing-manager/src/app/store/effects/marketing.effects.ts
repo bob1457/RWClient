@@ -1,5 +1,5 @@
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { MarketingService, PropertyListing, RentalApplication, PropertyImg } from '@lib/app-core';
+import { MarketingService, PropertyListing, RentalApplication, PropertyImg, OpenHouse } from '@lib/app-core';
 import { Injectable } from '@angular/core';
 
 import * as ListingActions from '../actions/marketing.actions';
@@ -246,5 +246,28 @@ export class MarketingEffects {
     )
   );
 
+  addOpenHouseToListing$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(ListingActions.addOpenHouseToListing),
+      tap(() => console.log('got here to add open house to listing !!!')),
+      map(action => action.payload),
+      switchMap((payload) =>
+        this.marketingService.addOpenHouse(payload).pipe(
+          map((openhouse: OpenHouse) => ({
+            type: '[Marketing] Add Open House to Listing Success',
+            payload: openhouse
+          })),
+          // tap(res => {console.log('response: ' + res); }),
+          // catchError(
+          //   err => {
+          //     return of('[Marketing] Add Property Listing Failure', err.error);
+          //   } // EMPTY
+          // )
+          catchError(error => of(ListingActions.addOpenHouseToListinggFailure(error.message)))
+        )
+      )
+    )
+  );
 
 }
