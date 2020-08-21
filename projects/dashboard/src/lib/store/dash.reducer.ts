@@ -15,6 +15,8 @@ export const initialState: DashState =  { // adapter.getInitialState
   tenants: null,
   leases: null,
   applications: null,
+  workOrders: null,
+  openHouseList: null,
   errorMessage: null
 };
 

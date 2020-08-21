@@ -27,6 +27,10 @@ import { LoadingComponent } from './loading/loading.component';
 import { AgreementViewComponent } from './agreement-view/agreement-view.component';
 import { TermPipe } from './term.pipe';
 import { RenewCodePipe } from './renew-code.pipe';
+import { AllWorkOrdersComponent } from './all-work-orders/all-work-orders.component';
+import { AddWorkOrderComponent } from './add-work-order/add-work-order.component';
+import { WorkOrderDetailsComponent } from './work-order-details/work-order-details.component';
+
 
 // import { CdkColumnDef } from '@angular/cdk/table';
 
@@ -40,7 +44,8 @@ const routes: Routes = [
       { path: 'leasedetails/:id', component: LeaseDetailsComponent},
       { path: 'addlease', component: AddLeaseComponent},
       { path: 'tenantdetails/:id', component: TenantDetailsComponent},
-      { path: 'addtenant', component: AddTenantComponent}
+      { path: 'addtenant', component: AddTenantComponent},
+      { path: 'workorders', component: AllWorkOrdersComponent}
       // { path: 'applications', component: ApplicationListComponent}
     ]
   }//,
@@ -61,7 +66,10 @@ const routes: Routes = [
     AgreementViewComponent,
     YesNoPipe,
     TermPipe,
-    RenewCodePipe
+    RenewCodePipe,
+    AllWorkOrdersComponent,
+    AddWorkOrderComponent,
+    WorkOrderDetailsComponent
   ],
   imports: [
     // BrowserModule,

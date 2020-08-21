@@ -19,6 +19,11 @@ import { LoadingComponent } from './loading/loading.component';
 import { AgreementViewComponent } from './agreement-view/agreement-view.component';
 import { TermPipe } from './term.pipe';
 import { RenewCodePipe } from './renew-code.pipe';
+import { AllWorkOrdersComponent } from './all-work-orders/all-work-orders.component';
+import { AddWorkOrderComponent } from './add-work-order/add-work-order.component';
+import { WorkOrderDetailsComponent } from './work-order-details/work-order-details.component';
+import { OpenHouseDetailsComponent } from './open-house-details/open-house-details.component';
+import { AllOpenHousesComponent } from './all-open-houses/all-open-houses.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +39,12 @@ import { RenewCodePipe } from './renew-code.pipe';
     LoadingComponent,
     AgreementViewComponent,
     TermPipe,
-    RenewCodePipe
+    RenewCodePipe,
+    AllWorkOrdersComponent,
+    AddWorkOrderComponent,
+    WorkOrderDetailsComponent,
+    OpenHouseDetailsComponent,
+    AllOpenHousesComponent
   ],
   imports: [
     BrowserModule,

@@ -213,8 +213,8 @@
                                     </li>
                                 </ul>
                                 <h6 style="margin-left: 60px;margin-bottom: 15px;">Registered Viewers</h6>
-                                <ul *ngIf="openhouse.length > 0" style="list-style: none;margin-left: 20px;">
-                                    <li *ngFor="let viewer of openhouse.openHouseViewer" style="margin-bottom: 8px;">
+                                <ul *ngIf="listing.rentalProperty.openHouse[0].openHouseViewer.length > 0" style="list-style: none;margin-left: 20px;">
+                                    <li *ngFor="let viewer of listing.rentalProperty.openHouse[0].openHouseViewer" style="margin-bottom: 8px;">
                                         <span style="font-style: italic; font-weight: bold;">{{viewer.firstName}} {{viewer.lastName}}</span> -- Email: {{viewer.contactEmail}}, Tel: {{viewer.contactTel}}
                                     </li>
                                 </ul>
@@ -222,7 +222,7 @@
                                     No viewers registered at this moment!
                                 </p>
                             </div>
-                            <!-- listing.rentalProperty.openHouse[0].openHouseViewer.length > 0 listing.rentalProperty.openHouse[0]-->
+                            <!--  -->
                             <div *ngIf="listing.rentalProperty.openHouse.length == 0">
                                 <p style="margin: 20px;">No open house</p>
                                 <a mat-button color="primary" style="margin-left: 20px;" (click)="AddOH()">
