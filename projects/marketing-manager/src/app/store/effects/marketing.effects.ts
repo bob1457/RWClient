@@ -270,4 +270,27 @@ export class MarketingEffects {
     )
   );
 
+  getOpenHouseList$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(ListingActions.getOpenHouseList),
+      tap(() => console.log('got here for rental application list!!!')),
+      switchMap(() =>
+        this.marketingService.getOpenHouseList().pipe(
+          map((openhouses: RentalApplication[]) => ({
+            type: '[Marketing] Get OpenHouse List Success',
+            payload: openhouses
+          })),
+          // tap(res => {console.log('response: ' + res); }),
+          // catchError(
+          //   err => {
+          //     return of('[Marketing] Get Rental Applications Failure', err.error);
+          //   } // EMPTY
+          // )
+          catchError(error => of(ListingActions.getOpenHouseListFailure(error.message)))
+        )
+      )
+    )
+  );
+
 }

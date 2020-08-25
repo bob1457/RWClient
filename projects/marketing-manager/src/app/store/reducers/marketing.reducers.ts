@@ -249,6 +249,27 @@ const propertyListingReducer = createReducer(
   }),
 
   /**
+   * Get all open houses
+   */
+
+
+  on(ListingActions.getOpenHouseList, state => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+
+  on(ListingActions.getOpenHouseListSuccess, (state, { payload }) => {
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      openHouses: payload
+    });
+  }),
+
+  /**
    * Add open house to property listing
    */
   on(ListingActions.addOpenHouseToListing, state => ({

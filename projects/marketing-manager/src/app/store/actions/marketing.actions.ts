@@ -202,6 +202,28 @@ export const updatePropertyListingStatusSuccess = createAction(
   props<{payload: PropertyListing}>()
 );
 
+
+/**
+ * Get all open houses Actions
+ */
+export const getOpenHouseList = createAction(
+  '[Marketing] Get OpenHouse List'
+);
+
+export const getOpenHouseListSuccess = createAction(
+  '[Marketing] Get OpenHouse List Success',
+  props<{payload: RentalApplication[]}>()
+);
+
+export const getOpenHouseListFailure = createAction(
+  '[Marketing] Get OpenHouse List Failure',
+  // props<{payload: any}>()
+  (errorMessage = 'Error loading property listing') => {
+    return ({ payload: { errorMessage } });
+  }
+);
+
+
 /**
  * Add Open House toy Listing Actions
  */

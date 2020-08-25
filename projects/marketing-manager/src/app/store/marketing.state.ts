@@ -12,7 +12,7 @@ export interface PropertyListingState   { // extends  EntityState<Property>
   application: RentalApplication | null;
   rentalproperties: any[] | null;
   propertyImgList: any[] | null;
-  openHouses: OpenHouse[] | null; // open houses for selected listing
+  openHouses: OpenHouse[] | null; // all open houses
 
   // ownersOfProperty: PropertyOwner[] | null;
   // selectedOwner: PropertyOwner | null;

@@ -107,6 +107,11 @@ export class MarketingService {
     return this.http.post(`${this.baseUrl}/listing/updateopenhouse`, data);
   }
 
+  getOpenHouseList() {
+    debugger;
+    return this.http.get<OpenHouse[]>(`${this.baseUrl}/listing/allopenhouses`);
+  }
+
   // addOpenHouseViewer() {}
 
 }
