@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { DashState } from '../store/dash.state';
 import { RentalApplication } from '../models/application.model';
 import { PropertyListing} from '../models/property-listing.model';
+import { OpenHouse } from '../models/openhouse.model';
 
 @Component({
   selector: 'lib-dash-owner',
@@ -16,6 +17,7 @@ export class DashOwnerComponent implements OnInit {
 
   @Input() listings: PropertyListing[];
   @Input() applications: RentalApplication[];
+  @Input() openhouses: OpenHouse[];
 
   constructor(private store: Store<DashState>) { }
 

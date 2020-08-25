@@ -274,10 +274,10 @@ export class MarketingEffects {
     this.actions$.pipe(
       // ofType('[Property] Get Property List'),
       ofType(ListingActions.getOpenHouseList),
-      tap(() => console.log('got here for rental application list!!!')),
+      tap(() => console.log('got here for open house list!!!')),
       switchMap(() =>
         this.marketingService.getOpenHouseList().pipe(
-          map((openhouses: RentalApplication[]) => ({
+          map((openhouses: OpenHouse[]) => ({
             type: '[Marketing] Get OpenHouse List Success',
             payload: openhouses
           })),

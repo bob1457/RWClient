@@ -212,13 +212,13 @@ export const getOpenHouseList = createAction(
 
 export const getOpenHouseListSuccess = createAction(
   '[Marketing] Get OpenHouse List Success',
-  props<{payload: RentalApplication[]}>()
+  props<{payload: OpenHouse[]}>()
 );
 
 export const getOpenHouseListFailure = createAction(
   '[Marketing] Get OpenHouse List Failure',
   // props<{payload: any}>()
-  (errorMessage = 'Error loading property listing') => {
+  (errorMessage = 'Error loading open house list') => {
     return ({ payload: { errorMessage } });
   }
 );

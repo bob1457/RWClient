@@ -2,7 +2,7 @@ import { createAction, props } from '@ngrx/store';
 import { Property } from '../models/property.model';
 import { PropertyOwner } from '../models/property-owner.model';
 import { ManagementContract } from '../models/management-contract.model';
-import { PropertyListing } from '@lib/app-core';
+import { PropertyListing, OpenHouse } from '@lib/app-core';
 import { PropertyLease } from '../models/property-lease.model';
 import { PropertyTenant } from '../models/property-tenant.model';
 import { RentalApplication } from '../models/application.model';
@@ -167,6 +167,26 @@ export const getRentalApplicationListSuccess = createAction(
 export const getRentalApplicationListFailure = createAction(
   '[Marketing] Get Rental Application List Failure',
   (errorMessage = 'Error loading rental application list') => {
+    return ({ payload: { errorMessage } });
+  }
+);
+
+/**
+ * Get all open houses Actions
+ */
+export const getOpenHouseList = createAction(
+  '[Marketing] Get OpenHouse List'
+);
+
+export const getOpenHouseListSuccess = createAction(
+  '[Marketing] Get OpenHouse List Success',
+  props<{payload: OpenHouse[]}>()
+);
+
+export const getOpenHouseListFailure = createAction(
+  '[Marketing] Get OpenHouse List Failure',
+  // props<{payload: any}>()
+  (errorMessage = 'Error loading open house list') => {
     return ({ payload: { errorMessage } });
   }
 );

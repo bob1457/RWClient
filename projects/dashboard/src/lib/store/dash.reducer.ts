@@ -16,7 +16,7 @@ export const initialState: DashState =  { // adapter.getInitialState
   leases: null,
   applications: null,
   workOrders: null,
-  openHouseList: null,
+  openHouses: null,
   errorMessage: null
 };
 
@@ -194,6 +194,27 @@ const dashReducer = createReducer(
       applications: null,
       errorMessage: 'Failed to load contract details'
     });
+  }),
+
+  /**
+   * Get all open houses
+   */
+
+
+  on(DashActions.getOpenHouseList, state => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+
+  on(DashActions.getOpenHouseListSuccess, (state, { payload }) => {
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      openHouses: payload
+    });
   })
 
 );
@@ -210,6 +231,7 @@ const AllContracts = (state: DashState) => state.contracts;
 const AllTenants = (state: DashState) => state.tenants;
 const AllRentals = (state: DashState) => state.leases;
 const AllOwners = (state: DashState) => state.owners;
+const AllOpenhouess = (state: DashState) => state.openHouses;
 
 const AllListings = (state: DashState) => state.listings;
 const AllRentalApps = (state: DashState) => state.applications;
@@ -225,6 +247,7 @@ export const ContractList = createSelector(getDashState, AllContracts);
 export const TenantList = createSelector(getDashState, AllTenants);
 export const RentalList = createSelector(getDashState, AllRentals);
 export const OwnerList = createSelector(getDashState, AllOwners);
+export const OpenHouseList = createSelector(getDashState, AllOpenhouess);
 
 export const MarketingList = createSelector(getDashState, AllListings);
 export const RentalAppList = createSelector(getDashState, AllRentalApps);
