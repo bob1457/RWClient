@@ -24,6 +24,10 @@ import { AddWorkOrderComponent } from './add-work-order/add-work-order.component
 import { WorkOrderDetailsComponent } from './work-order-details/work-order-details.component';
 import { OpenHouseDetailsComponent } from './open-house-details/open-house-details.component';
 import { AllOpenHousesComponent } from './all-open-houses/all-open-houses.component';
+import { ServieRequestListComponent } from './servie-request-list/servie-request-list.component';
+import { ServieRequestDetailsComponent } from './servie-request-details/servie-request-details.component';
+import { VendorDetailsComponent } from './vendor-details/vendor-details.component';
+import { VendorListComponent } from './vendor-list/vendor-list.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +48,11 @@ import { AllOpenHousesComponent } from './all-open-houses/all-open-houses.compon
     AddWorkOrderComponent,
     WorkOrderDetailsComponent,
     OpenHouseDetailsComponent,
-    AllOpenHousesComponent
+    AllOpenHousesComponent,
+    ServieRequestListComponent,
+    ServieRequestDetailsComponent,
+    VendorDetailsComponent,
+    VendorListComponent
   ],
   imports: [
     BrowserModule,

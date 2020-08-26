@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { PropertyLease, PropertyTenant } from '@lib/app-core';
+import { PropertyLease, PropertyTenant, WorkOrder, Vendor } from '@lib/app-core';
 
 debugger;
 
@@ -163,6 +163,134 @@ export const updateTenantSuccess = createAction(
   '[Leases] Update Tenant Success',
   props<{payload: PropertyLease}>()
 );
+
+/**
+ * Get All Work Orders Actions
+ */
+export const getAllWorkOrders = createAction(
+  '[Leases] Get All  Work Orders'
+);
+
+export const getAllWorkOrdersSuccess = createAction(
+  '[Leases] Get All Work Orders Success',
+  props<{payload: WorkOrder[]}>()
+);
+
+export const getAllWorkOrdersFailure = createAction(
+  '[Leases] Get All  Work Orders Failure',
+  // props<{payload: any}>()
+  (errorMessage = 'Error loading work orders') => {
+    return ({ payload: { errorMessage } });
+  }
+);
+
+/**
+ * Add Work Order to Property
+ */
+
+export const addWorkOrder = createAction(
+  '[Leases] Add Work Order',
+  props<{payload: WorkOrder}>()
+);
+
+export const addWorkOrderSuccess = createAction(
+  '[Leases] Add Work Order Success',
+  props<{payload: WorkOrder}>()
+);
+
+export const addWorkOrderFailure = createAction(
+  '[[Leases] Add Work Order Failure',
+  // props<{payload: any}>()
+  (errorMessage = 'Error adding work order') => ({ payload: { errorMessage }})
+
+);
+
+/**
+ * Update Work Order Actions
+ */
+
+export const updateWorkOrder = createAction(
+  '[Leases] Update Work Order',
+  props<{payload: WorkOrder}>()
+);
+
+export const updateWorkOrderSuccess = createAction(
+  '[Leases] Update Work Order Success',
+  props<{payload: WorkOrder}>()
+);
+
+export const updateWorkOrderFailure = createAction(
+  '[Leases] Update Work Order Failure',
+  // props<{payload: any}>()
+  (errorMessage = 'Error updating work order') => ({ payload: { errorMessage }})
+
+);
+
+
+/**
+ * Get All Vendors Actions
+ */
+export const getAllVendors = createAction(
+  '[Leases] Get All Vendors'
+);
+
+export const getAllVendorsSuccess = createAction(
+  '[Leases] Get All Vendors Success',
+  props<{payload: Vendor[]}>()
+);
+
+export const getAllVendorsFailure = createAction(
+  '[Leases] Get All Vendors Failure',
+  // props<{payload: any}>()
+  (errorMessage = 'Error loading work orders') => {
+    return ({ payload: { errorMessage } });
+  }
+);
+
+/**
+ * Add Vendor to Property
+ */
+
+export const addVendor = createAction(
+  '[Leases] Add Vendors',
+  props<{payload: WorkOrder}>()
+);
+
+export const addVendorSuccess = createAction(
+  '[Leases] Add Vendors Success',
+  props<{payload: WorkOrder}>()
+);
+
+export const addVendorFailure = createAction(
+  '[[Leases] Add Vendors Failure',
+  // props<{payload: any}>()
+  (errorMessage = 'Error adding work order') => ({ payload: { errorMessage }})
+
+);
+
+/**
+ * Update Vendor Actions
+ */
+
+export const updateVendor = createAction(
+  '[Leases] Update Vendor',
+  props<{payload: Vendor}>()
+);
+
+export const updateVendorsSuccess = createAction(
+  '[Leases] Update Vendor Success',
+  props<{payload: Vendor}>()
+);
+
+export const updatVendorsFailure = createAction(
+  '[Leases] Update Vendor Failure',
+  // props<{payload: any}>()
+  (errorMessage = 'Error updating work order') => ({ payload: { errorMessage }})
+
+);
+
+
+
 
 export const updateTenantFailure = createAction(
   '[Leases] Update Tenant Failure',

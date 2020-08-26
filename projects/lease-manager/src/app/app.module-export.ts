@@ -30,6 +30,10 @@ import { RenewCodePipe } from './renew-code.pipe';
 import { AllWorkOrdersComponent } from './all-work-orders/all-work-orders.component';
 import { AddWorkOrderComponent } from './add-work-order/add-work-order.component';
 import { WorkOrderDetailsComponent } from './work-order-details/work-order-details.component';
+import { ServieRequestListComponent } from './servie-request-list/servie-request-list.component';
+import { ServieRequestDetailsComponent } from './servie-request-details/servie-request-details.component';
+import { VendorDetailsComponent } from './vendor-details/vendor-details.component';
+import { VendorListComponent } from './vendor-list/vendor-list.component';
 
 
 // import { CdkColumnDef } from '@angular/cdk/table';
@@ -45,7 +49,12 @@ const routes: Routes = [
       { path: 'addlease', component: AddLeaseComponent},
       { path: 'tenantdetails/:id', component: TenantDetailsComponent},
       { path: 'addtenant', component: AddTenantComponent},
-      { path: 'workorders', component: AllWorkOrdersComponent}
+      { path: 'workorders', component: AllWorkOrdersComponent},
+      { path: 'workorderdetails/:id', component: WorkOrderDetailsComponent},
+      { path: 'servicerequests', component: ServieRequestListComponent},
+      { path: 'servicerequestdetails/:id', component: ServieRequestDetailsComponent},
+      { path: 'vendors', component: VendorListComponent},
+      { path: 'vendordetails/:id', component: VendorDetailsComponent}
       // { path: 'applications', component: ApplicationListComponent}
     ]
   }//,
@@ -69,7 +78,11 @@ const routes: Routes = [
     RenewCodePipe,
     AllWorkOrdersComponent,
     AddWorkOrderComponent,
-    WorkOrderDetailsComponent
+    WorkOrderDetailsComponent,
+    ServieRequestListComponent,
+    ServieRequestDetailsComponent,
+    VendorDetailsComponent,
+    VendorListComponent
   ],
   imports: [
     // BrowserModule,
