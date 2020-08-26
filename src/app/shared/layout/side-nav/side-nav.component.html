@@ -262,13 +262,13 @@
                                 <!---->
                                 <mat-icon style="color: rgb(72, 173, 219)" [routerLink]="['/Manage/marketing']" [routerLinkActive]="['active']" matListIcon>published_with_changes</mat-icon>
                                 <a matLine [routerLink]="['/Manage/marketing/openhouses']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }">Open Houses</a>
-                                <mat-chip *ngIf="propertyLisitng" title="{{propertyLisitng.length}}" style="background-color: rgb(16, 129, 63);
+                                <mat-chip *ngIf="openHouses" title="{{openHouses.length}}" style="background-color: rgb(16, 129, 63);
                                 color: rgb(195, 214, 26);
                                 padding-right: 7px;
                                 padding-left:7px;
                                 /* border-radius: 50%; */
                                 border: 0 transparent;
-                                font-size: 12px;">{{propertyLisitng.length}}
+                                font-size: 12px;">{{openHouses.length}}
                                 </mat-chip>
                                 <!-- <button mat-icon-button (click)="showInfo(link)"></button> -->
                             </mat-list-item>

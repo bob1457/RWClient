@@ -192,14 +192,14 @@
 
                         </mat-tab> -->
                         <mat-tab label="Open Houses" style="background: #f5f5f5;">
-                            <div *ngIf="listing.rentalProperty.openHouse.length > 0">
+                            <div *ngIf="openhouse.length > 0">
                                 <ul>
-                                    <li *ngFor="let oh of listing.rentalProperty.openHouse" style="list-style: none;" fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="1%" fxFlexFill>
+                                    <li *ngFor="let oh of openhouse" style="list-style: none;" fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="1%" fxFlexFill>
                                         <mat-card class="oh-card">
                                             <mat-card-header>
                                                 <!-- <div mat-card-avatar class="tenant-avatar">
                                       <img src="../../assets/images/tenant.png" width="50px" height="50px" style="border-radius: 50%;">
-                                  </div> -->
+                                  </div> listing.rentalProperty.openHouse-->
                                                 <mat-card-title> Current Open House </mat-card-title>
                                                 <mat-card-subtitle>Open house for {{listing.rentalProperty.propertyName}}</mat-card-subtitle>
                                             </mat-card-header>

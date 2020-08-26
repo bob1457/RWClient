@@ -28,6 +28,7 @@ export class ListingDetailsComponent implements OnInit {
   iconImg: any;
   addOpenHouse = false;
   openhouse: any;
+  // ohList: any[] = [];
 
   detailsForm: FormGroup;
   propertyForm: FormGroup;
@@ -51,6 +52,16 @@ export class ListingDetailsComponent implements OnInit {
                         this.iconImg = this.imgList.filter((value, index) => index === 0);
                       }
 
+                      this.store.select(openHouses)
+                          .subscribe(oh => {
+                            if (oh) {
+                              this.openhouse = oh.filter(p => p.rentalPropertyId == this.listing.rentalProperty.id);
+                              console.log('rentalpId', this.listing.rentalProperty.id);
+                              console.log('oh', this.openhouse);
+                            }
+                            // this.openhouse = oh;this.listing.rentalProperty.id
+                          });
+
                       console.log('imglist', this.imgList);
                       console.log('iconimg', this.iconImg);
                       console.log('list', this.listing);
@@ -67,10 +78,15 @@ export class ListingDetailsComponent implements OnInit {
                   }
                 });
 
-                this.store.select(openHouses)
-                    .subscribe(data => {
-                      this.openhouse = data;
-                    });
+                // this.store.select(openHouses)
+                //     .subscribe(oh => {
+                //       if (oh) {
+                //         this.openhouse = oh.filter(p => p.rentalPropertyId == 1);
+                //         console.log('rentalpId', this.listing.rentalProperty.id);
+                //         console.log('oh', this.openhouse);
+                //       }
+                //       // this.openhouse = oh;this.listing.rentalProperty.id
+                //     });
                }
 
   ngOnInit() {
