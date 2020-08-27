@@ -242,7 +242,7 @@ export const getAllVendorsSuccess = createAction(
 export const getAllVendorsFailure = createAction(
   '[Leases] Get All Vendors Failure',
   // props<{payload: any}>()
-  (errorMessage = 'Error loading work orders') => {
+  (errorMessage = 'Error loading vendors') => {
     return ({ payload: { errorMessage } });
   }
 );

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { LeaseService, PropertyLease, PropertyTenant } from '@lib/app-core';
+import { LeaseService, PropertyLease, PropertyTenant, Vendor } from '@lib/app-core';
 import * as LeaseActions from '../actions/lease.actions';
 
 import { switchMap, map, catchError, tap } from 'rxjs/operators';
@@ -204,6 +204,29 @@ export class LeaseEffects {
           //   } // EMPTY
           // )
           catchError(error => of(LeaseActions.updateTenantFailure(error.message)))
+        )
+      )
+    )
+  );
+
+  getAllVendors$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(LeaseActions.getAllVendors),
+      tap(() => console.log('got here for vendors!!!')),
+      switchMap(() =>
+        this.leaseService.getAllVendors().pipe(
+          map((vendors: Vendor[]) => ({
+            type: '[Leases] Get All Vendors Success',
+            payload: vendors
+          })),
+          // tap(res => {console.log('response: ' + res); }),
+          // catchError(
+          //   err => {
+          //     return of('[Leases] Get all leases Failure', err.error);
+          //   } // EMPTY
+          // )
+          catchError(error => of(LeaseActions.getAllVendorsFailure(error.message)))// EMPTY
         )
       )
     )

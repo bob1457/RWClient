@@ -180,7 +180,35 @@ const propertyLeaseReducer = createReducer(
       leases: updatedTenants, // [...state.listings, payload ]
       selectedTenant: payload
     });
+
+
   }),
+
+  /**
+   * Get Vendors
+   */
+
+  on(LeaseActions.getAllVendors, state => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+  on(LeaseActions.getAllVendorsSuccess, (state, { payload }) => {
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      vendors: payload
+    });
+  }),
+
+  on(LeaseActions.getAllVendorsFailure, (state) => ({
+    ...state,
+    loading: false,
+    loaded: false,
+    errorMessage: 'Failed to load vendors'
+  })),
 
 
 
@@ -198,6 +226,7 @@ export const getLeaseList = (state: PropertyLeaseState) => state.leases;
 export const getTenantList = (state: PropertyLeaseState) => state.tenants;
 export const getLeaseDetails = (state: PropertyLeaseState) => state.selectedLease;
 export const getTenantDetails = (state: PropertyLeaseState) => state.selectedTenant;
+export const getVendorList = (state: PropertyLeaseState) => state.vendors;
 
 export const loadingStatus = createSelector(selectLeaseyState, getLoadingStatus);
 
@@ -205,6 +234,7 @@ export const leaseList = createSelector(selectLeaseyState, getLeaseList);
 export const tenantList = createSelector(selectLeaseyState, getTenantList);
 export const leaseDetails = createSelector(selectLeaseyState, getLeaseDetails);
 export const tenantDetails = createSelector(selectLeaseyState, getTenantDetails);
+export const vendorList = createSelector(selectLeaseyState, getVendorList);
 
 
 
