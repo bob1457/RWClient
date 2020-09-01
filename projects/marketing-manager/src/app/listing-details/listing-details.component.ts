@@ -287,7 +287,8 @@ export class ListingDetailsComponent implements OnInit {
   // }
 
   AddOH() {
-    this.addOpenHouse = !this.addOpenHouse;
+    // this.addOpenHouse = !this.addOpenHouse;
+    this.router.navigate(['/Manage/marketing/openhouseson']);
   }
 
   updateOpenHouse() {

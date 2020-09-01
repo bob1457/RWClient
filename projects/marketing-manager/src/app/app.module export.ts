@@ -27,8 +27,8 @@ import { ListingDetailsSideComponent } from './listing-details-side/listing-deta
 import { ListingDetailsMainComponent } from './listing-details-main/listing-details-main.component';
 import { ListingDetailsSecondaryComponent } from './listing-details-secondary/listing-details-secondary.component';
 import { AppStatusPipe } from './app-status.pipe';
-import { AllOpenHousesComponent } from 'projects/lease-manager/src/app/all-open-houses/all-open-houses.component';
-import { OpenHouseDetailsComponent } from 'projects/lease-manager/src/app/open-house-details/open-house-details.component';
+import { AllOpenHousesComponent } from '../app/all-open-houses/all-open-houses.component';
+import { OpenHouseDetailsComponent } from '../app/open-house-details/open-house-details.component';
 
 
 const routes: Routes = [
@@ -69,7 +69,8 @@ const routes: Routes = [
     ListingDetailsSecondaryComponent,
     OpenHouseDetailsComponent,
     AllOpenHousesComponent,
-    AppStatusPipe
+    AppStatusPipe,
+    AllOpenHousesComponent
   ],
   imports: [
     // BrowserModule,
