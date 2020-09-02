@@ -25,26 +25,47 @@
                 <mat-card-subtitle>Rental Property: {{openhouse[0].rentalProperty.propertyName}}</mat-card-subtitle>
             </mat-card-header>
             <mat-card-content class="openhouse-details-card-content">
-                <form fxLayout="column" fxLayoutGap="7px" fxLayoutAlign="start start" [formGroup]="detailsForm" (ngSubmit)="submit()" style="margin-left: 20px;">
-                    <mat-form-field style="margin-right: 10px; width: 30%;">
-                        <mat-label>Open House Date</mat-label>
-                        <input matInput [matDatepicker]="picker" formControlName="openhouseDate" [ngModel]="openhouse[0].openhouseDate">
-                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                        <mat-datepicker #picker></mat-datepicker>
-                    </mat-form-field>
-                    <mat-form-field class="form-content" style="width: 30%;">
-                        <mat-icon matSuffix>av_timer</mat-icon>
-                        <input formControlName="startTime" matInput placeholder="Start Time: e.g. 2:00pm" [ngModel]="openhouse[0].startTime">
-                    </mat-form-field>
-                    <mat-form-field class="form-content" style="width: 30%;">
-                        <mat-icon matSuffix>av_timer</mat-icon>
-                        <input formControlName="endTime" matInput placeholder="End Time: e.g. 4:00pm" [ngModel]="openhouse[0].endTime">
-                    </mat-form-field>
-                    <mat-form-field class="property-full-width" style="width: 30%;">
-                        <mat-label>Note</mat-label>
-                        <textarea matInput formControlName="notes" [ngModel]="openhouse[0].notes"></textarea>
-                    </mat-form-field>
-                    <div fxLayout="row" fxLayoutGap="7px" fxLayoutAlign="end center" style="width: 30%; margin-bottom: 20px;">
+                <form fxLayout="column" fxLayoutGap="7px" fxLayoutAlign="center center" [formGroup]="detailsForm" (ngSubmit)="submit()" style="margin-left: 20px;">
+                    <div fxLayout="row" fxLayoutGap="7px" fxLayoutAlign="center start" style="width: 100%;">
+                        <div fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="start start" style="width:50%; margin-top:25px">
+                            <p></p>
+                            <p></p>
+                            <p></p>
+                            <p></p>
+                            <p></p>
+                            <p></p>
+                            <div>Property & Listing Info</div>
+                        </div>
+                        <div fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="start start" style="width:50%; margin-top: 25px;">
+                            <p></p>
+                            <p></p>
+                            <p></p>
+                            <p></p>
+                            <p></p>
+                            <p></p>
+                            <mat-form-field style="margin-right: 10px; width: 90%;">
+                                <mat-label>Open House Date</mat-label>
+                                <input matInput [matDatepicker]="picker" formControlName="openhouseDate" [ngModel]="openhouse[0].openhouseDate">
+                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker #picker></mat-datepicker>
+                            </mat-form-field>
+                            <mat-form-field class="form-content" style="width: 90%;">
+                                <mat-icon matSuffix>av_timer</mat-icon>
+                                <input formControlName="startTime" matInput placeholder="Start Time: e.g. 2:00pm" [ngModel]="openhouse[0].startTime">
+                            </mat-form-field>
+                            <mat-form-field class="form-content" style="width: 90%;">
+                                <mat-icon matSuffix>av_timer</mat-icon>
+                                <input formControlName="endTime" matInput placeholder="End Time: e.g. 4:00pm" [ngModel]="openhouse[0].endTime">
+                            </mat-form-field>
+                            <mat-form-field class="property-full-width" style="width: 90%;">
+                                <mat-label>Note</mat-label>
+                                <textarea matInput formControlName="notes" [ngModel]="openhouse[0].notes"></textarea>
+                            </mat-form-field>
+                        </div>
+
+                    </div>
+
+                    <div fxLayout="row" fxLayoutGap="7px" fxLayoutAlign="end center" style="width: 90%; margin-bottom: 20px;">
                         <!-- <span *ngIf="showMsg" style="color: rgb(189, 150, 25);">Updated successfully!</span>
 <img *ngIf=" loading" class="pl-2" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
 /> [disabled]="f.invalid || !f.dirty"-->

@@ -61,7 +61,9 @@ export class OpenHouseDetailsComponent implements OnInit {
   }
 
   submit() {
-
+    console.log('\n\n------ begin: update open house ------');
+    console.log('update submitted');
+    console.log('------ end:  done ------\n\n');
   }
 
 }
