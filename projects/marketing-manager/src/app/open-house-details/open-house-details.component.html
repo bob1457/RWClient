@@ -7,8 +7,21 @@
     </div>
     <div fxFlex="20%" fxLayout="column" class="avatar_sec" fxLayoutAlign="start center">
         <span>
-      <img src="../../assets/images/10621.jpg" style="border-radius: 50%;margin-top: 20px;" width="120px " height="120px" title="">
-    </span>
+        <img src="../../assets/images/10621.jpg" style="border-radius: 50%;" width="120px " height="120px" title="">
+      </span>
+        <div class="side-info">
+            <h6>Open house Attendees</h6>
+            <div>
+                <ul *ngIf="openhouse[0].openHouseViewer.length > 0" style="list-style: none;margin-left: -30px;font-size: .8em;">
+                    <li *ngFor="let viewer of openhouse[0].openHouseViewer" style="margin-bottom: 8px;">
+                        <span style="font-style: italic;">{{viewer.firstName}} {{viewer.lastName}}</span> -- {{viewer.contactEmail}}, {{viewer.contactTel}}
+                    </li>
+                </ul>
+                <p style="margin-left: 60px;" *ngIf="openhouse[0].openHouseViewer.length == 0" style="list-style: none;font-size: .8em;">
+                    No viewers registered at this moment!
+                </p>
+            </div>
+        </div>
 
     </div>
 
@@ -27,14 +40,34 @@
             <mat-card-content class="openhouse-details-card-content">
                 <form fxLayout="column" fxLayoutGap="7px" fxLayoutAlign="center center" [formGroup]="detailsForm" (ngSubmit)="submit()" style="margin-left: 20px;">
                     <div fxLayout="row" fxLayoutGap="7px" fxLayoutAlign="center start" style="width: 100%;">
-                        <div fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="start start" style="width:50%; margin-top:25px">
+                        <div fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="start start" style="width:50%; margin-top:25px; margin-left: 20px;">
                             <p></p>
                             <p></p>
                             <p></p>
                             <p></p>
                             <p></p>
                             <p></p>
-                            <div>Property & Listing Info</div>
+                            <h6>Property & Listing Info</h6>
+                            <p></p>
+                            <p></p>
+                            <p style="font-weight: bold;">Listing:</p>
+                            <p></p>
+                            <p>
+                                <span style="font-style:italic;">Listing ID:</span> &nbsp; {{listing[0].id}} - {{listing[0].title}}<br> {{listing[0].propertyType}}
+                                <span style="font-style:italic;">Monthly Rent:</span> &nbsp; {{listing[0].monthlyRent}}
+                            </p>
+
+                            <p style="font-weight: bold;">Property</p>
+                            <p>
+                                <span style="font-style:italic;">Property Name/Alias:</span> &nbsp; {{openhouse[0].rentalProperty.propertyName}}<br>
+                            </p>
+                            <p></p>
+                            <p>
+                                <span style="font-style:italic;">Address:</span>
+                            </p>
+                            <p>
+                                {{openhouse[0].rentalProperty.address.streetNum}} <br> {{openhouse[0].rentalProperty.address.city}} {{openhouse[0].rentalProperty.address.stateProvince}}<br> {{openhouse[0].rentalProperty.address.zipPostCode}} {{openhouse[0].rentalProperty.address.country}}
+                            </p>
                         </div>
                         <div fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="start start" style="width:50%; margin-top: 25px;">
                             <p></p>
