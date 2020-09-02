@@ -121,7 +121,7 @@
                                         </mat-form-field>
                                         <mat-checkbox formControlName="isShared" [ngModel]="property.isShared" [(checked)]="shared" class="property-full-width">Shared</mat-checkbox>
                                         <mat-checkbox formControlName="isBasementSuite" [ngModel]="property.isBasementSuite" class="property-full-width">Basement</mat-checkbox>
-                                        <mat-form-field class="property-full-width">
+                                        <mat-form-field class="property-full-width" style="width: 30%;">
                                             <mat-label>Rental Status</mat-label>
                                             <mat-select [disabled]="true" [(value)]="status" id="status" formControlName="status" [ngModel]="property.status">
                                                 <!-- <mat-option>None</mat-option> -->
@@ -157,7 +157,7 @@
                                     </div>
 
                                     <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center" fxLayoutGap="10px" style="width: 75%;">
-                                        <mat-form-field class="property-full-width" style="width: 25%;">
+                                        <mat-form-field class="property-full-width" style="width: 20%;">
                                             <span class="icon-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
                                             <input type="text" id="propertyStateProvince" formControlName="propertyStateProvince" matInput placeholder="Province/State" [ngModel]="property.propertyStateProvince">
 
