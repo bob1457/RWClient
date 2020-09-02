@@ -1,3 +1,59 @@
-<p>
+<!-- <p>*ngIf="!(loading$ | async) && listing else spinner"
   open-house-details works!
-</p>
+</p> -->
+<div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="1%" fxFlexFill>
+    <div fxFlex="10%" fxLayoutAlign="end">
+        <i class="far fa-arrow-alt-circle-left" title="back to list" style="cursor: pointer; color: seagreen; font-size: 1.5em;" (click)="goBack()"></i>
+    </div>
+    <div fxFlex="20%" fxLayout="column" class="avatar_sec" fxLayoutAlign="start center">
+        <span>
+      <img src="../../assets/images/10621.jpg" style="border-radius: 50%;margin-top: 20px;" width="120px " height="120px" title="">
+    </span>
+
+    </div>
+
+    <div fxFlex="70%">
+        <mat-card class="openhouse-details-card">
+            <mat-card-header style="background-color: #f5f5f5; ">
+                <div mat-card-avatar class="listing-details-header-image ">
+                    <i class="material-icons " style="font-size: 2.5em;color: #193fe6; margin-left: 5px; ">
+                      group_work
+              </i>
+                    <!-- <img src="../../assets/images/pmgmnt.png " height="40px " width="40px "> *ngIf="property*ngIf="detailsForm.value"-->
+                </div>
+                <mat-card-title>Open House: ID: {{openhouse[0].id}} </mat-card-title>
+                <mat-card-subtitle>Rental Property: {{openhouse[0].rentalProperty.propertyName}}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content class="openhouse-details-card-content">
+                <form fxLayout="column" fxLayoutGap="7px" fxLayoutAlign="start start" [formGroup]="detailsForm" (ngSubmit)="submit()" style="margin-left: 20px;">
+                    <mat-form-field style="margin-right: 10px; width: 30%;">
+                        <mat-label>Open House Date</mat-label>
+                        <input matInput [matDatepicker]="picker" formControlName="openhouseDate" [ngModel]="openhouse[0].openhouseDate">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                    <mat-form-field class="form-content" style="width: 30%;">
+                        <mat-icon matSuffix>av_timer</mat-icon>
+                        <input formControlName="startTime" matInput placeholder="Start Time: e.g. 2:00pm" [ngModel]="openhouse[0].startTime">
+                    </mat-form-field>
+                    <mat-form-field class="form-content" style="width: 30%;">
+                        <mat-icon matSuffix>av_timer</mat-icon>
+                        <input formControlName="endTime" matInput placeholder="End Time: e.g. 4:00pm" [ngModel]="openhouse[0].endTime">
+                    </mat-form-field>
+                    <mat-form-field class="property-full-width" style="width: 30%;">
+                        <mat-label>Note</mat-label>
+                        <textarea matInput formControlName="notes" [ngModel]="openhouse[0].notes"></textarea>
+                    </mat-form-field>
+                    <div fxLayout="row" fxLayoutGap="7px" fxLayoutAlign="end center" style="width: 30%; margin-bottom: 20px;">
+                        <!-- <span *ngIf="showMsg" style="color: rgb(189, 150, 25);">Updated successfully!</span>
+<img *ngIf=" loading" class="pl-2" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+/> [disabled]="f.invalid || !f.dirty"-->
+                        <button type="submit" mat-raised-button color="primary">UPDATE</button>
+                        <button type="button" mat-raised-button color="accent" (click)="clear()">CANCEL</button>
+                    </div>
+                </form>
+            </mat-card-content>
+        </mat-card>
+    </div>
+
+</div>
