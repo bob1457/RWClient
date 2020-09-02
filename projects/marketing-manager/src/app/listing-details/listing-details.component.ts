@@ -230,6 +230,7 @@ export class ListingDetailsComponent implements OnInit {
 
   }
 
+  // Not implemented here, instead, in Open House list section
   AddOpenHouse() {
     debugger;
     this.addForm.get('rentalPropertyId').setValue(this.listing.rentalProperty.id);

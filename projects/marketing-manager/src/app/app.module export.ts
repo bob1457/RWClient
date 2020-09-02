@@ -43,7 +43,8 @@ const routes: Routes = [
       { path: 'applicationDetails/:id', component: ApplicationDetailsComponent},
       { path: 'screening/:id', component: ScreeningComponent},
       { path: 'screeninglist', component: ScreeningListComponent},
-      { path: 'openhouses', component: AllOpenHousesComponent}
+      { path: 'openhouses', component: AllOpenHousesComponent},
+      { path: 'openhousedetails/:id', component: OpenHouseDetailsComponent}
     ]
 
   }//,
