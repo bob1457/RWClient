@@ -1,4 +1,4 @@
-import { PropertyLease, PropertyTenant, Vendor } from '@lib/app-core';
+import { PropertyLease, PropertyTenant, Vendor, WorkOrder } from '@lib/app-core';
 
 
 export interface PropertyLeaseState {
@@ -10,8 +10,8 @@ export interface PropertyLeaseState {
   // ownersOfProperty: PropertyOwner[] | null;
   selectedLease: PropertyLease | null;
   selectedTenant: PropertyTenant | null;
-  workorders: Worker[] | null;
-  selectedworkorder: Worker | null;
+  workorders: WorkOrder[] | null;
+  selectedworkorder: WorkOrder | null;
   vendors: Vendor[] | null;
   selectedvendor: Vendor | null;
   // contracts: ManagementContract[] | null;

@@ -1,3 +1,107 @@
-<p>
+<!-- <p>*ngIf="!(loading$ | async) && list; else spinner"
   vendor-list works!
-</p>
+</p> -->
+<mat-card class="vendor-list-card" *ngIf="!(loading$ | async) && list; else spinner">
+    <mat-card-header style="background-color: #f5f5f5;">
+        <div mat-card-avatar class="vendor-list-header-image">
+            <i class="material-icons" style="font-size: 2.5em;color: #212cc7; margin-left: 5px;">
+        group
+      </i>
+            <!-- <img src="../../assets/images/pmgmnt.png" height="40px" width="40px"> -->
+        </div>
+        <mat-card-title>Venor List ()</mat-card-title>
+        <mat-card-subtitle>All vendors</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content class="vendor-list-card-content">
+        <div class="container text-center" fxLayout="column" fxLayoutAlign="start" fxLayoutGap="1%" fxFlexFill>
+            <div fxLayout="row" fxLayoutAlign="end">
+                <mat-form-field fxLayout fxLayoutAlign="start center">
+                    <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="Filter">
+                </mat-form-field>
+                <mat-radio-group aria-label="Select an option" style="margin-top: 13px;margin-left: 25px;padding-right: 5px;">
+                    <mat-radio-button value="1" checked style="padding-right: 10px;">Active</mat-radio-button>
+                    <mat-radio-button value="0">All</mat-radio-button>
+                </mat-radio-group>
+                <span class="spacer"></span>
+                <button [routerLink]="['/Manage/marketing/addVendor']" mat-button mat-mini-fab style="background: #c26112;color: white;">
+              <i class="material-icons" title="Add Property">
+                person_add
+              </i>
+            </button>
+            </div>
+            <div fxLayoutAlign="center">
+                <table mat-table [dataSource]="dataSource" matSort class="my-table mat-elevation-z8" style="width: 100%;">
+
+                    <ng-container matColumnDef="id">
+                        <th class="table-header-text" style="text-align: center;" mat-header-cell *matHeaderCellDef> ID </th>
+                        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                    </ng-container>
+
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="businesstName">
+                        <th class="table-header-text" mat-header-cell *matHeaderCellDef mat-sort-header mat-sort-header> Business Name </th>
+                        <td mat-cell *matCellDef="let element"> {{element.vendorBusinessName}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="contactName">
+                        <th class="table-header-text" style="text-align: center;" mat-header-cell *matHeaderCellDef> Contact Name </th>
+                        <td mat-cell *matCellDef="let element">
+                            {{element.firstName}} {{element.lastName}}
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="specialty">
+                        <th class="table-header-text" mat-header-cell *matHeaderCellDef mat-sort-header> Specialty </th>
+                        <td mat-cell *matCellDef="let element"> {{element.vendorSpecialty}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="telephone">
+                        <th class="table-header-text" style="margin-left: auto;margin-right: auto;" mat-header-cell *matHeaderCellDef> Telephone </th>
+                        <td mat-cell *matCellDef="let element"> {{element.vendorContactTelephone1}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="added">
+                        <th class="table-header-text" style="margin-left: auto;margin-right: auto;" mat-header-cell *matHeaderCellDef mat-sort-header> Create </th>
+                        <td mat-cell *matCellDef="let element"> {{element.created | date }} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="email">
+                        <th class="table-header-text" style="margin-left: auto;margin-right: auto;" mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+                        <td mat-cell *matCellDef="let element"> {{element.vendorContactEmail }} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="icon">
+                        <th mat-header-cell *matHeaderCellDef></th>
+                        <td mat-cell *matCellDef="let element">
+                            <i style="border: 2px solid;
+                    padding: 3px;
+                    border-radius: 50%;" class="material-icons" [style.color]="element.isActive == true ? 'green': 'red'">
+                    house
+                  </i>
+                        </td>
+                    </ng-container>
+                    <!-- style="font-size: 1.5em; color: red;" -->
+                    <!-- Action Column -->
+                    <ng-container matColumnDef="action">
+                        <th mat-header-cell *matHeaderCellDef></th>
+                        <td mat-cell *matCellDef="let element" class="action-link">
+                            <!-- <a (click)="openDialog('Update',element)">Edit</a> |
+      <a (click)="openDialog('Delete',element)">Delete</a> ['/details', 1]-->
+                            <button routerLink="/Manage/lease/vendordetails/{{element.id}}" mat-raised-button color="primary">Details</button> &nbsp;
+                            <!-- <button mat-raised-button color="accent" (click)="openDialog('Delete',element)">Delete</button> -->
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+            </div>
+            <span class="spacer"></span>
+            <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 25]"></mat-paginator>
+        </div>
+    </mat-card-content>
+</mat-card>
+
+<ng-template #spinner>
+    <app-loading></app-loading>
+</ng-template>

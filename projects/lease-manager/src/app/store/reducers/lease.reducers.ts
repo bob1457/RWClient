@@ -212,6 +212,62 @@ const propertyLeaseReducer = createReducer(
 
 
 
+  on(LeaseActions.getAllWorkOrders, state => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+  on(LeaseActions.getAllWorkOrdersSuccess, (state, { payload }) => {
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      workorders: payload
+    });
+  }),
+
+  on(LeaseActions.getAllWorkOrdersFailure, (state) => ({
+    ...state,
+    loading: false,
+    loaded: false,
+    errorMessage: 'Failed to load work orders'
+  })),
+
+
+  on(LeaseActions.getVendorDetails, (state) => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+  on(LeaseActions.getVendorDetailsSuccess, (state, { payload }) => {
+    debugger;
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      selectedvendor: payload
+    });
+  }),
+
+  on(LeaseActions.getWorkOrderDetails, (state) => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+  on(LeaseActions.getWorkOrderDetailsSuccess, (state, { payload }) => {
+    debugger;
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      selectedworkorder: payload
+    });
+  }),
+
+
 );
 
 /**
@@ -227,6 +283,7 @@ export const getTenantList = (state: PropertyLeaseState) => state.tenants;
 export const getLeaseDetails = (state: PropertyLeaseState) => state.selectedLease;
 export const getTenantDetails = (state: PropertyLeaseState) => state.selectedTenant;
 export const getVendorList = (state: PropertyLeaseState) => state.vendors;
+export const getVendorDetails = (state: PropertyLeaseState) => state.selectedvendor;
 
 export const loadingStatus = createSelector(selectLeaseyState, getLoadingStatus);
 
@@ -235,6 +292,7 @@ export const tenantList = createSelector(selectLeaseyState, getTenantList);
 export const leaseDetails = createSelector(selectLeaseyState, getLeaseDetails);
 export const tenantDetails = createSelector(selectLeaseyState, getTenantDetails);
 export const vendorList = createSelector(selectLeaseyState, getVendorList);
+export const vendorDetails = createSelector(selectLeaseyState, getVendorDetails);
 
 
 

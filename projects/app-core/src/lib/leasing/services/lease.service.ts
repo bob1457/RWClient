@@ -61,9 +61,14 @@ export class LeaseService {
     return this.http.post<PropertyTenant>(`${this.baseUrl}/lease/tenant/update`, tenant);
   }
 
-  getAllNewWorkOrderss() {
+  getAllWorkOrders() {
     debugger;
     return this.http.get<WorkOrder[]>(`${this.baseUrl}/workorder/all`);
+  }
+
+  getWorkOrderDetails(id: number) {
+    debugger;
+    return this.http.get<WorkOrder>(`${this.baseUrl}/WorkOrder/details/${id}`);
   }
 
   addWorkOrders(workorder: WorkOrder) {
@@ -80,6 +85,11 @@ export class LeaseService {
   getAllVendors() {
     debugger;
     return this.http.get<Vendor[]>(`${this.baseUrl}/workorder/vendor/all`);
+  }
+
+  getVendorDetails(id: number) {
+    debugger;
+    return this.http.get<Vendor>(`${this.baseUrl}/workorder/vendor/details/${id}`);
   }
 
   addVendor(vendor: Vendor) {

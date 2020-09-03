@@ -1,4 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { Store, select } from '@ngrx/store';
+import { Router, ActivatedRoute } from '@angular/router';
+import { PropertyLeaseState } from '../store/lease-state';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { vendorDetails } from '../store/reducers';
+import { getVendorDetails } from '../store/actions/lease.actions';
 
 @Component({
   selector: 'app-vendor-details',
@@ -7,9 +14,33 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VendorDetailsComponent implements OnInit {
 
-  constructor() { }
+  id;
+  loading$: Observable<boolean>;
+  vendor;
+
+  detailsForm: FormGroup;
+
+  constructor(private store: Store<PropertyLeaseState>,
+              private router: Router,
+              private actRoute: ActivatedRoute,
+              private formBuilder: FormBuilder) {
+                this.id = this.actRoute.snapshot.params.id;
+                console.log(this.id);
+
+                this.store.pipe(select(vendorDetails))
+                          .subscribe(data => {
+                            this.vendor = data;
+                            // this.detailsForm.patchValue(data);
+                            console.log('vendor', data);
+                            // this.dataSource.data = this.lease;
+                            // console.log('payment', this.dataSource.data);
+                          });
+
+              }
 
   ngOnInit() {
+
+    this.store.dispatch(getVendorDetails({payload: this.id}));
   }
 
 }

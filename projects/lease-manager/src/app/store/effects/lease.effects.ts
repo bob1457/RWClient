@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { LeaseService, PropertyLease, PropertyTenant, Vendor } from '@lib/app-core';
+import { LeaseService, PropertyLease, PropertyTenant, Vendor, WorkOrder } from '@lib/app-core';
 import * as LeaseActions from '../actions/lease.actions';
 
 import { switchMap, map, catchError, tap } from 'rxjs/operators';
@@ -231,5 +231,80 @@ export class LeaseEffects {
       )
     )
   );
+
+  getVendorDetails$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(LeaseActions.getVendorDetails),
+      // tap(() => console.log('got here: ')),
+      map(action => action.payload),
+      switchMap((payload) =>
+        this.leaseService.getVendorDetails(payload).pipe(
+          tap(() => console.log('got here for vendor details')),
+          map((vendor: Vendor) => ({
+            type: '[Leases] Get Vendor Details Success', // the name of the action(string) must match the string in the Action, case senstive
+            payload: vendor
+          })),
+          tap(res => {console.log('response: ' + res); }),
+          // catchError(
+          //   err => {
+          //     tap( () => console.log('err'));
+          //     return of(LeaseActions.getLeaseDetailsFailure([err.error]));
+          //   } // EMPTY // return of('[Property] Get Property Details Failure', err.error);
+          // )
+          catchError(error => of(LeaseActions.getVendorDetailsFailure(error.message)))// EMPTY
+        )
+      )
+    )
+  );
+
+  getAllWorkOrders$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(LeaseActions.getAllWorkOrders),
+      tap(() => console.log('got here for work order leases!!!')),
+      switchMap(() =>
+        this.leaseService.getAllWorkOrders().pipe(
+          map((list: WorkOrder[]) => ({
+            type: '[Leases]Get All Work Orders Success',
+            payload: list
+          })),
+          // tap(res => {console.log('response: ' + res); }),
+          // catchError(
+          //   err => {
+          //     return of('[Leases] Get all leases Failure', err.error);
+          //   } // EMPTY
+          // )
+          catchError(error => of(LeaseActions.getAllWorkOrdersFailure(error.message)))// EMPTY
+        )
+      )
+    )
+  );
+
+  getWorkOrderDetails$ = createEffect(() =>
+  this.actions$.pipe(
+    // ofType('[Property] Get Property List'),
+    ofType(LeaseActions.getVendorDetails),
+    // tap(() => console.log('got here: ')),
+    map(action => action.payload),
+    switchMap((payload) =>
+      this.leaseService.getWorkOrderDetails(payload).pipe(
+        tap(() => console.log('got here for work order details')),
+        map((order: WorkOrder) => ({
+          type: '[Leases] Get Work Order Details Success', // the name of the action(string) must match the string in the Action, case senstive
+          payload: order
+        })),
+        tap(res => {console.log('response: ' + res); }),
+        // catchError(
+        //   err => {
+        //     tap( () => console.log('err'));
+        //     return of(LeaseActions.getLeaseDetailsFailure([err.error]));
+        //   } // EMPTY // return of('[Property] Get Property Details Failure', err.error);
+        // )
+        catchError(error => of(LeaseActions.getWorkOrderDetailsFailure(error.message)))// EMPTY
+      )
+    )
+  )
+);
 
 }

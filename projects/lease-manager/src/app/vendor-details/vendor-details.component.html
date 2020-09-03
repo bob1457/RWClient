@@ -1,3 +1,32 @@
-<p>
+<!-- <p>*ngIf="!(loading$ | async) && lease; else spinner"
   vendor-details works!
-</p>
+</p> -->
+<div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="1%" fxFlexFill>
+    <div>
+        <div fxFlex="10%" fxLayoutAlign="end">
+            <i class="far fa-arrow-alt-circle-left" title="back to list" style="cursor: pointer; color: seagreen; font-size: 1.5em;" (click)="goBack()"></i>
+        </div>
+    </div>
+    <div fxFlex="20%" fxLayout="column" class="avatar_sec" fxLayoutAlign="start center">
+        <img src="../../assets/images/agreement.png" style="border-radius: 50%;margin-top: 20px;" width="120px " height="120px" title="">
+
+        <div style="margin-top: 25px;">
+            <span style="font-weight: 500;">Rental Property</span>
+            <!-- <p>{{lease.rentalProperty.propertyName}}<br> {{lease.rentalProperty.address.city}} {{lease.rentalProperty.address.stateProvince}} {{lease.rentalProperty.address.zipPostCode}} <br> {{lease.rentalProperty.address.country}} -->
+            <!-- </p> -->
+            <p> </p>
+        </div>
+
+        <!-- <div style="margin-top: 25px;">
+        <span style="font-weight: 500;">Tenants</span>
+        <ul class="tenant-list">
+            <li *ngFor="let tenant of lease.tenant" style="margin-left: -40px;">
+                {{tenant.firstName}} {{tenant.lastName}} <a href="" style="cursor: pointer;">details</a>
+            </li>
+        </ul> -->
+    </div>
+    <div fxFlex="70%">
+
+    </div>
+
+</div>

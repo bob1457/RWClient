@@ -151,17 +151,17 @@ export const updateLeaseFailure = createAction(
 );
 
 /**
- * Update Lease Actions
+ * Update Tenant Actions
  */
 
 export const updateTenant = createAction(
   '[Leases] Update Tenant',
-  props<{payload: PropertyLease}>()
+  props<{payload: PropertyTenant}>()
 );
 
 export const updateTenantSuccess = createAction(
   '[Leases] Update Tenant Success',
-  props<{payload: PropertyLease}>()
+  props<{payload: PropertyTenant}>()
 );
 
 /**
@@ -180,6 +180,28 @@ export const getAllWorkOrdersFailure = createAction(
   '[Leases] Get All  Work Orders Failure',
   // props<{payload: any}>()
   (errorMessage = 'Error loading work orders') => {
+    return ({ payload: { errorMessage } });
+  }
+);
+
+
+/**
+ * Get Wrok Order Details Actions
+ */
+export const getWorkOrderDetails = createAction(
+  '[Leases] Get Work Order Details',
+  props<{payload: number}>()
+);
+
+export const getWorkOrderDetailsSuccess = createAction(
+  '[Leases] Get Work Order Details Success',
+  props<{payload: WorkOrder}>()
+);
+
+export const getWorkOrderDetailsFailure = createAction(
+  '[Leases] Get Work Order Details Failure',
+  // props<{payload: any}>()
+  (errorMessage = 'Error loading Work Order details') => {
     return ({ payload: { errorMessage } });
   }
 );
@@ -248,7 +270,28 @@ export const getAllVendorsFailure = createAction(
 );
 
 /**
- * Add Vendor to Property
+ * Get Vendor Details Actions
+ */
+export const getVendorDetails = createAction(
+  '[Leases] Get Vendor Details',
+  props<{payload: number}>()
+);
+
+export const getVendorDetailsSuccess = createAction(
+  '[Leases] Get Vendor Details Success',
+  props<{payload: PropertyTenant}>()
+);
+
+export const getVendorDetailsFailure = createAction(
+  '[Leases] Get Vendor Deatils Failure',
+  // props<{payload: any}>()
+  (errorMessage = 'Error loading Vendor details') => {
+    return ({ payload: { errorMessage } });
+  }
+);
+
+/**
+ * Add Vendor
  */
 
 export const addVendor = createAction(

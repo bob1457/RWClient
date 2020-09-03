@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { PropertyLeaseState } from '../store/lease-state';
 import { Observable } from 'rxjs';
 import { Vendor } from '@lib/app-core';
 import { loadingStatus, vendorList } from '../store/reducers/lease.reducers';
 import { getAllVendors } from '../store/actions/lease.actions';
+import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 
 @Component({
   selector: 'app-vendor-list',
@@ -17,10 +18,20 @@ export class VendorListComponent implements OnInit {
 
   list: Vendor[];
 
+  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: false}) sort: MatSort;
+
+  dataSource = new MatTableDataSource<Vendor>();
+
+  displayedColumns: string[] = ['icon', 'id', 'businesstName', 'contactName', 'specialty', 'email', 'telephone', 'added', 'action'];
+
   constructor(private store: Store<PropertyLeaseState>) {
     this.store.select(vendorList)
     .subscribe(vendors => {
       this.list = vendors;
+      this.dataSource.data = this.list;
+
+      setTimeout(() =>  {this.dataSource.paginator = this.paginator; this.dataSource.sort = this.sort; });
     });
   }
 
@@ -51,6 +62,15 @@ export class VendorListComponent implements OnInit {
     //         }
     //         console.log(data);
     //   });
+  }
+
+  ngAfterViewInit(): void {
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
+  }
+
+  public doFilter = (value: string) => {
+    this.dataSource.filter = value.trim().toLocaleLowerCase();
   }
 
 }
