@@ -17,6 +17,8 @@ export const initialState: PropertyLeaseState =  { // adapter.getInitialState
   selectedworkorder: null,
   vendors: null,
   selectedvendor: null,
+  servierequests: null,
+  selectedrequest: null,
   // contracts: null,
   // contractsForProperty: null,
   // selectedContract: null,
@@ -268,6 +270,82 @@ const propertyLeaseReducer = createReducer(
   }),
 
 
+  on(LeaseActions.getAllServiceRequests, state => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+  on(LeaseActions.getAllServiceRequestsSuccess, (state, { payload }) => {
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      servierequests: payload
+    });
+  }),
+
+  on(LeaseActions.getAllServiceRequestsFailure, (state) => ({
+    ...state,
+    loading: false,
+    loaded: false,
+    errorMessage: 'Failed to load service requests'
+  })),
+
+   /**
+     * Add service request
+     */
+  on(LeaseActions.addServiceRequest, state => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+  on(LeaseActions.addServiceRequestSuccess, (state, { payload }) => {
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      servierequests: [...state.servierequests, payload ]
+    });
+  }),
+
+  on(LeaseActions.addServiceRequestFailure, (state) => {
+    return ({
+      ...state,
+      loading: false,
+      errorMessage: 'Failed to add service request'
+    });
+  }),
+
+
+  on(LeaseActions.getServiceRequestDetails, (state) => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+  on(LeaseActions.getServiceRequestrDetailsSuccess, (state, { payload }) => {
+    debugger;
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      selectedrequest: payload
+    });
+  }),
+
+  on(LeaseActions.getServiceRequestFailure, (state, { payload }) => {
+    debugger;
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      errorMessage: 'Failed to load service request'
+    });
+  }),
+
+
 );
 
 /**
@@ -284,6 +362,8 @@ export const getLeaseDetails = (state: PropertyLeaseState) => state.selectedLeas
 export const getTenantDetails = (state: PropertyLeaseState) => state.selectedTenant;
 export const getVendorList = (state: PropertyLeaseState) => state.vendors;
 export const getVendorDetails = (state: PropertyLeaseState) => state.selectedvendor;
+export const getServiceRequestList = (state: PropertyLeaseState) => state.servierequests;
+export const getServiceRequestDetails = (state: PropertyLeaseState) => state.selectedrequest;
 
 export const loadingStatus = createSelector(selectLeaseyState, getLoadingStatus);
 
@@ -293,6 +373,8 @@ export const leaseDetails = createSelector(selectLeaseyState, getLeaseDetails);
 export const tenantDetails = createSelector(selectLeaseyState, getTenantDetails);
 export const vendorList = createSelector(selectLeaseyState, getVendorList);
 export const vendorDetails = createSelector(selectLeaseyState, getVendorDetails);
+export const serviceRequestList = createSelector(selectLeaseyState, getServiceRequestList);
+export const serviceRequestDetails = createSelector(selectLeaseyState, getServiceRequestDetails);
 
 
 

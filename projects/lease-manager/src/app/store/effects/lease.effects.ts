@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { LeaseService, PropertyLease, PropertyTenant, Vendor, WorkOrder } from '@lib/app-core';
+import { LeaseService, PropertyLease, PropertyTenant, Vendor, WorkOrder, ServiceRequest } from '@lib/app-core';
 import * as LeaseActions from '../actions/lease.actions';
 
 import { switchMap, map, catchError, tap } from 'rxjs/operators';
@@ -302,9 +302,59 @@ export class LeaseEffects {
         //   } // EMPTY // return of('[Property] Get Property Details Failure', err.error);
         // )
         catchError(error => of(LeaseActions.getWorkOrderDetailsFailure(error.message)))// EMPTY
+        )
       )
     )
-  )
-);
+  );
+
+
+  getAllServiceRequests$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(LeaseActions.getAllServiceRequests),
+      tap(() => console.log('got here for service requests!!!')),
+      switchMap(() =>
+        this.leaseService.getAllServiceRequests().pipe(
+          map((list: ServiceRequest[]) => ({
+            type: '[Leases] Get All Service Request Success',
+            payload: list
+          })),
+          // tap(res => {console.log('response: ' + res); }),
+          // catchError(
+          //   err => {
+          //     return of('[Leases] Get all leases Failure', err.error);
+          //   } // EMPTY
+          // )
+          catchError(error => of(LeaseActions.getAllServiceRequestsFailure(error.message)))// EMPTY
+        )
+      )
+    )
+  );
+
+  getServiceRequestDetails$ = createEffect(() =>
+  this.actions$.pipe(
+    // ofType('[Property] Get Property List'),
+    ofType(LeaseActions.getServiceRequestDetails),
+    // tap(() => console.log('got here: ')),
+    map(action => action.payload),
+    switchMap((payload) =>
+      this.leaseService.getDetails(payload).pipe(
+        tap(() => console.log('got here for work order details')),
+        map((request: ServiceRequest) => ({
+          type: '[Leases] Get Service Request Details Success',
+          payload: request
+        })),
+        tap(res => {console.log('response: ' + res); }),
+        // catchError(
+        //   err => {
+        //     tap( () => console.log('err'));
+        //     return of(LeaseActions.getLeaseDetailsFailure([err.error]));
+        //   } // EMPTY // return of('[Property] Get Property Details Failure', err.error);
+        // )
+        catchError(error => of(LeaseActions.getServiceRequestFailure(error.message)))// EMPTY
+        )
+      )
+    )
+  );
 
 }

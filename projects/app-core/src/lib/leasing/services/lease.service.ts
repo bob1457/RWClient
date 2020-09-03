@@ -6,6 +6,7 @@ import { RentalProperty } from '../models/rental-property.model';
 import { NewTenant } from '../models/new-tenant.model';
 import { WorkOrder } from '../models/work-order.model';
 import { Vendor } from '../models/vendor.model';
+import { ServiceRequest } from '../models/service-request.model';
 
 @Injectable({
   providedIn: 'root'
@@ -100,6 +101,21 @@ export class LeaseService {
   updateVendor(vendor: Vendor) {
     debugger;
     return this.http.post<Vendor>(`${this.baseUrl}/workorder/vendor/update`, vendor);
+  }
+
+  getAllServiceRequests() {
+    debugger;
+    return this.http.get<ServiceRequest[]>(`${this.baseUrl}/workorder/ServiceRequest/all`);
+  }
+
+  getDetails(id: number) {
+    debugger;
+    return this.http.get<ServiceRequest>(`${this.baseUrl}/workorder/ServiceRequest/details/${id}`);
+  }
+
+  addServiceRequest(request: ServiceRequest) {
+    debugger;
+    return this.http.post<ServiceRequest>(`${this.baseUrl}/workorder/request/add`, request);
   }
 
 

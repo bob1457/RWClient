@@ -32,4 +32,6 @@ export * from './lib/leasing/models/new-tenant.model';
 export * from './lib/leasing/services/lease.service';
 export * from './lib/leasing/models/vendor.model';
 export * from './lib/leasing/models/work-order.model';
+export * from './lib/leasing/models/service-request.model';
+
 

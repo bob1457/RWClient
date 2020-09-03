@@ -1,5 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import { PropertyLease, PropertyTenant, WorkOrder, Vendor } from '@lib/app-core';
+import { ServiceRequest } from 'projects/app-core/src/lib/leasing/models/service-request.model';
 
 debugger;
 
@@ -331,6 +332,85 @@ export const updatVendorsFailure = createAction(
   (errorMessage = 'Error updating work order') => ({ payload: { errorMessage }})
 
 );
+
+/**
+ * Add Service Request Actions
+ */
+
+export const addServiceRequest = createAction(
+  '[Leases] Add Service Request',
+  props<{payload: ServiceRequest}>()
+);
+
+export const addServiceRequestSuccess = createAction(
+  '[Leases] Add Service Request Success',
+  props<{payload: ServiceRequest}>()
+);
+
+export const addServiceRequestFailure = createAction(
+  '[[Leases] Add Service Request Failure',
+  // props<{payload: any}>()
+  (errorMessage = 'Error adding Service Request') => ({ payload: { errorMessage }})
+
+);
+
+
+/**
+ * Get All Service Request Actions
+ */
+export const getAllServiceRequests = createAction(
+  '[Leases] Get All Service Request'
+);
+
+export const getAllServiceRequestsSuccess = createAction(
+  '[Leases] Get All Service Request Success',
+  props<{payload: ServiceRequest[]}>()
+);
+
+export const getAllServiceRequestsFailure = createAction(
+  '[Leases] Get All Service Request Failure',
+  // props<{payload: any}>()
+  (errorMessage = 'Error loading Service Request') => {
+    return ({ payload: { errorMessage } });
+  }
+);
+
+/**
+ * Get Service Request Details Actions
+ */
+export const getServiceRequestDetails = createAction(
+  '[Leases] Get Service Request Details',
+  props<{payload: number}>()
+);
+
+export const getServiceRequestrDetailsSuccess = createAction(
+  '[Leases] Get Service Request Details Success',
+  props<{payload: ServiceRequest}>()
+);
+
+export const getServiceRequestFailure = createAction(
+  '[Leases] Get Service Request Details Failure',
+  // props<{payload: any}>()
+  (errorMessage = 'Error loading Service Request details') => {
+    return ({ payload: { errorMessage } });
+  }
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
