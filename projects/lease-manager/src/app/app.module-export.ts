@@ -34,6 +34,8 @@ import { ServieRequestListComponent } from './servie-request-list/servie-request
 import { ServieRequestDetailsComponent } from './servie-request-details/servie-request-details.component';
 import { VendorDetailsComponent } from './vendor-details/vendor-details.component';
 import { VendorListComponent } from './vendor-list/vendor-list.component';
+import { UrgentLevelPipe } from './urgent-level.pipe';
+import { StatusPipe } from './status.pipe';
 
 
 // import { CdkColumnDef } from '@angular/cdk/table';
@@ -82,7 +84,9 @@ const routes: Routes = [
     ServieRequestListComponent,
     ServieRequestDetailsComponent,
     VendorDetailsComponent,
-    VendorListComponent
+    VendorListComponent,
+    UrgentLevelPipe,
+    StatusPipe
   ],
   imports: [
     // BrowserModule,
