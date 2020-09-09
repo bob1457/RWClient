@@ -266,7 +266,7 @@ export class LeaseEffects {
       switchMap(() =>
         this.leaseService.getAllWorkOrders().pipe(
           map((list: WorkOrder[]) => ({
-            type: '[Leases]Get All Work Orders Success',
+            type: '[Leases] Get All Work Orders Success',
             payload: list
           })),
           // tap(res => {console.log('response: ' + res); }),

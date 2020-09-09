@@ -364,6 +364,8 @@ export const getVendorList = (state: PropertyLeaseState) => state.vendors;
 export const getVendorDetails = (state: PropertyLeaseState) => state.selectedvendor;
 export const getServiceRequestList = (state: PropertyLeaseState) => state.servierequests;
 export const getServiceRequestDetails = (state: PropertyLeaseState) => state.selectedrequest;
+export const getAllWorkOrders = (state: PropertyLeaseState) => state.workorders;
+export const getWorkOrderDetails = (state: PropertyLeaseState) => state.selectedworkorder;
 
 export const loadingStatus = createSelector(selectLeaseyState, getLoadingStatus);
 
@@ -375,6 +377,8 @@ export const vendorList = createSelector(selectLeaseyState, getVendorList);
 export const vendorDetails = createSelector(selectLeaseyState, getVendorDetails);
 export const serviceRequestList = createSelector(selectLeaseyState, getServiceRequestList);
 export const serviceRequestDetails = createSelector(selectLeaseyState, getServiceRequestDetails);
+export const workOrderList = createSelector(selectLeaseyState, getAllWorkOrders);
+export const workOrderDetails = createSelector(selectLeaseyState, getWorkOrderDetails);
 
 
 
