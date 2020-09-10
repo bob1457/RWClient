@@ -41,6 +41,29 @@ export class VendorDetailsComponent implements OnInit {
   ngOnInit() {
 
     this.store.dispatch(getVendorDetails({payload: this.id}));
+
+    this.detailsForm = this.formBuilder.group({
+      id: [''],
+      vendorBusinessName: [],
+      firstName: [''],
+      lastName: [''],
+      onlineAccessEnabled: [false],
+      vendorDesc: [''],
+      vendorSpecialty: [''],
+      vendorContactTelephone1: [''],
+      vendorContactOthers: [''],
+      vendorContactEmail: [''],
+      isActive: [true],
+      userAvartaImgUrl: ['']
+    });
+  }
+
+  submit() {
+
+  }
+
+  goBack() {
+    this.router.navigate(['/Manage/lease/vendors']);
   }
 
 }

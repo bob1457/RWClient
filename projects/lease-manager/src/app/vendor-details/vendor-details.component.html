@@ -1,20 +1,35 @@
-<!-- <p>*ngIf="!(loading$ | async) && lease; else spinner"
+<!-- <p>
   vendor-details works!
 </p> -->
-<div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="1%" fxFlexFill>
+<div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="1%" fxFlexFill *ngIf="!(loading$ | async) && vendor; else spinner">
     <div>
         <div fxFlex="10%" fxLayoutAlign="end">
             <i class="far fa-arrow-alt-circle-left" title="back to list" style="cursor: pointer; color: seagreen; font-size: 1.5em;" (click)="goBack()"></i>
         </div>
     </div>
     <div fxFlex="20%" fxLayout="column" class="avatar_sec" fxLayoutAlign="start center">
-        <img src="../../assets/images/agreement.png" style="border-radius: 50%;margin-top: 20px;" width="120px " height="120px" title="">
+        <img src="../../assets/images/tenant.png" style="border-radius: 50%;margin-top: 20px;" width="120px " height="120px" title="">
 
         <div style="margin-top: 25px;">
-            <span style="font-weight: 500;">Rental Property</span>
+            <span style="font-weight: 500;">Business Name & Address</span>
             <!-- <p>{{lease.rentalProperty.propertyName}}<br> {{lease.rentalProperty.address.city}} {{lease.rentalProperty.address.stateProvince}} {{lease.rentalProperty.address.zipPostCode}} <br> {{lease.rentalProperty.address.country}} -->
             <!-- </p> -->
-            <p> </p>
+            <p>{{vendor.vendorBusinessName}}</p>
+
+
+            <p>Work Orders History</p>
+            <ul style="list-style: none;">
+                <li *ngFor="let order of vendor.workOrder" style="font-size: .75em; margin-bottom: 7px;">
+                    {{order.workOrderName}}, started: {{order.startDate | date}}, Completed: {{order.endDate | date}} <br> ----------------------
+                </li>
+            </ul>
+
+
+        </div>
+        <div style="margin-top: 25px;font-size: .75em;
+                    font-style: italic;width: 80%;">
+            <p>Added: {{vendor.created | date }}</p>
+            <p>Updated: {{vendor.modified | date}}</p>
         </div>
 
         <!-- <div style="margin-top: 25px;">
@@ -26,7 +41,81 @@
         </ul> -->
     </div>
     <div fxFlex="70%">
+        <mat-card class="vendor-details-card ">
+            <mat-card-header style="background-color: #f5f5f5; ">
+                <div mat-card-avatar class="tenant-details-header-image ">
+                    <i class="material-icons " style="font-size: 2.5em;color: #1950e6; margin-left: 5px; ">
+                      account_circle
+                    </i>
+                    <!-- {{property.propertyId}}{{property.propertyName}}<img src="../../assets/images/pmgmnt.png " height="40px " width="40px "> *ngIf="property*ngIf="detailsForm.value"{{property.propertyNumber}} {{property.propertyNumber}} {{property.propertyStreet}} {{property.propertyCity}} {{property.propertyStateProvince}} {{property.propertyZipPostCode}}-->
+                </div>
+                <mat-card-title>Vendor: - ID: {{vendor.id}}<span style="font-size: .8em; font-style: italic;">{{vendor.vendorBusinessName}}</span> </mat-card-title>
+                <mat-card-subtitle>{{vendor.vendorSpecialty}}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content class="vendor-details-card-content">
+                <form novalidate fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" [formGroup]="detailsForm" (ngSubmit)="submit()">
+                    <div fxLayout="column" fxLayoutAlign="start center" style="width: 75%;">
+                        <mat-form-field class="vendor-full-width" style="margin-top: 25px;">
+                            <span class="icon-pos" matPrefix><mat-icon>swap_calls</mat-icon> &nbsp;</span>
+                            <input readonly type="text" id="id" formControlName="id" matInput placeholder="Vendor ID" [ngModel]="vendor.id">
+                        </mat-form-field>
 
+                        <mat-form-field class="vendor-full-width" style="margin-top: 25px;" *ngIf="vendor.onlineAccessEnabled">
+                            <span class="icon-pos" matPrefix><mat-icon>swap_calls</mat-icon> &nbsp;</span>
+                            <input readonly type="text" id="userName" formControlName="userName" matInput placeholder="User Name" [ngModel]="vendor.userName">
+                        </mat-form-field>
+
+
+                        <mat-form-field class="vendor-full-width">
+                            <span class="icon-pos" matPrefix><mat-icon>swap_calls</mat-icon> &nbsp;</span>
+                            <input type="text" id="vendorBusinessName" formControlName="vendorBusinessName" matInput placeholder="Business Name" [ngModel]="vendor.vendorBusinessName">
+                        </mat-form-field>
+                        <mat-form-field class="vendor-full-width">
+                            <span class="icon-pos" matPrefix><mat-icon>swap_calls</mat-icon> &nbsp;</span>
+                            <input type="text" id="firstName" formControlName="firstName" matInput placeholder="Contact: First Name" [ngModel]="vendor.firstName">
+                        </mat-form-field>
+                        <mat-form-field class="vendor-full-width">
+                            <span class="icon-pos" matPrefix><mat-icon>swap_calls</mat-icon> &nbsp;</span>
+                            <input type="text" id="lastName" formControlName="lastName" matInput placeholder="Contact: Last name" [ngModel]="vendor.lastName">
+                        </mat-form-field>
+
+                        <mat-form-field class="vendor-full-width">
+                            <span class="icon-pos" matPrefix><mat-icon>swap_calls</mat-icon> &nbsp;</span>
+                            <input type="text" id="vendorContactTelephone1" formControlName="vendorContactTelephone1" matInput placeholder="Contact: Telephone" [ngModel]="vendor.vendorContactTelephone1">
+                        </mat-form-field>
+                        <mat-form-field class="vendor-full-width">
+                            <span class="icon-pos" matPrefix><mat-icon>swap_calls</mat-icon> &nbsp;</span>
+                            <input type="text" id="vendorContactEmail" formControlName="vendorContactEmail" matInput placeholder="Contact: Email" [ngModel]="vendor.vendorContactEmail">
+                        </mat-form-field>
+                        <mat-form-field class="vendor-full-width">
+                            <span class="icon-pos" matPrefix><mat-icon>swap_calls</mat-icon> &nbsp;</span>
+                            <input type="text" id="lastName" formControlName="lastName" matInput placeholder="Contact: Last name" [ngModel]="vendor.lastName">
+                        </mat-form-field>
+                        <div fxLayout="row" fxLayoutAlign="start start" style="width: 95%;">
+                            <mat-form-field class="vendor-full-width" style="width:50%">
+                                <!-- <mat-label>Vendor Specialty</mat-label> -->
+                                <mat-select id="vendorSpecialty" formControlName="vendorSpecialty" [ngModel]="vendor.vendorSpecialty">
+                                    <mat-option>None</mat-option>
+                                    <mat-option value="Plumbing">Plumbing</mat-option>
+                                    <mat-option value="Electrician">Electrician</mat-option>
+                                    <mat-option value="Renovation">Renovation</mat-option>
+                                    <mat-option value="Janitorial">Janitorial</mat-option>
+                                    <mat-option value="Others">Others</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <div style="margin-left: 25px; width: 50%;margin-top: 10px;">
+                                <mat-checkbox formControlName="isActive" [ngModel]="vendor.isActive" [(checked)]="vendor.isActive" class="vendor-full-width">Active</mat-checkbox>
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+            </mat-card-content>
+        </mat-card>
     </div>
 
 </div>
+
+<ng-template #spinner>
+    <app-loading></app-loading>
+</ng-template>

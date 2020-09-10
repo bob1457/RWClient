@@ -30,6 +30,7 @@ import { VendorDetailsComponent } from './vendor-details/vendor-details.componen
 import { VendorListComponent } from './vendor-list/vendor-list.component';
 import { UrgentLevelPipe } from './urgent-level.pipe';
 import { StatusPipe } from './status.pipe';
+import { WorkOrderDatePipe } from './work-order-date.pipe';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { StatusPipe } from './status.pipe';
     VendorDetailsComponent,
     VendorListComponent,
     UrgentLevelPipe,
-    StatusPipe
+    StatusPipe,
+    WorkOrderDatePipe
   ],
   imports: [
     BrowserModule,

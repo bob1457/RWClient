@@ -242,10 +242,10 @@ export class LeaseEffects {
         this.leaseService.getVendorDetails(payload).pipe(
           tap(() => console.log('got here for vendor details')),
           map((vendor: Vendor) => ({
-            type: '[Leases] Get Vendor Details Success', // the name of the action(string) must match the string in the Action, case senstive
+            type: '[Leases] Get Vendor Details Success',
             payload: vendor
           })),
-          tap(res => {console.log('response: ' + res); }),
+          // tap(res => {console.log('response: ' + res); }),
           // catchError(
           //   err => {
           //     tap( () => console.log('err'));
@@ -284,7 +284,7 @@ export class LeaseEffects {
   getWorkOrderDetails$ = createEffect(() =>
   this.actions$.pipe(
     // ofType('[Property] Get Property List'),
-    ofType(LeaseActions.getVendorDetails),
+    ofType(LeaseActions.getWorkOrderDetails),
     // tap(() => console.log('got here: ')),
     map(action => action.payload),
     switchMap((payload) =>
