@@ -5,7 +5,7 @@ import { PropertyLeaseState } from '../store/lease-state';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { vendorDetails } from '../store/reducers';
-import { getVendorDetails } from '../store/actions/lease.actions';
+import { getVendorDetails, updateVendor } from '../store/actions/lease.actions';
 
 @Component({
   selector: 'app-vendor-details',
@@ -43,7 +43,7 @@ export class VendorDetailsComponent implements OnInit {
     this.store.dispatch(getVendorDetails({payload: this.id}));
 
     this.detailsForm = this.formBuilder.group({
-      id: [''],
+      id: [],
       vendorBusinessName: [],
       firstName: [''],
       lastName: [''],
@@ -59,7 +59,8 @@ export class VendorDetailsComponent implements OnInit {
   }
 
   submit() {
-
+    console.log('form', this.detailsForm.value);
+    // this.store.dispatch(updateVendor({payload: this.detailsForm.value}));
   }
 
   goBack() {

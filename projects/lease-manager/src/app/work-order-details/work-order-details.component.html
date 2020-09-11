@@ -1,3 +1,127 @@
-<p>
+<!-- <p>
   work-order-details works!
-</p>
+</p> -->
+<div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="1%" fxFlexFill *ngIf="!(loading$ | async) && workorder; else spinner">
+    <div>
+        <div fxFlex="10%" fxLayoutAlign="end">
+            <i class="far fa-arrow-alt-circle-left" title="back to list" style="cursor: pointer; color: seagreen; font-size: 1.5em;" (click)="goBack()"></i>
+        </div>
+    </div>
+    <div fxFlex="20%" fxLayout="column" class="avatar_sec" fxLayoutAlign="start center">
+        <img src="../../assets/images/agreement.png" style="border-radius: 50%;margin-top: 20px;" width="120px " height="120px" title="">
+
+        <div style="margin-top: 25px;">
+            <span style="font-weight: 500;">Rental Property</span>
+            <!-- <p>{{lease.rentalProperty.propertyName}}<br> {{lease.rentalProperty.address.city}} {{lease.rentalProperty.address.stateProvince}} {{lease.rentalProperty.address.zipPostCode}} <br> {{lease.rentalProperty.address.country}} -->
+            <!-- </p> -->
+            <!-- <p>{{vendor.vendorBusinessName}}</p> -->
+
+        </div>
+        <div style="margin-top: 25px;font-size: .75em;
+                  font-style: italic;width: 80%;">
+            <p>Added: {{workorder.created | date }}</p>
+            <p>Updated: {{workorder.updated | date}}</p>
+        </div>
+
+        <!-- <div style="margin-top: 25px;">
+      <span style="font-weight: 500;">Tenants</span>
+      <ul class="tenant-list">
+          <li *ngFor="let tenant of lease.tenant" style="margin-left: -40px;">
+              {{tenant.firstName}} {{tenant.lastName}} <a href="" style="cursor: pointer;">details</a>
+          </li>
+      </ul> -->
+    </div>
+    <div fxFlex="70%">
+        <mat-card class="order-details-card">
+            <mat-card-header style="background-color: #f5f5f5; ">
+                <div mat-card-avatar class="tenant-details-header-image ">
+                    <i class="material-icons " style="font-size: 2.5em;color: #99680e; margin-left: 5px; ">
+                    pending_actions
+                  </i>
+                    <!-- {{property.propertyId}}{{property.propertyName}}<img src="../../assets/images/pmgmnt.png " height="40px " width="40px "> *ngIf="property*ngIf="detailsForm.value"{{property.propertyNumber}} {{property.propertyNumber}} {{property.propertyStreet}} {{property.propertyCity}} {{property.propertyStateProvince}} {{property.propertyZipPostCode}}-->
+                </div>
+                <mat-card-title>Work Order: - ID: <span style="font-size: .8em; font-style: italic;">{{workorder.id}}</span> </mat-card-title>
+                <mat-card-subtitle>{{workorder.workOrderName}}, vendor: {{workorder.vendor.vendorBusinessName}}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content class="order-details-card-content">
+                <form novalidate fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" [formGroup]="detailsForm" (ngSubmit)="submit()">
+                    <div fxLayout="column" fxLayoutAlign="start center" style="width: 75%;">
+                        <mat-form-field class="order-full-width" style="margin-top: 25px;">
+                            <span class="icon-pos" matPrefix><mat-icon>swap_calls</mat-icon> &nbsp;</span>
+                            <input readonly type="text" id="id" formControlName="id" matInput placeholder="Work Order ID" [ngModel]="workorder.id">
+                        </mat-form-field>
+
+                        <mat-form-field class="order-full-width">
+                            <span class="icon-pos" matPrefix><mat-icon>swap_calls</mat-icon> &nbsp;</span>
+                            <input readonly type="text" id="workOrderName" formControlName="workOrderName" matInput placeholder="Work Order Title" [ngModel]="workorder.workOrderName">
+                        </mat-form-field>
+                        <mat-form-field class="order-full-width">
+                            <mat-label>Description</mat-label>
+                            <textarea matInput formControlName="workOrderDetails" [ngModel]="workorder.workOrderDetails"></textarea>
+                        </mat-form-field>
+                        <div fxLayout="row" fxLayoutAlign="start start" style="width: 95%;">
+                            <mat-form-field style="width:50%">
+                                <mat-label>>Work Order Category</mat-label>
+                                <mat-select id="workOrderCategory" formControlName="workOrderCategory" [ngModel]="workorder.workOrderCategory">
+                                    <mat-option>None</mat-option>
+                                    <mat-option value="Plumbing">Plumbing</mat-option>
+                                    <mat-option value="Electrician">Electrician</mat-option>
+                                    <mat-option value="Renovation">Renovation</mat-option>
+                                    <mat-option value="Janitorial">Janitorial</mat-option>
+                                    <mat-option value="Others">Others</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field style="width:50%">
+                                <mat-label>Work Order Type</mat-label>
+                                <mat-select id="workOrderType" formControlName="workOrderType" [ngModel]="workorder.workOrderType">
+                                    <mat-option>None</mat-option>
+                                    <mat-option value="Repair">Repair</mat-option>
+                                    <mat-option value="Replace">Replace</mat-option>
+                                    <mat-option value="Maintenance">Maintenance</mat-option>
+                                    <!-- <mat-option value="Janitorial">Janitorial</mat-option> -->
+                                    <mat-option value="Others">Others</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <!-- <div style="margin-left: 25px; width: 30%;margin-top: 10px;">
+                            <mat-checkbox formControlName="isActive" [ngModel]="vendor.isActive" [(checked)]="vendor.isActive" class="vendor-full-width">Active</mat-checkbox>
+                        </div> -->
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="start start" style="width: 95%;">
+                            <div fxFlex="50%">
+                                <mat-form-field fxFlex="90%">
+                                    <span class="icon-pos" matPrefix><mat-icon>date_range</mat-icon> &nbsp;</span>
+                                    <input type="text" id="startDate" formControlName="startDate" matInput placeholder="Start Date" [ngModel]="workorder.startDate | date">
+                                </mat-form-field>
+                            </div>
+                            <div fxFlex="50%">
+                                <mat-form-field fxFlex="100%">
+                                    <span class="icon-pos" matPrefix><mat-icon>date_range</mat-icon> &nbsp;</span>
+                                    <input type="text" id="endDate" formControlName="endDate" matInput placeholder="Completion Date" [ngModel]="workorder.endDate | date">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="start start" style="width: 95%;">
+                            <div style="width: 50%;margin-top: 10px;">
+                                <mat-checkbox formControlName="isEmergency" [ngModel]="workorder.isEmergency" [(checked)]="workorder.isEmergency" class="vendor-full-width">Is Emergency</mat-checkbox>
+                            </div>
+                            <div style="width: 50%;margin-top: 10px;">
+                                <mat-checkbox formControlName="isOwnerAuthorized" [ngModel]="workorder.isOwnerAuthorized" [(checked)]="workorder.isOwnerAuthorized" class="vendor-full-width">Is Authorized</mat-checkbox>
+                            </div>
+                        </div>
+                    </div>
+                    <div fxLayout="row" fxLayoutGap="7px" fxLayoutAlign="end center" style="width: 75%; margin-bottom: 20px;">
+                        <!-- <span *ngIf="showMsg" style="color: rgb(189, 150, 25);">Updated successfully!</span>
+<img *ngIf=" loading" class="pl-2" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+/> [disabled]="f.invalid || !f.dirty"-->
+                        <button type="submit" mat-raised-button color="primary">UPDATE</button>
+                        <button mat-raised-button color="accent">CANCEL</button>
+                    </div>
+                </form>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>
+
+<ng-template #spinner>
+    <app-loading></app-loading>
+</ng-template>
