@@ -7,7 +7,7 @@ import { EMPTY, of } from 'rxjs';
 
 import * as PropertyActions from '../actions/property.actions';
 import { PropertyActive } from 'projects/app-core/src/lib/property/models/property-active.model';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material';
 
 
 
@@ -389,22 +389,32 @@ export class PropertyEffects {
             type: '[Property] Update Contract Success',
             payload: contract
           })),
+          tap( () => {
+            // window.alert('done');
+            this.openSnackBar('Management contract updated successfully.', '');
+           }), // display notificaiton
           // tap(res => {console.log('response: ' + res); }),
           // catchError(
           //   err => {
-          //     return of('[Property] Update Contract Failure', err.error);
+          //     this.openSnackBar(err.message, '');
+          //     return of(PropertyActions.updateContractFailure(err.message));
           //   } // EMPTY
           // )
-          catchError(error => of(PropertyActions.updateContractFailure(error.message)))
+          // catchError(error => of(PropertyActions.updateContractFailure(error.message)))
+          catchError(error => {
+            this.openSnackBar(error.message, '');
+            return of(PropertyActions.updateContractFailure(error.message));
+          }
         )
       )
     )
-  );
+  ));
 
   openSnackBar(message: string, action: string) {
-    this.snackBar.open(message, action, {
-      duration: 3000,
-    });
+    let config = new MatSnackBarConfig();
+    config.panelClass = ['notify'];
+    config.duration = 3000;
+    this.snackBar.open(message, action, config);
   }
 
 }
