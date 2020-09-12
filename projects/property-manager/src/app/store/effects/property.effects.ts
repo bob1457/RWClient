@@ -83,13 +83,17 @@ export class PropertyEffects {
             type: '[Property] Add Property Success',
             payload: property
           })),
-          // tap(res => {console.log('response: ' + res); }),
-          // catchError(
-          //   err => {
-          //     return of('[Property] Add Property Failure', err.error);
-          //   } // EMPTY
-          // )
-          catchError(error => of(PropertyActions.addPropertyFailure(error.message)))
+          tap( () => {
+            // window.alert('done');
+            this.openSnackBar('Property added successfully.', '');
+           }), // display notificaiton
+
+          catchError(error => {
+            this.openSnackBar(error.message, '');
+            return of(PropertyActions.addPropertyOwnerFailure(error.message));
+            }
+          )
+          // catchError(error => of(PropertyActions.addPropertyFailure(error.message)))
         )
       )
     )
@@ -108,13 +112,17 @@ export class PropertyEffects {
             type: '[Property] Update Property Success',
             payload: property
           })),
-          // tap(res => {console.log('response: ' + res); }),
-          // catchError(
-          //   err => {
-          //     return of('[Property] Update Property Failure', err.error);
-          //   } // EMPTY
-          // )
-          catchError(error => of(PropertyActions.updatePropertyStatusFailure(error.message)))
+          tap( () => {
+            // window.alert('done');
+            this.openSnackBar('Property updated successfully.', '');
+           }), // display notificaiton
+
+          catchError(error => {
+            this.openSnackBar(error.message, '');
+            return of(PropertyActions.updatePropertyFailure(error.message));
+            }
+          )
+          // catchError(error => of(PropertyActions.updatePropertyStatusFailure(error.message)))
         )
       )
     )
@@ -133,13 +141,17 @@ export class PropertyEffects {
             type: '[Property] Update Property Status Success',
             payload: status
           })),
-          // tap(res => {console.log('response: ' + res); }),
-          // catchError(
-          //   err => {
-          //     return of('[Property] Update Property Status Failure', err.error);
-          //   } // EMPTY
-          // )
-          catchError(error => of(PropertyActions.updatePropertyStatusFailure(error.message)))
+          tap( () => {
+            // window.alert('done');
+            this.openSnackBar('Property Status updated successfully.', '');
+           }), // display notificaiton
+
+          catchError(error => {
+            this.openSnackBar(error.message, '');
+            return of(PropertyActions.updatePropertyStatusFailure(error.message));
+            }
+          )
+          // catchError(error => of(PropertyActions.updatePropertyStatusFailure(error.message)))
         )
       )
     )
@@ -234,13 +246,17 @@ export class PropertyEffects {
             type: '[Property] Add Property Owner Success',
             payload: owner
           })),
-          // tap(res => {console.log('response: ' + res); }),
-          // catchError(
-          //   err => {
-          //     return of('[Property] Add Property Owner Failure', err.error);
-          //   } // EMPTY
-          // )
-          catchError(error => of(PropertyActions.addPropertyOwnerFailure(error.message)))
+          tap( () => {
+            // window.alert('done');
+            this.openSnackBar('Owner Added successfully.', '');
+           }), // display notificaiton
+
+          catchError(error => {
+            this.openSnackBar(error.message, '');
+            return of(PropertyActions.addPropertyOwnerFailure(error.message));
+            }
+          )
+          // catchError(error => of(PropertyActions.addPropertyOwnerFailure(error.message)))
         )
       )
     )
@@ -266,12 +282,13 @@ export class PropertyEffects {
             this.openSnackBar('Owner updated successfully.', '');
            }), // display notificaiton
 
-          // catchError(
-          //   err => {
-          //     return of('[Property] Update Property Failure', err.error);
-          //   } // EMPTY
-          // )
-          catchError(error => of(PropertyActions.updatePropertyOwnerSuccess(error.message)))
+          catchError(error => {
+            this.openSnackBar(error.message, '');
+            return of(PropertyActions.updatePropertyOwnerFailure(error.message));
+            }
+          )
+          // catchError(error => of(PropertyActions.updatePropertyOwnerSuccess(error.message)))
+
         )
       )
     )
@@ -411,7 +428,7 @@ export class PropertyEffects {
   ));
 
   openSnackBar(message: string, action: string) {
-    let config = new MatSnackBarConfig();
+    const config = new MatSnackBarConfig();
     config.panelClass = ['notify'];
     config.duration = 3000;
     this.snackBar.open(message, action, config);
