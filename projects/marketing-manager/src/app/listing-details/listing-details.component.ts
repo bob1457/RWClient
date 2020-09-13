@@ -248,10 +248,10 @@ export class ListingDetailsComponent implements OnInit {
     //                      });
     this.store.dispatch(addOpenHouseToListing({payload: this.addForm.value}));
     this.addOpenHouse = false;
-    this.store.select(openHouses)
-        .subscribe(data => {
-          this.openhouse = data;
-        });
+    // this.store.select(openHouses)
+    //     .subscribe(data => {
+    //       this.openhouse = data;
+    //     });
   }
 
   updateStatus() {
@@ -291,8 +291,8 @@ export class ListingDetailsComponent implements OnInit {
   // }
 
   AddOH() {
-    // this.addOpenHouse = !this.addOpenHouse;
-    this.router.navigate(['/Manage/marketing/openhouseson']);
+    this.addOpenHouse = !this.addOpenHouse;
+    // this.router.navigate(['/Manage/marketing/openhouseson']);
   }
 
   updateOpenHouse() {

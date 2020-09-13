@@ -222,13 +222,27 @@
                                 </ul>
                                 <p style="margin-left: 60px;" *ngIf="listing.rentalProperty.openHouse[0].openHouseViewer == null">
                                     No viewers registered at this moment!
-                                </p>
+                                </p>-->
                             </div>
 
-                            <div *ngIf="listing.rentalProperty.openHouse.length == 0">
+                            <div *ngIf="openhouse.length == 0">
                                 <p style="margin: 20px;">No open house</p>
 
-                                <a [routerLink]="['/Manage/marketing/openhouses']">Add Open House</a>
+                                <!-- <a [routerLink]="['/Manage/marketing/openhouses']">Add Open House</a> -->
+
+                                <a mat-button color="primary" style="margin-left: 20px;" (click)="AddOH()">
+                                    <span *ngIf="!addOpenHouse">
+                                    <span class="material-icons" style="color: #11c447;vertical-align: middle;font-size: 3em;" title="Add Open House">
+                                      add_circle
+                                    </span>
+                                    </span>
+
+                                    <span *ngIf="addOpenHouse">
+                                <span class="material-icons" style="color: #ff5722;vertical-align: middle;font-size: 3em;" title="Cancel">
+                                  clear
+                                </span>
+                                    </span>
+                                </a>
 
 
                                 <div *ngIf="addOpenHouse">
@@ -259,7 +273,7 @@
                                         </div>
                                     </form>
                                 </div>
--->
+
                             </div>
 
                         </mat-tab>
