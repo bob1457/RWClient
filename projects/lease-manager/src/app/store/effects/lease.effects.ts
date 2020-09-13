@@ -5,12 +5,14 @@ import * as LeaseActions from '../actions/lease.actions';
 
 import { switchMap, map, catchError, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material';
 
 
 @Injectable()
 export class LeaseEffects {
   constructor(
     private actions$: Actions,
+    private snackBar: MatSnackBar,
     private leaseService: LeaseService
   ) {}
 
@@ -125,13 +127,17 @@ export class LeaseEffects {
             type: '[Leases] Add Lease Success',
             payload: lease
           })),
-          // tap(res => {console.log('response: ' + res); }),
-          // catchError(
-          //   err => {
-          //     return of('[Marketing] Add Property Listing Failure', err.error);
-          //   } // EMPTY
-          // )
-          catchError(error => of(LeaseActions.addLeaseFailure(error.message)))
+          tap( () => {
+            // window.alert('done');
+            this.openSnackBar('Property lease added successfully.', '');
+           }), // display notificaiton
+
+          catchError(error => {
+            this.openSnackBar(error.message, '');
+            return of(LeaseActions.addLeaseFailure(error.message));
+            }
+          )
+          // catchError(error => of(LeaseActions.addLeaseFailure(error.message)))
         )
       )
     )
@@ -173,13 +179,17 @@ export class LeaseEffects {
             type: '[Leases] Update Lease Success',
             payload: lease
           })),
-          // tap(res => {console.log('response: ' + res); }),
-          // catchError(
-          //   err => {
-          //     return of('[Marketing] Update Property Listing Failure', err.error);
-          //   } // EMPTY
-          // )
-          catchError(error => of(LeaseActions.updateLeaseFailure(error.message)))
+          tap( () => {
+            // window.alert('done');
+            this.openSnackBar('Property lease updated successfully.', '');
+           }), // display notificaiton
+
+          catchError(error => {
+            this.openSnackBar(error.message, '');
+            return of(LeaseActions.updateLeaseFailure(error.message));
+            }
+          )
+          // catchError(error => of(LeaseActions.updateLeaseFailure(error.message)))
         )
       )
     )
@@ -197,13 +207,17 @@ export class LeaseEffects {
             type: '[Leases] Update Tenant Success',
             payload: tenant
           })),
-          // tap(res => {console.log('response: ' + res); }),
-          // catchError(
-          //   err => {
-          //     return of('[Marketing] Update Property Listing Failure', err.error);
-          //   } // EMPTY
-          // )
-          catchError(error => of(LeaseActions.updateTenantFailure(error.message)))
+          tap( () => {
+            // window.alert('done');
+            this.openSnackBar('Tenant updated successfully.', '');
+           }), // display notificaiton
+
+          catchError(error => {
+            this.openSnackBar(error.message, '');
+            return of(LeaseActions.updateTenantFailure(error.message));
+            }
+          )
+          // catchError(error => of(LeaseActions.updateTenantFailure(error.message)))
         )
       )
     )
@@ -356,5 +370,12 @@ export class LeaseEffects {
       )
     )
   );
+
+  openSnackBar(message: string, action: string) {
+    const config = new MatSnackBarConfig();
+    config.panelClass = ['notify'];
+    config.duration = 3000;
+    this.snackBar.open(message, action, config);
+  }
 
 }

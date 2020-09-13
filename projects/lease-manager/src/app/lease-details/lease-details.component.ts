@@ -7,7 +7,7 @@ import { LeaseService, PropertyLease } from '@lib/app-core';
 import { getLeaseDetails, updateLease } from '../store/actions/lease.actions';
 import { leaseDetails, loadingStatus } from '../store/reducers';
 import { Observable } from 'rxjs';
-import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+// import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 
 @Component({
   selector: 'app-lease-details',
@@ -23,11 +23,11 @@ export class LeaseDetailsComponent implements OnInit {
 
   detailsForm: FormGroup;
 
-  displayedColumns: string[] = ['icon', 'id', 'rentAmtDue', 'paidAmt', 'rentMonth', 'rentYear', 'paidDate', 'payMethod', 'added', 'action'];
-  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: false}) sort: MatSort;
+  // displayedColumns: string[] = ['icon', 'id', 'rentAmtDue', 'paidAmt', 'rentMonth', 'rentYear', 'paidDate', 'payMethod', 'added', 'action'];
+  // @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
+  // @ViewChild(MatSort, {static: false}) sort: MatSort;
 
-  dataSource = new MatTableDataSource<PropertyLease>();
+  // dataSource = new MatTableDataSource<PropertyLease>();
 
   constructor(private store: Store<PropertyLeaseState>,
               private router: Router,
