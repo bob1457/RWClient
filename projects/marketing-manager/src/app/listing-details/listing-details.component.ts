@@ -50,17 +50,19 @@ export class ListingDetailsComponent implements OnInit {
                       if (this.listing) {
                         this.imgList = this.listing.rentalProperty.propertyImg;
                         this.iconImg = this.imgList.filter((value, index) => index === 0);
+
+                        this.store.select(openHouses) // need review for how to implement open house
+                          .subscribe(oh => {
+                            if (oh) {
+                              this.openhouse = oh.filter(p => p.rentalPropertyId == this.listing.rentalProperty.id);
+                              console.log('rentalpId', this.listing.rentalProperty.id);
+                              console.log('oh', this.openhouse);
+                            }
+                            // this.openhouse = oh;this.listing.rentalProperty.id
+                          });
                       }
 
-                      // this.store.select(openHouses) // need review for how to implement open house
-                      //     .subscribe(oh => {
-                      //       if (oh) {
-                      //         this.openhouse = oh.filter(p => p.rentalPropertyId == this.listing.rentalProperty.id);
-                      //         console.log('rentalpId', this.listing.rentalProperty.id);
-                      //         console.log('oh', this.openhouse);
-                      //       }
-                      //       // this.openhouse = oh;this.listing.rentalProperty.id
-                      //     });
+
 
                       console.log('imglist', this.imgList);
                       console.log('iconimg', this.iconImg);
@@ -68,15 +70,16 @@ export class ListingDetailsComponent implements OnInit {
 
                 });
 
-                this.store.pipe(select(propertyImgList))
-                .subscribe(img => {
-                  if (img != null) {
-                    // this.imgList = img; // .filter(p => p.rentalPropeprtyId === this.listing.rentalPropertyId);
-                    // this.iconImg = this.imgList.filter((value, index) => index === 0);
-                    // console.log('iconimg', this.iconImg);
-                    // console.log('imglist', this.imgList);
-                  }
-                });
+
+                // this.store.pipe(select(propertyImgList))
+                // .subscribe(img => {
+                //   if (img != null) {
+                //     // this.imgList = img; // .filter(p => p.rentalPropeprtyId === this.listing.rentalPropertyId);
+                //     // this.iconImg = this.imgList.filter((value, index) => index === 0);
+                //     // console.log('iconimg', this.iconImg);
+                //     // console.log('imglist', this.imgList);
+                //   }
+                // });
 
                 // this.store.select(openHouses)
                 //     .subscribe(oh => {
