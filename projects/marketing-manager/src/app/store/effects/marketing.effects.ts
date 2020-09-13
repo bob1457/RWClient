@@ -5,11 +5,13 @@ import { Injectable } from '@angular/core';
 import * as ListingActions from '../actions/marketing.actions';
 import { switchMap, map, catchError, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material';
 
 @Injectable()
 export class MarketingEffects {
   constructor(
     private actions$: Actions,
+    private snackBar: MatSnackBar,
     private marketingService: MarketingService
   ) {}
 
@@ -114,13 +116,17 @@ export class MarketingEffects {
             type: '[Marketing] Add Property Listing Success',
             payload: listing
           })),
-          // tap(res => {console.log('response: ' + res); }),
-          // catchError(
-          //   err => {
-          //     return of('[Marketing] Add Property Listing Failure', err.error);
-          //   } // EMPTY
-          // )
-          catchError(error => of(ListingActions.addPropertyListingFailure(error.message)))
+          tap( () => {
+            // window.alert('done');
+            this.openSnackBar('Property listing added successfully.', '');
+           }), // display notificaiton
+
+          catchError(error => {
+            this.openSnackBar(error.message, '');
+            return of(ListingActions.addPropertyListingFailure(error.message));
+            }
+          )
+          // catchError(error => of(ListingActions.addPropertyListingFailure(error.message)))
         )
       )
     )
@@ -138,13 +144,17 @@ export class MarketingEffects {
             type: '[Marketing] Update Property Listing Success',
             payload: listing
           })),
-          // tap(res => {console.log('response: ' + res); }),
-          // catchError(
-          //   err => {
-          //     return of('[Marketing] Update Property Listing Failure', err.error);
-          //   } // EMPTY
-          // )
-          catchError(error => of(ListingActions.updatePropertyListingStatusFailure(error.message)))
+          tap( () => {
+            // window.alert('done');
+            this.openSnackBar('Property listing updated successfully.', '');
+           }), // display notificaiton
+
+          catchError(error => {
+            this.openSnackBar(error.message, '');
+            return of(ListingActions.updatePropertyListingFailure(error.message));
+            }
+          )
+          // catchError(error => of(ListingActions.updatePropertyListingStatusFailure(error.message)))
         )
       )
     )
@@ -292,5 +302,12 @@ export class MarketingEffects {
       )
     )
   );
+
+  openSnackBar(message: string, action: string) {
+    const config = new MatSnackBarConfig();
+    config.panelClass = ['notify'];
+    config.duration = 3000;
+    this.snackBar.open(message, action, config);
+  }
 
 }

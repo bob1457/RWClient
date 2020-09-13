@@ -1,7 +1,7 @@
-<!-- <p>
-  listing-details works! *ngIf="listing"
+<!-- <p>*ngIf="!(loading$ | async) && listing else spinner"
+  listing-details works!
 </p> -->
-<div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="1%" fxFlexFill *ngIf="!(loading$ | async) && listing else spinner">
+<div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="1%" fxFlexFill *ngIf="listing">
     <div fxFlex="10%" fxLayoutAlign="end">
         <i class="far fa-arrow-alt-circle-left" title="back to list" style="cursor: pointer; color: seagreen; font-size: 1.5em;" (click)="goBack()"></i>
     </div>
@@ -191,15 +191,17 @@
                             </div>
 
                         </mat-tab> -->
+                        <!-- <div mat-card-avatar class="tenant-avatar">
+                                      <img src="../../assets/images/tenant.png" width="50px" height="50px" style="border-radius: 50%;">
+                                  </div> listing.rentalProperty.openHouse-->
+
                         <mat-tab label="Open Houses" style="background: #f5f5f5;">
-                            <div *ngIf="openhouse.length > 0">
+                            <!-- <div *ngIf="openhouse.length > 0">
                                 <ul>
                                     <li *ngFor="let oh of openhouse" style="list-style: none;" fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="1%" fxFlexFill>
                                         <mat-card class="oh-card">
                                             <mat-card-header>
-                                                <!-- <div mat-card-avatar class="tenant-avatar">
-                                      <img src="../../assets/images/tenant.png" width="50px" height="50px" style="border-radius: 50%;">
-                                  </div> listing.rentalProperty.openHouse-->
+
                                                 <mat-card-title> Current Open House </mat-card-title>
                                                 <mat-card-subtitle>Open house for {{listing.rentalProperty.propertyName}}</mat-card-subtitle>
                                             </mat-card-header>
@@ -222,27 +224,13 @@
                                     No viewers registered at this moment!
                                 </p>
                             </div>
-                            <!--  -->
+
                             <div *ngIf="listing.rentalProperty.openHouse.length == 0">
                                 <p style="margin: 20px;">No open house</p>
 
                                 <a [routerLink]="['/Manage/marketing/openhouses']">Add Open House</a>
 
-                                <!-- <a mat-button color="primary" style="margin-left: 20px;" (click)="AddOH()">
-                                    <span *ngIf="!addOpenHouse">
-                                    <span class="material-icons" style="color: #11c447;vertical-align: middle;font-size: 3em;" title="Add Open House">
-                                      add_circle
-                                    </span>
-                                    </span>
 
-                                    <span *ngIf="addOpenHouse">
-                                <span class="material-icons" style="color: #ff5722;vertical-align: middle;font-size: 3em;" title="Cancel">
-                                  clear
-                                </span>
-                                    </span>
-                                </a> -->
-                                <!-- </button>
-                              <button mat-raised-button color="primary" *ngIf="addOpenHouse" style="margin-left: 20px;" (click)="AddOpenHOuse()">background-color: #ff5722; background-color: #11c447;-->
                                 <div *ngIf="addOpenHouse">
                                     <h6 style="margin-left: 20px;margin-top: 20px;">Add Open House</h6>
                                     <form fxLayout="column" fxLayoutGap="7px" fxLayoutAlign="start start" [formGroup]="addForm" (ngSubmit)="AddOpenHouse()" style="margin-left: 20px;">
@@ -265,16 +253,14 @@
                                             <textarea matInput formControlName="notes"></textarea>
                                         </mat-form-field>
                                         <div fxLayout="row" fxLayoutGap="7px" fxLayoutAlign="end center" style="width: 30%; margin-bottom: 20px;">
-                                            <!-- <span *ngIf="showMsg" style="color: rgb(189, 150, 25);">Updated successfully!</span>
-                        <img *ngIf=" loading" class="pl-2" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
-                        /> [disabled]="f.invalid || !f.dirty"-->
+
                                             <button type="submit" mat-raised-button color="primary">CREATE</button>
                                             <button type="button" mat-raised-button color="accent" (click)="clear()">CANCEL</button>
                                         </div>
                                     </form>
                                 </div>
 
-                            </div>
+                            </div> -->
 
                         </mat-tab>
                     </mat-tab-group>
@@ -287,6 +273,31 @@
 </div>
 <!-- {{property.propertyNumber}} {{property.propertyNumber}} {{property.propertyStreet}} {{property.propertyCity}} {{property.propertyStateProvince}} {{property.propertyZipPostCode}} -->
 
-<ng-template #spinner>
+<!-- <ng-template #spinner>
     <app-loading></app-loading>
-</ng-template>
+</ng-template> -->
+<div *ngIf="loading$ | async">
+    <app-loading></app-loading>
+</div>
+
+
+
+<!-- <a mat-button color="primary" style="margin-left: 20px;" (click)="AddOH()">
+                                    <span *ngIf="!addOpenHouse">
+                                    <span class="material-icons" style="color: #11c447;vertical-align: middle;font-size: 3em;" title="Add Open House">
+                                      add_circle
+                                    </span>
+                                    </span>
+
+                                    <span *ngIf="addOpenHouse">
+                                <span class="material-icons" style="color: #ff5722;vertical-align: middle;font-size: 3em;" title="Cancel">
+                                  clear
+                                </span>
+                                    </span>
+                                </a> -->
+<!-- </button>
+                              <button mat-raised-button color="primary" *ngIf="addOpenHouse" style="margin-left: 20px;" (click)="AddOpenHOuse()">background-color: #ff5722; background-color: #11c447;-->
+
+<!-- <span *ngIf="showMsg" style="color: rgb(189, 150, 25);">Updated successfully!</span>
+                        <img *ngIf=" loading" class="pl-2" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+                        /> [disabled]="f.invalid || !f.dirty"-->

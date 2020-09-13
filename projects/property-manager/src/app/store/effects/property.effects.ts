@@ -85,7 +85,7 @@ export class PropertyEffects {
           })),
           tap( () => {
             // window.alert('done');
-            this.openSnackBar('Property added successfully.', '');
+            this.openSnackBar('Property added successfully.', '&#10003;');
            }), // display notificaiton
 
           catchError(error => {
