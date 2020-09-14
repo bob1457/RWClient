@@ -1,7 +1,7 @@
 <!-- <p>
   vendor-details works!
 </p> -->
-<div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="1%" fxFlexFill *ngIf="!(loading$ | async) && vendor; else spinner">
+<div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="1%" fxFlexFill *ngIf="vendor">
     <div>
         <div fxFlex="10%" fxLayoutAlign="end">
             <i class="far fa-arrow-alt-circle-left" title="back to list" style="cursor: pointer; color: seagreen; font-size: 1.5em;" (click)="goBack()"></i>
@@ -123,6 +123,9 @@
 
 </div>
 
-<ng-template #spinner>
+<!-- <ng-template #spinner>
     <app-loading></app-loading>
-</ng-template>
+</ng-template> -->
+<div *ngIf="loading$ | async">
+    <app-loading></app-loading>
+</div>

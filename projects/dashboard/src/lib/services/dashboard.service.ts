@@ -66,6 +66,11 @@ export class DashboardService {
     return this.http.get<OpenHouse[]>(`${this.baseUrl}/listing/allopenhouses`);
   }
 
+  getRentPaymentList() {
+    debugger;
+    return this.http.get<any[]>(`${this.baseUrl}/rentpayment/renthistory`);
+  }
+
 
 
 }

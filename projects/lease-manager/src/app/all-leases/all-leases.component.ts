@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { PropertyLeaseState } from '../store/lease-state';
-import { getAllLeases } from '../store/actions/lease.actions';
+import { getAllLeases, getRentPaymentList } from '../store/actions/lease.actions';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator, MatSort } from '@angular/material';
 import { PropertyLease } from '@lib/app-core';
@@ -63,6 +63,8 @@ export class AllLeasesComponent implements OnInit {
             }
             console.log(data);
       });
+
+    this.store.dispatch(getRentPaymentList());
 
 
   }

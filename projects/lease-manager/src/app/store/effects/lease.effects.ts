@@ -371,6 +371,30 @@ export class LeaseEffects {
     )
   );
 
+  getRentPaymentList$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(LeaseActions.getRentPaymentList),
+      tap(() => console.log('got here for rent payment list!!!')),
+      switchMap(() =>
+        this.leaseService.getRentPaymentList().pipe(
+          map((payments: any[]) => ({
+            type: '[Lease] Get Rent Payment List Success',
+            payload: payments
+          })),
+          // tap(res => {console.log('response: ' + res); }),
+          // catchError(
+          //   err => {
+          //     return of('[Marketing] Get Rental Applications Failure', err.error);
+          //   } // EMPTY
+          // )
+          catchError(error => of(LeaseActions.getRentPaymentListFailure(error.message)))
+        )
+      )
+    )
+  );
+
+
   openSnackBar(message: string, action: string) {
     const config = new MatSnackBarConfig();
     config.panelClass = ['notify'];

@@ -17,6 +17,7 @@ export const initialState: DashState =  { // adapter.getInitialState
   applications: null,
   workOrders: null,
   openHouses: null,
+  rentPayments: null,
   errorMessage: null
 };
 
@@ -215,6 +216,27 @@ const dashReducer = createReducer(
       loaded: true,
       openHouses: payload
     });
+  }),
+
+  /**
+   * Get all rent payment
+   */
+
+
+  on(DashActions.getRentPaymentList, state => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+
+  on(DashActions.getRentPaymentListSuccess, (state, { payload }) => {
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      rentPayments: payload
+    });
   })
 
 );
@@ -237,6 +259,7 @@ const AllListings = (state: DashState) => state.listings;
 const AllRentalApps = (state: DashState) => state.applications;
 
 export const AllPropertyImgs = (state: DashState) => state.propertyImgList;
+export const AllRentPaymentHistory = (state: DashState) => state.rentPayments;
 
 // Select required slice of state
 export const getDashState = createFeatureSelector<DashState>('dashboard');
@@ -252,6 +275,7 @@ export const OpenHouseList = createSelector(getDashState, AllOpenhouess);
 export const MarketingList = createSelector(getDashState, AllListings);
 export const RentalAppList = createSelector(getDashState, AllRentalApps);
 export const PropertyImgList = createSelector(getDashState, AllPropertyImgs);
+export const RentPaymentHistory = createSelector(getDashState, AllRentPaymentHistory);
 
 export const loadingStatus = createSelector(getDashState, loading);
 

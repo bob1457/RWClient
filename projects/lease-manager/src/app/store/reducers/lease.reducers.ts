@@ -1,6 +1,7 @@
 import { PropertyLeaseState } from '../lease-state';
 import { createReducer, on, Action, createFeatureSelector, createSelector } from '@ngrx/store';
 import * as LeaseActions from '../actions/lease.actions';
+import { getRentPaymentListFailure } from 'projects/dashboard/src/lib/store/dash.actions';
 
 
 
@@ -19,6 +20,7 @@ export const initialState: PropertyLeaseState =  { // adapter.getInitialState
   selectedvendor: null,
   servierequests: null,
   selectedrequest: null,
+  rentPayments: null,
   // contracts: null,
   // contractsForProperty: null,
   // selectedContract: null,
@@ -345,6 +347,22 @@ const propertyLeaseReducer = createReducer(
     });
   }),
 
+  on(LeaseActions.getRentPaymentList, state => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+
+  on(LeaseActions.getRentPaymentListSuccess, (state, { payload }) => {
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      rentPayments: payload
+    });
+  })
+
 
 );
 
@@ -366,6 +384,7 @@ export const getServiceRequestList = (state: PropertyLeaseState) => state.servie
 export const getServiceRequestDetails = (state: PropertyLeaseState) => state.selectedrequest;
 export const getAllWorkOrders = (state: PropertyLeaseState) => state.workorders;
 export const getWorkOrderDetails = (state: PropertyLeaseState) => state.selectedworkorder;
+export const getRentPaymentList = (state: PropertyLeaseState) => state.rentPayments;
 
 export const loadingStatus = createSelector(selectLeaseyState, getLoadingStatus);
 
@@ -379,6 +398,7 @@ export const serviceRequestList = createSelector(selectLeaseyState, getServiceRe
 export const serviceRequestDetails = createSelector(selectLeaseyState, getServiceRequestDetails);
 export const workOrderList = createSelector(selectLeaseyState, getAllWorkOrders);
 export const workOrderDetails = createSelector(selectLeaseyState, getWorkOrderDetails);
+export const rentPaymentList = createSelector(selectLeaseyState, getRentPaymentList);
 
 
 

@@ -227,5 +227,28 @@ export class DashboardEffects {
     )
   );
 
+  getRentPaymentList$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(DashActions.getRentPaymentList),
+      tap(() => console.log('got here for rent payment list!!!')),
+      switchMap(() =>
+        this.dashService.getRentPaymentList().pipe(
+          map((payments: any[]) => ({
+            type: '[Lease] Get Rent Payment List Success',
+            payload: payments
+          })),
+          // tap(res => {console.log('response: ' + res); }),
+          // catchError(
+          //   err => {
+          //     return of('[Marketing] Get Rental Applications Failure', err.error);
+          //   } // EMPTY
+          // )
+          catchError(error => of(DashActions.getRentPaymentListFailure(error.message)))
+        )
+      )
+    )
+  );
+
 
 }

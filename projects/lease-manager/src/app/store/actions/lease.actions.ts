@@ -396,6 +396,49 @@ export const getServiceRequestFailure = createAction(
   }
 );
 
+/**
+ * Get all rent payments Actions
+ */
+export const getRentPaymentList = createAction(
+  '[Lease] Get Rent Payment List'
+);
+
+export const getRentPaymentListSuccess = createAction(
+  '[Lease] Get Rent Payment List Success',
+  props<{payload: any[]}>()
+);
+
+export const getRentPaymentListFailure = createAction(
+  '[Lease] Get Rent Payment List Failure',
+  // props<{payload: any}>()
+  (errorMessage = 'Error loading rent payment list') => {
+    return ({ payload: { errorMessage } });
+  }
+);
+
+/**
+ * Add Rent Payment Actions
+ */
+
+export const addRentPayment = createAction(
+  '[Leases] Add Rent Payment',
+  props<{payload: ServiceRequest}>()
+);
+
+export const addRentPaymentSuccess = createAction(
+  '[Leases] Add Rent Payment Success',
+  props<{payload: ServiceRequest}>()
+);
+
+export const addRentPaymentFailure = createAction(
+  '[[Leases] Add Rent Payment Failure',
+  // props<{payload: any}>()
+  (errorMessage = 'Error adding rent payment') => ({ payload: { errorMessage }})
+
+);
+
+
+
 
 
 

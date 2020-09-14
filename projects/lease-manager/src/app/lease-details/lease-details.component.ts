@@ -5,7 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LeaseService, PropertyLease } from '@lib/app-core';
 import { getLeaseDetails, updateLease } from '../store/actions/lease.actions';
-import { leaseDetails, loadingStatus } from '../store/reducers';
+import { leaseDetails, loadingStatus, rentPaymentList } from '../store/reducers';
 import { Observable } from 'rxjs';
 // import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 
@@ -18,6 +18,7 @@ export class LeaseDetailsComponent implements OnInit {
 
   id: number;
   lease: any; //PropertyLease;
+  payments: any;
 
   loading$: Observable<boolean>;
 
@@ -137,6 +138,16 @@ export class LeaseDetailsComponent implements OnInit {
             console.log(data);
             // this.dataSource.data = this.lease;
             // console.log('payment', this.dataSource.data);
+            this.store.select(rentPaymentList)
+                .subscribe(paymentList => {
+                  this.payments = paymentList;
+
+                  if(paymentList) {
+                    this.payments = paymentList.filter(l => l.leaseId == this.lease.id);
+                    console.log('leaseid', this.lease.id);
+                    console.log('py', this.payments);
+                  }
+                });
           });
 
       // this.store.pipe(select(leaseDetails))

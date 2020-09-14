@@ -118,5 +118,15 @@ export class LeaseService {
     return this.http.post<ServiceRequest>(`${this.baseUrl}/workorder/request/add`, request);
   }
 
+  getRentPaymentList() {
+    debugger;
+    return this.http.get<any[]>(`${this.baseUrl}/rentpayment/renthistory`);
+  }
+
+  addRentPayment(data: any) {
+    debugger;
+    return this.http.post<any>(`${this.baseUrl}/rentalpayment/rent/add`, data );
+  }
+
 
 }

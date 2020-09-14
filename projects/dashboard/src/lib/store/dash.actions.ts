@@ -191,3 +191,23 @@ export const getOpenHouseListFailure = createAction(
   }
 );
 
+/**
+ * Get all rent payments Actions
+ */
+export const getRentPaymentList = createAction(
+  '[Lease] Get Rent Payment List'
+);
+
+export const getRentPaymentListSuccess = createAction(
+  '[Lease] Get Rent Payment List Success',
+  props<{payload: any[]}>()
+);
+
+export const getRentPaymentListFailure = createAction(
+  '[Lease] Get Rent Payment List Failure',
+  // props<{payload: any}>()
+  (errorMessage = 'Error loading rent payment list') => {
+    return ({ payload: { errorMessage } });
+  }
+);
+
