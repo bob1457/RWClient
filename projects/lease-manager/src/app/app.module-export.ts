@@ -49,6 +49,7 @@ const routes: Routes = [
       { path: '', component: AllLeasesComponent},
       { path: 'tenants', component: AllTenantsComponent},
       { path: 'leasedetails/:id', component: LeaseDetailsComponent},
+      // { path: 'leasedetails/rentpayment/:id': }
       { path: 'addlease', component: AddLeaseComponent},
       { path: 'tenantdetails/:id', component: TenantDetailsComponent},
       { path: 'addtenant', component: AddTenantComponent},

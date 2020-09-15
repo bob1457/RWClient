@@ -7,6 +7,7 @@ import { LeaseService, PropertyLease } from '@lib/app-core';
 import { getLeaseDetails, updateLease } from '../store/actions/lease.actions';
 import { leaseDetails, loadingStatus, rentPaymentList } from '../store/reducers';
 import { Observable } from 'rxjs';
+import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 // import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 
 @Component({
@@ -24,11 +25,11 @@ export class LeaseDetailsComponent implements OnInit {
 
   detailsForm: FormGroup;
 
-  // displayedColumns: string[] = ['icon', 'id', 'rentAmtDue', 'paidAmt', 'rentMonth', 'rentYear', 'paidDate', 'payMethod', 'added', 'action'];
-  // @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
-  // @ViewChild(MatSort, {static: false}) sort: MatSort;
+  displayedColumns: string[] = ['icon', 'id', 'paidAmt', 'paidDate', 'payMethod', 'rentMonth', 'rentYear', 'added', 'action'];
+  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: false}) sort: MatSort;
 
-  // dataSource = new MatTableDataSource<PropertyLease>();
+  dataSource = new MatTableDataSource<any>();
 
   constructor(private store: Store<PropertyLeaseState>,
               private router: Router,
@@ -141,11 +142,17 @@ export class LeaseDetailsComponent implements OnInit {
             this.store.select(rentPaymentList)
                 .subscribe(paymentList => {
                   this.payments = paymentList;
-
                   if(paymentList) {
                     this.payments = paymentList.filter(l => l.leaseId == this.lease.id);
-                    console.log('leaseid', this.lease.id);
-                    console.log('py', this.payments);
+                    this.dataSource.data = this.payments;
+                    // this.dataSource.sort = this.sort;
+                    // this.dataSource.paginator = this.paginator;
+
+                    setTimeout(() =>  {this.dataSource.paginator = this.paginator; this.dataSource.sort = this.sort; });
+
+                    // console.log('datasource', this.dataSource.data);
+                    // console.log('leaseid', this.lease.id);
+                    // console.log('py', this.payments);
                   }
                 });
           });
@@ -168,6 +175,11 @@ export class LeaseDetailsComponent implements OnInit {
 
   }
 
+
+  ngAfterViewInit(): void {
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
+  }
 
   viewAgreement() {
 
