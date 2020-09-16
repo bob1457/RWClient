@@ -394,6 +394,33 @@ export class LeaseEffects {
     )
   );
 
+  getRentPaymentDetails$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(LeaseActions.getRentPaymenttDetails),
+      // tap(() => console.log('got here: ')),
+      map(action => action.payload),
+      switchMap((payload) =>
+        this.leaseService.getRentPaymentDetails(payload).pipe(
+          tap(() => console.log('got here for payment details')),
+          map((payment: any) => ({
+            // tslint:disable-next-line:max-line-length
+            type: '[Leases] Get Rent Payment Details Success', // the name of the action(string) must match the string in the Action, case senstive
+            payload: payment
+          })),
+          // tap(res => {console.log('response: ' + res); }),
+          // catchError(
+          //   err => {
+          //     tap( () => console.log('err'));
+          //     return of(LeaseActions.getTenantDetailsFailure([err.error]));
+          //   } // EMPTY // return of('[Property] Get Property Details Failure', err.error);
+          // )
+          catchError(error => of(LeaseActions.getRentPaymentListFailure(error.message)))
+        )
+      )
+    )
+  );
+
 
   openSnackBar(message: string, action: string) {
     const config = new MatSnackBarConfig();

@@ -123,6 +123,11 @@ export class LeaseService {
     return this.http.get<any[]>(`${this.baseUrl}/rentpayment/renthistory`);
   }
 
+  getRentPaymentDetails(id: number) {
+    debugger;
+    return this.http.get<any>(`${this.baseUrl}/rentpayment/details/${id}`);
+  }
+
   addRentPayment(data: any) {
     debugger;
     return this.http.post<any>(`${this.baseUrl}/rentalpayment/rent/add`, data );

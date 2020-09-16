@@ -18,6 +18,7 @@ export interface PropertyLeaseState {
   servierequests: ServiceRequest[] | null;
   selectedrequest: ServiceRequest | null;
   rentPayments: any[];
+  selectedPayment: any,
   // contracts: ManagementContract[] | null;
   // contractsForProperty: ManagementContract[] | null;
   // selectedContract: ManagementContract | null;

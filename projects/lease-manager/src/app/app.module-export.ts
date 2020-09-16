@@ -38,7 +38,7 @@ import { UrgentLevelPipe } from './urgent-level.pipe';
 import { StatusPipe } from './status.pipe';
 import { WorkOrderDatePipe } from './work-order-date.pipe';
 import { PaymentMethodPipe } from './payment-method.pipe';
-import { DialogBodyComponent } from './dialog-body/dialog-body.component';
+import { PaymentDetailsDialogComponent } from './dialogs/payment-details-dialog/payment-details-dialog.component';
 
 
 // import { CdkColumnDef } from '@angular/cdk/table';
@@ -92,7 +92,8 @@ const routes: Routes = [
     UrgentLevelPipe,
     StatusPipe,
     WorkOrderDatePipe,
-    PaymentMethodPipe
+    PaymentMethodPipe,
+    PaymentDetailsDialogComponent
 
   ],
   imports: [
@@ -109,6 +110,9 @@ const routes: Routes = [
   ],
   providers: [
     // CdkColumnDef
+  ],
+  entryComponents: [
+    PaymentDetailsDialogComponent
   ],
   bootstrap: [AppLMComponent]
 })

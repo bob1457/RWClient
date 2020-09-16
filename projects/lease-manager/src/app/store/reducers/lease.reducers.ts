@@ -21,6 +21,7 @@ export const initialState: PropertyLeaseState =  { // adapter.getInitialState
   servierequests: null,
   selectedrequest: null,
   rentPayments: null,
+  selectedPayment: null,
   // contracts: null,
   // contractsForProperty: null,
   // selectedContract: null,
@@ -361,6 +362,22 @@ const propertyLeaseReducer = createReducer(
       loaded: true,
       rentPayments: payload
     });
+  }),
+
+  on(LeaseActions.getRentPaymenttDetails, (state) => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+  on(LeaseActions.getRentPaymenttDetailssSuccess, (state, { payload }) => {
+    debugger;
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      selectedPayment: payload
+    });
   })
 
 
@@ -385,6 +402,7 @@ export const getServiceRequestDetails = (state: PropertyLeaseState) => state.sel
 export const getAllWorkOrders = (state: PropertyLeaseState) => state.workorders;
 export const getWorkOrderDetails = (state: PropertyLeaseState) => state.selectedworkorder;
 export const getRentPaymentList = (state: PropertyLeaseState) => state.rentPayments;
+export const getRemtPaymentDetails = (state: PropertyLeaseState) => state.selectedPayment;
 
 export const loadingStatus = createSelector(selectLeaseyState, getLoadingStatus);
 
@@ -399,6 +417,7 @@ export const serviceRequestDetails = createSelector(selectLeaseyState, getServic
 export const workOrderList = createSelector(selectLeaseyState, getAllWorkOrders);
 export const workOrderDetails = createSelector(selectLeaseyState, getWorkOrderDetails);
 export const rentPaymentList = createSelector(selectLeaseyState, getRentPaymentList);
+export const rentPaymentDetails = createSelector(selectLeaseyState, getRemtPaymentDetails);
 
 
 

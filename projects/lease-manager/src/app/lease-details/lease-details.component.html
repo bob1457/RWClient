@@ -397,13 +397,13 @@
                                             </td>
                                         </ng-container>
                                         <!-- style="font-size: 1.5em; color: red;" [style.color]="element.status == 'Rented' ? 'green': element.status == 'Pending'? 'orange' :'red'"-->
-                                        <!-- Action Column -->
+                                        <!-- Action Column routerLink="/Manage/lease/leasedetails/rentpayment/{{element.id}}"-->
                                         <ng-container matColumnDef="action">
                                             <th mat-header-cell *matHeaderCellDef></th>
                                             <td mat-cell *matCellDef="let element" class="action-link">
                                                 <!-- <a (click)="openDialog('Update',element)">Edit</a> |
                       <a (click)="openDialog('Delete',element)">Delete</a> ['/details', 1]-->
-                                                <button routerLink="/Manage/lease/leasedetails/rentpayment/{{element.id}}" mat-raised-button color="primary">Details</button> &nbsp;
+                                                <button type="button" mat-raised-button color="primary" (click)="getRentPaymentDetails(element.id)">Details</button> &nbsp;
                                                 <!-- <button mat-raised-button color="accent" (click)="openDialog('Delete',element)">Delete</button> -->
                                             </td>
                                         </ng-container>

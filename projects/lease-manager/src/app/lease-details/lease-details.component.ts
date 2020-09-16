@@ -4,10 +4,11 @@ import { PropertyLeaseState } from '../store/lease-state';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LeaseService, PropertyLease } from '@lib/app-core';
-import { getLeaseDetails, updateLease } from '../store/actions/lease.actions';
-import { leaseDetails, loadingStatus, rentPaymentList } from '../store/reducers';
+import { getLeaseDetails, getRentPaymenttDetails, updateLease } from '../store/actions/lease.actions';
+import { leaseDetails, loadingStatus, rentPaymentDetails, rentPaymentList } from '../store/reducers';
 import { Observable } from 'rxjs';
-import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { MatDialog, MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { PaymentDetailsDialogComponent } from '../dialogs/payment-details-dialog/payment-details-dialog.component';
 // import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 
 @Component({
@@ -20,6 +21,7 @@ export class LeaseDetailsComponent implements OnInit {
   id: number;
   lease: any; //PropertyLease;
   payments: any;
+  paymentDetails: any;
 
   loading$: Observable<boolean>;
 
@@ -31,18 +33,37 @@ export class LeaseDetailsComponent implements OnInit {
 
   dataSource = new MatTableDataSource<any>();
 
+  private dialogConfig;
+
   constructor(private store: Store<PropertyLeaseState>,
               private router: Router,
               private actRoute: ActivatedRoute,
+              private dialog: MatDialog,
               private formBuilder: FormBuilder,
               private propertyService: LeaseService) {
                 this.id = this.actRoute.snapshot.params.id;
                 console.log(this.id);
+
+                this.store.select(rentPaymentDetails)
+                          .subscribe(data => {
+                            this.paymentDetails = data;
+                            console.log('py-details', this.paymentDetails);
+                          });
               }
 
   ngOnInit() {
 
     this.loading$ = this.store.pipe(select(loadingStatus));
+
+    this.dialogConfig = {
+      height: '200px',
+      width: '400px',
+      disableClose: false,
+      data: {
+        py: this.paymentDetails,
+        txt: 'test'
+      }
+    };
 
     this.GetLeaseDetails(this.id);
 
@@ -196,6 +217,18 @@ export class LeaseDetailsComponent implements OnInit {
       );
     console.log('form data', this.detailsForm.value);
     this.store.dispatch(updateLease({payload: this.detailsForm.value}));
+
+  }
+
+  getRentPaymentDetails(id: number) {
+    debugger;
+    let dialogRef = this.dialog.open(PaymentDetailsDialogComponent, this.dialogConfig);
+
+    this.store.dispatch(getRentPaymenttDetails({payload: id}));
+
+  }
+
+  openDialog() {
 
   }
 

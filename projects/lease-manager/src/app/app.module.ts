@@ -32,7 +32,8 @@ import { UrgentLevelPipe } from './urgent-level.pipe';
 import { StatusPipe } from './status.pipe';
 import { WorkOrderDatePipe } from './work-order-date.pipe';
 import { PaymentMethodPipe } from './payment-method.pipe';
-import { DialogBodyComponent } from './dialog-body/dialog-body.component';
+import { PaymentDetailsDialogComponent } from './dialogs/payment-details-dialog/payment-details-dialog.component';
+
 
 @NgModule({
   declarations: [
@@ -61,8 +62,8 @@ import { DialogBodyComponent } from './dialog-body/dialog-body.component';
     UrgentLevelPipe,
     StatusPipe,
     WorkOrderDatePipe,
-    PaymentMethodPipe
-
+    PaymentMethodPipe,
+    PaymentDetailsDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -71,6 +72,9 @@ import { DialogBodyComponent } from './dialog-body/dialog-body.component';
     EffectsModule.forFeature([LeaseEffects])
   ],
   providers: [],
+  entryComponents: [
+    PaymentDetailsDialogComponent
+  ],
   bootstrap: [AppLMComponent]
 })
 export class AppModule { }

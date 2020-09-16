@@ -1,0 +1,9 @@
+<p>
+    payment-details-dialog works! {{dataIn}}
+</p>
+<div *ngIf="payment">
+    Payement info: {{payment.actualPaymentAmt}}
+</div>
+<div *ngIf="!payment">
+    loading...
+</div>
