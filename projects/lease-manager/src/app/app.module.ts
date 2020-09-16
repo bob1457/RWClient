@@ -31,6 +31,8 @@ import { VendorListComponent } from './vendor-list/vendor-list.component';
 import { UrgentLevelPipe } from './urgent-level.pipe';
 import { StatusPipe } from './status.pipe';
 import { WorkOrderDatePipe } from './work-order-date.pipe';
+import { PaymentMethodPipe } from './payment-method.pipe';
+import { DialogBodyComponent } from './dialog-body/dialog-body.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +60,9 @@ import { WorkOrderDatePipe } from './work-order-date.pipe';
     VendorListComponent,
     UrgentLevelPipe,
     StatusPipe,
-    WorkOrderDatePipe
+    WorkOrderDatePipe,
+    PaymentMethodPipe
+
   ],
   imports: [
     BrowserModule,

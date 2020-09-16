@@ -368,7 +368,7 @@
 
                                         <ng-container matColumnDef="payMethod">
                                             <th class="table-header-text" style="margin-left: auto;margin-right: auto;" mat-header-cell *matHeaderCellDef mat-sort-header> Paid by </th>
-                                            <td mat-cell *matCellDef="let element"> {{element.payMethod}} </td>
+                                            <td mat-cell *matCellDef="let element"> {{element.payMethod | paymentMethod}} </td>
                                         </ng-container>
 
                                         <ng-container matColumnDef="rentMonth">
@@ -432,7 +432,6 @@
                                         {{lease.rentalProperty.address.country}}
                                     </p>
                                     <h6>Work Orders</h6>
-
 
                                 </div>
 
