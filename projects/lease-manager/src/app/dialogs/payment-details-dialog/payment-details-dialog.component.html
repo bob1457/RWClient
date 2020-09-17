@@ -1,8 +1,8 @@
-<section fxLayout="column" fxLayoutAlign="start" fxLayoutGap="1%" fxFlexFill>
-    <div mat-dialog-title>Rent Payment Details</div>
+<section fxLayout="column" fxLayoutAlign="start" fxLayoutGap="1%" fxFlexFill style="overflow-x: hidden;">
+    <div mat-dialog-title class="dialog-title">Rent Payment Details</div>
 
     <mat-dialog-content class="text">
-        <div *ngIf="payment">
+        <div *ngIf="payment" style="margin-left: 25px;">
             Payement info: {{payment.actualPaymentAmt}}
         </div>
         <div *ngIf="!payment">
@@ -10,6 +10,6 @@
         </div>
     </mat-dialog-content>
     <mat-dialog-actions>
-        <button mat-raised-button [mat-dialog-close]="true" color="primary">Ok</button>
+        <button mat-raised-button [mat-dialog-close]="true" color="primary" style="margin-left: 25px;">Ok</button>
     </mat-dialog-actions>
 </section>

@@ -58,7 +58,7 @@ export class LeaseDetailsComponent implements OnInit {
     this.dialogConfig = {
       height: '300px',
       width: '500px',
-      disableClose: false,
+      disableClose: true,
       panelClass: 'my-custom-dialog-class',
       data: {
         py: this.paymentDetails,
