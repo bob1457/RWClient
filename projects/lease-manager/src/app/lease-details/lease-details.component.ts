@@ -56,9 +56,10 @@ export class LeaseDetailsComponent implements OnInit {
     this.loading$ = this.store.pipe(select(loadingStatus));
 
     this.dialogConfig = {
-      height: '200px',
-      width: '400px',
+      height: '300px',
+      width: '500px',
       disableClose: false,
+      panelClass: 'my-custom-dialog-class',
       data: {
         py: this.paymentDetails,
         txt: 'test'
