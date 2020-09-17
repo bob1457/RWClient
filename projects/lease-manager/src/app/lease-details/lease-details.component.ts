@@ -56,7 +56,7 @@ export class LeaseDetailsComponent implements OnInit {
     this.loading$ = this.store.pipe(select(loadingStatus));
 
     this.dialogConfig = {
-      height: '300px',
+      height: '350px',
       width: '500px',
       disableClose: true,
       panelClass: 'my-custom-dialog-class',
@@ -227,6 +227,10 @@ export class LeaseDetailsComponent implements OnInit {
 
     this.store.dispatch(getRentPaymenttDetails({payload: id}));
 
+  }
+
+  public doFilter = (value: string) => {
+    this.dataSource.filter = value.trim().toLocaleLowerCase();
   }
 
   openDialog() {

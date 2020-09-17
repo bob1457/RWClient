@@ -341,6 +341,31 @@
 
 
                             <mat-tab label="Rent Payment" style="background: #f5f5f5;">
+
+                                <div fxLayout="row" fxLayoutAlign="center" style="margin-bottom: 1%;
+                                    flex-direction: row;
+                                    box-sizing: border-box;
+                                    display: flex;
+                                    place-content: stretch flex-end;
+                                    align-items: stretch;
+                                    margin-top: 20px;
+                                    margin-left: 25px;
+                                    width: 95%;">
+                                    <mat-form-field fxLayout fxLayoutAlign="start center">
+                                        <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="Filter">
+                                    </mat-form-field>
+                                    <!-- <mat-radio-group aria-label="Select an option" style="margin-top: 13px;margin-left: 25px;padding-right: 5px;">
+                                        <mat-radio-button value="1" checked style="padding-right: 10px;">Active</mat-radio-button>
+                                        <mat-radio-button value="0">All</mat-radio-button>
+                                    </mat-radio-group> -->
+                                    <span class="spacer"></span>
+                                    <button [routerLink]="['/Manage/lease/addlease']" mat-button mat-mini-fab style="background: #3d5afe;color: white;">
+                                    <i class="material-icons" title="Add Lease Agreement">
+                                      playlist_add
+                                    </i>
+                                  </button>
+                                </div>
+
                                 <div fxLayoutAlign="center">
                                     <table mat-table [dataSource]="dataSource" matSort class="my-table mat-elevation-z8" style="width: 100%;">
                                         <ng-container matColumnDef="id">

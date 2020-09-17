@@ -1,15 +1,35 @@
-<section fxLayout="column" fxLayoutAlign="start" fxLayoutGap="1%" fxFlexFill style="overflow-x: hidden;">
+<section fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="30px" fxFlexFill style="overflow-x: hidden;overflow-y: hidden;">
     <div mat-dialog-title class="dialog-title">Rent Payment Details</div>
 
-    <mat-dialog-content class="text">
-        <div *ngIf="payment" style="margin-left: 25px;">
-            Payement info: {{payment.actualPaymentAmt}}
+    <mat-dialog-content class="text" fxLayout="column" fxLayoutAlign="staret center" fxLayoutGap="1%" style="height: 200px;margin-top: 20px;" fxFlexFill>
+        <div *ngIf="payment" style="width:100%">
+            <div fxLayout="row" fxLayoutAlign="start" style="font-size: .9em;">
+                <div style="width: 50%;">
+                    <p><span style="font-weight: bold;">Rent Month:</span> <span style="font-style: italic;">{{payment.rentalForMonth}}</span></p>
+                    <p><span style="font-weight: bold;">Rent Year:</span> <span style="font-style: italic;">{{payment.rentalForYear}}</span></p>
+                    <p><span style="font-weight: bold;">Rent Amount Due:</span> <span style="font-style: italic;">{{payment.scheduledPaymentAmt | currency:'CAD'}}</span></p>
+                    <p><span style="font-weight: bold;">Rent Due Date:</span> <span style="font-style: italic;">{{payment.paymentDueDate | date}}</span></p>
+                </div>
+                <div style="width: 50%;">
+                    <p><span style="font-weight: bold;">Rent Paid:</span> <span style="font-style: italic;">{{payment.actualPaymentAmt | currency:'CAD'}}</span></p>
+                    <p><span style="font-weight: bold;">Rent Paid on:</span> <span style="font-style: italic;">{{payment.paymentReceivedDate | date}}</span></p>
+                    <p><span style="font-weight: bold;">Rent by:</span> <span style="font-style: italic;">{{payment.payMethod | paymentMethod}}</span></p>
+                    <p><span style="font-weight: bold;">Outstanding:</span> <span style="font-style: italic;">${{payment.balance}}</span></p>
+                    <!-- <p>Rent Month : {{}}</p>   -->
+                </div>
+            </div>
+            <div>
+                <span style="font-weight: bold;">Note:</span> <span style="font-style: italic;">{{payment.note}}</span>
+            </div>
+            <!-- position: fixed; top:50%; left: 50%; -->
+            <button mat-raised-button [mat-dialog-close]="true" color="primary" style="margin-top: 30px;">Ok</button>
         </div>
-        <div *ngIf="!payment">
+        <div *ngIf="!payment" style="text-align: center; vertical-align: middle;">
             loading...
         </div>
+
     </mat-dialog-content>
-    <mat-dialog-actions>
-        <button mat-raised-button [mat-dialog-close]="true" color="primary" style="margin-left: 25px;">Ok</button>
-    </mat-dialog-actions>
+    <!-- <mat-dialog-actions style="margin-top: -30px;">
+
+    </mat-dialog-actions> -->
 </section>
