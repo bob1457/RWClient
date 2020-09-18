@@ -25,6 +25,8 @@ export class LeaseDetailsComponent implements OnInit {
   paymentDetails: any;
   addRent = false;
 
+  tabIndex = 0;
+  hide = false;
   // rentAmtDue;
   // rentDueOn;
 
@@ -99,6 +101,7 @@ export class LeaseDetailsComponent implements OnInit {
 
   ngOnInit() {
 
+    console.log('start tab index', this.tabIndex);
     // this.currentMonth = (new Date().getMonth() + 1).toString();
     // this.currentYear = (new Date().getFullYear).toString();
 
@@ -269,6 +272,48 @@ export class LeaseDetailsComponent implements OnInit {
 
   }
 
+  tabSelected(e) {
+    this.tabIndex = e.index;
+    console.log('tab selected', this.tabIndex);
+    // if (this.tabIndex == 1) {
+    //   this.hide = false;
+    // }
+
+    // if (this.tabIndex == 0) {
+    //   this.hide = false;
+    // }
+
+    // if (this.tabIndex == 1) {
+    //   this.hide = false;
+    // }
+
+    switch (this.tabIndex) {
+      case 0 : {
+        this.hide = false;
+        break;
+      }
+      case 1 : {
+        this.hide = false;
+        break;
+      }
+      case 2 : {
+        this.hide = true;
+        break;
+      }
+      case 3 : {
+        this.hide = true;
+        break;
+      }
+      case 4 : {
+        this.hide = true;
+        break;
+      }
+        default: {
+        this.hide = false;
+        break;
+      }
+    }
+  }
 
   ngAfterViewInit(): void {
     this.dataSource.sort = this.sort;
