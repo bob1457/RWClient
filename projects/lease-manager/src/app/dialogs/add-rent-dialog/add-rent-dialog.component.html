@@ -9,27 +9,55 @@
     </div>
     <mat-dialog-content class="text" fxLayout="column" fxLayoutAlign="staret center" fxLayoutGap="1%" style="height: 200px;margin-top: 20px;" fxFlexFill>
         <form novalidate fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" [formGroup]="addForm">
-            <mat-form-field style="width: 70%;">
-                <mat-label>Rent Month</mat-label>
-                <mat-select id="month" formControlName="rentalForMonth">
-                    <mat-option [value]='months' *ngFor="let month of months">{{month.name}}</mat-option>
-                    <!-- <mat-option value="SingleHouse">January</mat-option>
-                <mat-option value="Apartment">Februray</mat-option>
-                <mat-option value="TownHouse">March</mat-option> -->
-                    <mat-option value="Others">April</mat-option>
-                </mat-select>
-            </mat-form-field>
+            <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
+                <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="5px">
+                    <mat-form-field style="width: 70%;">
+                        <mat-label>Rent Month</mat-label>
+                        <mat-select id="month" formControlName="rentalForMonth">
+                            <mat-option [value]='month.name' *ngFor="let month of months">{{month.name}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field style="width: 70%;">
+                        <mat-label>Rent Year</mat-label>
+                        <mat-select id="year" formControlName="rentalForYear">
+                            <mat-option [value]='year.name' *ngFor="let year of years">{{year.name}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="5px">
+                    <mat-form-field class="lease-full-width">
+                        <span class="icon-pos" matPrefix><mat-icon>payment</mat-icon> &nbsp;</span>
+                        <input type="text" id="actualPaymentAmt" formControlName="actualPaymentAmt" matInput placeholder="Paid Rent Amount">
+                    </mat-form-field>
+                    <mat-form-field class="lease-full-width">
+                        <span class="icon-pos" matPrefix><mat-icon>notes</mat-icon> &nbsp;</span>
+                        <input type="text" id="actualPaymentAmt" formControlName="actualPaymentAmt" matInput placeholder="Paid Rent Amount">
+                    </mat-form-field>
+                    <mat-form-field fxFlex="50%" fxFlex.xs="90%" style="margin-right: 10px;">
+                        <mat-label>Start Date</mat-label>
+                        <input matInput [matDatepicker]="picker1" formControlName="paymentReceivedDate">
+                        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                        <mat-datepicker #picker1></mat-datepicker>
+                    </mat-form-field>
+                </div>
 
-            <mat-form-field class="lease-full-width" style="margin-top: 25px;">
+            </div>
+
+
+            <!-- <mat-form-field class="lease-full-width" style="margin-top: 25px;">
                 <span class="icon-pos" matPrefix><mat-icon>notes</mat-icon> &nbsp;</span>
                 <input type="text" id="leaseTitle" formControlName="actualPaymentAmt" matInput placeholder="Paid Rent Amount">
-            </mat-form-field>
+            </mat-form-field> -->
             <!-- <mat-form-field class="lease-full-width">
               <span class="icon-pos" matPrefix><mat-icon>notes</mat-icon> &nbsp;</span>
               <input type="text" id="leaseDesc" formControlName="leaseDesc" matInput placeholder="Description" [ngModel]="lease.leaseDesc">
           </mat-form-field> -->
-            <button class="mat-raised-button mat-primary" (click)="addRent()">Save</button>
-            <button mat-raised-button (click)="close()" color="primary" style="margin-top: 30px;">Ok</button>
+            <div fxLayout="row" fxLayoutAlign="end end" fxLayoutGap="1%">
+                <button class="mat-raised-button mat-primary" (click)="addRent()">Save</button>
+                <button mat-raised-button (click)="close()" color="primary" style="margin-top: 30px;">Ok</button>
+            </div>
+
+
         </form>
     </mat-dialog-content>
 

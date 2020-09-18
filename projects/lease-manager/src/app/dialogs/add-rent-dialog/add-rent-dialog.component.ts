@@ -48,7 +48,7 @@ export class AddRentDialogComponent implements OnInit {
   ngOnInit() {
 
     this.addForm = this.formBuilder.group({
-      leaseId: [],
+      leaseId: [null],
       scheduledPaymentAmt: [''],
       actualPaymentAmt: [''],
       payMethod: [],
@@ -65,6 +65,13 @@ export class AddRentDialogComponent implements OnInit {
 
   addRent() {
     debugger;
+    this.addForm.get('leaseId').setValue(Number(this.data.leaseId));
+    this.addForm.patchValue({
+      // leaseId: this.data.leaseId,
+      // scheduledPaymentAmt: this.data.rentDueAmount,
+      // paymentDueDate: this.data.rentDue
+    });
+
     console.log('form data', this.addForm.value);
     // this.dialogRef.close(this.addForm.value);
   }

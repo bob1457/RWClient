@@ -63,8 +63,10 @@ export class LeaseDetailsComponent implements OnInit {
       panelClass: 'my-custom-dialog-class',
       data: {
         leaseId: this.id,
-        py: this.paymentDetails,
-        txt: 'test'
+        // py: this.paymentDetails,
+        // txt: 'test'
+        // rentDueAmount: this.lease.rentAmount,
+        // rentDue: this.lease.rentDueOn
       }
     };
 
