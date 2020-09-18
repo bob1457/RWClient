@@ -23,6 +23,8 @@ export class LeaseDetailsComponent implements OnInit {
   lease: any; //PropertyLease;
   payments: any;
   paymentDetails: any;
+  // rentAmtDue;
+  // rentDueOn;
 
   loading$: Observable<boolean>;
 
@@ -65,8 +67,9 @@ export class LeaseDetailsComponent implements OnInit {
         leaseId: this.id,
         // py: this.paymentDetails,
         // txt: 'test'
-        // rentDueAmount: this.lease.rentAmount,
-        // rentDue: this.lease.rentDueOn
+
+        // rentDueAmount: this.rentAmtDue,
+        // rentDue: this.rentDueOn
       }
     };
 
@@ -161,6 +164,11 @@ export class LeaseDetailsComponent implements OnInit {
       this.store.pipe(select(leaseDetails))
           .subscribe(data => {
             this.lease = data;
+            // this.rentAmtDue = this.lease.rentAmount;
+            // this.rentDueOn = this.lease.rentDueOn;
+            // console.log('amt', this.rentAmtDue);
+            // console.log('due', this.rentDueOn);
+
             // this.detailsForm.patchValue(data);
             console.log(data);
             // this.dataSource.data = this.lease;

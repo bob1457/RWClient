@@ -421,6 +421,34 @@ export class LeaseEffects {
     )
   );
 
+  addRentPayment$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(LeaseActions.addRentPayment),
+      tap(() => console.log('got here to add rent !!!')),
+      map(action => action.payload),
+      switchMap((payload) =>
+        this.leaseService.addRentPayment(payload).pipe(
+          map((payment: any) => ({
+            type: '[Leases] Add Rent Payment Success',
+            payload: payment
+          })),
+          tap( () => {
+            // window.alert('done');
+            this.openSnackBar('Rent payment added successfully.', '');
+           }), // display notificaiton
+
+          catchError(error => {
+            this.openSnackBar(error.message, '');
+            return of(LeaseActions.addLeaseFailure(error.message));
+            }
+          )
+          // catchError(error => of(LeaseActions.addLeaseFailure(error.message)))
+        )
+      )
+    )
+  );
+
 
   openSnackBar(message: string, action: string) {
     const config = new MatSnackBarConfig();

@@ -378,7 +378,33 @@ const propertyLeaseReducer = createReducer(
       loaded: true,
       selectedPayment: payload
     });
-  })
+  }),
+
+   /**
+     * Add service request
+     */
+    on(LeaseActions.addRentPayment, state => ({
+      ...state,
+      loading: true,
+      loaded: false
+    })),
+
+    on(LeaseActions.addRentPaymentSuccess, (state, { payload }) => {
+      return ({
+        ...state,
+        loading: false,
+        loaded: true,
+        rentPayments: [...state.rentPayments, payload ]
+      });
+    }),
+
+    on(LeaseActions.addRentPaymentFailure, (state) => {
+      return ({
+        ...state,
+        loading: false,
+        errorMessage: 'Failed to add rent payment'
+      });
+    }),
 
 
 );
