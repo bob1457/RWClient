@@ -23,12 +23,55 @@ export class LeaseDetailsComponent implements OnInit {
   lease: any; //PropertyLease;
   payments: any;
   paymentDetails: any;
+  addRent = false;
+
   // rentAmtDue;
   // rentDueOn;
 
   loading$: Observable<boolean>;
 
   detailsForm: FormGroup;
+  addForm: FormGroup;
+
+  months = [
+    {name: 'January'},
+    {name: 'February'},
+    {name: 'March'},
+    {name: 'April'},
+    {name: 'May'},
+    {name: 'June'},
+    {name: 'July'},
+    {name: 'August'},
+    {name: 'September'},
+    {name: 'October'},
+    {name: 'November'},
+    {name: 'December'}
+  ];
+
+  years = [
+    {name: 2020},
+    {name: 2021},
+    {name: 2022},
+    {name: 2023},
+    {name: 2024},
+    {name: 2026},
+    {name: 2027},
+    {name: 2028},
+    {name: 2029}
+  ];
+
+  payBy = [
+    {name: 'Cash', key: 1},
+    {name: 'Cheque', key: 2},
+    {name: 'ETransfer', key: 3},
+    {name: 'BankTransfer', key: 4},
+    {name: 'PreAuthorized', key: 5},
+    {name: 'Online', key: 6},
+    {name: 'Other', key: 7}
+  ];
+
+  // currentMonth;
+  // currentYear;
 
   displayedColumns: string[] = ['icon', 'id', 'paidAmt', 'paidDate', 'payMethod', 'rentMonth', 'rentYear', 'added', 'action'];
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
@@ -55,6 +98,11 @@ export class LeaseDetailsComponent implements OnInit {
               }
 
   ngOnInit() {
+
+    // this.currentMonth = (new Date().getMonth() + 1).toString();
+    // this.currentYear = (new Date().getFullYear).toString();
+
+    // console.log('date', this.currentMonth);
 
     this.loading$ = this.store.pipe(select(loadingStatus));
 
@@ -149,6 +197,18 @@ export class LeaseDetailsComponent implements OnInit {
       // })
     });
 
+    this.addForm = this.formBuilder.group({
+      leaseId: [null],
+      scheduledPaymentAmt: [''],
+      actualPaymentAmt: [''],
+      payMethod: [],
+      paymentDueDate: [''],
+      paymentReceivedDate: [''],
+      isOnTime: [true],
+      inChargeTenantId: [0],
+      rentalForMonth: [''],
+      rentalForYear: ['2020']
+    });
       // User servie directlty the first time when the compowent loads
       // this.propertyService.getPropertyDetails(id)
       //     .subscribe(data => {
@@ -176,7 +236,7 @@ export class LeaseDetailsComponent implements OnInit {
             this.store.select(rentPaymentList)
                 .subscribe(paymentList => {
                   this.payments = paymentList;
-                  if(paymentList) {
+                  if(paymentList && this.lease) {
                     this.payments = paymentList.filter(l => l.leaseId == this.lease.id);
                     this.dataSource.data = this.payments;
                     // this.dataSource.sort = this.sort;
@@ -241,9 +301,28 @@ export class LeaseDetailsComponent implements OnInit {
 
   }
 
+  addR() {
+    this.addRent = true;
+  }
+
+  cancel() {
+    this.addRent = false;
+  }
+
   addRentPayment() {
     debugger;
-    this.dialog.open(AddRentDialogComponent, this.dialogConfig)
+    this.addForm.patchValue({
+      leaseId: Number(this.id)
+    });
+    console.log('add rent form', this.addForm.value);
+    // this.dialog.open(AddRentDialogComponent, this.dialogConfig);
+
+    this.addRent = false;
+  }
+
+  reset() {
+    this.addForm.reset();
+    this.addForm.get('').setValue('2020');
   }
 
   public doFilter = (value: string) => {
