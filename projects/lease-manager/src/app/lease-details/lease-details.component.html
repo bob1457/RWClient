@@ -375,7 +375,7 @@
                                     <form novalidate fxLayoutAlign="center center" [formGroup]="addForm" style="width: 100%;border: 1px solid;
                                     margin-bottom: 5px;
                                     padding: 5px;" (ngSubmit)="addRentPayment()">
-                                        <mat-form-field fxFlex="15%" fxFlex.xs="90%" style="width: 15%;margin-left: 20px;">
+                                        <mat-form-field fxFlex="15%" fxFlex.xs="90%" style="width: 15%;margin-left: 10px;">
                                             <mat-label>Month</mat-label>
                                             <mat-select id="month" formControlName="rentalForMonth">
                                                 <mat-option [value]='month.name' *ngFor="let month of months">{{month.name}}</mat-option>
@@ -387,9 +387,9 @@
                                                 <mat-option [value]='year.name' *ngFor="let year of years">{{year.name}}</mat-option>
                                             </mat-select>
                                         </mat-form-field>
-                                        <mat-form-field fxFlex="15%" fxFlex.xs="90%" appearance="standard" style="width:20%;margin-top: -12px; margin-left: 10px;">
+                                        <mat-form-field fxFlex="10%" fxFlex.xs="90%" appearance="standard" style="width:20%;margin-top: -12px; margin-left: 10px;">
                                             <mat-label>Amount</mat-label>
-                                            <input matInput placeholder="Placeholder" formControlName="actualPaymentAmt">
+                                            <input type="number" matInput placeholder="Rent Paid" formControlName="actualPaymentAmt">
                                             <!-- <mat-icon matSuffix>payment</mat-icon> -->
                                         </mat-form-field>
                                         <mat-form-field fxFlex="15%" fxFlex.xs="90%" style="width:15%;margin-left: 10px;">
@@ -398,19 +398,28 @@
                                                 <mat-option [value]='pay.key' *ngFor="let pay of payBy">{{pay.name}}</mat-option>
                                             </mat-select>
                                         </mat-form-field>
+
+                                        <mat-form-field fxFlex="15%" fxFlex.xs="90%" style="margin-left: 10px;margin-right: 10px;">
+                                            <mat-label>Due Date</mat-label>
+                                            <input matInput [matDatepicker]="picker2" formControlName="paymentDueDate">
+                                            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                                            <mat-datepicker #picker2></mat-datepicker>
+                                        </mat-form-field>
+
                                         <mat-form-field fxFlex="15%" fxFlex.xs="90%" style="margin-left: 10px;margin-right: 10px;">
                                             <mat-label>Paid Date</mat-label>
                                             <input matInput [matDatepicker]="picker1" formControlName="paymentReceivedDate">
                                             <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                                             <mat-datepicker #picker1></mat-datepicker>
                                         </mat-form-field>
-                                        <div fxFlex="30%" fxFlex.xs="90%">
-                                            <button type="submit" mat-button mat-raised-button color="primary" style="margin-right: 5px;">
-                                            Add
+                                        <div fxFlex="20%" fxFlex.xs="90%">
+                                            <button type="submit" mat-button color="primary" style="margin-right: 5px; color: green;">
+                                            <!-- Add -->
+                                            <mat-icon>add_circle_outline</mat-icon>
                                           </button>
-                                            <button type="button" (click)="reset()" mat-button mat-stroked-button color="accent">
+                                            <!-- <button type="button" (click)="reset()" mat-button mat-stroked-button color="accent">
                                             Reset
-                                          </button>
+                                          </button> -->
                                         </div>
                                     </form>
 
@@ -477,7 +486,7 @@
                                                 <i style="border: 2px solid;
                                     padding: 3px;
                                     border-radius: 50%;" class="material-icons">
-                                    house
+                                    attach_money
                                   </i>
                                             </td>
                                         </ng-container>

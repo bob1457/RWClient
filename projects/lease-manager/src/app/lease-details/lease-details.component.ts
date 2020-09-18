@@ -4,7 +4,7 @@ import { PropertyLeaseState } from '../store/lease-state';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LeaseService, PropertyLease } from '@lib/app-core';
-import { getLeaseDetails, getRentPaymenttDetails, updateLease } from '../store/actions/lease.actions';
+import { addRentPayment, getLeaseDetails, getRentPaymenttDetails, updateLease } from '../store/actions/lease.actions';
 import { leaseDetails, loadingStatus, rentPaymentDetails, rentPaymentList } from '../store/reducers';
 import { Observable } from 'rxjs';
 import { MatDialog, MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
@@ -49,15 +49,15 @@ export class LeaseDetailsComponent implements OnInit {
   ];
 
   years = [
-    {name: 2020},
-    {name: 2021},
-    {name: 2022},
-    {name: 2023},
-    {name: 2024},
-    {name: 2026},
-    {name: 2027},
-    {name: 2028},
-    {name: 2029}
+    {name: '2020'},
+    {name: '2021'},
+    {name: '2022'},
+    {name: '2023'},
+    {name: '2024'},
+    {name: '2026'},
+    {name: '2027'},
+    {name: '2028'},
+    {name: '2029'}
   ];
 
   payBy = [
@@ -199,15 +199,15 @@ export class LeaseDetailsComponent implements OnInit {
 
     this.addForm = this.formBuilder.group({
       leaseId: [null],
-      scheduledPaymentAmt: [''],
-      actualPaymentAmt: [''],
+      scheduledPaymentAmt: [0],
+      actualPaymentAmt: [0],
       payMethod: [],
       paymentDueDate: [''],
       paymentReceivedDate: [''],
       isOnTime: [true],
       inChargeTenantId: [0],
       rentalForMonth: [''],
-      rentalForYear: ['2020']
+      rentalForYear: ['']
     });
       // User servie directlty the first time when the compowent loads
       // this.propertyService.getPropertyDetails(id)
@@ -316,7 +316,9 @@ export class LeaseDetailsComponent implements OnInit {
     });
     console.log('add rent form', this.addForm.value);
     // this.dialog.open(AddRentDialogComponent, this.dialogConfig);
+    this.store.dispatch(addRentPayment({payload: this.addForm.value}));
 
+    this.addForm.reset();
     this.addRent = false;
   }
 
