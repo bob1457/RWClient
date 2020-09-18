@@ -1,3 +1,37 @@
-<p>
+<!-- <p>
   add-rent-dialog works!
-</p>
+</p> -->
+<section fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="30px" fxFlexFill style="overflow-x: hidden;overflow-y: hidden;">
+    <div mat-dialog-title class="dialog-title">
+        <span class="material-icons" style="color: rgb(48, 48, 224);font-size: 1.75em;vertical-align: top;">
+          add_circle
+        </span> &nbsp; Add Rent Payment
+    </div>
+    <mat-dialog-content class="text" fxLayout="column" fxLayoutAlign="staret center" fxLayoutGap="1%" style="height: 200px;margin-top: 20px;" fxFlexFill>
+        <form novalidate fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" [formGroup]="addForm">
+            <mat-form-field style="width: 70%;">
+                <mat-label>Rent Month</mat-label>
+                <mat-select id="month" formControlName="rentalForMonth">
+                    <mat-option [value]='months' *ngFor="let month of months">{{month.name}}</mat-option>
+                    <!-- <mat-option value="SingleHouse">January</mat-option>
+                <mat-option value="Apartment">Februray</mat-option>
+                <mat-option value="TownHouse">March</mat-option> -->
+                    <mat-option value="Others">April</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field class="lease-full-width" style="margin-top: 25px;">
+                <span class="icon-pos" matPrefix><mat-icon>notes</mat-icon> &nbsp;</span>
+                <input type="text" id="leaseTitle" formControlName="actualPaymentAmt" matInput placeholder="Paid Rent Amount">
+            </mat-form-field>
+            <!-- <mat-form-field class="lease-full-width">
+              <span class="icon-pos" matPrefix><mat-icon>notes</mat-icon> &nbsp;</span>
+              <input type="text" id="leaseDesc" formControlName="leaseDesc" matInput placeholder="Description" [ngModel]="lease.leaseDesc">
+          </mat-form-field> -->
+            <button class="mat-raised-button mat-primary" (click)="addRent()">Save</button>
+            <button mat-raised-button (click)="close()" color="primary" style="margin-top: 30px;">Ok</button>
+        </form>
+    </mat-dialog-content>
+
+
+</section>

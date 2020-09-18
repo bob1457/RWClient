@@ -9,6 +9,7 @@ import { leaseDetails, loadingStatus, rentPaymentDetails, rentPaymentList } from
 import { Observable } from 'rxjs';
 import { MatDialog, MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { PaymentDetailsDialogComponent } from '../dialogs/payment-details-dialog/payment-details-dialog.component';
+import { AddRentDialogComponent } from '../dialogs/add-rent-dialog/add-rent-dialog.component';
 // import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 
 @Component({
@@ -61,6 +62,7 @@ export class LeaseDetailsComponent implements OnInit {
       disableClose: true,
       panelClass: 'my-custom-dialog-class',
       data: {
+        leaseId: this.id,
         py: this.paymentDetails,
         txt: 'test'
       }
@@ -227,6 +229,11 @@ export class LeaseDetailsComponent implements OnInit {
 
     this.store.dispatch(getRentPaymenttDetails({payload: id}));
 
+  }
+
+  addRentPayment() {
+    debugger;
+    this.dialog.open(AddRentDialogComponent, this.dialogConfig)
   }
 
   public doFilter = (value: string) => {

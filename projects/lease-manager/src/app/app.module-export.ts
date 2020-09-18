@@ -39,6 +39,7 @@ import { StatusPipe } from './status.pipe';
 import { WorkOrderDatePipe } from './work-order-date.pipe';
 import { PaymentMethodPipe } from './payment-method.pipe';
 import { PaymentDetailsDialogComponent } from './dialogs/payment-details-dialog/payment-details-dialog.component';
+import { AddRentDialogComponent } from './dialogs/add-rent-dialog/add-rent-dialog.component';
 
 
 // import { CdkColumnDef } from '@angular/cdk/table';
@@ -93,8 +94,8 @@ const routes: Routes = [
     StatusPipe,
     WorkOrderDatePipe,
     PaymentMethodPipe,
-    PaymentDetailsDialogComponent
-
+    PaymentDetailsDialogComponent,
+    AddRentDialogComponent
   ],
   imports: [
     // BrowserModule,
@@ -112,7 +113,8 @@ const routes: Routes = [
     // CdkColumnDef
   ],
   entryComponents: [
-    PaymentDetailsDialogComponent
+    PaymentDetailsDialogComponent,
+    AddRentDialogComponent
   ],
   bootstrap: [AppLMComponent]
 })

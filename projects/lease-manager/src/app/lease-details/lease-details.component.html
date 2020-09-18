@@ -359,7 +359,7 @@
                                         <mat-radio-button value="0">All</mat-radio-button>
                                     </mat-radio-group> -->
                                     <span class="spacer"></span>
-                                    <button [routerLink]="['/Manage/lease/addlease']" mat-button mat-mini-fab style="background: #3d5afe;color: white;">
+                                    <button (click)="addRentPayment()" mat-button mat-mini-fab style="background: #3d5afe;color: white;">
                                     <i class="material-icons" title="Add Lease Agreement">
                                       playlist_add
                                     </i>
