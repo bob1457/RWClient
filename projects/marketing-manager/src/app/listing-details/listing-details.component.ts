@@ -48,8 +48,16 @@ export class ListingDetailsComponent implements OnInit {
                       this.listing = data;
                       // localStorage.setItem('listing', JSON.stringify(this.listing));
                       if (this.listing) {
-                        this.imgList = this.listing.rentalProperty.propertyImg;
-                        this.iconImg = this.imgList.filter((value, index) => index === 0);
+                        this.store.select(propertyImgList)
+                            .subscribe(imgs => {
+                              this.imgList = imgs;
+
+                              // this.imgList = this.listing.rentalProperty.propertyImg;
+                              // this.imgList = imgs.filter(i => i.rentalPropertyId == this.listing.rentalProperty.Id);
+                              this.iconImg = this.imgList.filter((value, index) => index === 0);
+
+                            });
+
 
                         this.store.select(openHouses) // need review for how to implement open house
                           .subscribe(oh => {
