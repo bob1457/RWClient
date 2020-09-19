@@ -185,8 +185,6 @@ const propertyLeaseReducer = createReducer(
       leases: updatedTenants, // [...state.listings, payload ]
       selectedTenant: payload
     });
-
-
   }),
 
   /**
@@ -229,6 +227,29 @@ const propertyLeaseReducer = createReducer(
       loading: false,
       loaded: true,
       workorders: payload
+    });
+  }),
+
+  /**
+   * Update work order
+   */
+  on(LeaseActions.updateWorkOrder, state => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+  on(LeaseActions.updateWorkOrderSuccess, (state, { payload }) => {
+
+    const updatedWorkOrders = state.workorders.map(
+      item => payload.id === item.id ? payload : item
+    );
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      workorders: updatedWorkOrders, // [...state.listings, payload ]
+      selectedworkorder: payload
     });
   }),
 
@@ -348,12 +369,14 @@ const propertyLeaseReducer = createReducer(
     });
   }),
 
+  /**
+   * Rent payments */
+
   on(LeaseActions.getRentPaymentList, state => ({
     ...state,
     loading: true,
     loaded: false
   })),
-
 
   on(LeaseActions.getRentPaymentListSuccess, (state, { payload }) => {
     return ({

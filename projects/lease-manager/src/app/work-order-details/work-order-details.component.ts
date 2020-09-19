@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
 import { PropertyLeaseState } from '../store/lease-state';
 import { Router, ActivatedRoute } from '@angular/router';
-import { getWorkOrderDetails } from '../store/actions/lease.actions';
+import { getWorkOrderDetails, updateWorkOrder } from '../store/actions/lease.actions';
 import { workOrderDetails } from '../store/reducers';
 
 @Component({
@@ -55,7 +55,7 @@ export class WorkOrderDetailsComponent implements OnInit {
 
   submit() {
     console.log('form', this.detailsForm.value);
-    // this.store.dispatch(updateVendor({payload: this.detailsForm.value}));
+    // this.store.dispatch(updateWorkOrder({payload: this.detailsForm.value}));
   }
 
   goBack() {

@@ -143,30 +143,6 @@ export class LeaseEffects {
     )
   );
 
-  // addPropertyTenant$ = createEffect(() =>
-  //   this.actions$.pipe(
-  //     // ofType('[Property] Get Property List'),
-  //     ofType(LeaseActions.addTenant),
-  //     tap(() => console.log('got here to add property Tenant !!!')),
-  //     map(action => action.payload),
-  //     switchMap((payload) =>
-  //       this.leaseService.addTenant(payload).pipe(
-  //         map((Tenant: PropertyTenant) => ({
-  //           type: '[Leases] Add Tenant Success',
-  //           payload: Tenant
-  //         })),
-  //         // tap(res => {console.log('response: ' + res); }),
-  //         // catchError(
-  //         //   err => {
-  //         //     return of('[Marketing] Add Property Listing Failure', err.error);
-  //         //   } // EMPTY
-  //         // )
-  //         catchError(error => of(LeaseActions.addTenantFailure(error.message)))
-  //       )
-  //     )
-  //   )
-  // );
-
   updateLease$ = createEffect(() =>
     this.actions$.pipe(
       // ofType('[Property] Get Property List'),
@@ -272,6 +248,34 @@ export class LeaseEffects {
     )
   );
 
+  updateWVendor$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(LeaseActions.updateVendor),
+      tap(() => console.log('got here to update vendor!!!')),
+      map(action => action.payload),
+      switchMap((payload) =>
+        this.leaseService.updateVendor(payload).pipe(
+          map((vendor: Vendor) => ({
+            type: '[Leases] Update Vendor Success',
+            payload: vendor
+          })),
+          tap( () => {
+            // window.alert('done');
+            this.openSnackBar('Vendor updated successfully.', '');
+           }), // display notificaiton
+
+          catchError(error => {
+            this.openSnackBar(error.message, '');
+            return of(LeaseActions.updatVendorsFailure(error.message));
+            }
+          )
+          // catchError(error => of(LeaseActions.updateLeaseFailure(error.message)))
+        )
+      )
+    )
+  );
+
   getAllWorkOrders$ = createEffect(() =>
     this.actions$.pipe(
       // ofType('[Property] Get Property List'),
@@ -321,6 +325,34 @@ export class LeaseEffects {
     )
   );
 
+
+  updateWorkOrdere$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(LeaseActions.updateWorkOrder),
+      tap(() => console.log('got here to update work order !!!')),
+      map(action => action.payload),
+      switchMap((payload) =>
+        this.leaseService.updateWorkOrder(payload).pipe(
+          map((order: WorkOrder) => ({
+            type: '[Leases] Update Work Order Success',
+            payload: order
+          })),
+          tap( () => {
+            // window.alert('done');
+            this.openSnackBar('Work order updated successfully.', '');
+           }), // display notificaiton
+
+          catchError(error => {
+            this.openSnackBar(error.message, '');
+            return of(LeaseActions.updateLeaseFailure(error.message));
+            }
+          )
+          // catchError(error => of(LeaseActions.updateLeaseFailure(error.message)))
+        )
+      )
+    )
+  );
 
   getAllServiceRequests$ = createEffect(() =>
     this.actions$.pipe(

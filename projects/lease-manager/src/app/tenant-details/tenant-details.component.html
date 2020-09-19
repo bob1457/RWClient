@@ -1,11 +1,11 @@
-<!-- <p>
+<!-- <p>*ngIf="!(loading$ | async) && tenant; else spinner"
   tenant-details works!
 </p> -->
 
 <!-- <p>
   all-tenants works!*ngIf="tenant"
 </p> -->
-<div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="1%" fxFlexFill *ngIf="!(loading$ | async) && tenant; else spinner">
+<div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="1%" fxFlexFill *ngIf="tenant">
     <div>
         <div fxFlex="10%" fxLayoutAlign="end">
             <i class="far fa-arrow-alt-circle-left" title="back to list" style="cursor: pointer; color: seagreen; font-size: 1.5em;" (click)="goBack()"></i>
@@ -147,25 +147,9 @@
 </div>
 
 
-<ng-template #spinner>
-    <!-- <div class="loadingio-spinner-spinner-vhc1lmfzuvn" style="top: 50%;
-      left: 50%;
-      position: fixed;
-      z-index: 1000;">
-        <div class="ldio-ugrhztjm33r">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
-    </div> -->
+<!-- <ng-template #spinner>    
     <app-loading></app-loading>
-</ng-template>
+</ng-template> -->
+<div *ngIf="loading$ | async">
+    <app-loading></app-loading>
+</div>
