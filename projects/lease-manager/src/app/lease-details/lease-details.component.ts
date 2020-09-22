@@ -85,8 +85,8 @@ export class LeaseDetailsComponent implements OnInit {
   dataSource = new MatTableDataSource<any>();
 
   displayedColumns2: string[] = ['icon', 'id', 'workOrderName', 'category', 'type', 'status', 'startDate', 'endDate', 'added', 'action'];
-  @ViewChild(MatPaginator, {static: false}) paginator2: MatPaginator;
-  @ViewChild(MatSort, {static: false}) sort2: MatSort;
+  @ViewChild('paginator2', {static: false}) paginator2: MatPaginator;
+  @ViewChild('Sort2', {static: true}) sort2: MatSort;
 
   dataSource2 = new MatTableDataSource<any>();
 
@@ -354,6 +354,9 @@ export class LeaseDetailsComponent implements OnInit {
   ngAfterViewInit(): void {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
+
+    this.dataSource2.sort = this.sort2;
+    this.dataSource2.paginator = this.paginator2;
   }
 
   viewAgreement() {
@@ -382,7 +385,7 @@ export class LeaseDetailsComponent implements OnInit {
 
   }
 
-  getWrokOrderDetails(id: number) {
+  getWorkOrderDetails(id: number) {
     debugger;
   }
 
@@ -414,6 +417,10 @@ export class LeaseDetailsComponent implements OnInit {
 
   public doFilter = (value: string) => {
     this.dataSource.filter = value.trim().toLocaleLowerCase();
+  }
+
+  public doFilter2 = (value: string) => {
+    this.dataSource2.filter = value.trim().toLocaleLowerCase();
   }
 
   openDialog() {
