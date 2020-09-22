@@ -24,6 +24,7 @@ export class LeaseDetailsComponent implements OnInit {
   payments: any;
   paymentDetails: any;
   addRent = false;
+  addWorkOrder = false;
   workOrders: any;
 
   tabIndex = 0;
@@ -35,6 +36,7 @@ export class LeaseDetailsComponent implements OnInit {
 
   detailsForm: FormGroup;
   addForm: FormGroup;
+  addForm2: FormGroup;
 
   months = [
     {name: 'January'},
@@ -82,7 +84,7 @@ export class LeaseDetailsComponent implements OnInit {
 
   dataSource = new MatTableDataSource<any>();
 
-  displayedColumns2: string[] = ['icon', 'id', 'workOrderName', 'category', 'type', 'status', 'startDate', 'endDate', 'created', 'action'];;
+  displayedColumns2: string[] = ['icon', 'id', 'workOrderName', 'category', 'type', 'status', 'startDate', 'endDate', 'added', 'action'];
   @ViewChild(MatPaginator, {static: false}) paginator2: MatPaginator;
   @ViewChild(MatSort, {static: false}) sort2: MatSort;
 
@@ -207,7 +209,7 @@ export class LeaseDetailsComponent implements OnInit {
       // })
     });
 
-    this.addForm = this.formBuilder.group({
+    this.addForm = this.formBuilder.group({ // add rent payment
       leaseId: [null],
       scheduledPaymentAmt: [0],
       actualPaymentAmt: [0],
@@ -219,6 +221,18 @@ export class LeaseDetailsComponent implements OnInit {
       rentalForMonth: [''],
       rentalForYear: ['']
     });
+
+    this.addForm2 = this.formBuilder.group({  // add work order
+      workOrderName: [''],
+      workOrderDetails: [''],
+      workOrderType: [''],
+      startDate: [''],
+      endDate: [''],
+      isOwnerAuthorized: [true],
+      isEmergency: [false],
+      workOrderStatus: [''],
+      note: ['']
+    });
       // User servie directlty the first time when the compowent loads
       // this.propertyService.getPropertyDetails(id)
       //     .subscribe(data => {
@@ -226,6 +240,9 @@ export class LeaseDetailsComponent implements OnInit {
       //       this.detailsForm.patchValue(data);
       // });
     }
+
+
+
 
     GetLeaseDetails(id: any) {
       debugger;
@@ -265,7 +282,10 @@ export class LeaseDetailsComponent implements OnInit {
                   this.workOrders = orders;
                   if (orders && this.lease) {
                     this.workOrders = orders.filter(l => l.leaseId == this.lease.id);
+                    this.dataSource2.data = this.workOrders;
                     console.log('orders', this.workOrders);
+
+                    setTimeout(() =>  {this.dataSource2.paginator = this.paginator2; this.dataSource2.sort = this.sort2; });
                   }
                 });
           });
@@ -360,6 +380,10 @@ export class LeaseDetailsComponent implements OnInit {
 
     this.store.dispatch(getRentPaymenttDetails({payload: id}));
 
+  }
+
+  getWrokOrderDetails(id: number) {
+    debugger;
   }
 
   addR() {
