@@ -2,4 +2,5 @@ export interface WorkOrder {
   id: number;
   rentalPropertyId: number;
   vendorId: number;
+  leaseId: number;
 }

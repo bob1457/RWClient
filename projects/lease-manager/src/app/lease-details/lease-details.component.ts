@@ -5,7 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LeaseService, PropertyLease } from '@lib/app-core';
 import { addRentPayment, getLeaseDetails, getRentPaymenttDetails, updateLease } from '../store/actions/lease.actions';
-import { leaseDetails, loadingStatus, rentPaymentDetails, rentPaymentList } from '../store/reducers';
+import { leaseDetails, loadingStatus, rentPaymentDetails, rentPaymentList, workOrderList } from '../store/reducers';
 import { Observable } from 'rxjs';
 import { MatDialog, MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { PaymentDetailsDialogComponent } from '../dialogs/payment-details-dialog/payment-details-dialog.component';
@@ -24,6 +24,7 @@ export class LeaseDetailsComponent implements OnInit {
   payments: any;
   paymentDetails: any;
   addRent = false;
+  workOrders: any;
 
   tabIndex = 0;
   hide = false;
@@ -80,6 +81,12 @@ export class LeaseDetailsComponent implements OnInit {
   @ViewChild(MatSort, {static: false}) sort: MatSort;
 
   dataSource = new MatTableDataSource<any>();
+
+  displayedColumns2: string[] = ['icon', 'id', 'workOrderName', 'category', 'type', 'status', 'startDate', 'endDate', 'created', 'action'];;
+  @ViewChild(MatPaginator, {static: false}) paginator2: MatPaginator;
+  @ViewChild(MatSort, {static: false}) sort2: MatSort;
+
+  dataSource2 = new MatTableDataSource<any>();
 
   private dialogConfig;
 
@@ -250,6 +257,15 @@ export class LeaseDetailsComponent implements OnInit {
                     // console.log('datasource', this.dataSource.data);
                     // console.log('leaseid', this.lease.id);
                     // console.log('py', this.payments);
+                  }
+                });
+
+            this.store.select(workOrderList)
+                .subscribe(orders => {
+                  this.workOrders = orders;
+                  if (orders && this.lease) {
+                    this.workOrders = orders.filter(l => l.leaseId == this.lease.id);
+                    console.log('orders', this.workOrders);
                   }
                 });
           });
