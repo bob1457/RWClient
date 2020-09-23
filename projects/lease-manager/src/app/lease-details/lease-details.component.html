@@ -557,56 +557,68 @@
                                   </button>
                                 </div>
 
-                                <div *ngIf="addWorkOrder" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center" stye="width: 95%;margin-left: 10px; margin-right: 10px;">
-                                    <form novalidate fxLayoutAlign="center center" [formGroup]="addForm2" style="width: 100%;border: 1px solid;
-                                  margin-bottom: 5px;
-                                  padding: 5px;" (ngSubmit)="addNewOrder()">
-                                        <mat-form-field fxFlex="10%" fxFlex.xs="90%" appearance="standard" style="width:20%;margin-top: -12px; margin-left: 10px;">
-                                            <mat-label>Title</mat-label>
-                                            <input type="text" matInput placeholder="Rent Paid" formControlName="workOrderName">
-                                            <!-- <mat-icon matSuffix>payment</mat-icon> -->
-                                        </mat-form-field>
-                                        <mat-form-field fxFlex="20%" fxFlex.xs="90%" appearance="standard" style="width:20%;margin-top: -12px; margin-left: 10px;">
-                                            <mat-label>Details</mat-label>
-                                            <input type="text" matInput placeholder="Rent Paid" formControlName="workOrderDetails">
-                                            <!-- <mat-icon matSuffix>payment</mat-icon> -->
-                                        </mat-form-field>
+                                <div *ngIf="addWorkOrder">
+                                    <form novalidate fxLayout="column" fxLayout.xs="column" fxLayoutAlign="center center" stye="width: 95%;margin-left: 10px; margin-right: 10px;" [formGroup]="addForm2" style="width: 100%;border: 1px solid;
+                                        margin-bottom: 5px;
+                                        padding: 5px;" (ngSubmit)="addNewOrder()">
+                                        <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center">
+                                            <mat-form-field fxFlex="20%" fxFlex.xs="90%" appearance="standard" style="width:20%;margin-top: -12px; margin-left: 10px;">
+                                                <mat-label>Title</mat-label>
+                                                <input type="text" matInput placeholder="Rent Paid" formControlName="workOrderName">
+                                                <!-- <mat-icon matSuffix>payment</mat-icon> -->
+                                            </mat-form-field>
+                                            <mat-form-field fxFlex="30%" fxFlex.xs="90%" appearance="standard" style="width:20%;margin-top: -12px; margin-left: 10px;">
+                                                <mat-label>Details</mat-label>
+                                                <input type="text" matInput placeholder="Rent Paid" formControlName="workOrderDetails">
+                                                <!-- <mat-icon matSuffix>payment</mat-icon> -->
+                                            </mat-form-field>
 
-                                        <mat-form-field fxFlex="15%" fxFlex.xs="90%" style="width: 15%;margin-left: 10px;">
-                                            <mat-label>Type</mat-label>
-                                            <mat-select id="month" formControlName="workOrderType">
-                                                <mat-option [value]='type.name' *ngFor="let type of types">{{type.name}}</mat-option>
-                                            </mat-select>
-                                        </mat-form-field>
-                                        <mat-form-field fxFlex="10%" fxFlex.xs="90%" style="width:15%;margin-left: 10px;">
-                                            <mat-label>Category</mat-label>
-                                            <mat-select id="year" formControlName="workOrderCategory">
-                                                <mat-option [value]='category.name' *ngFor="let category of categories">{{category.name}}</mat-option>
-                                            </mat-select>
-                                        </mat-form-field>
+                                            <mat-form-field fxFlex="15%" fxFlex.xs="90%" style="width: 15%;margin-left: 10px;">
+                                                <mat-label>Type</mat-label>
+                                                <mat-select id="month" formControlName="workOrderType">
+                                                    <mat-option [value]='type.name' *ngFor="let type of types">{{type.name}}</mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                            <mat-form-field fxFlex="15%" fxFlex.xs="90%" style="width:15%;margin-left: 10px;">
+                                                <mat-label>Category</mat-label>
+                                                <mat-select id="year" formControlName="workOrderCategory">
+                                                    <mat-option [value]='category.name' *ngFor="let category of categories">{{category.name}}</mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+                                        <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center">
+                                            <mat-form-field fxFlex="15%" fxFlex.xs="90%" style="width:15%;margin-left: 10px;">
+                                                <mat-label>Vendor</mat-label>
+                                                <mat-select id="vendor" formControlName="vendorId">
+                                                    <mat-option [value]='vendor.id' *ngFor="let vendor of vendors">{{vendor.name}}</mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                            <mat-checkbox fxFlex="20%" style="width:20%;margin-left: 10px; margin-top: 8px;" formControlName="isEmergency">Urgent</mat-checkbox>
 
-                                        <mat-checkbox fxFlex="10%" style="margin-left: 10px; margin-top: 8px;" formControlName="isEmergency">Urgent</mat-checkbox>
+
+                                            <mat-form-field fxFlex="15%" fxFlex.xs="90%" style="width:15%;margin-left: 10px;margin-right: 10px;">
+                                                <mat-label>Start Date</mat-label>
+                                                <input matInput [matDatepicker]="picker2" formControlName="startDate">
+                                                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                                                <mat-datepicker #picker2></mat-datepicker>
+                                            </mat-form-field>
 
 
-                                        <mat-form-field fxFlex="15%" fxFlex.xs="90%" style="margin-left: 10px;margin-right: 10px;">
-                                            <mat-label>Start Date</mat-label>
-                                            <input matInput [matDatepicker]="picker2" formControlName="startDate">
-                                            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-                                            <mat-datepicker #picker2></mat-datepicker>
-                                        </mat-form-field>
+                                            <mat-form-field fxFlex="15%" fxFlex.xs="90%" style="width: 15%; margin-left: 10px;margin-right: 10px;">
+                                                <mat-label>End Date</mat-label>
+                                                <input matInput [matDatepicker]="picker1" formControlName="endDate">
+                                                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                                                <mat-datepicker #picker1></mat-datepicker>
+                                            </mat-form-field>
+                                            <div fxFlex="10%" fxFlex.xs="90%" style="width: 10%;">
+                                                <button type="submit" mat-button color="primary" style="margin-right: 5px; color: green;">
+                                            <!-- Add -->
+                                            <mat-icon style="font-size: 2.5em;">add_circle</mat-icon>
+                                          </button>
+                                            </div>
 
 
-                                        <!-- <mat-form-field fxFlex="15%" fxFlex.xs="90%" style="margin-left: 10px;margin-right: 10px;">
-                                            <mat-label>End Date</mat-label>
-                                            <input matInput [matDatepicker]="picker1" formControlName="endDate">
-                                            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                                            <mat-datepicker #picker1></mat-datepicker>
-                                        </mat-form-field> -->
-                                        <div fxFlex="20%" fxFlex.xs="90%">
-                                            <button type="submit" mat-button color="primary" style="margin-right: 5px; color: green;">
-                                          <!-- Add -->
-                                          <mat-icon style="font-size: 2.5em;">add_circle</mat-icon>
-                                        </button>
+
                                             <!-- <button type="button" (click)="reset()" mat-button mat-stroked-button color="accent">
                                           Reset
                                         </button> -->

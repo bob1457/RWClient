@@ -38,6 +38,11 @@ export class LeaseDetailsComponent implements OnInit {
   addForm: FormGroup;
   addForm2: FormGroup;
 
+  vendors = [
+    {id: 1, name: 'John Renovation'},
+    {id: 2, name: 'Amco Electric'},
+  ];
+
   months = [
     {name: 'January'},
     {name: 'February'},
@@ -239,6 +244,7 @@ export class LeaseDetailsComponent implements OnInit {
       workOrderDetails: [''],
       workOrderType: [''],
       workOrderCategory: [''],
+      vendorId: [],
       startDate: [''],
       endDate: [''],
       isOwnerAuthorized: [true],
@@ -432,7 +438,12 @@ export class LeaseDetailsComponent implements OnInit {
   }
 
   addNewOrder() {
+    debugger;
+    this.addForm2.patchValue({
+      workOrderStatus: 'New',
+      rentalPropertyId: this.lease.id
 
+    });
   }
 
   reset() {
