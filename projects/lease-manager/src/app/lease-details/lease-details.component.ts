@@ -5,7 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LeaseService, PropertyLease } from '@lib/app-core';
 import { addRentPayment, getLeaseDetails, getRentPaymenttDetails, updateLease } from '../store/actions/lease.actions';
-import { leaseDetails, loadingStatus, rentPaymentDetails, rentPaymentList, workOrderList } from '../store/reducers';
+import { leaseDetails, loadingStatus, rentPaymentDetails, rentPaymentList, vendorList, workOrderList } from '../store/reducers';
 import { Observable } from 'rxjs';
 import { MatDialog, MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { PaymentDetailsDialogComponent } from '../dialogs/payment-details-dialog/payment-details-dialog.component';
@@ -38,10 +38,7 @@ export class LeaseDetailsComponent implements OnInit {
   addForm: FormGroup;
   addForm2: FormGroup;
 
-  vendors = [
-    {id: 1, name: 'John Renovation'},
-    {id: 2, name: 'Amco Electric'},
-  ];
+  vendors:any [];
 
   months = [
     {name: 'January'},
@@ -122,6 +119,10 @@ export class LeaseDetailsComponent implements OnInit {
                           .subscribe(data => {
                             this.paymentDetails = data;
                             console.log('py-details', this.paymentDetails);
+                          });
+                this.store.select(vendorList)
+                          .subscribe(vendors => {
+                            this.vendors = vendors;
                           });
               }
 
