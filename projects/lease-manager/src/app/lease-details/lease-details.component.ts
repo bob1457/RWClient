@@ -5,7 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LeaseService, PropertyLease } from '@lib/app-core';
 import { addRentPayment, getLeaseDetails, getRentPaymenttDetails, updateLease } from '../store/actions/lease.actions';
-import { leaseDetails, loadingStatus, rentPaymentDetails, rentPaymentList, vendorList, workOrderList } from '../store/reducers';
+import { leaseDetails, loadingStatus, rentPaymentDetails, rentPaymentList, serviceRequestList, vendorList, workOrderList } from '../store/reducers';
 import { Observable } from 'rxjs';
 import { MatDialog, MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { PaymentDetailsDialogComponent } from '../dialogs/payment-details-dialog/payment-details-dialog.component';
@@ -26,6 +26,7 @@ export class LeaseDetailsComponent implements OnInit {
   addRent = false;
   addWorkOrder = false;
   workOrders: any;
+  requests: any [];
 
   tabIndex = 0;
   hide = false;
@@ -124,6 +125,11 @@ export class LeaseDetailsComponent implements OnInit {
                           .subscribe(vendors => {
                             this.vendors = vendors;
                           });
+                // this.store.select(serviceRequestList)
+                //           .subscribe(reqs => {
+                //             this.requests = reqs;
+
+                //           });
               }
 
   ngOnInit() {
@@ -245,12 +251,14 @@ export class LeaseDetailsComponent implements OnInit {
       workOrderDetails: [''],
       workOrderType: [''],
       workOrderCategory: [''],
+      rentalPropertyId: [],
       vendorId: [],
       startDate: [''],
       endDate: [''],
       isOwnerAuthorized: [true],
       isEmergency: [false],
       workOrderStatus: [''],
+      serviceRequestId: [],
       note: ['']
     });
       // User servie directlty the first time when the compowent loads
@@ -308,6 +316,15 @@ export class LeaseDetailsComponent implements OnInit {
                     setTimeout(() =>  {this.dataSource2.paginator = this.paginator2; this.dataSource2.sort = this.sort2; });
                   }
                 });
+
+            this.store.select(serviceRequestList)
+                      .subscribe(reqs => {
+                        this.requests = reqs;
+                        if (reqs && this.lease) {
+                          this.requests = reqs.filter(l => l.leaseId == this.lease.id);
+                          console.log('reqs for this lease', this.requests);
+                        }
+                      });
           });
 
       // this.store.pipe(select(leaseDetails))
@@ -443,8 +460,8 @@ export class LeaseDetailsComponent implements OnInit {
     this.addForm2.patchValue({
       workOrderStatus: 'New',
       rentalPropertyId: this.lease.id
-
     });
+    console.log('order form', this.addForm2.value);
   }
 
   reset() {

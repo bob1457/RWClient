@@ -561,7 +561,7 @@
                                     <form novalidate fxLayout="column" fxLayout.xs="column" fxLayoutAlign="center center" stye="width: 95%;margin-left: 10px; margin-right: 10px;" [formGroup]="addForm2" style="width: 100%;border: 1px solid;
                                         margin-bottom: 5px;
                                         padding: 5px;" (ngSubmit)="addNewOrder()">
-                                        <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center">
+                                        <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center" style="width: 95%;">
                                             <mat-form-field fxFlex="20%" fxFlex.xs="90%" appearance="standard" style="width:20%;margin-top: -12px; margin-left: 10px;">
                                                 <mat-label>Title</mat-label>
                                                 <input type="text" matInput placeholder="Rent Paid" formControlName="workOrderName">
@@ -586,17 +586,32 @@
                                                 </mat-select>
                                             </mat-form-field>
                                         </div>
-                                        <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center">
-                                            <mat-form-field fxFlex="15%" fxFlex.xs="90%" style="width:15%;margin-left: 10px;">
+                                        <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center" style="width: 95%;">
+                                            <mat-form-field fxFlex="20%" fxFlex.xs="90%" style="width:20%;margin-left: 10px;">
                                                 <mat-label>Vendor</mat-label>
                                                 <mat-select id="vendor" formControlName="vendorId">
                                                     <mat-option [value]='vendor.id' *ngFor="let vendor of vendors">{{vendor.vendorBusinessName}}</mat-option>
                                                 </mat-select>
                                             </mat-form-field>
-                                            <mat-checkbox fxFlex="20%" style="width:20%;margin-left: 10px; margin-top: 8px;" formControlName="isEmergency">Urgent</mat-checkbox>
+                                            <mat-checkbox fxFlex="20%" style="width:20%;margin-left: 20px; margin-top: 8px;" formControlName="isEmergency">Urgent</mat-checkbox>
+                                            <mat-checkbox fxFlex="20%" style="width:20%;margin-left: 10px; margin-top: 8px;" formControlName="isOwnerAuthorized">Approved</mat-checkbox>
 
+                                            <mat-form-field style="width: 20%;">
+                                                <!-- <input matInput type="text" placeholder="Property Name" formControlName="propertyName" id="title"> -->
+                                                <mat-label>Notes</mat-label>
+                                                <textarea matInput formControlName="notes"></textarea>
+                                            </mat-form-field>
 
-                                            <mat-form-field fxFlex="15%" fxFlex.xs="90%" style="width:15%;margin-left: 10px;margin-right: 10px;">
+                                        </div>
+                                        <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center" style="width: 95%;">
+
+                                            <mat-form-field fxFlex="20%" fxFlex.xs="90%" style="width:20%;margin-left: 10px;">
+                                                <mat-label>Service Requests</mat-label>
+                                                <mat-select id="request" formControlName="serviceRequestId">
+                                                    <mat-option [value]='request.id' *ngFor="let request of requests">{{request.requestSubject}}</mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                            <mat-form-field fxFlex="20%" fxFlex.xs="90%" style="width:20%;margin-left: 10px;margin-right: 10px;">
                                                 <mat-label>Start Date</mat-label>
                                                 <input matInput [matDatepicker]="picker2" formControlName="startDate">
                                                 <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
@@ -604,24 +619,18 @@
                                             </mat-form-field>
 
 
-                                            <mat-form-field fxFlex="15%" fxFlex.xs="90%" style="width: 15%; margin-left: 10px;margin-right: 10px;">
+                                            <mat-form-field fxFlex="20%" fxFlex.xs="90%" style="width: 20%; margin-left: 10px;margin-right: 10px;">
                                                 <mat-label>End Date</mat-label>
                                                 <input matInput [matDatepicker]="picker1" formControlName="endDate">
                                                 <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                                                 <mat-datepicker #picker1></mat-datepicker>
                                             </mat-form-field>
-                                            <div fxFlex="10%" fxFlex.xs="90%" style="width: 10%;">
-                                                <button type="submit" mat-button color="primary" style="margin-right: 5px; color: green;">
-                                            <!-- Add -->
-                                            <mat-icon style="font-size: 2.5em;">add_circle</mat-icon>
-                                          </button>
+                                            <div fxFlex="20%" fxFlex.xs="90%" style="width: 20%;">
+                                                <button type="submit" mat-raised-button color="primary" style="margin-right: 5px; color: green;width: 100%;">
+                                              Add
+                                            </button>
                                             </div>
 
-
-
-                                            <!-- <button type="button" (click)="reset()" mat-button mat-stroked-button color="accent">
-                                          Reset
-                                        </button> -->
                                         </div>
                                     </form>
 
