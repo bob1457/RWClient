@@ -415,7 +415,7 @@
                                         <div fxFlex="20%" fxFlex.xs="90%">
                                             <button type="submit" mat-button color="primary" style="margin-right: 5px; color: green;">
                                             <!-- Add -->
-                                            <mat-icon>add_circle_outline</mat-icon>
+                                            <mat-icon style="font-size: 2.5em;">add_circle</mat-icon>
                                           </button>
                                             <!-- <button type="button" (click)="reset()" mat-button mat-stroked-button color="accent">
                                             Reset
@@ -545,17 +545,86 @@
                                         <mat-radio-button value="0">All</mat-radio-button>
                                     </mat-radio-group> (click)="addRentPayment()"-->
                                     <span class="spacer"></span>
-                                    <button *ngIf="!addWorkOrder" title="Add Work Order" (click)="addR()" mat-button mat-mini-fab style="background: #3d5afe;color: white;">
+                                    <button *ngIf="!addWorkOrder" title="Add Work Order" (click)="addW()" mat-button mat-mini-fab style="background: #3d5afe;color: white;">
                                     <i class="material-icons" title="Add Work Order">
                                       playlist_add
                                     </i>
                                   </button>
-                                    <button *ngIf="addWorkOrder" (click)="cancel()" title="Cancel" mat-button mat-mini-fab style="background: #d86f0d;color: white;">
+                                    <button *ngIf="addWorkOrder" (click)="cancel2()" title="Cancel" mat-button mat-mini-fab style="background: #d86f0d;color: white;">
                                     <i class="material-icons" title="Cancel">
                                       clear
                                     </i>
                                   </button>
                                 </div>
+
+                                <div *ngIf="addWorkOrder" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center" stye="width: 95%;margin-left: 10px; margin-right: 10px;">
+                                    <form novalidate fxLayoutAlign="center center" [formGroup]="addForm2" style="width: 100%;border: 1px solid;
+                                  margin-bottom: 5px;
+                                  padding: 5px;" (ngSubmit)="addNewOrder()">
+                                        <mat-form-field fxFlex="10%" fxFlex.xs="90%" appearance="standard" style="width:20%;margin-top: -12px; margin-left: 10px;">
+                                            <mat-label>Title</mat-label>
+                                            <input type="text" matInput placeholder="Rent Paid" formControlName="workOrderName">
+                                            <!-- <mat-icon matSuffix>payment</mat-icon> -->
+                                        </mat-form-field>
+                                        <mat-form-field fxFlex="20%" fxFlex.xs="90%" appearance="standard" style="width:20%;margin-top: -12px; margin-left: 10px;">
+                                            <mat-label>Details</mat-label>
+                                            <input type="text" matInput placeholder="Rent Paid" formControlName="workOrderDetails">
+                                            <!-- <mat-icon matSuffix>payment</mat-icon> -->
+                                        </mat-form-field>
+
+                                        <mat-form-field fxFlex="15%" fxFlex.xs="90%" style="width: 15%;margin-left: 10px;">
+                                            <mat-label>Type</mat-label>
+                                            <mat-select id="month" formControlName="workOrderType">
+                                                <mat-option [value]='type.name' *ngFor="let type of types">{{type.name}}</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                        <mat-form-field fxFlex="10%" fxFlex.xs="90%" style="width:15%;margin-left: 10px;">
+                                            <mat-label>Category</mat-label>
+                                            <mat-select id="year" formControlName="workOrderCategory">
+                                                <mat-option [value]='category.name' *ngFor="let category of categories">{{category.name}}</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+
+                                        <mat-checkbox fxFlex="10%" style="margin-left: 10px; margin-top: 8px;" formControlName="isEmergency">Urgent</mat-checkbox>
+
+
+                                        <mat-form-field fxFlex="15%" fxFlex.xs="90%" style="margin-left: 10px;margin-right: 10px;">
+                                            <mat-label>Start Date</mat-label>
+                                            <input matInput [matDatepicker]="picker2" formControlName="startDate">
+                                            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                                            <mat-datepicker #picker2></mat-datepicker>
+                                        </mat-form-field>
+
+
+                                        <!-- <mat-form-field fxFlex="15%" fxFlex.xs="90%" style="margin-left: 10px;margin-right: 10px;">
+                                            <mat-label>End Date</mat-label>
+                                            <input matInput [matDatepicker]="picker1" formControlName="endDate">
+                                            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                                            <mat-datepicker #picker1></mat-datepicker>
+                                        </mat-form-field> -->
+                                        <div fxFlex="20%" fxFlex.xs="90%">
+                                            <button type="submit" mat-button color="primary" style="margin-right: 5px; color: green;">
+                                          <!-- Add -->
+                                          <mat-icon style="font-size: 2.5em;">add_circle</mat-icon>
+                                        </button>
+                                            <!-- <button type="button" (click)="reset()" mat-button mat-stroked-button color="accent">
+                                          Reset
+                                        </button> -->
+                                        </div>
+                                    </form>
+
+                                    <!-- <mat-radio-group aria-label="Select an option" style="margin-top: 13px;margin-left: 25px;padding-right: 5px;">
+                                      <mat-radio-button value="1" checked style="padding-right: 10px;">Active</mat-radio-button>
+                                      <mat-radio-button value="0">All</mat-radio-button>
+                                  </mat-radio-group> -->
+                                    <!-- <span class="spacer"></span>
+                                  <button (click)="addRentPayment()" mat-button mat-mini-fab style="background: #3d5afe;color: white;">
+                                  <i class="material-icons" title="Add Lease Agreement">
+                                    playlist_add
+                                  </i>
+                                </button> -->
+                                </div>
+
 
                                 <div fxLayoutAlign="center">
                                     <table mat-table [dataSource]="dataSource2" #Sort2="matSort" matSort class="my-table mat-elevation-z8" style="width: 100%;">

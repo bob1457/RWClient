@@ -75,6 +75,18 @@ export class LeaseDetailsComponent implements OnInit {
     {name: 'Other', key: 7}
   ];
 
+  types = [
+    {name: 'Repair'},
+    {name: 'Replacement'},
+    {name: 'Metenance'}
+  ];
+
+  categories = [
+    {name: 'Plumbing'},
+    {name: 'Electrical'},
+    {name: 'Renovation'}
+  ]
+;
   // currentMonth;
   // currentYear;
 
@@ -226,6 +238,7 @@ export class LeaseDetailsComponent implements OnInit {
       workOrderName: [''],
       workOrderDetails: [''],
       workOrderType: [''],
+      workOrderCategory: [''],
       startDate: [''],
       endDate: [''],
       isOwnerAuthorized: [true],
@@ -393,8 +406,16 @@ export class LeaseDetailsComponent implements OnInit {
     this.addRent = true;
   }
 
+  addW() {
+    this.addWorkOrder = true;
+  }
+
   cancel() {
     this.addRent = false;
+  }
+
+  cancel2() {
+    this.addWorkOrder = false;
   }
 
   addRentPayment() {
@@ -410,9 +431,17 @@ export class LeaseDetailsComponent implements OnInit {
     this.addRent = false;
   }
 
+  addNewOrder() {
+
+  }
+
   reset() {
     this.addForm.reset();
     this.addForm.get('').setValue('2020');
+  }
+
+  reset2() {
+    this.addForm2.reset();
   }
 
   public doFilter = (value: string) => {
