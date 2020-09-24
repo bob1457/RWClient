@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import { Location } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { PropertyListingState } from '../store/marketing.state';
 import { Observable } from 'rxjs';
-import { openHouses, propertyListing } from '../store/reducers';
-import { getPropertyListing } from '../store/actions/marketing.actions';
+import { loadingStatus, openHouses, propertyListing } from '../store/reducers';
+import { getPropertyListing, updateOpenHouseToListing } from '../store/actions/marketing.actions';
 
 @Component({
   selector: 'app-open-house-details',
@@ -33,13 +33,14 @@ export class OpenHouseDetailsComponent implements OnInit {
                 this.store.select(openHouses)
                           .subscribe(oh => {
                             if (oh) {
-                              this.openhouse = oh.filter(p => p.id == this.id);
+                              this.openhouse = oh.find(p => p.id == this.id);
                               console.log('openhoused', this.openhouse.id);
                               console.log('oh', this.openhouse);
                               this.store.select(propertyListing)
                                         .subscribe(res => {
                                           if (res) {
-                                            this.listing = res.filter(l => l.rentalPropertyId == this.openhouse[0].rentalPropertyId);
+                                            // this.listing = res.filter(l => l.rentalPropertyId == this.openhouse[0].rentalPropertyId);
+                                            this.listing = res.find(l => l.rentalPropertyId == this.openhouse.rentalPropertyId);
                                             console.log('listing', this.listing);
                                           } else {
                                             this.store.dispatch(getPropertyListing());
@@ -52,8 +53,11 @@ export class OpenHouseDetailsComponent implements OnInit {
 
   ngOnInit() {
 
+    this.loading$ = this.store.pipe(select(loadingStatus));
+
     this.detailsForm = this.formBuilder.group({
-      rentalPropertyId: [],
+      id: [],
+      // rentalPropertyId: [],
       openhouseDate: [''],
       isActive: [true],
       startTime: [''],
@@ -72,9 +76,14 @@ export class OpenHouseDetailsComponent implements OnInit {
   }
 
   submit() {
-    console.log('\n\n------ begin: update open house ------');
-    console.log('update submitted');
-    console.log('------ end:  done ------\n\n');
+    this.detailsForm.patchValue({
+     id: this.id
+    });
+    // console.log('\n\n------ begin: update open house ------');
+    // console.log('update submitted');
+    // console.log('------ end:  done ------\n\n');
+    console.log('form oh', this.detailsForm.value);
+    this.store.dispatch(updateOpenHouseToListing({payload: this.detailsForm.value}));
   }
 
 }

@@ -59,6 +59,10 @@
     /* active tab bottome bar color*/
 }
 
+::ng-deep .mat-tab-body-content {
+    min-height: 340px;
+}
+
 .mat-tab-body-wrapper {
     height: 340px;
 }

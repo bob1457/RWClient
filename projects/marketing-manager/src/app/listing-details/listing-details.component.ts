@@ -231,6 +231,8 @@ export class ListingDetailsComponent implements OnInit {
 
     this.store.dispatch(updatePropertyListing({payload: this.detailsForm.value}));
 
+    this.editContact = false;
+
     // this.store.pipe(select(propertyImgList))
     //             .subscribe(img => {
     //               if (img == null) {

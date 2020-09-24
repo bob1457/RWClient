@@ -260,7 +260,7 @@ export const updateOpenHouseToistingSuccess = createAction(
 );
 
 export const updateOpenHouseToListingFailure = createAction(
-  '[Property] Update  Open House to Listing Failure',
+  '[Marketing] Update  Open House to Listing Failure',
   // props<{payload: any}>()
   (errorMessage = 'Error updating open house') => ({ payload: { errorMessage }})
 

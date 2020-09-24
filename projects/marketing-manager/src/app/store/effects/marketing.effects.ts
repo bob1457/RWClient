@@ -280,6 +280,34 @@ export class MarketingEffects {
     )
   );
 
+  updateOpenHouseToListing$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(ListingActions.updateOpenHouseToListing),
+      tap(() => console.log('got here to update open house!!!')),
+      map(action => action.payload),
+      switchMap((payload) =>
+        this.marketingService.updateOpenHouse(payload).pipe(
+          map((openhouse: OpenHouse) => ({
+            type: '[Marketing] Update  Open House to Listing Success',
+            payload: openhouse
+          })),
+          tap( () => {
+            // window.alert('done');
+            this.openSnackBar('Open house updated successfully.', '');
+           }), // display notificaiton
+          // tap(res => {console.log('response: ' + res); }),
+          // catchError(
+          //   err => {
+          //     return of('[Marketing] Update Property Listing Failure', err.error);
+          //   } // EMPTY
+          // )
+          catchError(error => of(ListingActions.updateOpenHouseToListingFailure(error.message)))
+        )
+      )
+    )
+  );
+
   getOpenHouseList$ = createEffect(() =>
     this.actions$.pipe(
       // ofType('[Property] Get Property List'),
