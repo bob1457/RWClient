@@ -153,7 +153,7 @@
                                         <input type="text" id="contactTel" formControlName="contactTel" matInput placeholder="contact Tel" [ngModel]="listing.contact.contactTel">
                                     </mat-form-field>
                                     <mat-form-field class="owner-full-width" fxFlex="20%">
-                                        <input type="text" id="contactSMS" formControlName="contactSMS" matInput placeholder="contactS Text" [ngModel]="listing.contact.contactSMS">
+                                        <input type="text" id="contactSMS" formControlName="contactSMS" matInput placeholder="contact SMS" [ngModel]="listing.contact.contactSMS">
                                     </mat-form-field>
                                     <!-- <mat-form-field class="owner-full-width" fxFlex="10%">
                               <input type="text" id="city" formControlName="country" matInput placeholder="Country" [ngModel]="owner.address.country">
@@ -206,10 +206,31 @@
                                                 <mat-card-subtitle>Open house for {{listing.rentalProperty.propertyName}}</mat-card-subtitle>
                                             </mat-card-header>
                                             <mat-card-content fxLayoutAlign="center center">
-                                                Date: {{oh.openhouseDate | date: 'EEEE, MMMM d, y'}} <br>Time: {{oh.startTime}} to {{oh.endTime}}
+                                                <!-- Date: {{oh.openhouseDate | date: 'EEEE, MMMM d, y'}} <br>Time: {{oh.startTime}} to {{oh.endTime}} -->
+                                                <form novalidate fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" [formGroup]="ohForm" (ngSubmit)="updateOpenHouse()">
+                                                    <mat-form-field style="margin-right: 10px; width: 90%;">
+                                                        <mat-label>Open House Date</mat-label>
+                                                        <input matInput [matDatepicker]="picker" formControlName="openhouseDate" [ngModel]="oh.openhouseDate">
+                                                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                                        <mat-datepicker #picker></mat-datepicker>
+                                                    </mat-form-field>
+                                                    <mat-form-field class="owner-full-width" fxFlex="25%" style="margin-right: 8px;">
+                                                        <input type="text" id="startTime" formControlName="startTime" matInput placeholder="Start Time" [ngModel]="oh.startTime" name="email">
+                                                    </mat-form-field>
+                                                    <mat-form-field class="owner-full-width" fxFlex="20%" style="margin-right: 8px;">
+                                                        <input type="text" id="endTime" formControlName="endTime" matInput placeholder="End time" [ngModel]="oh.endTime">
+                                                    </mat-form-field>
+                                                    <div style="width: 90%;margin-top: 10px;">
+                                                        <mat-checkbox formControlName="isActive" [ngModel]="oh.isActive" [(checked)]="oh.isActive" class="vendor-full-width">Active</mat-checkbox>
+                                                    </div>
+                                                    <mat-form-field class="owner-full-width" fxFlex="20%">
+                                                        <textarea id="notes" formControlName="notes" matInput placeholder="Notes" [ngModel]="oh.notes"></textarea>
+                                                    </mat-form-field>
+                                                    <button type="submit" mat-button>UPDATE</button>
+                                                </form>
                                             </mat-card-content>
                                             <mat-card-actions>
-                                                <button mat-button (click)="updateOpenHouse()">UPDATE</button>
+                                                <!-- <button mat-button (click)="updateOpenHouse()">UPDATE</button> -->
                                             </mat-card-actions>
                                         </mat-card>
                                     </li>

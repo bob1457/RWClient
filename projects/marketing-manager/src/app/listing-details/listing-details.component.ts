@@ -33,6 +33,7 @@ export class ListingDetailsComponent implements OnInit {
   detailsForm: FormGroup;
   propertyForm: FormGroup;
   addForm: FormGroup;
+  ohForm: FormGroup;
 
   constructor(private store: Store<PropertyListingState>,
               private router: Router,
@@ -166,6 +167,17 @@ export class ListingDetailsComponent implements OnInit {
       endTime: [''],
       notes: ['']
     });
+
+    this.ohForm = this.formBuilder.group({
+      id: [],
+      rentalPropertyId: [],
+      openhouseDate: [''],
+      isActive: [true],
+      startTime: [''],
+      endTime: [''],
+      notes: ['']
+    });
+
   }
 
   GetPropertyListingDetails(id: any) {
@@ -213,6 +225,16 @@ export class ListingDetailsComponent implements OnInit {
 
   publish() {
     // this.store.dispatch(updatePropertyListingStatus(payload:))
+  }
+
+  updateOpenHouse() {
+    debugger;
+    this.ohForm.patchValue({
+      id: this.openhouse[0].id,
+      rentalPropertyId: this.openhouse[0].rentalPropertyId
+    });
+    console.log('update open house form', this.ohForm.value);
+
   }
 
   submit() {
@@ -305,9 +327,6 @@ export class ListingDetailsComponent implements OnInit {
     // this.router.navigate(['/Manage/marketing/openhouseson']);
   }
 
-  updateOpenHouse() {
-
-  }
 
   clear() {
     this.addForm.reset();
