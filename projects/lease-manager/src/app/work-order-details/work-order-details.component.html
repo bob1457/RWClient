@@ -16,8 +16,17 @@
             </p>
 
         </div>
+
+        <div style="margin-top: 25px;width: 60%;">
+            <span style="font-weight: 500;">Service Request</span>
+            <p>{{workorder.serviceRequest.requestSubject}}<br> Details: <br>{{workorder.serviceRequest.requestDetails}}
+                <br>Status: {{workorder.serviceRequest.status | status}} <br>Note: <br> {{workorder.serviceRequest.notes}}
+            </p>
+
+        </div>
+
         <div style="margin-top: 25px;font-size: .75em;
-                  font-style: italic;width: 80%;">
+                  font-style: italic;width: 60%;">
             <p>Added: {{workorder.created | date }}</p>
             <p>Updated: {{workorder.updated | date}}</p>
         </div>

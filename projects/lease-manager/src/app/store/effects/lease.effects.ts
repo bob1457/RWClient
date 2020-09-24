@@ -325,6 +325,33 @@ export class LeaseEffects {
     )
   );
 
+  addWorkOrder$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(LeaseActions.addWorkOrder),
+      tap(() => console.log('got here to add order !!!')),
+      map(action => action.payload),
+      switchMap((payload) =>
+        this.leaseService.addWorkOrders(payload).pipe(
+          map((order: any) => ({
+            type: '[Leases] Add Work Order Success',
+            payload: order
+          })),
+          tap( () => {
+            // window.alert('done');
+            this.openSnackBar('Work order added successfully.', '');
+           }), // display notificaiton
+
+          catchError(error => {
+            this.openSnackBar(error.message, '');
+            return of(LeaseActions.addWorkOrderFailure(error.message));
+            }
+          )
+          // catchError(error => of(LeaseActions.addLeaseFailure(error.message)))
+        )
+      )
+    )
+  );
 
   updateWorkOrdere$ = createEffect(() =>
     this.actions$.pipe(

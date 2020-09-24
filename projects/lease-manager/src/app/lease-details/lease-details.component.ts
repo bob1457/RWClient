@@ -4,7 +4,7 @@ import { PropertyLeaseState } from '../store/lease-state';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LeaseService, PropertyLease } from '@lib/app-core';
-import { addRentPayment, getLeaseDetails, getRentPaymenttDetails, updateLease } from '../store/actions/lease.actions';
+import { addRentPayment, addWorkOrder, getLeaseDetails, getRentPaymenttDetails, updateLease } from '../store/actions/lease.actions';
 import { leaseDetails, loadingStatus, rentPaymentDetails, rentPaymentList, serviceRequestList, vendorList, workOrderList } from '../store/reducers';
 import { Observable } from 'rxjs';
 import { MatDialog, MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
@@ -462,6 +462,9 @@ export class LeaseDetailsComponent implements OnInit {
       rentalPropertyId: this.lease.id
     });
     console.log('order form', this.addForm2.value);
+    this.store.dispatch(addWorkOrder({payload: this.addForm2.value}));
+    this.addForm2.reset();
+    this.addWorkOrder = false;
   }
 
   reset() {

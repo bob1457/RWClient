@@ -429,6 +429,31 @@ const propertyLeaseReducer = createReducer(
       });
     }),
 
+    /**
+     * Add work order
+     */
+    on(LeaseActions.addWorkOrder, state => ({
+      ...state,
+      loading: true,
+      loaded: false
+    })),
+
+    on(LeaseActions.addWorkOrderSuccess, (state, { payload }) => {
+      return ({
+        ...state,
+        loading: false,
+        loaded: true,
+        workorders: [...state.workorders, payload ]
+      });
+    }),
+
+    on(LeaseActions.addWorkOrderFailure, (state) => {
+      return ({
+        ...state,
+        loading: false,
+        errorMessage: 'Failed to add work order'
+      });
+    }),
 
 );
 
