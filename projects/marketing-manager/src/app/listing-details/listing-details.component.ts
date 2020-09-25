@@ -5,7 +5,7 @@ import { PropertyListingState } from '../store/marketing.state';
 import { Store, select } from '@ngrx/store';
 import { Location } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
-import { getPropertyListingDetails, updatePropertyListing, uploadPropertyImage, addOpenHouseToListing } from '../store/actions/marketing.actions';
+import { getPropertyListingDetails, updatePropertyListing, uploadPropertyImage, addOpenHouseToListing, updateOpenHouseToListingFailure, updateOpenHouseToListing } from '../store/actions/marketing.actions';
 import { propertyListingDetails, loadingStatus, propertyImgList, loadedStatus, openHouses } from '../store/reducers';
 import { Observable } from 'rxjs';
 
@@ -234,7 +234,7 @@ export class ListingDetailsComponent implements OnInit {
       rentalPropertyId: this.openhouse[0].rentalPropertyId
     });
     console.log('update open house form', this.ohForm.value);
-
+    this.store.dispatch(updateOpenHouseToListing({payload: this.ohForm.value}));
   }
 
   submit() {
