@@ -86,6 +86,7 @@ export class UpdateAvatarFailure implements Action {
 
 export class UpdateProfile implements Action {
   readonly type = AuthActionTypes.UPDATE_PROFILE;
+  constructor(public payload: any ) {}
 }
 
 export class UpdateProfileSuccess implements Action {

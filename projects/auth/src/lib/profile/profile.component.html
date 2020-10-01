@@ -33,7 +33,7 @@
       <mat-error *ngIf="!emailInput.hasError('required')">Email is invalid</mat-error> -->
     </mat-form-field>
 
-    <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center" fxLayoutGap="10px" style="width: 70%;">
+    <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center" fxLayoutGap="10px" style="width: 80%;">
         <mat-form-field class="profile-full-width" style="width: 100%;">
             <span class="iocn-pos" matPrefix><mat-icon>phone</mat-icon> &nbsp;</span>
             <input type="text" matInput placeholder="Primary telephone number" ngModel name="telephone1" [(ngModel)]="user.telephone1" #telInput="ngModel" tel1>
@@ -46,7 +46,7 @@
 
     </div>
 
-    <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center" fxLayoutGap="10px" style="width: 70%;">
+    <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center" fxLayoutGap="10px" style="width: 80%;">
         <mat-form-field class="profile-full-width" style="width: 100%;">
             <span class="iocn-pos" matPrefix><mat-icon>dialpad</mat-icon> &nbsp;</span>
             <input type="text" matInput placeholder="Primary social media contact" ngModel name="socialMediaContact1" [(ngModel)]="user.socialmedia1" #contactInput="ngModel" contact1>
@@ -57,7 +57,7 @@
         </mat-form-field>
     </div>
 
-    <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center" fxLayoutGap="10px" style="width: 70%;">
+    <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center" fxLayoutGap="10px" style="width: 80%;">
         <mat-form-field class="profile-full-width" style="width: 100%;">
             <span class="iocn-pos" matPrefix><mat-icon>mobile_friendly</mat-icon> &nbsp;</span>
             <input type="text" matInput placeholder="Address: Number and Street" ngModel name="addressstreet" [(ngModel)]="user.addressstreet" #contactInput="ngModel" contact1>
@@ -68,7 +68,7 @@
         </mat-form-field>
     </div>
 
-    <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center" fxLayoutGap="10px" style="width: 70%;">
+    <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center" fxLayoutGap="10px" style="width: 80%;">
         <mat-form-field class="profile-full-width" style="width: 100%;">
             <span class="iocn-pos" matPrefix><mat-icon>mobile_friendly</mat-icon> &nbsp;</span>
             <input type="text" matInput placeholder="Address: Province/State" ngModel name="addressProvstate" [(ngModel)]="user.addressprovstate" #contactInput="ngModel" contact1>
@@ -95,11 +95,10 @@
 
     <!-- <mat-checkbox color="primary" ngModel name="agree" required>Agree to the terms and conditions</mat-checkbox> -->
     <div fxLayout="row" fxLayoutGap="7px" style="align-self: flex-end;">
-        <span *ngIf="showMsg" style="color: rgb(189, 150, 25);">Updated successfully!</span>
-        <img *ngIf=" loading" class="pl-2" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+        <span *ngIf="showMsg" style="color: rgb(51, 51, 49);margin-left: 25px;">Updated successfully!</span>
+        <img *ngIf="loading" class="pl-2" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
         />
         <button type="submit" mat-raised-button color="primary" [disabled]="f.invalid || !f.dirty">UPDATE</button>
         <button mat-raised-button color="accent">CANCEL</button>
     </div>
-
 </form>

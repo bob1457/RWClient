@@ -57,6 +57,7 @@ export class ProfileHomeComponent implements OnInit {
         this.user = JSON.parse(localStorage.getItem('auth'));
       } else {
          this.user = userData;
+         localStorage.setItem('auth', JSON.stringify(userData)); // Refresh the user dat
          console.log('user from profile homne: ' + userData);
       }
 

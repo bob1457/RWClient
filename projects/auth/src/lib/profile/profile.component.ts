@@ -6,8 +6,10 @@ import { AuthState } from '../store/auth.state';
 
 import { User } from '../models';
 import { getUserInfo } from '../store/auth.reducers';
-import { NgForm } from '@angular/forms';
+import { FormGroup, NgForm } from '@angular/forms';
 import { subscribeOn } from 'rxjs/operators';
+import { UpdateProfile } from '../store/auth.actions';
+
 
 @Component({
   selector: 'lib-profile',
@@ -41,8 +43,9 @@ export class ProfileComponent implements OnInit {
     debugger;
     this.loading = true;
     console.log(form.value);
+    // this.store.dispatch(new UpdateProfile({payload: form.value}));
     this.profileService.updateProfile(form.value).
-    subscribe(() => { // res
+    subscribe((res) => { // res
       // this.user = res;
       this.showMsg = true;
       this.loading = false;
@@ -54,6 +57,8 @@ export class ProfileComponent implements OnInit {
       setTimeout(() => {
         this.showMsg = false;
         // this.disabled = null;
+        form.form.markAsPristine();
+        this._markFormPristine(form);
         console.log(this.showMsg);
       }, 2000);
 
@@ -62,5 +67,10 @@ export class ProfileComponent implements OnInit {
 
   }
 
+  private _markFormPristine(form: FormGroup | NgForm): void {
+    Object.keys(form.controls).forEach(control => {
+        form.controls[control].markAsPristine();
+    });
+  }
 
 }
