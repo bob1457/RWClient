@@ -34,6 +34,7 @@ import { WorkOrderDatePipe } from './work-order-date.pipe';
 import { PaymentMethodPipe } from './payment-method.pipe';
 import { PaymentDetailsDialogComponent } from './dialogs/payment-details-dialog/payment-details-dialog.component';
 import { AddRentDialogComponent } from './dialogs/add-rent-dialog/add-rent-dialog.component';
+import { FullLeaseAgreementComponent } from './full-lease-agreement/full-lease-agreement.component';
 
 
 @NgModule({
@@ -65,7 +66,8 @@ import { AddRentDialogComponent } from './dialogs/add-rent-dialog/add-rent-dialo
     WorkOrderDatePipe,
     PaymentMethodPipe,
     PaymentDetailsDialogComponent,
-    AddRentDialogComponent
+    AddRentDialogComponent,
+    FullLeaseAgreementComponent
   ],
   imports: [
     BrowserModule,

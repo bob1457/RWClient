@@ -397,7 +397,7 @@ export class LeaseDetailsComponent implements OnInit {
   }
 
   viewAgreement() {
-
+    console.log('generating agreement....');
   }
 
   submit() {

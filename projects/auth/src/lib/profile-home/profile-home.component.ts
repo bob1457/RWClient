@@ -10,6 +10,7 @@ import { getUserInfo } from '../store/auth.reducers';
 import * as sparkmd5 from 'spark-md5';
 import { MatRadioChange, MatRadioButton } from '@angular/material';
 import { StateService } from '../services/state.service';
+import { ProfileService } from '../services/profile.service';
 
 @Component({
   selector: 'lib-profile-home',
@@ -44,6 +45,7 @@ export class ProfileHomeComponent implements OnInit {
   constructor(private location: Location,
               private store: Store<fromAuth.AuthState>,
               private stateService: StateService,
+              private profileService: ProfileService,
               private httpClient: HttpClient) { }
 
 
@@ -71,6 +73,11 @@ export class ProfileHomeComponent implements OnInit {
         default:
         break;
       }
+    });
+
+    this.profileService.getUserInfo(this.user.username)
+    .subscribe(user => {
+      this.user = user;
     });
 
     this.hash = sparkmd5.hash(this.user.email);

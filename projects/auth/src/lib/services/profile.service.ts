@@ -13,6 +13,11 @@ export class ProfileService {
 
   constructor(private httpClient: HttpClient) { }
 
+  getUserInfo(username) {
+    debugger;
+    return this.httpClient.get(`${this.serverUrl}/${username}`);
+  }
+
   updateProfile(profile: Profile) {
     debugger;
     return this.httpClient.post(this.serverUrl, profile);

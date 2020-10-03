@@ -40,6 +40,7 @@ import { WorkOrderDatePipe } from './work-order-date.pipe';
 import { PaymentMethodPipe } from './payment-method.pipe';
 import { PaymentDetailsDialogComponent } from './dialogs/payment-details-dialog/payment-details-dialog.component';
 import { AddRentDialogComponent } from './dialogs/add-rent-dialog/add-rent-dialog.component';
+import { FullLeaseAgreementComponent } from './full-lease-agreement/full-lease-agreement.component';
 
 
 // import { CdkColumnDef } from '@angular/cdk/table';
@@ -61,7 +62,8 @@ const routes: Routes = [
       { path: 'servicerequests', component: ServieRequestListComponent},
       { path: 'servicerequestdetails/:id', component: ServieRequestDetailsComponent},
       { path: 'vendors', component: VendorListComponent},
-      { path: 'vendordetails/:id', component: VendorDetailsComponent}
+      { path: 'vendordetails/:id', component: VendorDetailsComponent},
+      { path: 'agreementview/:id', component: FullLeaseAgreementComponent}
       // { path: 'applications', component: ApplicationListComponent}
     ]
   }//,
@@ -95,7 +97,8 @@ const routes: Routes = [
     WorkOrderDatePipe,
     PaymentMethodPipe,
     PaymentDetailsDialogComponent,
-    AddRentDialogComponent
+    AddRentDialogComponent,
+    FullLeaseAgreementComponent
   ],
   imports: [
     // BrowserModule,
