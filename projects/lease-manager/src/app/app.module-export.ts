@@ -41,6 +41,8 @@ import { PaymentMethodPipe } from './payment-method.pipe';
 import { PaymentDetailsDialogComponent } from './dialogs/payment-details-dialog/payment-details-dialog.component';
 import { AddRentDialogComponent } from './dialogs/add-rent-dialog/add-rent-dialog.component';
 import { FullLeaseAgreementComponent } from './full-lease-agreement/full-lease-agreement.component';
+import { AgreementHeaderComponent } from './agreement-header/agreement-header.component';
+import { AgreementContentComponent } from './agreement-content/agreement-content.component';
 
 
 // import { CdkColumnDef } from '@angular/cdk/table';
@@ -98,7 +100,9 @@ const routes: Routes = [
     PaymentMethodPipe,
     PaymentDetailsDialogComponent,
     AddRentDialogComponent,
-    FullLeaseAgreementComponent
+    FullLeaseAgreementComponent,
+    AgreementHeaderComponent,
+    AgreementContentComponent
   ],
   imports: [
     // BrowserModule,

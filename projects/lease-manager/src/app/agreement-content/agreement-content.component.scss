@@ -1,0 +1,21 @@
+.container {
+    width: 100%;
+    // background: #e0e0e0;
+    background-color: white;
+    padding: 10px;
+    border-bottom: 8px solid #1150af;
+}
+
+input[type=text] {
+    width: 98%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    margin-bottom: -4px;
+    background-color: #e4ebf3;
+    height: 38px;
+}
+
+label {
+    font-size: .75em;
+}
