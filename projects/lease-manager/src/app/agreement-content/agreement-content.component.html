@@ -6,14 +6,31 @@
     <p style="margin-top: 7px;">
         <span style="font-size: .9em;font-weight: bold;">the LANDLORD(S):</span> <span style="font-size: .75em;font-weight: bold;font-style: italic;">(if entry for landlord is a business name, use the ’last name’ field box to enter the full legal business name)</span>
     </p>
-    <form [formGroup]="leaseForm" fxLayout="row" fxLayoutAlign="start" fxFlexFill>
-        <div style="width: 50%;">
-            <input readonly type="text" id="fname" formControlName="landlordLastName" [ngModel]="lease.rentalProperty.rentalPropertyOwners[0].firstName">
-            <label for="lname">last Name</label>
+    <form [formGroup]="leaseForm" fxLayout="column" fxLayoutAlign="start" fxFlexFill>
+        <div *ngFor="let landlord of lease.rentalProperty.rentalPropertyOwners">
+            <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
+                <div style="width: 50%;">
+                    <input readonly type="text" [value]="landlord.lastName" [name]="landlord.lastName">
+                    <label>last Name</label>
+                </div>
+                <div style="width: 50%;">
+                    <input readonly type="text" [value]="landlord.firstName" [name]="landlord.firstName">
+                    <label>first and middle name(s)</label>
+                </div>
+            </div>
+
+
+            <!-- <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
+                <div style="width: 50%;">
+                    <input readonly type="text" id="fname" formControlName="landlordLastName" [ngModel]="lease.rentalProperty.rentalPropertyOwners[1].lastName">
+                    <label for="lname">last Name</label>
+                </div>
+                <div style="width: 50%;">
+                    <input readonly type="text" id="fname" name="fname" value="Bob H." formControlName="landlordFirstName" [ngModel]="lease.rentalProperty.rentalPropertyOwners[1].firstName">
+                    <label for="fname">first and middle name(s)</label>
+                </div>
+            </div> -->
         </div>
-        <div style="width: 50%;">
-            <input readonly type="text" id="fname" name="fname" value="Bob H." formControlName="landlordFirstName" [ngModel]="lease.rentalProperty.rentalPropertyOwners[0].lastName">
-            <label for="fname">first and middle name(s)</label>
-        </div>
+
     </form>
 </div>
