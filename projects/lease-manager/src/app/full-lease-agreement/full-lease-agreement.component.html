@@ -3,5 +3,5 @@
 </p> -->
 <div class="view-container">
     <app-agreement-header></app-agreement-header>
-    <app-agreement-content></app-agreement-content>
+    <app-agreement-content [lease]="agreement$ | async"></app-agreement-content>
 </div>

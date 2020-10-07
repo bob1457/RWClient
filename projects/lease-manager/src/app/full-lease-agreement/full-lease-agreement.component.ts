@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { Location } from '@angular/common';
 import { PropertyLeaseState } from '../store/lease-state';
 import { leaseDetails } from '../store/reducers';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -15,6 +16,7 @@ export class FullLeaseAgreementComponent implements OnInit {
 
   id: number;
   agreementDetails;
+  agreement$: Observable<any>;
 
   constructor(private store: Store<PropertyLeaseState>,
               private actRoute: ActivatedRoute,
@@ -31,6 +33,9 @@ export class FullLeaseAgreementComponent implements OnInit {
               }
 
   ngOnInit() {
+
+    this.agreement$ = this.store.select(leaseDetails);
+
   }
 
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
@@ -10,11 +10,16 @@ export class AgreementContentComponent implements OnInit {
 
   leaseForm: FormGroup;
 
+  @Input() lease;
+
   constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit() {
-    this.leaseForm = this.formBuilder.group({
+    console.log('lease', this.lease);
 
+    this.leaseForm = this.formBuilder.group({
+      landlordFirstName: [''],
+      landlordLastName: ['']
     });
   }
 

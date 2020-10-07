@@ -8,11 +8,11 @@
     </p>
     <form [formGroup]="leaseForm" fxLayout="row" fxLayoutAlign="start" fxFlexFill>
         <div style="width: 50%;">
-            <input readonly type="text" id="fname" value="Yuan" name="fname">
+            <input readonly type="text" id="fname" formControlName="landlordLastName" [ngModel]="lease.rentalProperty.rentalPropertyOwners[0].firstName">
             <label for="lname">last Name</label>
         </div>
         <div style="width: 50%;">
-            <input readonly type="text" id="fname" name="fname" value="Bob H.">
+            <input readonly type="text" id="fname" name="fname" value="Bob H." formControlName="landlordFirstName" [ngModel]="lease.rentalProperty.rentalPropertyOwners[0].lastName">
             <label for="fname">first and middle name(s)</label>
         </div>
     </form>
