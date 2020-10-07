@@ -8,7 +8,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 })
 export class AgreementContentComponent implements OnInit {
 
-  leaseForm: FormGroup;
+  // leaseForm: FormGroup;
 
   @Input() lease;
 
@@ -17,10 +17,10 @@ export class AgreementContentComponent implements OnInit {
   ngOnInit() {
     console.log('lease', this.lease);
 
-    this.leaseForm = this.formBuilder.group({
-      landlordFirstName: [''],
-      landlordLastName: ['']
-    });
+    // this.leaseForm = this.formBuilder.group({
+    //   landlordFirstName: [''],
+    //   landlordLastName: ['']
+    // });
   }
 
 }

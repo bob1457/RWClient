@@ -6,7 +6,7 @@
     <p style="margin-top: 7px;">
         <span style="font-size: .9em;font-weight: bold;">the LANDLORD(S):</span> <span style="font-size: .75em;font-weight: bold;font-style: italic;">(if entry for landlord is a business name, use the ’last name’ field box to enter the full legal business name)</span>
     </p>
-    <form [formGroup]="leaseForm" fxLayout="column" fxLayoutAlign="start" fxFlexFill>
+    <form fxLayout="column" fxLayoutAlign="start" fxFlexFill>
         <div *ngFor="let landlord of lease.rentalProperty.rentalPropertyOwners">
             <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
                 <div style="width: 50%;">
