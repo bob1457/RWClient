@@ -7,21 +7,22 @@
         <span style="font-size: .9em;font-weight: bold;">the LANDLORD(S):</span> <span style="font-size: .75em;font-weight: bold;font-style: italic;">(if entry for landlord is a business name, use the ’last name’ field box to enter the full legal business name)</span>
     </p>
     <form fxLayout="column" fxLayoutAlign="start" fxFlexFill>
-        <div *ngFor="let landlord of lease.rentalProperty.rentalPropertyOwners" style="margin-top: -15px;">
-            <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
-                <div style="width: 50%;">
-                    <input readonly type="text" [value]="landlord.lastName" [name]="landlord.lastName">
-                    <label>last Name</label>
+        <div class="page-container">
+            <div *ngFor="let landlord of lease.rentalProperty.rentalPropertyOwners" style="margin-top: -15px;">
+                <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
+                    <div style="width: 50%;">
+                        <input readonly type="text" [value]="landlord.lastName" [name]="landlord.lastName">
+                        <label>last Name</label>
+                    </div>
+                    <div style="width: 50%;">
+                        <input readonly type="text" [value]="landlord.firstName" [name]="landlord.firstName">
+                        <label>first and middle name(s)</label>
+                    </div>
                 </div>
-                <div style="width: 50%;">
-                    <input readonly type="text" [value]="landlord.firstName" [name]="landlord.firstName">
-                    <label>first and middle name(s)</label>
-                </div>
-            </div>
 
 
 
-            <!-- <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
+                <!-- <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
                 <div style="width: 50%;">
                     <input readonly type="text" id="fname" formControlName="landlordLastName" [ngModel]="lease.rentalProperty.rentalPropertyOwners[1].lastName">
                     <label for="lname">last Name</label>
@@ -31,86 +32,128 @@
                     <label for="fname">first and middle name(s)</label>
                 </div>
             </div> -->
-        </div>
-        <p style="margin-top: 7px;">
-            <span style="font-size: .9em;font-weight: bold;">and the TENANT(S):</span>
-        </p>
-        <div *ngFor="let tenant of lease.tenant" style="margin-top: -15px;">
-            <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
-                <div style="width: 50%;">
-                    <input readonly type="text" [value]="tenant.lastName" [name]="tenant.lastName">
-                    <label>last Name</label>
+            </div>
+            <p style="margin-top: 7px;">
+                <span style="font-size: .9em;font-weight: bold;">and the TENANT(S):</span>
+            </p>
+            <div *ngFor="let tenant of lease.tenant" style="margin-top: -15px;">
+                <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
+                    <div style="width: 50%;">
+                        <input readonly type="text" [value]="tenant.lastName" [name]="tenant.lastName">
+                        <label>last Name</label>
+                    </div>
+                    <div style="width: 50%;">
+                        <input readonly type="text" [value]="tenant.firstName" [name]="tenant.firstName">
+                        <label>first and middle name(s)</label>
+                    </div>
                 </div>
-                <div style="width: 50%;">
-                    <input readonly type="text" [value]="tenant.firstName" [name]="tenant.firstName">
-                    <label>first and middle name(s)</label>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start" fxFlexFill style="border-bottom: 2px dashed;">
+                <div style="width: 7%;">
+                    <input readonly type="text">
+                </div>
+                <div style="width: 23%;">
+                    <input readonly type="text" [value]="lease.tenant[0].contactTelephone1" [name]="lease.tenant[0].contactTelephone1">
+                    <label style="margin-left: -60px;"><span style="font-style: italic;">(optional)</span> phone number</label>
+                </div>
+                <div style="width: 7%;">
+                    <input readonly type="text"></div>
+                <div style="width: 23%;">
+                    <input readonly type="text" [value]="lease.tenant[0].contactTelephone2" [name]="lease.tenant[0].contactTelephone2">
+                    <label style="margin-left: -60px;"><span style="font-style: italic;">(optional)</span> other phone number</label>
                 </div>
             </div>
+            <p style="margin-top: 7px;margin-bottom: -5px;">
+                <span style="font-size: .9em;font-weight: bold;">ADDRESS OF PLACE BEING RENTED TO TENANT(s)<span style="font-style: italic;"> called the 'rental unit' in this agreement:</span></span>
+            </p>
+            <div fxLayout="row" fxLayoutAlign="start" fxFlexFill style="border-bottom: 2px dashed;" style="margin-top: -15px;">
+                <div style="width: 10%;">
+                    <input readonly type="text">
+                    <label>unit number</label>
+                </div>
+                <div style="width: 35%;">
+                    <input readonly type="text" [value]="lease.rentalProperty.address.streetNum" [name]="lease.rentalProperty.address.streetNum">
+                    <label>street number and street name</label>
+                </div>
+                <div style="width: 30%;">
+                    <input readonly type="text" [value]="lease.rentalProperty.address.city" [name]="lease.rentalProperty.address.city">
+                    <label>city</label>
+                </div>
+                <div style="width: 10%;">
+                    <input readonly type="text" [value]="lease.rentalProperty.address.stateProvince" [name]="lease.rentalProperty.address.stateProvince">
+                    <label>province</label>
+                </div>
+                <div style="width: 15%;">
+                    <input readonly type="text" [value]="lease.rentalProperty.address.zipPostCode" [name]="lease.rentalProperty.address.zipPostCode">
+                    <label>postal code</label>
+                </div>
+            </div>
+            <p style="margin-top: 7px;margin-bottom: -5px;">
+                <span style="font-size: .9em;font-weight: bold;">ADDRESS FOR SERVICE of the</span><span style="margin-left: 25px;font-weight: bold;"><input type="checkbox"> &nbsp;landlord</span> <span style="margin-left: 25px; font-weight: bold;"><input type="checkbox"> &nbsp;landlord's agent</span>
+            </p>
+            <div fxLayout="row" fxLayoutAlign="start" fxFlexFill style="margin-top: -15px;">
+                <div style="width: 10%;">
+                    <input readonly type="text">
+                    <label>unit/site #</label>
+                </div>
+                <div style="width: 35%;">
+                    <input readonly type="text" [value]="lease.rentalProperty.rentalPropertyOwners[0].ownerAddress.streetNumber" [name]="lease.rentalProperty.rentalPropertyOwners[0].ownerAddress.streetNum">
+                    <label>street number and street name</label>
+                </div>
+                <div style="width: 30%;">
+                    <input readonly type="text" [value]="lease.rentalProperty.rentalPropertyOwners[0].ownerAddress.city" [name]="lease.rentalProperty.rentalPropertyOwners[0].ownerAddress.city">
+                    <label>city</label>
+                </div>
+                <div style="width: 10%;">
+                    <input readonly type="text" [value]="lease.rentalProperty.rentalPropertyOwners[0].ownerAddress.stateProvince" [name]="lease.rentalProperty.rentalPropertyOwners[0].ownerAddress.stateProvince">
+                    <label>province</label>
+                </div>
+                <div style="width: 15%;">
+                    <input readonly type="text" [value]="lease.rentalProperty.rentalPropertyOwners[0].ownerAddress.zipPostCode" [name]="lease.rentalProperty.rentalPropertyOwners[0].ownerAddress.zipPostCode">
+                    <label>postal code</label>
+                </div>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start" fxFlexFill style="margin-bottom: 40px;">
+                <div style="width: 8%;">
+                    <input readonly type="text">
+                </div>
+                <div style="width: 25%;">
+                    <input readonly type="text" [value]="lease.rentalProperty.rentalPropertyOwners[0].contactTelephone" [name]="lease.rentalProperty.rentalPropertyOwners[0].contactTelephone" style="width: 90%;">
+                    <label style="margin-left: -60px;">daytime phone number</label>
+                </div>
+                <div style="width: 8%;">
+                    <input readonly type="text">
+                </div>
+                <div style="width: 25%;">
+                    <input type="text" [value]="lease.rentalProperty.rentalPropertyOwners[0].contactTelephone" [name]="lease.rentalProperty.rentalPropertyOwners[0].contactTelephone" style="width: 90%;">
+                    <label style="margin-left: -60px;">other phone number</label>
+                </div>
+                <div style="width: 8%;">
+                    <input readonly type="text">
+                </div>
+                <div style="width: 25%;">
+                    <input type="text" [value]="lease.rentalProperty.rentalPropertyOwners[0].contactTelephone" [name]="lease.rentalProperty.rentalPropertyOwners[0].contactTelephone" style="width: 90%;">
+                    <label style="margin-left: -60px;">fax phone for services</label>
+                </div>
+            </div>
+
         </div>
-        <div fxLayout="row" fxLayoutAlign="start" fxFlexFill style="border-bottom: 2px dashed;">
-            <div style="width: 7%;">
-                <input readonly type="text">
+        <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
+            <div style="width: 25%;">
+                <span style="font-weight:bold;font-style: italic;">
+              Residential Tenancy Branch
+            </span><br>
+                <span style="font-style:italic;">
+              Office of Housing and<br>
+              Construction Standards<br>
+              #RTB-1 (2019/11)
+            </span>
             </div>
-            <div style="width: 23%;">
-                <input readonly type="text" [value]="lease.tenant[0].contactTelephone1" [name]="lease.tenant[0].contactTelephone1">
-                <label style="margin-left: -60px;"><span style="font-style: italic;">(optional)</span> phone number</label>
+            <div class="spacer"></div>
+            <div>
+                <span style="font-weight:bold;font-style: italic;">page 1 of 6 pages</span>
             </div>
-            <div style="width: 7%;">
-                <input readonly type="text"></div>
-            <div style="width: 23%;">
-                <input readonly type="text" [value]="lease.tenant[0].contactTelephone2" [name]="lease.tenant[0].contactTelephone2">
-                <label style="margin-left: -60px;"><span style="font-style: italic;">(optional)</span> other phone number</label>
-            </div>
-        </div>
-        <p style="margin-top: 7px;">
-            <span style="font-size: .9em;font-weight: bold;">ADDRESS OF PLACE BEING RENTED TO TENANT(s)<span style="font-style: italic;"> called the 'rental unit' in this agreement:</span></span>
-        </p>
-        <div fxLayout="row" fxLayoutAlign="start" fxFlexFill style="border-bottom: 2px dashed;">
-            <div style="width: 10%;">
-                <input readonly type="text">
-                <label>unit number</label>
-            </div>
-            <div style="width: 35%;">
-                <input readonly type="text" [value]="lease.rentalProperty.address.streetNum" [name]="lease.rentalProperty.address.streetNum">
-                <label>street number and street name</label>
-            </div>
-            <div style="width: 30%;">
-                <input readonly type="text" [value]="lease.rentalProperty.address.city" [name]="lease.rentalProperty.address.city">
-                <label>city</label>
-            </div>
-            <div style="width: 10%;">
-                <input readonly type="text" [value]="lease.rentalProperty.address.stateProvince" [name]="lease.rentalProperty.address.stateProvince">
-                <label>province</label>
-            </div>
-            <div style="width: 15%;">
-                <input readonly type="text" [value]="lease.rentalProperty.address.zipPostCode" [name]="lease.rentalProperty.address.zipPostCode">
-                <label>postal code</label>
-            </div>
-        </div>
-        <p style="margin-top: 7px;">
-            <span style="font-size: .9em;font-weight: bold;">ADDRESS FOR SERVICE of the</span><span style="margin-left: 25px;font-weight: bold;"><input type="checkbox"> &nbsp;landlord</span> <span style="margin-left: 25px; font-weight: bold;"><input type="checkbox"> &nbsp;landlord's agent</span>
-        </p>
-        <div fxLayout="row" fxLayoutAlign="start" fxFlexFill style="border-bottom: 2px dashed;">
-            <div style="width: 10%;">
-                <input readonly type="text">
-                <label>unit number</label>
-            </div>
-            <div style="width: 35%;">
-                <input readonly type="text" [value]="lease.rentalProperty.rentalPropertyOwners[0].ownerAddress.streetNumber" [name]="lease.rentalProperty.rentalPropertyOwners[0].ownerAddress.streetNum">
-                <label>street number and street name</label>
-            </div>
-            <div style="width: 30%;">
-                <input readonly type="text" [value]="lease.rentalProperty.rentalPropertyOwners[0].ownerAddress.city" [name]="lease.rentalProperty.rentalPropertyOwners[0].ownerAddress.city">
-                <label>city</label>
-            </div>
-            <div style="width: 10%;">
-                <input readonly type="text" [value]="lease.rentalProperty.rentalPropertyOwners[0].ownerAddress.stateProvince" [name]="lease.rentalProperty.rentalPropertyOwners[0].ownerAddress.stateProvince">
-                <label>province</label>
-            </div>
-            <div style="width: 15%;">
-                <input readonly type="text" [value]="lease.rentalProperty.rentalPropertyOwners[0].ownerAddress.zipPostCode" [name]="lease.rentalProperty.rentalPropertyOwners[0].ownerAddress.zipPostCode">
-                <label>postal code</label>
-            </div>
+
         </div>
     </form>
 </div>

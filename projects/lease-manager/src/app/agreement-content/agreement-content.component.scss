@@ -3,6 +3,12 @@
     // background: #e0e0e0;
     background-color: white;
     padding: 10px;
+    // border-bottom: 8px solid #1150af;
+}
+
+.page-container {
+    width: 100%;
+    background-color: white;
     border-bottom: 8px solid #1150af;
 }
 
@@ -19,4 +25,8 @@ input[type=text] {
 
 label {
     font-size: .75em;
+}
+
+.spacer {
+    flex: 1 1 auto;
 }
