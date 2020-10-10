@@ -116,6 +116,8 @@ export class LeaseDetailsComponent implements OnInit {
                 this.id = this.actRoute.snapshot.params.id;
                 console.log(this.id);
 
+                this.GetLeaseDetails(this.id);
+
                 this.store.select(rentPaymentDetails)
                           .subscribe(data => {
                             this.paymentDetails = data;
@@ -157,7 +159,7 @@ export class LeaseDetailsComponent implements OnInit {
       }
     };
 
-    this.GetLeaseDetails(this.id);
+    // this.GetLeaseDetails(this.id);
 
     this.detailsForm = this.formBuilder.group({
       id: [0],
