@@ -129,11 +129,11 @@ export class LeaseEffects {
           })),
           tap( () => {
             // window.alert('done');
-            this.openSnackBar('Property lease added successfully.', '');
+            this.openSnackBar('Property lease added successfully.', 'close', 'notify');
            }), // display notificaiton
 
           catchError(error => {
-            this.openSnackBar(error.message, '');
+            this.openSnackBar(error.message, 'dismiss', 'error');
             return of(LeaseActions.addLeaseFailure(error.message));
             }
           )
@@ -157,11 +157,11 @@ export class LeaseEffects {
           })),
           tap( () => {
             // window.alert('done');
-            this.openSnackBar('Property lease updated successfully.', '');
+            this.openSnackBar('Property lease updated successfully.', 'close', 'notify');
            }), // display notificaiton
 
           catchError(error => {
-            this.openSnackBar(error.message, '');
+            this.openSnackBar(error.message, 'dismiss', 'error');
             return of(LeaseActions.updateLeaseFailure(error.message));
             }
           )
@@ -185,11 +185,11 @@ export class LeaseEffects {
           })),
           tap( () => {
             // window.alert('done');
-            this.openSnackBar('Tenant updated successfully.', '');
+            this.openSnackBar('Tenant updated successfully.', 'close', 'notify');
            }), // display notificaiton
 
           catchError(error => {
-            this.openSnackBar(error.message, '');
+            this.openSnackBar(error.message, 'dismiss', 'error');
             return of(LeaseActions.updateTenantFailure(error.message));
             }
           )
@@ -262,11 +262,11 @@ export class LeaseEffects {
           })),
           tap( () => {
             // window.alert('done');
-            this.openSnackBar('Vendor updated successfully.', '');
+            this.openSnackBar('Vendor updated successfully.', 'close', 'notify');
            }), // display notificaiton
 
           catchError(error => {
-            this.openSnackBar(error.message, '');
+            this.openSnackBar(error.message, 'dismiss', 'error');
             return of(LeaseActions.updatVendorsFailure(error.message));
             }
           )
@@ -339,11 +339,11 @@ export class LeaseEffects {
           })),
           tap( () => {
             // window.alert('done');
-            this.openSnackBar('Work order added successfully.', '');
+            this.openSnackBar('Work order added successfully.', 'close', 'notify');
            }), // display notificaiton
 
           catchError(error => {
-            this.openSnackBar(error.message, '');
+            this.openSnackBar(error.message, 'dismiss', 'error');
             return of(LeaseActions.addWorkOrderFailure(error.message));
             }
           )
@@ -367,11 +367,11 @@ export class LeaseEffects {
           })),
           tap( () => {
             // window.alert('done');
-            this.openSnackBar('Work order updated successfully.', '');
+            this.openSnackBar('Work order updated successfully.', 'close', 'notify');
            }), // display notificaiton
 
           catchError(error => {
-            this.openSnackBar(error.message, '');
+            this.openSnackBar(error.message, 'dismiss', 'error');
             return of(LeaseActions.updateLeaseFailure(error.message));
             }
           )
@@ -494,11 +494,11 @@ export class LeaseEffects {
           })),
           tap( () => {
             // window.alert('done');
-            this.openSnackBar('Rent payment added successfully.', '');
+            this.openSnackBar('Rent payment added successfully.', 'close', 'notify');
            }), // display notificaiton
 
           catchError(error => {
-            this.openSnackBar(error.message, '');
+            this.openSnackBar(error.message, 'dismiss', 'error');
             return of(LeaseActions.addLeaseFailure(error.message));
             }
           )
@@ -509,9 +509,9 @@ export class LeaseEffects {
   );
 
 
-  openSnackBar(message: string, action: string) {
+  openSnackBar(message: string, action: string, type: string) {
     const config = new MatSnackBarConfig();
-    config.panelClass = ['notify'];
+    config.panelClass = [type];
     config.duration = 3000;
     this.snackBar.open(message, action, config);
   }

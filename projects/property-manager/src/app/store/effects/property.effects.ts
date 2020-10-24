@@ -85,11 +85,11 @@ export class PropertyEffects {
           })),
           tap( () => {
             // window.alert('done');
-            this.openSnackBar('Property added successfully.', '&#10003;');
+            this.openSnackBar('Property added successfully.', 'close', 'notify');
            }), // display notificaiton
 
           catchError(error => {
-            this.openSnackBar(error.message, '');
+            this.openSnackBar(error.message, 'dismiss', 'error');
             return of(PropertyActions.addPropertyOwnerFailure(error.message));
             }
           )
@@ -114,11 +114,11 @@ export class PropertyEffects {
           })),
           tap( () => {
             // window.alert('done');
-            this.openSnackBar('Property updated successfully.', '');
+            this.openSnackBar('Property updated successfully.', 'close', 'notify');
            }), // display notificaiton
 
           catchError(error => {
-            this.openSnackBar(error.message, '');
+            this.openSnackBar(error.message, 'dismiss', 'error');
             return of(PropertyActions.updatePropertyFailure(error.message));
             }
           )
@@ -143,11 +143,11 @@ export class PropertyEffects {
           })),
           tap( () => {
             // window.alert('done');
-            this.openSnackBar('Property Status updated successfully.', '');
+            this.openSnackBar('Property Status updated successfully.', 'close', 'notify');
            }), // display notificaiton
 
           catchError(error => {
-            this.openSnackBar(error.message, '');
+            this.openSnackBar(error.message, 'dismiss', 'error');
             return of(PropertyActions.updatePropertyStatusFailure(error.message));
             }
           )
@@ -248,11 +248,11 @@ export class PropertyEffects {
           })),
           tap( () => {
             // window.alert('done');
-            this.openSnackBar('Owner Added successfully.', '');
+            this.openSnackBar('Owner Added successfully.', 'close', 'notify');
            }), // display notificaiton
 
           catchError(error => {
-            this.openSnackBar(error.message, '');
+            this.openSnackBar(error.message, 'dismiss', 'error');
             return of(PropertyActions.addPropertyOwnerFailure(error.message));
             }
           )
@@ -279,11 +279,11 @@ export class PropertyEffects {
 
           tap( () => {
             // window.alert('done');
-            this.openSnackBar('Owner updated successfully.', '');
+            this.openSnackBar('Owner updated successfully.', 'close', 'notify');
            }), // display notificaiton
 
           catchError(error => {
-            this.openSnackBar(error.message, '');
+            this.openSnackBar(error.message, 'dismiss', 'error');
             return of(PropertyActions.updatePropertyOwnerFailure(error.message));
             }
           )
@@ -408,7 +408,7 @@ export class PropertyEffects {
           })),
           tap( () => {
             // window.alert('done');
-            this.openSnackBar('Management contract updated successfully.', '');
+            this.openSnackBar('Management contract updated successfully.', 'close', 'notify');
            }), // display notificaiton
           // tap(res => {console.log('response: ' + res); }),
           // catchError(
@@ -419,7 +419,7 @@ export class PropertyEffects {
           // )
           // catchError(error => of(PropertyActions.updateContractFailure(error.message)))
           catchError(error => {
-            this.openSnackBar(error.message, '');
+            this.openSnackBar(error.message, 'dismiss', 'error');
             return of(PropertyActions.updateContractFailure(error.message));
           }
         )
@@ -427,9 +427,9 @@ export class PropertyEffects {
     )
   ));
 
-  openSnackBar(message: string, action: string) {
+  openSnackBar(message: string, action: string, type: string) {
     const config = new MatSnackBarConfig();
-    config.panelClass = ['notify'];
+    config.panelClass = [type];
     config.duration = 3000;
     this.snackBar.open(message, action, config);
   }

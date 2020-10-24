@@ -118,11 +118,11 @@ export class MarketingEffects {
           })),
           tap( () => {
             // window.alert('done');
-            this.openSnackBar('Property listing added successfully.', '');
+            this.openSnackBar('Property listing added successfully.', 'close', 'notify');
            }), // display notificaiton
 
           catchError(error => {
-            this.openSnackBar(error.message, '');
+            this.openSnackBar(error.message, 'dismiss', 'error');
             return of(ListingActions.addPropertyListingFailure(error.message));
             }
           )
@@ -146,11 +146,11 @@ export class MarketingEffects {
           })),
           tap( () => {
             // window.alert('done');
-            this.openSnackBar('Property listing updated successfully.', '');
+            this.openSnackBar('Property listing updated successfully.', 'close', 'notify');
            }), // display notificaiton
 
           catchError(error => {
-            this.openSnackBar(error.message, '');
+            this.openSnackBar(error.message, 'dismiss', 'error');
             return of(ListingActions.updatePropertyListingFailure(error.message));
             }
           )
@@ -294,7 +294,7 @@ export class MarketingEffects {
           })),
           tap( () => {
             // window.alert('done');
-            this.openSnackBar('Open house updated successfully.', '');
+            this.openSnackBar('Open house updated successfully.', 'close', 'notify');
            }), // display notificaiton
           // tap(res => {console.log('response: ' + res); }),
           // catchError(
@@ -302,7 +302,11 @@ export class MarketingEffects {
           //     return of('[Marketing] Update Property Listing Failure', err.error);
           //   } // EMPTY
           // )
-          catchError(error => of(ListingActions.updateOpenHouseToListingFailure(error.message)))
+          catchError((error) => {
+              this.openSnackBar(error.message, 'dismiss', 'error');
+              return of(ListingActions.updateOpenHouseToListingFailure(error.message));
+            }
+          )
         )
       )
     )
@@ -331,9 +335,9 @@ export class MarketingEffects {
     )
   );
 
-  openSnackBar(message: string, action: string) {
+  openSnackBar(message: string, action: string, type: string) {
     const config = new MatSnackBarConfig();
-    config.panelClass = ['notify'];
+    config.panelClass = [type];
     config.duration = 3000;
     this.snackBar.open(message, action, config);
   }
