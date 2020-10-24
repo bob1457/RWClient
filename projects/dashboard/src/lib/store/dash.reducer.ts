@@ -15,6 +15,9 @@ export const initialState: DashState =  { // adapter.getInitialState
   tenants: null,
   leases: null,
   applications: null,
+  workOrders: null,
+  openHouses: null,
+  rentPayments: null,
   errorMessage: null
 };
 
@@ -192,6 +195,48 @@ const dashReducer = createReducer(
       applications: null,
       errorMessage: 'Failed to load contract details'
     });
+  }),
+
+  /**
+   * Get all open houses
+   */
+
+
+  on(DashActions.getOpenHouseList, state => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+
+  on(DashActions.getOpenHouseListSuccess, (state, { payload }) => {
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      openHouses: payload
+    });
+  }),
+
+  /**
+   * Get all rent payment
+   */
+
+
+  on(DashActions.getRentPaymentList, state => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+
+  on(DashActions.getRentPaymentListSuccess, (state, { payload }) => {
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      rentPayments: payload
+    });
   })
 
 );
@@ -208,11 +253,13 @@ const AllContracts = (state: DashState) => state.contracts;
 const AllTenants = (state: DashState) => state.tenants;
 const AllRentals = (state: DashState) => state.leases;
 const AllOwners = (state: DashState) => state.owners;
+const AllOpenhouess = (state: DashState) => state.openHouses;
 
 const AllListings = (state: DashState) => state.listings;
 const AllRentalApps = (state: DashState) => state.applications;
 
 export const AllPropertyImgs = (state: DashState) => state.propertyImgList;
+export const AllRentPaymentHistory = (state: DashState) => state.rentPayments;
 
 // Select required slice of state
 export const getDashState = createFeatureSelector<DashState>('dashboard');
@@ -223,10 +270,12 @@ export const ContractList = createSelector(getDashState, AllContracts);
 export const TenantList = createSelector(getDashState, AllTenants);
 export const RentalList = createSelector(getDashState, AllRentals);
 export const OwnerList = createSelector(getDashState, AllOwners);
+export const OpenHouseList = createSelector(getDashState, AllOpenhouess);
 
 export const MarketingList = createSelector(getDashState, AllListings);
 export const RentalAppList = createSelector(getDashState, AllRentalApps);
 export const PropertyImgList = createSelector(getDashState, AllPropertyImgs);
+export const RentPaymentHistory = createSelector(getDashState, AllRentPaymentHistory);
 
 export const loadingStatus = createSelector(getDashState, loading);
 

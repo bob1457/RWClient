@@ -17,6 +17,9 @@ export interface DashState {
   tenants: any[];
   leases: any[];
   applications: RentalApplication[];
+  workOrders: any[];
+  openHouses: any[];
+  rentPayments: any[];
   errorMessage: string;
 }
 

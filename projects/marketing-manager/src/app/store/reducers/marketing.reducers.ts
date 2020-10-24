@@ -12,6 +12,7 @@ export const initialState: PropertyListingState =  { // adapter.getInitialState
   application: null,
   rentalproperties: null,
   propertyImgList: [],
+  openHouses: [],
   // owners: null,
   // ownersOfProperty: null,
   // selectedOwner: null,
@@ -245,6 +246,69 @@ const propertyListingReducer = createReducer(
       loaded: true,
       application: payload
     });
+  }),
+
+  /**
+   * Get all open houses
+   */
+
+
+  on(ListingActions.getOpenHouseList, state => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+
+  on(ListingActions.getOpenHouseListSuccess, (state, { payload }) => {
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      openHouses: payload
+    });
+  }),
+
+  /**
+   * Add open house to property listing
+   */
+  on(ListingActions.addOpenHouseToListing, state => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+  on(ListingActions.addOpenHouseToListingSuccess, (state, { payload }) => {
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      openHouses: [...state.openHouses, payload ]
+    });
+  }),
+
+
+  /**
+   * Update open house to property listing
+   */
+  on(ListingActions.updateOpenHouseToListing, state => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+  on(ListingActions.updateOpenHouseToistingSuccess, (state, { payload }) => {
+
+    const updatedOpenHouse = state.openHouses.map(
+      item => payload.id === item.id ? payload : item
+    );
+
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      openHouses: updatedOpenHouse
+    });
   })
 
 );
@@ -265,6 +329,7 @@ export const getPropertyApplications = (state: PropertyListingState) => state.ap
 export const getPropertyApplicationDetails = (state: PropertyListingState) => state.application;
 export const getAllRentalProperties = (state: PropertyListingState) => state.rentalproperties;
 export const getPropertyImgList = (state: PropertyListingState) => state.propertyImgList;
+export const getOpenHouse = (state: PropertyListingState) => state.openHouses;
 
 export const propertyListing = createSelector(selectPropertyListingState, getPropertyListing);
 export const propertyListingDetails = createSelector(selectPropertyListingState, getPropertyListingDetails);
@@ -272,6 +337,7 @@ export const propertyApplications = createSelector(selectPropertyListingState, g
 export const propertyApplicationDetails = createSelector(selectPropertyListingState, getPropertyApplicationDetails);
 export const allRentalProperties = createSelector(selectPropertyListingState, getAllRentalProperties);
 export const propertyImgList = createSelector(selectPropertyListingState, getPropertyImgList);
+export const openHouses = createSelector(selectPropertyListingState, getOpenHouse);
 
 export const loadingStatus = createSelector(selectPropertyListingState, getLoadingStatus);
 export const loadedStatus = createSelector(selectPropertyListingState, getLoadedStatus);

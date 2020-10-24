@@ -4,6 +4,9 @@ import { PropertyLease } from '../models/property-lease.model';
 import { PropertyTenant } from '../models/property-tenant.model';
 import { RentalProperty } from '../models/rental-property.model';
 import { NewTenant } from '../models/new-tenant.model';
+import { WorkOrder } from '../models/work-order.model';
+import { Vendor } from '../models/vendor.model';
+import { ServiceRequest } from '../models/service-request.model';
 
 @Injectable({
   providedIn: 'root'
@@ -57,6 +60,77 @@ export class LeaseService {
   updateTenant(tenant: PropertyTenant) {
     debugger;
     return this.http.post<PropertyTenant>(`${this.baseUrl}/lease/tenant/update`, tenant);
+  }
+
+  getAllWorkOrders() {
+    debugger;
+    return this.http.get<WorkOrder[]>(`${this.baseUrl}/workorder/all`);
+  }
+
+  getWorkOrderDetails(id: number) {
+    debugger;
+    return this.http.get<WorkOrder>(`${this.baseUrl}/WorkOrder/details/${id}`);
+  }
+
+  addWorkOrders(workorder: WorkOrder) {
+    debugger;
+    return this.http.post<WorkOrder>(`${this.baseUrl}/workorder/add`, workorder);
+  }
+
+  updateWorkOrder(workorder: WorkOrder) {
+    debugger;
+    return this.http.post<WorkOrder>(`${this.baseUrl}/workorder/update`, workorder);
+  }
+
+
+  getAllVendors() {
+    debugger;
+    return this.http.get<Vendor[]>(`${this.baseUrl}/workorder/vendor/all`);
+  }
+
+  getVendorDetails(id: number) {
+    debugger;
+    return this.http.get<Vendor>(`${this.baseUrl}/workorder/vendor/details/${id}`);
+  }
+
+  addVendor(vendor: Vendor) {
+    debugger;
+    return this.http.post<Vendor>(`${this.baseUrl}/workorder/vendor/add`, vendor);
+  }
+
+  updateVendor(vendor: Vendor) {
+    debugger;
+    return this.http.post<Vendor>(`${this.baseUrl}/workorder/vendor/update`, vendor);
+  }
+
+  getAllServiceRequests() {
+    debugger;
+    return this.http.get<ServiceRequest[]>(`${this.baseUrl}/workorder/ServiceRequest/all`);
+  }
+
+  getDetails(id: number) {
+    debugger;
+    return this.http.get<ServiceRequest>(`${this.baseUrl}/workorder/ServiceRequest/details/${id}`);
+  }
+
+  addServiceRequest(request: ServiceRequest) {
+    debugger;
+    return this.http.post<ServiceRequest>(`${this.baseUrl}/workorder/request/add`, request);
+  }
+
+  getRentPaymentList() {
+    debugger;
+    return this.http.get<any[]>(`${this.baseUrl}/rentpayment/renthistory`);
+  }
+
+  getRentPaymentDetails(id: number) {
+    debugger;
+    return this.http.get<any>(`${this.baseUrl}/rentpayment/details/${id}`);
+  }
+
+  addRentPayment(data: any) {
+    debugger;
+    return this.http.post<any>(`${this.baseUrl}/rentalpayment/rent/add`, data );
   }
 
 

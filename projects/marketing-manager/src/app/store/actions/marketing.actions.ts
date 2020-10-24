@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { PropertyListing, PropertyImg } from '@lib/app-core';
+import { PropertyListing, PropertyImg, OpenHouse} from '@lib/app-core';
 import { RentalApplication } from 'projects/app-core/src/public-api';
 
 
@@ -201,6 +201,72 @@ export const updatePropertyListingStatusSuccess = createAction(
   '[Marketing] Update Property Listing Status Success',
   props<{payload: PropertyListing}>()
 );
+
+
+/**
+ * Get all open houses Actions
+ */
+export const getOpenHouseList = createAction(
+  '[Marketing] Get OpenHouse List'
+);
+
+export const getOpenHouseListSuccess = createAction(
+  '[Marketing] Get OpenHouse List Success',
+  props<{payload: OpenHouse[]}>()
+);
+
+export const getOpenHouseListFailure = createAction(
+  '[Marketing] Get OpenHouse List Failure',
+  // props<{payload: any}>()
+  (errorMessage = 'Error loading open house list') => {
+    return ({ payload: { errorMessage } });
+  }
+);
+
+
+/**
+ * Add Open House toy Listing Actions
+ */
+
+export const addOpenHouseToListing = createAction(
+  '[Marketing] Add Open House to Listing',
+  props<{payload: OpenHouse}>()
+);
+
+export const addOpenHouseToListingSuccess = createAction(
+  '[Marketing] Add Open House to Listing Success',
+  props<{payload: OpenHouse}>()
+);
+
+export const addOpenHouseToListinggFailure = createAction(
+  '[Property] Add Open House to Listing Failure',
+  // props<{payload: any}>()
+  (errorMessage = 'Error adding open house to the listing') => ({ payload: { errorMessage }})
+
+);
+
+/**
+ * Update Open House to Property Listing Actions
+ */
+
+export const updateOpenHouseToListing = createAction(
+  '[Marketing] Update Open House to Listing',
+  props<{payload: OpenHouse}>()
+);
+
+export const updateOpenHouseToistingSuccess = createAction(
+  '[Marketing] Update  Open House to Listing Success',
+  props<{payload: OpenHouse}>()
+);
+
+export const updateOpenHouseToListingFailure = createAction(
+  '[Marketing] Update  Open House to Listing Failure',
+  // props<{payload: any}>()
+  (errorMessage = 'Error updating open house') => ({ payload: { errorMessage }})
+
+);
+
+
 
 export const updatePropertyListingStatusFailure = createAction(
   '[Property] Update Property Listing Status Failure',

@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 import { Action, Store } from '@ngrx/store';
 import { Router } from '@angular/router';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { Observable } from 'rxjs';
+import { EMPTY, Observable } from 'rxjs';
 
 import * as AuthActions from './auth.actions';
 // import * as RouterActions from './router.actions';
@@ -26,11 +26,13 @@ import {
   AuthActionTypes,
   LogIn, LogInSuccess, LogInFailure,
   SignUp, SignUpSuccess, SignUpFailure,
-  LogOut,
+  LogOut, UpdateAvatarSuccess
 } from './auth.actions';
 import { Authentication } from './authentication';
 import { HttpErrorResponse } from '@angular/common/http';
 import { AuthState } from './auth.state';
+import { ProfileService } from '../services/profile.service';
+
 
 
 
@@ -40,6 +42,7 @@ export class AuthEffects {
   constructor(
     private actions: Actions,
     private authService: AuthService,
+    private profileService: ProfileService,
     private store: Store<AuthState>,
     private router: Router
   ) {}
@@ -101,6 +104,29 @@ export class AuthEffects {
   //       });
   //   });
 
+  @Effect()
+  updateProfile: Observable<any> = this.actions
+  .pipe(ofType(AuthActionTypes.UPDATE_PROFILE),
+    map((action: AuthActions.UpdateProfile) => action.payload),
+    switchMap(payload => {
+      return this.profileService.updateProfile(payload).pipe(
+        tap(() => { console.log('getting here to update user profile'); } ),
+        map((user) => {
+          return new AuthActions.UpdateProfileSuccess({user});
+        }),
+        catchError((error) => {
+          return EMPTY;
+        }));
+    }));
+
+    @Effect({ dispatch: false })
+  UpdateProfileSuccess = this.actions.pipe(
+    ofType(AuthActionTypes.UPDATE_PROFILE_SUCCESS),
+    map((action: AuthActions.UpdateProfileSuccess) => action.payload)// ,
+    // tap(() => this.router.navigate(['./Manage'])
+  // )
+  );
+
 /*
   @Effect({ dispatch: false })
   LogInSuccess: Observable<any> = this.actions.pipe(
@@ -113,6 +139,7 @@ export class AuthEffects {
       this.router.navigateByUrl('/profile');
     })
   );
+
 
   @Effect({ dispatch: false })
   LogInFailure: Observable<any> = this.actions.pipe(

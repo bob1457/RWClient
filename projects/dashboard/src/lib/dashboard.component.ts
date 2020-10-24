@@ -5,12 +5,13 @@ import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Property } from './models/property.model';
 import { Store, select } from '@ngrx/store';
-import { PropertyList, ContractList, TenantList, RentalList, OwnerList, MarketingList, RentalAppList } from './store/dash.reducer';
+import { PropertyList, ContractList, TenantList, RentalList, OwnerList, MarketingList, RentalAppList, OpenHouseList, RentPaymentHistory } from './store/dash.reducer';
 // tslint:disable-next-line:max-line-length
-import { getPropertyList, getAllLeases, getAllTenants, getContractList, getPropertyOwnerList, getRentalApplicationList, getPropertyImageList } from './store/dash.actions';
+import { getPropertyList, getAllLeases, getAllTenants, getContractList, getPropertyOwnerList, getRentalApplicationList, getPropertyImageList, getOpenHouseList, getRentPaymentList } from './store/dash.actions';
 import { PropertyService, ManagementContract, PropertyTenant, PropertyLease, RentalApplication } from '@lib/app-core';
 import { PropertyOwner } from './models/property-owner.model';
 import { PropertyListing } from './models/property-listing.model';
+import { OpenHouse } from './models/openhouse.model';
 
 
 @Component({
@@ -31,6 +32,8 @@ export class DashboardComponent implements OnInit {
   ownerList$: Observable<PropertyOwner[]>;
   marketingList$: Observable<PropertyListing[]>;
   rentalAppList$: Observable<RentalApplication[]>;
+  openHouseList$: Observable<OpenHouse[]>;
+  rentPaymentList$: Observable<any>;
 
   loading: boolean;
 
@@ -44,6 +47,8 @@ export class DashboardComponent implements OnInit {
                 this.ownerList$ = this.store.select(OwnerList);
                 this.marketingList$ = this.store.select(MarketingList);
                 this.rentalAppList$ = this.store.select(RentalAppList);
+                this.openHouseList$ = this.store.select(OpenHouseList);
+                this.rentPaymentList$ = this.store.select(RentPaymentHistory);
               }
 
   ngOnInit() {
@@ -60,6 +65,9 @@ export class DashboardComponent implements OnInit {
     this.store.dispatch(getRentalApplicationList());
 
     this.store.dispatch(getPropertyImageList());
+
+    this.store.dispatch(getOpenHouseList());
+    this.store.dispatch(getRentPaymentList());
 
     // this.getAllPropertyList();
   }

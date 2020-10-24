@@ -54,6 +54,9 @@ export class ScreeningComponent implements OnInit {
   }
 
 
+  cancel() {
+    this.goBack();
+  }
   goBack() {
     this.router.navigate(['/Manage/marketing/screeninglist']);
   }

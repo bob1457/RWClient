@@ -5,8 +5,8 @@ import { PropertyListingState } from '../store/marketing.state';
 import { Store, select } from '@ngrx/store';
 import { Location } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
-import { getPropertyListingDetails, updatePropertyListing, uploadPropertyImage } from '../store/actions/marketing.actions';
-import { propertyListingDetails, loadingStatus, propertyImgList, loadedStatus } from '../store/reducers';
+import { getPropertyListingDetails, updatePropertyListing, uploadPropertyImage, addOpenHouseToListing, updateOpenHouseToListingFailure, updateOpenHouseToListing } from '../store/actions/marketing.actions';
+import { propertyListingDetails, loadingStatus, propertyImgList, loadedStatus, openHouses } from '../store/reducers';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -26,15 +26,21 @@ export class ListingDetailsComponent implements OnInit {
   imgList: any[] = [];
 
   iconImg: any;
+  addOpenHouse = false;
+  openhouse: any;
+  // ohList: any[] = [];
 
   detailsForm: FormGroup;
   propertyForm: FormGroup;
+  addForm: FormGroup;
+  ohForm: FormGroup;
 
   constructor(private store: Store<PropertyListingState>,
               private router: Router,
               private actRoute: ActivatedRoute,
               private location: Location,
               private formBuilder: FormBuilder,
+              private marketingService: MarketingService,
               private propertyService: MarketingService) {
                 this.id = this.actRoute.snapshot.params.id;
                 console.log(this.id);
@@ -43,9 +49,29 @@ export class ListingDetailsComponent implements OnInit {
                       this.listing = data;
                       // localStorage.setItem('listing', JSON.stringify(this.listing));
                       if (this.listing) {
-                        this.imgList = this.listing.rentalProperty.propertyImg;
-                        this.iconImg = this.imgList.filter((value, index) => index === 0);
+                        this.store.select(propertyImgList)
+                            .subscribe(imgs => {
+                              this.imgList = imgs;
+
+                              // this.imgList = this.listing.rentalProperty.propertyImg;
+                              // this.imgList = imgs.filter(i => i.rentalPropertyId == this.listing.rentalProperty.Id);
+                              this.iconImg = this.imgList.filter((value, index) => index === 0);
+
+                            });
+
+
+                        this.store.select(openHouses) // need review for how to implement open house
+                          .subscribe(oh => {
+                            if (oh) {
+                              this.openhouse = oh.filter(p => p.rentalPropertyId == this.listing.rentalProperty.id);
+                              console.log('rentalpId', this.listing.rentalProperty.id);
+                              console.log('oh', this.openhouse);
+                            }
+                            // this.openhouse = oh;this.listing.rentalProperty.id
+                          });
                       }
+
+
 
                       console.log('imglist', this.imgList);
                       console.log('iconimg', this.iconImg);
@@ -53,15 +79,26 @@ export class ListingDetailsComponent implements OnInit {
 
                 });
 
-                this.store.pipe(select(propertyImgList))
-                .subscribe(img => {
-                  if (img != null) {
-                    // this.imgList = img; // .filter(p => p.rentalPropeprtyId === this.listing.rentalPropertyId);
-                    // this.iconImg = this.imgList.filter((value, index) => index === 0);
-                    // console.log('iconimg', this.iconImg);
-                    // console.log('imglist', this.imgList);
-                  }
-                });
+
+                // this.store.pipe(select(propertyImgList))
+                // .subscribe(img => {
+                //   if (img != null) {
+                //     // this.imgList = img; // .filter(p => p.rentalPropeprtyId === this.listing.rentalPropertyId);
+                //     // this.iconImg = this.imgList.filter((value, index) => index === 0);
+                //     // console.log('iconimg', this.iconImg);
+                //     // console.log('imglist', this.imgList);
+                //   }
+                // });
+
+                // this.store.select(openHouses)
+                //     .subscribe(oh => {
+                //       if (oh) {
+                //         this.openhouse = oh.filter(p => p.rentalPropertyId == 1);
+                //         console.log('rentalpId', this.listing.rentalProperty.id);
+                //         console.log('oh', this.openhouse);
+                //       }
+                //       // this.openhouse = oh;this.listing.rentalProperty.id
+                //     });
                }
 
   ngOnInit() {
@@ -121,6 +158,26 @@ export class ListingDetailsComponent implements OnInit {
       id: [],
       isActive: ['']
     });
+
+    this.addForm = this.formBuilder.group({
+      rentalPropertyId: [],
+      openhouseDate: [''],
+      isActive: [true],
+      startTime: [''],
+      endTime: [''],
+      notes: ['']
+    });
+
+    this.ohForm = this.formBuilder.group({
+      id: [],
+      rentalPropertyId: [],
+      openhouseDate: [''],
+      isActive: [true],
+      startTime: [''],
+      endTime: [''],
+      notes: ['']
+    });
+
   }
 
   GetPropertyListingDetails(id: any) {
@@ -170,6 +227,16 @@ export class ListingDetailsComponent implements OnInit {
     // this.store.dispatch(updatePropertyListingStatus(payload:))
   }
 
+  updateOpenHouse() {
+    debugger;
+    this.ohForm.patchValue({
+      id: this.openhouse[0].id,
+      rentalPropertyId: this.openhouse[0].rentalPropertyId
+    });
+    console.log('update open house form', this.ohForm.value);
+    this.store.dispatch(updateOpenHouseToListing({payload: this.ohForm.value}));
+  }
+
   submit() {
     debugger;
     if (!this.editContact) {
@@ -186,6 +253,8 @@ export class ListingDetailsComponent implements OnInit {
 
     this.store.dispatch(updatePropertyListing({payload: this.detailsForm.value}));
 
+    this.editContact = false;
+
     // this.store.pipe(select(propertyImgList))
     //             .subscribe(img => {
     //               if (img == null) {
@@ -194,6 +263,27 @@ export class ListingDetailsComponent implements OnInit {
     //               this.imgList = img; // .filter(p => p.rentalPropertyId === this.listing.rentalPropertyId)
     //             });
 
+  }
+
+  // Not implemented here, instead, in Open House list section
+  AddOpenHouse() {
+    debugger;
+    this.addForm.get('rentalPropertyId').setValue(this.listing.rentalProperty.id);
+    console.log('oh', this.addForm.value);
+    // this.marketingService.addOpenHouse(this.addForm.value)
+    //                      .subscribe(data => {
+    //                        console.log('new oh', data);
+    //                       //  this.listing.rentalProperty.openHouse = [''];
+    //                        console.log('ops-b', this.listing.rentalProperty.openHouse);
+    //                        this.listing.rentalProperty.openHouse.push(data);
+    //                        console.log('ops-a', this.listing.rentalProperty.openHouse);
+    //                      });
+    this.store.dispatch(addOpenHouseToListing({payload: this.addForm.value}));
+    this.addOpenHouse = false;
+    // this.store.select(openHouses)
+    //     .subscribe(data => {
+    //       this.openhouse = data;
+    //     });
   }
 
   updateStatus() {
@@ -231,5 +321,15 @@ export class ListingDetailsComponent implements OnInit {
   //     console.log(data);
   //   });
   // }
+
+  AddOH() {
+    this.addOpenHouse = !this.addOpenHouse;
+    // this.router.navigate(['/Manage/marketing/openhouseson']);
+  }
+
+
+  clear() {
+    this.addForm.reset();
+  }
 
 }

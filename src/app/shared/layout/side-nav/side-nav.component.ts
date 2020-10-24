@@ -16,7 +16,7 @@ import { getUserInfo, User } from '@lib/auth';
 
 import * as sparkmd5 from 'spark-md5';
 
-import { PropertyList, ContractList, TenantList, RentalList, OwnerList, MarketingList, RentalAppList } from '@lib/dashboard';
+import { PropertyList, ContractList, TenantList, RentalList, OwnerList, MarketingList, RentalAppList, OpenHouseList } from '@lib/dashboard';
 // import { StateService } from '@lib/auth';
 import { StateService } from 'projects/auth/src/public-api';
 
@@ -66,6 +66,7 @@ export class SideNavComponent implements OnInit {
   applicatons: any[] = [];
   propertyLisitng: any[] = [];
   rentalList: any[] = [];
+  openHouses: any[] = [];
 
   mode = 'side';
   opened = true;
@@ -179,6 +180,10 @@ export class SideNavComponent implements OnInit {
     this.store.pipe(select(RentalAppList)).subscribe(data => {
         this.applicatons = data;
       });
+
+    this.store.select(OpenHouseList).subscribe(data => {
+      this.openHouses = data;
+    })
 
     // select single state then use async pipe in template for sub/unsub using *ngIf which returns a boolean value // console.log(userData);
     // this.avatar$ = this.store.select(ustate => ustate.user.avatarUrl);

@@ -1,15 +1,17 @@
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { MarketingService, PropertyListing, RentalApplication, PropertyImg } from '@lib/app-core';
+import { MarketingService, PropertyListing, RentalApplication, PropertyImg, OpenHouse } from '@lib/app-core';
 import { Injectable } from '@angular/core';
 
 import * as ListingActions from '../actions/marketing.actions';
 import { switchMap, map, catchError, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material';
 
 @Injectable()
 export class MarketingEffects {
   constructor(
     private actions$: Actions,
+    private snackBar: MatSnackBar,
     private marketingService: MarketingService
   ) {}
 
@@ -114,13 +116,17 @@ export class MarketingEffects {
             type: '[Marketing] Add Property Listing Success',
             payload: listing
           })),
-          // tap(res => {console.log('response: ' + res); }),
-          // catchError(
-          //   err => {
-          //     return of('[Marketing] Add Property Listing Failure', err.error);
-          //   } // EMPTY
-          // )
-          catchError(error => of(ListingActions.addPropertyListingFailure(error.message)))
+          tap( () => {
+            // window.alert('done');
+            this.openSnackBar('Property listing added successfully.', 'close', 'notify');
+           }), // display notificaiton
+
+          catchError(error => {
+            this.openSnackBar(error.message, 'dismiss', 'error');
+            return of(ListingActions.addPropertyListingFailure(error.message));
+            }
+          )
+          // catchError(error => of(ListingActions.addPropertyListingFailure(error.message)))
         )
       )
     )
@@ -138,13 +144,17 @@ export class MarketingEffects {
             type: '[Marketing] Update Property Listing Success',
             payload: listing
           })),
-          // tap(res => {console.log('response: ' + res); }),
-          // catchError(
-          //   err => {
-          //     return of('[Marketing] Update Property Listing Failure', err.error);
-          //   } // EMPTY
-          // )
-          catchError(error => of(ListingActions.updatePropertyListingStatusFailure(error.message)))
+          tap( () => {
+            // window.alert('done');
+            this.openSnackBar('Property listing updated successfully.', 'close', 'notify');
+           }), // display notificaiton
+
+          catchError(error => {
+            this.openSnackBar(error.message, 'dismiss', 'error');
+            return of(ListingActions.updatePropertyListingFailure(error.message));
+            }
+          )
+          // catchError(error => of(ListingActions.updatePropertyListingStatusFailure(error.message)))
         )
       )
     )
@@ -246,5 +256,90 @@ export class MarketingEffects {
     )
   );
 
+  addOpenHouseToListing$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(ListingActions.addOpenHouseToListing),
+      tap(() => console.log('got here to add open house to listing !!!')),
+      map(action => action.payload),
+      switchMap((payload) =>
+        this.marketingService.addOpenHouse(payload).pipe(
+          map((openhouse: OpenHouse) => ({
+            type: '[Marketing] Add Open House to Listing Success',
+            payload: openhouse
+          })),
+          // tap(res => {console.log('response: ' + res); }),
+          // catchError(
+          //   err => {
+          //     return of('[Marketing] Add Property Listing Failure', err.error);
+          //   } // EMPTY
+          // )
+          catchError(error => of(ListingActions.addOpenHouseToListinggFailure(error.message)))
+        )
+      )
+    )
+  );
+
+  updateOpenHouseToListing$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(ListingActions.updateOpenHouseToListing),
+      tap(() => console.log('got here to update open house!!!')),
+      map(action => action.payload),
+      switchMap((payload) =>
+        this.marketingService.updateOpenHouse(payload).pipe(
+          map((openhouse: OpenHouse) => ({
+            type: '[Marketing] Update  Open House to Listing Success',
+            payload: openhouse
+          })),
+          tap( () => {
+            // window.alert('done');
+            this.openSnackBar('Open house updated successfully.', 'close', 'notify');
+           }), // display notificaiton
+          // tap(res => {console.log('response: ' + res); }),
+          // catchError(
+          //   err => {
+          //     return of('[Marketing] Update Property Listing Failure', err.error);
+          //   } // EMPTY
+          // )
+          catchError((error) => {
+              this.openSnackBar(error.message, 'dismiss', 'error');
+              return of(ListingActions.updateOpenHouseToListingFailure(error.message));
+            }
+          )
+        )
+      )
+    )
+  );
+
+  getOpenHouseList$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(ListingActions.getOpenHouseList),
+      tap(() => console.log('got here for open house list!!!')),
+      switchMap(() =>
+        this.marketingService.getOpenHouseList().pipe(
+          map((openhouses: OpenHouse[]) => ({
+            type: '[Marketing] Get OpenHouse List Success',
+            payload: openhouses
+          })),
+          // tap(res => {console.log('response: ' + res); }),
+          // catchError(
+          //   err => {
+          //     return of('[Marketing] Get Rental Applications Failure', err.error);
+          //   } // EMPTY
+          // )
+          catchError(error => of(ListingActions.getOpenHouseListFailure(error.message)))
+        )
+      )
+    )
+  );
+
+  openSnackBar(message: string, action: string, type: string) {
+    const config = new MatSnackBarConfig();
+    config.panelClass = [type];
+    config.duration = 3000;
+    this.snackBar.open(message, action, config);
+  }
 
 }

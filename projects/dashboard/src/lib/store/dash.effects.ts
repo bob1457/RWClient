@@ -9,7 +9,7 @@ import { switchMap, map, tap, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { PropertyOwner } from '../models/property-owner.model';
 import { PropertyLease } from '../models/property-lease.model';
-import { PropertyTenant, RentalApplication } from '@lib/app-core';
+import { PropertyTenant, RentalApplication, OpenHouse } from '@lib/app-core';
 import { PropertyListing } from '../models/property-listing.model';
 import { PropertyImg } from '../models/property-img';
 
@@ -202,6 +202,52 @@ export class DashboardEffects {
               )
             )
           )
+  );
+
+  getOpenHouseList$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(DashActions.getOpenHouseList),
+      tap(() => console.log('got here for open house list!!!')),
+      switchMap(() =>
+        this.dashService.getOpenHouseList().pipe(
+          map((openhouses: OpenHouse[]) => ({
+            type: '[Marketing] Get OpenHouse List Success',
+            payload: openhouses
+          })),
+          // tap(res => {console.log('response: ' + res); }),
+          // catchError(
+          //   err => {
+          //     return of('[Marketing] Get Rental Applications Failure', err.error);
+          //   } // EMPTY
+          // )
+          catchError(error => of(DashActions.getOpenHouseListFailure(error.message)))
+        )
+      )
+    )
+  );
+
+  getRentPaymentList$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(DashActions.getRentPaymentList),
+      tap(() => console.log('got here for rent payment list!!!')),
+      switchMap(() =>
+        this.dashService.getRentPaymentList().pipe(
+          map((payments: any[]) => ({
+            type: '[Lease] Get Rent Payment List Success',
+            payload: payments
+          })),
+          // tap(res => {console.log('response: ' + res); }),
+          // catchError(
+          //   err => {
+          //     return of('[Marketing] Get Rental Applications Failure', err.error);
+          //   } // EMPTY
+          // )
+          catchError(error => of(DashActions.getRentPaymentListFailure(error.message)))
+        )
+      )
+    )
   );
 
 

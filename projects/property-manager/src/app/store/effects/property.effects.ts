@@ -7,6 +7,7 @@ import { EMPTY, of } from 'rxjs';
 
 import * as PropertyActions from '../actions/property.actions';
 import { PropertyActive } from 'projects/app-core/src/lib/property/models/property-active.model';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material';
 
 
 
@@ -16,6 +17,7 @@ export class PropertyEffects {
   constructor(
     private actions$: Actions,
     private propertyService: PropertyService,
+    private snackBar: MatSnackBar,
     private propertyOwnerService: PropertyOwnerService,
     private contractService: ManagementContractService
   ) {}
@@ -81,13 +83,17 @@ export class PropertyEffects {
             type: '[Property] Add Property Success',
             payload: property
           })),
-          // tap(res => {console.log('response: ' + res); }),
-          // catchError(
-          //   err => {
-          //     return of('[Property] Add Property Failure', err.error);
-          //   } // EMPTY
-          // )
-          catchError(error => of(PropertyActions.addPropertyFailure(error.message)))
+          tap( () => {
+            // window.alert('done');
+            this.openSnackBar('Property added successfully.', 'close', 'notify');
+           }), // display notificaiton
+
+          catchError(error => {
+            this.openSnackBar(error.message, 'dismiss', 'error');
+            return of(PropertyActions.addPropertyOwnerFailure(error.message));
+            }
+          )
+          // catchError(error => of(PropertyActions.addPropertyFailure(error.message)))
         )
       )
     )
@@ -106,13 +112,17 @@ export class PropertyEffects {
             type: '[Property] Update Property Success',
             payload: property
           })),
-          // tap(res => {console.log('response: ' + res); }),
-          // catchError(
-          //   err => {
-          //     return of('[Property] Update Property Failure', err.error);
-          //   } // EMPTY
-          // )
-          catchError(error => of(PropertyActions.updatePropertyStatusFailure(error.message)))
+          tap( () => {
+            // window.alert('done');
+            this.openSnackBar('Property updated successfully.', 'close', 'notify');
+           }), // display notificaiton
+
+          catchError(error => {
+            this.openSnackBar(error.message, 'dismiss', 'error');
+            return of(PropertyActions.updatePropertyFailure(error.message));
+            }
+          )
+          // catchError(error => of(PropertyActions.updatePropertyStatusFailure(error.message)))
         )
       )
     )
@@ -131,13 +141,17 @@ export class PropertyEffects {
             type: '[Property] Update Property Status Success',
             payload: status
           })),
-          // tap(res => {console.log('response: ' + res); }),
-          // catchError(
-          //   err => {
-          //     return of('[Property] Update Property Status Failure', err.error);
-          //   } // EMPTY
-          // )
-          catchError(error => of(PropertyActions.updatePropertyStatusFailure(error.message)))
+          tap( () => {
+            // window.alert('done');
+            this.openSnackBar('Property Status updated successfully.', 'close', 'notify');
+           }), // display notificaiton
+
+          catchError(error => {
+            this.openSnackBar(error.message, 'dismiss', 'error');
+            return of(PropertyActions.updatePropertyStatusFailure(error.message));
+            }
+          )
+          // catchError(error => of(PropertyActions.updatePropertyStatusFailure(error.message)))
         )
       )
     )
@@ -232,13 +246,17 @@ export class PropertyEffects {
             type: '[Property] Add Property Owner Success',
             payload: owner
           })),
-          // tap(res => {console.log('response: ' + res); }),
-          // catchError(
-          //   err => {
-          //     return of('[Property] Add Property Owner Failure', err.error);
-          //   } // EMPTY
-          // )
-          catchError(error => of(PropertyActions.addPropertyOwnerFailure(error.message)))
+          tap( () => {
+            // window.alert('done');
+            this.openSnackBar('Owner Added successfully.', 'close', 'notify');
+           }), // display notificaiton
+
+          catchError(error => {
+            this.openSnackBar(error.message, 'dismiss', 'error');
+            return of(PropertyActions.addPropertyOwnerFailure(error.message));
+            }
+          )
+          // catchError(error => of(PropertyActions.addPropertyOwnerFailure(error.message)))
         )
       )
     )
@@ -258,12 +276,19 @@ export class PropertyEffects {
             payload: owner
           })),
           // tap(res => {console.log('response: ' + res); }),
-          // catchError(
-          //   err => {
-          //     return of('[Property] Update Property Failure', err.error);
-          //   } // EMPTY
-          // )
-          catchError(error => of(PropertyActions.updatePropertyOwnerSuccess(error.message)))
+
+          tap( () => {
+            // window.alert('done');
+            this.openSnackBar('Owner updated successfully.', 'close', 'notify');
+           }), // display notificaiton
+
+          catchError(error => {
+            this.openSnackBar(error.message, 'dismiss', 'error');
+            return of(PropertyActions.updatePropertyOwnerFailure(error.message));
+            }
+          )
+          // catchError(error => of(PropertyActions.updatePropertyOwnerSuccess(error.message)))
+
         )
       )
     )
@@ -381,16 +406,32 @@ export class PropertyEffects {
             type: '[Property] Update Contract Success',
             payload: contract
           })),
+          tap( () => {
+            // window.alert('done');
+            this.openSnackBar('Management contract updated successfully.', 'close', 'notify');
+           }), // display notificaiton
           // tap(res => {console.log('response: ' + res); }),
           // catchError(
           //   err => {
-          //     return of('[Property] Update Contract Failure', err.error);
+          //     this.openSnackBar(err.message, '');
+          //     return of(PropertyActions.updateContractFailure(err.message));
           //   } // EMPTY
           // )
-          catchError(error => of(PropertyActions.updateContractFailure(error.message)))
+          // catchError(error => of(PropertyActions.updateContractFailure(error.message)))
+          catchError(error => {
+            this.openSnackBar(error.message, 'dismiss', 'error');
+            return of(PropertyActions.updateContractFailure(error.message));
+          }
         )
       )
     )
-  );
+  ));
+
+  openSnackBar(message: string, action: string, type: string) {
+    const config = new MatSnackBarConfig();
+    config.panelClass = [type];
+    config.duration = 3000;
+    this.snackBar.open(message, action, config);
+  }
 
 }

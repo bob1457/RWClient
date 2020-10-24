@@ -161,7 +161,7 @@
                                 <mat-icon style="color: rgb(129, 43, 86);" [routerLink]="['/Manage/lease']" [routerLinkActive]="['active']" matListIcon>vertical_split</mat-icon>
                                 <a matLine [routerLink]="['/Manage/lease']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }">All Leases</a>
                                 <mat-chip *ngIf="rentalList" title="{{rentalList.length}}" style="background-color: rgb(17, 92, 55);
-                                  color: rgb(228, 241, 33);
+                                  color: rgb(211, 151, 23);
                                   padding-right: 7px;
                                   padding-left:7px;
                                   /* border-radius: 50%; */
@@ -175,7 +175,7 @@
                             </mat-list-item>
 
                             <mat-list-item>
-                                <mat-icon style="color: rgb(189, 219, 20);" [routerLink]="['/Manage/lease/tenants']" [routerLinkActive]="['active']" matListIcon>people</mat-icon>
+                                <mat-icon style="color: rgb(136, 35, 111);" [routerLink]="['/Manage/lease/tenants']" [routerLinkActive]="['active']" matListIcon>people</mat-icon>
                                 <a matLine [routerLink]="['/Manage/lease/tenants']" [routerLinkActive]="['active']">Tenants</a>
                                 <mat-chip *ngIf="tenant" title="{{tenant.length}}" style="background-color: rgb(92, 17, 29);
                                   color: rgb(215, 219, 207);
@@ -188,6 +188,54 @@
                                 <!-- <button mat-icon-button (click)="showInfo(link)"> -->
                                 <!--<mat-icon>info</mat-icon>
                                 </button>-->
+                            </mat-list-item>
+
+                            <mat-list-item>
+                                <mat-icon style="color: rgb(33, 20, 219);" [routerLink]="['/Manage/lease/workorders']" [routerLinkActive]="['active']" matListIcon>assistant</mat-icon>
+                                <a matLine [routerLink]="['/Manage/lease/workorders']" [routerLinkActive]="['active']">Work Orders</a>
+                                <mat-chip *ngIf="tenant" title="{{tenant.length}}" style="background-color: rgb(79, 13, 141);
+                                color: rgb(215, 219, 207);
+                                padding-right: 7px;
+                                padding-left:7px;
+                                /* border-radius: 50%; */
+                                border: 0 transparent;
+                                font-size: 12px;">{{tenant.length}}
+                                </mat-chip>
+                                <!-- <button mat-icon-button (click)="showInfo(link)"> -->
+                                <!--<mat-icon>info</mat-icon>
+                              </button>-->
+                            </mat-list-item>
+
+                            <mat-list-item>
+                                <mat-icon style="color: rgb(189, 219, 20);" [routerLink]="['/Manage/lease/vendors']" [routerLinkActive]="['active']" matListIcon>support</mat-icon>
+                                <a matLine [routerLink]="['/Manage/lease/vendors']" [routerLinkActive]="['active']">Vendors</a>
+                                <mat-chip *ngIf="tenant" title="{{tenant.length}}" style="background-color: rgb(36, 209, 59);
+                              color: rgb(215, 219, 207);
+                              padding-right: 7px;
+                              padding-left:7px;
+                              /* border-radius: 50%; */
+                              border: 0 transparent;
+                              font-size: 12px;">{{tenant.length}}
+                                </mat-chip>
+                                <!-- <button mat-icon-button (click)="showInfo(link)"> -->
+                                <!--<mat-icon>info</mat-icon>
+                            </button>-->
+                            </mat-list-item>
+
+                            <mat-list-item>
+                                <mat-icon style="color: rgb(219, 20, 63);" [routerLink]="['/Manage/lease/servicerequests']" [routerLinkActive]="['active']" matListIcon>sms</mat-icon>
+                                <a matLine [routerLink]="['/Manage/lease/servicerequests']" [routerLinkActive]="['active']">Service Requests</a>
+                                <mat-chip *ngIf="tenant" title="{{tenant.length}}" style="background-color: rgb(162, 207, 39);
+                            color: rgb(215, 219, 207);
+                            padding-right: 7px;
+                            padding-left:7px;
+                            /* border-radius: 50%; */
+                            border: 0 transparent;
+                            font-size: 12px;">{{tenant.length}}
+                                </mat-chip>
+                                <!-- <button mat-icon-button (click)="showInfo(link)"> -->
+                                <!--<mat-icon>info</mat-icon>
+                          </button>-->
                             </mat-list-item>
 
                         </mat-list>
@@ -241,6 +289,22 @@
                                 </mat-chip>
                                 <!-- <button mat-icon-button (click)="showInfo(link)"></button> -->
                             </mat-list-item>
+
+                            <mat-list-item>
+                                <!---->
+                                <mat-icon style="color: rgb(72, 173, 219)" [routerLink]="['/Manage/marketing']" [routerLinkActive]="['active']" matListIcon>published_with_changes</mat-icon>
+                                <a matLine [routerLink]="['/Manage/marketing/openhouses']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }">Open Houses</a>
+                                <mat-chip *ngIf="openHouses" title="{{openHouses.length}}" style="background-color: rgb(16, 129, 63);
+                                color: rgb(195, 214, 26);
+                                padding-right: 7px;
+                                padding-left:7px;
+                                /* border-radius: 50%; */
+                                border: 0 transparent;
+                                font-size: 12px;">{{openHouses.length}}
+                                </mat-chip>
+                                <!-- <button mat-icon-button (click)="showInfo(link)"></button> -->
+                            </mat-list-item>
+
                             <mat-list-item>
                                 <!---->
                                 <mat-icon style="color: rgb(58, 212, 66);" [routerLink]="['/Manage/marketing/applications']" [routerLinkActive]="['active']" matListIcon>open_in_browser</mat-icon>

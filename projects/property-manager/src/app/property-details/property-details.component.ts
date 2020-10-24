@@ -246,7 +246,7 @@ export class PropertyDetailsComponent implements OnInit {
     // console.log(this.detailsForm.value);
     try {
       this.store.dispatch(PropertyActions.updateProperty({payload: this.detailsForm.value}));
-      this.showMsg = true;
+      // this.showMsg = true;
     } catch (err) {
       console.log(err); // show error message
     }
@@ -256,11 +256,11 @@ export class PropertyDetailsComponent implements OnInit {
     // this.showMsg = true; // may need re-factor
     // }
 
-    setTimeout(() => {
-      this.showMsg = false;
-      // this.disabled = null;
-      console.log(this.showMsg);
-    }, 2000);
+    // setTimeout(() => {
+    //   this.showMsg = false;
+    //   // this.disabled = null;
+    //   console.log(this.showMsg);
+    // }, 2000);
 
     //
     // this.propertyService.updateProperty(formValue)

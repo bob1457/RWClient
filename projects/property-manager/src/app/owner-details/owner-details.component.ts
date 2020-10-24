@@ -142,7 +142,8 @@ export class OwnerDetailsComponent implements OnInit {
     console.log(this.detailsForm.value);
 
     this.store.dispatch(PropertyActions.updatePropertyOwner({payload: this.detailsForm.value}));
-
+    // this.editAddress = false;
+    this.editAddress = false;
   }
 
   getOwnerDetails(id: number) {

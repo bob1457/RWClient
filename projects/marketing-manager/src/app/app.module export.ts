@@ -27,6 +27,9 @@ import { ListingDetailsSideComponent } from './listing-details-side/listing-deta
 import { ListingDetailsMainComponent } from './listing-details-main/listing-details-main.component';
 import { ListingDetailsSecondaryComponent } from './listing-details-secondary/listing-details-secondary.component';
 import { AppStatusPipe } from './app-status.pipe';
+import { AllOpenHousesComponent } from '../app/all-open-houses/all-open-houses.component';
+import { OpenHouseDetailsComponent } from '../app/open-house-details/open-house-details.component';
+
 
 const routes: Routes = [
   // { path: '', component: PropertyListingComponent},
@@ -39,7 +42,9 @@ const routes: Routes = [
       { path: 'applications', component: ApplicationListComponent},
       { path: 'applicationDetails/:id', component: ApplicationDetailsComponent},
       { path: 'screening/:id', component: ScreeningComponent},
-      { path: 'screeninglist', component: ScreeningListComponent}
+      { path: 'screeninglist', component: ScreeningListComponent},
+      { path: 'openhouses', component: AllOpenHousesComponent},
+      { path: 'openhousedetails/:id', component: OpenHouseDetailsComponent}
     ]
 
   }//,
@@ -63,7 +68,10 @@ const routes: Routes = [
     ListingDetailsSideComponent,
     ListingDetailsMainComponent,
     ListingDetailsSecondaryComponent,
-    AppStatusPipe
+    OpenHouseDetailsComponent,
+    AllOpenHousesComponent,
+    AppStatusPipe,
+    AllOpenHousesComponent
   ],
   imports: [
     // BrowserModule,

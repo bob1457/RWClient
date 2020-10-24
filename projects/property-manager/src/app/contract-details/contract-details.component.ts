@@ -22,10 +22,10 @@ export class ContractDetailsComponent implements OnInit {
   detailsForm: FormGroup;;
   contract: ManagementContract;
 
-  contract$ = this.store.pipe(select(contractDetails))
-              .subscribe(data => {
-                this.contract = data;
-              });
+  // contract$ = this.store.pipe(select(contractDetails))
+  //             .subscribe(data => {
+  //               this.contract = data;
+  //             });
 
   constructor(private actRoute: ActivatedRoute,
               private store: Store<PropertyState>,
@@ -35,7 +35,10 @@ export class ContractDetailsComponent implements OnInit {
     this.id = this.actRoute.snapshot.params.id;
     console.log(this.id);
     this.store.pipe(select(contractDetails))
-              .subscribe(data => this.contract = data);
+              .subscribe(data => {
+                this.contract = data;
+                console.log(this.contract);
+              });
    }
 
   ngOnInit() {
@@ -43,6 +46,9 @@ export class ContractDetailsComponent implements OnInit {
     this.loading$ = this.store.pipe(select(loadingStatus));
 
     this.getContractDetails(this.id);
+
+    // by service directly
+    // this.getContractDetailsByService(this.id);
 
     this.detailsForm = this.formBuilder.group({
       id: [''],

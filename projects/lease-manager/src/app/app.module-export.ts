@@ -24,8 +24,28 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { YesNoPipe } from './yes-no.pipe';
 import { LoadingComponent } from './loading/loading.component';
+import { AgreementViewComponent } from './agreement-view/agreement-view.component';
 import { TermPipe } from './term.pipe';
 import { RenewCodePipe } from './renew-code.pipe';
+import { AllWorkOrdersComponent } from './all-work-orders/all-work-orders.component';
+import { AddWorkOrderComponent } from './add-work-order/add-work-order.component';
+import { WorkOrderDetailsComponent } from './work-order-details/work-order-details.component';
+import { ServieRequestListComponent } from './servie-request-list/servie-request-list.component';
+import { ServieRequestDetailsComponent } from './servie-request-details/servie-request-details.component';
+import { VendorDetailsComponent } from './vendor-details/vendor-details.component';
+import { VendorListComponent } from './vendor-list/vendor-list.component';
+import { UrgentLevelPipe } from './urgent-level.pipe';
+import { StatusPipe } from './status.pipe';
+import { WorkOrderDatePipe } from './work-order-date.pipe';
+import { PaymentMethodPipe } from './payment-method.pipe';
+import { PaymentDetailsDialogComponent } from './dialogs/payment-details-dialog/payment-details-dialog.component';
+import { AddRentDialogComponent } from './dialogs/add-rent-dialog/add-rent-dialog.component';
+import { FullLeaseAgreementComponent } from './full-lease-agreement/full-lease-agreement.component';
+import { AgreementHeaderComponent } from './agreement-header/agreement-header.component';
+import { AgreementContentComponent } from './agreement-content/agreement-content.component';
+
+
+// import { CdkColumnDef } from '@angular/cdk/table';
 
 
 const routes: Routes = [
@@ -35,9 +55,17 @@ const routes: Routes = [
       { path: '', component: AllLeasesComponent},
       { path: 'tenants', component: AllTenantsComponent},
       { path: 'leasedetails/:id', component: LeaseDetailsComponent},
+      // { path: 'leasedetails/rentpayment/:id': }
       { path: 'addlease', component: AddLeaseComponent},
       { path: 'tenantdetails/:id', component: TenantDetailsComponent},
-      { path: 'addtenant', component: AddTenantComponent}
+      { path: 'addtenant', component: AddTenantComponent},
+      { path: 'workorders', component: AllWorkOrdersComponent},
+      { path: 'workorderdetails/:id', component: WorkOrderDetailsComponent},
+      { path: 'servicerequests', component: ServieRequestListComponent},
+      { path: 'servicerequestdetails/:id', component: ServieRequestDetailsComponent},
+      { path: 'vendors', component: VendorListComponent},
+      { path: 'vendordetails/:id', component: VendorDetailsComponent},
+      { path: 'agreementview/:id', component: FullLeaseAgreementComponent}
       // { path: 'applications', component: ApplicationListComponent}
     ]
   }//,
@@ -55,9 +83,26 @@ const routes: Routes = [
     AddLeaseComponent,
     AddTenantComponent,
     TenantDetailsComponent,
+    AgreementViewComponent,
     YesNoPipe,
     TermPipe,
-    RenewCodePipe
+    RenewCodePipe,
+    AllWorkOrdersComponent,
+    AddWorkOrderComponent,
+    WorkOrderDetailsComponent,
+    ServieRequestListComponent,
+    ServieRequestDetailsComponent,
+    VendorDetailsComponent,
+    VendorListComponent,
+    UrgentLevelPipe,
+    StatusPipe,
+    WorkOrderDatePipe,
+    PaymentMethodPipe,
+    PaymentDetailsDialogComponent,
+    AddRentDialogComponent,
+    FullLeaseAgreementComponent,
+    AgreementHeaderComponent,
+    AgreementContentComponent
   ],
   imports: [
     // BrowserModule,
@@ -71,7 +116,13 @@ const routes: Routes = [
     EffectsModule.forFeature([LeaseEffects])
     // AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    // CdkColumnDef
+  ],
+  entryComponents: [
+    PaymentDetailsDialogComponent,
+    AddRentDialogComponent
+  ],
   bootstrap: [AppLMComponent]
 })
 export class AppLMModule { }

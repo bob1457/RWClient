@@ -9,6 +9,7 @@ import { PropertyLease } from '../models/property-lease.model';
 import { PropertyTenant } from '../models/property-tenant.model';
 import { RentalApplication } from '@lib/app-core';
 import { PropertyImg } from '../models/property-img';
+import { OpenHouse } from '../models/openhouse.model';
 
 @Injectable({
   providedIn: 'root'
@@ -60,6 +61,15 @@ export class DashboardService {
     return this.http.get<RentalApplication[]>(`${this.baseUrl}/applications`);
   }
 
+  getOpenHouseList() {
+    debugger;
+    return this.http.get<OpenHouse[]>(`${this.baseUrl}/listing/allopenhouses`);
+  }
+
+  getRentPaymentList() {
+    debugger;
+    return this.http.get<any[]>(`${this.baseUrl}/rentpayment/renthistory`);
+  }
 
 
 

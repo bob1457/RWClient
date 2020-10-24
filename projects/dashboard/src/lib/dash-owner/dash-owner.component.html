@@ -61,6 +61,24 @@
 
                     </div>
                 </mat-tab>
+                <mat-tab style="background: #f5f5f5;">
+                    <ng-template mat-tab-label>
+
+                        <span style="color: black;">Open Houses <span *ngIf="openhouses">({{openhouses.length}})</span></span>
+                    </ng-template>
+                    <div fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="15px" style="height: 340px;">
+                        <mat-card style="width: 25%; padding: 0; margin-top: 15px; margin-left: 10px; height: 185px; margin-left: 5px;" [ngStyle.xs]="{'width': '30%'}" *ngFor="let op of openhouses">
+                            <img src="../../assets/images/open-house.png" class="user-avatar" alt="Open Houses">
+                            <mat-card-content>
+                                <p style="margin-top: 10px; font-weight: bold;">
+                                    {{op.openhouseDate | date}}<br> {{op.startTime}} - {{op.endTime}}<br> {{op.rentalProperty.propertyName }}
+                                </p>
+
+                            </mat-card-content>
+                        </mat-card>
+
+                    </div>
+                </mat-tab>
             </mat-tab-group>
         </div>
 

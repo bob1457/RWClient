@@ -30,7 +30,7 @@ import { AddPropertyOwnerComponent } from './add-property-owner/add-property-own
 import { YesNoPipe } from './yes-no.pipe';
 import { ContractContentComponent } from './contract-content/contract-content.component';
 import { LoadingComponent } from './loading/loading.component';
-import { MatSortModule, MatPaginator, MatPaginatorModule } from '@angular/material';
+import { MatSortModule, MatPaginator, MatPaginatorModule, MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material';
 import { ContractHeaderComponent } from './contract-header/contract-header.component';
 import { ContractFooterComponent } from './contract-footer/contract-footer.component';
 import { ContractContentEditorComponent } from './contract-content-editor/contract-content-editor.component';
@@ -79,7 +79,9 @@ import { TypePipe } from './type.pipe';
     StoreModule.forFeature('property', reducer),
     EffectsModule.forFeature([PropertyEffects])
   ],
-  providers: [],
+  providers: [
+    // {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2500, panelClass: ['notif']}}
+  ],
   bootstrap: [AppPmComponent]
 })
 export class AppModule { }

@@ -1,8 +1,8 @@
-<!-- <p>
-  property-details works!*ngIf="property"
+<!-- <p>*ngIf="!(loading$ | async) && property; else spinner"
+  property-details works!
 </p>
 <p>Property ID: {{id}}</p> -->
-<div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="1%" fxFlexFill *ngIf="!(loading$ | async) && property; else spinner">
+<div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="1%" fxFlexFill *ngIf="property">
     <div>
         <div fxFlex="10%" fxLayoutAlign="end">
             <i class="far fa-arrow-alt-circle-left" title="back to list" style="cursor: pointer; color: seagreen; font-size: 1.5em;" (click)="goBack()"></i>
@@ -121,7 +121,7 @@
                                         </mat-form-field>
                                         <mat-checkbox formControlName="isShared" [ngModel]="property.isShared" [(checked)]="shared" class="property-full-width">Shared</mat-checkbox>
                                         <mat-checkbox formControlName="isBasementSuite" [ngModel]="property.isBasementSuite" class="property-full-width">Basement</mat-checkbox>
-                                        <mat-form-field class="property-full-width">
+                                        <mat-form-field class="property-full-width" style="width: 30%;">
                                             <mat-label>Rental Status</mat-label>
                                             <mat-select [disabled]="true" [(value)]="status" id="status" formControlName="status" [ngModel]="property.status">
                                                 <!-- <mat-option>None</mat-option> -->
@@ -157,7 +157,7 @@
                                     </div>
 
                                     <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center" fxLayoutGap="10px" style="width: 75%;">
-                                        <mat-form-field class="property-full-width" style="width: 25%;">
+                                        <mat-form-field class="property-full-width" style="width: 20%;">
                                             <span class="icon-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
                                             <input type="text" id="propertyStateProvince" formControlName="propertyStateProvince" matInput placeholder="Province/State" [ngModel]="property.propertyStateProvince">
 
@@ -271,12 +271,12 @@
                         <!-- <span *ngIf="showMsg" style="color: rgb(189, 150, 25);">Updated successfully!</span>
             <img *ngIf=" loading" class="pl-2" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
             /> [disabled]="f.invalid || !f.dirty"          ; $event.preventDefault()            UpdateProperty()  (click)="submit(detailsForm.value)"     -->
-                        <span *ngIf="status" style="margin-right: 20px;">
+                        <!-- <span *ngIf="status" style="margin-right: 20px;">
                           <img src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
                         />
-                        </span>
-                        <span *ngIf="showMsg" style="margin-right: 20px;"> Updated successfully!</span>&nbsp;&nbsp;
-                        <button type="submit" mat-raised-button color="primary">UPDATE</button>
+                        </span> -->
+                        <!-- <span *ngIf="showMsg" style="margin-right: 20px;"> Updated successfully!</span>&nbsp;&nbsp; -->
+                        <button [disabled]="loading$ | async" type="submit" mat-raised-button color="primary">UPDATE</button>
                         <button mat-raised-button color="accent">CANCEL</button>
                     </div>
                 </form>
@@ -285,6 +285,6 @@
     </div>
 </div>
 
-<ng-template #spinner>
+<div *ngIf="loading$ | async">
     <app-loading></app-loading>
-</ng-template>
+</div>

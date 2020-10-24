@@ -88,6 +88,70 @@ hr {
     width: 200px;
 }
 
+.list {
+    list-style: none;
+    width: 90%;
+    margin-top: 20px;
+}
+
+.list th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #4CAF50;
+}
+
+.list tr {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.list tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.list tr:hover {
+    background-color: #ddd;
+}
+
+.spacer {
+    flex: 1 1 auto;
+}
+
+td,
+th {
+    white-space: normal;
+    word-wrap: break-word;
+    max-width: 200px;
+    text-align: center;
+}
+
+tr.mat-header-row {
+    background: #fb8c00;
+}
+
+.mat-row:nth-child(even) {
+    background-color: #e4e0e0;
+}
+
+.mat-row:nth-child(odd) {
+    background-color: #ece5e5;
+}
+
+.mat-row:hover {
+    background-color: rgb(233, 221, 221);
+}
+
+.mat-sort-header-button {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.table-header-text {
+    font-size: 1.15em;
+    color: white;
+}
+
 
 /*
   Loading style
