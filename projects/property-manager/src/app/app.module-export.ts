@@ -37,6 +37,10 @@ import { ContractViewComponent } from './contract-view/contract-view.component';
 import { TypePipe } from './type.pipe';
 // import { MatSortModule } from '@angular/material/sort';
 
+// ngx-mask ref: https://www.npmjs.com/package/ngx-mask
+import { NgxMaskModule, IConfig } from 'ngx-mask';
+export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
+
 const routes: Routes = [
   { path: '', component: PropertyHomeComponent,
     children: [
@@ -95,6 +99,7 @@ const routes: Routes = [
     MatSortModule,
     MatPaginatorModule,
     ReactiveFormsModule,
+    NgxMaskModule.forRoot(),
     RouterModule.forChild(routes),
     StoreModule.forFeature('property', reducer)
   ],
