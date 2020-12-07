@@ -1277,6 +1277,68 @@
                         </div>
                     </div>
                 </div>
+                <p style="font-weight: bold;margin-bottom: 0;margin-top: 5px;">TENANT(S):
+                </p>
+                <div *ngFor="let tenant of lease.tenant">
+                    <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
+                        <div fxFlex="50%">
+                            <input type="text" [value]="tenant.lastName" [name]="tenant.lastName">
+                            <label>last Name</label>
+                        </div>
+                        <div fxFlex="50%">
+                            <input type="text" [value]="tenant.firstName" [name]="tenant.firstName">
+                            <label>first and middle Name(s)</label>
+                        </div>
+                    </div>
+                    <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
+                        <div fxFlex="50%" fxLayout="row" fxLayoutAlign="start" fxFlexFill>
+                            <span style="font-weight: 500;font-size:1.25em;margin-top: 12px;">Signature:</span> <input type="text" style="border: none;margin-right: 10px;margin-top: -5px">
+                        </div>
+                        <div fxFlex="50%" fxLayout="row" fxLayoutAlign="start" fxFlexFill>
+                            <span style="font-weight: 500;font-size:1.25em;margin-top: 12px;">Date:</span> <input type="text" style="border: none;margin-right: 10px;margin-top: -5px">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="border: 2px solid;font-size: .9em;padding: 5px;">
+                <p style="font-weight: bold;text-align: center;margin-bottom: 0;">General Information about Residential Tenancy Agreements</p>
+                <p style="margin-bottom: 0;"><span style="font-weight: 500;">Important Legal Document</span> – This tenancy agreement is an important legal document. Keep it in a safe place.</p>
+                <p style="margin-bottom: 0;">Additional Terms – Any additional terms cannot contradict or change any right or duty under the RTA or this tenancy agreement.</p>
+                <p style="margin-bottom: 0;">
+                    <span style="font-weight: 500;">Amendment of the RTA</span> – The RTA or a regulation made under the RTA, as amended from time to time, may take priority over th terms of this tenancy agreement.
+                </p>
+                <p style="margin-bottom: 0;">
+                    <span style="font-weight: 500;"> Condition Report</span> – The landlord and tenant are required to inspect the residential unit together at the beginning and end of the tenancy and complete a written condition report. If the landlord
+                    allows the tenant to have a pet after the start of the tenancy, an inspection report must be done on the day the tenant starts keeping a pet or on another day mutually agreed to by the landlord and tenant, unless the tenancy started
+                    on or after January 1, 2004, and a condition inspection report was completed at that time. A report may describe any damage, how clean each room is, and the general condition of the residential unit including: the floors, carpets,
+                    appliances, and paint on the walls. The report must be signed and dated by both the landlord and the tenant who made the inspection, and each should keep a copy.
+                </p>
+                <p style="margin-bottom: 0;">
+                    <span style="font-weight: 500;"></span>Change of Landlord – A new landlord has the same rights and duties as the previous one and must follow all the terms of this agreement unless the tenant and new landlord agree to other terms.
+                </p>
+                <p style="margin-bottom: 0;">
+                    <span style="font-weight: 500;">Resolution of Disputes</span> – If problems or disagreements arise, the landlord and tenant should try to talk to each other to find a solution. If they still cannot agree, either may contact the Residential
+                    Tenancy Branch for clarification of their rights and responsibilities or an intervention. If no agreement is reached, a landlord or a tenant may apply for a dispute resolution to get a decision. Many, but not all, kinds of disagreements
+                    can be decided by dispute resolution.
+                </p>
+            </div>
+            <div>
+                <p style="font-weight: bold;text-align: center;margin-bottom: 0;">FOR MORE INFORMATION<br> RTB website: www.gov.bc.ca/landlordtenant</p>
+                <p style="margin-bottom: 0;text-align: center;font-weight: 500;">
+                    Public Information Lines 1-800-665-8779 (toll-free) &nbsp;&nbsp;Greater Vancouver 604-660-1020 &nbsp;&nbsp;Victoria 250-387-1602
+                </p>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start" fxFlexFill style="border-top: 10px solid #1150af;">
+                <div style="width: 25%;">
+                    <span style="font-style:italic;">
+                        #RTB-1 (2019/11)
+                        </span>
+                </div>
+                <div class="spacer"></div>
+                <div>
+                    <span style="font-weight:bold;font-style: italic;">page 6 of 6 pages</span>
+                </div>
 
             </div>
 
