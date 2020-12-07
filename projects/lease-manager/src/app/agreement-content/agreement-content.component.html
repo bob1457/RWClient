@@ -1246,12 +1246,39 @@
                 <div fxLayout="column" fxLayoutAlign="start" fxFlexFill fxFlex="90%" style="margin-left: 5px;">
                     <span>Attached to this tenancy agreement, there <input type="checkbox"> &nbsp;is <input type="checkbox"> &nbsp;is not an Addendum </span><br>
                     <span style="margin-top: -13px;"><span style="font-style: italic;font-weight: bold;">If there is an Addendum attached,</span> provide the following information on the Addendum that forms part of thistenancy agreement:</span><br>
-                    <span style="margin-top: -20px;"><span style="font-style: italic;">Number of pages of the Addendum:</span> <input type="text" style="width: 30px;height: 30px;"> <span style="font-style: italic;">Number of additional terms in the Addendum:</span>                    <input type="text" style="width: 30px;height: 30px;"></span>
+                    <span style="margin-top: -20px;"><span style="font-style: italic;"> Number of pages of the Addendum: </span> <input type="text" style="width: 30px;height: 30px;"> <span style="font-style: italic;"> Number of additional terms in the Addendum: </span>                    <input type="text" style="width: 30px;height: 30px;"></span>
                 </div>
             </div>
-            <p style="font-weight: bold;margin-bottom: 0;margin-top: 5px;">
+            <p style="font-weight: bold;margin-bottom: 0;margin-top: 5px;text-align: center;">
                 By signing this tenancy agreement, the landlord and the tenant are bound by its terms.
             </p>
+            <!-- <p style="margin-top: -12px;"></p> -->
+            <div fxLayout="column" fxLayoutAlign="start" fxFlexFill style="font-size: .9em;border: 1px solid;padding: 5px;">
+                <p style="font-weight: bold;margin-bottom: 0;margin-top: 5px;">LANDLORD(S): <span style="font-size: .9em;font-style: italic;">(if entry for landlord is a business name, use the 'last name' field box to enter the full legal business name)</span>
+                </p>
+                <div *ngFor="let landlord of lease.rentalProperty.rentalPropertyOwners">
+                    <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
+                        <div fxFlex="50%">
+                            <input type="text" [value]="landlord.lastName" [name]="landlord.lastName">
+                            <label>last Name</label>
+                        </div>
+                        <div fxFlex="50%">
+                            <input type="text" [value]="landlord.firstName" [name]="landlord.firstName">
+                            <label>first and middle Name(s)</label>
+                        </div>
+                    </div>
+                    <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
+                        <div fxFlex="50%" fxLayout="row" fxLayoutAlign="start" fxFlexFill>
+                            <span style="font-weight: 500;font-size:1.25em;margin-top: 12px;">Signature:</span> <input type="text" style="border: none;margin-right: 10px;margin-top: -5px">
+                        </div>
+                        <div fxFlex="50%" fxLayout="row" fxLayoutAlign="start" fxFlexFill>
+                            <span style="font-weight: 500;font-size:1.25em;margin-top: 12px;">Date:</span> <input type="text" style="border: none;margin-right: 10px;margin-top: -5px">
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
 
         </div>
 
