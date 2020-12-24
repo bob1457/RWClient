@@ -57,6 +57,31 @@
                     <label>first and middle name(s)</label>
                 </div>
             </div>
+
+            <div *ngIf="lease.tenant[1]">
+                <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
+                    <div style="width: 50%;">
+                        <input readonly type="text" [value]="lease.tenant[1].lastName" [name]="lease.tenant[1].lastName">
+                        <label>last Name</label>
+                    </div>
+                    <div style="width: 50%;">
+                        <input readonly type="text" [value]="lease.tenant[1].firstName" [name]="lease.tenant[1].firstName">
+                        <label>first and middle name(s)</label>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="!lease.tenant[1]">
+                <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
+                    <div style="width: 50%;">
+                        <input readonly type="text" [value]="" [name]="">
+                        <label>last Name</label>
+                    </div>
+                    <div style="width: 50%;">
+                        <input readonly type="text" [value]="" [name]="">
+                        <label>first and middle name(s)</label>
+                    </div>
+                </div>
+            </div>
             <!-- </div> -->
             <div fxLayout="row" fxLayoutAlign="start" fxFlexFill style="border-bottom: 2px dashed;">
                 <div style="width: 7%;">
@@ -149,11 +174,11 @@
 
         </div>
         <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
-            <div style="width: 25%;">
+            <div style="width: 35%;font-size: .95em;">
                 <span style="font-weight:bold;font-style: italic;">
               Residential Tenancy Branch
             </span><br>
-                <span style="font-style:italic;">
+                <span style="font-style:italic;font-size: .85em;">
               Office of Housing and<br>
               Construction Standards<br>
               #RTB-1 (2019/11)
@@ -165,7 +190,7 @@
             </div>
 
         </div>
-        <div style="margin-top: 90px;">
+        <div style="margin-top: 20px;">
             <div fxLayout="column" fxLayoutAlign="start" fxFlexFill style="border: 1px solid;padding: 9px;padding-top: 4px;padding-bottom: 3px;">
 
                 <p style="font-weight: bold;margin-bottom: 0;"> 1.APPLICATION OF THE RESIDENTIAL TENANCY ACT
@@ -426,7 +451,7 @@
 
                 </div>
             </div>
-            <div style="margin-top: 10px;">
+            <div style="margin-top: 15px;">
                 <div fxLayout="column" fxLayoutAlign="start" fxFlexFill style="border:1px solid;padding: 9px;padding-top: 4px; padding-bottom: 0px;">
                     <p style="font-weight: bold;margin-bottom: 3px;margin-top: 5px;"> 4. SECURITY DEPOSIT AND PET DAMAGE DEPOSIT
                     </p>
