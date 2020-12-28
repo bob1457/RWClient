@@ -66,6 +66,9 @@ export class OpenHouseDetailsComponent implements OnInit {
     });
   }
 
+  clear() {
+
+  }
 
   goBack() {
     this.router.navigate(['/Manage/marketing/openhouses']);
