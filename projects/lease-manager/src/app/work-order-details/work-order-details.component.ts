@@ -5,6 +5,7 @@ import { PropertyLeaseState } from '../store/lease-state';
 import { Router, ActivatedRoute } from '@angular/router';
 import { getWorkOrderDetails, updateWorkOrder } from '../store/actions/lease.actions';
 import { workOrderDetails } from '../store/reducers';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-work-order-details',
@@ -14,6 +15,7 @@ import { workOrderDetails } from '../store/reducers';
 export class WorkOrderDetailsComponent implements OnInit {
 
   id: number;
+  loading$: Observable<boolean>;
   workorder;
   detailsForm: FormGroup;
 
