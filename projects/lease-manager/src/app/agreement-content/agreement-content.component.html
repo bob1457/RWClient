@@ -8,21 +8,21 @@
     </p>
     <form fxLayout="column" fxLayoutAlign="start" fxFlexFill>
         <div class="page-container">
-            <div *ngFor="let landlord of lease.rentalProperty.rentalPropertyOwners" style="margin-top: -15px;">
-                <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
-                    <div style="width: 50%;">
-                        <input readonly type="text" [value]="landlord.lastName" [name]="landlord.lastName">
-                        <label>last Name</label>
-                    </div>
-                    <div style="width: 50%;">
-                        <input readonly type="text" [value]="landlord.firstName" [name]="landlord.firstName">
-                        <label>first and middle name(s)</label>
-                    </div>
+            <!-- <div *ngFor="let landlord of lease.rentalProperty.rentalPropertyOwners" style="margin-top: -15px;"> -->
+            <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
+                <div style="width: 50%;">
+                    <input readonly type="text" [value]="lease.rentalProperty.rentalPropertyOwners[0].lastName" [name]="lease.rentalProperty.rentalPropertyOwners[0].lastName">
+                    <label>last Name</label>
                 </div>
+                <div style="width: 50%;">
+                    <input readonly type="text" [value]="lease.rentalProperty.rentalPropertyOwners[0].firstName" [name]="lease.rentalProperty.rentalPropertyOwners[0].firstName">
+                    <label>first and middle name(s)</label>
+                </div>
+            </div>
 
 
 
-                <!-- <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
+            <!-- <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
                 <div style="width: 50%;">
                     <input readonly type="text" id="fname" formControlName="landlordLastName" [ngModel]="lease.rentalProperty.rentalPropertyOwners[1].lastName">
                     <label for="lname">last Name</label>
@@ -32,22 +32,57 @@
                     <label for="fname">first and middle name(s)</label>
                 </div>
             </div> -->
+            <!-- </div> -->
+            <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
+                <div style="width: 50%;">
+                    <input readonly type="text" [value]="lease.rentalProperty.rentalPropertyOwners[1].lastName" [name]="lease.rentalProperty.rentalPropertyOwners[1].lastName">
+                    <label>last Name</label>
+                </div>
+                <div style="width: 50%;">
+                    <input readonly type="text" [value]="lease.rentalProperty.rentalPropertyOwners[1].firstName" [name]="lease.rentalProperty.rentalPropertyOwners[1].firstName">
+                    <label>first and middle name(s)</label>
+                </div>
             </div>
             <p style="margin-top: 7px;">
                 <span style="font-size: .9em;font-weight: bold;">and the TENANT(S):</span>
             </p>
-            <div *ngFor="let tenant of lease.tenant" style="margin-top: -15px;">
+            <!-- <div *ngFor="let tenant of lease.tenant" style="margin-top: -15px;"> -->
+            <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
+                <div style="width: 50%;">
+                    <input readonly type="text" [value]="lease.tenant[0].lastName" [name]="lease.tenant[0].lastName">
+                    <label>last Name</label>
+                </div>
+                <div style="width: 50%;">
+                    <input readonly type="text" [value]="lease.tenant[0].firstName" [name]="lease.tenant[0].firstName">
+                    <label>first and middle name(s)</label>
+                </div>
+            </div>
+
+            <div *ngIf="lease.tenant[1]">
                 <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
                     <div style="width: 50%;">
-                        <input readonly type="text" [value]="tenant.lastName" [name]="tenant.lastName">
+                        <input readonly type="text" [value]="lease.tenant[1].lastName" [name]="lease.tenant[1].lastName">
                         <label>last Name</label>
                     </div>
                     <div style="width: 50%;">
-                        <input readonly type="text" [value]="tenant.firstName" [name]="tenant.firstName">
+                        <input readonly type="text" [value]="lease.tenant[1].firstName" [name]="lease.tenant[1].firstName">
                         <label>first and middle name(s)</label>
                     </div>
                 </div>
             </div>
+            <div *ngIf="!lease.tenant[1]">
+                <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
+                    <div style="width: 50%;">
+                        <input readonly type="text" [value]="" [name]="">
+                        <label>last Name</label>
+                    </div>
+                    <div style="width: 50%;">
+                        <input readonly type="text" [value]="" [name]="">
+                        <label>first and middle name(s)</label>
+                    </div>
+                </div>
+            </div>
+            <!-- </div> -->
             <div fxLayout="row" fxLayoutAlign="start" fxFlexFill style="border-bottom: 2px dashed;">
                 <div style="width: 7%;">
                     <input readonly type="text">
@@ -139,11 +174,11 @@
 
         </div>
         <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
-            <div style="width: 25%;">
+            <div style="width: 35%;font-size: .95em;">
                 <span style="font-weight:bold;font-style: italic;">
               Residential Tenancy Branch
             </span><br>
-                <span style="font-style:italic;">
+                <span style="font-style:italic;font-size: .85em;">
               Office of Housing and<br>
               Construction Standards<br>
               #RTB-1 (2019/11)
@@ -155,7 +190,7 @@
             </div>
 
         </div>
-        <div style="margin-top: 110px;">
+        <div style="margin-top: 20px;">
             <div fxLayout="column" fxLayoutAlign="start" fxFlexFill style="border: 1px solid;padding: 9px;padding-top: 4px;padding-bottom: 3px;">
 
                 <p style="font-weight: bold;margin-bottom: 0;"> 1.APPLICATION OF THE RESIDENTIAL TENANCY ACT
@@ -416,7 +451,7 @@
 
                 </div>
             </div>
-            <div style="margin-top: 10px;">
+            <div style="margin-top: 15px;">
                 <div fxLayout="column" fxLayoutAlign="start" fxFlexFill style="border:1px solid;padding: 9px;padding-top: 4px; padding-bottom: 0px;">
                     <p style="font-weight: bold;margin-bottom: 3px;margin-top: 5px;"> 4. SECURITY DEPOSIT AND PET DAMAGE DEPOSIT
                     </p>
@@ -1256,14 +1291,77 @@
             <div fxLayout="column" fxLayoutAlign="start" fxFlexFill style="font-size: .9em;border: 1px solid;padding: 5px;">
                 <p style="font-weight: bold;margin-bottom: 0;margin-top: 5px;">LANDLORD(S): <span style="font-size: .9em;font-style: italic;">(if entry for landlord is a business name, use the 'last name' field box to enter the full legal business name)</span>
                 </p>
-                <div *ngFor="let landlord of lease.rentalProperty.rentalPropertyOwners">
+                <!-- <div *ngFor="let landlord of lease.rentalProperty.rentalPropertyOwners"> -->
+                <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
+                    <div fxFlex="50%">
+                        <input type="text" [value]="lease.rentalProperty.rentalPropertyOwners[0].lastName" [name]="lease.rentalProperty.rentalPropertyOwners[0].lastName">
+                        <label>last Name</label>
+                    </div>
+                    <div fxFlex="50%">
+                        <input type="text" [value]="lease.rentalProperty.rentalPropertyOwners[0].firstName" [name]="lease.rentalProperty.rentalPropertyOwners[0].firstName">
+                        <label>first and middle Name(s)</label>
+                    </div>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
+                    <div fxFlex="50%" fxLayout="row" fxLayoutAlign="start" fxFlexFill>
+                        <span style="font-weight: 500;font-size:1.25em;margin-top: 12px;">Signature:</span> <input type="text" style="border: none;margin-right: 10px;margin-top: -5px">
+                    </div>
+                    <div fxFlex="50%" fxLayout="row" fxLayoutAlign="start" fxFlexFill>
+                        <span style="font-weight: 500;font-size:1.25em;margin-top: 12px;">Date:</span> <input type="text" style="border: none;margin-right: 10px;margin-top: -5px">
+
+                    </div>
+                </div>
+                <!-- </div> -->
+                <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
+                    <div fxFlex="50%">
+                        <input type="text" [value]="lease.rentalProperty.rentalPropertyOwners[1].lastName" [name]="lease.rentalProperty.rentalPropertyOwners[1].lastName">
+                        <label>last Name</label>
+                    </div>
+                    <div fxFlex="50%">
+                        <input type="text" [value]="lease.rentalProperty.rentalPropertyOwners[1].firstName" [name]="lease.rentalProperty.rentalPropertyOwners[1].firstName">
+                        <label>first and middle Name(s)</label>
+                    </div>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
+                    <div fxFlex="50%" fxLayout="row" fxLayoutAlign="start" fxFlexFill>
+                        <span style="font-weight: 500;font-size:1.25em;margin-top: 12px;">Signature:</span> <input type="text" style="border: none;margin-right: 10px;margin-top: -5px">
+                    </div>
+                    <div fxFlex="50%" fxLayout="row" fxLayoutAlign="start" fxFlexFill>
+                        <span style="font-weight: 500;font-size:1.25em;margin-top: 12px;">Date:</span> <input type="text" style="border: none;margin-right: 10px;margin-top: -5px">
+
+                    </div>
+                </div>
+                <p style="font-weight: bold;margin-bottom: 0;margin-top: 5px;">TENANT(S):
+                </p>
+                <!-- <div *ngFor="let tenant of lease.tenant"> -->
+                <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
+                    <div fxFlex="50%">
+                        <input type="text" [value]="lease.tenant[0].lastName" [name]="lease.tenant[0].lastName">
+                        <label>last Name</label>
+                    </div>
+                    <div fxFlex="50%">
+                        <input type="text" [value]="lease.tenant[0].firstName" [name]="lease.tenant[0].firstName">
+                        <label>first and middle Name(s)</label>
+                    </div>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
+                    <div fxFlex="50%" fxLayout="row" fxLayoutAlign="start" fxFlexFill>
+                        <span style="font-weight: 500;font-size:1.25em;margin-top: 12px;">Signature:</span> <input type="text" style="border: none;margin-right: 10px;margin-top: -5px">
+                    </div>
+                    <div fxFlex="50%" fxLayout="row" fxLayoutAlign="start" fxFlexFill>
+                        <span style="font-weight: 500;font-size:1.25em;margin-top: 12px;">Date:</span> <input type="text" style="border: none;margin-right: 10px;margin-top: -5px">
+
+                    </div>
+                </div>
+                <!-- </div> -->
+                <div *ngIf="lease.tenant[1]">
                     <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
                         <div fxFlex="50%">
-                            <input type="text" [value]="landlord.lastName" [name]="landlord.lastName">
+                            <input type="text" [value]="lease.tenant[1].lastName" [name]="lease.tenant[1].lastName">
                             <label>last Name</label>
                         </div>
                         <div fxFlex="50%">
-                            <input type="text" [value]="landlord.firstName" [name]="landlord.firstName">
+                            <input type="text" [value]="lease.tenant[1].firstName" [name]="lease.tenant[1].firstName">
                             <label>first and middle Name(s)</label>
                         </div>
                     </div>
@@ -1277,16 +1375,14 @@
                         </div>
                     </div>
                 </div>
-                <p style="font-weight: bold;margin-bottom: 0;margin-top: 5px;">TENANT(S):
-                </p>
-                <div *ngFor="let tenant of lease.tenant">
+                <div *ngIf="!lease.tenant[1]">
                     <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
                         <div fxFlex="50%">
-                            <input type="text" [value]="tenant.lastName" [name]="tenant.lastName">
+                            <input type="text" [value]="" [name]="">
                             <label>last Name</label>
                         </div>
                         <div fxFlex="50%">
-                            <input type="text" [value]="tenant.firstName" [name]="tenant.firstName">
+                            <input type="text" [value]="" [name]="">
                             <label>first and middle Name(s)</label>
                         </div>
                     </div>
