@@ -1,7 +1,7 @@
 <!-- <p>
   work-order-details works!
 </p> -->
-<div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="1%" fxFlexFill *ngIf="!(loading$ | async) && workorder; else spinner">
+<div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="1%" fxFlexFill *ngIf="workorder">
     <div>
         <div fxFlex="10%" fxLayoutAlign="end">
             <i class="far fa-arrow-alt-circle-left" title="back to list" style="cursor: pointer; color: seagreen; font-size: 1.5em;" (click)="goBack()"></i>
@@ -48,7 +48,7 @@
                   </i>
                     <!-- {{property.propertyId}}{{property.propertyName}}<img src="../../assets/images/pmgmnt.png " height="40px " width="40px "> *ngIf="property*ngIf="detailsForm.value"{{property.propertyNumber}} {{property.propertyNumber}} {{property.propertyStreet}} {{property.propertyCity}} {{property.propertyStateProvince}} {{property.propertyZipPostCode}}-->
                 </div>
-                <mat-card-title>Work Order: - ID: <span style="font-size: .8em; font-style: italic;">{{workorder.id}}</span> </mat-card-title>
+                <mat-card-title>Work Order: - ID: <span style="font-size: .8em; font-style: italic;">{{workorder.workOrderId}}</span> </mat-card-title>
                 <mat-card-subtitle>{{workorder.workOrderName}}, vendor: {{workorder.vendor.vendorBusinessName}}</mat-card-subtitle>
             </mat-card-header>
             <mat-card-content class="order-details-card-content">
@@ -56,7 +56,7 @@
                     <div fxLayout="column" fxLayoutAlign="start center" style="width: 75%;">
                         <mat-form-field class="order-full-width" style="margin-top: 25px;">
                             <span class="icon-pos" matPrefix><mat-icon>swap_calls</mat-icon> &nbsp;</span>
-                            <input readonly type="text" id="id" formControlName="id" matInput placeholder="Work Order ID" [ngModel]="workorder.id">
+                            <input readonly type="text" id="id" formControlName="workOrderId" matInput placeholder="Work Order ID" [ngModel]="workorder.id">
                         </mat-form-field>
 
                         <mat-form-field class="order-full-width">
@@ -110,6 +110,24 @@
                         </div>
                         <div fxLayout="row" fxLayoutAlign="start start" style="width: 95%;">
                             <div style="width: 50%;margin-top: 10px;">
+                                <mat-form-field style="width:50%">
+                                    <mat-label>Work Order Status</mat-label>
+                                    <mat-select id="workOrderStatus" formControlName="workOrderStatus" [ngModel]="workorder.workOrderStatus">
+                                        <mat-option>None</mat-option>
+                                        <mat-option value="New">New</mat-option>
+                                        <mat-option value="In Progress">In Progress</mat-option>
+                                        <mat-option value="Completed">Completed</mat-option>
+                                        <mat-option value="On Hold">On Hold</mat-option>
+                                        <mat-option value="Canceled">Canceled</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div style="width: 50%;margin-top: 10px;">
+
+                            </div>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="start start" style="width: 95%;">
+                            <div style="width: 50%;margin-top: 10px;">
                                 <mat-checkbox formControlName="isEmergency" [ngModel]="workorder.isEmergency" [(checked)]="workorder.isEmergency" class="vendor-full-width">Is Emergency</mat-checkbox>
                             </div>
                             <div style="width: 50%;margin-top: 10px;">
@@ -130,6 +148,9 @@
     </div>
 </div>
 
-<ng-template #spinner>
+<!-- <ng-template #spinner>
     <app-loading></app-loading>
-</ng-template>
+</ng-template> -->
+<div *ngIf="loading$ | async">
+    <app-loading></app-loading>
+</div>
