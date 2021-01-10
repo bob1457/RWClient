@@ -6,6 +6,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { getWorkOrderDetails, updateWorkOrder } from '../store/actions/lease.actions';
 import { workOrderDetails } from '../store/reducers';
 import { Observable } from 'rxjs';
+import { loadingStatus } from '../store/reducers';
 
 @Component({
   selector: 'app-work-order-details',
@@ -38,14 +39,17 @@ export class WorkOrderDetailsComponent implements OnInit {
 
   ngOnInit() {
 
+    this.loading$ = this.store.pipe(select(loadingStatus));
+
     this.store.dispatch(getWorkOrderDetails({payload: this.id}));
 
     this.detailsForm = this.formBuilder.group({
-      id: [],
+      workOrderId: [],
       workOrderName: [''],
       workOrderDetails: [],
       workOrderCategory: [''],
       workOrderType: [''],
+      workOrderStatus: [''],
       startDate: [''],
       endDate: [''],
       isEmergency: [false],
@@ -56,8 +60,9 @@ export class WorkOrderDetailsComponent implements OnInit {
   }
 
   submit() {
+    debugger;
     console.log('form', this.detailsForm.value);
-    // this.store.dispatch(updateWorkOrder({payload: this.detailsForm.value}));
+    this.store.dispatch(updateWorkOrder({payload: this.detailsForm.value}));
   }
 
   goBack() {
