@@ -301,9 +301,6 @@ const propertyLeaseReducer = createReducer(
     });
   }),
 
-
-
-
   on(LeaseActions.getWorkOrderDetails, (state) => ({
     ...state,
     loading: true,
