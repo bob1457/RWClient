@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import { PropertyLeaseState } from '../store/lease-state';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { loadingStatus, serviceRequestDetails } from '../store/reducers';
+import { getServiceRequestDetails } from '../store/actions/lease.actions';
 
 @Component({
   selector: 'app-servie-request-details',
@@ -12,6 +15,8 @@ import { FormBuilder } from '@angular/forms';
 export class ServieRequestDetailsComponent implements OnInit {
 
   id: number;
+  loading$: Observable<boolean>;
+  request;
 
   constructor(private store: Store<PropertyLeaseState>,
               private router: Router,
@@ -19,9 +24,23 @@ export class ServieRequestDetailsComponent implements OnInit {
               private formBuilder: FormBuilder) {
                 this.id = this.actRoute.snapshot.params.id;
                 console.log(this.id);
+
+                this.store.pipe(select(serviceRequestDetails))
+                          .subscribe(data => {
+                            this.request = data;
+                            // this.detailsForm.patchValue(data);
+                            console.log('request', data);
+                            // this.dataSource.data = this.lease;
+                            // console.log('payment', this.dataSource.data);
+                          });
               }
 
   ngOnInit() {
+
+    this.loading$ = this.store.pipe(select(loadingStatus));
+
+    this.store.dispatch(getServiceRequestDetails({payload: this.id}));
+
   }
 
 }
