@@ -38,6 +38,56 @@
                 <mat-card-title>Service Request: - ID: {{request.id}}<span style="font-size: .8em; font-style: italic;"> &nbsp; {{request.requestSubject}}</span> </mat-card-title>
                 <mat-card-subtitle>{{request.serviceCategory}}</mat-card-subtitle>
             </mat-card-header>
+            <mat-card-content class="request-details-card-content">
+                <form novalidate fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px">
+                    <div fxLayout="column" fxLayoutAlign="start center" style="width: 75%;">
+                        <mat-form-field class="request-full-width" style="margin-top: 25px;">
+                            <mat-label>Service Request Id</mat-label>
+                            <span class="icon-pos" matPrefix><mat-icon>swap_calls</mat-icon> &nbsp;</span>
+                            <input readonly type="text" id="id" matInput [value]="request.id" name="request.id">
+                        </mat-form-field>
+                        <mat-form-field class="request-full-width">
+                            <mat-label>Request Subject</mat-label>
+                            <span class="icon-pos" matPrefix><mat-icon>swap_calls</mat-icon> &nbsp;</span>
+                            <input readonly type="text" id="id" matInput [value]="request.requestSubject" name="request.requestSubject">
+                        </mat-form-field>
+                        <mat-form-field class="request-full-width">
+                            <mat-label>Service Request Id</mat-label>
+                            <span class="icon-pos" matPrefix><mat-icon>swap_calls</mat-icon> &nbsp;</span>
+                            <textarea type="text" id="notes" matInput placeholder="Notes" [value]="request.requestDetails" name="request.requestDetails"></textarea>
+                        </mat-form-field>
+                        <mat-form-field class="request-full-width">
+                            <mat-label>Notes</mat-label>
+                            <span class="icon-pos" matPrefix><mat-icon>swap_calls</mat-icon> &nbsp;</span>
+                            <textarea type="text" id="notes" matInput placeholder="Notes" [value]="request.notes" name="request.notes"></textarea>
+                        </mat-form-field>
+                        <div fxLayout="row" fxLayoutAlign="start center" style="width: 95%;">
+                            <div fxFlex="50%">
+                                <mat-form-field fxFlex="90%">
+                                    <mat-label>Service Request Status</mat-label>
+                                    <span class="icon-pos" matPrefix><mat-icon>swap_calls</mat-icon> &nbsp;</span>
+                                    <input readonly type="text" id="status" matInput [value]="request.status | status" name="request.status">
+                                </mat-form-field>
+                            </div>
+                            <div fxFlex="50%">
+                                <!-- <mat-checkbox class="reqeust-full-width" [value]="request.urgent" name="request.urgent">Is An Emergence</mat-checkbox> -->
+                                <mat-form-field fxFlex="90%">
+                                    <mat-label>Urgence Level</mat-label>
+                                    <span class="icon-pos" matPrefix><mat-icon>swap_calls</mat-icon> &nbsp;</span>
+                                    <input readonly type="text" id="urgent" matInput [value]="request.urgent | urgentLevel" name="request.urgent">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <p style="width: 95%;font-weight: bold;margin-bottom: 20px;font-size: 1.2em;">
+                            Comments & Feedbacks
+                        </p>
+                        <div class="request-full-width">
+
+                        </div>
+
+                    </div>
+                </form>
+            </mat-card-content>
         </mat-card>
     </div>
 </div>

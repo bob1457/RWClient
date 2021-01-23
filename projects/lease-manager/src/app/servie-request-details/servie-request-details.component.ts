@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { PropertyLeaseState } from '../store/lease-state';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { loadingStatus, serviceRequestDetails } from '../store/reducers';
 import { getServiceRequestDetails } from '../store/actions/lease.actions';
@@ -17,6 +17,9 @@ export class ServieRequestDetailsComponent implements OnInit {
   id: number;
   loading$: Observable<boolean>;
   request;
+
+  detailsForm: FormGroup;
+
 
   constructor(private store: Store<PropertyLeaseState>,
               private router: Router,
@@ -41,6 +44,18 @@ export class ServieRequestDetailsComponent implements OnInit {
 
     this.store.dispatch(getServiceRequestDetails({payload: this.id}));
 
+    // this.detailsForm = this.formBuilder.group({
+    //   id: [],
+    //   requestSubject: [''],
+    //   serviceCategory: [''],
+    //   requestDetails: ['']
+    // });
+
   }
+
+  goBack() {
+    this.router.navigate(['/Manage/lease/servicerequests/']);
+  }
+
 
 }
