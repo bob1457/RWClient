@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AgreementViewComponent } from './agreement-view.component';
+import { AgreementViewComponent } from './agreement-party-view.component';
 
 describe('AgreementViewComponent', () => {
   let component: AgreementViewComponent;
