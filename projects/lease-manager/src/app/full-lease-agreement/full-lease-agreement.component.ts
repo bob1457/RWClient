@@ -20,6 +20,8 @@ export class FullLeaseAgreementComponent implements OnInit {
   id: number;
   agreementDetails;
   agreement$: Observable<any>;
+  numberOfTenants;
+  numberOfLandlords;
 
   @ViewChild('pdfdoc', {static: false}) pdfdoc: ElementRef;
 
@@ -33,6 +35,10 @@ export class FullLeaseAgreementComponent implements OnInit {
                 this.store.select(leaseDetails)
                     .subscribe(lease => {
                       this.agreementDetails = lease;
+                      this.numberOfTenants = this.agreementDetails.tenant.length;
+                      this.numberOfLandlords = this.agreementDetails.rentalProperty.rentalPropertyOwners.length;
+                      console.log('No. Tenants',this.numberOfTenants);
+                      console.log('No. Landloard',this.numberOfLandlords);
                       console.log('agreement', this.agreementDetails);
                     });
               }

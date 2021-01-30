@@ -16,7 +16,7 @@ import { AddTenantComponent } from './add-tenant/add-tenant.component';
 import { TenantDetailsComponent } from './tenant-details/tenant-details.component';
 import { YesNoPipe } from './yes-no.pipe';
 import { LoadingComponent } from './loading/loading.component';
-import { AgreementViewComponent } from './agreement-view/agreement-view.component';
+import { AgreementPartyViewComponent } from './agreement-party-view/agreement-party-view.component';
 import { TermPipe } from './term.pipe';
 import { RenewCodePipe } from './renew-code.pipe';
 import { AllWorkOrdersComponent } from './all-work-orders/all-work-orders.component';
@@ -51,7 +51,7 @@ import { AgreementContentComponent } from './agreement-content/agreement-content
     TenantDetailsComponent,
     YesNoPipe,
     LoadingComponent,
-    AgreementViewComponent,
+    AgreementPartyViewComponent,
     TermPipe,
     RenewCodePipe,
     AllWorkOrdersComponent,

@@ -277,6 +277,30 @@ const propertyLeaseReducer = createReducer(
     });
   }),
 
+
+  /**
+   * Update vendor
+   */
+  on(LeaseActions.updateVendor, state => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+  on(LeaseActions.updateVendorsSuccess, (state, { payload }) => {
+
+    const updatedVendors = state.vendors.map(
+      item => payload.id === item.id ? payload : item
+    );
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      vendors: updatedVendors, // [...state.listings, payload ]
+      selectedvendor: payload
+    });
+  }),
+
   on(LeaseActions.getWorkOrderDetails, (state) => ({
     ...state,
     loading: true,

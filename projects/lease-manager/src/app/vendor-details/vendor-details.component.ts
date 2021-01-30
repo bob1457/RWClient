@@ -4,7 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { PropertyLeaseState } from '../store/lease-state';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { vendorDetails } from '../store/reducers';
+import { loadingStatus, vendorDetails } from '../store/reducers';
 import { getVendorDetails, updateVendor } from '../store/actions/lease.actions';
 
 @Component({
@@ -40,6 +40,8 @@ export class VendorDetailsComponent implements OnInit {
 
   ngOnInit() {
 
+    this.loading$ = this.store.pipe(select(loadingStatus));
+
     this.store.dispatch(getVendorDetails({payload: this.id}));
 
     this.detailsForm = this.formBuilder.group({
@@ -60,7 +62,7 @@ export class VendorDetailsComponent implements OnInit {
 
   submit() {
     console.log('form', this.detailsForm.value);
-    // this.store.dispatch(updateVendor({payload: this.detailsForm.value}));
+    this.store.dispatch(updateVendor({payload: this.detailsForm.value}));
   }
 
   goBack() {
