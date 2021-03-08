@@ -78,7 +78,7 @@
 
                     <ng-container matColumnDef="type">
                         <th class="table-header-text" style="margin-left: auto;margin-right: auto;" mat-header-cell *matHeaderCellDef mat-sort-header> Type </th>
-                        <td mat-cell *matCellDef="let element"> {{element.type}} </td>
+                        <td mat-cell *matCellDef="let element"> {{element.type | propertyType}} </td>
                     </ng-container>
 
                     <ng-container matColumnDef="createdDate">

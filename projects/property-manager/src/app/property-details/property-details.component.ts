@@ -229,19 +229,19 @@ export class PropertyDetailsComponent implements OnInit {
   //       });
   // }
 
-  selectPropertyDetails() {
-    debugger;
-    this.store.pipe(select(propertyDetrails))
-    .subscribe(data => {
-      this.property = data;
-      this.detailsForm.setValue(data);
-      console.log(data);
-    });
-  }
+  // selectPropertyDetails() {
+  //   debugger;
+  //   this.store.pipe(select(propertyDetrails))
+  //   .subscribe(data => {
+  //     this.property = data;
+  //     this.detailsForm.setValue(data);
+  //     console.log(data);
+  //   });
+  // }
 
   submit() { //formValue
     debugger;
-    // console.log(formValue);
+    console.log('update form data',this.detailsForm.value);
     this.loading$ = this.store.pipe(select(loadingStatus));
     // console.log(this.detailsForm.value);
     try {

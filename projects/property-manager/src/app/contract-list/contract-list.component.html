@@ -115,7 +115,7 @@
                         <td mat-cell *matCellDef="let element">
                             <i style="border: 2px solid;
                               padding: 3px;
-                              border-radius: 50%; color: chocolate;" class="material-icons">
+                              border-radius: 50%;" title="{{element.managementContractType}}" class="material-icons" [style.color]="element.managementContractType == 1 ? 'green' : 'orange'">
                               view_headline
                             </i>
                         </td>
