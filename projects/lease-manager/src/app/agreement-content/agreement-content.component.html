@@ -394,8 +394,8 @@
                         a) Payment of Rent:
                     </p>
                     <div style="margin-left: 35px;font-size: .9em; margin-top: -20px;">
-                        The tenant will pay the rent of $ <input type="text" style="width: 10%;vertical-align: bottom;height: 30px;"> each <span style="font-size: initial;">(check one)</span> &nbsp;<input type="checkbox"> &nbsp; day <input type="checkbox">&nbsp;
-                        week <input type="checkbox">&nbsp; month to the landlord on the first day of the rental period which falls on the (due date, e.g., 1st, 2nd, 3rd, .... 31st) <input type="text" style="width: 7%;vertical-align: bottom;height: 25px;">                        day of each
+                        The tenant will pay the rent of $ <input type="text" style="width: 10%;vertical-align: bottom;height: 30px;padding-left: 5px;" [value]="lease.rentAmount"> each <span style="font-size: initial;">(check one)</span> &nbsp;<input type="checkbox">                        &nbsp; day <input type="checkbox">&nbsp; week <input type="checkbox">&nbsp; month to the landlord on the first day of the rental period which falls on the (due date, e.g., 1st, 2nd, 3rd, .... 31st) <input type="text" style="width: 7%;vertical-align: bottom;height: 25px;padding-left: 5px;"
+                            [value]="lease.rentDueOn"> day of each
                         <span style="font-size: initial;">(check one)</span>&nbsp;
                         <input type="checkbox">&nbsp;day <input type="checkbox"> &nbsp; week <input type="checkbox"> &nbsp; month subject to rent increases given in accordance with the RTA.<br> The tenant must pay the rent on time. If the rent is late,
                         the landlord may issue a <span style="font-size: .85em;font-style: italic;">Notice to End Tenancy for Unpaid Rent</span> (form RTB-30) to the tenant, which may take effect not earlier than 10 days after the date the notice is given.
@@ -408,40 +408,40 @@
                     </div>
                     <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
                         <div fxFlex="17%" fxLayout="column" fxLayoutAlign="start" fxFlexFill>
-                            <p style="margin-left: 25px;font-size: .8em;margin-bottom: 5px;"><input type="checkbox"> Water</p>
-                            <p style="margin-left: 25px;font-size: .8em;margin-bottom: 5px;"><input type="checkbox"> Cablevision</p>
-                            <p style="margin-left: 25px;font-size: .8em;margin-bottom: 5px;"><input type="checkbox"> Electricity</p>
-                            <p style="margin-left: 25px;font-size: .8em;margin-bottom: 5px;"><input type="checkbox"> Internet</p>
-                            <p style="margin-left: 25px;font-size: .8em;margin-bottom: 5px;"><input type="checkbox"> Heat</p>
+                            <p style="margin-left: 25px;font-size: .8em;margin-bottom: 5px;"><input type="checkbox" [checked]="lease.rentCoverage.water"> Water</p>
+                            <p style="margin-left: 25px;font-size: .8em;margin-bottom: 5px;"><input type="checkbox" [checked]="lease.rentCoverage.cablevison"> Cablevision</p>
+                            <p style="margin-left: 25px;font-size: .8em;margin-bottom: 5px;"><input type="checkbox" [checked]="lease.rentCoverage.electricity"> Electricity</p>
+                            <p style="margin-left: 25px;font-size: .8em;margin-bottom: 5px;"><input type="checkbox" [checked]="lease.rentCoverage.internet"> Internet</p>
+                            <p style="margin-left: 25px;font-size: .8em;margin-bottom: 5px;"><input type="checkbox" [checked]="lease.rentCoverage.heat"> Heat</p>
                             <!-- <input type="checkbox"> Additional information -->
                         </div>
                         <div fxFlex="20%" fxLayout="column" fxLayoutAlign="start" fxFlexFill>
-                            <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox"> Natural gas</p>
-                            <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox"> Sewage disposal</p>
-                            <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox"> snow removal</p>
-                            <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox"> Storage</p>
-                            <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox"> reacreational facility</p>
+                            <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox" [checked]="lease.rentCoverage.naturalGas"> Natural gas</p>
+                            <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox" [checked]="lease.rentCoverage.sewageDisposal"> Sewage disposal</p>
+                            <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox" [checked]="lease.rentCoverage.snowRemoval"> snow removal</p>
+                            <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox" [checked]="lease.rentCoverage.storage"> Storage</p>
+                            <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox" [checked]="lease.rentCoverage.recreationFacility"> reacreational facility</p>
                             <!-- <input type="checkbox"> Additional information -->
                         </div>
                         <div fxFlex="25%" fxLayout="column" fxLayoutAlign="start" fxFlexFill>
-                            <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox"> Garbage collection</p>
-                            <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox"> Recycling services</p>
-                            <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox"> Kitchen scrap services</p>
+                            <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox" [checked]="lease.rentCoverage.garbageCollection"> Garbage collection</p>
+                            <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox" [checked]="lease.rentCoverage.recycleServices"> Recycling services</p>
+                            <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox" [checked]="lease.rentCoverage.kitchenScrapCollection"> Kitchen scrap services</p>
                             <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox"> Laundry (coin-op)</p>
-                            <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox"> Laundry (free)</p>
+                            <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox" [checked]="lease.rentCoverage.laundry"> Laundry (free)</p>
                             <!-- <input type="checkbox"> Additional information -->
                         </div>
                         <div fxFlex="20%" fxLayout="column" fxLayoutAlign="start" fxFlexFill>
-                            <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox"> Refrigerator</p>
-                            <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox"> Dishwasher</p>
-                            <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox"> Stove andoOven</p>
-                            <p style="font-size: .9em;margin-bottom: 5px;"><input type="checkbox"> Window coverings</p>
-                            <p style="font-size: .9em;margin-bottom: 5px;"><input type="checkbox"> Furniture)</p>
+                            <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox" [checked]="lease.rentCoverage.regigerator"> Refrigerator</p>
+                            <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox" [checked]="lease.rentCoverage.dishwasher"> Dishwasher</p>
+                            <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox" [checked]="lease.rentCoverage.stoveOven"> Stove andoOven</p>
+                            <p style="font-size: .9em;margin-bottom: 5px;"><input type="checkbox" [checked]="lease.rentCoverage.windowCovering"> Window coverings</p>
+                            <p style="font-size: .9em;margin-bottom: 5px;"><input type="checkbox" [checked]="lease.rentCoverage.furniture"> Furniture)</p>
                             <!-- <input type="checkbox"> Additional information -->
                         </div>
                         <div fxFlex="25%" fxLayout="column" fxLayoutAlign="start" fxFlexFill>
-                            <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox"> Carpets</p>
-                            <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox"> Parking for </p>
+                            <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox" [checked]="lease.rentCoverage.carpets"> Carpets</p>
+                            <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox" [checked]="lease.rentCoverage.parkingStall >= 1"> Parking for {{lease.rentCoverage.parkingStall}}</p>
                             <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox"> Other <input type="text" style="width: 60%; height: 30px;margin-top:-12px;"></p>
                             <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox"> Other <input type="text" style="width: 60%; height: 30px;margin-top:-15px;"></p>
                             <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox"> Other <input type="text" style="width: 60%; height: 30px;margin-top:-15px;"></p>
@@ -473,7 +473,7 @@
                     <div fxLayout="column" fxLayoutAlign="start" fxFlexFill>
                         <p style="font-size: .9em;font-weight: bold;margin-bottom: 0;">A.Security Deposits</p>
                         <p style="font-size: .9em;margin-bottom: 0;">
-                            The tenant is required to pay a security deposit of $ <input type="text" style="width: 20%;height: 30px;">
+                            The tenant is required to pay a security deposit of $ <input type="text" style="width: 20%;height: 30px;padding-left: 5px;" [value]="lease.damageDepositAmount">
                         </p>
                         <p style="font-size: .9em;margin-bottom: 0;">
                             by <input type="text" style="width: 5%;height: 30px;"> <input type="text" style="width: 10%;height: 30px;">
@@ -488,7 +488,7 @@
                     <div fxLayout="column" fxLayoutAlign="start" fxFlexFill style="margin-top: 10px;font-size: .9em;">
                         <p style="font-size: .9em;font-weight: bold;margin-bottom: 0px;margin-top: 10px;">B.Pet Damage Deposits <span style="margin-left: 25px;"><input type="checkbox"> not applicable</span></p>
                         <p style="font-size: .9em;margin-bottom: 0;">
-                            The tenant is required to pay a pet damage deposit of $ <input type="text" style="width: 20%;height: 30px;">
+                            The tenant is required to pay a pet damage deposit of $ <input type="text" style="width: 20%;height: 30px;padding-left: 5px;" [value]="lease.petDepositAmount">
                         </p>
                         <p style="font-size: .9em;margin-bottom: 10px;">
                             by <input type="text" style="width: 5%;height: 30px;"> <input type="text" style="width: 10%;height: 30px;">
