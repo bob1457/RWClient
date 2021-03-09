@@ -476,8 +476,8 @@
                             The tenant is required to pay a security deposit of $ <input type="text" style="width: 20%;height: 30px;padding-left: 5px;" [value]="lease.damageDepositAmount">
                         </p>
                         <p style="font-size: .9em;margin-bottom: 0;">
-                            by <input type="text" style="width: 5%;height: 30px;"> <input type="text" style="width: 10%;height: 30px;">
-                            <input type="text" style="width: 10%;height: 30px;">
+                            by <input type="text" style="width: 5%;height: 30px;padding-left: 0;padding-right: 3px;" [value]="todayDate"> <input type="text" style="width: 10%;height: 30px;padding-left: 3px;" [value]="todayMonth">
+                            <input type="text" style="width: 10%;height: 30px;" [value]="todayYear">
                         </p>
                         <div style="font-size: .9em;margin-bottom: 0;">
                             <span style="margin-left: 20px;">day</span><span style="margin-left: 25px;">month</span><span style="margin-left: 40px;">year</span>
@@ -486,13 +486,13 @@
 
                     </div>
                     <div fxLayout="column" fxLayoutAlign="start" fxFlexFill style="margin-top: 10px;font-size: .9em;">
-                        <p style="font-size: .9em;font-weight: bold;margin-bottom: 0px;margin-top: 10px;">B.Pet Damage Deposits <span style="margin-left: 25px;"><input type="checkbox"> not applicable</span></p>
+                        <p style="font-size: .9em;font-weight: bold;margin-bottom: 0px;margin-top: 10px;">B.Pet Damage Deposits <span style="margin-left: 25px;"><input type="checkbox" [checked]="lease.petDepositAmount === 0"> not applicable</span></p>
                         <p style="font-size: .9em;margin-bottom: 0;">
                             The tenant is required to pay a pet damage deposit of $ <input type="text" style="width: 20%;height: 30px;padding-left: 5px;" [value]="lease.petDepositAmount">
                         </p>
                         <p style="font-size: .9em;margin-bottom: 10px;">
-                            by <input type="text" style="width: 5%;height: 30px;"> <input type="text" style="width: 10%;height: 30px;">
-                            <input type="text" style="width: 10%;height: 30px;">
+                            by <input type="text" style="width: 5%;height: 30px;padding-left: 0;padding-right: 3px;" [value]="todayDate"> <input type="text" style="width: 10%;height: 30px;padding-left: 3px;" [value]="todayMonth">
+                            <input type="text" style="width: 10%;height: 30px;" [value]="todayYear">
                         </p>
                         <div style="font-size: .9em;margin-bottom: 0;">
                             <span style="margin-left: 20px;">day</span><span style="margin-left: 25px;">month</span><span style="margin-left: 40px;">year</span>

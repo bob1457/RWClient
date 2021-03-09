@@ -15,6 +15,9 @@ export class AgreementContentComponent implements OnInit {
   startDate;
   startMonth;
   startYear;
+  todayDate;
+  todayMonth;
+  todayYear;
 
   constructor(private formBuilder: FormBuilder) { }
 
@@ -53,7 +56,15 @@ export class AgreementContentComponent implements OnInit {
     this.startMonth = month[newDate.getMonth()];
     this.startYear = newDate.getFullYear();
 
-    console.log('(start date)', this.startDate + ' ' + this.startMonth + ' ' + this.startYear);
+    const today = new Date();
+
+    this.todayDate = today.getDate().toString().length === 1 ? '0' + today.getDate() :  today.getDate();
+    this.todayMonth = month[today.getMonth()];
+    this.todayYear = today.getFullYear();
+    console.log('(current date)', this.todayDate + ' ' + this.todayMonth + ' ' + this.todayYear);
+
+
+
   }
 
 
