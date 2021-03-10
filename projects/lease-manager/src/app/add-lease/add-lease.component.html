@@ -125,10 +125,10 @@
                                 <mat-label>Rent Due Date</mat-label>
                                 <mat-select id="rentDueOn" formControlName="rentDueOn">
                                     <mat-option>None</mat-option>
-                                    <mat-option value="Frist Day of Month">Frist Day of Month</mat-option>
-                                    <mat-option value="15th Day of Month">15th Day of Month</mat-option>
-                                    <mat-option value="Last Day of Month">Last Day of Month</mat-option>
-                                    <mat-option value="Other">Other</mat-option>
+                                    <mat-option value="1st">Frist Day of Month</mat-option>
+                                    <mat-option value="15th">15th Day of Month</mat-option>
+                                    <mat-option value="last">Last Day of Month</mat-option>
+                                    <!-- <mat-option value="Other">Other</mat-option> -->
                                 </mat-select>
                             </mat-form-field>
                             <!--</mat-form-field>
@@ -138,19 +138,6 @@
                             </mat-form-field> -->
                         </div>
                         <div fxFlex="50%">
-                            <mat-form-field class="lease-full-width">
-                                <span class="icon-pos" matPrefix><mat-icon>notes</mat-icon> &nbsp;</span>
-                                <input type="text" id="renewTerm" formControlName="renewTerm" matInput placeholder="Renew Terms">
-                            </mat-form-field>
-                        </div>
-                    </div>
-
-                    <div fxLayout="row" fxLayoutAlign="start start" style="width: 90%;">
-                        <div fxFlex="50%">
-                            <!-- <mat-form-field fxFlex="90%">
-                                <span class="icon-pos" matPrefix><mat-icon>swap_calls</mat-icon> &nbsp;</span>
-                                <input type="text" id="term" formControlName="term" matInput placeholder="Lease Term">
-                            </mat-form-field> -->
                             <mat-form-field style="width: 90%;">
                                 <mat-label>Lease Term</mat-label>
                                 <mat-select id="term" formControlName="term">
@@ -161,8 +148,17 @@
                                     <mat-option [value]=4>Other</mat-option>
                                 </mat-select>
                             </mat-form-field>
+
                         </div>
+                    </div>
+
+                    <div fxLayout="row" fxLayoutAlign="start start" style="width: 90%;">
                         <div fxFlex="50%">
+                            <!-- <mat-form-field fxFlex="90%">
+                                <span class="icon-pos" matPrefix><mat-icon>swap_calls</mat-icon> &nbsp;</span>
+                                <input type="text" id="term" formControlName="term" matInput placeholder="Lease Term">
+                            </mat-form-field> -->
+
                             <mat-form-field style="width: 90%;">
                                 <mat-label>Lease End Code</mat-label>
                                 <mat-select id="leaseEndCode" formControlName="leaseEndCode">
@@ -171,11 +167,17 @@
 
                                     <mat-option [value]=21>Renew by weekly</mat-option>
                                     <mat-option [value]=22>Renew by bi-weekly</mat-option>
-                                    <mat-option [value]=23>Renew by other term</mat-option>
+                                    <mat-option [value]=23>Renew by another term</mat-option>
 
                                     <mat-option [value]=31>Fixed Term and Renew the Term</mat-option>
                                     <mat-option [value]=32>Fixed Term and Vacant</mat-option>
                                 </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div fxFlex="50%">
+                            <mat-form-field class="lease-full-width">
+                                <span class="icon-pos" matPrefix><mat-icon>notes</mat-icon> &nbsp;</span>
+                                <input type="text" id="renewTerm" formControlName="renewTerm" matInput placeholder="Reason to vacant">
                             </mat-form-field>
                             <!-- <mat-form-field class="lease-full-width">
                                 <span class="icon-pos" matPrefix><mat-icon>notes</mat-icon> &nbsp;</span>
