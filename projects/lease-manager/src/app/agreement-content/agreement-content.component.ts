@@ -15,9 +15,14 @@ export class AgreementContentComponent implements OnInit {
   startDate;
   startMonth;
   startYear;
+  endDate;
+  endMonth;
+  endYear;
   todayDate;
   todayMonth;
   todayYear;
+
+  newTerm = '';
 
   constructor(private formBuilder: FormBuilder) { }
 
@@ -38,7 +43,12 @@ export class AgreementContentComponent implements OnInit {
       'October',
       'November',
       'December'
-  ];
+    ];
+
+    if (this.lease.endLeaseCode === 23) {
+      this.newTerm = 'One Year';
+    }
+    console.log('new term', this.newTerm);
 
     // this.leaseForm = this.formBuilder.group({
     //   landlordFirstName: [''],
@@ -52,9 +62,15 @@ export class AgreementContentComponent implements OnInit {
 
     console.log('new date', newDate);
 
-    this.startDate = '0' + newDate.getDate();
+    this.startDate = newDate.getDate().toString().length === 1 ? '0' + newDate.getDate() : newDate.getDate();
     this.startMonth = month[newDate.getMonth()];
     this.startYear = newDate.getFullYear();
+
+    const endDate = new Date(this.lease.leaseEndDate);
+
+    this.endDate = endDate.getDate().toString().length === 1 ? '0' + endDate.getDate() : endDate.getDate();
+    this.endMonth = month[endDate.getMonth()];
+    this.endYear = endDate.getFullYear();
 
     const today = new Date();
 

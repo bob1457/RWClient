@@ -139,7 +139,7 @@
                 </div>
             </div>
             <p style="margin-top: 7px;margin-bottom: -5px;">
-                <span style="font-size: .9em;font-weight: bold;">ADDRESS FOR SERVICE of the</span><span style="margin-left: 25px;font-weight: bold;"><input type="checkbox"> &nbsp;landlord</span> <span style="margin-left: 25px; font-weight: bold;"><input type="checkbox"> &nbsp;landlord's agent</span>
+                <span style="font-size: .9em;font-weight: bold;">ADDRESS FOR SERVICE of the</span><span style="margin-left: 25px;font-weight: bold;"><input type="checkbox" [checked]="true"> &nbsp;landlord</span> <span style="margin-left: 25px; font-weight: bold;"><input type="checkbox"> &nbsp;landlord's agent</span>
             </p>
             <div fxLayout="row" fxLayoutAlign="start" fxFlexFill style="margin-top: -15px;">
                 <div style="width: 10%;">
@@ -270,27 +270,28 @@
                             <div fxFlex="90%">
                                 <div fxLayout="column" fxLayoutAlign="start" fxFlexFill>
                                     <div>
-                                        <input type="checkbox"> &nbsp;<span style="font-size: .9em;">A) and continues on a month-to-month basis until ended in accordance with the Act.</span>
+                                        <input type="checkbox" [checked]="lease.endLeaseCode == 1"> &nbsp;<span style="font-size: .9em;">A) and continues on a month-to-month basis until ended in accordance with the Act.</span>
                                     </div>
                                     <div>
-                                        <input type="checkbox"> &nbsp;<span style="font-size: .9em;">B) and continues on another periodic basis, as specified below, until ended in accordance with the Act.</span><br>
-                                        <input type="checkbox" style="margin-left: 10px;"> &nbsp;weekly &nbsp;<input type="checkbox"> &nbsp;bi-weekly <input type="checkbox"> &nbsp;other <input readonly type="text" style="width: 50%;height: 30px;">
+                                        <input type="checkbox" [checked]="lease.endLeaseCode == 21 || lease.endLeaseCode == 22 || lease.endLeaseCode == 23"> &nbsp;<span style="font-size: .9em;">B) and continues on another periodic basis, as specified below, until ended in accordance with the Act.</span><br>
+                                        <input type="checkbox" style="margin-left: 10px;" [checked]="lease.endLeaseCode == 21"> &nbsp;weekly &nbsp;<input type="checkbox" [checked]="lease.endLeaseCode == 22"> &nbsp;bi-weekly <input type="checkbox" [checked]="lease.endLeaseCode == 23">&nbsp;other
+                                        <input readonly type="text" style="width: 50%;height: 30px;" [value]="newTerm">
                                     </div>
                                     <div fxLayout="row" fxLayoutAlign="start">
                                         <div fxFlex="40%" style="margin-top: 8px;">
-                                            <input type="checkbox"> &nbsp;C) and is for a fixed term ending on
+                                            <input type="checkbox" [checked]="lease.endLeaseCode == 31 || lease.endLeaseCode == 32"> &nbsp;C) and is for a fixed term ending on
                                         </div>
                                         <div fxFlex="60%" fxLayout="row" fxLayoutAlign="start">
                                             <div fxFlex="10%" style="margin-right: 5px;">
-                                                <input type="text" style="height: 30px;">
+                                                <input type="text" style="height: 30px;padding-left: 0;" [value]="endDate">
                                                 <label>day</label>
                                             </div>
                                             <div fxFlex="40%">
-                                                <input type="text" style="height: 30px;">
+                                                <input type="text" style="height: 30px;" [value]="endMonth">
                                                 <label>month</label>
                                             </div>
                                             <div fxFlex="40%">
-                                                <input type="text" style="height: 30px;">
+                                                <input type="text" style="height: 30px;" [value]="endYear">
                                                 <label>year</label>
                                             </div>
                                         </div>
@@ -313,11 +314,11 @@
                         <div fxFlex="90%">
                             <div fxLayout="column" fxLayoutAlign="start" fxFlexFill>
                                 <div>
-                                    <input type="checkbox"> &nbsp;<span style="font-size: .95em;">D) At the end of this time, the tenancy will continue on a month-to-month basis, or another fixed length of
+                                    <input type="checkbox" [checked]="lease.endLeaseCode == 31"> &nbsp;<span style="font-size: .95em;">D) At the end of this time, the tenancy will continue on a month-to-month basis, or another fixed length of
                           time, unless the tenant gives notice to end tenancy at least one clear month before the end of the term.</span>
                                 </div>
                                 <div>
-                                    <input type="checkbox"> &nbsp;<span style="font-size: .95em;">E) At the end of this time, the tenancy is ended and <span style="font-weight:bold">the tenant <span style="text-decoration: underline;">must vacate</span>                                    the rental unit. This requirement is only permitted in circumstances prescribed under section 13.1 of theResidential Tenancy Regulation, or if this is a sublease agreement as defined in the Act.</span>
+                                    <input type="checkbox" [checked]="lease.endLeaseCode == 32"> &nbsp;<span style="font-size: .95em;">E) At the end of this time, the tenancy is ended and <span style="font-weight:bold">the tenant <span style="text-decoration: underline;">must vacate</span>                                    the rental unit. This requirement is only permitted in circumstances prescribed under section 13.1 of theResidential Tenancy Regulation, or if this is a sublease agreement as defined in the Act.</span>
                                     </span>
                                 </div>
                                 <div style="margin-top: -10px;">
@@ -441,7 +442,7 @@
                         </div>
                         <div fxFlex="25%" fxLayout="column" fxLayoutAlign="start" fxFlexFill>
                             <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox" [checked]="lease.rentCoverage.carpets"> Carpets</p>
-                            <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox" [checked]="lease.rentCoverage.parkingStall >= 1"> Parking for {{lease.rentCoverage.parkingStall}}</p>
+                            <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox" [checked]="lease.rentCoverage.parkingStall >= 1"> Parking for {{lease.rentCoverage.parkingStall}} &nbsp;vehicle(s)</p>
                             <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox"> Other <input type="text" style="width: 60%; height: 30px;margin-top:-12px;"></p>
                             <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox"> Other <input type="text" style="width: 60%; height: 30px;margin-top:-15px;"></p>
                             <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox"> Other <input type="text" style="width: 60%; height: 30px;margin-top:-15px;"></p>
@@ -449,8 +450,8 @@
                         </div>
                     </div>
                     <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
-                        <p fxFlex="25%" style="font-size: .8em;margin-bottom: 15px;margin-left: 25px;"><input type="checkbox"> Additional Information</p>
-                        <input fxFlex="80%" type="text" style="height: 25px;margin-top:0px;">
+                        <p fxFlex="25%" style="font-size: .8em;margin-bottom: 15px;margin-left: 25px;"><input type="checkbox" [checked]="lease.notes.length > 1"> Additional Information</p>
+                        <input fxFlex="80%" type="text" style="height: 25px;margin-top:0px;" [value]="lease.notes">
                     </div>
                 </div>
                 <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
@@ -601,7 +602,7 @@
                                     2)
                                 </div>
                                 <div fxFlex="90%" style="margin-left: 5px;">
-                                    The landlord and tenant may agree on a differentday for the condition inspection.
+                                    The landlord and tenant may agree on a different day for the condition inspection.
                                 </div>
                             </div>
                             <div>
