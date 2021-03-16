@@ -277,7 +277,7 @@
                         </span> -->
                         <!-- <span *ngIf="showMsg" style="margin-right: 20px;"> Updated successfully!</span>&nbsp;&nbsp; -->
                         <button [disabled]="loading$ | async" type="submit" mat-raised-button color="primary">UPDATE</button>
-                        <button mat-raised-button color="accent">CANCEL</button>
+                        <button mat-raised-button color="accent" (click)="goBack()">CANCEL</button>
                     </div>
                 </form>
             </mat-card-content>

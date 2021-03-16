@@ -22,10 +22,19 @@
                         <div fxLayout="column" style="margin-top: 35px;" fxFlex="50" fxflex.xs="85">
                             <mat-form-field style="width: 90%;">
                                 <mat-label>Select Rental Property to be Listed</mat-label>
+
                                 <mat-select #mySelect (selectionChange)="onChange(mySelect.value)">
-                                    <mat-option *ngFor="let property of rentalProperties" [value]="property.id">
-                                        {{property.propertyName}}
-                                    </mat-option>
+                                    <div *ngIf="rentalProperties; else loading2 ">
+                                        <mat-option *ngFor="let property of rentalProperties" [value]="property.id">
+                                            {{property.propertyName}}
+                                        </mat-option>
+                                    </div>
+                                    <ng-template #loading2>
+                                        <mat-option>
+                                            <img src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==">
+                                        </mat-option>
+                                    </ng-template>
+
                                 </mat-select>
                             </mat-form-field>
                             <mat-form-field class="property-full-width" style="width: 90%;">

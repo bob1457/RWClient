@@ -6,6 +6,7 @@ import { Location } from '@angular/common';
 import { MarketingService } from '@lib/app-core';
 import { allRentalProperties } from '../store/reducers';
 import { getAllRentalProperties, addPropertyListing } from '../store/actions/marketing.actions';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-add-listing',
@@ -16,6 +17,7 @@ export class AddListingComponent implements OnInit {
 
   addForm: FormGroup;
   rentalProperties: any[];
+  // properties$: Observable<any[]>;
 
   constructor(private formBuilder: FormBuilder,
               private marketingService: MarketingService,
@@ -37,6 +39,8 @@ export class AddListingComponent implements OnInit {
     //       // console.log(this.rentalProperties);.filter(p => p.status === 'NotSet')
     //     });
     this.store.dispatch(getAllRentalProperties());
+
+    // this.properties$ = this.store.select(allRentalProperties);
 
     this.addForm = this.formBuilder.group({
       rentalPropertyId: [],

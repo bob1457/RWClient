@@ -24,7 +24,10 @@ export class AllLeasesComponent implements OnInit {
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: false}) sort: MatSort;
 
-  constructor(private store: Store<PropertyLeaseState>) { }
+  constructor(private store: Store<PropertyLeaseState>) {
+
+    setTimeout(() =>  {this.dataSource.paginator = this.paginator; this.dataSource.sort = this.sort; });
+  }
 
   dataSource = new MatTableDataSource<PropertyLease>();
 

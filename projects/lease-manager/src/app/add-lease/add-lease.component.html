@@ -48,7 +48,7 @@
                         </mat-select>
                     </mat-form-field>
                     <mat-form-field style="width: 90%;">
-                        <mat-label>Select Newe Tenant</mat-label>
+                        <mat-label>Select New Tenant</mat-label>
                         <mat-select #mySelect2 (selectionChange)="onTenantChange(mySelect2.value)">
                             <div *ngIf="newTenants$ | async; else loading2">
                                 <mat-option *ngFor="let tenant of newTenants$ | async" [value]="tenant.id">
