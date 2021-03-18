@@ -26,25 +26,6 @@ export class AllLeasesComponent implements OnInit {
 
   constructor(private store: Store<PropertyLeaseState>) {
 
-    setTimeout(() =>  {this.dataSource.paginator = this.paginator; this.dataSource.sort = this.sort; });
-  }
-
-  dataSource = new MatTableDataSource<PropertyLease>();
-
-  ngOnInit() {
-    debugger;
-    // return this.propertyService.getPropertyList().subscribe((pList: Property[]) => {this.list = pList; console.log(pList)});
-    this.loading$ = this.store.pipe(select(loadingStatus));
-
-    // this.store.dispatch(getAllLeases());
-
-    // this.store.pipe(
-    //   select(leaseList)).subscribe(data => {
-    //     this.list = data ;
-    //     console.log(data);
-    //     this.dataSource.data = this.list;
-    //     console.log(this.dataSource.data);
-    //   });
     this.store.pipe(select(leaseList))
           .subscribe(data => {
             if (data != null) { // select data from state store if data exists
@@ -67,10 +48,52 @@ export class AllLeasesComponent implements OnInit {
             console.log(data);
       });
 
-    this.store.dispatch(getRentPaymentList());
-    this.store.dispatch(getAllWorkOrders());
-    this.store.dispatch(getAllVendors());
-    this.store.dispatch(getAllServiceRequests());
+    setTimeout(() =>  {this.dataSource.paginator = this.paginator; this.dataSource.sort = this.sort; });
+  }
+
+  dataSource = new MatTableDataSource<PropertyLease>();
+
+  ngOnInit() {
+    debugger;
+    // return this.propertyService.getPropertyList().subscribe((pList: Property[]) => {this.list = pList; console.log(pList)});
+    this.loading$ = this.store.pipe(select(loadingStatus));
+
+    // this.store.dispatch(getAllLeases());
+
+    // this.store.pipe(
+    //   select(leaseList)).subscribe(data => {
+    //     this.list = data ;
+    //     console.log(data);
+    //     this.dataSource.data = this.list;
+    //     console.log(this.dataSource.data);
+    //   });
+
+    // this.store.pipe(select(leaseList))
+    //       .subscribe(data => {
+    //         if (data != null) { // select data from state store if data exists
+    //           this.list = data;
+    //           this.dataSource.data = this.list;
+    //           // this.detailsForm.patchValue(data);
+    //         } else {
+    //           this.store.dispatch(getAllLeases()); // dispatch the action if state has no data
+
+    //           this.store.pipe(select(leaseList)) // select date from state in store
+    //           .subscribe(list => {
+    //             this.list = list;
+    //             this.dataSource.data = this.list;
+
+    //             this.dataSource.sort = this.sort;
+    //             this.dataSource.paginator = this.paginator;
+
+    //           });
+    //         }
+    //         console.log(data);
+    //   });
+
+    // this.store.dispatch(getRentPaymentList());
+    // this.store.dispatch(getAllWorkOrders());
+    // this.store.dispatch(getAllVendors());
+    // this.store.dispatch(getAllServiceRequests());
 
 
   }
