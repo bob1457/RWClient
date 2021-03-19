@@ -95,6 +95,13 @@
                     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                 </table>
             </div>
+            <table style="width: 100%;">
+                <tr *ngIf="!dataSource.data.length">
+                    <td style="text-align: center;height:40px" [attr.colspan]="displayedColumns.length">
+                        No Records Found!
+                    </td>
+                </tr>
+            </table>
             <span class="spacer"></span>
             <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 25]"></mat-paginator>
         </div>
