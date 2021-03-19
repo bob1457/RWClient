@@ -5,7 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LeaseService, PropertyLease } from '@lib/app-core';
 import { addRentPayment, addWorkOrder, getLeaseDetails, getRentPaymenttDetails, updateLease } from '../store/actions/lease.actions';
-import { leaseDetails, loadingStatus, rentPaymentDetails, rentPaymentList, serviceRequestList, vendorList, workOrderList } from '../store/reducers';
+import { leaseDetails, loadingStatus, rentPaymentDetails, rentPaymentList, serviceRequestList, tenantList, vendorList, workOrderList } from '../store/reducers';
 import { Observable } from 'rxjs';
 import { MatDialog, MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { PaymentDetailsDialogComponent } from '../dialogs/payment-details-dialog/payment-details-dialog.component';
@@ -27,6 +27,7 @@ export class LeaseDetailsComponent implements OnInit {
   addWorkOrder = false;
   workOrders: any;
   requests: any [];
+  tenants: any [];
 
   tabIndex = 0;
   hide = false;
@@ -323,8 +324,15 @@ export class LeaseDetailsComponent implements OnInit {
                       .subscribe(reqs => {
                         this.requests = reqs;
                         if (reqs && this.lease) {
-                          this.requests = reqs.filter(l => l.leaseId == this.lease.id);
+                          this.requests = reqs.filter(l => l.leaseId === this.lease.id);
                           console.log('reqs for this lease', this.requests);
+                        }
+                      });
+
+            this.store.select(tenantList)
+                      .subscribe(tnts => {
+                        if (tnts && this.lease) {
+                          this.tenants = tnts.filter(l => l.leaseId === this.lease.id);
                         }
                       });
           });

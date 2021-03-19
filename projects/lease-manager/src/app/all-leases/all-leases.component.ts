@@ -1,12 +1,14 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { PropertyLeaseState } from '../store/lease-state';
-import { getAllLeases, getAllServiceRequests, getAllVendors, getAllWorkOrders, getRentPaymentList } from '../store/actions/lease.actions';
+import { getAllLeases, getAllServiceRequests, getAllVendors,
+        getAllWorkOrders, getRentPaymentList, getAllTenants } from '../store/actions/lease.actions';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator, MatSort } from '@angular/material';
 import { PropertyLease } from '@lib/app-core';
 import { leaseList, loadingStatus } from '../store/reducers';
 import { Observable } from 'rxjs';
+
 
 @Component({
   selector: 'app-all-leases',
@@ -90,10 +92,13 @@ export class AllLeasesComponent implements OnInit {
     //         console.log(data);
     //   });
 
-    // this.store.dispatch(getRentPaymentList());
-    // this.store.dispatch(getAllWorkOrders());
-    // this.store.dispatch(getAllVendors());
-    // this.store.dispatch(getAllServiceRequests());
+    // Pre-load all these list so that for each lease these list can be filtered
+    //
+    this.store.dispatch(getRentPaymentList());
+    this.store.dispatch(getAllWorkOrders());
+    this.store.dispatch(getAllVendors());
+    this.store.dispatch(getAllServiceRequests());
+    this.store.dispatch(getAllTenants());
 
 
   }
