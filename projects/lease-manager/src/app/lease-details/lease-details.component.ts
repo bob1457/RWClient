@@ -6,6 +6,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LeaseService, PropertyLease } from '@lib/app-core';
 import { addRentPayment, addWorkOrder, getLeaseDetails, getRentPaymenttDetails, updateLease } from '../store/actions/lease.actions';
 import { leaseDetails, loadingStatus, rentPaymentDetails, rentPaymentList, serviceRequestList, tenantList, vendorList, workOrderList } from '../store/reducers';
+import { getAllServiceRequests, getAllVendors,
+  getAllWorkOrders, getRentPaymentList, getAllTenants } from '../store/actions/lease.actions';
 import { Observable } from 'rxjs';
 import { MatDialog, MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { PaymentDetailsDialogComponent } from '../dialogs/payment-details-dialog/payment-details-dialog.component';
@@ -270,6 +272,12 @@ export class LeaseDetailsComponent implements OnInit {
       //       this.property = data;
       //       this.detailsForm.patchValue(data);
       // });
+
+      this.store.dispatch(getRentPaymentList());
+    this.store.dispatch(getAllWorkOrders());
+    this.store.dispatch(getAllVendors());
+    this.store.dispatch(getAllServiceRequests());
+    this.store.dispatch(getAllTenants());
     }
 
 

@@ -49,8 +49,14 @@ export class AllLeasesComponent implements OnInit {
             }
             console.log(data);
       });
-
     setTimeout(() =>  {this.dataSource.paginator = this.paginator; this.dataSource.sort = this.sort; });
+    // this.store.dispatch(getRentPaymentList());
+    // this.store.dispatch(getAllWorkOrders());
+    // this.store.dispatch(getAllVendors());
+    // this.store.dispatch(getAllServiceRequests());
+    // this.store.dispatch(getAllTenants());
+
+
   }
 
   dataSource = new MatTableDataSource<PropertyLease>();
@@ -94,11 +100,11 @@ export class AllLeasesComponent implements OnInit {
 
     // Pre-load all these list so that for each lease these list can be filtered
     //
-    this.store.dispatch(getRentPaymentList());
-    this.store.dispatch(getAllWorkOrders());
-    this.store.dispatch(getAllVendors());
-    this.store.dispatch(getAllServiceRequests());
-    this.store.dispatch(getAllTenants());
+    // this.store.dispatch(getRentPaymentList());
+    // this.store.dispatch(getAllWorkOrders());
+    // this.store.dispatch(getAllVendors());
+    // this.store.dispatch(getAllServiceRequests());
+    // this.store.dispatch(getAllTenants());
 
 
   }
