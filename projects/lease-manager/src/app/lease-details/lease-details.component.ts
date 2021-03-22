@@ -4,7 +4,7 @@ import { PropertyLeaseState } from '../store/lease-state';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LeaseService, PropertyLease } from '@lib/app-core';
-import { addRentPayment, addWorkOrder, getLeaseDetails, getRentPaymenttDetails, updateLease } from '../store/actions/lease.actions';
+import { addRentPayment, addTenant, addWorkOrder, getLeaseDetails, getRentPaymenttDetails, updateLease } from '../store/actions/lease.actions';
 import { leaseDetails, loadingStatus, rentPaymentDetails, rentPaymentList, serviceRequestList,
          tenantList, vendorList, workOrderList } from '../store/reducers';
 import { getAllServiceRequests, getAllVendors,
@@ -27,6 +27,7 @@ export class LeaseDetailsComponent implements OnInit {
   payments: any;
   paymentDetails: any;
   addRent = false;
+  addTenant = false;
   addWorkOrder = false;
   workOrders: any;
   requests: any [];
@@ -40,8 +41,9 @@ export class LeaseDetailsComponent implements OnInit {
   loading$: Observable<boolean>;
 
   detailsForm: FormGroup;
-  addForm: FormGroup;
-  addForm2: FormGroup;
+  addForm: FormGroup; // Add rent payment
+  addForm2: FormGroup; // Add work order
+  addTenantForm: FormGroup;
 
   vendors:any [];
 
@@ -108,6 +110,12 @@ export class LeaseDetailsComponent implements OnInit {
   @ViewChild('Sort2', {static: true}) sort2: MatSort;
 
   dataSource2 = new MatTableDataSource<any>();
+
+  displayedColumns3: string[] = ['icon', 'id', 'firstName', 'lastName', 'email', 'tel1', 'addDate', 'action'];
+  @ViewChild('paginator3', {static: false}) paginator3: MatPaginator;
+  @ViewChild('Sort3', {static: true}) sort3: MatSort;
+
+  dataSource3 = new MatTableDataSource<any>();
 
   private dialogConfig;
 
@@ -274,11 +282,25 @@ export class LeaseDetailsComponent implements OnInit {
       //       this.detailsForm.patchValue(data);
       // });
 
-    this.store.dispatch(getRentPaymentList());
-    this.store.dispatch(getAllWorkOrders());
-    // this.store.dispatch(getAllVendors());
-    // this.store.dispatch(getAllServiceRequests());
-    this.store.dispatch(getAllTenants());
+    this.addTenantForm = this.formBuilder.group({
+      userNam: ['Unset'],
+      firstName: [''],
+      lastName: [''],
+      contactEmail: [''],
+      contactTelephone1: [''],
+      contactTelephone2: [''],
+      contatctOthers: [''],
+      leaseId: [],
+      onlineAccessEnbaled: [false],
+      roleId: [3]
+
+    })
+
+    // this.store.dispatch(getRentPaymentList());
+    // this.store.dispatch(getAllWorkOrders());
+      // this.store.dispatch(getAllVendors());
+      // this.store.dispatch(getAllServiceRequests());
+    // this.store.dispatch(getAllTenants());
   }
 
 
@@ -342,6 +364,9 @@ export class LeaseDetailsComponent implements OnInit {
                       .subscribe(tnts => {
                         if (tnts && this.lease) {
                           this.tenants = tnts.filter(l => l.leaseId === this.lease.id);
+                          this.dataSource3.data = this.tenants;
+
+                          setTimeout(() =>  {this.dataSource3.paginator = this.paginator3; this.dataSource3.sort = this.sort3; });
                         }
                       });
           });
@@ -390,14 +415,17 @@ export class LeaseDetailsComponent implements OnInit {
       }
       case 2 : {
         this.hide = true;
+        this.store.dispatch(getAllTenants());
         break;
       }
       case 3 : {
         this.hide = true;
+        this.store.dispatch(getRentPaymentList());
         break;
       }
       case 4 : {
         this.hide = true;
+        this.store.dispatch(getAllWorkOrders());
         break;
       }
         default: {
@@ -445,8 +473,16 @@ export class LeaseDetailsComponent implements OnInit {
     debugger;
   }
 
+  getTenantDetails(id: number) {
+
+  }
+
   addR() {
     this.addRent = true;
+  }
+
+  addT() {
+    this.addTenant = true;
   }
 
   addW() {
@@ -459,6 +495,10 @@ export class LeaseDetailsComponent implements OnInit {
 
   cancel2() {
     this.addWorkOrder = false;
+  }
+
+  cancel3() {
+    this.addTenant = false;
   }
 
   addRentPayment() {
@@ -474,11 +514,24 @@ export class LeaseDetailsComponent implements OnInit {
     this.addRent = false;
   }
 
+  addAdditionalTenant() {
+    this.addTenantForm.patchValue({
+      leaseId: Number(this.id),
+      onlineAccessEnbaled: false,
+      roleId: 3
+    });
+
+    console.log('tenant form', this.addTenantForm.value);
+    // this.store.dispatch(addTenant({payload: this.addTenantForm.value()}));
+    this.addTenantForm.reset();
+    this.addTenant = false;
+  }
+
   addNewOrder() {
     debugger;
     this.addForm2.patchValue({
       workOrderStatus: 'New',
-      rentalPropertyId: this.lease.id
+      rentalPropertyId: this.lease.id //??
     });
     console.log('order form', this.addForm2.value);
     this.store.dispatch(addWorkOrder({payload: this.addForm2.value}));
@@ -501,6 +554,10 @@ export class LeaseDetailsComponent implements OnInit {
 
   public doFilter2 = (value: string) => {
     this.dataSource2.filter = value.trim().toLocaleLowerCase();
+  }
+
+  public doFilter3 = (value: string) => {
+    this.dataSource3.filter = value.trim().toLocaleLowerCase();
   }
 
   openDialog() {
