@@ -276,8 +276,8 @@ export class LeaseDetailsComponent implements OnInit {
 
     this.store.dispatch(getRentPaymentList());
     this.store.dispatch(getAllWorkOrders());
-    this.store.dispatch(getAllVendors());
-    this.store.dispatch(getAllServiceRequests());
+    // this.store.dispatch(getAllVendors());
+    // this.store.dispatch(getAllServiceRequests());
     this.store.dispatch(getAllTenants());
   }
 
