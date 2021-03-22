@@ -5,7 +5,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LeaseService, PropertyLease } from '@lib/app-core';
 import { addRentPayment, addWorkOrder, getLeaseDetails, getRentPaymenttDetails, updateLease } from '../store/actions/lease.actions';
-import { leaseDetails, loadingStatus, rentPaymentDetails, rentPaymentList, serviceRequestList, tenantList, vendorList, workOrderList } from '../store/reducers';
+import { leaseDetails, loadingStatus, rentPaymentDetails, rentPaymentList, serviceRequestList,
+         tenantList, vendorList, workOrderList } from '../store/reducers';
 import { getAllServiceRequests, getAllVendors,
   getAllWorkOrders, getRentPaymentList, getAllTenants } from '../store/actions/lease.actions';
 import { Observable } from 'rxjs';
@@ -273,12 +274,12 @@ export class LeaseDetailsComponent implements OnInit {
       //       this.detailsForm.patchValue(data);
       // });
 
-      this.store.dispatch(getRentPaymentList());
+    this.store.dispatch(getRentPaymentList());
     this.store.dispatch(getAllWorkOrders());
     this.store.dispatch(getAllVendors());
     this.store.dispatch(getAllServiceRequests());
     this.store.dispatch(getAllTenants());
-    }
+  }
 
 
 

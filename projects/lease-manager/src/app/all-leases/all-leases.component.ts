@@ -48,8 +48,10 @@ export class AllLeasesComponent implements OnInit {
               });
             }
             console.log(data);
+
+            setTimeout(() =>  {this.dataSource.paginator = this.paginator; this.dataSource.sort = this.sort; });
       });
-    setTimeout(() =>  {this.dataSource.paginator = this.paginator; this.dataSource.sort = this.sort; });
+
     // this.store.dispatch(getRentPaymentList());
     // this.store.dispatch(getAllWorkOrders());
     // this.store.dispatch(getAllVendors());
