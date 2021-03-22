@@ -62,6 +62,11 @@ export class LeaseService {
     return this.http.post<PropertyTenant>(`${this.baseUrl}/lease/tenant/update`, tenant);
   }
 
+  addTenant(tenant: PropertyTenant) {
+    debugger;
+    return this.http.post<PropertyTenant>(`${this.baseUrl}/lease/addTenant`, tenant);
+  }
+
   getAllWorkOrders() {
     debugger;
     return this.http.get<WorkOrder[]>(`${this.baseUrl}/workorder/all`);

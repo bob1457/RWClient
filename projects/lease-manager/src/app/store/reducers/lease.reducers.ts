@@ -101,6 +101,36 @@ const propertyLeaseReducer = createReducer(
     });
   }),
 
+
+  /**
+   * Add tenant to lease
+   */
+   on(LeaseActions.addTenant, state => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+  on(LeaseActions.addTenantSuccess, (state, { payload }) => {
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      tenants: [...state.tenants, payload ]
+    });
+  }),
+
+  on(LeaseActions.addTenantFailure, (state) => {
+    return ({
+      ...state,
+      loading: false,
+      errorMessage: 'Failed to add tenant'
+    });
+  }),
+
+
+
+
   /**
    * Add property lease
    */
@@ -123,7 +153,7 @@ const propertyLeaseReducer = createReducer(
     return ({
       ...state,
       loading: false,
-      errorMessage: 'Failed to lease'
+      errorMessage: 'Failed to add lease'
     });
   }),
 

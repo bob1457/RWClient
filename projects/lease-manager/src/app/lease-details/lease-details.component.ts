@@ -283,15 +283,17 @@ export class LeaseDetailsComponent implements OnInit {
       // });
 
     this.addTenantForm = this.formBuilder.group({
-      userNam: ['Unset'],
+      newTenantId: 0,
+      userName: ['Unset'],
       firstName: [''],
       lastName: [''],
       contactEmail: [''],
       contactTelephone1: [''],
       contactTelephone2: [''],
-      contatctOthers: [''],
+      contactOthers: [''],
       leaseId: [],
       onlineAccessEnbaled: [false],
+      userAvartaImgUrl: [''],
       roleId: [3]
 
     })
@@ -415,17 +417,23 @@ export class LeaseDetailsComponent implements OnInit {
       }
       case 2 : {
         this.hide = true;
-        this.store.dispatch(getAllTenants());
+        if (!this.tenants) {
+          this.store.dispatch(getAllTenants());
+        }
         break;
       }
       case 3 : {
         this.hide = true;
-        this.store.dispatch(getRentPaymentList());
+        if (!this.payments) {
+          this.store.dispatch(getRentPaymentList());
+        }
         break;
       }
       case 4 : {
         this.hide = true;
-        this.store.dispatch(getAllWorkOrders());
+        if (!this.workOrders) {
+           this.store.dispatch(getAllWorkOrders());
+        }
         break;
       }
         default: {
@@ -515,14 +523,17 @@ export class LeaseDetailsComponent implements OnInit {
   }
 
   addAdditionalTenant() {
+    debugger;
     this.addTenantForm.patchValue({
+      newTenantId: 0,
       leaseId: Number(this.id),
       onlineAccessEnbaled: false,
+      userAvartaImgUrl: '',
       roleId: 3
     });
 
     console.log('tenant form', this.addTenantForm.value);
-    // this.store.dispatch(addTenant({payload: this.addTenantForm.value()}));
+    this.store.dispatch(addTenant({payload: this.addTenantForm.value}));
     this.addTenantForm.reset();
     this.addTenant = false;
   }
