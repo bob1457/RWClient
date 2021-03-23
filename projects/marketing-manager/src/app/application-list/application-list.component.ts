@@ -62,7 +62,7 @@ export class ApplicationListComponent implements OnInit {
     this.store.select(loadedStatus)
         .subscribe(res => this.loaded = res);
 
-    if (this.list == null) {
+    if (!this.list) {
           this.store.dispatch(getRentalApplicationList())  ;
         }
 

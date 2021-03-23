@@ -39,8 +39,12 @@ export class AllOpenHousesComponent implements OnInit {
 
   ngOnInit() {
 
-    this.loading$ = this.store.pipe(select(loadingStatus))
-    this.store.dispatch(getOpenHouseList());
+    this.loading$ = this.store.pipe(select(loadingStatus));
+
+    if (this.openhouseList.length === 0) {
+      this.store.dispatch(getOpenHouseList());
+    }
+    // this.store.dispatch(getOpenHouseList());
 
   }
 
