@@ -3,7 +3,7 @@ import { Store, select } from '@ngrx/store';
 import { PropertyLeaseState } from '../store/lease-state';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { LeaseService, PropertyLease } from '@lib/app-core';
+import { LeaseService, PropertyLease, Vendor } from '@lib/app-core';
 import { addRentPayment, addTenant, addWorkOrder, getLeaseDetails, getRentPaymenttDetails, updateLease } from '../store/actions/lease.actions';
 import { leaseDetails, loadingStatus, rentPaymentDetails, rentPaymentList, serviceRequestList,
          tenantList, vendorList, workOrderList } from '../store/reducers';
@@ -46,6 +46,7 @@ export class LeaseDetailsComponent implements OnInit {
   addTenantForm: FormGroup;
 
   vendors:any [];
+  vendors$: Observable<Vendor[]>;
 
   months = [
     {name: 'January'},
@@ -127,6 +128,8 @@ export class LeaseDetailsComponent implements OnInit {
               private propertyService: LeaseService) {
                 this.id = this.actRoute.snapshot.params.id;
                 console.log(this.id);
+
+                // this.vendors$ = this.store.select(vendorList);
 
                 this.GetLeaseDetails(this.id);
 
@@ -296,7 +299,7 @@ export class LeaseDetailsComponent implements OnInit {
       userAvartaImgUrl: [''],
       roleId: [3]
 
-    })
+    });
 
     // this.store.dispatch(getRentPaymentList());
     // this.store.dispatch(getAllWorkOrders());
@@ -431,6 +434,11 @@ export class LeaseDetailsComponent implements OnInit {
       }
       case 4 : {
         this.hide = true;
+        if (!this.vendors) {
+          // this.store.dispatch(getAllVendors());
+          this.vendors$ = this.propertyService.getAllVendors();
+        }
+
         if (!this.workOrders) {
            this.store.dispatch(getAllWorkOrders());
         }

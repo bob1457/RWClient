@@ -360,9 +360,9 @@
                                             <input type="text" matInput placeholder="Contact Others" formControlName="contactOthers">
                                         </mat-form-field>
                                         <div fxFlex="20%" fxFlex.xs="90%">
-                                            <button type="submit" mat-button color="primary" style="margin-right: 5px;">
+                                            <button type="submit" mat-button color="primary" style="margin-right: 5px; color: green;">
                                           <!-- Add -->
-                                          Add <mat-icon style="font-size: 2.5em;color: green;font-weight: bold;">check</mat-icon>
+                                          Add <mat-icon style="font-size: 2.5em;color: green;font-weight: bold;vertical-align: top;">check</mat-icon>
                                         </button>
                                             <!-- <button type="button" (click)="reset()" mat-button mat-stroked-button color="accent">
                                           Reset
@@ -538,7 +538,7 @@
                                         <div fxFlex="20%" fxFlex.xs="90%">
                                             <button type="submit" mat-button color="primary" style="margin-right: 5px; color: green;">
                                             <!-- Add -->
-                                            <mat-icon style="font-size: 2.5em;">check_circle_outline</mat-icon>
+                                            <mat-icon style="font-size: 2.5em;vertical-align: top;">check_circle_outline</mat-icon>
                                           </button>
                                             <!-- <button type="button" (click)="reset()" mat-button mat-stroked-button color="accent">
                                             Reset
@@ -712,8 +712,18 @@
                                         <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center" style="width: 95%;">
                                             <mat-form-field fxFlex="20%" fxFlex.xs="90%" style="width:20%;margin-left: 10px;">
                                                 <mat-label>Vendor</mat-label>
-                                                <mat-select id="vendor" formControlName="vendorId">
-                                                    <mat-option [value]='vendor.id' *ngFor="let vendor of vendors">{{vendor.vendorBusinessName}}</mat-option>
+                                                <mat-select #mySelect id="vendor" formControlName="vendorId" (selectionChange)="onVendorChange(mySelect.value)">
+                                                    <div *ngIf="vendors$ | async; else loading">
+                                                        <mat-option [value]='vendor.id' *ngFor="let vendor of vendors$ | async">
+                                                            {{vendor.vendorBusinessName}}
+                                                        </mat-option>
+                                                    </div>
+                                                    <ng-template #loading>
+                                                        <mat-option>
+                                                            <img src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==">
+                                                        </mat-option>
+                                                    </ng-template>
+
                                                 </mat-select>
                                             </mat-form-field>
                                             <mat-checkbox fxFlex="20%" style="width:20%;margin-left: 20px; margin-top: 8px;" formControlName="isEmergency">Urgent</mat-checkbox>
