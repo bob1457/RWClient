@@ -147,6 +147,67 @@ export class LeaseDetailsComponent implements OnInit {
                 //             this.requests = reqs;
 
                 //           });
+
+                this.store.pipe(select(leaseDetails))
+                .subscribe(data => {
+                  this.lease = data;
+                  // this.rentAmtDue = this.lease.rentAmount;
+                  // this.rentDueOn = this.lease.rentDueOn;
+                  // console.log('amt', this.rentAmtDue);
+                  // console.log('due', this.rentDueOn);
+
+                  // this.detailsForm.patchValue(data);
+                  console.log(data);
+                  // this.dataSource.data = this.lease;
+                  // console.log('payment', this.dataSource.data);
+                  this.store.select(rentPaymentList)
+                      .subscribe(paymentList => {
+                        this.payments = paymentList;
+                        if(paymentList && this.lease) {
+                          this.payments = paymentList.filter(l => l.leaseId == this.lease.id);
+                          this.dataSource.data = this.payments;
+                          // this.dataSource.sort = this.sort;
+                          // this.dataSource.paginator = this.paginator;
+
+                          setTimeout(() =>  {this.dataSource.paginator = this.paginator; this.dataSource.sort = this.sort; });
+
+                          // console.log('datasource', this.dataSource.data);
+                          // console.log('leaseid', this.lease.id);
+                          // console.log('py', this.payments);
+                        }
+                      });
+
+                  this.store.select(workOrderList)
+                      .subscribe(orders => {
+                        this.workOrders = orders;
+                        if (orders && this.lease) {
+                          this.workOrders = orders.filter(l => l.leaseId == this.lease.id);
+                          this.dataSource2.data = this.workOrders;
+                          console.log('orders', this.workOrders);
+
+                          setTimeout(() =>  {this.dataSource2.paginator = this.paginator2; this.dataSource2.sort = this.sort2; });
+                        }
+                      });
+
+                  this.store.select(serviceRequestList)
+                            .subscribe(reqs => {
+                              this.requests = reqs;
+                              if (reqs && this.lease) {
+                                this.requests = reqs.filter(l => l.leaseId === this.lease.id);
+                                console.log('reqs for this lease', this.requests);
+                              }
+                            });
+
+                  this.store.select(tenantList)
+                            .subscribe(tnts => {
+                              if (tnts && this.lease) {
+                                this.tenants = tnts.filter(l => l.leaseId === this.lease.id);
+                                this.dataSource3.data = this.tenants;
+
+                                setTimeout(() =>  {this.dataSource3.paginator = this.paginator3; this.dataSource3.sort = this.sort3; });
+                              }
+                            });
+                });
               }
 
   ngOnInit() {
@@ -315,66 +376,7 @@ export class LeaseDetailsComponent implements OnInit {
       debugger;
       this.store.dispatch(getLeaseDetails({payload: id}));
 
-      this.store.pipe(select(leaseDetails))
-          .subscribe(data => {
-            this.lease = data;
-            // this.rentAmtDue = this.lease.rentAmount;
-            // this.rentDueOn = this.lease.rentDueOn;
-            // console.log('amt', this.rentAmtDue);
-            // console.log('due', this.rentDueOn);
 
-            // this.detailsForm.patchValue(data);
-            console.log(data);
-            // this.dataSource.data = this.lease;
-            // console.log('payment', this.dataSource.data);
-            this.store.select(rentPaymentList)
-                .subscribe(paymentList => {
-                  this.payments = paymentList;
-                  if(paymentList && this.lease) {
-                    this.payments = paymentList.filter(l => l.leaseId == this.lease.id);
-                    this.dataSource.data = this.payments;
-                    // this.dataSource.sort = this.sort;
-                    // this.dataSource.paginator = this.paginator;
-
-                    setTimeout(() =>  {this.dataSource.paginator = this.paginator; this.dataSource.sort = this.sort; });
-
-                    // console.log('datasource', this.dataSource.data);
-                    // console.log('leaseid', this.lease.id);
-                    // console.log('py', this.payments);
-                  }
-                });
-
-            this.store.select(workOrderList)
-                .subscribe(orders => {
-                  this.workOrders = orders;
-                  if (orders && this.lease) {
-                    this.workOrders = orders.filter(l => l.leaseId == this.lease.id);
-                    this.dataSource2.data = this.workOrders;
-                    console.log('orders', this.workOrders);
-
-                    setTimeout(() =>  {this.dataSource2.paginator = this.paginator2; this.dataSource2.sort = this.sort2; });
-                  }
-                });
-
-            this.store.select(serviceRequestList)
-                      .subscribe(reqs => {
-                        this.requests = reqs;
-                        if (reqs && this.lease) {
-                          this.requests = reqs.filter(l => l.leaseId === this.lease.id);
-                          console.log('reqs for this lease', this.requests);
-                        }
-                      });
-
-            this.store.select(tenantList)
-                      .subscribe(tnts => {
-                        if (tnts && this.lease) {
-                          this.tenants = tnts.filter(l => l.leaseId === this.lease.id);
-                          this.dataSource3.data = this.tenants;
-
-                          setTimeout(() =>  {this.dataSource3.paginator = this.paginator3; this.dataSource3.sort = this.sort3; });
-                        }
-                      });
-          });
 
       // this.store.pipe(select(leaseDetails))
       //     .subscribe(data => {
