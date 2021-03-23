@@ -360,7 +360,7 @@
                                             <input type="text" matInput placeholder="Contact Others" formControlName="contactOthers">
                                         </mat-form-field>
                                         <div fxFlex="20%" fxFlex.xs="90%">
-                                            <button type="submit" mat-button color="primary" style="margin-right: 5px; color: green;">
+                                            <button type="submit" mat-raised-button color="primary" style="margin-right: 5px; width: 100%; color: green;">
                                           <!-- Add -->
                                           Add <mat-icon style="font-size: 2.5em;color: green;font-weight: bold;vertical-align: top;">check</mat-icon>
                                         </button>
@@ -458,6 +458,7 @@
                                         <tr mat-row *matRowDef="let row; columns: displayedColumns3;"></tr>
                                     </table>
                                 </div>
+                                <mat-paginator [hidden]="!dataSource3.data.length" [pageSize]="10" [pageSizeOptions]="[5, 10, 25]"></mat-paginator>
 
 
                             </mat-tab>
@@ -713,8 +714,8 @@
                                             <mat-form-field fxFlex="20%" fxFlex.xs="90%" style="width:20%;margin-left: 10px;">
                                                 <mat-label>Vendor</mat-label>
                                                 <mat-select #mySelect id="vendor" formControlName="vendorId" (selectionChange)="onVendorChange(mySelect.value)">
-                                                    <div *ngIf="vendors$ | async; else loading">
-                                                        <mat-option [value]='vendor.id' *ngFor="let vendor of vendors$ | async">
+                                                    <div *ngIf="vendors; else loading">
+                                                        <mat-option [value]='vendor.id' *ngFor="let vendor of vendors">
                                                             {{vendor.vendorBusinessName}}
                                                         </mat-option>
                                                     </div>

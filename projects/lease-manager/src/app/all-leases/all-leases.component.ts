@@ -28,16 +28,7 @@ export class AllLeasesComponent implements OnInit {
 
   constructor(private store: Store<PropertyLeaseState>) {
 
-    this.store.pipe(select(leaseList))
-          .subscribe(data => {
-            if (data != null) { // select data from state store if data exists
-              this.list = data;
-              this.dataSource.data = this.list;
-              // this.detailsForm.patchValue(data);
-            } else {
-              this.store.dispatch(getAllLeases()); // dispatch the action if state has no data
-
-              this.store.pipe(select(leaseList)) // select date from state in store
+    this.store.pipe(select(leaseList)) // select date from state in store
               .subscribe(list => {
                 this.list = list;
                 this.dataSource.data = this.list;
@@ -46,11 +37,30 @@ export class AllLeasesComponent implements OnInit {
                 this.dataSource.paginator = this.paginator;
 
               });
-            }
-            console.log(data);
 
-            setTimeout(() =>  {this.dataSource.paginator = this.paginator; this.dataSource.sort = this.sort; });
-      });
+    // this.store.pipe(select(leaseList))
+    //       .subscribe(data => {
+    //         if (data != null) { // select data from state store if data exists
+    //           this.list = data;
+    //           this.dataSource.data = this.list;
+    //           // this.detailsForm.patchValue(data);
+    //         } else {
+    //           this.store.dispatch(getAllLeases()); // dispatch the action if state has no data
+
+    //           // this.store.pipe(select(leaseList)) // select date from state in store
+    //           // .subscribe(list => {
+    //           //   this.list = list;
+    //           //   this.dataSource.data = this.list;
+
+    //           //   this.dataSource.sort = this.sort;
+    //           //   this.dataSource.paginator = this.paginator;
+
+    //           // });
+    //         }
+    //         console.log(data);
+
+    //         setTimeout(() =>  {this.dataSource.paginator = this.paginator; this.dataSource.sort = this.sort; });
+    //   });
 
     // this.store.dispatch(getRentPaymentList());
     // this.store.dispatch(getAllWorkOrders());
@@ -68,7 +78,10 @@ export class AllLeasesComponent implements OnInit {
     // return this.propertyService.getPropertyList().subscribe((pList: Property[]) => {this.list = pList; console.log(pList)});
     this.loading$ = this.store.pipe(select(loadingStatus));
 
-    // this.store.dispatch(getAllLeases());
+    if (!this.list) {
+      this.store.dispatch(getAllLeases());
+      console.log('dispatched');
+    }
 
     // this.store.pipe(
     //   select(leaseList)).subscribe(data => {

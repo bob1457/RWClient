@@ -13,6 +13,7 @@ import { Observable } from 'rxjs';
 import { MatDialog, MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { PaymentDetailsDialogComponent } from '../dialogs/payment-details-dialog/payment-details-dialog.component';
 import { AddRentDialogComponent } from '../dialogs/add-rent-dialog/add-rent-dialog.component';
+import { tap } from 'rxjs/operators';
 // import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 
 @Component({
@@ -131,7 +132,7 @@ export class LeaseDetailsComponent implements OnInit {
 
                 // this.vendors$ = this.store.select(vendorList);
 
-                this.GetLeaseDetails(this.id);
+                // this.GetLeaseDetails(this.id);
 
                 this.store.select(rentPaymentDetails)
                           .subscribe(data => {
@@ -367,6 +368,8 @@ export class LeaseDetailsComponent implements OnInit {
       // this.store.dispatch(getAllVendors());
       // this.store.dispatch(getAllServiceRequests());
     // this.store.dispatch(getAllTenants());
+
+    this.GetLeaseDetails(this.id);
   }
 
 
@@ -374,6 +377,7 @@ export class LeaseDetailsComponent implements OnInit {
 
     GetLeaseDetails(id: any) {
       debugger;
+      // Always dispatch because new detailw are not available and must be coming from server
       this.store.dispatch(getLeaseDetails({payload: id}));
 
 
@@ -437,8 +441,8 @@ export class LeaseDetailsComponent implements OnInit {
       case 4 : {
         this.hide = true;
         if (!this.vendors) {
-          // this.store.dispatch(getAllVendors());
-          this.vendors$ = this.propertyService.getAllVendors();
+          this.store.dispatch(getAllVendors());
+          // this.vendors$ = this.propertyService.getAllVendors();
         }
 
         if (!this.workOrders) {

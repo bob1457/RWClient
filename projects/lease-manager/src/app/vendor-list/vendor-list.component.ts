@@ -39,7 +39,10 @@ export class VendorListComponent implements OnInit {
 
     this.loading$ = this.store.pipe(select(loadingStatus));
     debugger;
-    this.store.dispatch(getAllVendors());
+    if (!this.list) {
+      this.store.dispatch(getAllVendors());
+    }
+
 
     // this.store.pipe(select(vendorList))
     //       .subscribe(data => {
