@@ -17,7 +17,7 @@ export class AllOpenHousesComponent implements OnInit {
   openhouseList;
   loading$: Observable<boolean>;
 
-  displayedColumns: string[] = ['icon', 'id', 'openHouseDate',  'startTime', 'endTime', 'rentalPRoperty', 'isActive', 'notes', 'action'];
+  displayedColumns: string[] = ['icon', 'id', 'openhouseDate',  'startTime', 'endTime', 'rentalProperty.propertyName', 'isActive', 'notes', 'action'];
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: false}) sort: MatSort;
 // 'applicatnLastName',

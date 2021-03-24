@@ -45,7 +45,7 @@
                         <td mat-cell *matCellDef="let element"> {{element.applicatnFirstName}} {{element.applicatnLastName}}</td>
                     </ng-container>
 
-                    <ng-container matColumnDef="status">
+                    <ng-container matColumnDef="rentalApplicationStatus">
                         <th class="table-header-text" mat-header-cell *matHeaderCellDef mat-sort-header> Application Status </th>
                         <td mat-cell *matCellDef="let element"> {{element.rentalApplicationStatus | appStatus}}</td>
                     </ng-container>
@@ -62,7 +62,7 @@
                         <td mat-cell *matCellDef="let element"> {{element.propertyName}} </td>
                     </ng-container>
 
-                    <ng-container matColumnDef="telephone">
+                    <ng-container matColumnDef="applicantContactTel">
                         <th class="table-header-text" style="margin-left: auto;margin-right: auto;" mat-header-cell *matHeaderCellDef mat-sort-header> Telephone </th>
                         <td mat-cell *matCellDef="let element"> {{element.applicantContactTel}} </td>
                     </ng-container>
@@ -72,7 +72,7 @@
                         <td mat-cell *matCellDef="let element"> {{element.appliedDate | date }} </td>
                     </ng-container>
 
-                    <ng-container matColumnDef="occupants">
+                    <ng-container matColumnDef="applicantNubmerOfOccupants">
                         <th class="table-header-text" style="margin-left: auto;margin-right: auto;" mat-header-cell *matHeaderCellDef mat-sort-header> Occupants </th>
                         <td mat-cell *matCellDef="let element"> {{element.applicantNubmerOfOccupants}} </td>
                     </ng-container>

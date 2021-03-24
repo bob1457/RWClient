@@ -20,7 +20,7 @@ export class ApplicationListComponent implements OnInit {
   loading$: Observable<boolean>;
   loaded = false;
 
-  displayedColumns: string[] = ['icon', 'id', 'applicatnFirstName',  'email', 'telephone', 'propertyName', 'occupants', 'status', 'appliedDate', 'action'];
+  displayedColumns: string[] = ['icon', 'id', 'applicatnFirstName',  'email', 'applicantContactTel', 'propertyName', 'applicantNubmerOfOccupants', 'rentalApplicationStatus', 'appliedDate', 'action'];
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: false}) sort: MatSort;
 // 'applicatnLastName',
