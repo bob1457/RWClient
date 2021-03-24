@@ -103,6 +103,14 @@ export class PropertyListingComponent implements OnInit {
   }
 
 
+  // filterChange(event) { // for future invetigation
+  //   debugger;
+  //   console.log('filter selected', event.value);
+  //   if (event.value === '1' ) {
+  //     this.dataSource.filterPredicate = (data, filter) => (data.listingDesc.toLowerCase().indexOf('CONDO') !== -1);
+
+  //   }
+  // }
 
   // GetPropertyListingDetails(id: number) {
   //   debugger;

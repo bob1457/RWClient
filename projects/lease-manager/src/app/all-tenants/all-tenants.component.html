@@ -19,10 +19,10 @@
                     <mat-form-field fxLayout fxLayoutAlign="start center">
                         <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="Filter">
                     </mat-form-field>
-                    <mat-radio-group aria-label="Select an option" style="margin-top: 13px;margin-left: 25px;padding-right: 5px;">
+                    <!-- <mat-radio-group aria-label="Select an option" style="margin-top: 13px;margin-left: 25px;padding-right: 5px;">
                         <mat-radio-button value="1" checked style="padding-right: 10px;">Active</mat-radio-button>
                         <mat-radio-button value="0">All</mat-radio-button>
-                    </mat-radio-group>
+                    </mat-radio-group> -->
                     <span class="spacer"></span>
                     <button [routerLink]="['/Manage/lease/addlease']" mat-button mat-mini-fab style="background: #3d5afe;color: white;">
                 <i class="material-icons" title="Add Lease Agreement">
@@ -30,7 +30,7 @@
                 </i>
               </button>
                 </div>
-                <div fxLayoutAlign="start">
+                <!-- <div fxLayoutAlign="start">
                     <a (click)="listView = true" style="cursor: pointer;">
                         <i class="material-icons " style="font-size: 1.5em;color: #3412ad; margin-left: 5px; border: 1px black solid; " title="List View">
                       list_alt
@@ -47,7 +47,7 @@
                     <span style="margin-left: 25px;
                     margin-top: 3px;
                     font-size: 1.0em;" *ngIf="!listView">Grid View</span>
-                </div>
+                </div> -->
                 <div fxLayoutAlign="center">
                     <div *ngIf="listView" style="width: 100%;">
                         <table mat-table [dataSource]="dataSource" matSort class="my-table mat-elevation-z8" style="width: 100%;">
