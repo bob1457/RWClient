@@ -20,7 +20,7 @@ export class AllTenantsComponent implements OnInit {
 
   listView = true;
 
-  displayedColumns: string[] = ['icon', 'id', 'Name', 'Telephone', 'Email', 'OnlineAccess', 'Property', 'created', 'modified', 'action'];
+  displayedColumns: string[] = ['icon', 'id', 'firstName', 'lastName', 'Telephone', 'Email', 'propertyName', 'created', 'modified', 'action'];
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: false}) sort: MatSort;
 
