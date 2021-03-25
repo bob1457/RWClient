@@ -29,7 +29,7 @@ import { ListingDetailsSecondaryComponent } from './listing-details-secondary/li
 import { AppStatusPipe } from './app-status.pipe';
 import { AllOpenHousesComponent } from '../app/all-open-houses/all-open-houses.component';
 import { OpenHouseDetailsComponent } from '../app/open-house-details/open-house-details.component';
-
+import { OhStatusPipe } from './oh-status.pipe';
 
 const routes: Routes = [
   // { path: '', component: PropertyListingComponent},
@@ -71,6 +71,7 @@ const routes: Routes = [
     OpenHouseDetailsComponent,
     AllOpenHousesComponent,
     AppStatusPipe,
+    OhStatusPipe,
     AllOpenHousesComponent
   ],
   imports: [

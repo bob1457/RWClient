@@ -36,6 +36,7 @@ import { ContractFooterComponent } from './contract-footer/contract-footer.compo
 import { ContractContentEditorComponent } from './contract-content-editor/contract-content-editor.component';
 import { ContractViewComponent } from './contract-view/contract-view.component';
 import { TypePipe } from './type.pipe';
+import { PropertyTypePipe } from './property-type.pipe';
 
 
 @NgModule({
@@ -66,7 +67,8 @@ import { TypePipe } from './type.pipe';
     ContractFooterComponent,
     ContractContentEditorComponent,
     ContractViewComponent,
-    TypePipe
+    TypePipe,
+    PropertyTypePipe
   ],
   imports: [
     BrowserModule,

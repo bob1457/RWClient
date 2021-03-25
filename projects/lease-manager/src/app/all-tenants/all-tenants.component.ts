@@ -20,21 +20,13 @@ export class AllTenantsComponent implements OnInit {
 
   listView = true;
 
-  displayedColumns: string[] = ['icon', 'id', 'Name', 'Telephone', 'Email', 'OnlineAccess', 'Property', 'created', 'modified', 'action'];
+  displayedColumns: string[] = ['icon', 'id', 'firstName', 'lastName', 'Telephone', 'Email', 'propertyName', 'created', 'modified', 'action'];
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: false}) sort: MatSort;
 
   dataSource = new MatTableDataSource<PropertyTenant>();
 
-  constructor(private store: Store<PropertyLeaseState>) { }
-
-  ngOnInit() {
-    debugger;
-    // return this.propertyService.getPropertyList().subscribe((pList: Property[]) => {this.list = pList; console.log(pList)});
-    this.loading$ = this.store.pipe(select(loadingStatus));
-
-    this.store.dispatch(getAllTenants());
-
+  constructor(private store: Store<PropertyLeaseState>) {
     this.store.pipe(
       select(tenantList)).subscribe(data => {
         this.list = data ;
@@ -46,6 +38,19 @@ export class AllTenantsComponent implements OnInit {
         this.dataSource.paginator = this.paginator;
 
       });
+  }
+
+  ngOnInit() {
+    debugger;
+    // return this.propertyService.getPropertyList().subscribe((pList: Property[]) => {this.list = pList; console.log(pList)});
+    this.loading$ = this.store.pipe(select(loadingStatus));
+
+    if (!this.list) {
+      this.store.dispatch(getAllTenants());
+    }
+
+
+
 
   }
 

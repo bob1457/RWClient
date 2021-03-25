@@ -1,5 +1,6 @@
 export interface PropertyLease {
   id: number;
+  leaseId: number;
   // propertyOwnerId: number;
   // propertyId: number;
   // userName: string;

@@ -3,13 +3,17 @@ import { Store, select } from '@ngrx/store';
 import { PropertyLeaseState } from '../store/lease-state';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { LeaseService, PropertyLease } from '@lib/app-core';
-import { addRentPayment, addWorkOrder, getLeaseDetails, getRentPaymenttDetails, updateLease } from '../store/actions/lease.actions';
-import { leaseDetails, loadingStatus, rentPaymentDetails, rentPaymentList, serviceRequestList, vendorList, workOrderList } from '../store/reducers';
+import { LeaseService, PropertyLease, Vendor } from '@lib/app-core';
+import { addRentPayment, addTenant, addWorkOrder, getLeaseDetails, getRentPaymenttDetails, updateLease } from '../store/actions/lease.actions';
+import { leaseDetails, loadingStatus, rentPaymentDetails, rentPaymentList, serviceRequestList,
+         tenantList, vendorList, workOrderList } from '../store/reducers';
+import { getAllServiceRequests, getAllVendors,
+  getAllWorkOrders, getRentPaymentList, getAllTenants } from '../store/actions/lease.actions';
 import { Observable } from 'rxjs';
 import { MatDialog, MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { PaymentDetailsDialogComponent } from '../dialogs/payment-details-dialog/payment-details-dialog.component';
 import { AddRentDialogComponent } from '../dialogs/add-rent-dialog/add-rent-dialog.component';
+import { tap } from 'rxjs/operators';
 // import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 
 @Component({
@@ -24,9 +28,11 @@ export class LeaseDetailsComponent implements OnInit {
   payments: any;
   paymentDetails: any;
   addRent = false;
+  addTenant = false;
   addWorkOrder = false;
   workOrders: any;
   requests: any [];
+  tenants: any [];
 
   tabIndex = 0;
   hide = false;
@@ -36,10 +42,12 @@ export class LeaseDetailsComponent implements OnInit {
   loading$: Observable<boolean>;
 
   detailsForm: FormGroup;
-  addForm: FormGroup;
-  addForm2: FormGroup;
+  addForm: FormGroup; // Add rent payment
+  addForm2: FormGroup; // Add work order
+  addTenantForm: FormGroup;
 
   vendors:any [];
+  vendors$: Observable<Vendor[]>;
 
   months = [
     {name: 'January'},
@@ -105,6 +113,12 @@ export class LeaseDetailsComponent implements OnInit {
 
   dataSource2 = new MatTableDataSource<any>();
 
+  displayedColumns3: string[] = ['icon', 'id', 'firstName', 'lastName', 'email', 'tel1', 'addDate', 'action'];
+  @ViewChild('paginator3', {static: false}) paginator3: MatPaginator;
+  @ViewChild('Sort3', {static: true}) sort3: MatSort;
+
+  dataSource3 = new MatTableDataSource<any>();
+
   private dialogConfig;
 
   constructor(private store: Store<PropertyLeaseState>,
@@ -116,7 +130,9 @@ export class LeaseDetailsComponent implements OnInit {
                 this.id = this.actRoute.snapshot.params.id;
                 console.log(this.id);
 
-                this.GetLeaseDetails(this.id);
+                // this.vendors$ = this.store.select(vendorList);
+
+                // this.GetLeaseDetails(this.id);
 
                 this.store.select(rentPaymentDetails)
                           .subscribe(data => {
@@ -132,6 +148,67 @@ export class LeaseDetailsComponent implements OnInit {
                 //             this.requests = reqs;
 
                 //           });
+
+                this.store.pipe(select(leaseDetails))
+                .subscribe(data => {
+                  this.lease = data;
+                  // this.rentAmtDue = this.lease.rentAmount;
+                  // this.rentDueOn = this.lease.rentDueOn;
+                  // console.log('amt', this.rentAmtDue);
+                  // console.log('due', this.rentDueOn);
+
+                  // this.detailsForm.patchValue(data);
+                  console.log(data);
+                  // this.dataSource.data = this.lease;
+                  // console.log('payment', this.dataSource.data);
+                  this.store.select(rentPaymentList)
+                      .subscribe(paymentList => {
+                        this.payments = paymentList;
+                        if(paymentList && this.lease) {
+                          this.payments = paymentList.filter(l => l.leaseId == this.lease.id);
+                          this.dataSource.data = this.payments;
+                          // this.dataSource.sort = this.sort;
+                          // this.dataSource.paginator = this.paginator;
+
+                          setTimeout(() =>  {this.dataSource.paginator = this.paginator; this.dataSource.sort = this.sort; });
+
+                          // console.log('datasource', this.dataSource.data);
+                          // console.log('leaseid', this.lease.id);
+                          // console.log('py', this.payments);
+                        }
+                      });
+
+                  this.store.select(workOrderList)
+                      .subscribe(orders => {
+                        this.workOrders = orders;
+                        if (orders && this.lease) {
+                          this.workOrders = orders.filter(l => l.leaseId == this.lease.id);
+                          this.dataSource2.data = this.workOrders;
+                          console.log('orders', this.workOrders);
+
+                          setTimeout(() =>  {this.dataSource2.paginator = this.paginator2; this.dataSource2.sort = this.sort2; });
+                        }
+                      });
+
+                  this.store.select(serviceRequestList)
+                            .subscribe(reqs => {
+                              this.requests = reqs;
+                              if (reqs && this.lease) {
+                                this.requests = reqs.filter(l => l.leaseId === this.lease.id);
+                                console.log('reqs for this lease', this.requests);
+                              }
+                            });
+
+                  this.store.select(tenantList)
+                            .subscribe(tnts => {
+                              if (tnts && this.lease) {
+                                this.tenants = tnts.filter(l => l.leaseId === this.lease.id);
+                                this.dataSource3.data = this.tenants;
+
+                                setTimeout(() =>  {this.dataSource3.paginator = this.paginator3; this.dataSource3.sort = this.sort3; });
+                              }
+                            });
+                });
               }
 
   ngOnInit() {
@@ -269,65 +346,41 @@ export class LeaseDetailsComponent implements OnInit {
       //       this.property = data;
       //       this.detailsForm.patchValue(data);
       // });
-    }
+
+    this.addTenantForm = this.formBuilder.group({
+      newTenantId: 0,
+      userName: ['Unset'],
+      firstName: [''],
+      lastName: [''],
+      contactEmail: [''],
+      contactTelephone1: [''],
+      contactTelephone2: [''],
+      contactOthers: [''],
+      leaseId: [],
+      onlineAccessEnbaled: [false],
+      userAvartaImgUrl: [''],
+      roleId: [3]
+
+    });
+
+    // this.store.dispatch(getRentPaymentList());
+    // this.store.dispatch(getAllWorkOrders());
+      // this.store.dispatch(getAllVendors());
+      // this.store.dispatch(getAllServiceRequests());
+    // this.store.dispatch(getAllTenants());
+
+    this.GetLeaseDetails(this.id);
+  }
 
 
 
 
     GetLeaseDetails(id: any) {
       debugger;
+      // Always dispatch because new detailw are not available and must be coming from server
       this.store.dispatch(getLeaseDetails({payload: id}));
 
-      this.store.pipe(select(leaseDetails))
-          .subscribe(data => {
-            this.lease = data;
-            // this.rentAmtDue = this.lease.rentAmount;
-            // this.rentDueOn = this.lease.rentDueOn;
-            // console.log('amt', this.rentAmtDue);
-            // console.log('due', this.rentDueOn);
 
-            // this.detailsForm.patchValue(data);
-            console.log(data);
-            // this.dataSource.data = this.lease;
-            // console.log('payment', this.dataSource.data);
-            this.store.select(rentPaymentList)
-                .subscribe(paymentList => {
-                  this.payments = paymentList;
-                  if(paymentList && this.lease) {
-                    this.payments = paymentList.filter(l => l.leaseId == this.lease.id);
-                    this.dataSource.data = this.payments;
-                    // this.dataSource.sort = this.sort;
-                    // this.dataSource.paginator = this.paginator;
-
-                    setTimeout(() =>  {this.dataSource.paginator = this.paginator; this.dataSource.sort = this.sort; });
-
-                    // console.log('datasource', this.dataSource.data);
-                    // console.log('leaseid', this.lease.id);
-                    // console.log('py', this.payments);
-                  }
-                });
-
-            this.store.select(workOrderList)
-                .subscribe(orders => {
-                  this.workOrders = orders;
-                  if (orders && this.lease) {
-                    this.workOrders = orders.filter(l => l.leaseId == this.lease.id);
-                    this.dataSource2.data = this.workOrders;
-                    console.log('orders', this.workOrders);
-
-                    setTimeout(() =>  {this.dataSource2.paginator = this.paginator2; this.dataSource2.sort = this.sort2; });
-                  }
-                });
-
-            this.store.select(serviceRequestList)
-                      .subscribe(reqs => {
-                        this.requests = reqs;
-                        if (reqs && this.lease) {
-                          this.requests = reqs.filter(l => l.leaseId == this.lease.id);
-                          console.log('reqs for this lease', this.requests);
-                        }
-                      });
-          });
 
       // this.store.pipe(select(leaseDetails))
       //     .subscribe(data => {
@@ -373,14 +426,28 @@ export class LeaseDetailsComponent implements OnInit {
       }
       case 2 : {
         this.hide = true;
+        if (!this.tenants) {
+          this.store.dispatch(getAllTenants());
+        }
         break;
       }
       case 3 : {
         this.hide = true;
+        if (!this.payments) {
+          this.store.dispatch(getRentPaymentList());
+        }
         break;
       }
       case 4 : {
         this.hide = true;
+        if (!this.vendors) {
+          this.store.dispatch(getAllVendors());
+          // this.vendors$ = this.propertyService.getAllVendors();
+        }
+
+        if (!this.workOrders) {
+           this.store.dispatch(getAllWorkOrders());
+        }
         break;
       }
         default: {
@@ -428,8 +495,16 @@ export class LeaseDetailsComponent implements OnInit {
     debugger;
   }
 
+  getTenantDetails(id: number) {
+
+  }
+
   addR() {
     this.addRent = true;
+  }
+
+  addT() {
+    this.addTenant = true;
   }
 
   addW() {
@@ -442,6 +517,10 @@ export class LeaseDetailsComponent implements OnInit {
 
   cancel2() {
     this.addWorkOrder = false;
+  }
+
+  cancel3() {
+    this.addTenant = false;
   }
 
   addRentPayment() {
@@ -457,11 +536,27 @@ export class LeaseDetailsComponent implements OnInit {
     this.addRent = false;
   }
 
+  addAdditionalTenant() {
+    debugger;
+    this.addTenantForm.patchValue({
+      newTenantId: 0,
+      leaseId: Number(this.id),
+      onlineAccessEnbaled: false,
+      userAvartaImgUrl: '',
+      roleId: 3
+    });
+
+    console.log('tenant form', this.addTenantForm.value);
+    this.store.dispatch(addTenant({payload: this.addTenantForm.value}));
+    this.addTenantForm.reset();
+    this.addTenant = false;
+  }
+
   addNewOrder() {
     debugger;
     this.addForm2.patchValue({
       workOrderStatus: 'New',
-      rentalPropertyId: this.lease.id
+      rentalPropertyId: this.lease.id //??
     });
     console.log('order form', this.addForm2.value);
     this.store.dispatch(addWorkOrder({payload: this.addForm2.value}));
@@ -484,6 +579,10 @@ export class LeaseDetailsComponent implements OnInit {
 
   public doFilter2 = (value: string) => {
     this.dataSource2.filter = value.trim().toLocaleLowerCase();
+  }
+
+  public doFilter3 = (value: string) => {
+    this.dataSource3.filter = value.trim().toLocaleLowerCase();
   }
 
   openDialog() {

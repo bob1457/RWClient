@@ -17,7 +17,7 @@ export class AllOpenHousesComponent implements OnInit {
   openhouseList;
   loading$: Observable<boolean>;
 
-  displayedColumns: string[] = ['icon', 'id', 'openHouseDate',  'startTime', 'endTime', 'rentalPRoperty', 'notes', 'action'];
+  displayedColumns: string[] = ['icon', 'id', 'openhouseDate',  'startTime', 'endTime', 'propertyName', 'isActive', 'notes', 'action'];
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: false}) sort: MatSort;
 // 'applicatnLastName',
@@ -39,8 +39,12 @@ export class AllOpenHousesComponent implements OnInit {
 
   ngOnInit() {
 
-    this.loading$ = this.store.pipe(select(loadingStatus))
-    this.store.dispatch(getOpenHouseList());
+    this.loading$ = this.store.pipe(select(loadingStatus));
+
+    if (this.openhouseList.length === 0) {
+      this.store.dispatch(getOpenHouseList());
+    }
+    // this.store.dispatch(getOpenHouseList());
 
   }
 

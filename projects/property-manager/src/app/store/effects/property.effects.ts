@@ -381,13 +381,22 @@ export class PropertyEffects {
             type: '[Property] Add Management Contract Success',
             payload: contract
           })),
+          tap( () => {
+            // window.alert('done');
+            this.openSnackBar('Management contract added successfully.', 'close', 'notify');
+           }),
           // tap(res => {console.log('response: ' + res); }),
           // catchError(
           //   err => {
           //     return of('[Property] Add Management Contract Failure', err.error);
           //   } // EMPTY
           // )
-          catchError(error => of(PropertyActions.addManagementContractFailure(error.message)))
+          // catchError(error => of(PropertyActions.addManagementContractFailure(error.message)))
+          catchError(error => {
+            this.openSnackBar(error.message, 'dismiss', 'error');
+            return of(PropertyActions.addManagementContractFailure(error.message));
+            }
+          )
         )
       )
     )

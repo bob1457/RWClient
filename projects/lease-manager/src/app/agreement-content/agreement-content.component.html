@@ -139,7 +139,7 @@
                 </div>
             </div>
             <p style="margin-top: 7px;margin-bottom: -5px;">
-                <span style="font-size: .9em;font-weight: bold;">ADDRESS FOR SERVICE of the</span><span style="margin-left: 25px;font-weight: bold;"><input type="checkbox"> &nbsp;landlord</span> <span style="margin-left: 25px; font-weight: bold;"><input type="checkbox"> &nbsp;landlord's agent</span>
+                <span style="font-size: .9em;font-weight: bold;">ADDRESS FOR SERVICE of the</span><span style="margin-left: 25px;font-weight: bold;"><input type="checkbox" [checked]="true"> &nbsp;landlord</span> <span style="margin-left: 25px; font-weight: bold;"><input type="checkbox"> &nbsp;landlord's agent</span>
             </p>
             <div fxLayout="row" fxLayoutAlign="start" fxFlexFill style="margin-top: -15px;">
                 <div style="width: 10%;">
@@ -250,15 +250,15 @@
                             This tenancy created by this agreement starts on:
                         </div>
                         <div fxFlex="5%" style="margin-top: -15px;margin-right: 5px;">
-                            <input readonly type="text" style="height: 30px;">
+                            <input readonly type="text" style="height: 30px;padding-left: 0;" [value]="startDate">
                             <label>day</label>
                         </div>
                         <div fxFlex="15%" style="margin-top: -15px;">
-                            <input readonly type="text" style="height: 30px;">
+                            <input readonly type="text" style="height: 30px;" [value]="startMonth">
                             <label>month</label>
                         </div>
                         <div fxFlex="15%" style="margin-top: -15px;">
-                            <input readonly type="text" style="height: 30px;">
+                            <input readonly type="text " style="height: 30px;margin-top: 8px;background-color: #e4ebf3;" [value]="startYear">
                             <label>year</label>
                         </div>
                     </div>
@@ -270,27 +270,28 @@
                             <div fxFlex="90%">
                                 <div fxLayout="column" fxLayoutAlign="start" fxFlexFill>
                                     <div>
-                                        <input type="checkbox"> &nbsp;<span style="font-size: .9em;">A) and continues on a month-to-month basis until ended in accordance with the Act.</span>
+                                        <input type="checkbox" [checked]="lease.endLeaseCode == 1"> &nbsp;<span style="font-size: .9em;">A) and continues on a month-to-month basis until ended in accordance with the Act.</span>
                                     </div>
                                     <div>
-                                        <input type="checkbox"> &nbsp;<span style="font-size: .9em;">B) and continues on another periodic basis, as specified below, until ended in accordance with the Act.</span><br>
-                                        <input type="checkbox" style="margin-left: 10px;"> &nbsp;weekly &nbsp;<input type="checkbox"> &nbsp;bi-weekly <input type="checkbox"> &nbsp;other <input readonly type="text" style="width: 50%;height: 30px;">
+                                        <input type="checkbox" [checked]="lease.endLeaseCode == 21 || lease.endLeaseCode == 22 || lease.endLeaseCode == 23"> &nbsp;<span style="font-size: .9em;">B) and continues on another periodic basis, as specified below, until ended in accordance with the Act.</span><br>
+                                        <input type="checkbox" style="margin-left: 10px;" [checked]="lease.endLeaseCode == 21"> &nbsp;weekly &nbsp;<input type="checkbox" [checked]="lease.endLeaseCode == 22"> &nbsp;bi-weekly <input type="checkbox" [checked]="lease.endLeaseCode == 23">&nbsp;other
+                                        <input readonly type="text" style="width: 50%;height: 30px;" [value]="newTerm">
                                     </div>
                                     <div fxLayout="row" fxLayoutAlign="start">
                                         <div fxFlex="40%" style="margin-top: 8px;">
-                                            <input type="checkbox"> &nbsp;C) and is for a fixed term ending on
+                                            <input type="checkbox" [checked]="lease.endLeaseCode == 31 || lease.endLeaseCode == 32"> &nbsp;C) and is for a fixed term ending on
                                         </div>
                                         <div fxFlex="60%" fxLayout="row" fxLayoutAlign="start">
                                             <div fxFlex="10%" style="margin-right: 5px;">
-                                                <input type="text" style="height: 30px;">
+                                                <input type="text" style="height: 30px;padding-left: 0;" [value]="endDate">
                                                 <label>day</label>
                                             </div>
                                             <div fxFlex="40%">
-                                                <input type="text" style="height: 30px;">
+                                                <input type="text" style="height: 30px;" [value]="endMonth">
                                                 <label>month</label>
                                             </div>
                                             <div fxFlex="40%">
-                                                <input type="text" style="height: 30px;">
+                                                <input type="text" style="height: 30px;" [value]="endYear">
                                                 <label>year</label>
                                             </div>
                                         </div>
@@ -313,11 +314,11 @@
                         <div fxFlex="90%">
                             <div fxLayout="column" fxLayoutAlign="start" fxFlexFill>
                                 <div>
-                                    <input type="checkbox"> &nbsp;<span style="font-size: .95em;">D) At the end of this time, the tenancy will continue on a month-to-month basis, or another fixed length of
+                                    <input type="checkbox" [checked]="lease.endLeaseCode == 31"> &nbsp;<span style="font-size: .95em;">D) At the end of this time, the tenancy will continue on a month-to-month basis, or another fixed length of
                           time, unless the tenant gives notice to end tenancy at least one clear month before the end of the term.</span>
                                 </div>
                                 <div>
-                                    <input type="checkbox"> &nbsp;<span style="font-size: .95em;">E) At the end of this time, the tenancy is ended and <span style="font-weight:bold">the tenant <span style="text-decoration: underline;">must vacate</span>                                    the rental unit. This requirement is only permitted in circumstances prescribed under section 13.1 of theResidential Tenancy Regulation, or if this is a sublease agreement as defined in the Act.</span>
+                                    <input type="checkbox" [checked]="lease.endLeaseCode == 32"> &nbsp;<span style="font-size: .95em;">E) At the end of this time, the tenancy is ended and <span style="font-weight:bold">the tenant <span style="text-decoration: underline;">must vacate</span>                                    the rental unit. This requirement is only permitted in circumstances prescribed under section 13.1 of theResidential Tenancy Regulation, or if this is a sublease agreement as defined in the Act.</span>
                                     </span>
                                 </div>
                                 <div style="margin-top: -10px;">
@@ -394,8 +395,8 @@
                         a) Payment of Rent:
                     </p>
                     <div style="margin-left: 35px;font-size: .9em; margin-top: -20px;">
-                        The tenant will pay the rent of $ <input type="text" style="width: 10%;vertical-align: bottom;height: 30px;"> each <span style="font-size: initial;">(check one)</span> &nbsp;<input type="checkbox"> &nbsp; day <input type="checkbox">&nbsp;
-                        week <input type="checkbox">&nbsp; month to the landlord on the first day of the rental period which falls on the (due date, e.g., 1st, 2nd, 3rd, .... 31st) <input type="text" style="width: 7%;vertical-align: bottom;height: 25px;">                        day of each
+                        The tenant will pay the rent of $ <input type="text" style="width: 10%;vertical-align: bottom;height: 30px;padding-left: 5px;" [value]="lease.rentAmount"> each <span style="font-size: initial;">(check one)</span> &nbsp;<input type="checkbox">                        &nbsp; day <input type="checkbox">&nbsp; week <input type="checkbox">&nbsp; month to the landlord on the first day of the rental period which falls on the (due date, e.g., 1st, 2nd, 3rd, .... 31st) <input type="text" style="width: 7%;vertical-align: bottom;height: 25px;padding-left: 5px;"
+                            [value]="lease.rentDueOn"> day of each
                         <span style="font-size: initial;">(check one)</span>&nbsp;
                         <input type="checkbox">&nbsp;day <input type="checkbox"> &nbsp; week <input type="checkbox"> &nbsp; month subject to rent increases given in accordance with the RTA.<br> The tenant must pay the rent on time. If the rent is late,
                         the landlord may issue a <span style="font-size: .85em;font-style: italic;">Notice to End Tenancy for Unpaid Rent</span> (form RTB-30) to the tenant, which may take effect not earlier than 10 days after the date the notice is given.
@@ -408,40 +409,40 @@
                     </div>
                     <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
                         <div fxFlex="17%" fxLayout="column" fxLayoutAlign="start" fxFlexFill>
-                            <p style="margin-left: 25px;font-size: .8em;margin-bottom: 5px;"><input type="checkbox"> Water</p>
-                            <p style="margin-left: 25px;font-size: .8em;margin-bottom: 5px;"><input type="checkbox"> Cablevision</p>
-                            <p style="margin-left: 25px;font-size: .8em;margin-bottom: 5px;"><input type="checkbox"> Electricity</p>
-                            <p style="margin-left: 25px;font-size: .8em;margin-bottom: 5px;"><input type="checkbox"> Internet</p>
-                            <p style="margin-left: 25px;font-size: .8em;margin-bottom: 5px;"><input type="checkbox"> Heat</p>
+                            <p style="margin-left: 25px;font-size: .8em;margin-bottom: 5px;"><input type="checkbox" [checked]="lease.rentCoverage.water"> Water</p>
+                            <p style="margin-left: 25px;font-size: .8em;margin-bottom: 5px;"><input type="checkbox" [checked]="lease.rentCoverage.cablevison"> Cablevision</p>
+                            <p style="margin-left: 25px;font-size: .8em;margin-bottom: 5px;"><input type="checkbox" [checked]="lease.rentCoverage.electricity"> Electricity</p>
+                            <p style="margin-left: 25px;font-size: .8em;margin-bottom: 5px;"><input type="checkbox" [checked]="lease.rentCoverage.internet"> Internet</p>
+                            <p style="margin-left: 25px;font-size: .8em;margin-bottom: 5px;"><input type="checkbox" [checked]="lease.rentCoverage.heat"> Heat</p>
                             <!-- <input type="checkbox"> Additional information -->
                         </div>
                         <div fxFlex="20%" fxLayout="column" fxLayoutAlign="start" fxFlexFill>
-                            <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox"> Natural gas</p>
-                            <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox"> Sewage disposal</p>
-                            <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox"> snow removal</p>
-                            <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox"> Storage</p>
-                            <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox"> reacreational facility</p>
+                            <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox" [checked]="lease.rentCoverage.naturalGas"> Natural gas</p>
+                            <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox" [checked]="lease.rentCoverage.sewageDisposal"> Sewage disposal</p>
+                            <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox" [checked]="lease.rentCoverage.snowRemoval"> snow removal</p>
+                            <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox" [checked]="lease.rentCoverage.storage"> Storage</p>
+                            <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox" [checked]="lease.rentCoverage.recreationFacility"> reacreational facility</p>
                             <!-- <input type="checkbox"> Additional information -->
                         </div>
                         <div fxFlex="25%" fxLayout="column" fxLayoutAlign="start" fxFlexFill>
-                            <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox"> Garbage collection</p>
-                            <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox"> Recycling services</p>
-                            <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox"> Kitchen scrap services</p>
+                            <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox" [checked]="lease.rentCoverage.garbageCollection"> Garbage collection</p>
+                            <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox" [checked]="lease.rentCoverage.recycleServices"> Recycling services</p>
+                            <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox" [checked]="lease.rentCoverage.kitchenScrapCollection"> Kitchen scrap services</p>
                             <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox"> Laundry (coin-op)</p>
-                            <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox"> Laundry (free)</p>
+                            <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox" [checked]="lease.rentCoverage.laundry"> Laundry (free)</p>
                             <!-- <input type="checkbox"> Additional information -->
                         </div>
                         <div fxFlex="20%" fxLayout="column" fxLayoutAlign="start" fxFlexFill>
-                            <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox"> Refrigerator</p>
-                            <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox"> Dishwasher</p>
-                            <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox"> Stove andoOven</p>
-                            <p style="font-size: .9em;margin-bottom: 5px;"><input type="checkbox"> Window coverings</p>
-                            <p style="font-size: .9em;margin-bottom: 5px;"><input type="checkbox"> Furniture)</p>
+                            <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox" [checked]="lease.rentCoverage.regigerator"> Refrigerator</p>
+                            <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox" [checked]="lease.rentCoverage.dishwasher"> Dishwasher</p>
+                            <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox" [checked]="lease.rentCoverage.stoveOven"> Stove andoOven</p>
+                            <p style="font-size: .9em;margin-bottom: 5px;"><input type="checkbox" [checked]="lease.rentCoverage.windowCovering"> Window coverings</p>
+                            <p style="font-size: .9em;margin-bottom: 5px;"><input type="checkbox" [checked]="lease.rentCoverage.furniture"> Furniture)</p>
                             <!-- <input type="checkbox"> Additional information -->
                         </div>
                         <div fxFlex="25%" fxLayout="column" fxLayoutAlign="start" fxFlexFill>
-                            <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox"> Carpets</p>
-                            <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox"> Parking for </p>
+                            <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox" [checked]="lease.rentCoverage.carpets"> Carpets</p>
+                            <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox" [checked]="lease.rentCoverage.parkingStall >= 1"> Parking for {{lease.rentCoverage.parkingStall}} &nbsp;vehicle(s)</p>
                             <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox"> Other <input type="text" style="width: 60%; height: 30px;margin-top:-12px;"></p>
                             <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox"> Other <input type="text" style="width: 60%; height: 30px;margin-top:-15px;"></p>
                             <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox"> Other <input type="text" style="width: 60%; height: 30px;margin-top:-15px;"></p>
@@ -449,8 +450,8 @@
                         </div>
                     </div>
                     <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
-                        <p fxFlex="25%" style="font-size: .8em;margin-bottom: 15px;margin-left: 25px;"><input type="checkbox"> Additional Information</p>
-                        <input fxFlex="80%" type="text" style="height: 25px;margin-top:0px;">
+                        <p fxFlex="25%" style="font-size: .8em;margin-bottom: 15px;margin-left: 25px;"><input type="checkbox" [checked]="lease.notes.length > 1"> Additional Information</p>
+                        <input fxFlex="80%" type="text" style="height: 25px;margin-top:0px;" [value]="lease.notes">
                     </div>
                 </div>
                 <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
@@ -473,11 +474,11 @@
                     <div fxLayout="column" fxLayoutAlign="start" fxFlexFill>
                         <p style="font-size: .9em;font-weight: bold;margin-bottom: 0;">A.Security Deposits</p>
                         <p style="font-size: .9em;margin-bottom: 0;">
-                            The tenant is required to pay a security deposit of $ <input type="text" style="width: 20%;height: 30px;">
+                            The tenant is required to pay a security deposit of $ <input type="text" style="width: 20%;height: 30px;padding-left: 5px;" [value]="lease.damageDepositAmount">
                         </p>
                         <p style="font-size: .9em;margin-bottom: 0;">
-                            by <input type="text" style="width: 5%;height: 30px;"> <input type="text" style="width: 10%;height: 30px;">
-                            <input type="text" style="width: 10%;height: 30px;">
+                            by <input type="text" style="width: 5%;height: 30px;padding-left: 0;padding-right: 3px;" [value]="todayDate"> <input type="text" style="width: 10%;height: 30px;padding-left: 3px;" [value]="todayMonth">
+                            <input type="text" style="width: 10%;height: 30px;" [value]="todayYear">
                         </p>
                         <div style="font-size: .9em;margin-bottom: 0;">
                             <span style="margin-left: 20px;">day</span><span style="margin-left: 25px;">month</span><span style="margin-left: 40px;">year</span>
@@ -486,13 +487,13 @@
 
                     </div>
                     <div fxLayout="column" fxLayoutAlign="start" fxFlexFill style="margin-top: 10px;font-size: .9em;">
-                        <p style="font-size: .9em;font-weight: bold;margin-bottom: 0px;margin-top: 10px;">B.Pet Damage Deposits <span style="margin-left: 25px;"><input type="checkbox"> not applicable</span></p>
+                        <p style="font-size: .9em;font-weight: bold;margin-bottom: 0px;margin-top: 10px;">B.Pet Damage Deposits <span style="margin-left: 25px;"><input type="checkbox" [checked]="lease.petDepositAmount === 0"> not applicable</span></p>
                         <p style="font-size: .9em;margin-bottom: 0;">
-                            The tenant is required to pay a pet damage deposit of $ <input type="text" style="width: 20%;height: 30px;">
+                            The tenant is required to pay a pet damage deposit of $ <input type="text" style="width: 20%;height: 30px;padding-left: 5px;" [value]="lease.petDepositAmount">
                         </p>
                         <p style="font-size: .9em;margin-bottom: 10px;">
-                            by <input type="text" style="width: 5%;height: 30px;"> <input type="text" style="width: 10%;height: 30px;">
-                            <input type="text" style="width: 10%;height: 30px;">
+                            by <input type="text" style="width: 5%;height: 30px;padding-left: 0;padding-right: 3px;" [value]="todayDate"> <input type="text" style="width: 10%;height: 30px;padding-left: 3px;" [value]="todayMonth">
+                            <input type="text" style="width: 10%;height: 30px;" [value]="todayYear">
                         </p>
                         <div style="font-size: .9em;margin-bottom: 0;">
                             <span style="margin-left: 20px;">day</span><span style="margin-left: 25px;">month</span><span style="margin-left: 40px;">year</span>
@@ -601,7 +602,7 @@
                                     2)
                                 </div>
                                 <div fxFlex="90%" style="margin-left: 5px;">
-                                    The landlord and tenant may agree on a differentday for the condition inspection.
+                                    The landlord and tenant may agree on a different day for the condition inspection.
                                 </div>
                             </div>
                             <div>

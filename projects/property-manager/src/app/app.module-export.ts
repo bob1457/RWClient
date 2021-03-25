@@ -35,6 +35,7 @@ import { ContractFooterComponent } from './contract-footer/contract-footer.compo
 import { ContractContentEditorComponent } from './contract-content-editor/contract-content-editor.component';
 import { ContractViewComponent } from './contract-view/contract-view.component';
 import { TypePipe } from './type.pipe';
+import { PropertyTypePipe } from './property-type.pipe';
 // import { MatSortModule } from '@angular/material/sort';
 
 // ngx-mask ref: https://www.npmjs.com/package/ngx-mask
@@ -84,6 +85,7 @@ const routes: Routes = [
     ContractContentComponent,
     YesNoPipe,
     TypePipe,
+    PropertyTypePipe,
     LoadingComponent,
     ContractHeaderComponent,
     ContractFooterComponent,

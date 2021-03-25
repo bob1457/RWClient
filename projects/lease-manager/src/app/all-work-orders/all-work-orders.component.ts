@@ -35,6 +35,8 @@ export class AllWorkOrdersComponent implements OnInit {
         this.dataSource.data = this.list;
         // this.detailsForm.patchValue(data);
         console.log(this.list);
+
+        setTimeout(() =>  {this.dataSource.paginator = this.paginator; this.dataSource.sort = this.sort; });
     });
   }
 
@@ -44,7 +46,10 @@ export class AllWorkOrdersComponent implements OnInit {
 
     this.loading$ = this.store.pipe(select(loadingStatus));
 
-    this.store.dispatch(getAllWorkOrders());
+    if (!this.list) {
+      this.store.dispatch(getAllWorkOrders());
+    }
+
 
   }
 

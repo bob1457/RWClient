@@ -18,10 +18,10 @@
                 <mat-form-field fxLayout fxLayoutAlign="start center">
                     <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="Filter">
                 </mat-form-field>
-                <mat-radio-group aria-label="Select an option" style="margin-top: 13px;margin-left: 25px;padding-right: 5px;">
+                <!-- <mat-radio-group aria-label="Select an option" style="margin-top: 13px;margin-left: 25px;padding-right: 5px;">
                     <mat-radio-button value="1" checked style="padding-right: 10px;">Active</mat-radio-button>
                     <mat-radio-button value="0">All</mat-radio-button>
-                </mat-radio-group>
+                </mat-radio-group> -->
                 <span class="spacer"></span>
                 <button [routerLink]="['/Manage/marketing/addVendor']" mat-button mat-mini-fab style="background: #c26112;color: white;">
               <i class="material-icons" title="Add Property">
@@ -96,6 +96,13 @@
                     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                 </table>
             </div>
+            <table style="width: 100%;">
+                <tr *ngIf="!dataSource.data.length">
+                    <td style="text-align: center;height:40px" [attr.colspan]="displayedColumns.length">
+                        No Records Found!
+                    </td>
+                </tr>
+            </table>
             <span class="spacer"></span>
             <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 25]"></mat-paginator>
         </div>
