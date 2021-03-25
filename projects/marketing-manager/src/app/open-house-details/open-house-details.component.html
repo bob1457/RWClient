@@ -12,8 +12,8 @@
         <div class="side-info">
             <h6>Open house Attendees</h6>
             <div>
-                <ul *ngIf="openhouse.openHouseViewer;else msg" style="list-style: none;margin-left: -30px;font-size: .8em;">
-                    <li *ngFor="let viewer of openhouse.openHouseViewer" style="margin-bottom: 8px;">
+                <ul *ngIf="openhouse.viewers;else msg" style="list-style: none;margin-left: -30px;font-size: .8em;">
+                    <li *ngFor="let viewer of openhouse.viewers" style="margin-bottom: 8px;">
                         <span style="font-style: italic;">{{viewer.firstName}} {{viewer.lastName}}</span> -- {{viewer.contactEmail}}, {{viewer.contactTel}}
                     </li>
                 </ul>
@@ -67,7 +67,7 @@
                                 <span style="font-style:italic;">Address:</span>
                             </p>
                             <p>
-                                {{openhouse.rentalProperty.address.streetNum}} <br> {{openhouse.address.city}} {{openhouse.address.stateProvince}}<br> {{openhouse.address.zipPostCode}} {{openhouse.address.country}}
+                                {{openhouse.address.streetNum}} <br> {{openhouse.address.city}} {{openhouse.address.stateProvince}}<br> {{openhouse.address.zipPostCode}} {{openhouse.address.country}}
                             </p>
                         </div>
                         <div fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="start start" style="width:50%; margin-top: 25px;">
