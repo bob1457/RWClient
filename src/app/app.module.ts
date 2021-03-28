@@ -25,6 +25,8 @@ import { StoreRouterConnectingModule, RouterStateSerializer, routerReducer, Rout
 import { PropertyEffects } from 'projects/property-manager/src/app/store/effects/property.effects';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
+import { metaReducers } from './store/metareducres';
+
 
 @NgModule({
   declarations: [
@@ -41,6 +43,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     EffectsModule.forRoot([AuthEffects, PropertyEffects]),
     StoreModule.forRoot({router: routerReducer},
       {
+        metaReducers,
         runtimeChecks: {
           strictActionImmutability: false,
           strictActionSerializability: false,
