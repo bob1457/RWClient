@@ -379,8 +379,8 @@ on(PropertyActions.getContractDetails, (state) => ({
       ...state,
       loading: false,
       loaded: false,
-      selectedContract: null,
-      errorMessage: 'Failed to load contract details'
+      property: null,
+      errorMessage: 'Failed to load property details'
     });
   }),
 

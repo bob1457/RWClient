@@ -43,7 +43,7 @@ import { metaReducers } from './store/metareducres';
     EffectsModule.forRoot([AuthEffects, PropertyEffects]),
     StoreModule.forRoot({router: routerReducer},
       {
-        metaReducers,
+        // metaReducers,
         runtimeChecks: {
           strictActionImmutability: false,
           strictActionSerializability: false,
