@@ -46,7 +46,10 @@ export class AllWorkOrdersComponent implements OnInit {
 
     this.loading$ = this.store.pipe(select(loadingStatus));
 
-    this.store.dispatch(getAllWorkOrders());
+    if (!this.list) {
+      this.store.dispatch(getAllWorkOrders());
+    }
+
 
   }
 

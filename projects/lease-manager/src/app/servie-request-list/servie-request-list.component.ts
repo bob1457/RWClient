@@ -49,7 +49,10 @@ export class ServieRequestListComponent implements OnInit {
 
     this.loading$ = this.store.pipe(select(loadingStatus));
 
-    this.store.dispatch(getAllServiceRequests());
+    if(!this.list) {
+      this.store.dispatch(getAllServiceRequests());
+    }
+
   }
 
 

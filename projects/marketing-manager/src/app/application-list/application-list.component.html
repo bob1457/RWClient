@@ -18,10 +18,10 @@
                 <mat-form-field fxLayout fxLayoutAlign="start center">
                     <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="Filter">
                 </mat-form-field>
-                <mat-radio-group aria-label="Select an option" style="margin-top: 13px;margin-left: 25px;padding-right: 5px;">
+                <!-- <mat-radio-group aria-label="Select an option" style="margin-top: 13px;margin-left: 25px;padding-right: 5px;">
                     <mat-radio-button value="1" checked style="padding-right: 10px;">Active</mat-radio-button>
                     <mat-radio-button value="0">All</mat-radio-button>
-                </mat-radio-group>
+                </mat-radio-group> -->
                 <span class="spacer"></span>
                 <!-- <button [routerLink]="['/Manage/property/addproperty']" mat-button mat-mini-fab style="background: #3d5afe;color: white;">
           <i class="material-icons" title="Add Property">
@@ -45,7 +45,7 @@
                         <td mat-cell *matCellDef="let element"> {{element.applicatnFirstName}} {{element.applicatnLastName}}</td>
                     </ng-container>
 
-                    <ng-container matColumnDef="status">
+                    <ng-container matColumnDef="rentalApplicationStatus">
                         <th class="table-header-text" mat-header-cell *matHeaderCellDef mat-sort-header> Application Status </th>
                         <td mat-cell *matCellDef="let element"> {{element.rentalApplicationStatus | appStatus}}</td>
                     </ng-container>
@@ -62,17 +62,17 @@
                         <td mat-cell *matCellDef="let element"> {{element.propertyName}} </td>
                     </ng-container>
 
-                    <ng-container matColumnDef="telephone">
+                    <ng-container matColumnDef="applicantContactTel">
                         <th class="table-header-text" style="margin-left: auto;margin-right: auto;" mat-header-cell *matHeaderCellDef mat-sort-header> Telephone </th>
                         <td mat-cell *matCellDef="let element"> {{element.applicantContactTel}} </td>
                     </ng-container>
 
                     <ng-container matColumnDef="appliedDate">
                         <th class="table-header-text" style="margin-left: auto;margin-right: auto;" mat-header-cell *matHeaderCellDef mat-sort-header> Applied On </th>
-                        <td mat-cell *matCellDef="let element"> {{element.appliedDate | date }} </td>
+                        <td mat-cell *matCellDef="let element"> {{element.appliedDate }} </td>
                     </ng-container>
 
-                    <ng-container matColumnDef="occupants">
+                    <ng-container matColumnDef="applicantNubmerOfOccupants">
                         <th class="table-header-text" style="margin-left: auto;margin-right: auto;" mat-header-cell *matHeaderCellDef mat-sort-header> Occupants </th>
                         <td mat-cell *matCellDef="let element"> {{element.applicantNubmerOfOccupants}} </td>
                     </ng-container>

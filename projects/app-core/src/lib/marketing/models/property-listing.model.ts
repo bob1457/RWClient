@@ -4,6 +4,7 @@ export interface PropertyListing {
   rentalPropertyId: number;
   listingDesc: string;
   originalId: number;
+  isActive: boolean;
   // listingStatus: string;
   monthlyRent: number;
   notes: string;

@@ -55,9 +55,12 @@ export class PropertyListingComponent implements OnInit {
 
                     this.dataSource.sort = this.sort;
                     this.dataSource.paginator = this.paginator;
-                    // setTimeout(() =>  {this.dataSource.paginator = this.paginator; this.dataSource.sort = this.sort; });
+
+                    setTimeout(() =>  {this.dataSource.paginator = this.paginator; this.dataSource.sort = this.sort; });
 
                   });
+
+                setTimeout(() =>  {this.dataSource.paginator = this.paginator; this.dataSource.sort = this.sort; });
                }
 
   ngOnInit() {
@@ -65,17 +68,17 @@ export class PropertyListingComponent implements OnInit {
 
     this.loading$ = this.store.pipe(select(loadingStatus));
 
-    this.store.select(loadedStatus)
-    .subscribe( res => this.loaded = res);
+    // this.store.select(loadedStatus)
+    // .subscribe( res => this.loaded = res);
 
-    // if (this.list == null) {
-    this.store.dispatch(getPropertyListing());
-    // }
+    if (!this.list) {
+      this.store.dispatch(getPropertyListing());
+    }
 
-    this.store.dispatch(getPropertyImageList());
+    // this.store.dispatch(getPropertyImageList());
     // return this.propertyService.getPropertyList().subscribe((pList: Property[]) => {this.list = pList; console.log(pList)});
 
-    this.store.dispatch(getOpenHouseList());
+    // this.store.dispatch(getOpenHouseList());
 
     // this.store.pipe(
     //   select(propertyListing)).subscribe(data => {
@@ -100,11 +103,19 @@ export class PropertyListingComponent implements OnInit {
   }
 
 
+  // filterChange(event) { // for future invetigation
+  //   debugger;
+  //   console.log('filter selected', event.value);
+  //   if (event.value === '1' ) {
+  //     this.dataSource.filterPredicate = (data, filter) => (data.listingDesc.toLowerCase().indexOf('CONDO') !== -1);
 
-  GetPropertyListingDetails(id: number) {
-    debugger;
-    return this.store.dispatch(getPropertyListingDetails({payload: id}));
-  }
+  //   }
+  // }
+
+  // GetPropertyListingDetails(id: number) {
+  //   debugger;
+  //   return this.store.dispatch(getPropertyListingDetails({payload: id}));
+  // }
 
   // AddPropertyListing() {
 

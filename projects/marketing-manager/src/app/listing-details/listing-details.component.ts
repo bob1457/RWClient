@@ -5,7 +5,7 @@ import { PropertyListingState } from '../store/marketing.state';
 import { Store, select } from '@ngrx/store';
 import { Location } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
-import { getPropertyListingDetails, updatePropertyListing, uploadPropertyImage, addOpenHouseToListing, updateOpenHouseToListingFailure, updateOpenHouseToListing } from '../store/actions/marketing.actions';
+import { getPropertyListingDetails, updatePropertyListing, uploadPropertyImage, addOpenHouseToListing, updateOpenHouseToListingFailure, updateOpenHouseToListing, getPropertyImageList, getOpenHouseList } from '../store/actions/marketing.actions';
 import { propertyListingDetails, loadingStatus, propertyImgList, loadedStatus, openHouses } from '../store/reducers';
 import { Observable } from 'rxjs';
 
@@ -24,6 +24,8 @@ export class ListingDetailsComponent implements OnInit {
   loading$: Observable<boolean>;
   // loaded = false;
   imgList: any[] = [];
+
+  tabIndex = 0;
 
   iconImg: any;
   addOpenHouse = false;
@@ -191,7 +193,9 @@ export class ListingDetailsComponent implements OnInit {
 
     this.store.dispatch(getPropertyListingDetails({payload: id}));
 
+    this.store.dispatch(getPropertyImageList());
 
+    // this.store.dispatch(getOpenHouseList());
 
     // console.log('rental property id:', this.listing.rentalPropertyId);
 
@@ -332,4 +336,36 @@ export class ListingDetailsComponent implements OnInit {
     this.addForm.reset();
   }
 
+
+  tabSelected(e) {
+    this.tabIndex = e.index;
+    console.log('tab selected', this.tabIndex);
+    // if (this.tabIndex == 1) {
+    //   this.hide = false;
+    // }
+
+    // if (this.tabIndex == 0) {
+    //   this.hide = false;
+    // }
+
+    // if (this.tabIndex == 1) {
+    //   this.hide = false;
+    // }
+
+    switch (this.tabIndex) {
+      case 0 : {
+        break;
+      }
+      case 1 : {
+        if (this.openhouse.length === 0) {
+          this.store.dispatch(getOpenHouseList());
+        }
+        break;
+      }
+        default: {
+        break;
+      }
+    }
+
+  }
 }
