@@ -37,6 +37,7 @@ import { ContractContentEditorComponent } from './contract-content-editor/contra
 import { ContractViewComponent } from './contract-view/contract-view.component';
 import { TypePipe } from './type.pipe';
 import { PropertyTypePipe } from './property-type.pipe';
+import { SignDatePipe } from './sign-date.pipe';
 
 
 @NgModule({
@@ -68,7 +69,8 @@ import { PropertyTypePipe } from './property-type.pipe';
     ContractContentEditorComponent,
     ContractViewComponent,
     TypePipe,
-    PropertyTypePipe
+    PropertyTypePipe,
+    SignDatePipe
   ],
   imports: [
     BrowserModule,

@@ -291,7 +291,7 @@ on(PropertyActions.getPropertyDetails, (state) => ({
   on(PropertyActions.updatePropertyOwnerFailure, (state) => {
     return ({
       ...state,
-      loading: true,
+      loading: false,
       errorMessage: 'Failed to update property owner'
     });
   }),
@@ -379,8 +379,8 @@ on(PropertyActions.getContractDetails, (state) => ({
       ...state,
       loading: false,
       loaded: false,
-      selectedContract: null,
-      errorMessage: 'Failed to load contract details'
+      property: null,
+      errorMessage: 'Failed to load property details'
     });
   }),
 

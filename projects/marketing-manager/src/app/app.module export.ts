@@ -30,6 +30,7 @@ import { AppStatusPipe } from './app-status.pipe';
 import { AllOpenHousesComponent } from '../app/all-open-houses/all-open-houses.component';
 import { OpenHouseDetailsComponent } from '../app/open-house-details/open-house-details.component';
 import { OhStatusPipe } from './oh-status.pipe';
+import { metaReducers } from './store/metaReducers';
 
 const routes: Routes = [
   // { path: '', component: PropertyListingComponent},
@@ -82,7 +83,7 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forChild(routes),
-    StoreModule.forFeature('marketing', reducer),
+    StoreModule.forFeature('marketing', reducer, {metaReducers}),
     EffectsModule.forFeature([MarketingEffects])
     // AppRoutingModule
   ],

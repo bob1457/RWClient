@@ -38,8 +38,11 @@ import { TypePipe } from './type.pipe';
 import { PropertyTypePipe } from './property-type.pipe';
 // import { MatSortModule } from '@angular/material/sort';
 
+import { metaReducers } from './store/metareducers';
+
 // ngx-mask ref: https://www.npmjs.com/package/ngx-mask
 import { NgxMaskModule, IConfig } from 'ngx-mask';
+import { SignDatePipe } from 'src/app/sign-date.pipe';
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 
 const routes: Routes = [
@@ -85,6 +88,7 @@ const routes: Routes = [
     ContractContentComponent,
     YesNoPipe,
     TypePipe,
+    SignDatePipe,
     PropertyTypePipe,
     LoadingComponent,
     ContractHeaderComponent,
@@ -103,7 +107,7 @@ const routes: Routes = [
     ReactiveFormsModule,
     NgxMaskModule.forRoot(),
     RouterModule.forChild(routes),
-    StoreModule.forFeature('property', reducer)
+    StoreModule.forFeature('property', reducer, {metaReducers})
   ],
   exports: [
     MatSortModule

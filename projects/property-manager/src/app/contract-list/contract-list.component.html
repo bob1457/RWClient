@@ -85,14 +85,14 @@
                     <ng-container matColumnDef="startDate">
                         <th class="table-header-text" style="text-align: center;" mat-header-cell *matHeaderCellDef mat-sort-header> StartDate </th>
                         <td mat-cell *matCellDef="let element">
-                            {{element.startDate | date}}
+                            {{element.startDate}}
                             <!-- {{element.address}} -->
                         </td>
                     </ng-container>
 
                     <ng-container matColumnDef="endDate">
                         <th class="table-header-text" mat-header-cell *matHeaderCellDef mat-sort-header mat-sort-header> EndDate </th>
-                        <td mat-cell *matCellDef="let element"> {{element.endDate | date}} </td>
+                        <td mat-cell *matCellDef="let element"> {{element.endDate}} </td>
                     </ng-container>
 
                     <ng-container matColumnDef="propertyName">
@@ -102,7 +102,7 @@
 
                     <ng-container matColumnDef="contractSignDate">
                         <th class="table-header-text" style="margin-left: auto;margin-right: auto;" mat-header-cell *matHeaderCellDef mat-sort-header> SignedOn </th>
-                        <td mat-cell *matCellDef="let element"> {{element.contractSignDate | date }} </td>
+                        <td mat-cell *matCellDef="let element"> {{element.contractSignDate }}</td>
                     </ng-container>
 
                     <ng-container matColumnDef="managementContractType">

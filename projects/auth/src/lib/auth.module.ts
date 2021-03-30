@@ -15,6 +15,7 @@ import { reducer } from './store/auth.reducers';
 import { EffectsModule } from '@ngrx/effects';
 import { ProfileHomeComponent } from './profile-home/profile-home.component';
 import { ChangePassComponent } from './change-pass/change-pass.component';
+import { metaReducers } from './store/metaReducers';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,7 @@ import { ChangePassComponent } from './change-pass/change-pass.component';
     FlexLayoutModule,
     HttpClientModule,
     EffectsModule.forFeature([AuthEffects]),
-    StoreModule.forFeature('auth', reducer)
+    StoreModule.forFeature('auth', reducer, {metaReducers})
   ],
   exports: [
     AuthComponent,
