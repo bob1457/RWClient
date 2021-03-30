@@ -291,7 +291,7 @@ on(PropertyActions.getPropertyDetails, (state) => ({
   on(PropertyActions.updatePropertyOwnerFailure, (state) => {
     return ({
       ...state,
-      loading: true,
+      loading: false,
       errorMessage: 'Failed to update property owner'
     });
   }),
