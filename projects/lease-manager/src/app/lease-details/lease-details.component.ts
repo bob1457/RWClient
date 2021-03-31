@@ -109,9 +109,9 @@ export class LeaseDetailsComponent implements OnInit {
   // currentMonth;
   // currentYear;
 
-  displayedColumns: string[] = ['icon', 'id', 'paidAmt', 'paidDate', 'payMethod', 'rentMonth', 'rentYear', 'added', 'action'];
-  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: false}) sort: MatSort;
+  displayedColumns: string[] = ['icon', 'id', 'paidAmt', 'paymentReceivedDate', 'payMethod', 'rentalForMonth', 'rentalForYear', 'created', 'action'];
+  @ViewChild('paginator', {static: false}) paginator: MatPaginator;
+  @ViewChild('Sort', {static: false}) sort: MatSort;
 
   dataSource = new MatTableDataSource<any>();
 

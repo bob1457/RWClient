@@ -100,6 +100,7 @@ export class ContractDetailsComponent implements OnInit {
     debugger;
     console.log(this.detailsForm.value);
     this.store.dispatch(updateContract({payload: this.detailsForm.value}));
+    this.editSignDate = false; // how to maek it done when update is finished and data returned??
   }
 
   viewContract() {
