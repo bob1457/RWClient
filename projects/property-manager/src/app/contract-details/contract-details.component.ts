@@ -21,6 +21,7 @@ export class ContractDetailsComponent implements OnInit {
 
   detailsForm: FormGroup;;
   contract: ManagementContract;
+  editSignDate = false;
 
   // contract$ = this.store.pipe(select(contractDetails))
   //             .subscribe(data => {
@@ -103,6 +104,10 @@ export class ContractDetailsComponent implements OnInit {
 
   viewContract() {
     console.log('show contract');
+  }
+
+  editDate() {
+    this.editSignDate = !this.editSignDate;
   }
 
   openInput() {

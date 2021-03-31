@@ -443,7 +443,7 @@ on(PropertyActions.getContractDetails, (state) => ({
   on(PropertyActions.updatePropertyFailure, (state) => {
     return ({
       ...state,
-      loading: true,
+      loading: false,
       errorMessage: 'Failed to update contract'
     });
   }),
