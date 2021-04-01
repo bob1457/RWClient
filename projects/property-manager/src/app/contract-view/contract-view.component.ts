@@ -48,7 +48,7 @@ export class ContractViewComponent implements OnInit {
                   // this.pm = localStorage.getItem('user');
                   this.pm = user;
                 } else {
-                  this.pm = JSON.parse(localStorage.getItem('user'));
+                  this.pm = JSON.parse(localStorage.getItem('auth'));
                 }
 
               });

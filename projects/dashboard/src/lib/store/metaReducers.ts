@@ -12,8 +12,10 @@ export function localStorageSyncReducer(reducer: ActionReducer<any>): ActionRedu
       'tenants',
       'leases',
       'applications',
-      'workOrders',
+      'workorders',
       'rentPayments',
+      'vendors',
+      'servierequests',
       'openHouses'
   ],
     rehydrate: true
