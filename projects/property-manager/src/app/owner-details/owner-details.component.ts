@@ -38,7 +38,10 @@ export class OwnerDetailsComponent implements OnInit {
     private formBuilder: FormBuilder  ) {
     this.id = this.actRoute.snapshot.params.id;
     this.store.pipe(select(ownerDetails))
-        .subscribe(data => this.owner = data);
+        .subscribe(data => {
+          this.owner = data;
+          console.log('landload', this.owner);
+        });
     // this.store.dispatch(getPropertyOwnerDetails({payload: this.id}));
   }
 
@@ -125,21 +128,25 @@ export class OwnerDetailsComponent implements OnInit {
 
   submit() {
     debugger;
-
     // set form value for owner address
+
+    this.detailsForm.patchValue({
+      id: this.id
+    });
 
     if (!this.editAddress) {
       this.detailsForm.patchValue({
+      onlineAccessEnbaled: false,
       streetNumber: this.owner.address.streetNumber,
       city: this.owner.address.city,
-      stateProvince: this.owner.address.stateProv,
+      stateProvince: this.owner.address.stateProvince,
       zipPostCode: this.owner.address.zipPostCode,
       country: this.owner.address.country
 
     });
     }
 
-    console.log(this.detailsForm.value);
+    console.log('from submitted',this.detailsForm.value);
 
     this.store.dispatch(PropertyActions.updatePropertyOwner({payload: this.detailsForm.value}));
     // this.editAddress = false;

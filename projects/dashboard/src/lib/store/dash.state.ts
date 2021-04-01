@@ -17,10 +17,12 @@ export interface DashState {
   tenants: any[];
   leases: any[];
   applications: RentalApplication[];
-  workOrders: any[];
+  workorders: any[];
   openHouses: any[];
   rentPayments: any[];
   errorMessage: string;
+  vendors: any[];
+  servierequests: any[];
 }
 
 

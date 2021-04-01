@@ -37,6 +37,7 @@ import { AddRentDialogComponent } from './dialogs/add-rent-dialog/add-rent-dialo
 import { FullLeaseAgreementComponent } from './full-lease-agreement/full-lease-agreement.component';
 import { AgreementHeaderComponent } from './agreement-header/agreement-header.component';
 import { AgreementContentComponent } from './agreement-content/agreement-content.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -75,6 +76,7 @@ import { AgreementContentComponent } from './agreement-content/agreement-content
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     StoreModule.forFeature('lease', reducer),
     EffectsModule.forFeature([LeaseEffects])

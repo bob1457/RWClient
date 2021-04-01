@@ -16,8 +16,8 @@ export interface PropertyOwner {
   address : {
     streetNumber: string;
     city: string;
-    stateProv: string;
+    stateProvince: string;
     zipPostCode: string;
     country: string;
-  }  
+  }
 }

@@ -12,13 +12,13 @@
         <img src="../../assets/images/contract.png" width="120px" height="120px">
         <div class="date-time">
             <p>
-                Created: {{contract.created | date }}
+                Created: {{contract.created }}
             </p>
             <p style="margin-top: -10px;">
-                Updated: {{contract.modified | date }}
+                Updated: {{contract.modified }}
             </p>
             <p style="margin-top: -10px;">
-                Signed: {{contract.contractSignDate | date }}
+                Signed: {{contract.contractSignDate }}
             </p>
         </div>
     </div>
@@ -31,7 +31,7 @@
                     </i>
                     <!-- <img src="../../assets/images/pmgmnt.png " height="40px " width="40px "> *ngIf="property*ngIf="detailsForm.value"-->
                 </div>
-                <mat-card-title>Management Contract: <span style="font-size: .8em; font-style: italic;">{{contract.managementContractTitle}}</span></mat-card-title>
+                <mat-card-title>Management Contract: (ID: {{contract.id}}) &nbsp;<span style="font-size: .8em; font-style: italic;">{{contract.managementContractTitle}}</span></mat-card-title>
                 <mat-card-subtitle>
                     Property Address: <span *ngIf="!contract.property.address.propertySuiteNumber == ''">{{contract.property.address.propertySuiteNumber}}-</span> {{contract.property.address.propertyNumber}} {{contract.property.address.propertyStreet}}
                     {{contract.property.address.propertyCity}} {{contract.property.address.propertyStateProvince}} {{contract.property.address.propertyZipPostCode}}
@@ -62,16 +62,20 @@
                         </div>
                         <div fxLayout="row" fxLayout.xs="column" style="width: 70%;">
                             <mat-form-field style="margin-right: 10px; width: 50%;">
-                                <mat-label>Start Date</mat-label>
+                                <!-- <mat-label>Start Date</mat-label>
                                 <input matInput [matDatepicker]="picker1" formControlName="startDate" [ngModel]="contract.startDate">
                                 <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                                <mat-datepicker #picker1></mat-datepicker>
+                                <mat-datepicker #picker1></mat-datepicker> -->
+                                <span class="icon-pos" matPrefix><mat-icon>date_range</mat-icon> &nbsp;</span>
+                                <input type="text" readonly formControlName="startDate" matInput placeholder="Contract Start Date" [ngModel]="contract.startDate">
                             </mat-form-field>
                             <mat-form-field style="width: 50%;">
-                                <mat-label>End Date</mat-label>
+                                <!-- <mat-label>End Date</mat-label>
                                 <input matInput [matDatepicker]="picker2" formControlName="endDate" [ngModel]="contract.endDate">
                                 <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-                                <mat-datepicker #picker2></mat-datepicker>
+                                <mat-datepicker #picker2></mat-datepicker> -->
+                                <span class="icon-pos" matPrefix><mat-icon>date_range</mat-icon> &nbsp;</span>
+                                <input type="text" readonly formControlName="endDate" matInput placeholder="Contract End Date" [ngModel]="contract.endDate">
                             </mat-form-field>
                         </div>
 
@@ -88,16 +92,38 @@
                         <div fxLayout="row" style="width: 70%;" fxLayoutAlign="start start">
                             <div style="margin-right: 10px; width: 50%;">
                                 <mat-checkbox formControlName="isActive" [ngModel]="contract.isActive" [(checked)]="contract.isActive" class="property-full-width">Active</mat-checkbox>
+
                             </div>
                             <!-- <div style="width: 50%;">
                                 Contract Sign Date: &nbsp; &nbsp; <span style="font-style: italic;">{{contract.contractSignDate | date: mediumDate}}</span>
                             </div> -->
-                            <mat-form-field style="margin-right: 10px; width: 50%;">
-                                <mat-label>Sign Date</mat-label>
+                            <div *ngIf="!editSignDate" style="margin-right: 10px; width: 45%;">
+                                <mat-form-field style="width: 100%;">
+                                    <!-- <mat-label>Sign Date</mat-label>
                                 <input matInput [matDatepicker]="picker3" formControlName="contractSignDate" [ngModel]="contract.contractSignDate">
                                 <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
-                                <mat-datepicker #picker3></mat-datepicker>
-                            </mat-form-field>
+                                <mat-datepicker #picker3></mat-datepicker> -->
+
+                                    <span class="icon-pos" matPrefix><mat-icon>date_range</mat-icon> &nbsp;</span>
+                                    <input readonly type="text" formControlName="contractSignDate" matInput placeholder="Contract Sign Date" [value]="contract.contractSignDate">
+
+                                    <!-- <div *ngIf="!editSignDate">
+                                    Edit
+                                </div> -->
+                                </mat-form-field>
+                            </div>
+
+                            <div *ngIf="editSignDate" style="margin-right: 10px; width: 45%;">
+                                <mat-form-field style="width: 100%;">
+                                    <mat-label>Sign Date</mat-label>
+                                    <input matInput [matDatepicker]="picker3" formControlName="contractSignDate" [ngModel]="contract.contractSignDate">
+                                    <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker3></mat-datepicker>
+                                </mat-form-field>
+
+                            </div>
+                            <span *ngIf="!editSignDate" style="margin-right: -15px; cursor: pointer; width: 5%;margin-top: 10px;color: green;" title="update"><mat-icon (click)="editDate()">edit_calenda</mat-icon></span>
+                            <span *ngIf="editSignDate" style="margin-right: -15px; cursor: pointer; width: 5%;margin-top: 10px; color: orangered;" title="cancel update"><mat-icon (click)="editDate()">edit_off</mat-icon></span>
 
                         </div>
                         <div style="width:70%">

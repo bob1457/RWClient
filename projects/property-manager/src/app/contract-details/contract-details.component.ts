@@ -21,6 +21,7 @@ export class ContractDetailsComponent implements OnInit {
 
   detailsForm: FormGroup;;
   contract: ManagementContract;
+  editSignDate = false;
 
   // contract$ = this.store.pipe(select(contractDetails))
   //             .subscribe(data => {
@@ -99,10 +100,15 @@ export class ContractDetailsComponent implements OnInit {
     debugger;
     console.log(this.detailsForm.value);
     this.store.dispatch(updateContract({payload: this.detailsForm.value}));
+    this.editSignDate = false; // how to maek it done when update is finished and data returned??
   }
 
   viewContract() {
     console.log('show contract');
+  }
+
+  editDate() {
+    this.editSignDate = !this.editSignDate;
   }
 
   openInput() {

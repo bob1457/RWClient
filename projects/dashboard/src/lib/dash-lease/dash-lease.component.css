@@ -93,7 +93,7 @@
 }
 
 .card-header-img {
-    background-image: url('../../assets/imgs/group.png');
+    /* background-image: url('../../assets/imgs/group.png'); */
     background-size: cover;
 }
 

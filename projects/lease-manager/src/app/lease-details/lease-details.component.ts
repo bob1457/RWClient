@@ -13,13 +13,20 @@ import { Observable } from 'rxjs';
 import { MatDialog, MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { PaymentDetailsDialogComponent } from '../dialogs/payment-details-dialog/payment-details-dialog.component';
 import { AddRentDialogComponent } from '../dialogs/add-rent-dialog/add-rent-dialog.component';
-import { tap } from 'rxjs/operators';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 // import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 
 @Component({
   selector: 'app-lease-details',
   templateUrl: './lease-details.component.html',
-  styleUrls: ['./lease-details.component.scss']
+  styleUrls: ['./lease-details.component.scss'],
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed', style({ height: '0px', minHeight: '0' })),
+      state('expanded', style({ height: '*' })),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+  ]
 })
 export class LeaseDetailsComponent implements OnInit {
 
@@ -96,14 +103,15 @@ export class LeaseDetailsComponent implements OnInit {
     {name: 'Plumbing'},
     {name: 'Electrical'},
     {name: 'Renovation'}
-  ]
-;
+  ];
+
+  isTableExpanded = false;
   // currentMonth;
   // currentYear;
 
-  displayedColumns: string[] = ['icon', 'id', 'paidAmt', 'paidDate', 'payMethod', 'rentMonth', 'rentYear', 'added', 'action'];
-  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: false}) sort: MatSort;
+  displayedColumns: string[] = ['icon', 'id', 'paidAmt', 'paymentReceivedDate', 'payMethod', 'rentalForMonth', 'rentalForYear', 'created', 'action'];
+  @ViewChild('paginator', {static: false}) paginator: MatPaginator;
+  @ViewChild('Sort', {static: false}) sort: MatSort;
 
   dataSource = new MatTableDataSource<any>();
 
@@ -594,3 +602,23 @@ export class LeaseDetailsComponent implements OnInit {
   }
 
 }
+// function trigger(arg0: string, arg1: any[]): any {
+//   throw new Error('Function not implemented.');
+// }
+
+// function state(arg0: string, arg1: any): any {
+//   throw new Error('Function not implemented.');
+// }
+
+// function style(arg0: { height: string; minHeight: string; }): any {
+//   throw new Error('Function not implemented.');
+// }
+
+// function transition(arg0: string, arg1: any): any {
+//   throw new Error('Function not implemented.');
+// }
+
+// function animate(arg0: string): any {
+//   throw new Error('Function not implemented.');
+// }
+

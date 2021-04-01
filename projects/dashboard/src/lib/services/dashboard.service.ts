@@ -71,6 +71,21 @@ export class DashboardService {
     return this.http.get<any[]>(`${this.baseUrl}/rentpayment/renthistory`);
   }
 
+  getVendorList() {
+    debugger;
+    return this.http.get<any[]>(`${this.baseUrl}/WorkOrder/vendor/all`);
+  }
+
+  getWorkOrderList() {
+    debugger;
+    return this.http.get<any[]>(`${this.baseUrl}/WorkOrder/all`);
+  }
+
+  getServiceList() {
+    debugger;
+    return this.http.get<any[]>(`${this.baseUrl}/WorkOrder/ServiceRequest/all`);
+  }
+
 
 
 }

@@ -9,7 +9,7 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { ChartsModule } from 'ng2-charts';
 
 import { reducer } from './store/dash.reducer';
-import { StoreModule } from '@ngrx/store';
+import { Store, StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { DashboardEffects } from './store/dash.effects';
 import { DashPropertyComponent } from './dash-property/dash-property.component';
@@ -26,6 +26,8 @@ import { IndicatorRentalsComponent } from './indicator-rentals/indicator-rentals
 import { PieChartComponent } from './charts/pie-chart/pie-chart.component';
 import { BarChartComponent } from './charts/bar-chart/bar-chart.component';
 import { LoadingComponent } from './loading/loading.component';
+import { metaReducers } from './store/metaReducers'
+
 
 @NgModule({
   declarations: [
@@ -53,7 +55,7 @@ import { LoadingComponent } from './loading/loading.component';
     FlexLayoutModule,
     AppMaterialModule,
     LayoutModule,
-    StoreModule.forFeature('dashboard', reducer),
+    StoreModule.forFeature('dashboard', reducer, {metaReducers}),
     EffectsModule.forFeature([DashboardEffects])
   ],
   exports: [
