@@ -2,7 +2,7 @@ import { createAction, props } from '@ngrx/store';
 import { Property } from '../models/property.model';
 import { PropertyOwner } from '../models/property-owner.model';
 import { ManagementContract } from '../models/management-contract.model';
-import { PropertyListing, OpenHouse } from '@lib/app-core';
+import { PropertyListing, OpenHouse, WorkOrder, Vendor, ServiceRequest } from '@lib/app-core';
 import { PropertyLease } from '../models/property-lease.model';
 import { PropertyTenant } from '../models/property-tenant.model';
 import { RentalApplication } from '../models/application.model';
@@ -211,3 +211,62 @@ export const getRentPaymentListFailure = createAction(
   }
 );
 
+/**
+ * Get All Vendors Actions
+ */
+export const getAllVendors = createAction(
+  '[Leases] Get All Vendors'
+);
+
+export const getAllVendorsSuccess = createAction(
+  '[Leases] Get All Vendors Success',
+  props<{payload: Vendor[]}>()
+);
+
+export const getAllVendorsFailure = createAction(
+  '[Leases] Get All Vendors Failure',
+  // props<{payload: any}>()
+  (errorMessage = 'Error loading vendors') => {
+    return ({ payload: { errorMessage } });
+  }
+);
+
+/**
+ * Get All Work Orders Actions
+ */
+export const getAllWorkOrders = createAction(
+  '[Leases] Get All  Work Orders'
+);
+
+export const getAllWorkOrdersSuccess = createAction(
+  '[Leases] Get All Work Orders Success',
+  props<{payload: WorkOrder[]}>()
+);
+
+export const getAllWorkOrdersFailure = createAction(
+  '[Leases] Get All  Work Orders Failure',
+  // props<{payload: any}>()
+  (errorMessage = 'Error loading work orders') => {
+    return ({ payload: { errorMessage } });
+  }
+);
+
+/**
+ * Get All Service Request Actions
+ */
+export const getAllServiceRequests = createAction(
+  '[Leases] Get All Service Request'
+);
+
+export const getAllServiceRequestsSuccess = createAction(
+  '[Leases] Get All Service Request Success',
+  props<{payload: ServiceRequest[]}>()
+);
+
+export const getAllServiceRequestsFailure = createAction(
+  '[Leases] Get All Service Request Failure',
+  // props<{payload: any}>()
+  (errorMessage = 'Error loading Service Request') => {
+    return ({ payload: { errorMessage } });
+  }
+);

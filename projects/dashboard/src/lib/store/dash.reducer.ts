@@ -15,9 +15,11 @@ export const initialState: DashState =  { // adapter.getInitialState
   tenants: null,
   leases: null,
   applications: null,
-  workOrders: null,
+  workorders: null,
   openHouses: null,
   rentPayments: null,
+  vendors: null,
+  servierequests: null,
   errorMessage: null
 };
 
@@ -237,6 +239,69 @@ const dashReducer = createReducer(
       loaded: true,
       rentPayments: payload
     });
+  }),
+
+  /**
+   * Get all vendor list
+   */
+
+
+   on(DashActions.getAllVendors, state => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+
+  on(DashActions.getAllVendorsSuccess, (state, { payload }) => {
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      vendors: payload
+    });
+  }),
+
+  /**
+   * Get all workk order list
+   */
+
+
+   on(DashActions.getAllWorkOrders, state => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+
+  on(DashActions.getAllWorkOrdersSuccess, (state, { payload }) => {
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      workorders: payload
+    });
+  }),
+
+  /**
+   * Get all service request list
+   */
+
+
+   on(DashActions.getAllServiceRequests, state => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+
+  on(DashActions.getAllServiceRequestsSuccess, (state, { payload }) => {
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      servierequests: payload
+    });
   })
 
 );
@@ -258,6 +323,10 @@ const AllOpenhouess = (state: DashState) => state.openHouses;
 const AllListings = (state: DashState) => state.listings;
 const AllRentalApps = (state: DashState) => state.applications;
 
+const  AllVendors = (state: DashState) => state.vendors;
+const  AllworkOrders = (state: DashState) => state.workorders;
+const  AllServiceRequests = (state: DashState) => state.servierequests;
+
 export const AllPropertyImgs = (state: DashState) => state.propertyImgList;
 export const AllRentPaymentHistory = (state: DashState) => state.rentPayments;
 
@@ -276,6 +345,10 @@ export const MarketingList = createSelector(getDashState, AllListings);
 export const RentalAppList = createSelector(getDashState, AllRentalApps);
 export const PropertyImgList = createSelector(getDashState, AllPropertyImgs);
 export const RentPaymentHistory = createSelector(getDashState, AllRentPaymentHistory);
+
+export const VendorList = createSelector(getDashState, AllVendors);
+export const WorkOrderList = createSelector(getDashState, AllworkOrders);
+export const ServiceRequestList = createSelector(getDashState, AllServiceRequests);
 
 export const loadingStatus = createSelector(getDashState, loading);
 

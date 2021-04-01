@@ -168,7 +168,7 @@
 }
 
 .card-header-img {
-    background-image: url('../../assets/imgs/target.png');
+    /* background-image: url('../../assets/imgs/target.png'); */
     background-size: cover;
 }
 

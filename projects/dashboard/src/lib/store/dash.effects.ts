@@ -251,4 +251,73 @@ export class DashboardEffects {
   );
 
 
+  getVendorList$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(DashActions.getAllVendors),
+      tap(() => console.log('got here for vendor list!!!')),
+      switchMap(() =>
+        this.dashService.getVendorList().pipe(
+          map((vendors: any[]) => ({
+            type: '[Leases] Get All Vendors Success',
+            payload: vendors
+          })),
+          // tap(res => {console.log('response: ' + res); }),
+          // catchError(
+          //   err => {
+          //     return of('[Marketing] Get Rental Applications Failure', err.error);
+          //   } // EMPTY
+          // )
+          catchError(error => of(DashActions.getAllVendorsFailure(error.message)))
+        )
+      )
+    )
+  );
+
+  getWorkOrderList$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(DashActions.getAllWorkOrders),
+      tap(() => console.log('got here for work order list!!!')),
+      switchMap(() =>
+        this.dashService.getWorkOrderList().pipe(
+          map((vendors: any[]) => ({
+            type: '[Leases] Get All Work Orders Success',
+            payload: vendors
+          })),
+          // tap(res => {console.log('response: ' + res); }),
+          // catchError(
+          //   err => {
+          //     return of('[Marketing] Get Rental Applications Failure', err.error);
+          //   } // EMPTY
+          // )
+          catchError(error => of(DashActions.getAllWorkOrdersFailure(error.message)))
+        )
+      )
+    )
+  );
+
+  getServiceRequestList$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(DashActions.getAllServiceRequests),
+      tap(() => console.log('got here for service request list!!!')),
+      switchMap(() =>
+        this.dashService.getServiceList().pipe(
+          map((vendors: any[]) => ({
+            type: '[Leases] Get All Service Request Success',
+            payload: vendors
+          })),
+          // tap(res => {console.log('response: ' + res); }),
+          // catchError(
+          //   err => {
+          //     return of('[Marketing] Get Rental Applications Failure', err.error);
+          //   } // EMPTY
+          // )
+          catchError(error => of(DashActions.getAllServiceRequestsFailure(error.message)))
+        )
+      )
+    )
+  );
+
 }

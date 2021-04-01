@@ -41,7 +41,7 @@ export class AllOpenHousesComponent implements OnInit {
 
     this.loading$ = this.store.pipe(select(loadingStatus));
 
-    if (this.openhouseList.length === 0) {
+    if (!this.openhouseList) {
       this.store.dispatch(getOpenHouseList());
     }
     // this.store.dispatch(getOpenHouseList());
