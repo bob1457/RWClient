@@ -42,7 +42,7 @@ import { metaReducers } from './store/metareducers';
 
 // ngx-mask ref: https://www.npmjs.com/package/ngx-mask
 import { NgxMaskModule, IConfig } from 'ngx-mask';
-import { SignDatePipe } from 'src/app/sign-date.pipe';
+import { SignDatePipe } from './sign-date.pipe';
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 
 const routes: Routes = [
