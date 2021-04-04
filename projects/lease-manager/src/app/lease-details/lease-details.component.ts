@@ -471,6 +471,9 @@ export class LeaseDetailsComponent implements OnInit {
 
     this.dataSource2.sort = this.sort2;
     this.dataSource2.paginator = this.paginator2;
+
+    this.dataSource3.sort = this.sort3;
+    this.dataSource3.paginator = this.paginator3;
   }
 
   viewAgreement() {
