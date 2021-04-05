@@ -115,13 +115,13 @@ export class LeaseDetailsComponent implements OnInit {
 
   dataSource = new MatTableDataSource<any>();
 
-  displayedColumns2: string[] = ['icon', 'id', 'workOrderName', 'category', 'type', 'status', 'startDate', 'endDate', 'added', 'action'];
+  displayedColumns2: string[] = ['icon', 'id', 'workOrderName', 'workOrderCategory', 'workOrderType', 'workOrderStatus', 'startDate', 'endDate', 'added', 'action'];
   @ViewChild('paginator2', {static: false}) paginator2: MatPaginator;
   @ViewChild('Sort2', {static: true}) sort2: MatSort;
 
   dataSource2 = new MatTableDataSource<any>();
 
-  displayedColumns3: string[] = ['icon', 'id', 'firstName', 'lastName', 'email', 'tel1', 'addDate', 'action'];
+  displayedColumns3: string[] = ['icon', 'id', 'firstName', 'lastName', 'email', 'tel1', 'created', 'action'];
   @ViewChild('paginator3', {static: false}) paginator3: MatPaginator;
   @ViewChild('Sort3', {static: true}) sort3: MatSort;
 
@@ -585,15 +585,15 @@ export class LeaseDetailsComponent implements OnInit {
   }
 
   public doFilter = (value: string) => {
-    this.dataSource.filter = value.trim().toLocaleLowerCase();
+    this.dataSource.filter = value.trim().toLowerCase();
   }
 
   public doFilter2 = (value: string) => {
-    this.dataSource2.filter = value.trim().toLocaleLowerCase();
+    this.dataSource2.filter = value.trim().toLowerCase();
   }
 
   public doFilter3 = (value: string) => {
-    this.dataSource3.filter = value.trim().toLocaleLowerCase();
+    this.dataSource3.filter = value.trim().toLowerCase();
   }
 
   openDialog() {
@@ -605,23 +605,4 @@ export class LeaseDetailsComponent implements OnInit {
   }
 
 }
-// function trigger(arg0: string, arg1: any[]): any {
-//   throw new Error('Function not implemented.');
-// }
-
-// function state(arg0: string, arg1: any): any {
-//   throw new Error('Function not implemented.');
-// }
-
-// function style(arg0: { height: string; minHeight: string; }): any {
-//   throw new Error('Function not implemented.');
-// }
-
-// function transition(arg0: string, arg1: any): any {
-//   throw new Error('Function not implemented.');
-// }
-
-// function animate(arg0: string): any {
-//   throw new Error('Function not implemented.');
-// }
 
