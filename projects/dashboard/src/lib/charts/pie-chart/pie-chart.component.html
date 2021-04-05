@@ -6,5 +6,10 @@
         <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType" [options]="pieChartOptions" [plugins]="pieChartPlugins" [colors]="pieChartColors" [legend]="pieChartLegend">
       </canvas>
     </div>
+    <div *ngIf="!pieChartData" class="chart-container" style="position: relative; height:150px; width:300px">
+        <p style="height:40px; margin-top: 15px;text-align: center;">
+            No statistics.
+        </p>
+    </div>
 
 </div>

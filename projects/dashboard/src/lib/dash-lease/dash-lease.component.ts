@@ -1,9 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import { DashState } from '../store/dash.state';
 import { getAllLeases, getAllTenants } from '../store/dash.actions';
 import { PropertyTenant } from '../models/property-tenant.model';
 import { PropertyLease } from '../models/property-lease.model';
+import { Observable } from 'rxjs';
+import { loadingStatus } from '../store/dash.reducer';
 
 @Component({
   selector: 'lib-dash-lease',
@@ -11,6 +13,9 @@ import { PropertyLease } from '../models/property-lease.model';
   styleUrls: ['./dash-lease.component.css']
 })
 export class DashLeaseComponent implements OnInit {
+
+  loading$: Observable<boolean>;
+
 
   breakpoint: number;
 
@@ -20,6 +25,9 @@ export class DashLeaseComponent implements OnInit {
   constructor(private store: Store<DashState>) { }
 
   ngOnInit() {
+
+    this.loading$ = this.store.pipe(select(loadingStatus));
+
     this.breakpoint = (window.innerWidth <= 640) ? 2 : 1;
     debugger;
     // return this.store.dispatch(getPropertyOwnerList()) ;

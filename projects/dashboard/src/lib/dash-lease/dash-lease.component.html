@@ -44,7 +44,7 @@
                         </i> &nbsp;&nbsp; -->
                         <span class="tab-label">Tenants <span *ngIf="tenants">({{tenants.length}})</span></span>
                     </ng-template>
-                    <div class="container" fxLayout="column" fxLayoutAlign="start" fxLayoutGap="1%" fxFlexFill>
+                    <div class="container" fxLayout="column" fxLayoutAlign="start" fxLayoutGap="1%" fxFlexFill *ngIf="!(loading$ | async) && tenants; else spinner">
                         <mat-grid-list cols="1" rowHeight="85px">
                             <mat-grid-tile *ngFor="let tenant of tenants">
                                 <mat-card class="user-card" style="margin-left: 5px;">
@@ -61,6 +61,13 @@
                             </mat-grid-tile>
 
                         </mat-grid-list>
+                    </div>
+                    <div *ngIf="tenants.length === 0" class="container" fxLayout="column" fxLayoutAlign="start" fxLayoutGap="1%" fxFlexFill>
+                        <div style="height: 50px;margin-top: 15px;">
+                            <p style="text-align:center;">
+                                No records found!
+                            </p>
+                        </div>
                     </div>
                 </mat-tab>
                 <mat-tab>
@@ -88,9 +95,13 @@
                                 </mat-card>
                             </mat-grid-tile>
                         </mat-grid-list>
-
-
-
+                    </div>
+                    <div *ngIf="rentals.length === 0" class="container" fxLayout="column" fxLayoutAlign="start" fxLayoutGap="1%" fxFlexFill>
+                        <div style="height: 50px;margin-top: 15px;">
+                            <p style="text-align:center;">
+                                No records found!
+                            </p>
+                        </div>
                     </div>
                 </mat-tab>
             </mat-tab-group>
@@ -99,3 +110,8 @@
     </mat-card-content>
 </mat-card>
 <!-- </mat-grid-tile> -->
+<ng-template #spinner style="top: 50%;
+left: 50%; position: fixed;
+    z-index: 1000;">
+    <lib-loading style="position: relative; margin-top: 150px;"></lib-loading>
+</ng-template>

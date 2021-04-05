@@ -4,4 +4,9 @@
 <div class="chart-container" style="position: relative; height:180px; width:650px">
     <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [plugins]="barChartPlugins" [legend]="barChartLegend" [chartType]="barChartType">
     </canvas>
+    <div *ngIf="!barChartData" class="chart-container" style="position: relative; height:150px; width:300px">
+        <p style="height:40px; margin-top: 15px;text-align: center;">
+            No statistics.
+        </p>
+    </div>
 </div>
