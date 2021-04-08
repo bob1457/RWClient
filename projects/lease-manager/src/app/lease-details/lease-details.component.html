@@ -620,33 +620,33 @@
                                         <ng-container matColumnDef="action">
                                             <th mat-header-cell *matHeaderCellDef></th>
                                             <td mat-cell *matCellDef="let element" class="action-link">
-                                                <!-- <a (click)="openDialog('Update',element)">Edit</a> |
-                        <a (click)="openDialog('Delete',element)">Delete</a> ['/details', 1]-->
-                                                <a type="button" mat-raised-button color="primary">Details</a> &nbsp;
+                                                <a (click)="openDialog('Update',element)">Edit</a> |
+                                                <!-- <a (click)="openDialog('Delete',element)">Delete</a> ['/details', 1] -->
+                                                <!-- <a type="button" mat-raised-button color="primary">Details</a> &nbsp; -->
                                                 <!-- <button mat-raised-button color="accent" (click)="openDialog('Delete',element)">Delete</button> (click)="getRentPaymentDetails(element.id)"-->
                                             </td>
                                         </ng-container>
 
 
                                         <!-- Detail Panel [@detailExpand]="element.isExpanded ? 'expanded' : 'collapsed'"-->
-                                        <ng-container matColumnDef="expandedDetail">
+                                        <!-- <ng-container matColumnDef="expandedDetail">
                                             <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
 
                                                 <div class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
                                                     <mat-list>
                                                         <div mat-subheader>Subjects of {{element.id}}</div>
                                                         <div>{{element.paymentReceivedDate | date}}</div>
-                                                        <!-- <mat-list-item *ngFor="let subject of element.subjects">
+                                                        <mat-list-item *ngFor="let subject of element.subjects">
                                                     <div mat-line>{{subject.name}}</div>
                                                     <div mat-line> {{subject.type}} | Grade: {{subject.grade}}</div>
-                                                  </mat-list-item> -->
+                                                  </mat-list-item>
 
                                                     </mat-list>
 
                                                 </div>
 
                                             </td>
-                                        </ng-container>
+                                        </ng-container> -->
 
 
 
