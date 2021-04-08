@@ -138,5 +138,10 @@ export class LeaseService {
     return this.http.post<any>(`${this.baseUrl}/rentalpayment/rent/add`, data );
   }
 
+  updateRentPayment(data: any) {
+    debugger;
+    return this.http.post<any>(`${this.baseUrl}/RentalPayment/rent/update`, data );
+  }
+
 
 }

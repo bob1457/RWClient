@@ -4,7 +4,7 @@ import { PropertyLeaseState } from '../store/lease-state';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LeaseService, PropertyLease, Vendor } from '@lib/app-core';
-import { addRentPayment, addTenant, addWorkOrder, getLeaseDetails, getRentPaymenttDetails, updateLease } from '../store/actions/lease.actions';
+import { addRentPayment, addTenant, addWorkOrder, getLeaseDetails, getRentPaymenttDetails, updateLease, updateRentPayment } from '../store/actions/lease.actions';
 import { leaseDetails, loadingStatus, rentPaymentDetails, rentPaymentList, serviceRequestList,
          tenantList, vendorList, workOrderList } from '../store/reducers';
 import { getAllServiceRequests, getAllVendors,
@@ -52,6 +52,7 @@ export class LeaseDetailsComponent implements OnInit {
   addForm: FormGroup; // Add rent payment
   addForm2: FormGroup; // Add work order
   addTenantForm: FormGroup;
+  updateRenForm: FormGroup;
 
   vendors:any [];
   vendors$: Observable<Vendor[]>;
@@ -333,6 +334,14 @@ export class LeaseDetailsComponent implements OnInit {
       rentalForYear: ['']
     });
 
+    this.updateRenForm = this.formBuilder.group({
+      id: [],
+      isOnTime: [],
+      rentAmount: [''],
+      paymentReceivedDate: [''],
+      note: ['']
+    });
+
     this.addForm2 = this.formBuilder.group({  // add work order
       workOrderName: [''],
       workOrderDetails: [''],
@@ -545,6 +554,15 @@ export class LeaseDetailsComponent implements OnInit {
 
     this.addForm.reset();
     this.addRent = false;
+  }
+
+  updateRentPayment() {
+    debugger;
+    // this.updateRenForm.patchValue({
+    //   id: Number()
+    // });
+    console.log('pymt form', this.updateRenForm.value);
+    // this.store.dispatch(updateRentPayment({payload:this.updateRenForm.value}));
   }
 
   addAdditionalTenant() {

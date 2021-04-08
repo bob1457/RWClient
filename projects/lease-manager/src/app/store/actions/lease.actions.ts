@@ -458,6 +458,27 @@ export const addRentPaymentFailure = createAction(
 
 );
 
+/**
+ * Update Rent Payment Actions
+ */
+
+export const updateRentPayment = createAction(
+  '[Leases] Update Rent Payment',
+  props<{payload: ServiceRequest}>()
+);
+
+export const updateRentPaymentSuccess = createAction(
+  '[Leases] Update Rent Payment Success',
+  props<{payload: ServiceRequest}>()
+);
+
+export const updateRentPaymentFailure = createAction(
+  '[[Leases] Update Rent Payment Failure',
+  // props<{payload: any}>()
+  (errorMessage = 'Error updating rent payment') => ({ payload: { errorMessage }})
+
+);
+
 
 
 

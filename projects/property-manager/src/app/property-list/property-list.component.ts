@@ -37,14 +37,14 @@ export class PropertyListComponent implements OnInit, AfterViewInit {
   constructor(private propertyService: PropertyService,
               private router: Router,
               private store: Store<PropertyState>) {
-                
+
                 this.store.pipe(
                   select(propertyList)).subscribe(data => {
                     this.list = data ;
                     console.log(data);
                     this.dataSource.data = this.list;
                     console.log(this.dataSource.data);
-            
+
                     this.dataSource.sort = this.sort;
                     this.dataSource.paginator = this.paginator;
                   });
@@ -74,7 +74,7 @@ export class PropertyListComponent implements OnInit, AfterViewInit {
     }
 
     // this.store.dispatch(getPropertyImageList());
-    
+
     // this.propertyList$ =
 
     // debugger;

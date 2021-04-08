@@ -497,8 +497,8 @@
 
                                 <div *ngIf="addRent" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center" stye="width: 95%;margin-left: 10px; margin-right: 10px;">
                                     <form novalidate fxLayoutAlign="center center" [formGroup]="addForm" style="width: 100%;border: 1px solid;
-                                    margin-bottom: 5px;
-                                    padding: 5px;" (ngSubmit)="addRentPayment()">
+                                            margin-bottom: 5px;
+                                            padding: 5px;" (ngSubmit)="addRentPayment()">
                                         <mat-form-field fxFlex="15%" fxFlex.xs="90%" style="width: 15%;margin-left: 10px;">
                                             <mat-label>Month</mat-label>
                                             <mat-select id="month" formControlName="rentalForMonth">
@@ -560,8 +560,8 @@
                                 </div>
 
                                 <div fxLayoutAlign="center">
-                                    <!-- <ng-template matTabContent> multiTemplateDataRows-->
-                                    <table mat-table [dataSource]="dataSource" #Sort="matSort" matSort matSort class="my-table mat-elevation-z8" style="width: 100%;">
+                                    <!-- <ng-template matTabContent> -->
+                                    <table mat-table [dataSource]="dataSource" multiTemplateDataRows #Sort="matSort" matSort matSort class="my-table mat-elevation-z8" style="width: 100%;">
                                         <ng-container matColumnDef="id">
                                             <th class="table-header-text" style="text-align: center;" mat-header-cell *matHeaderCellDef> ID </th>
                                             <td mat-cell *matCellDef="let element"> {{element.id}} </td>
@@ -609,10 +609,10 @@
                                             <th mat-header-cell *matHeaderCellDef></th>
                                             <td mat-cell *matCellDef="let element">
                                                 <i style="border: 2px solid;
-                                      padding: 3px;
-                                      border-radius: 50%;" class="material-icons">
-                                      attach_money
-                                    </i>
+                                                      padding: 3px;
+                                                      border-radius: 50%;" class="material-icons">
+                                                      attach_money
+                                                    </i>
                                             </td>
                                         </ng-container>
                                         <!-- style="font-size: 1.5em; color: red;" [style.color]="element.status == 'Rented' ? 'green': element.status == 'Pending'? 'orange' :'red'"-->
@@ -640,7 +640,9 @@
                                                     <div mat-line>{{subject.name}}</div>
                                                     <div mat-line> {{subject.type}} | Grade: {{subject.grade}}</div>
                                                   </mat-list-item> -->
+
                                                     </mat-list>
+
                                                 </div>
 
                                             </td>

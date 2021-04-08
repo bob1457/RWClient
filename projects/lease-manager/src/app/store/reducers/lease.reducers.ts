@@ -457,9 +457,32 @@ const propertyLeaseReducer = createReducer(
     });
   }),
 
-   /**
-     * Add service request
-     */
+  /**
+   * Update rent payment
+   */
+
+  on(LeaseActions.updateRentPayment, state => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+  on(LeaseActions.updateRentPaymentSuccess, (state, { payload }) => {
+
+    const updatedRentPayment = state.rentPayments.map(
+      item => payload.id === item.id ? payload : item
+    );
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      rentPayments: updatedRentPayment
+    });
+  }),
+
+  /**
+   * Add service request
+   */
     on(LeaseActions.addRentPayment, state => ({
       ...state,
       loading: true,
