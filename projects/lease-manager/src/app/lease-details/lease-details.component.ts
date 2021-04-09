@@ -245,6 +245,8 @@ export class LeaseDetailsComponent implements OnInit {
       }
     };
 
+
+
     // this.GetLeaseDetails(this.id);
 
     this.detailsForm = this.formBuilder.group({
@@ -505,7 +507,20 @@ export class LeaseDetailsComponent implements OnInit {
 
   getRentPaymentDetails(id: number) {
     debugger;
-    let dialogRef = this.dialog.open(PaymentDetailsDialogComponent, this.dialogConfig);
+    let dialogRef = this.dialog.open(PaymentDetailsDialogComponent, {
+      height: '400px',
+      width: '500px',
+      disableClose: true,
+      panelClass: 'my-custom-dialog-class',
+      data: {
+        id: id,
+        // py: this.paymentDetails,
+        // txt: 'test'
+
+        // rentDueAmount: this.rentAmtDue,
+        // rentDue: this.rentDueOn
+      }
+    });
 
     this.store.dispatch(getRentPaymenttDetails({payload: id}));
 
@@ -556,14 +571,14 @@ export class LeaseDetailsComponent implements OnInit {
     this.addRent = false;
   }
 
-  updateRentPayment() {
-    debugger;
-    // this.updateRenForm.patchValue({
-    //   id: Number()
-    // });
-    console.log('pymt form', this.updateRenForm.value);
-    // this.store.dispatch(updateRentPayment({payload:this.updateRenForm.value}));
-  }
+  // updateRentPayment() {
+  //   debugger;
+  //   // this.updateRenForm.patchValue({
+  //   //   id: Number()
+  //   // });
+  //   console.log('pymt form', this.updateRenForm.value);
+  //   // this.store.dispatch(updateRentPayment({payload:this.updateRenForm.value}));
+  // }
 
   addAdditionalTenant() {
     debugger;
@@ -614,8 +629,16 @@ export class LeaseDetailsComponent implements OnInit {
     this.dataSource3.filter = value.trim().toLowerCase();
   }
 
-  openDialog() {
+  openDialog():void {
+    const dialogRef = this.dialog.open(PaymentDetailsDialogComponent, {
+      width: '250px',
+      data: {}
+    });
 
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      // this.animal = result;
+    });
   }
 
   goBack() {

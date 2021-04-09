@@ -1,4 +1,5 @@
 import { Component, Inject, OnInit, Optional } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialogRef,  MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { PropertyLeaseState } from '../../store/lease-state';
@@ -13,16 +14,26 @@ export class PaymentDetailsDialogComponent implements OnInit {
 
   dataIn;
   payment;
+  updateRentForm: FormGroup;
 
   constructor( private store: Store<PropertyLeaseState>,
+               private formBuilder: FormBuilder,
                public dialogRef: MatDialogRef<PaymentDetailsDialogComponent>,
-               @Optional() @Inject(MAT_DIALOG_DATA) public data: any) { }
+               @Optional() @Inject(MAT_DIALOG_DATA) public data: {id: number}) { }
 
   ngOnInit() {
 
+    this.updateRentForm = this.formBuilder.group({
+      id: [],
+      isOnTime: [],
+      rentAmount: [''],
+      paymentReceivedDate: [''],
+      note: ['']
+    });
+
     this.store.select(rentPaymentDetails)
-                          .subscribe(data => {
-                            this.payment = data;
+                          .subscribe(res => {
+                            this.payment = res;
                             console.log('py-in-dialog', this.payment);
                           });
 
@@ -30,6 +41,15 @@ export class PaymentDetailsDialogComponent implements OnInit {
     // this.payment = this.data.py;
     // console.log('dat in', this.data.py);
     // console.log('dat in', this.payment);
+  }
+
+  updateRentPayment() {
+    debugger;
+    this.updateRentForm.patchValue({
+      id: Number(this.data.id)
+    });
+    console.log('pymt form', this.updateRentForm.value);
+    // this.store.dispatch(updateRentPayment({payload:this.updateRenForm.value}));
   }
 
 }

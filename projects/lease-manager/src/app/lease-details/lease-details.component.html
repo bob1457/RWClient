@@ -620,10 +620,10 @@
                                         <ng-container matColumnDef="action">
                                             <th mat-header-cell *matHeaderCellDef></th>
                                             <td mat-cell *matCellDef="let element" class="action-link">
-                                                <a (click)="openDialog('Update',element)">Edit</a> |
+                                                <!-- <a (click)="openDialog('Update',element)">Edit</a> | -->
                                                 <!-- <a (click)="openDialog('Delete',element)">Delete</a> ['/details', 1] -->
-                                                <!-- <a type="button" mat-raised-button color="primary">Details</a> &nbsp; -->
-                                                <!-- <button mat-raised-button color="accent" (click)="openDialog('Delete',element)">Delete</button> (click)="getRentPaymentDetails(element.id)"-->
+                                                <!-- <a type="button" mat-raised-button color="primary">Details</a> &nbsp; (click)="openDialog('Delete',element)"-->
+                                                <button type="button" mat-raised-button color="accent" (click)="getRentPaymentDetails(element.id)">Details</button>
                                             </td>
                                         </ng-container>
 
@@ -884,6 +884,7 @@
                                         <ng-container matColumnDef="action">
                                             <th mat-header-cell *matHeaderCellDef></th>
                                             <td mat-cell *matCellDef="let element" class="action-link">
+
                                                 <!-- <a (click)="openDialog('Update',element)">Edit</a> |
                     <a (click)="openDialog('Delete',element)">Delete</a> ['/details', 1]-->
                                                 <button type="button" mat-raised-button color="primary" (click)="getWorkOrderDetails(element.id)">Details</button> &nbsp;
