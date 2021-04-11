@@ -1,9 +1,11 @@
 import { Component, Inject, OnInit, Optional } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialogRef,  MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { updateRentPayment } from '../../store/actions/lease.actions';
 import { PropertyLeaseState } from '../../store/lease-state';
-import { rentPaymentDetails } from '../../store/reducers';
+import { loadingStatus, rentPaymentDetails } from '../../store/reducers';
 
 @Component({
   selector: 'app-payment-details-dialog',
@@ -15,6 +17,9 @@ export class PaymentDetailsDialogComponent implements OnInit {
   dataIn;
   payment;
   updateRentForm: FormGroup;
+  updateDone = false;
+
+  loading$: Observable<boolean>;
 
   constructor( private store: Store<PropertyLeaseState>,
                private formBuilder: FormBuilder,
@@ -23,9 +28,11 @@ export class PaymentDetailsDialogComponent implements OnInit {
 
   ngOnInit() {
 
+    this.loading$ = this.store.pipe(select(loadingStatus));
+
     this.updateRentForm = this.formBuilder.group({
       id: [],
-      isOnTime: [],
+      isOnTime: [false],
       rentAmount: [''],
       paymentReceivedDate: [''],
       note: ['']
@@ -49,7 +56,14 @@ export class PaymentDetailsDialogComponent implements OnInit {
       id: Number(this.data.id)
     });
     console.log('pymt form', this.updateRentForm.value);
-    // this.store.dispatch(updateRentPayment({payload:this.updateRenForm.value}));
+    try {
+      this.store.dispatch(updateRentPayment({payload: this.updateRentForm.value}));
+      this.updateDone = true;
+    }
+    catch {
+      console.log('Error occured!');
+    }
+
   }
 
 }
