@@ -74,7 +74,7 @@
                     <div *ngIf="loading$ | async">
                         <app-loading></app-loading>
                     </div>
-                    <button [disabled]="!updateRentForm.dirty || updateDone" type="button" mat-raised-button color="primary" (click)="updateRentPayment()">UPDATE</button>
+                    <button [disabled]="!updateRentForm.dirty" type="button" mat-raised-button color="primary" (click)="updateRentPayment()">UPDATE</button>
                     <button mat-raised-button color="accent" [mat-dialog-close]="true">CLOSE</button>
                 </div>
 

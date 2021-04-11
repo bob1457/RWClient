@@ -17,7 +17,7 @@ export class PaymentDetailsDialogComponent implements OnInit {
   dataIn;
   payment;
   updateRentForm: FormGroup;
-  updateDone = false;
+
 
   loading$: Observable<boolean>;
 
@@ -58,7 +58,7 @@ export class PaymentDetailsDialogComponent implements OnInit {
     console.log('pymt form', this.updateRentForm.value);
     try {
       this.store.dispatch(updateRentPayment({payload: this.updateRentForm.value}));
-      this.updateDone = true;
+      this.updateRentForm.markAsPristine();
     } catch {
       console.log('Error occured!');
     }
