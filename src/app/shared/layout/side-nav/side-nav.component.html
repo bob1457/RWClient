@@ -421,14 +421,14 @@
           <mat-list-item>
             <mat-icon
               style="color: #5d0920"
-              [routerLink]="['/manage/documentation']"
+              [routerLink]="['/Manage/documentation']"
               [routerLinkActive]="['active']"
               matListIcon
               >import_contacts</mat-icon
             >
             <a
               matLine
-              [routerLink]="['/manage/documentation']"
+              [routerLink]="['/Manage/documentation']"
               [routerLinkActive]="['active']"
               >Documentation</a
             >
@@ -461,14 +461,14 @@
               <mat-list-item>
                 <mat-icon
                   style="color: rgb(11, 162, 234);"
-                  [routerLink]="['/manage/reporting']"
+                  [routerLink]="['/Manage/reporting']"
                   [routerLinkActive]="['active']"
                   matListIcon
                   >insert_chart</mat-icon
                 >
                 <a
                   matLine
-                  [routerLink]="['/manage/reporting']"
+                  [routerLink]="['/Manage/reporting']"
                   [routerLinkActive]="['active']"
                   >Reporting</a
                 >
@@ -481,14 +481,14 @@
 
           <mat-list-item *ngIf="isAdmin">
             <mat-icon
-              [routerLink]="['/manage/administration']"
+              [routerLink]="['/Manage/administration']"
               [routerLinkActive]="['active']"
               matListIcon
               >brightness_7</mat-icon
             >
             <a
               matLine
-              [routerLink]="['/manage/administration']"
+              [routerLink]="['/Manage/administration']"
               [routerLinkActive]="['active']"
               >Administration</a
             >
@@ -496,6 +496,26 @@
               <!--<mat-icon>info</mat-icon>-->
             </button>
           </mat-list-item>
+
+          <mat-list-item >
+            <mat-icon
+            style="color: rgb(21, 55, 165);"
+              [routerLink]="['/Manage/about']"
+              [routerLinkActive]="['active']"
+              matListIcon
+              >fingerprint</mat-icon
+            >
+            <a
+              matLine
+              [routerLink]="['/Manage/about']"
+              [routerLinkActive]="['active']"
+              >About</a
+            >
+            <button mat-icon-button (click)="showInfo(link)">
+              <!--<mat-icon>info</mat-icon>-->
+            </button>
+          </mat-list-item>
+
                 </mat-nav-list>
             </main>
             <ng-template class="side" #client>

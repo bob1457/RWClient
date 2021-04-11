@@ -59,8 +59,7 @@ export class PaymentDetailsDialogComponent implements OnInit {
     try {
       this.store.dispatch(updateRentPayment({payload: this.updateRentForm.value}));
       this.updateDone = true;
-    }
-    catch {
+    } catch {
       console.log('Error occured!');
     }
 

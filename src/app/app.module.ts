@@ -23,9 +23,10 @@ import { StoreDevtoolsModule} from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule, RouterStateSerializer, routerReducer, RouterState } from '@ngrx/router-store';
 import { PropertyEffects } from 'projects/property-manager/src/app/store/effects/property.effects';
-import { FlexLayoutModule } from '@angular/flex-layout';
+import { FlexLayoutModule, LayoutGapStyleBuilder } from '@angular/flex-layout';
 
 import { metaReducers } from './store/metareducres';
+import { CustomLayoutGapStyleBuilder } from './shared/LayoutGapBuilder';
 
 
 @NgModule({
@@ -64,6 +65,7 @@ import { metaReducers } from './store/metareducres';
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass:JwtInterceptor, multi: true },
+    { provide: LayoutGapStyleBuilder, useClass: CustomLayoutGapStyleBuilder },
     { provide: RouterStateSerializer, useClass: fromStore.CustomSerializer }
   ],
   bootstrap: [AppComponent]
