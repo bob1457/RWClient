@@ -15,6 +15,7 @@ import { PaymentDetailsDialogComponent } from '../dialogs/payment-details-dialog
 import { AddRentDialogComponent } from '../dialogs/add-rent-dialog/add-rent-dialog.component';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 // import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import {Overlay} from '@angular/cdk/overlay';
 
 @Component({
   selector: 'app-lease-details',
@@ -134,6 +135,7 @@ export class LeaseDetailsComponent implements OnInit {
               private router: Router,
               private actRoute: ActivatedRoute,
               private dialog: MatDialog,
+              public overlay: Overlay,
               private formBuilder: FormBuilder,
               private propertyService: LeaseService) {
                 this.id = this.actRoute.snapshot.params.id;
@@ -509,8 +511,9 @@ export class LeaseDetailsComponent implements OnInit {
     debugger;
     let dialogRef = this.dialog.open(PaymentDetailsDialogComponent, {
       height: '400px',
-      width: '500px',
+      width: '550px',
       disableClose: true,
+      scrollStrategy: this.overlay.scrollStrategies.noop(),
       panelClass: 'my-custom-dialog-class',
       data: {
         id: id,

@@ -1,5 +1,5 @@
 <section fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="30px" fxFlexFill style="overflow-x: hidden;overflow-y: hidden;">
-    <div mat-dialog-title class="dialog-title">Rent Payment Details</div>
+    <div mat-dialog-title class="dialog-title">Rent Payment Details<span></span></div>
 
     <mat-dialog-content class="text" fxLayout="column" fxLayoutAlign="staret center" fxLayoutGap="1%" style="height: 200px;margin-top: 20px;" fxFlexFill>
         <div *ngIf="payment" style="width:100%">
@@ -16,7 +16,7 @@
                 <div style="width: 50%;">
                     <p><span style="font-weight: bold;">Rent Amount Due:</span> <span style="font-style: italic;">&nbsp; {{payment.scheduledPaymentAmt | currency:'CAD'}}</span></p>
                     <p><span style="font-weight: bold;">Rent Due Date:</span> <span style="font-style: italic;">&nbsp; {{payment.paymentDueDate | date}}</span></p>
-                    <p><span style="font-weight: bold;">Paid On Time:</span> <span style="font-style: italic;">&nbsp; {{payment.isOnTime}}</span></p>
+                    <p><span style="font-weight: bold;">Balance:</span> <span style="font-style: italic;">&nbsp; {{payment.balance}}</span></p>
 
                     <!-- <p><span style="font-weight: bold;">Rent Paid:</span> <span style="font-style: italic;">{{payment.actualPaymentAmt | currency:'CAD'}}</span></p>
                   <p><span style="font-weight: bold;">Rent Paid on:</span> <span style="font-style: italic;">{{payment.paymentReceivedDate | date}}</span></p>
@@ -92,6 +92,7 @@
             />
             <p>loading...</p>
         </div>
+        <!-- <p *ngIf="payment" style="width: 100%;"><span>Paid On Time</span> <span style="font-style: italic;">&nbsp; {{payment.sOnTime | yesNo}}</span></p> -->
 
     </mat-dialog-content>
     <!-- <mat-dialog-actions style="margin-top: -30px;">
