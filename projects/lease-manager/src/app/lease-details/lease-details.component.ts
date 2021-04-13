@@ -4,7 +4,7 @@ import { PropertyLeaseState } from '../store/lease-state';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LeaseService, PropertyLease, Vendor } from '@lib/app-core';
-import { addRentPayment, addTenant, addWorkOrder, getLeaseDetails, getRentPaymenttDetails, updateLease, updateRentPayment } from '../store/actions/lease.actions';
+import { addRentPayment, addTenant, addWorkOrder, getLeaseDetails, getRentPaymenttDetails, getWorkOrderDetails, updateLease, updateRentPayment } from '../store/actions/lease.actions';
 import { leaseDetails, loadingStatus, rentPaymentDetails, rentPaymentList, serviceRequestList,
          tenantList, vendorList, workOrderList } from '../store/reducers';
 import { getAllServiceRequests, getAllVendors,
@@ -16,6 +16,7 @@ import { AddRentDialogComponent } from '../dialogs/add-rent-dialog/add-rent-dial
 import { animate, state, style, transition, trigger } from '@angular/animations';
 // import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import {Overlay} from '@angular/cdk/overlay';
+import { WorkorderDetailsDialogComponent } from '../dialogs/workorder-details-dialog/workorder-details-dialog.component';
 
 @Component({
   selector: 'app-lease-details',
@@ -54,6 +55,7 @@ export class LeaseDetailsComponent implements OnInit {
   addForm2: FormGroup; // Add work order
   addTenantForm: FormGroup;
   updateRenForm: FormGroup;
+  // updateWorkOrderForm: FormGroup;
 
   vendors:any [];
   vendors$: Observable<Vendor[]>;
@@ -531,6 +533,25 @@ export class LeaseDetailsComponent implements OnInit {
 
   getWorkOrderDetails(id: number) {
     debugger;
+
+    let dialogRef = this.dialog.open(WorkorderDetailsDialogComponent, {
+      height: '400px',
+      width: '600px',
+      disableClose: true,
+      scrollStrategy: this.overlay.scrollStrategies.noop(),
+      panelClass: 'my-custom-dialog-class',
+      data: {
+        id: id,
+        // py: this.paymentDetails,
+        // txt: 'test'
+
+        // rentDueAmount: this.rentAmtDue,
+        // rentDue: this.rentDueOn
+      }
+    });
+
+    this.store.dispatch(getWorkOrderDetails({payload: id}));
+
   }
 
   getTenantDetails(id: number) {

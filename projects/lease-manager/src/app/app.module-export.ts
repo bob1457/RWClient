@@ -43,6 +43,7 @@ import { AddRentDialogComponent } from './dialogs/add-rent-dialog/add-rent-dialo
 import { FullLeaseAgreementComponent } from './full-lease-agreement/full-lease-agreement.component';
 import { AgreementHeaderComponent } from './agreement-header/agreement-header.component';
 import { AgreementContentComponent } from './agreement-content/agreement-content.component';
+import { WorkorderDetailsDialogComponent } from './dialogs/workorder-details-dialog/workorder-details-dialog.component';
 
 
 // import { CdkColumnDef } from '@angular/cdk/table';
@@ -99,6 +100,7 @@ const routes: Routes = [
     WorkOrderDatePipe,
     PaymentMethodPipe,
     PaymentDetailsDialogComponent,
+    WorkorderDetailsDialogComponent,
     AddRentDialogComponent,
     FullLeaseAgreementComponent,
     AgreementHeaderComponent,
@@ -121,6 +123,7 @@ const routes: Routes = [
   ],
   entryComponents: [
     PaymentDetailsDialogComponent,
+    WorkorderDetailsDialogComponent,
     AddRentDialogComponent
   ],
   bootstrap: [AppLMComponent]
