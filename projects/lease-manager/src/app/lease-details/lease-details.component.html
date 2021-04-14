@@ -804,7 +804,7 @@
 
                                             <mat-form-field fxFlex="20%" fxFlex.xs="90%" style="width:20%;margin-left: 10px;">
                                                 <mat-label>Service Requests</mat-label>
-                                                <mat-select id="request" formControlName="serviceRequestId">
+                                                <mat-select #Selected id="request" formControlName="serviceRequestId" (selectionChange)="onServieRequestChange(Selected.value)">
                                                     <mat-option [value]='request.id' *ngFor="let request of requests">{{request.requestSubject}}</mat-option>
                                                 </mat-select>
                                             </mat-form-field>

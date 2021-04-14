@@ -27,13 +27,20 @@ export class WorkorderDetailsDialogComponent implements OnInit {
 
   ngOnInit() {
 
-    this.loading$ = this.store.pipe(select(loadingStatus));
+    // this.loading$ = this.store.pipe(select(loadingStatus));
 
     this.updateWorkOrderForm = this.formBuilder.group({
-      id: Number,
-      endDate: [''],
+      workOrderId: [],
+      workOrderName: [''],
+      workOrderDetails: [],
+      workOrderCategory: [''],
+      workOrderType: [''],
       workOrderStatus: [''],
-      note:['']
+      startDate: [''],
+      endDate: [''],
+      isEmergency: [false],
+      isOwnerAuthorized: [''],
+      note: ['']
     });
 
 
@@ -48,12 +55,19 @@ export class WorkorderDetailsDialogComponent implements OnInit {
   upateWorkOrder(id: number) {
     debugger;
     this.updateWorkOrderForm.patchValue({
-      id: Number(this.data.id)
+      workOrderId: Number(this.data.id),
+      workOrderName: this.workOrder.workOrderName,
+      workOrderDetails: this.workOrder.workOrderDetails,
+      workOrderCategory: this.workOrder.workOrderCategory,
+      workOrderType: this.workOrder.workOrderType,
+      startDate: this.workOrder.startDate,
+      isEmergency: this.workOrder.isEmergency,
+      isOwnerAuthorized: this.workOrder.isOwnerAuthorized
     });
-    console.log('pymt form', this.updateWorkOrderForm.value);
+    console.log('wo form', this.updateWorkOrderForm.value);
     try {
       this.store.dispatch(updateWorkOrder({payload: this.updateWorkOrderForm.value}));
-
+      this.updateWorkOrderForm.markAsPristine();
     } catch {
 
     }

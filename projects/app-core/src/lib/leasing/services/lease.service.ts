@@ -77,14 +77,14 @@ export class LeaseService {
     return this.http.get<WorkOrder>(`${this.baseUrl}/WorkOrder/details/${id}`);
   }
 
-  addWorkOrders(workorder: WorkOrder) {
+  addWorkOrders(workorder: any) {
     debugger;
-    return this.http.post<WorkOrder>(`${this.baseUrl}/workorder/add`, workorder);
+    return this.http.post<any>(`${this.baseUrl}/workorder/add`, workorder);
   }
 
-  updateWorkOrder(workorder: WorkOrder) {
+  updateWorkOrder(workorder: any) {
     debugger;
-    return this.http.post<WorkOrder>(`${this.baseUrl}/workorder/update`, workorder);
+    return this.http.post<any>(`${this.baseUrl}/workorder/update`, workorder);
   }
 
 

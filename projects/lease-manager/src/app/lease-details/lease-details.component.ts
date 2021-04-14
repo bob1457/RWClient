@@ -18,6 +18,8 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import {Overlay} from '@angular/cdk/overlay';
 import { WorkorderDetailsDialogComponent } from '../dialogs/workorder-details-dialog/workorder-details-dialog.component';
 
+import { ServiceRequestList } from '@lib/dashboard';
+
 @Component({
   selector: 'app-lease-details',
   templateUrl: './lease-details.component.html',
@@ -59,6 +61,8 @@ export class LeaseDetailsComponent implements OnInit {
 
   vendors:any [];
   vendors$: Observable<Vendor[]>;
+  chosenVendorId;
+  chosenServiceRequestId;
 
   months = [
     {name: 'January'},
@@ -203,13 +207,18 @@ export class LeaseDetailsComponent implements OnInit {
                         }
                       });
 
-                  this.store.select(serviceRequestList)
+                  this.store.select(ServiceRequestList)
                             .subscribe(reqs => {
                               this.requests = reqs;
                               if (reqs && this.lease) {
                                 this.requests = reqs.filter(l => l.leaseId === this.lease.id);
                                 console.log('reqs for this lease', this.requests);
                               }
+                              // else {
+                              //   this.requests = JSON.parse(localStorage.getItem('servicerequests'))
+                              //                   .filter(l => l.leaseId === this.lease.id);
+                              //   console.log('reqs from cashe', this.requests);
+                              // }
                             });
 
                   this.store.select(tenantList)
@@ -355,6 +364,7 @@ export class LeaseDetailsComponent implements OnInit {
       workOrderCategory: [''],
       rentalPropertyId: [],
       vendorId: [],
+      leaseId: [], // newly added
       startDate: [''],
       endDate: [''],
       isOwnerAuthorized: [true],
@@ -623,8 +633,11 @@ export class LeaseDetailsComponent implements OnInit {
   addNewOrder() {
     debugger;
     this.addForm2.patchValue({
+      leaseId: this.lease.id,
+      vendorId: this.chosenVendorId,
       workOrderStatus: 'New',
-      rentalPropertyId: this.lease.id //??
+      serviceRequestId:this.chosenServiceRequestId,
+      rentalPropertyId: this.lease.rentalPropertyId //??
     });
     console.log('order form', this.addForm2.value);
     this.store.dispatch(addWorkOrder({payload: this.addForm2.value}));
@@ -667,6 +680,16 @@ export class LeaseDetailsComponent implements OnInit {
 
   goBack() {
     this.router.navigate(['/Manage/lease/']);
+  }
+
+  onVendorChange(value) {
+    this.chosenVendorId = value;
+    console.log('vendor id', value);
+  }
+
+  onServieRequestChange(value) {
+    this.chosenServiceRequestId = value;
+    console.log('service req id', value);
   }
 
 }
