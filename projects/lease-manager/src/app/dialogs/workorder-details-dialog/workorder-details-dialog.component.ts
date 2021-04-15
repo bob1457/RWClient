@@ -17,6 +17,7 @@ export class WorkorderDetailsDialogComponent implements OnInit {
 
   workOrder;
   updateWorkOrderForm: FormGroup;
+  updateInvoiceForm: FormGroup;
 
   loading$: Observable<boolean>;
 
@@ -43,7 +44,15 @@ export class WorkorderDetailsDialogComponent implements OnInit {
       note: ['']
     });
 
-
+    this.updateInvoiceForm = this.formBuilder.group({
+      invoiceId: [],
+      isPaid: [false],
+      paymentDate: [''],
+      paymentMethod:[''],
+      paymentAmount: 0,
+      workOrderId: [],
+      note: ['']
+    });
 
     this.store.select(workOrderDetails)
         .subscribe(res => {
@@ -71,6 +80,11 @@ export class WorkorderDetailsDialogComponent implements OnInit {
     } catch {
 
     }
+  }
+
+  upateInvoice() {
+    debugger;
+
   }
 
 }

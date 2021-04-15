@@ -148,12 +148,12 @@
                             </form>
                         </mat-tab>
                         <mat-tab label="Invoice" style="background: #f5f5f5;">
-                            <mat-card class="invoice-card">
+                            <mat-card class="invoice-card" *ngIf="workorder.invoice">
                                 <mat-card-header>
-                                    <mat-card-title>Title</mat-card-title>
+                                    <mat-card-title>{{workorder.invoice.invoiceTitle}}</mat-card-title>
                                     <mat-card-subtitle>Subtitle</mat-card-subtitle>
                                 </mat-card-header>
-                                <img matCardImage src="Card wide image source">
+                                <!-- <img matCardImage src="Card wide image source"> -->
                                 <mat-card-content>
                                     Text content
                                 </mat-card-content>
@@ -165,6 +165,7 @@
                                     Footer
                                 </mat-card-footer>
                             </mat-card>
+                            <p>No invoice</p>
                         </mat-tab>
 
                     </mat-tab-group>

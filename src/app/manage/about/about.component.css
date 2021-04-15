@@ -1,0 +1,9 @@
+.container {
+    height: 100%;
+}
+
+.about-card {
+    /* max-width: 400px; */
+    padding: 35px;
+    margin-bottom: 25px;
+}
