@@ -28,7 +28,9 @@ export class WorkorderDetailsDialogComponent implements OnInit {
 
   ngOnInit() {
 
-    // this.loading$ = this.store.pipe(select(loadingStatus));
+    this.loading$ = this.store.pipe(select(loadingStatus));
+
+
 
     this.updateWorkOrderForm = this.formBuilder.group({
       workOrderId: [],
@@ -86,6 +88,11 @@ export class WorkorderDetailsDialogComponent implements OnInit {
 
   upateInvoice() {
     debugger;
+    this.updateInvoiceForm.patchValue({
+      workOrderId:this.data.id,
+      invoiceId:this.workOrder.invoice.id
+    });
+    console.log('invoice form', this.updateInvoiceForm.value);
 
   }
 

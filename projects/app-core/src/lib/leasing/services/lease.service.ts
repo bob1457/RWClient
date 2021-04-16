@@ -143,5 +143,14 @@ export class LeaseService {
     return this.http.post<any>(`${this.baseUrl}/RentalPayment/rent/update`, data );
   }
 
+  addInvoice(data: any) {
+    debugger;
+    return this.http.post<any>(`${this.baseUrl}/invoice/add`, data)
+  }
+
+  updateInvoice(data: any) {
+    debugger;
+    return this.http.post<any>(`${this.baseUrl}/invoice/update`, data );
+  }
 
 }
