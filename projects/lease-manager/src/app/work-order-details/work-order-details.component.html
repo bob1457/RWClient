@@ -126,7 +126,10 @@
                                             </mat-form-field>
                                         </div>
                                         <div style="width: 50%;margin-top: 10px;">
-
+                                            <mat-form-field fxFlex="100%">
+                                                <span class="icon-pos" matPrefix><mat-icon>article</mat-icon> &nbsp;</span>
+                                                <textarea formControlName="note" matInput placeholder="Notes" [ngModel]="workorder.note"></textarea>
+                                            </mat-form-field>
                                         </div>
                                     </div>
                                     <div fxLayout="row" fxLayoutAlign="start start" style="width: 95%;">

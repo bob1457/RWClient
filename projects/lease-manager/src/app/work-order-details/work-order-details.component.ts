@@ -54,7 +54,7 @@ export class WorkOrderDetailsComponent implements OnInit {
       endDate: [''],
       isEmergency: [false],
       isOwnerAuthorized: [''],
-      notes: ['']
+      note: ['']
 
     });
   }

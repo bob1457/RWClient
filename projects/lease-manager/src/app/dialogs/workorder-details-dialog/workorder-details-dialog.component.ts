@@ -32,15 +32,15 @@ export class WorkorderDetailsDialogComponent implements OnInit {
 
     this.updateWorkOrderForm = this.formBuilder.group({
       workOrderId: [],
-      workOrderName: [''],
+      // workOrderName: [''],
       workOrderDetails: [],
       workOrderCategory: [''],
       workOrderType: [''],
       workOrderStatus: [''],
       startDate: [''],
       endDate: [''],
-      isEmergency: [false],
-      isOwnerAuthorized: [''],
+      // isEmergency: [false],
+      // isOwnerAuthorized: [''],
       note: ['']
     });
 
@@ -65,13 +65,15 @@ export class WorkorderDetailsDialogComponent implements OnInit {
     debugger;
     this.updateWorkOrderForm.patchValue({
       workOrderId: Number(this.data.id),
-      workOrderName: this.workOrder.workOrderName,
+      // workOrderName: this.workOrder.workOrderName,
       workOrderDetails: this.workOrder.workOrderDetails,
       workOrderCategory: this.workOrder.workOrderCategory,
       workOrderType: this.workOrder.workOrderType,
-      startDate: this.workOrder.startDate,
-      isEmergency: this.workOrder.isEmergency,
-      isOwnerAuthorized: this.workOrder.isOwnerAuthorized
+      startDate: this.workOrder.startDate//,
+      // endDate: this.workOrder.endDate,
+      // workOrderStatus: this.workOrder.workOrderStatus,
+      // isEmergency: this.workOrder.isEmergency,
+      // isOwnerAuthorized: this.workOrder.isOwnerAuthorized
     });
     console.log('wo form', this.updateWorkOrderForm.value);
     try {

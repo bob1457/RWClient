@@ -2,172 +2,172 @@
     <!-- <p style="margin-top: -15px;"></p> -->
     <div mat-dialog-title class="dialog-title">Work Order Details<span></span></div>
     <mat-dialog-content class="text" fxLayout="column" fxLayoutAlign="staret center" fxLayoutGap="1%" style="height: 200px;" fxFlexFill>
-        <div [@.disabled]="true" style="width: 100%;margin-top: -10px;">
-            <mat-tab-group>
-                <mat-tab label="Work Order" style="background: #f5f5f5;">
-                    <div *ngIf="workOrder" style="width:100%">
-                        <div fxLayout="row" fxLayoutAlign="start" style="font-size: .9em;">
-                            <div style="width: 50%;">
-                                <p><span style="font-weight: bold;">Order Id:</span> <span style="font-style: italic;">&nbsp; {{workOrder.id}}</span></p>
-                                <p><span style="font-weight: bold;">Work Order:</span> <span style="font-style: italic;">&nbsp; {{workOrder.workOrderName}}</span></p>
-                                <p><span style="font-weight: bold;">Description:</span> <span style="font-style: italic;">&nbsp; {{workOrder.workOrderDetails}}</span></p>
+        <div *ngIf="workOrder" style="width: 100%;">
+            <div [@.disabled]="true" style="width: 100%;margin-top: -10px;">
+                <mat-tab-group>
+                    <mat-tab label="Work Order" style="background: #f5f5f5;">
+                        <div *ngIf="workOrder" style="width:100%">
+                            <div fxLayout="row" fxLayoutAlign="start" style="font-size: .9em;">
+                                <div style="width: 50%;">
+                                    <p><span style="font-weight: bold;">Order Id:</span> <span style="font-style: italic;">&nbsp; {{workOrder.id}}</span></p>
+                                    <p><span style="font-weight: bold;">Work Order:</span> <span style="font-style: italic;">&nbsp; {{workOrder.workOrderName}}</span></p>
+                                    <p><span style="font-weight: bold;">Description:</span> <span style="font-style: italic;">&nbsp; {{workOrder.workOrderDetails}}</span></p>
 
-                            </div>
-                            <div style="width: 50%;">
-                                <p><span style="font-weight: bold;">Work Type:</span> <span style="font-style: italic;">&nbsp; {{workOrder.workOrderType }}</span></p>
-                                <p><span style="font-weight: bold;">Start Date:</span> <span style="font-style: italic;">&nbsp; {{workOrder.startDate | date}}</span></p>
-                                <p><span style="font-weight: bold;">Is Urgent:</span> <span style="font-style: italic;">&nbsp; {{workOrder.isEmergency | yesNo}}</span></p>
+                                </div>
+                                <div style="width: 50%;">
+                                    <p><span style="font-weight: bold;">Work Type:</span> <span style="font-style: italic;">&nbsp; {{workOrder.workOrderType }}</span></p>
+                                    <p><span style="font-weight: bold;">Start Date:</span> <span style="font-style: italic;">&nbsp; {{workOrder.startDate | date}}</span></p>
+                                    <p><span style="font-weight: bold;">Is Urgent:</span> <span style="font-style: italic;">&nbsp; {{workOrder.isEmergency | yesNo}}</span></p>
 
 
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div style="width: 100%;font-size: .9em;" *ngIf="workOrder">
-                        <form novalidate [formGroup]="updateWorkOrderForm" style="width: 100%;border: 1px solid;margin-bottom: 5px;padding: 5px;margin-top: -10px;">
-                            <div fxLayout="column" fxLayoutAlign="start start">
-                                <div fxLayout="row" fxLayoutAlign="start start" style="width: 100%;">
-                                    <div fxFlex="50%">
-                                        <mat-form-field fxFlex.xs="100%" style="margin-left: 10px;margin-right: 10px;width: 95%;">
-                                            <!-- <mat-label>Status</mat-label> -->
-                                            <!-- <input type="text" matInput placeholder="Rent Paid" formControlName="rentAmount" [ngModel]="payment.actualPaymentAmt"> -->
-                                            <!-- <mat-form-field style="width:100%"> -->
-                                            <mat-label>Work Order Status</mat-label>
-                                            <mat-select formControlName="workOrderStatus" [ngModel]="workOrder.workOrderStatus">
-                                                <!-- <mat-option>None</mat-option> -->
-                                                <mat-option value="New">New</mat-option>
-                                                <mat-option value="In Progress">In Progress</mat-option>
-                                                <mat-option value="Completed">Completed</mat-option>
-                                                <mat-option value="On Hold">On Hold</mat-option>
-                                                <mat-option value="Canceled">Canceled</mat-option>
-                                            </mat-select>
-                                            <!-- </mat-form-field> -->
-                                        </mat-form-field>
-                                    </div>
-                                    <div fxFlex="50%">
-                                        <mat-form-field style="width: 98%;">
-                                            <mat-label>Completed On</mat-label>
-                                            <input matInput [matDatepicker]="picker2" formControlName="endDate" [ngModel]="workOrder.endDate">
-                                            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-                                            <mat-datepicker #picker2></mat-datepicker>
-                                        </mat-form-field>
-                                    </div>
-                                </div>
-                                <div style="width: 100%;">
-                                    <mat-form-field fxFlex="95%" fxFlex.xs="90%" style="margin-left: 10px;margin-right: 10px;">
-                                        <mat-label>Note</mat-label>
-                                        <input type="text" matInput placeholder="Note" formControlName="note" [ngModel]="workOrder.note">
-                                    </mat-form-field>
-                                </div>
-                            </div>
-
-                            <div fxLayout="row" fxLayoutGap="7px" fxLayoutAlign="end center" style="width: 98%; margin-bottom: 20px;">
-                                <!-- <span *ngIf="showMsg" style="color: rgb(189, 150, 25);">Updated successfully!</span>
-    <img *ngIf=" loading" class="pl-2" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
-    /> [disabled]="f.invalid || !f.dirty"-->
-                                <div *ngIf="loading$ | async">
-                                    <app-loading></app-loading>
-                                </div>
-                                <button [disabled]="!updateWorkOrderForm.dirty" type="button" mat-raised-button color="primary" (click)="upateWorkOrder()">UPDATE</button>
-                                <button mat-raised-button color="accent" [mat-dialog-close]="true">CLOSE</button>
-                            </div>
-                        </form>
-                    </div>
-                </mat-tab>
-                <mat-tab label="Invoice" style="background: #f5f5f5;">
-                    <div *ngIf="workOrder.invoice" style="width:100%">
-                        <p style="margin-top: 15px;"></p>
-                        <div fxLayout="row" fxLayoutAlign="start" style="font-size: .9em;">
-                            <div style="width: 50%;">
-                                <p class="bottom-margin"><span style="font-weight: bold;">Invoice Id:</span> <span style="font-style: italic;">&nbsp; {{workOrder.invoice.id}}</span></p>
-                                <p class="bottom-margin"><span style="font-weight: bold;">Subject:</span> <span style="font-style: italic;">&nbsp; {{workOrder.invoice.invoiceTitle}}</span></p>
-                                <p><span style="font-weight: bold;">Amount Due:</span> <span style="font-style: italic;">&nbsp; {{workOrder.invoice.invoiceAmount}}</span></p>
-
-                            </div>
-                            <div style="width: 50%;">
-                                <p class="bottom-margin"><span style="font-weight: bold;">Due Date:</span> <span style="font-style: italic;">&nbsp; {{workOrder.invoice.paymentDate | date }}</span></p>
-                                <p class="bottom-margin"><span style="font-weight: bold;">Prefered Payment Method:</span> <span style="font-style: italic;">&nbsp; {{workOrder.invoice.paymentMethod}}</span></p>
-                                <p><span style="font-weight: bold;">Is Paid:</span> <span style="font-style: italic;">&nbsp; {{workOrder.invoice.isPaid | yesNo}}</span></p>
-
-
-                            </div>
-                        </div>
-                    </div>
-                    <div style="width: 100%;font-size: .9em;overflow-x: hidden;" *ngIf="workOrder.invoice">
-                        <form novalidate [formGroup]="updateInvoiceForm" style="width: 100%;border: 1px solid;margin-bottom: 5px;padding: 5px;">
-                            <div fxLayout="column" fxLayoutAlign="start start">
-                                <div fxLayout="row" fxLayoutAlign="start start" style="width: 100%;">
-                                    <div fxFlex="30%">
-                                        <!-- <mat-form-field fxFlex.xs="100%" style="margin-left: 10px;margin-right: 10px;width: 95%;"></mat-form-field> -->
-                                        <!-- <mat-checkbox class="example-margin" formControlName="isPaid" [checked]="workOrder.invoice.isPaid">Checked</mat-checkbox> -->
-                                        <!-- </mat-form-field> -->
-                                        <div style="width: 95%;">
-                                            <mat-form-field>
-                                                <mat-label>Invovice Paid</mat-label>
-                                                <mat-label>Paid Amount</mat-label>
-                                                <input type="text" matInput placeholder="Paid Amount" formControlName="paymentAmount" [ngModel]="workOrder.invoice.paymentAmount">
+                        <div style="width: 100%;font-size: .9em;" *ngIf="workOrder">
+                            <form novalidate [formGroup]="updateWorkOrderForm" style="width: 100%;border: 1px solid;margin-bottom: 5px;padding: 5px;margin-top: -10px;">
+                                <div fxLayout="column" fxLayoutAlign="start start">
+                                    <div fxLayout="row" fxLayoutAlign="start start" style="width: 100%;">
+                                        <div fxFlex="50%">
+                                            <mat-form-field fxFlex.xs="100%" style="margin-left: 10px;margin-right: 10px;width: 95%;">
+                                                <!-- <mat-label>Status</mat-label> -->
+                                                <!-- <input type="text" matInput placeholder="Rent Paid" formControlName="rentAmount" [ngModel]="payment.actualPaymentAmt"> -->
+                                                <!-- <mat-form-field style="width:100%"> -->
+                                                <mat-label>Work Order Status</mat-label>
+                                                <mat-select formControlName="workOrderStatus" [ngModel]="workOrder.workOrderStatus">
+                                                    <!-- <mat-option>None</mat-option> -->
+                                                    <mat-option value="New">New</mat-option>
+                                                    <mat-option value="In Progress">In Progress</mat-option>
+                                                    <mat-option value="Completed">Completed</mat-option>
+                                                    <mat-option value="On Hold">On Hold</mat-option>
+                                                    <mat-option value="Canceled">Canceled</mat-option>
+                                                </mat-select>
+                                                <!-- </mat-form-field> -->
                                             </mat-form-field>
                                         </div>
-
+                                        <div fxFlex="50%">
+                                            <mat-form-field style="width: 98%;">
+                                                <mat-label>Completed On</mat-label>
+                                                <input matInput [matDatepicker]="picker2" formControlName="endDate" [ngModel]="workOrder.endDate">
+                                                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                                                <mat-datepicker #picker2></mat-datepicker>
+                                            </mat-form-field>
+                                        </div>
                                     </div>
-                                    <div fxFlex="30%">
-                                        <mat-checkbox class="example-margin" style="margin-left: 35px;" formControlName="isPaid" [checked]="workOrder.invoice.isPaid">&nbsp; Paid</mat-checkbox>
-                                    </div>
-                                    <div fxFlex="40%">
-                                        <mat-form-field fxFlex.xs="100%" style="margin-left: 10px;margin-right: 10px;width: 95%;">
-                                            <mat-label>Payment Method</mat-label>
-                                            <mat-select formControlName="paymentMethod" [ngModel]="workOrder.invoice.paymentMethod">
-                                                <mat-option value="Cash">Cash</mat-option>
-                                                <mat-option value="Cheque">Cheque</mat-option>
-                                                <mat-option value="Transfer">E-Transfer</mat-option>
-                                                <mat-option value="Other">Other</mat-option>
-                                            </mat-select>
-                                            <!-- </mat-form-field> -->
-                                        </mat-form-field>
-                                    </div>
-                                </div>
-                                <div fxLayout="row" fxLayoutAlign="start start" style="width: 100%;">
-                                    <div fxFlex="50%">
-                                        <mat-form-field>
-                                            <mat-label>Notes</mat-label>
-                                            <textarea type="text" matInput placeholder="Notes" formControlName="note" [ngModel]="workOrder.invoice.note"></textarea>
-                                        </mat-form-field>
-                                    </div>
-                                    <div fxFlex="50%">
-                                        <mat-form-field style="width: 98%;">
-                                            <mat-label>Completed On</mat-label>
-                                            <input matInput [matDatepicker]="picker5" formControlName="paymentDate" [ngModel]="workOrder.invoice.paymentDate">
-                                            <mat-datepicker-toggle matSuffix [for]="picker5"></mat-datepicker-toggle>
-                                            <mat-datepicker #picker5></mat-datepicker>
+                                    <div style="width: 100%;">
+                                        <mat-form-field fxFlex="95%" fxFlex.xs="90%" style="margin-left: 10px;margin-right: 10px;">
+                                            <mat-label>Note</mat-label>
+                                            <input type="text" matInput placeholder="Note" formControlName="note" [ngModel]="workOrder.note">
                                         </mat-form-field>
                                     </div>
                                 </div>
 
+                                <div fxLayout="row" fxLayoutGap="7px" fxLayoutAlign="end center" style="width: 98%; margin-bottom: 20px;">
+                                    <!-- <span *ngIf="showMsg" style="color: rgb(189, 150, 25);">Updated successfully!</span>
+    <img *ngIf=" loading" class="pl-2" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+    /> [disabled]="f.invalid || !f.dirty"-->
+                                    <div *ngIf="loading$ | async">
+                                        <app-loading></app-loading>
+                                    </div>
+                                    <button [disabled]="!updateWorkOrderForm.dirty" type="button" mat-raised-button color="primary" (click)="upateWorkOrder()">UPDATE</button>
+                                    <button mat-raised-button color="accent" [mat-dialog-close]="true">CLOSE</button>
+                                </div>
+                            </form>
+                        </div>
+                    </mat-tab>
+                    <mat-tab label="Invoice" style="background: #f5f5f5;">
+                        <div *ngIf="workOrder.invoice" style="width:100%">
+                            <p style="margin-top: 15px;"></p>
+                            <div fxLayout="row" fxLayoutAlign="start" style="font-size: .9em;">
+                                <div style="width: 50%;">
+                                    <p class="bottom-margin"><span style="font-weight: bold;">Invoice Id:</span> <span style="font-style: italic;">&nbsp; {{workOrder.invoice.id}}</span></p>
+                                    <p class="bottom-margin"><span style="font-weight: bold;">Subject:</span> <span style="font-style: italic;">&nbsp; {{workOrder.invoice.invoiceTitle}}</span></p>
+                                    <p><span style="font-weight: bold;">Amount Due:</span> <span style="font-style: italic;">&nbsp; {{workOrder.invoice.invoiceAmount}}</span></p>
 
+                                </div>
+                                <div style="width: 50%;">
+                                    <p class="bottom-margin"><span style="font-weight: bold;">Due Date:</span> <span style="font-style: italic;">&nbsp; {{workOrder.invoice.paymentDate | date }}</span></p>
+                                    <p class="bottom-margin"><span style="font-weight: bold;">Prefered Payment Method:</span> <span style="font-style: italic;">&nbsp; {{workOrder.invoice.paymentMethod}}</span></p>
+                                    <p><span style="font-weight: bold;">Is Paid:</span> <span style="font-style: italic;">&nbsp; {{workOrder.invoice.isPaid | yesNo}}</span></p>
+
+
+                                </div>
                             </div>
-                            <div fxLayout="row" fxLayoutGap="7px" fxLayoutAlign="end center" style="width: 98%;">
-                                <!-- <span *ngIf="showMsg" style="color: rgb(189, 150, 25);">Updated successfully!</span>
+                        </div>
+                        <div style="width: 100%;font-size: .9em;overflow-x: hidden;" *ngIf="workOrder.invoice">
+                            <form novalidate [formGroup]="updateInvoiceForm" style="width: 100%;border: 1px solid;margin-bottom: 5px;padding: 5px;">
+                                <div fxLayout="column" fxLayoutAlign="start start">
+                                    <div fxLayout="row" fxLayoutAlign="start start" style="width: 100%;">
+                                        <div fxFlex="30%">
+                                            <!-- <mat-form-field fxFlex.xs="100%" style="margin-left: 10px;margin-right: 10px;width: 95%;"></mat-form-field> -->
+                                            <!-- <mat-checkbox class="example-margin" formControlName="isPaid" [checked]="workOrder.invoice.isPaid">Checked</mat-checkbox> -->
+                                            <!-- </mat-form-field> -->
+                                            <div style="width: 95%;">
+                                                <mat-form-field>
+                                                    <mat-label>Invovice Paid</mat-label>
+                                                    <mat-label>Paid Amount</mat-label>
+                                                    <input type="text" matInput placeholder="Paid Amount" formControlName="paymentAmount" [ngModel]="workOrder.invoice.paymentAmount">
+                                                </mat-form-field>
+                                            </div>
+
+                                        </div>
+                                        <div fxFlex="30%">
+                                            <mat-checkbox class="example-margin" style="margin-left: 35px;" formControlName="isPaid" [checked]="workOrder.invoice.isPaid">&nbsp; Paid</mat-checkbox>
+                                        </div>
+                                        <div fxFlex="40%">
+                                            <mat-form-field fxFlex.xs="100%" style="margin-left: 10px;margin-right: 10px;width: 95%;">
+                                                <mat-label>Payment Method</mat-label>
+                                                <mat-select formControlName="paymentMethod" [ngModel]="workOrder.invoice.paymentMethod">
+                                                    <mat-option value="Cash">Cash</mat-option>
+                                                    <mat-option value="Cheque">Cheque</mat-option>
+                                                    <mat-option value="Transfer">E-Transfer</mat-option>
+                                                    <mat-option value="Other">Other</mat-option>
+                                                </mat-select>
+                                                <!-- </mat-form-field> -->
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                    <div fxLayout="row" fxLayoutAlign="start start" style="width: 100%;">
+                                        <div fxFlex="50%">
+                                            <mat-form-field>
+                                                <mat-label>Notes</mat-label>
+                                                <textarea type="text" matInput placeholder="Notes" formControlName="note" [ngModel]="workOrder.invoice.note"></textarea>
+                                            </mat-form-field>
+                                        </div>
+                                        <div fxFlex="50%">
+                                            <mat-form-field style="width: 98%;">
+                                                <mat-label>Completed On</mat-label>
+                                                <input matInput [matDatepicker]="picker5" formControlName="paymentDate" [ngModel]="workOrder.invoice.paymentDate">
+                                                <mat-datepicker-toggle matSuffix [for]="picker5"></mat-datepicker-toggle>
+                                                <mat-datepicker #picker5></mat-datepicker>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <div fxLayout="row" fxLayoutGap="7px" fxLayoutAlign="end center" style="width: 98%;">
+                                    <!-- <span *ngIf="showMsg" style="color: rgb(189, 150, 25);">Updated successfully!</span>
 <img *ngIf=" loading" class="pl-2" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
 /> [disabled]="f.invalid || !f.dirty"-->
-                                <div *ngIf="loading$ | async">
-                                    <app-loading></app-loading>
+                                    <div *ngIf="loading$ | async">
+                                        <app-loading></app-loading>
+                                    </div>
+                                    <button [disabled]="!updateInvoiceForm.dirty" type="button" mat-raised-button color="primary" (click)="upateInvoice()">UPDATE</button>
+                                    <button mat-raised-button color="accent" [mat-dialog-close]="true">CLOSE</button>
                                 </div>
-                                <button [disabled]="!updateInvoiceForm.dirty" type="button" mat-raised-button color="primary" (click)="upateInvoice()">UPDATE</button>
-                                <button mat-raised-button color="accent" [mat-dialog-close]="true">CLOSE</button>
-                            </div>
-                        </form>
-                    </div>
-                    <div *ngIf="!workOrder.invoice" style="margin-top: 20px;">
-                        No Invoice
-                    </div>
-                </mat-tab>
+                            </form>
+                        </div>
+                        <div *ngIf="!workOrder.invoice" style="margin-top: 20px;">
+                            No Invoice
+                        </div>
+                    </mat-tab>
 
-            </mat-tab-group>
+                </mat-tab-group>
+
+            </div>
 
         </div>
-
-
-
 
         <div *ngIf="!workOrder" style="text-align: center; vertical-align: middle;">
             <img class="pl-2" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="

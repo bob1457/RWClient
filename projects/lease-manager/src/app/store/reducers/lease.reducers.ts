@@ -260,6 +260,13 @@ const propertyLeaseReducer = createReducer(
     });
   }),
 
+  on(LeaseActions.updateWorkOrderFailure, (state) => ({
+    ...state,
+    loading: false,
+    loaded: false,
+    errorMessage: 'Failed to update work orders'
+  })),
+
   /**
    * Update work order
    */
@@ -282,6 +289,8 @@ const propertyLeaseReducer = createReducer(
       selectedworkorder: payload
     });
   }),
+
+
 
   on(LeaseActions.getAllWorkOrdersFailure, (state) => ({
     ...state,
