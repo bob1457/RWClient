@@ -22,6 +22,7 @@ export const initialState: PropertyLeaseState =  { // adapter.getInitialState
   selectedrequest: null,
   rentPayments: null,
   selectedPayment: null,
+  invoiceList: null,
   // contracts: null,
   // contractsForProperty: null,
   // selectedContract: null,
@@ -541,6 +542,24 @@ const propertyLeaseReducer = createReducer(
       });
     }),
 
+    /**
+ * Add Invoice
+   */
+   on(LeaseActions.addInvoice, state => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+  on(LeaseActions.addInvoiceSuccess, (state, { payload }) => {
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      invoiceList: [...state.invoiceList, payload ]
+    });
+  }),
+
 );
 
 /**
@@ -563,6 +582,7 @@ export const getAllWorkOrders = (state: PropertyLeaseState) => state.workorders;
 export const getWorkOrderDetails = (state: PropertyLeaseState) => state.selectedworkorder;
 export const getRentPaymentList = (state: PropertyLeaseState) => state.rentPayments;
 export const getRemtPaymentDetails = (state: PropertyLeaseState) => state.selectedPayment;
+export const getInviceList = (state: PropertyLeaseState) => state.invoiceList;
 
 export const loadingStatus = createSelector(selectLeaseyState, getLoadingStatus);
 
@@ -578,7 +598,7 @@ export const workOrderList = createSelector(selectLeaseyState, getAllWorkOrders)
 export const workOrderDetails = createSelector(selectLeaseyState, getWorkOrderDetails);
 export const rentPaymentList = createSelector(selectLeaseyState, getRentPaymentList);
 export const rentPaymentDetails = createSelector(selectLeaseyState, getRemtPaymentDetails);
-
+export const invoiceList = createSelector(selectLeaseyState, getInviceList);
 
 
 export function reducer(state: PropertyLeaseState | undefined, action: Action) {

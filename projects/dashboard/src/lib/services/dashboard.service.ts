@@ -86,6 +86,10 @@ export class DashboardService {
     return this.http.get<any[]>(`${this.baseUrl}/WorkOrder/ServiceRequest/all`);
   }
 
+  getAllInvoices() {
+    debugger;
+    return this.http.get<any[]>(`${this.baseUrl}/Workorder/invoice/all`);
+  }
 
 
 }

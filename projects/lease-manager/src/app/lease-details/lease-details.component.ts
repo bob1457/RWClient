@@ -5,7 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LeaseService, PropertyLease, Vendor } from '@lib/app-core';
 import { addRentPayment, addTenant, addWorkOrder, getLeaseDetails, getRentPaymenttDetails, getWorkOrderDetails, updateLease, updateRentPayment } from '../store/actions/lease.actions';
-import { leaseDetails, loadingStatus, rentPaymentDetails, rentPaymentList, serviceRequestList,
+import { invoiceList, leaseDetails, loadingStatus, rentPaymentDetails, rentPaymentList, serviceRequestList,
          tenantList, vendorList, workOrderList } from '../store/reducers';
 import { getAllServiceRequests, getAllVendors,
   getAllWorkOrders, getRentPaymentList, getAllTenants } from '../store/actions/lease.actions';
@@ -61,6 +61,7 @@ export class LeaseDetailsComponent implements OnInit {
 
   vendors:any [];
   vendors$: Observable<Vendor[]>;
+  invoiceList: any[];
   chosenVendorId;
   chosenServiceRequestId;
 
@@ -228,6 +229,13 @@ export class LeaseDetailsComponent implements OnInit {
                                 this.dataSource3.data = this.tenants;
 
                                 setTimeout(() =>  {this.dataSource3.paginator = this.paginator3; this.dataSource3.sort = this.sort3; });
+                              }
+                            });
+
+                  this.store.select(invoiceList)
+                            .subscribe(invoices => {
+                              if(invoices && this.lease) {
+                                this.invoiceList = invoices;
                               }
                             });
                 });

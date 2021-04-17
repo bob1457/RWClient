@@ -143,14 +143,19 @@ export class LeaseService {
     return this.http.post<any>(`${this.baseUrl}/RentalPayment/rent/update`, data );
   }
 
+  getAllInvoices() {
+    debugger;
+    return this.http.get<any[]>(`${this.baseUrl}/Workorder/invoice/all`);
+  }
+
   addInvoice(data: any) {
     debugger;
-    return this.http.post<any>(`${this.baseUrl}/invoice/add`, data)
+    return this.http.post<any>(`${this.baseUrl}/Workorder/invoice/add`, data)
   }
 
   updateInvoice(data: any) {
     debugger;
-    return this.http.post<any>(`${this.baseUrl}/invoice/update`, data );
+    return this.http.post<any>(`${this.baseUrl}/Workorder/invoice/update`, data );
   }
 
 }

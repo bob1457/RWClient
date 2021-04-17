@@ -23,6 +23,7 @@ export interface DashState {
   errorMessage: string;
   vendors: any[];
   servierequests: any[];
+  invoiceList: any[];
 }
 
 

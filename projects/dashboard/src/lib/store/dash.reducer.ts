@@ -20,6 +20,7 @@ export const initialState: DashState =  { // adapter.getInitialState
   rentPayments: null,
   vendors: null,
   servierequests: null,
+  invoiceList: null,
   errorMessage: null
 };
 
@@ -302,7 +303,32 @@ const dashReducer = createReducer(
       loaded: true,
       servierequests: payload
     });
-  })
+  }),
+
+/**
+  * All invoices */
+
+   on(DashActions.getAllInvoices, state => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+  on(DashActions.getAllInvoicesSuccess, (state, { payload }) => {
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      invoiceList: payload
+    });
+  }),
+
+  on(DashActions.getAllInvoicesFailure, (state) => ({
+    ...state,
+    loading: true,
+    loaded: false
+  }))
+
 
 );
 
@@ -326,6 +352,7 @@ const AllRentalApps = (state: DashState) => state.applications;
 const  AllVendors = (state: DashState) => state.vendors;
 const  AllworkOrders = (state: DashState) => state.workorders;
 const  AllServiceRequests = (state: DashState) => state.servierequests;
+const  AllInvoices = (state: DashState) => state.invoiceList;
 
 export const AllPropertyImgs = (state: DashState) => state.propertyImgList;
 export const AllRentPaymentHistory = (state: DashState) => state.rentPayments;
@@ -349,6 +376,7 @@ export const RentPaymentHistory = createSelector(getDashState, AllRentPaymentHis
 export const VendorList = createSelector(getDashState, AllVendors);
 export const WorkOrderList = createSelector(getDashState, AllworkOrders);
 export const ServiceRequestList = createSelector(getDashState, AllServiceRequests);
+export const InvoiceList = createSelector(getDashState, AllInvoices);
 
 export const loadingStatus = createSelector(getDashState, loading);
 

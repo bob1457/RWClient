@@ -320,4 +320,27 @@ export class DashboardEffects {
     )
   );
 
+  getAllInvoices$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(DashActions.getAllInvoices),
+      tap(() => console.log('got here for invoices!!!')),
+      switchMap(() =>
+        this.dashService.getAllInvoices().pipe(
+          map((list: any[]) => ({
+            type: '[Leases] Get All Invoices Success',
+            payload: list
+          })),
+          // tap(res => {console.log('response: ' + res); }),
+          // catchError(
+          //   err => {
+          //     return of('[Leases] Get all leases Failure', err.error);
+          //   } // EMPTY
+          // )
+          catchError(error => of(DashActions.getAllInvoicesFailure(error.message)))// EMPTY
+        )
+      )
+    )
+  );
+
 }

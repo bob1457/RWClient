@@ -249,6 +249,27 @@ export const updateWorkOrderFailure = createAction(
 
 );
 
+/**
+ * Update Invoice
+ */
+
+export const updateInvoice = createAction(
+  '[Leases] Update Invoice',
+  props<{payload: any}>()
+);
+
+export const updateInvoiceSuccess = createAction(
+  '[Leases] Update Invoice Success',
+  props<{payload: any}>()
+);
+
+export const updateInvoiceFailure = createAction(
+  '[Leases] Update Invoice Failure',
+  // props<{payload: any}>()
+  (errorMessage = 'Error updating invoice') => ({ payload: { errorMessage }})
+
+);
+
 
 /**
  * Get All Vendors Actions
@@ -352,6 +373,49 @@ export const addServiceRequestFailure = createAction(
   // props<{payload: any}>()
   (errorMessage = 'Error adding Service Request') => ({ payload: { errorMessage }})
 
+);
+
+
+
+/**
+ * Add Invoice
+ */
+
+export const addInvoice = createAction(
+  '[Leases] Add Invoice',
+  props<{payload: any}>()
+);
+
+export const addInvoiceSuccess = createAction(
+  '[Leases] Add Invoice Success',
+  props<{payload: any}>()
+);
+
+export const addInvoiceFailure = createAction(
+  '[[Leases] Add Invoice Failure',
+  // props<{payload: any}>()
+  (errorMessage = 'Error adding Invoice') => ({ payload: { errorMessage }})
+
+);
+
+/**
+ * Get All Invoices
+ */
+export const getAllInvoices = createAction(
+  '[Leases] Get All Invoices'
+);
+
+export const getAllInvoicesSuccess = createAction(
+  '[Leases] Get All Vendors Success',
+  props<{payload: Vendor[]}>()
+);
+
+export const getAllInvoicesFailure = createAction(
+  '[Leases] Get All Invoices Failure',
+  // props<{payload: any}>()
+  (errorMessage = 'Error loading invoices') => {
+    return ({ payload: { errorMessage } });
+  }
 );
 
 
