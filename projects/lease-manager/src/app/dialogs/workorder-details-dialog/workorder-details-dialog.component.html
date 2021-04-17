@@ -112,7 +112,7 @@
 
                                         </div>
                                         <div fxFlex="30%">
-                                            <mat-checkbox class="example-margin" style="margin-left: 35px;" formControlName="isPaid" [checked]="invoiceList[0].isPaid">&nbsp; Paid</mat-checkbox>
+                                            <mat-checkbox class="example-margin" style="margin-left: 35px;" formControlName="isPaid" [ngModel]="invoiceList[0].isPaid">&nbsp; Paid</mat-checkbox>
                                         </div>
                                         <div fxFlex="40%">
                                             <mat-form-field fxFlex.xs="100%" style="margin-left: 10px;margin-right: 10px;width: 95%;">

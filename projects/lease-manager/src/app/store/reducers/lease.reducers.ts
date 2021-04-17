@@ -582,7 +582,30 @@ const propertyLeaseReducer = createReducer(
     ...state,
     loading: true,
     loaded: false
-  }))
+  })),
+
+  /**
+   * Update invoice
+   */
+
+   on(LeaseActions.updateInvoice, state => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+  on(LeaseActions.updateInvoiceSuccess, (state, { payload }) => {
+
+    const updatedInvoice = state.invoiceList.map(
+      item => payload.id === item.id ? payload : item
+    );
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      invoiceList: updatedInvoice
+    });
+  })
 
 );
 

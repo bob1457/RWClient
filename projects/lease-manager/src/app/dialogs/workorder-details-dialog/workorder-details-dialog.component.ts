@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { updateWorkOrder } from '../../store/actions/lease.actions';
+import { updateInvoice, updateWorkOrder } from '../../store/actions/lease.actions';
 import { PropertyLeaseState } from '../../store/lease-state';
 import { invoiceList, loadingStatus, workOrderDetails } from '../../store/reducers';
 
@@ -74,12 +74,12 @@ export class WorkorderDetailsDialogComponent implements OnInit {
           console.log('wo-in-dialog', this.workOrder);
 
           this.store.select(invoiceList)
-                          .subscribe(list => {
-                            if (list && this.workOrder) {
-                              this.invoiceList = list.filter(i => i.workOrderId === this.workOrder.id);
-                              console.log('invoice in dialog filtered', this.invoiceList);
-                            }
-                          });
+                    .subscribe(list => {
+                      if (list && this.workOrder) {
+                        this.invoiceList = list.filter(i => i.workOrderId === this.workOrder.id);
+                        console.log('invoice in dialog filtered', this.invoiceList);
+                      }
+                    });
         });
   }
 
@@ -102,7 +102,7 @@ export class WorkorderDetailsDialogComponent implements OnInit {
       this.store.dispatch(updateWorkOrder({payload: this.updateWorkOrderForm.value}));
       this.updateWorkOrderForm.markAsPristine();
     } catch {
-
+      console.log('error occured');
     }
   }
 
@@ -113,7 +113,12 @@ export class WorkorderDetailsDialogComponent implements OnInit {
       invoiceId:this.workOrder.invoice.id
     });
     console.log('invoice form', this.updateInvoiceForm.value);
-
+    try {
+      this.store.dispatch(updateInvoice({payload: this.updateInvoiceForm.value}));
+      this.updateInvoiceForm.markAsPristine();
+    } catch {
+      console.log('error occured');
+    }
   }
 
 }
