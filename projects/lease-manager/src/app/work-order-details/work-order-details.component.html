@@ -168,7 +168,7 @@
                                     Footer
                                 </mat-card-footer>
                             </mat-card>
-                            <p>No invoice</p>
+                            <p *ngIf="!workorder.invoice" class="no-invoice-text">No invoice</p>
                         </mat-tab>
 
                     </mat-tab-group>

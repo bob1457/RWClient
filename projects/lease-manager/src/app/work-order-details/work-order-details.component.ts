@@ -3,10 +3,11 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
 import { PropertyLeaseState } from '../store/lease-state';
 import { Router, ActivatedRoute } from '@angular/router';
-import { getWorkOrderDetails, updateWorkOrder } from '../store/actions/lease.actions';
-import { workOrderDetails } from '../store/reducers';
+import { getWorkOrderDetails, updateWorkOrder, getAllInvoices } from '../store/actions/lease.actions';
+import { getInviceList, workOrderDetails } from '../store/reducers';
 import { Observable } from 'rxjs';
 import { loadingStatus } from '../store/reducers';
+
 
 @Component({
   selector: 'app-work-order-details',
@@ -18,6 +19,7 @@ export class WorkOrderDetailsComponent implements OnInit {
   id: number;
   loading$: Observable<boolean>;
   workorder;
+  invoice;
   detailsForm: FormGroup;
 
   constructor(private store: Store<PropertyLeaseState>,
@@ -42,6 +44,8 @@ export class WorkOrderDetailsComponent implements OnInit {
     this.loading$ = this.store.pipe(select(loadingStatus));
 
     this.store.dispatch(getWorkOrderDetails({payload: this.id}));
+
+    // this.store.dispatch(getAllInvoices());
 
     this.detailsForm = this.formBuilder.group({
       workOrderId: [],

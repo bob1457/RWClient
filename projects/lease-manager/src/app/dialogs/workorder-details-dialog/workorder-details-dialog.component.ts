@@ -5,7 +5,7 @@ import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { updateWorkOrder } from '../../store/actions/lease.actions';
 import { PropertyLeaseState } from '../../store/lease-state';
-import { loadingStatus, workOrderDetails } from '../../store/reducers';
+import { invoiceList, loadingStatus, workOrderDetails } from '../../store/reducers';
 
 
 @Component({
@@ -18,13 +18,25 @@ export class WorkorderDetailsDialogComponent implements OnInit {
   workOrder;
   updateWorkOrderForm: FormGroup;
   updateInvoiceForm: FormGroup;
+  invoiceList;
 
   loading$: Observable<boolean>;
 
   constructor(private store: Store<PropertyLeaseState>,
               private formBuilder: FormBuilder,
               public dialogRef: MatDialogRef<WorkorderDetailsDialogComponent>,
-              @Optional() @Inject(MAT_DIALOG_DATA) public data: {id: number}) { }
+              @Optional() @Inject(MAT_DIALOG_DATA) public data: {id: number}) {
+
+                console.log('passed in', data.id);
+
+                // this.store.select(invoiceList)
+                //           .subscribe(list => {
+                //             if (list && this.workOrder) {
+                //               this.invoiceList = list.filter(i => i.workOrderId === data.id);
+                //               console.log('invoice in dialog filtered', this.invoiceList);
+                //             }
+                //           });
+              }
 
   ngOnInit() {
 
@@ -60,6 +72,14 @@ export class WorkorderDetailsDialogComponent implements OnInit {
         .subscribe(res => {
           this.workOrder = res;
           console.log('wo-in-dialog', this.workOrder);
+
+          this.store.select(invoiceList)
+                          .subscribe(list => {
+                            if (list && this.workOrder) {
+                              this.invoiceList = list.filter(i => i.workOrderId === this.workOrder.id);
+                              console.log('invoice in dialog filtered', this.invoiceList);
+                            }
+                          });
         });
   }
 

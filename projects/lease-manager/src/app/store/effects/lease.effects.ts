@@ -413,7 +413,7 @@ export class LeaseEffects {
     this.actions$.pipe(
       // ofType('[Property] Get Property List'),
       ofType(LeaseActions.getAllInvoices),
-      tap(() => console.log('got here for invoices!!!')),
+      tap(() => console.log('got here for all invoices!!!')),
       switchMap(() =>
         this.leaseService.getAllInvoices().pipe(
           map((list: any[]) => ({

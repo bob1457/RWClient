@@ -406,8 +406,8 @@ export const getAllInvoices = createAction(
 );
 
 export const getAllInvoicesSuccess = createAction(
-  '[Leases] Get All Vendors Success',
-  props<{payload: Vendor[]}>()
+  '[Leases] Get All Invoices Success',
+  props<{payload: any[]}>()
 );
 
 export const getAllInvoicesFailure = createAction(

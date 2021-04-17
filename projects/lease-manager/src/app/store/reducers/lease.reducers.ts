@@ -560,6 +560,30 @@ const propertyLeaseReducer = createReducer(
     });
   }),
 
+  /**
+  * All invoices */
+
+   on(LeaseActions.getAllInvoices, state => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+  on(LeaseActions.getAllInvoicesSuccess, (state, { payload }) => {
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      invoiceList: payload
+    });
+  }),
+
+  on(LeaseActions.getAllInvoicesFailure, (state) => ({
+    ...state,
+    loading: true,
+    loaded: false
+  }))
+
 );
 
 /**

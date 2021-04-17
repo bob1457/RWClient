@@ -4,7 +4,7 @@ import { PropertyLeaseState } from '../store/lease-state';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LeaseService, PropertyLease, Vendor } from '@lib/app-core';
-import { addRentPayment, addTenant, addWorkOrder, getLeaseDetails, getRentPaymenttDetails, getWorkOrderDetails, updateLease, updateRentPayment } from '../store/actions/lease.actions';
+import { addRentPayment, addTenant, addWorkOrder, getAllInvoices, getLeaseDetails, getRentPaymenttDetails, getWorkOrderDetails, updateLease, updateRentPayment } from '../store/actions/lease.actions';
 import { invoiceList, leaseDetails, loadingStatus, rentPaymentDetails, rentPaymentList, serviceRequestList,
          tenantList, vendorList, workOrderList } from '../store/reducers';
 import { getAllServiceRequests, getAllVendors,
@@ -569,7 +569,7 @@ export class LeaseDetailsComponent implements OnInit {
     });
 
     this.store.dispatch(getWorkOrderDetails({payload: id}));
-
+    this.store.dispatch(getAllInvoices());
   }
 
   getTenantDetails(id: number) {
