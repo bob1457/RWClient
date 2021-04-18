@@ -7,6 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AboutComponent implements OnInit {
 
+  tabs = [
+    {tab: 'System Info'},
+    {tab: 'Support Info'},
+    {tab: 'EULA'}
+  ];
   constructor() { }
 
   ngOnInit() {
