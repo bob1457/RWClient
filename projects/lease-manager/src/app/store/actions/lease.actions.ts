@@ -249,6 +249,27 @@ export const updateWorkOrderFailure = createAction(
 
 );
 
+/**
+ * Update Invoice
+ */
+
+export const updateInvoice = createAction(
+  '[Leases] Update Invoice',
+  props<{payload: any}>()
+);
+
+export const updateInvoiceSuccess = createAction(
+  '[Leases] Update Invoice Success',
+  props<{payload: any}>()
+);
+
+export const updateInvoiceFailure = createAction(
+  '[Leases] Update Invoice Failure',
+  // props<{payload: any}>()
+  (errorMessage = 'Error updating invoice') => ({ payload: { errorMessage }})
+
+);
+
 
 /**
  * Get All Vendors Actions
@@ -355,6 +376,49 @@ export const addServiceRequestFailure = createAction(
 );
 
 
+
+/**
+ * Add Invoice
+ */
+
+export const addInvoice = createAction(
+  '[Leases] Add Invoice',
+  props<{payload: any}>()
+);
+
+export const addInvoiceSuccess = createAction(
+  '[Leases] Add Invoice Success',
+  props<{payload: any}>()
+);
+
+export const addInvoiceFailure = createAction(
+  '[[Leases] Add Invoice Failure',
+  // props<{payload: any}>()
+  (errorMessage = 'Error adding Invoice') => ({ payload: { errorMessage }})
+
+);
+
+/**
+ * Get All Invoices
+ */
+export const getAllInvoices = createAction(
+  '[Leases] Get All Invoices'
+);
+
+export const getAllInvoicesSuccess = createAction(
+  '[Leases] Get All Invoices Success',
+  props<{payload: any[]}>()
+);
+
+export const getAllInvoicesFailure = createAction(
+  '[Leases] Get All Invoices Failure',
+  // props<{payload: any}>()
+  (errorMessage = 'Error loading invoices') => {
+    return ({ payload: { errorMessage } });
+  }
+);
+
+
 /**
  * Get All Service Request Actions
  */
@@ -455,6 +519,27 @@ export const addRentPaymentFailure = createAction(
   '[[Leases] Add Rent Payment Failure',
   // props<{payload: any}>()
   (errorMessage = 'Error adding rent payment') => ({ payload: { errorMessage }})
+
+);
+
+/**
+ * Update Rent Payment Actions
+ */
+
+export const updateRentPayment = createAction(
+  '[Leases] Update Rent Payment',
+  props<{payload: ServiceRequest}>()
+);
+
+export const updateRentPaymentSuccess = createAction(
+  '[Leases] Update Rent Payment Success',
+  props<{payload: ServiceRequest}>()
+);
+
+export const updateRentPaymentFailure = createAction(
+  '[[Leases] Update Rent Payment Failure',
+  // props<{payload: any}>()
+  (errorMessage = 'Error updating rent payment') => ({ payload: { errorMessage }})
 
 );
 

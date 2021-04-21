@@ -129,7 +129,7 @@
     background: white;
     color: black;
     margin-top: 10px;
-    margin-left: 10px;
+    margin-left: 5px;
 }
 
 .tab-label {
@@ -138,4 +138,8 @@
 
 .mat-tab-header-pagination-chevron {
     border-color: rgb(44, 43, 43);
+}
+
+.mat-card-header-text {
+    margin: 0 5;
 }

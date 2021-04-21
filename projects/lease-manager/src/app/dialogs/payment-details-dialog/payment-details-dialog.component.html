@@ -1,37 +1,105 @@
 <section fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="30px" fxFlexFill style="overflow-x: hidden;overflow-y: hidden;">
-    <div mat-dialog-title class="dialog-title">Rent Payment Details</div>
+    <div mat-dialog-title class="dialog-title">Rent Payment Details<span></span></div>
 
     <mat-dialog-content class="text" fxLayout="column" fxLayoutAlign="staret center" fxLayoutGap="1%" style="height: 200px;margin-top: 20px;" fxFlexFill>
         <div *ngIf="payment" style="width:100%">
             <div fxLayout="row" fxLayoutAlign="start" style="font-size: .9em;">
+                <!-- <form novalidate fxLayoutAlign="center center" [formGroup]="updateRentForm" style="width: 100%;border: 1px solid;
+              margin-bottom: 5px;
+              padding: 5px;" (ngSubmit)="addAdditionalTenant()">-->
                 <div style="width: 50%;">
-                    <p><span style="font-weight: bold;">Rent Month:</span> <span style="font-style: italic;">{{payment.rentalForMonth}}</span></p>
-                    <p><span style="font-weight: bold;">Rent Year:</span> <span style="font-style: italic;">{{payment.rentalForYear}}</span></p>
-                    <p><span style="font-weight: bold;">Rent Amount Due:</span> <span style="font-style: italic;">{{payment.scheduledPaymentAmt | currency:'CAD'}}</span></p>
-                    <p><span style="font-weight: bold;">Rent Due Date:</span> <span style="font-style: italic;">{{payment.paymentDueDate | date}}</span></p>
+                    <p><span style="font-weight: bold;">Payment Id:</span> <span style="font-style: italic;">&nbsp; {{payment.id}}</span></p>
+                    <p><span style="font-weight: bold;">Rent Month:</span> <span style="font-style: italic;">&nbsp; {{payment.rentalForMonth}}</span></p>
+                    <p><span style="font-weight: bold;">Rent Year:</span> <span style="font-style: italic;">&nbsp; {{payment.rentalForYear}}</span></p>
+
                 </div>
                 <div style="width: 50%;">
-                    <p><span style="font-weight: bold;">Rent Paid:</span> <span style="font-style: italic;">{{payment.actualPaymentAmt | currency:'CAD'}}</span></p>
-                    <p><span style="font-weight: bold;">Rent Paid on:</span> <span style="font-style: italic;">{{payment.paymentReceivedDate | date}}</span></p>
-                    <p><span style="font-weight: bold;">Rent by:</span> <span style="font-style: italic;">{{payment.payMethod | paymentMethod}}</span></p>
-                    <p><span style="font-weight: bold;">Outstanding:</span> <span style="font-style: italic;">${{payment.balance}}</span></p>
+                    <p><span style="font-weight: bold;">Rent Amount Due:</span> <span style="font-style: italic;">&nbsp; {{payment.scheduledPaymentAmt | currency:'CAD'}}</span></p>
+                    <p><span style="font-weight: bold;">Rent Due Date:</span> <span style="font-style: italic;">&nbsp; {{payment.paymentDueDate | date}}</span></p>
+                    <p><span style="font-weight: bold;">Balance:</span> <span style="font-style: italic;">&nbsp; {{payment.balance}}</span></p>
+
+                    <!-- <p><span style="font-weight: bold;">Rent Paid:</span> <span style="font-style: italic;">{{payment.actualPaymentAmt | currency:'CAD'}}</span></p>
+                  <p><span style="font-weight: bold;">Rent Paid on:</span> <span style="font-style: italic;">{{payment.paymentReceivedDate | date}}</span></p>
+                  <p><span style="font-weight: bold;">Rent by:</span> <span style="font-style: italic;">{{payment.payMethod | paymentMethod}}</span></p>
+                  <p><span style="font-weight: bold;">Outstanding:</span> <span style="font-style: italic;">${{payment.balance}}</span></p> -->
                     <!-- <p>Rent Month : {{}}</p>   -->
+                    <!-- <mat-form-field fxFlex="10%" fxFlex.xs="90%" style="margin-left: 10px;margin-right: 10px;">
+                    <mat-label>Other Contact</mat-label>
+                    <input type="text" matInput placeholder="Rent Paid" formControlName="rentAmount" [ngModel]="rentAmount">
+                  </mat-form-field> -->
                 </div>
+                <!--  -->
+
             </div>
-            <div>
+
+            <!-- <div>
                 <span style="font-weight: bold;">Note:</span> <span style="font-style: italic;">{{payment.note}}</span>
-            </div>
+            </div> -->
             <!-- position: fixed; top:50%; left: 50%; -->
-            <button mat-raised-button [mat-dialog-close]="true" color="primary" style="margin-top: 30px;">Ok</button>
+
         </div>
+        <div style="width: 100%;font-size: .9em;" *ngIf="payment">
+            <form novalidate [formGroup]="updateRentForm" style="width: 100%;border: 1px solid;margin-bottom: 5px;padding: 5px;">
+                <div fxLayout="column" fxLayoutAlign="start start">
+                    <div fxLayout="row" fxLayoutAlign="start start">
+                        <div fxFlex="50%">
+                            <mat-form-field fxFlex="95%" fxFlex.xs="100%" style="margin-left: 10px;margin-right: 10px;">
+                                <mat-label>Rent Paid</mat-label>
+                                <input type="text" matInput placeholder="Rent Paid" formControlName="rentAmount" [ngModel]="payment.actualPaymentAmt">
+                            </mat-form-field>
+                        </div>
+                        <div fxFlex="50%">
+                            <mat-form-field style="width: 100%;">
+                                <mat-label>Paid On</mat-label>
+                                <input matInput [matDatepicker]="picker3" formControlName="paymentReceivedDate" [ngModel]="payment.paymentReceivedDate">
+                                <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+                                <mat-datepicker #picker3></mat-datepicker>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div style="width: 100%;">
+                        <mat-form-field fxFlex="95%" fxFlex.xs="90%" style="margin-left: 10px;margin-right: 10px;">
+                            <mat-label>Note</mat-label>
+                            <input type="text" matInput placeholder="Note" formControlName="note" [ngModel]="payment.note">
+                        </mat-form-field>
+                    </div>
+                </div>
+                <!-- <div>
+                    <button mat-raised-button [mat-dialog-close]="true" color="primary" style="margin-top: 30px;">Ok</button>
+                </div> -->
+                <div fxLayout="row" fxLayoutGap="7px" fxLayoutAlign="end center" style="width: 98%; margin-bottom: 20px;">
+                    <!-- <span *ngIf="showMsg" style="color: rgb(189, 150, 25);">Updated successfully!</span>
+<img *ngIf=" loading" class="pl-2" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+/> [disabled]="f.invalid || !f.dirty"-->
+                    <div *ngIf="loading$ | async">
+                        <app-loading></app-loading>
+                    </div>
+                    <button [disabled]="!updateRentForm.dirty" type="button" mat-raised-button color="primary" (click)="updateRentPayment()">UPDATE</button>
+                    <button mat-raised-button color="accent" [mat-dialog-close]="true">CLOSE</button>
+                </div>
+
+
+
+
+
+            </form>
+
+        </div>
+
+
         <div *ngIf="!payment" style="text-align: center; vertical-align: middle;">
             <img class="pl-2" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
             />
             <p>loading...</p>
         </div>
+        <!-- <p *ngIf="payment" style="width: 100%;"><span>Paid On Time</span> <span style="font-style: italic;">&nbsp; {{payment.sOnTime | yesNo}}</span></p> -->
 
     </mat-dialog-content>
     <!-- <mat-dialog-actions style="margin-top: -30px;">
 
     </mat-dialog-actions> -->
 </section>
+
+<!-- <div *ngIf="loading$ | async">
+  <app-loading></app-loading>
+</div> -->

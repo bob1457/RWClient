@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import { DashState } from '../store/dash.state';
 import { getAllTenants } from '../store/dash.actions';
 import { BarChartData } from '../models/bar-chart.model';
 import { ChartService } from '../services/chart.service';
+import { loadingStatus } from '../store/dash.reducer';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'lib-dash-tenant',
@@ -14,15 +16,20 @@ export class DashTenantComponent implements OnInit {
 
   breakpoint: number;
 
+  loading$: Observable<boolean>;
+
   chartData = [];
   chartLabel = [];
 
   chartData2 = [];
-  chartLabel2 = [];  
+  chartLabel2 = [];
 
   constructor(private store: Store<DashState>, private chartService: ChartService) { }
 
   ngOnInit() {
+
+    this.loading$ = this.store.pipe(select(loadingStatus));
+
     this.breakpoint = (window.innerWidth <= 640) ? 2 : 1;
     debugger;
     // return

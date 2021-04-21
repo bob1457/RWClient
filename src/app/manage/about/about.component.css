@@ -1,0 +1,30 @@
+.container {
+    height: 100%;
+}
+
+.about-card {
+    /* max-width: 400px; */
+    padding: 35px;
+    margin-bottom: 25px;
+}
+
+.about-header {
+    margin-top: 20px;
+    font-size: 2em;
+    font-weight: bold;
+}
+
+.about-content {
+    margin-top: 100px;
+}
+
+.sub-title {}
+
+.tab-content {
+    margin-top: 20px;
+}
+
+.about_icon {
+    font-size: 3em;
+    margin-left: 20px;
+}

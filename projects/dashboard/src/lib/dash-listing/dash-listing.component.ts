@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import { DashState } from '../store/dash.state';
 import { getPropertyListing } from '../store/dash.actions';
 import { ChartService } from '../services/chart.service';
 import { PieChartData } from '../models/pie-chart-data.model';
+import { loadingStatus } from '../store/dash.reducer';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'lib-dash-listing',
@@ -13,6 +15,8 @@ import { PieChartData } from '../models/pie-chart-data.model';
 export class DashListingComponent implements OnInit {
 
   breakpoint: number;
+
+  loading$: Observable<boolean>;
 
   chartData = [];
   chartLabel = [];
@@ -30,6 +34,10 @@ export class DashListingComponent implements OnInit {
               private chartService: ChartService) { }
 
   ngOnInit() {
+
+    this.loading$ = this.store.pipe(select(loadingStatus));
+
+
     this.breakpoint = (window.innerWidth <= 640) ? 2 : 1;
     debugger;
     // return this.store.dispatch(getPropertyOwnerList()) ;

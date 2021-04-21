@@ -12,3 +12,22 @@
 .order-full-width {
     width: 95%;
 }
+
+.invoice-card {
+    width: 95%;
+    // background: #f5f5f5;
+    background: transparent;
+    border: 1px solid #ddd;
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 2px 2px #ccc;
+    margin-top: 25px;
+}
+
+.no-invoice-text {
+    margin-left: 25px;
+    margin-top: 25px;
+    font-size: 1.25em;
+    font-weight: 500;
+}

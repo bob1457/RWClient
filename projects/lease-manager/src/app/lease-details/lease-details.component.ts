@@ -4,8 +4,8 @@ import { PropertyLeaseState } from '../store/lease-state';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LeaseService, PropertyLease, Vendor } from '@lib/app-core';
-import { addRentPayment, addTenant, addWorkOrder, getLeaseDetails, getRentPaymenttDetails, updateLease } from '../store/actions/lease.actions';
-import { leaseDetails, loadingStatus, rentPaymentDetails, rentPaymentList, serviceRequestList,
+import { addRentPayment, addTenant, addWorkOrder, getAllInvoices, getLeaseDetails, getRentPaymenttDetails, getWorkOrderDetails, updateLease, updateRentPayment } from '../store/actions/lease.actions';
+import { invoiceList, leaseDetails, loadingStatus, rentPaymentDetails, rentPaymentList, serviceRequestList,
          tenantList, vendorList, workOrderList } from '../store/reducers';
 import { getAllServiceRequests, getAllVendors,
   getAllWorkOrders, getRentPaymentList, getAllTenants } from '../store/actions/lease.actions';
@@ -15,6 +15,10 @@ import { PaymentDetailsDialogComponent } from '../dialogs/payment-details-dialog
 import { AddRentDialogComponent } from '../dialogs/add-rent-dialog/add-rent-dialog.component';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 // import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import {Overlay} from '@angular/cdk/overlay';
+import { WorkorderDetailsDialogComponent } from '../dialogs/workorder-details-dialog/workorder-details-dialog.component';
+
+import { ServiceRequestList } from '@lib/dashboard';
 
 @Component({
   selector: 'app-lease-details',
@@ -52,9 +56,14 @@ export class LeaseDetailsComponent implements OnInit {
   addForm: FormGroup; // Add rent payment
   addForm2: FormGroup; // Add work order
   addTenantForm: FormGroup;
+  updateRenForm: FormGroup;
+  // updateWorkOrderForm: FormGroup;
 
   vendors:any [];
   vendors$: Observable<Vendor[]>;
+  invoiceList: any[];
+  chosenVendorId;
+  chosenServiceRequestId;
 
   months = [
     {name: 'January'},
@@ -115,13 +124,13 @@ export class LeaseDetailsComponent implements OnInit {
 
   dataSource = new MatTableDataSource<any>();
 
-  displayedColumns2: string[] = ['icon', 'id', 'workOrderName', 'category', 'type', 'status', 'startDate', 'endDate', 'added', 'action'];
+  displayedColumns2: string[] = ['icon', 'id', 'workOrderName', 'workOrderCategory', 'workOrderType', 'workOrderStatus', 'startDate', 'endDate', 'added', 'action'];
   @ViewChild('paginator2', {static: false}) paginator2: MatPaginator;
   @ViewChild('Sort2', {static: true}) sort2: MatSort;
 
   dataSource2 = new MatTableDataSource<any>();
 
-  displayedColumns3: string[] = ['icon', 'id', 'firstName', 'lastName', 'email', 'tel1', 'addDate', 'action'];
+  displayedColumns3: string[] = ['icon', 'id', 'firstName', 'lastName', 'email', 'tel1', 'created', 'action'];
   @ViewChild('paginator3', {static: false}) paginator3: MatPaginator;
   @ViewChild('Sort3', {static: true}) sort3: MatSort;
 
@@ -133,6 +142,7 @@ export class LeaseDetailsComponent implements OnInit {
               private router: Router,
               private actRoute: ActivatedRoute,
               private dialog: MatDialog,
+              public overlay: Overlay,
               private formBuilder: FormBuilder,
               private propertyService: LeaseService) {
                 this.id = this.actRoute.snapshot.params.id;
@@ -198,13 +208,18 @@ export class LeaseDetailsComponent implements OnInit {
                         }
                       });
 
-                  this.store.select(serviceRequestList)
+                  this.store.select(ServiceRequestList)
                             .subscribe(reqs => {
                               this.requests = reqs;
                               if (reqs && this.lease) {
                                 this.requests = reqs.filter(l => l.leaseId === this.lease.id);
                                 console.log('reqs for this lease', this.requests);
                               }
+                              // else {
+                              //   this.requests = JSON.parse(localStorage.getItem('servicerequests'))
+                              //                   .filter(l => l.leaseId === this.lease.id);
+                              //   console.log('reqs from cashe', this.requests);
+                              // }
                             });
 
                   this.store.select(tenantList)
@@ -214,6 +229,13 @@ export class LeaseDetailsComponent implements OnInit {
                                 this.dataSource3.data = this.tenants;
 
                                 setTimeout(() =>  {this.dataSource3.paginator = this.paginator3; this.dataSource3.sort = this.sort3; });
+                              }
+                            });
+
+                  this.store.select(invoiceList)
+                            .subscribe(invoices => {
+                              if(invoices && this.lease) {
+                                this.invoiceList = invoices;
                               }
                             });
                 });
@@ -243,6 +265,8 @@ export class LeaseDetailsComponent implements OnInit {
         // rentDue: this.rentDueOn
       }
     };
+
+
 
     // this.GetLeaseDetails(this.id);
 
@@ -333,6 +357,14 @@ export class LeaseDetailsComponent implements OnInit {
       rentalForYear: ['']
     });
 
+    this.updateRenForm = this.formBuilder.group({
+      id: [],
+      isOnTime: [],
+      rentAmount: [''],
+      paymentReceivedDate: [''],
+      note: ['']
+    });
+
     this.addForm2 = this.formBuilder.group({  // add work order
       workOrderName: [''],
       workOrderDetails: [''],
@@ -340,6 +372,7 @@ export class LeaseDetailsComponent implements OnInit {
       workOrderCategory: [''],
       rentalPropertyId: [],
       vendorId: [],
+      leaseId: [], // newly added
       startDate: [''],
       endDate: [''],
       isOwnerAuthorized: [true],
@@ -471,6 +504,9 @@ export class LeaseDetailsComponent implements OnInit {
 
     this.dataSource2.sort = this.sort2;
     this.dataSource2.paginator = this.paginator2;
+
+    this.dataSource3.sort = this.sort3;
+    this.dataSource3.paginator = this.paginator3;
   }
 
   viewAgreement() {
@@ -493,7 +529,21 @@ export class LeaseDetailsComponent implements OnInit {
 
   getRentPaymentDetails(id: number) {
     debugger;
-    let dialogRef = this.dialog.open(PaymentDetailsDialogComponent, this.dialogConfig);
+    let dialogRef = this.dialog.open(PaymentDetailsDialogComponent, {
+      height: '400px',
+      width: '550px',
+      disableClose: true,
+      scrollStrategy: this.overlay.scrollStrategies.noop(),
+      panelClass: 'my-custom-dialog-class',
+      data: {
+        id: id,
+        // py: this.paymentDetails,
+        // txt: 'test'
+
+        // rentDueAmount: this.rentAmtDue,
+        // rentDue: this.rentDueOn
+      }
+    });
 
     this.store.dispatch(getRentPaymenttDetails({payload: id}));
 
@@ -501,6 +551,25 @@ export class LeaseDetailsComponent implements OnInit {
 
   getWorkOrderDetails(id: number) {
     debugger;
+
+    let dialogRef = this.dialog.open(WorkorderDetailsDialogComponent, {
+      height: '400px',
+      width: '600px',
+      disableClose: true,
+      scrollStrategy: this.overlay.scrollStrategies.noop(),
+      panelClass: 'my-custom-dialog-class',
+      data: {
+        id: id,
+        // py: this.paymentDetails,
+        // txt: 'test'
+
+        // rentDueAmount: this.rentAmtDue,
+        // rentDue: this.rentDueOn
+      }
+    });
+
+    this.store.dispatch(getWorkOrderDetails({payload: id}));
+    this.store.dispatch(getAllInvoices());
   }
 
   getTenantDetails(id: number) {
@@ -544,6 +613,15 @@ export class LeaseDetailsComponent implements OnInit {
     this.addRent = false;
   }
 
+  // updateRentPayment() {
+  //   debugger;
+  //   // this.updateRenForm.patchValue({
+  //   //   id: Number()
+  //   // });
+  //   console.log('pymt form', this.updateRenForm.value);
+  //   // this.store.dispatch(updateRentPayment({payload:this.updateRenForm.value}));
+  // }
+
   addAdditionalTenant() {
     debugger;
     this.addTenantForm.patchValue({
@@ -563,8 +641,11 @@ export class LeaseDetailsComponent implements OnInit {
   addNewOrder() {
     debugger;
     this.addForm2.patchValue({
+      leaseId: this.lease.id,
+      vendorId: this.chosenVendorId,
       workOrderStatus: 'New',
-      rentalPropertyId: this.lease.id //??
+      serviceRequestId:this.chosenServiceRequestId,
+      rentalPropertyId: this.lease.rentalPropertyId //??
     });
     console.log('order form', this.addForm2.value);
     this.store.dispatch(addWorkOrder({payload: this.addForm2.value}));
@@ -582,43 +663,42 @@ export class LeaseDetailsComponent implements OnInit {
   }
 
   public doFilter = (value: string) => {
-    this.dataSource.filter = value.trim().toLocaleLowerCase();
+    this.dataSource.filter = value.trim().toLowerCase();
   }
 
   public doFilter2 = (value: string) => {
-    this.dataSource2.filter = value.trim().toLocaleLowerCase();
+    this.dataSource2.filter = value.trim().toLowerCase();
   }
 
   public doFilter3 = (value: string) => {
-    this.dataSource3.filter = value.trim().toLocaleLowerCase();
+    this.dataSource3.filter = value.trim().toLowerCase();
   }
 
-  openDialog() {
+  openDialog():void {
+    const dialogRef = this.dialog.open(PaymentDetailsDialogComponent, {
+      width: '250px',
+      data: {}
+    });
 
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      // this.animal = result;
+    });
   }
 
   goBack() {
     this.router.navigate(['/Manage/lease/']);
   }
 
+  onVendorChange(value) {
+    this.chosenVendorId = value;
+    console.log('vendor id', value);
+  }
+
+  onServieRequestChange(value) {
+    this.chosenServiceRequestId = value;
+    console.log('service req id', value);
+  }
+
 }
-// function trigger(arg0: string, arg1: any[]): any {
-//   throw new Error('Function not implemented.');
-// }
-
-// function state(arg0: string, arg1: any): any {
-//   throw new Error('Function not implemented.');
-// }
-
-// function style(arg0: { height: string; minHeight: string; }): any {
-//   throw new Error('Function not implemented.');
-// }
-
-// function transition(arg0: string, arg1: any): any {
-//   throw new Error('Function not implemented.');
-// }
-
-// function animate(arg0: string): any {
-//   throw new Error('Function not implemented.');
-// }
 

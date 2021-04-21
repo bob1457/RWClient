@@ -1,0 +1,22 @@
+::ng-deep .my-custom-dialog-class {
+    mat-dialog-container {
+        padding: 0;
+    }
+}
+
+.dialog-title {
+    color: #fff;
+    background: #fb8c00;
+    padding: 10px;
+    font-size: 1em;
+    width: 100%;
+    margin-bottom: 0px;
+}
+
+.mat-dialog-content {
+    margin-top: -15px;
+}
+
+.bottom-margin {
+    margin-bottom: 3px;
+}

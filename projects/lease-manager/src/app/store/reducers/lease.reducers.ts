@@ -22,6 +22,7 @@ export const initialState: PropertyLeaseState =  { // adapter.getInitialState
   selectedrequest: null,
   rentPayments: null,
   selectedPayment: null,
+  invoiceList: null,
   // contracts: null,
   // contractsForProperty: null,
   // selectedContract: null,
@@ -260,6 +261,13 @@ const propertyLeaseReducer = createReducer(
     });
   }),
 
+  on(LeaseActions.updateWorkOrderFailure, (state) => ({
+    ...state,
+    loading: false,
+    loaded: false,
+    errorMessage: 'Failed to update work orders'
+  })),
+
   /**
    * Update work order
    */
@@ -282,6 +290,8 @@ const propertyLeaseReducer = createReducer(
       selectedworkorder: payload
     });
   }),
+
+
 
   on(LeaseActions.getAllWorkOrdersFailure, (state) => ({
     ...state,
@@ -457,9 +467,32 @@ const propertyLeaseReducer = createReducer(
     });
   }),
 
-   /**
-     * Add service request
-     */
+  /**
+   * Update rent payment
+   */
+
+  on(LeaseActions.updateRentPayment, state => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+  on(LeaseActions.updateRentPaymentSuccess, (state, { payload }) => {
+
+    const updatedRentPayment = state.rentPayments.map(
+      item => payload.id === item.id ? payload : item
+    );
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      rentPayments: updatedRentPayment
+    });
+  }),
+
+  /**
+   * Add service request
+   */
     on(LeaseActions.addRentPayment, state => ({
       ...state,
       loading: true,
@@ -509,6 +542,71 @@ const propertyLeaseReducer = createReducer(
       });
     }),
 
+    /**
+ * Add Invoice
+   */
+   on(LeaseActions.addInvoice, state => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+  on(LeaseActions.addInvoiceSuccess, (state, { payload }) => {
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      invoiceList: [...state.invoiceList, payload ]
+    });
+  }),
+
+  /**
+  * All invoices */
+
+   on(LeaseActions.getAllInvoices, state => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+  on(LeaseActions.getAllInvoicesSuccess, (state, { payload }) => {
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      invoiceList: payload
+    });
+  }),
+
+  on(LeaseActions.getAllInvoicesFailure, (state) => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+  /**
+   * Update invoice
+   */
+
+   on(LeaseActions.updateInvoice, state => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+  on(LeaseActions.updateInvoiceSuccess, (state, { payload }) => {
+
+    const updatedInvoice = state.invoiceList.map(
+      item => payload.id === item.id ? payload : item
+    );
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      invoiceList: updatedInvoice
+    });
+  })
+
 );
 
 /**
@@ -531,6 +629,7 @@ export const getAllWorkOrders = (state: PropertyLeaseState) => state.workorders;
 export const getWorkOrderDetails = (state: PropertyLeaseState) => state.selectedworkorder;
 export const getRentPaymentList = (state: PropertyLeaseState) => state.rentPayments;
 export const getRemtPaymentDetails = (state: PropertyLeaseState) => state.selectedPayment;
+export const getInviceList = (state: PropertyLeaseState) => state.invoiceList;
 
 export const loadingStatus = createSelector(selectLeaseyState, getLoadingStatus);
 
@@ -546,7 +645,7 @@ export const workOrderList = createSelector(selectLeaseyState, getAllWorkOrders)
 export const workOrderDetails = createSelector(selectLeaseyState, getWorkOrderDetails);
 export const rentPaymentList = createSelector(selectLeaseyState, getRentPaymentList);
 export const rentPaymentDetails = createSelector(selectLeaseyState, getRemtPaymentDetails);
-
+export const invoiceList = createSelector(selectLeaseyState, getInviceList);
 
 
 export function reducer(state: PropertyLeaseState | undefined, action: Action) {

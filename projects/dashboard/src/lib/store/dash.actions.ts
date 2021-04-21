@@ -270,3 +270,24 @@ export const getAllServiceRequestsFailure = createAction(
     return ({ payload: { errorMessage } });
   }
 );
+
+
+/**
+ * Get All Invoices
+ */
+export const getAllInvoices = createAction(
+  '[Leases] Get All Invoices'
+);
+
+export const getAllInvoicesSuccess = createAction(
+  '[Leases] Get All Invoices Success',
+  props<{payload: Vendor[]}>()
+);
+
+export const getAllInvoicesFailure = createAction(
+  '[Leases] Get All Invoices Failure',
+  // props<{payload: any}>()
+  (errorMessage = 'Error loading invoices') => {
+    return ({ payload: { errorMessage } });
+  }
+);

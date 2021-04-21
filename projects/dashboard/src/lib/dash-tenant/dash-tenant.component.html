@@ -15,10 +15,16 @@
             </mat-menu>
         </mat-card-title>
     </mat-card-header> -->
-    <mat-card-content class="dashboard-card-content">
-        <lib-bar-chart [chartData]="chartData" [chartData2]="chartData2" [chartLabel]="chartLabel" ></lib-bar-chart>
+    <mat-card-content class="dashboard-card-content" *ngIf="!(loading$ | async) && chartData && chartData2; else spinner">
+        <lib-bar-chart [chartData]="chartData" [chartData2]="chartData2" [chartLabel]="chartLabel"></lib-bar-chart>
         <!-- <div>
 
         </div> -->
     </mat-card-content>
 </mat-card>
+
+<ng-template #spinner style="top: 50%;
+left: 50%; position: fixed;
+    z-index: 1000;">
+    <lib-loading style="position: relative; margin-top: 150px;"></lib-loading>
+</ng-template>

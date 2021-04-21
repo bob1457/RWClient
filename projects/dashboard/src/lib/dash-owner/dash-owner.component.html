@@ -27,20 +27,43 @@
 
                         <span style="color: black;">Property Listings <span *ngIf="listings">({{listings.length}})</span></span>
                     </ng-template>
-                    <div fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="15px" style="height: 340px;">
-                        <mat-card style="width: 25%; padding: 0; margin-top: 15px; margin-left: 10px; height: 220px;" [ngStyle.xs]="{'width': '30%'}" *ngFor="let listing of listings">
-                            <mat-card-header fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center">
-                                <div mat-card-avatar>
-                                    <img src="../../assets/images/home.png" style="border-radius: 50%; margin: 5px; height: 30px; width: 30px;">
-                                </div>
-                                <mat-card-title style="font-size: 10px;margin-top: 5px;" [ngStyle.xs]="{'font-size': '9px'}">{{listing.title}}</mat-card-title>
-                            </mat-card-header>
-                            <img src="../../assets/images/rent.png" alt="For Rent" style="margin-top: 5px; width: 65%;">
-                            <mat-card-content>
-                                <p>{{listing.listingDesc}}</p>
-                                <p>{{listing.monthlyRent}}</p>
-                            </mat-card-content>
-                        </mat-card>
+                    <div fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="0px" style="height: 340px;" *ngIf="!(loading$ | async) && listings; else spinner">
+                        <div fxLayout="row wrap" fxLayoutGap="5px" fxLayoutAlign="flex-start">
+                            <ng-container *ngFor="let listing of listings">
+                                <mat-card style="width: 30%; padding: 0; margin-top: 15px; margin-left: 5px; height: 180px;" [ngStyle.xs]="{'width': '30%'}">
+                                    <mat-card-header class="card-header" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center">
+                                        <div mat-card-avatar>
+                                            <img class="listing-avatar" src="../../assets/images/listing.png" style="border-radius: 50%; margin: 5px; margin-left: -15px;">
+                                        </div>
+                                        <span class="title-spacer"></span>
+                                        <div style="font-size: 10px;margin-right: 5px;">ID: {{listing.id}}<br>{{listing.status}}</div>
+                                        <!-- <mat-card-title style="font-size: 10px;margin-top: 5px;" [ngStyle.xs]="{'font-size': '9px'}">{{listing.title}}</mat-card-title> -->
+                                    </mat-card-header>
+                                    <div style="text-align: left;margin-top: 5px;margin-left:5px;">
+                                        <p style="margin-bottom: 2px;">
+                                            <span style="font-weight: bold;">Listed Property:</span> {{listing.propertyName}}
+                                        </p>
+                                        <p style="font-weight: bold;margin-bottom: 0;">Details</p>
+                                        <p style="margin-bottom: 3px;">{{listing.listingDesc | slice:0:25}}<span *ngIf="listing.listingDesc.length > 25">...</span></p>
+                                        <p><span style="font-weight: bold;">Rent:</span> &nbsp;${{listing.monthlyRent}}/mo</p>
+                                    </div>
+                                    <!-- <img src="../../assets/images/rent.png" alt="For Rent" style="margin-top: 5px; width: 65%;"> -->
+                                    <!-- <mat-card-content>
+                                  <p>{{listing.listingDesc}}</p>
+                                  <p>{{listing.monthlyRent}}</p>
+                              </mat-card-content> -->
+                                </mat-card>
+                            </ng-container>
+
+                        </div>
+
+                    </div>
+                    <div *ngIf="listings.length === 0" fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="15px" style="height: 340px;">
+                        <div style="height: 50px;margin-top: 15px;">
+                            <p style="text-align:center;">
+                                No property listing at this time!
+                            </p>
+                        </div>
                     </div>
                 </mat-tab>
                 <mat-tab style="background: #f5f5f5;">
@@ -48,17 +71,28 @@
 
                         <span style="color: black;">Rental Applications <span *ngIf="applications">({{applications.length}})</span></span>
                     </ng-template>
-                    <div fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="15px" style="height: 340px;">
-                        <mat-card style="width: 25%; padding: 0; margin-top: 15px; margin-left: 10px; height: 185px; margin-left: 5px;" [ngStyle.xs]="{'width': '30%'}" *ngFor="let application of applications">
-                            <img src="../../assets/images/avatar.png" class="user-avatar" alt="Photo of a Shiba Inu">
+                    <div fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="5px" style="height: 340px;">
+                        <mat-card style="width: 30%; padding: 0; margin-top: 15px; margin-left: 10px; height: 185px; margin-left: 5px;" [ngStyle.xs]="{'width': '30%'}" *ngFor="let application of applications">
+                            <img style="opacity: 0.75;" src="../../assets/images/avatar.png" class="user-avatar" alt="Applicant">
                             <mat-card-content>
-                                <p style="margin-top: 10px; font-weight: bold;">
-                                    {{application.propertyName}}<br> {{application.applicatnFirstName}} {{application.applicatnLastName | uppercase}}<br> {{application.appliedDate | date }}
+                                <p style="margin-top: 10px;margin-bottom: 2px;">
+                                    <span style=" font-weight: bold;">Rental Unit</span><br> {{application.propertyName}}
+                                    <br>
+                                </p>
+                                <p>
+                                    <span style=" font-weight: bold;">Applicant</span><br> {{application.applicatnFirstName}} {{application.applicatnLastName | uppercase}}<br> <br> Applied on: {{application.appliedDate | date }}
                                 </p>
 
                             </mat-card-content>
                         </mat-card>
 
+                    </div>
+                    <div *ngIf="applications.length === 0" fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="15px" style="height: 340px;">
+                        <div style="height: 50px;margin-top: 15px;">
+                            <p style="text-align:center;">
+                                No applications at this time!
+                            </p>
+                        </div>
                     </div>
                 </mat-tab>
                 <mat-tab style="background: #f5f5f5;">
@@ -66,17 +100,25 @@
 
                         <span style="color: black;">Open Houses <span *ngIf="openhouses">({{openhouses.length}})</span></span>
                     </ng-template>
-                    <div fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="15px" style="height: 340px;">
-                        <mat-card style="width: 25%; padding: 0; margin-top: 15px; margin-left: 10px; height: 185px; margin-left: 5px;" [ngStyle.xs]="{'width': '30%'}" *ngFor="let op of openhouses">
-                            <img src="../../assets/images/open-house.png" class="user-avatar" alt="Open Houses">
+                    <div fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="5px" style="height: 340px;">
+                        <mat-card style="width: 30%; padding: 0; margin-top: 15px; margin-left: 5px; height: 185px; margin-left: 5px;" [ngStyle.xs]="{'width': '30%'}" *ngFor="let op of openhouses">
+                            <img src="../../assets/images/open-house.png" style="border: 2px solid;padding: 5px;" class="user-avatar" alt="Open Houses">
                             <mat-card-content>
-                                <p style="margin-top: 10px; font-weight: bold;">
-                                    {{op.openhouseDate | date}}<br> {{op.startTime}} - {{op.endTime}}<br> {{op.propertyName }}
+                                <p style="margin-top: 10px; ">
+                                    <span style="font-weight: bold;">Date & Time</span><br> {{op.openhouseDate | date}}<br> {{op.startTime}} - {{op.endTime}}<br>
+                                    <span style="font-weight: bold;">Rental Property</span><br> {{op.propertyName }}
                                 </p>
 
                             </mat-card-content>
                         </mat-card>
 
+                    </div>
+                    <div *ngIf="openhouses.length === 0" fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="15px" style="height: 340px;">
+                        <div style="height: 50px;margin-top: 15px;">
+                            <p style="text-align:center;">
+                                No open house at this time!
+                            </p>
+                        </div>
                     </div>
                 </mat-tab>
             </mat-tab-group>
@@ -87,3 +129,9 @@
 
     </mat-card-content>
 </mat-card>
+
+<ng-template #spinner style="top: 50%;
+left: 50%; position: fixed;
+    z-index: 1000;">
+    <lib-loading style="position: relative; margin-top: 150px;"></lib-loading>
+</ng-template>

@@ -409,6 +409,85 @@ export class LeaseEffects {
     )
   );
 
+  getAllInvoices$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(LeaseActions.getAllInvoices),
+      tap(() => console.log('got here for all invoices!!!')),
+      switchMap(() =>
+        this.leaseService.getAllInvoices().pipe(
+          map((list: any[]) => ({
+            type: '[Leases] Get All Invoices Success',
+            payload: list
+          })),
+          // tap(res => {console.log('response: ' + res); }),
+          // catchError(
+          //   err => {
+          //     return of('[Leases] Get all leases Failure', err.error);
+          //   } // EMPTY
+          // )
+          catchError(error => of(LeaseActions.getAllInvoicesFailure(error.message)))// EMPTY
+        )
+      )
+    )
+  );
+
+  addInvoice$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(LeaseActions.addInvoice),
+      tap(() => console.log('got here to add invoice !!!')),
+      map(action => action.payload),
+      switchMap((payload) =>
+        this.leaseService.addInvoice(payload).pipe(
+          map((invoice: any) => ({
+            type: '[Leases] Add Invoice Success',
+            payload: invoice
+          })),
+          tap( () => {
+            // window.alert('done');
+            this.openSnackBar('Invoice added successfully.', 'close', 'notify');
+           }), // display notificaiton
+
+          catchError(error => {
+            this.openSnackBar(error.message, 'dismiss', 'error');
+            return of(LeaseActions.addWorkOrderFailure(error.message));
+            }
+          )
+          // catchError(error => of(LeaseActions.addLeaseFailure(error.message)))
+        )
+      )
+    )
+  );
+
+  updateInvoice$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(LeaseActions.updateInvoice),
+      tap(() => console.log('got here to update invoice !!!')),
+      map(action => action.payload),
+      switchMap((payload) =>
+        this.leaseService.updateInvoice(payload).pipe(
+          map((invoice: any) => ({
+            type: '[Leases] Update Invoice Success',
+            payload: invoice
+          })),
+          tap( () => {
+            // window.alert('done');
+            this.openSnackBar('Invoice updated successfully.', 'close', 'notify');
+           }), // display notificaiton
+
+          catchError(error => {
+            this.openSnackBar(error.message, 'dismiss', 'error');
+            return of(LeaseActions.updateInvoiceFailure(error.message));
+            }
+          )
+          // catchError(error => of(LeaseActions.updateLeaseFailure(error.message)))
+        )
+      )
+    )
+  );
+
   getAllServiceRequests$ = createEffect(() =>
     this.actions$.pipe(
       // ofType('[Property] Get Property List'),
@@ -523,6 +602,34 @@ export class LeaseEffects {
           tap( () => {
             // window.alert('done');
             this.openSnackBar('Rent payment added successfully.', 'close', 'notify');
+           }), // display notificaiton
+
+          catchError(error => {
+            this.openSnackBar(error.message, 'dismiss', 'error');
+            return of(LeaseActions.addLeaseFailure(error.message));
+            }
+          )
+          // catchError(error => of(LeaseActions.addLeaseFailure(error.message)))
+        )
+      )
+    )
+  );
+
+  updateRentPayment$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(LeaseActions.updateRentPayment),
+      tap(() => console.log('got here to update rent !!!')),
+      map(action => action.payload),
+      switchMap((payload) =>
+        this.leaseService.updateRentPayment(payload).pipe(
+          map((payment: any) => ({
+            type: '[Leases] Update Rent Payment Success',
+            payload: payment
+          })),
+          tap( () => {
+            // window.alert('done');
+            this.openSnackBar('Rent payment updated successfully.', 'close', 'notify');
            }), // display notificaiton
 
           catchError(error => {

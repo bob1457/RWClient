@@ -299,172 +299,6 @@
 
                             <!-- </mat-tab> -->
                             <mat-tab label="Tenants" style="background: #f5f5f5;">
-                                <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="10px" style="margin-bottom: 1%;
-                                    flex-direction: row;
-                                    box-sizing: border-box;
-                                    display: flex;
-                                    place-content: stretch flex-end;
-                                    align-items: stretch;
-                                    margin-top: 20px;
-                                    margin-left: 25px;
-                                    width: 95%;">
-                                    <mat-form-field fxLayout fxLayoutAlign="start center">
-                                        <input matInput type="text" (keyup)="doFilter3($event.target.value)" placeholder="Filter">
-                                    </mat-form-field>
-                                    <!-- <mat-radio-group aria-label="Select an option" style="margin-top: 13px;margin-left: 25px;padding-right: 5px;">
-                                  <mat-radio-button value="1" checked style="padding-right: 10px;">Active</mat-radio-button>
-                                  <mat-radio-button value="0">All</mat-radio-button>
-                              </mat-radio-group> (click)="addRentPayment()"-->
-                                    <span class="spacer"></span>
-                                    <button *ngIf="!addTenant" title="Add Additional Tenant" (click)="addT()" mat-button mat-mini-fab style="background: #3d5afe;color: white;">
-                                    <i class="material-icons" title="Add Additional Tenant">
-                                      person_add
-                                    </i>
-                                  </button>
-                                    <button *ngIf="addTenant" (click)="cancel3()" title="Cancel" mat-button mat-mini-fab style="background: #d86f0d;color: white;">
-                                    <i class="material-icons" title="Cancel">
-                                      clear
-                                    </i>
-                                  </button>
-                                </div>
-
-                                <div *ngIf="addTenant" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center" stye="width: 95%;margin-left: 10px; margin-right: 10px;">
-                                    <form novalidate fxLayoutAlign="center center" [formGroup]="addTenantForm" style="width: 100%;border: 1px solid;
-                                        margin-bottom: 5px;
-                                        padding: 5px;" (ngSubmit)="addAdditionalTenant()">
-                                        <mat-form-field fxFlex="15%" fxFlex.xs="90%" style="width: 15%;margin-left: 10px;">
-                                            <mat-label>First Name</mat-label>
-                                            <input type="text" matInput placeholder="First Name" formControlName="firstName">
-                                        </mat-form-field>
-                                        <mat-form-field fxFlex="15%" fxFlex.xs="90%" style="width:15%;margin-left: 10px;">
-                                            <mat-label>First Name</mat-label>
-                                            <input type="text" matInput placeholder="Last Name" formControlName="lastName">
-                                        </mat-form-field>
-                                        <mat-form-field fxFlex="15%" fxFlex.xs="90%" appearance="standard" style="width:20%;margin-top: -12px; margin-left: 10px;">
-                                            <mat-label>Email</mat-label>
-                                            <input type="text" matInput placeholder="Contact Email" formControlName="contactEmail">
-                                            <!-- <mat-icon matSuffix>payment</mat-icon> -->
-                                        </mat-form-field>
-                                        <mat-form-field fxFlex="10%" fxFlex.xs="90%" style="width:15%;margin-left: 10px;">
-                                            <mat-label>Telephone</mat-label>
-                                            <input type="text" matInput placeholder="Contact Telephone" formControlName="contactTelephone1">
-                                        </mat-form-field>
-
-                                        <mat-form-field fxFlex="10%" fxFlex.xs="90%" style="margin-left: 10px;margin-right: 10px;">
-                                            <mat-label>Telephone 2</mat-label>
-                                            <input type="text" matInput placeholder="Contact Telephone 2" formControlName="contactTelephone2">
-                                        </mat-form-field>
-
-                                        <mat-form-field fxFlex="10%" fxFlex.xs="90%" style="margin-left: 10px;margin-right: 10px;">
-                                            <mat-label>Other Contact</mat-label>
-                                            <input type="text" matInput placeholder="Contact Others" formControlName="contactOthers">
-                                        </mat-form-field>
-                                        <div fxFlex="20%" fxFlex.xs="90%">
-                                            <button type="submit" mat-raised-button color="primary" style="margin-right: 5px; width: 100%; color: green;">
-                                          <!-- Add -->
-                                          Add <mat-icon style="font-size: 2.5em;color: green;font-weight: bold;vertical-align: top;">check</mat-icon>
-                                        </button>
-                                            <!-- <button type="button" (click)="reset()" mat-button mat-stroked-button color="accent">
-                                          Reset
-                                        </button> -->
-                                        </div>
-                                    </form>
-
-                                    <!-- <mat-radio-group aria-label="Select an option" style="margin-top: 13px;margin-left: 25px;padding-right: 5px;">
-                                      <mat-radio-button value="1" checked style="padding-right: 10px;">Active</mat-radio-button>
-                                      <mat-radio-button value="0">All</mat-radio-button>
-                                  </mat-radio-group> -->
-                                    <!-- <span class="spacer"></span>
-                                  <button (click)="addRentPayment()" mat-button mat-mini-fab style="background: #3d5afe;color: white;">
-                                  <i class="material-icons" title="Add Lease Agreement">
-                                    playlist_add
-                                  </i>
-                                </button> -->
-                                </div>
-
-                                <div fxLayoutAlign="center">
-                                    <table mat-table [dataSource]="dataSource3" #Sort3="matSort" matSort class="my-table mat-elevation-z8" style="width: 100%;">
-                                        <ng-container matColumnDef="id">
-                                            <th class="table-header-text" style="text-align: center;" mat-header-cell *matHeaderCellDef> ID </th>
-                                            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-                                        </ng-container>
-
-                                        <!-- Name Column -->
-                                        <!-- <ng-container matColumnDef="rentAmtDue">
-                                        <th class="table-header-text" mat-header-cell *matHeaderCellDef mat-sort-header>Rent Due </th>
-                                        <td mat-cell *matCellDef="let element"> {{element.scheduledPaymentAmt | currency:'CAD'}} </td>
-                                    </ng-container> -->
-
-                                        <ng-container matColumnDef="firstName">
-                                            <th class="table-header-text" style="text-align: center;" mat-header-cell *matHeaderCellDef>First Name</th>
-                                            <td mat-cell *matCellDef="let element">
-                                                {{element.firstName}}
-                                            </td>
-                                        </ng-container>
-
-                                        <ng-container matColumnDef="lastName">
-                                            <th class="table-header-text" mat-header-cell *matHeaderCellDef>Last Name</th>
-                                            <td mat-cell *matCellDef="let element"> {{element.lastName }} </td>
-                                        </ng-container>
-
-                                        <ng-container matColumnDef="email">
-                                            <th class="table-header-text" mat-header-cell *matHeaderCellDef>Email</th>
-                                            <td mat-cell *matCellDef="let element"> {{element.contactEmail}} </td>
-                                        </ng-container>
-
-                                        <ng-container matColumnDef="tel1">
-                                            <th class="table-header-text" style="margin-left: auto;margin-right: auto;" mat-header-cell *matHeaderCellDef mat-sort-header>Telephone 1</th>
-                                            <td mat-cell *matCellDef="let element"> {{element.contactTelephone1}} </td>
-                                        </ng-container>
-
-                                        <!-- <ng-container matColumnDef="tel2">
-                                            <th class="table-header-text" style="margin-left: auto;margin-right: auto;" mat-header-cell *matHeaderCellDef mat-sort-header>Telephone 1</th>
-                                            <td mat-cell *matCellDef="let element"> {{element.contactTelephone2}} </td>
-                                        </ng-container> -->
-
-                                        <!-- <ng-container matColumnDef="updateDate">
-                                            <th class="table-header-text" style="margin-left: auto;margin-right: auto;" mat-header-cell *matHeaderCellDef mat-sort-header>Updated On</th>
-                                            <td mat-cell *matCellDef="let element"> {{element.modified | date}} </td>
-                                        </ng-container> -->
-
-                                        <ng-container matColumnDef="addDate">
-                                            <th class="table-header-text" style="margin-left: auto;margin-right: auto;" mat-header-cell *matHeaderCellDef mat-sort-header> Added On </th>
-                                            <td mat-cell *matCellDef="let element"> {{element.created | date }} </td>
-                                        </ng-container>
-
-                                        <ng-container matColumnDef="icon">
-                                            <th mat-header-cell *matHeaderCellDef></th>
-                                            <td mat-cell *matCellDef="let element">
-                                                <i style="border: 2px solid;
-                                            padding: 3px;
-                                            border-radius: 50%;" class="material-icons">
-                                            person
-                                          </i>
-                                            </td>
-                                        </ng-container>
-                                        <!-- style="font-size: 1.5em; color: red;" [style.color]="element.status == 'Rented' ? 'green': element.status == 'Pending'? 'orange' :'red'"-->
-                                        <!-- Action Column routerLink="/Manage/lease/leasedetails/rentpayment/{{element.id}}"-->
-                                        <ng-container matColumnDef="action">
-                                            <th mat-header-cell *matHeaderCellDef></th>
-                                            <td mat-cell *matCellDef="let element" class="action-link">
-                                                <!-- <a (click)="openDialog('Update',element)">Edit</a> |
-                  <a (click)="openDialog('Delete',element)">Delete</a> ['/details', 1]-->
-                                                <button type="button" mat-raised-button color="primary" (click)="getTenantDetails(element.id)">Details</button> &nbsp;
-                                                <!-- <button mat-raised-button color="accent" (click)="openDialog('Delete',element)">Delete</button> -->
-                                            </td>
-                                        </ng-container>
-
-                                        <tr mat-header-row *matHeaderRowDef="displayedColumns3"></tr>
-                                        <tr mat-row *matRowDef="let row; columns: displayedColumns3;"></tr>
-                                    </table>
-                                </div>
-                                <mat-paginator #paginator3 [hidden]="!dataSource3.data.length" [pageSize]="10" [pageSizeOptions]="[5, 10, 25]"></mat-paginator>
-
-
-                            </mat-tab>
-
-
-                            <mat-tab label="Rent Payment" style="background: #f5f5f5;">
                                 <ng-template matTabContent>
                                     <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="10px" style="margin-bottom: 1%;
                                     flex-direction: row;
@@ -476,92 +310,81 @@
                                     margin-left: 25px;
                                     width: 95%;">
                                         <mat-form-field fxLayout fxLayoutAlign="start center">
-                                            <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="Filter">
+                                            <input matInput type="text" (keyup)="doFilter3($event.target.value)" placeholder="Filter">
                                         </mat-form-field>
                                         <!-- <mat-radio-group aria-label="Select an option" style="margin-top: 13px;margin-left: 25px;padding-right: 5px;">
-                                        <mat-radio-button value="1" checked style="padding-right: 10px;">Active</mat-radio-button>
-                                        <mat-radio-button value="0">All</mat-radio-button>
-                                    </mat-radio-group> (click)="addRentPayment()"-->
+                                  <mat-radio-button value="1" checked style="padding-right: 10px;">Active</mat-radio-button>
+                                  <mat-radio-button value="0">All</mat-radio-button>
+                              </mat-radio-group> (click)="addRentPayment()"-->
                                         <span class="spacer"></span>
-                                        <button *ngIf="!addRent" title="Add Rent Payment" (click)="addR()" mat-button mat-mini-fab style="background: #3d5afe;color: white;">
-                                    <i class="material-icons" title="Add Rent Payment">
-                                      playlist_add
+                                        <button *ngIf="!addTenant" title="Add Additional Tenant" (click)="addT()" mat-button mat-mini-fab style="background: #3d5afe;color: white;">
+                                    <i class="material-icons" title="Add Additional Tenant">
+                                      person_add
                                     </i>
                                   </button>
-                                        <button *ngIf="addRent" (click)="cancel()" title="Cancel" mat-button mat-mini-fab style="background: #d86f0d;color: white;">
+                                        <button *ngIf="addTenant" (click)="cancel3()" title="Cancel" mat-button mat-mini-fab style="background: #d86f0d;color: white;">
                                     <i class="material-icons" title="Cancel">
                                       clear
                                     </i>
                                   </button>
                                     </div>
 
-                                    <div *ngIf="addRent" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center" stye="width: 95%;margin-left: 10px; margin-right: 10px;">
-                                        <form novalidate fxLayoutAlign="center center" [formGroup]="addForm" style="width: 100%;border: 1px solid;
-                                    margin-bottom: 5px;
-                                    padding: 5px;" (ngSubmit)="addRentPayment()">
+                                    <div *ngIf="addTenant" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center" stye="width: 95%;margin-left: 10px; margin-right: 10px;">
+                                        <form novalidate fxLayoutAlign="center center" [formGroup]="addTenantForm" style="width: 100%;border: 1px solid;
+                                        margin-bottom: 5px;
+                                        padding: 5px;" (ngSubmit)="addAdditionalTenant()">
                                             <mat-form-field fxFlex="15%" fxFlex.xs="90%" style="width: 15%;margin-left: 10px;">
-                                                <mat-label>Month</mat-label>
-                                                <mat-select id="month" formControlName="rentalForMonth">
-                                                    <mat-option [value]='month.name' *ngFor="let month of months">{{month.name}}</mat-option>
-                                                </mat-select>
-                                            </mat-form-field>
-                                            <mat-form-field fxFlex="10%" fxFlex.xs="90%" style="width:15%;margin-left: 10px;">
-                                                <mat-label>Year</mat-label>
-                                                <mat-select id="year" formControlName="rentalForYear">
-                                                    <mat-option [value]='year.name' *ngFor="let year of years">{{year.name}}</mat-option>
-                                                </mat-select>
-                                            </mat-form-field>
-                                            <mat-form-field fxFlex="10%" fxFlex.xs="90%" appearance="standard" style="width:20%;margin-top: -12px; margin-left: 10px;">
-                                                <mat-label>Amount</mat-label>
-                                                <input type="number" matInput placeholder="Rent Paid" formControlName="actualPaymentAmt">
-                                                <!-- <mat-icon matSuffix>payment</mat-icon> -->
+                                                <mat-label>First Name</mat-label>
+                                                <input type="text" matInput placeholder="First Name" formControlName="firstName">
                                             </mat-form-field>
                                             <mat-form-field fxFlex="15%" fxFlex.xs="90%" style="width:15%;margin-left: 10px;">
-                                                <mat-label>Paid By</mat-label>
-                                                <mat-select id="payby" formControlName="payMethod">
-                                                    <mat-option [value]='pay.key' *ngFor="let pay of payBy">{{pay.name}}</mat-option>
-                                                </mat-select>
+                                                <mat-label>First Name</mat-label>
+                                                <input type="text" matInput placeholder="Last Name" formControlName="lastName">
+                                            </mat-form-field>
+                                            <mat-form-field fxFlex="15%" fxFlex.xs="90%" appearance="standard" style="width:20%;margin-top: -12px; margin-left: 10px;">
+                                                <mat-label>Email</mat-label>
+                                                <input type="text" matInput placeholder="Contact Email" formControlName="contactEmail">
+                                                <!-- <mat-icon matSuffix>payment</mat-icon> -->
+                                            </mat-form-field>
+                                            <mat-form-field fxFlex="10%" fxFlex.xs="90%" style="width:15%;margin-left: 10px;">
+                                                <mat-label>Telephone</mat-label>
+                                                <input type="text" matInput placeholder="Contact Telephone" formControlName="contactTelephone1">
                                             </mat-form-field>
 
-                                            <mat-form-field fxFlex="15%" fxFlex.xs="90%" style="margin-left: 10px;margin-right: 10px;">
-                                                <mat-label>Due Date</mat-label>
-                                                <input matInput [matDatepicker]="picker2" formControlName="paymentDueDate">
-                                                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-                                                <mat-datepicker #picker2></mat-datepicker>
+                                            <mat-form-field fxFlex="10%" fxFlex.xs="90%" style="margin-left: 10px;margin-right: 10px;">
+                                                <mat-label>Telephone 2</mat-label>
+                                                <input type="text" matInput placeholder="Contact Telephone 2" formControlName="contactTelephone2">
                                             </mat-form-field>
 
-                                            <mat-form-field fxFlex="15%" fxFlex.xs="90%" style="margin-left: 10px;margin-right: 10px;">
-                                                <mat-label>Paid Date</mat-label>
-                                                <input matInput [matDatepicker]="picker1" formControlName="paymentReceivedDate">
-                                                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                                                <mat-datepicker #picker1></mat-datepicker>
+                                            <mat-form-field fxFlex="10%" fxFlex.xs="90%" style="margin-left: 10px;margin-right: 10px;">
+                                                <mat-label>Other Contact</mat-label>
+                                                <input type="text" matInput placeholder="Contact Others" formControlName="contactOthers">
                                             </mat-form-field>
                                             <div fxFlex="20%" fxFlex.xs="90%">
-                                                <button type="submit" mat-button color="primary" style="margin-right: 5px; color: green;">
-                                            <!-- Add -->
-                                            <mat-icon style="font-size: 2.5em;vertical-align: top;">check_circle_outline</mat-icon>
-                                          </button>
+                                                <button type="submit" mat-raised-button color="primary" style="margin-right: 5px; width: 100%; color: green;">
+                                          <!-- Add -->
+                                          Add <mat-icon style="font-size: 2.5em;color: green;font-weight: bold;vertical-align: top;">check</mat-icon>
+                                        </button>
                                                 <!-- <button type="button" (click)="reset()" mat-button mat-stroked-button color="accent">
-                                            Reset
-                                          </button> -->
+                                          Reset
+                                        </button> -->
                                             </div>
                                         </form>
 
                                         <!-- <mat-radio-group aria-label="Select an option" style="margin-top: 13px;margin-left: 25px;padding-right: 5px;">
-                                        <mat-radio-button value="1" checked style="padding-right: 10px;">Active</mat-radio-button>
-                                        <mat-radio-button value="0">All</mat-radio-button>
-                                    </mat-radio-group> -->
+                                      <mat-radio-button value="1" checked style="padding-right: 10px;">Active</mat-radio-button>
+                                      <mat-radio-button value="0">All</mat-radio-button>
+                                  </mat-radio-group> -->
                                         <!-- <span class="spacer"></span>
-                                    <button (click)="addRentPayment()" mat-button mat-mini-fab style="background: #3d5afe;color: white;">
-                                    <i class="material-icons" title="Add Lease Agreement">
-                                      playlist_add
-                                    </i>
-                                  </button> -->
+                                  <button (click)="addRentPayment()" mat-button mat-mini-fab style="background: #3d5afe;color: white;">
+                                  <i class="material-icons" title="Add Lease Agreement">
+                                    playlist_add
+                                  </i>
+                                </button> -->
                                     </div>
 
                                     <div fxLayoutAlign="center">
-                                        <!-- <ng-template matTabContent> -->
-                                        <table mat-table [dataSource]="dataSource" multiTemplateDataRows matSort class="my-table mat-elevation-z8" style="width: 100%;">
+                                        <table mat-table [dataSource]="dataSource3" multiTemplateDataRows #Sort3="matSort" matSort class="my-table mat-elevation-z8" style="width: 100%;">
                                             <ng-container matColumnDef="id">
                                                 <th class="table-header-text" style="text-align: center;" mat-header-cell *matHeaderCellDef> ID </th>
                                                 <td mat-cell *matCellDef="let element"> {{element.id}} </td>
@@ -569,36 +392,41 @@
 
                                             <!-- Name Column -->
                                             <!-- <ng-container matColumnDef="rentAmtDue">
-                                              <th class="table-header-text" mat-header-cell *matHeaderCellDef mat-sort-header>Rent Due </th>
-                                              <td mat-cell *matCellDef="let element"> {{element.scheduledPaymentAmt | currency:'CAD'}} </td>
-                                          </ng-container> -->
+                                        <th class="table-header-text" mat-header-cell *matHeaderCellDef mat-sort-header>Rent Due </th>
+                                        <td mat-cell *matCellDef="let element"> {{element.scheduledPaymentAmt | currency:'CAD'}} </td>
+                                    </ng-container> -->
 
-                                            <ng-container matColumnDef="paidAmt">
-                                                <th class="table-header-text" style="text-align: center;" mat-header-cell *matHeaderCellDef> Actual Paid </th>
+                                            <ng-container matColumnDef="firstName">
+                                                <th class="table-header-text" style="text-align: center;" mat-header-cell *matHeaderCellDef mat-sort-header>First Name</th>
                                                 <td mat-cell *matCellDef="let element">
-                                                    {{element.actualPaymentAmt | currency:'CAD'}}
+                                                    {{element.firstName}}
                                                 </td>
                                             </ng-container>
 
-                                            <ng-container matColumnDef="paymentReceivedDate">
-                                                <th class="table-header-text" mat-header-cell *matHeaderCellDef mat-sort-header> Paid on </th>
-                                                <td mat-cell *matCellDef="let element"> {{element.paymentReceivedDate | date}} </td>
+                                            <ng-container matColumnDef="lastName">
+                                                <th class="table-header-text" mat-header-cell *matHeaderCellDef mat-sort-header>Last Name</th>
+                                                <td mat-cell *matCellDef="let element"> {{element.lastName }} </td>
                                             </ng-container>
 
-                                            <ng-container matColumnDef="payMethod">
-                                                <th class="table-header-text" style="margin-left: auto;margin-right: auto;" mat-header-cell *matHeaderCellDef mat-sort-header> Paid by </th>
-                                                <td mat-cell *matCellDef="let element"> {{element.payMethod | paymentMethod}} </td>
+                                            <ng-container matColumnDef="email">
+                                                <th class="table-header-text" mat-header-cell *matHeaderCellDef>Email</th>
+                                                <td mat-cell *matCellDef="let element"> {{element.contactEmail}} </td>
                                             </ng-container>
 
-                                            <ng-container matColumnDef="rentalForMonth">
-                                                <th class="table-header-text" style="margin-left: auto;margin-right: auto;" mat-header-cell *matHeaderCellDef mat-sort-header> Rent Month </th>
-                                                <td mat-cell *matCellDef="let element"> {{element.rentalForMonth}} </td>
+                                            <ng-container matColumnDef="tel1">
+                                                <th class="table-header-text" style="margin-left: auto;margin-right: auto;" mat-header-cell *matHeaderCellDef>Telephone 1</th>
+                                                <td mat-cell *matCellDef="let element"> {{element.contactTelephone1}} </td>
                                             </ng-container>
 
-                                            <ng-container matColumnDef="rentalForYear">
-                                                <th class="table-header-text" style="margin-left: auto;margin-right: auto;" mat-header-cell *matHeaderCellDef mat-sort-header> Rent Year </th>
-                                                <td mat-cell *matCellDef="let element"> {{element.rentalForYear }} </td>
-                                            </ng-container>
+                                            <!-- <ng-container matColumnDef="tel2">
+                                            <th class="table-header-text" style="margin-left: auto;margin-right: auto;" mat-header-cell *matHeaderCellDef mat-sort-header>Telephone 1</th>
+                                            <td mat-cell *matCellDef="let element"> {{element.contactTelephone2}} </td>
+                                        </ng-container> -->
+
+                                            <!-- <ng-container matColumnDef="updateDate">
+                                            <th class="table-header-text" style="margin-left: auto;margin-right: auto;" mat-header-cell *matHeaderCellDef mat-sort-header>Updated On</th>
+                                            <td mat-cell *matCellDef="let element"> {{element.modified | date}} </td>
+                                        </ng-container> -->
 
                                             <ng-container matColumnDef="created">
                                                 <th class="table-header-text" style="margin-left: auto;margin-right: auto;" mat-header-cell *matHeaderCellDef mat-sort-header> Added On </th>
@@ -609,10 +437,10 @@
                                                 <th mat-header-cell *matHeaderCellDef></th>
                                                 <td mat-cell *matCellDef="let element">
                                                     <i style="border: 2px solid;
-                                      padding: 3px;
-                                      border-radius: 50%;" class="material-icons">
-                                      attach_money
-                                    </i>
+                                            padding: 3px;
+                                            border-radius: 50%;" class="material-icons">
+                                            person
+                                          </i>
                                                 </td>
                                             </ng-container>
                                             <!-- style="font-size: 1.5em; color: red;" [style.color]="element.status == 'Rented' ? 'green': element.status == 'Pending'? 'orange' :'red'"-->
@@ -621,56 +449,261 @@
                                                 <th mat-header-cell *matHeaderCellDef></th>
                                                 <td mat-cell *matCellDef="let element" class="action-link">
                                                     <!-- <a (click)="openDialog('Update',element)">Edit</a> |
-                        <a (click)="openDialog('Delete',element)">Delete</a> ['/details', 1]-->
-                                                    <a type="button" mat-raised-button color="primary">Details</a> &nbsp;
-                                                    <!-- <button mat-raised-button color="accent" (click)="openDialog('Delete',element)">Delete</button> (click)="getRentPaymentDetails(element.id)"-->
+                  <a (click)="openDialog('Delete',element)">Delete</a> ['/details', 1]-->
+                                                    <button type="button" mat-raised-button color="primary" (click)="getTenantDetails(element.id)">Details</button> &nbsp;
+                                                    <!-- <button mat-raised-button color="accent" (click)="openDialog('Delete',element)">Delete</button> -->
                                                 </td>
                                             </ng-container>
 
-
-                                            <!-- Detail Panel [@detailExpand]="element.isExpanded ? 'expanded' : 'collapsed'"-->
                                             <ng-container matColumnDef="expandedDetail">
                                                 <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
 
                                                     <div class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
                                                         <mat-list>
                                                             <div mat-subheader>Subjects of {{element.id}}</div>
-                                                            <div>{{element.paymentReceivedDate | date}}</div>
+                                                            <div>{{element.firstName}}</div>
                                                             <!-- <mat-list-item *ngFor="let subject of element.subjects">
                                                     <div mat-line>{{subject.name}}</div>
                                                     <div mat-line> {{subject.type}} | Grade: {{subject.grade}}</div>
                                                   </mat-list-item> -->
+
                                                         </mat-list>
+
                                                     </div>
 
                                                 </td>
                                             </ng-container>
 
+                                            <tr mat-header-row *matHeaderRowDef="displayedColumns3"></tr>
+                                            <!-- <tr mat-row *matRowDef="let row; columns: displayedColumns3;"></tr> -->
 
-
-                                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                                            <!-- <tr mat-row *matRowDef="let element; columns: displayedColumns;" class="student-element-row" [class.student-expanded-row]="element.isExpanded"></tr> -->
-                                            <tr mat-row *matRowDef="let element; columns: displayedColumns;" class="example-element-row" [class.example-expanded-row]="expandedElement === element" (click)="expandedElement = expandedElement === element ? null : element">
+                                            <tr mat-row *matRowDef="let element; columns: displayedColumns3;" class="example-element-row" [class.example-expanded-row]="expandedElement === element" (click)="expandedElement = expandedElement === element ? null : element">
                                             </tr>
                                             <!-- Additional row-->
                                             <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
-
                                         </table>
-                                        <!-- </ng-template> -->
-
                                     </div>
+                                    <!-- <mat-paginator #paginator3 [hidden]="!dataSource3.data.length" [pageSize]="10" [pageSizeOptions]="[5, 10, 25]"></mat-paginator> -->
 
-                                    <table style="width: 100%;">
-                                        <tr *ngIf="!dataSource.data.length">
-                                            <td style="text-align: center;height:40px" [attr.colspan]="displayedColumns.length">
-
-                                                No Records Found!
-                                            </td>
-                                        </tr>
-                                    </table>
-                                    <span class="spacer"></span>
-                                    <mat-paginator #paginator [hidden]="!dataSource.data.length" [pageSize]="10" [pageSizeOptions]="[5, 10, 25]"></mat-paginator>
                                 </ng-template>
+                            </mat-tab>
+
+
+                            <mat-tab label="Rent Payment" style="background: #f5f5f5;">
+                                <!-- <ng-template matTabContent> -->
+                                <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="10px" style="margin-bottom: 1%;
+                                    flex-direction: row;
+                                    box-sizing: border-box;
+                                    display: flex;
+                                    place-content: stretch flex-end;
+                                    align-items: stretch;
+                                    margin-top: 20px;
+                                    margin-left: 25px;
+                                    width: 95%;">
+                                    <mat-form-field fxLayout fxLayoutAlign="start center">
+                                        <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="Filter">
+                                    </mat-form-field>
+                                    <!-- <mat-radio-group aria-label="Select an option" style="margin-top: 13px;margin-left: 25px;padding-right: 5px;">
+                                        <mat-radio-button value="1" checked style="padding-right: 10px;">Active</mat-radio-button>
+                                        <mat-radio-button value="0">All</mat-radio-button>
+                                    </mat-radio-group> (click)="addRentPayment()"-->
+                                    <span class="spacer"></span>
+                                    <button *ngIf="!addRent" title="Add Rent Payment" (click)="addR()" mat-button mat-mini-fab style="background: #3d5afe;color: white;">
+                                    <i class="material-icons" title="Add Rent Payment">
+                                      playlist_add
+                                    </i>
+                                  </button>
+                                    <button *ngIf="addRent" (click)="cancel()" title="Cancel" mat-button mat-mini-fab style="background: #d86f0d;color: white;">
+                                    <i class="material-icons" title="Cancel">
+                                      clear
+                                    </i>
+                                  </button>
+                                </div>
+
+                                <div *ngIf="addRent" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center" stye="width: 95%;margin-left: 10px; margin-right: 10px;">
+                                    <form novalidate fxLayoutAlign="center center" [formGroup]="addForm" style="width: 100%;border: 1px solid;
+                                            margin-bottom: 5px;
+                                            padding: 5px;" (ngSubmit)="addRentPayment()">
+                                        <mat-form-field fxFlex="15%" fxFlex.xs="90%" style="width: 15%;margin-left: 10px;">
+                                            <mat-label>Month</mat-label>
+                                            <mat-select id="month" formControlName="rentalForMonth">
+                                                <mat-option [value]='month.name' *ngFor="let month of months">{{month.name}}</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                        <mat-form-field fxFlex="10%" fxFlex.xs="90%" style="width:15%;margin-left: 10px;">
+                                            <mat-label>Year</mat-label>
+                                            <mat-select id="year" formControlName="rentalForYear">
+                                                <mat-option [value]='year.name' *ngFor="let year of years">{{year.name}}</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                        <mat-form-field fxFlex="10%" fxFlex.xs="90%" appearance="standard" style="width:20%;margin-top: -12px; margin-left: 10px;">
+                                            <mat-label>Amount</mat-label>
+                                            <input type="number" matInput placeholder="Rent Paid" formControlName="actualPaymentAmt">
+                                            <!-- <mat-icon matSuffix>payment</mat-icon> -->
+                                        </mat-form-field>
+                                        <mat-form-field fxFlex="15%" fxFlex.xs="90%" style="width:15%;margin-left: 10px;">
+                                            <mat-label>Paid By</mat-label>
+                                            <mat-select id="payby" formControlName="payMethod">
+                                                <mat-option [value]='pay.key' *ngFor="let pay of payBy">{{pay.name}}</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+
+                                        <mat-form-field fxFlex="15%" fxFlex.xs="90%" style="margin-left: 10px;margin-right: 10px;">
+                                            <mat-label>Due Date</mat-label>
+                                            <input matInput [matDatepicker]="picker2" formControlName="paymentDueDate">
+                                            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                                            <mat-datepicker #picker2></mat-datepicker>
+                                        </mat-form-field>
+
+                                        <mat-form-field fxFlex="15%" fxFlex.xs="90%" style="margin-left: 10px;margin-right: 10px;">
+                                            <mat-label>Paid Date</mat-label>
+                                            <input matInput [matDatepicker]="picker1" formControlName="paymentReceivedDate">
+                                            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                                            <mat-datepicker #picker1></mat-datepicker>
+                                        </mat-form-field>
+                                        <div fxFlex="20%" fxFlex.xs="90%">
+                                            <button type="submit" mat-button color="primary" style="margin-right: 5px; color: green;">
+                                            <!-- Add -->
+                                            <mat-icon style="font-size: 2.5em;vertical-align: top;">check_circle_outline</mat-icon>
+                                          </button>
+                                            <!-- <button type="button" (click)="reset()" mat-button mat-stroked-button color="accent">
+                                            Reset
+                                          </button> -->
+                                        </div>
+                                    </form>
+
+                                    <!-- <mat-radio-group aria-label="Select an option" style="margin-top: 13px;margin-left: 25px;padding-right: 5px;">
+                                        <mat-radio-button value="1" checked style="padding-right: 10px;">Active</mat-radio-button>
+                                        <mat-radio-button value="0">All</mat-radio-button>
+                                    </mat-radio-group> -->
+                                    <!-- <span class="spacer"></span>
+                                    <button (click)="addRentPayment()" mat-button mat-mini-fab style="background: #3d5afe;color: white;">
+                                    <i class="material-icons" title="Add Lease Agreement">
+                                      playlist_add
+                                    </i>
+                                  </button> -->
+                                </div>
+
+                                <div fxLayoutAlign="center">
+                                    <!-- <ng-template matTabContent> -->
+                                    <table mat-table [dataSource]="dataSource" #Sort="matSort" matSort matSort class="my-table mat-elevation-z8" style="width: 100%;">
+                                        <ng-container matColumnDef="id">
+                                            <th class="table-header-text" style="text-align: center;" mat-header-cell *matHeaderCellDef> ID </th>
+                                            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                                        </ng-container>
+
+                                        <!-- Name Column -->
+                                        <!-- <ng-container matColumnDef="rentAmtDue">
+                                              <th class="table-header-text" mat-header-cell *matHeaderCellDef mat-sort-header>Rent Due </th>
+                                              <td mat-cell *matCellDef="let element"> {{element.scheduledPaymentAmt | currency:'CAD'}} </td>
+                                          </ng-container> -->
+
+                                        <ng-container matColumnDef="paidAmt">
+                                            <th class="table-header-text" style="text-align: center;" mat-header-cell *matHeaderCellDef> Actual Paid </th>
+                                            <td mat-cell *matCellDef="let element">
+                                                {{element.actualPaymentAmt | currency:'CAD'}}
+                                            </td>
+                                        </ng-container>
+
+                                        <ng-container matColumnDef="paymentReceivedDate">
+                                            <th class="table-header-text" mat-header-cell *matHeaderCellDef mat-sort-header> Paid on </th>
+                                            <td mat-cell *matCellDef="let element"> {{element.paymentReceivedDate | date}} </td>
+                                        </ng-container>
+
+                                        <ng-container matColumnDef="payMethod">
+                                            <th class="table-header-text" style="margin-left: auto;margin-right: auto;" mat-header-cell *matHeaderCellDef mat-sort-header> Paid by </th>
+                                            <td mat-cell *matCellDef="let element"> {{element.payMethod | paymentMethod}} </td>
+                                        </ng-container>
+
+                                        <ng-container matColumnDef="rentalForMonth">
+                                            <th class="table-header-text" style="margin-left: auto;margin-right: auto;" mat-header-cell *matHeaderCellDef mat-sort-header> Rent Month </th>
+                                            <td mat-cell *matCellDef="let element"> {{element.rentalForMonth}} </td>
+                                        </ng-container>
+
+                                        <ng-container matColumnDef="rentalForYear">
+                                            <th class="table-header-text" style="margin-left: auto;margin-right: auto;" mat-header-cell *matHeaderCellDef mat-sort-header> Rent Year </th>
+                                            <td mat-cell *matCellDef="let element"> {{element.rentalForYear }} </td>
+                                        </ng-container>
+
+                                        <ng-container matColumnDef="created">
+                                            <th class="table-header-text" style="margin-left: auto;margin-right: auto;" mat-header-cell *matHeaderCellDef mat-sort-header> Added On </th>
+                                            <td mat-cell *matCellDef="let element"> {{element.created | date }} </td>
+                                        </ng-container>
+
+                                        <ng-container matColumnDef="icon">
+                                            <th mat-header-cell *matHeaderCellDef></th>
+                                            <td mat-cell *matCellDef="let element">
+                                                <i style="border: 2px solid;
+                                                      padding: 3px;
+                                                      border-radius: 50%;" class="material-icons">
+                                                      attach_money
+                                                    </i>
+                                            </td>
+                                        </ng-container>
+                                        <!-- style="font-size: 1.5em; color: red;" [style.color]="element.status == 'Rented' ? 'green': element.status == 'Pending'? 'orange' :'red'"-->
+                                        <!-- Action Column routerLink="/Manage/lease/leasedetails/rentpayment/{{element.id}}"-->
+                                        <ng-container matColumnDef="action">
+                                            <th mat-header-cell *matHeaderCellDef></th>
+                                            <td mat-cell *matCellDef="let element" class="action-link">
+                                                <!-- <a (click)="openDialog('Update',element)">Edit</a> | -->
+                                                <!-- <a (click)="openDialog('Delete',element)">Delete</a> ['/details', 1] -->
+                                                <!-- <a type="button" mat-raised-button color="primary">Details</a> &nbsp; (click)="openDialog('Delete',element)"-->
+                                                <button type="button" mat-raised-button color="accent" (click)="getRentPaymentDetails(element.id)">Details</button>
+                                            </td>
+                                        </ng-container>
+
+
+                                        <!-- Detail Panel [@detailExpand]="element.isExpanded ? 'expanded' : 'collapsed'"-->
+                                        <!-- <ng-container matColumnDef="expandedDetail">
+                                            <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
+
+                                                <div class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+                                                    <mat-list>
+                                                        <div mat-subheader>Subjects of {{element.id}}</div>
+                                                        <div>{{element.paymentReceivedDate | date}}</div>
+                                                        <mat-list-item *ngFor="let subject of element.subjects">
+                                                    <div mat-line>{{subject.name}}</div>
+                                                    <div mat-line> {{subject.type}} | Grade: {{subject.grade}}</div>
+                                                  </mat-list-item>
+
+                                                    </mat-list>
+
+                                                </div>
+
+                                            </td>
+                                        </ng-container> -->
+
+
+
+
+
+                                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                                        <!-- <tr mat-row *matRowDef="let element; columns: displayedColumns;" class="student-element-row" [class.student-expanded-row]="element.isExpanded"></tr> -->
+
+
+                                        <!-- Expanded row implementation -- Disabled -->
+                                        <!-- <tr mat-row *matRowDef="let element; columns: displayedColumns;" class="example-element-row" [class.example-expanded-row]="expandedElement === element" (click)="expandedElement = expandedElement === element ? null : element">
+                                            </tr> -->
+                                        <!-- Additional row-->
+                                        <!-- <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr> -->
+                                        <!-- Expanded row implementation -- Disabled -->
+                                    </table>
+                                    <!-- </ng-template> -->
+
+                                </div>
+
+                                <table style="width: 100%;">
+                                    <tr *ngIf="!dataSource.data.length">
+                                        <td style="text-align: center;height:40px" [attr.colspan]="displayedColumns.length">
+
+                                            No Records Found!
+                                        </td>
+                                    </tr>
+                                </table>
+                                <span class="spacer"></span>
+                                <mat-paginator #paginator [hidden]="!dataSource.data.length" [pageSize]="10" [pageSizeOptions]="[5, 10, 25]"></mat-paginator>
+                                <!-- </ng-template> -->
                             </mat-tab>
                             <mat-tab label="Work Orders" style="background: #f5f5f5;">
                                 <!-- <div style="margin-top: 25px; margin-left: 40px;margin-bottom: 320px;">
@@ -771,7 +804,7 @@
 
                                             <mat-form-field fxFlex="20%" fxFlex.xs="90%" style="width:20%;margin-left: 10px;">
                                                 <mat-label>Service Requests</mat-label>
-                                                <mat-select id="request" formControlName="serviceRequestId">
+                                                <mat-select #Selected id="request" formControlName="serviceRequestId" (selectionChange)="onServieRequestChange(Selected.value)">
                                                     <mat-option [value]='request.id' *ngFor="let request of requests">{{request.requestSubject}}</mat-option>
                                                 </mat-select>
                                             </mat-form-field>
@@ -841,17 +874,17 @@
                                             <td mat-cell *matCellDef="let element"> {{element.endDate | date}} </td>
                                         </ng-container>
 
-                                        <ng-container matColumnDef="category">
+                                        <ng-container matColumnDef="workOrderCategory">
                                             <th class="table-header-text" style="margin-left: auto;margin-right: auto;" mat-header-cell *matHeaderCellDef mat-sort-header> Category </th>
                                             <td mat-cell *matCellDef="let element"> {{element.workOrderCategory}} </td>
                                         </ng-container>
 
-                                        <ng-container matColumnDef="type">
+                                        <ng-container matColumnDef="workOrderType">
                                             <th class="table-header-text" style="margin-left: auto;margin-right: auto;" mat-header-cell *matHeaderCellDef mat-sort-header> Type </th>
                                             <td mat-cell *matCellDef="let element"> {{element.workOrderType}} </td>
                                         </ng-container>
 
-                                        <ng-container matColumnDef="status">
+                                        <ng-container matColumnDef="workOrderStatus">
                                             <th class="table-header-text" style="margin-left: auto;margin-right: auto;" mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
                                             <td mat-cell *matCellDef="let element"> {{element.workOrderStatus }} </td>
                                         </ng-container>
@@ -876,6 +909,7 @@
                                         <ng-container matColumnDef="action">
                                             <th mat-header-cell *matHeaderCellDef></th>
                                             <td mat-cell *matCellDef="let element" class="action-link">
+
                                                 <!-- <a (click)="openDialog('Update',element)">Edit</a> |
                     <a (click)="openDialog('Delete',element)">Delete</a> ['/details', 1]-->
                                                 <button type="button" mat-raised-button color="primary" (click)="getWorkOrderDetails(element.id)">Details</button> &nbsp;
@@ -916,8 +950,6 @@
             </mat-card-content>
         </mat-card>
     </div>
-
-
 </div>
 
 <!-- <ng-template #spinner>
