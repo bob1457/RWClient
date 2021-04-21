@@ -34,33 +34,70 @@
                             <span style="color: black;">Properties <span *ngIf="propertyList">({{propertyList.length}})</span></span>
                         </ng-template>
 
-                        <div fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="15px" style="height: 340px;" *ngIf="!(loading$ | async) && propertyList; else spinner">
-                            <mat-card style="width: 15%; padding: 0; margin-top: 15px; margin-left: 10px; max-height: 220px;" [ngStyle.xs]="{'width': '25%'}" *ngFor="let property of propertyList">
-                                <!-- *ngFor="let property of properties" title="{{property.status }}"-->
-                                <mat-card-header fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center" style="margin-bottom: 10px;">
-                                    <div mat-card-avatar class="card-header-img">
-                                        <!-- <img style="margin-top: -8px;" src="../../assets/imgs/house.png" width="40px" height="40px"> -->
-                                        <i class="material-icons" title="{{property.status}}" style="border: 2px solid;
-                                        padding: 10px;
-                                        border-radius: 50%;" [style.color]="property.status === 'Rented' ? 'green': property.status === 'Pending'? 'orange' :'red'"> <!---->
-                                        home
-                                      </i>
-                                    </div>
-                                    <mat-card-title style="font-size: 12px;margin-top: 15px;" [ngStyle.xs]="{'font-size': '9px', 'margin-top': '-12px'}">{{property.propertyName}}</mat-card-title>
-                                    <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
-                                    <!-- <div fxHide.xs style="margin-top: 10px;">10621 158A St.</div> -->
-                                </mat-card-header>
-                                <!-- <img src="../../../assets/images/10621.jpg" title="{{property.propertyName}}" width="100%" height="auto"> -->
-                                <mat-card-content>
-                                    <!-- <p>More information</p> -->
-                                    <p>{{property.propertySuiteNumber}} {{property.propertySupropertyNumberiteNumber}} {{property.propertyStreet}}<br> {{property.propertyCity}} {{property.propertyStateProvince}} {{property.propertyZipPostCode}} <br> {{property.propertyCountry}}
-                                    </p>
-                                </mat-card-content>
-                                <!-- <mat-card-actions>
-                          <button mat-button>LIKE</button>
-                          <button mat-button>SHARE</button>
-                       </mat-card-actions> -->
-                            </mat-card>
+                        <div fxLayout="row wrap" fxLayoutAlign="space-evenly start" fxLayoutGap="15px" style="height: 340px;" *ngIf="!(loading$ | async) && propertyList; else spinner">
+                            <div fxLayout="row wrap" fxLayoutGap="10px" fxLayoutAlign="flex-start">
+                                <ng-container *ngFor="let property of propertyList">
+                                    <mat-card style="width: 15%; padding: 0; margin-top: 15px; margin-left: 5px; height: 180px;width: 180px;;" [ngStyle.xs]="{'width': '25%'}">
+                                        <!-- *ngFor="let property of properties" title="{{property.status }}"-->
+                                        <mat-card-header class="card-header">
+                                            <div mat-card-avatar>
+                                                <!-- <img style="margin-top: -8px;" src="../../assets/imgs/house.png" width="40px" height="40px"> -->
+                                                <i class="material-icons " title="{{property.status }}" [style.color]="property.status == 'Rented' ? 'green': property.status == 'Pending'? 'orange' :'red'" style="border: 3px solid;
+                                                padding: 5px;
+                                                margin-left: 5px;
+                                                border-radius: 50%;">home
+                                        </i>
+                                            </div>
+                                            <span class="title-spacer"></span>
+                                            <div style="font-size: 12px;text-align: right;" [ngStyle.xs]="{'font-size': '9px'}">ID:{{property.id}}<br>{{property.status }}</div>
+
+
+
+                                            <!-- <div style="width:25%">
+                                            <div mat-card-avatar class="card-header-img">
+
+                                                <i class="material-icons" title="{{property.status}}" style="border: 2px solid;
+                                            padding: 10px;
+                                            border-radius: 50%;" [style.color]="property.status === 'Rented' ? 'green': property.status === 'Pending'? 'orange' :'red'">
+                                            home
+                                          </i>
+                                            </div>
+                                        </div>
+                                        <div style="width:25%">
+                                            <mat-card-title style="font-size: 12px;margin-top: 15px;" [ngStyle.xs]="{'font-size': '9px', 'margin-top': '-12px'}">{{property.propertyName}}</mat-card-title>
+                                        </div>
+                                        <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
+                                            <!-- <div fxHide.xs style="margin-top: 10px;">10621 158A St.</div> -->
+                                        </mat-card-header>
+                                        <mat-card-content>
+                                            <div style="text-align: left;margin-left:5px;">
+                                                <p style="margin-bottom: 2px;">
+                                                    <span style="font-weight: bold;">Property:</span> {{property.propertyName}}
+                                                </p>
+                                                <p style="font-weight: bold;margin-bottom: 0;">Address:</p>
+                                                <p style="font-size: .85em;">{{property.propertySuiteNumber}} {{property.propertySupropertyNumberiteNumber}} {{property.propertyStreet}}<br> {{property.propertyCity}} {{property.propertyStateProvince}} {{property.propertyZipPostCode}}
+                                                    <br> {{property.propertyCountry}}
+                                                </p>
+                                            </div>
+
+
+
+                                        </mat-card-content>
+                                        <!-- <img src="../../../assets/images/10621.jpg" title="{{property.propertyName}}" width="100%" height="auto"> -->
+                                        <!--<mat-card-content>
+                                        <p>More information</p>
+                                        <p>{{property.propertySuiteNumber}} {{property.propertySupropertyNumberiteNumber}} {{property.propertyStreet}}<br> {{property.propertyCity}} {{property.propertyStateProvince}} {{property.propertyZipPostCode}} <br> {{property.propertyCountry}}
+                                        </p>
+                                    </mat-card-content>-->
+                                        <!-- <mat-card-actions>
+                                        <button mat-button>LIKE</button>
+                                        <button mat-button>SHARE</button>
+                                    </mat-card-actions> -->
+                                    </mat-card>
+                                </ng-container>
+
+                            </div>
+
                         </div>
                         <div *ngIf="propertyList.length === 0" fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="15px" style="height: 340px;">
                             <div style="height: 50px;margin-top: 15px;">
@@ -78,13 +115,16 @@
                         </i> &nbsp;&nbsp; -->
                             <span style="color: black;">Property Owners <span *ngIf="ownerList">({{ownerList.length}})</span></span>
                         </ng-template>
-                        <div fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="15px" style="height: 340px;" *ngIf="!(loading$ | async) && ownerList; else spinner">
-                            <mat-card style="width: 15%; padding: 0; margin-top: 15px; margin-left: 10px;" [ngStyle.xs]="{'width': '25%'}" *ngFor="let owner of ownerList">
+                        <div fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="5px" style="height: 340px;" *ngIf="!(loading$ | async) && ownerList; else spinner">
+                            <mat-card style="width: 20%; padding: 0; margin-top: 10px; margin-left: 10px;" [ngStyle.xs]="{'width': '25%'}" *ngFor="let owner of ownerList">
                                 <!-- *ngFor="let property of properties" -->
 
                                 <img src="../../assets/images/avatar.png" class="user-avatar" alt="owner">
                                 <mat-card-content>
                                     <p style="margin-top: 10px; font-weight: bold;">{{owner.firstName}} {{owner.lastName | uppercase}}</p>
+                                    <p style="margin-bottom: 7px;">
+                                        {{owner.contactTelephone1}}, <br>{{owner.contactEmail}}
+                                    </p>
                                 </mat-card-content>
                                 <!-- <mat-card-actions>
                           <button mat-button>LIKE</button>
@@ -95,7 +135,7 @@
                         <div *ngIf="ownerList.length === 0" fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="15px" style="height: 340px;">
                             <div style="height: 50px;margin-top: 15px;">
                                 <p style="text-align:center;">
-                                    No records found!
+                                    No property owners!
                                 </p>
                             </div>
                         </div>
@@ -109,24 +149,26 @@
                             </i> &nbsp;&nbsp; -->
                             <span style="color: black;">Management Contrcts <span *ngIf="contractList">({{contractList.length}})</span></span>
                         </ng-template>
-                        <div fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="15px" style="height: 340px;" *ngIf="!(loading$ | async) && contractList; else spinner">
-                            <mat-card style="width: 15%; padding: 0; margin-top: 15px; margin-left: 10px; max-height: 220px;" [ngStyle.xs]="{'width': '25%'}" *ngFor="let contract of contractList">
+                        <div fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="5px" style="height: 340px;" *ngIf="!(loading$ | async) && contractList; else spinner">
+                            <mat-card style="width: 20%; padding: 0; margin-top: 10px; margin-left: 10px; max-height: 180px;" [ngStyle.xs]="{'width': '25%'}" *ngFor="let contract of contractList">
                                 <!-- *ngFor="let property of properties" -->
                                 <mat-card-header class="contract-header">
-                                    <div mat-card-avatar style="margin-top: 10px;">
+                                    <div mat-card-avatar style="margin-top: 7px;margin-bottom: 5px;margin-left: 5px;">
                                         <!-- <img style="margin-top: -8px;" src="../../assets/imgs/house.png" width="40px" height="40px"> -->
-                                        <i class="material-icons" title="{{contract.isActive }}" [style.color]="contract.isActive == true ? 'green': 'orange'">
+                                        <i class="material-icons" title="{{contract.managementContractType }}" style="border: 2px solid orangered;
+                                        padding: 5px;" [style.color]="contract.isActive == true ? 'green': 'orange'">
                                     list_alt
                                 </i>
                                     </div>
-                                    <mat-card-title style="font-size: 12px;margin-top: 15px;" [ngStyle.xs]="{'font-size': '9px'}">{{contract.managementContractTitle}}</mat-card-title>
+                                    <span class="title-spacer"></span>
+                                    <div style="font-size: 12px;margin-top: 5px;text-align: right;margin-right: 8px;" [ngStyle.xs]="{'font-size': '9px'}">ID: {{contract.id}}<br><span style="font-size: 10px; font-weight: normal;" [style.color]="contract.managementContractType == 'New' ? 'green': 'orangered'">{{contract.managementContractType}}</span></div>
                                     <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
                                     <!-- <div fxHide.xs style="margin-top: 10px;">10621 158A St.</div> -->
                                 </mat-card-header>
 
                                 <mat-card-content class="contract-content">
-                                    <p>Property: <br>{{contract.propertyName}}</p>
-                                    <p>Signed on: <br>{{contract.contractSignDate | date }}</p>
+                                    <p style="text-align: left;margin-left: 5px;"><span style="font-weight: bold;">Property:</span> <br>{{contract.propertyName}}</p>
+                                    <p style="text-align: left;margin-left: 5px;"><span style="font-weight: bold;">Signed on: </span><br>{{contract.contractSignDate | date }}</p>
                                 </mat-card-content>
                                 <!-- <mat-card-actions>
                           <button mat-button>LIKE</button>
@@ -137,7 +179,7 @@
                         <div *ngIf="contractList.length === 0" fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="15px" style="height: 340px;">
                             <div style="height: 50px;margin-top: 15px;">
                                 <p style="text-align:center;">
-                                    No records found!
+                                    No management contracts!
                                 </p>
                             </div>
                         </div>

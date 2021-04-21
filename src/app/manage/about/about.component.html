@@ -49,20 +49,35 @@
             <div [@.disabled]="true" style="width: 100%;">
                 <mat-tab-group [disableRipple]="false">
                     <mat-tab label="System Info">
-                        <p class="tab-content">
-                            System Info
-                        </p>
+                        <div class="tab-content" fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px">
+                            <div fxFlex="10%">
+                                <mat-icon class="about_icon" style="color: teal;">settings</mat-icon>
+                            </div>
+                            <div fxFlex="80%">
+                                System Information
+                            </div>
+                        </div>
 
                     </mat-tab>
                     <mat-tab label="Support Info">
-                        <p class="tab-content">
-                            Customer Support
-                        </p>
+                        <div class="tab-content" fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px">
+                            <div fxFlex="10%">
+                                <mat-icon class="about_icon" style="color: orangered;">thumb_up_off_alt</mat-icon>
+                            </div>
+                            <div fxFlex="80%">
+                                Customer Support
+                            </div>
+                        </div>
                     </mat-tab>
                     <mat-tab label="End User License Agreement">
-                        <p class="tab-content">
-                            License Agreement
-                        </p>
+                        <div class="tab-content" fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px">
+                            <div fxFlex="10%">
+                                <mat-icon class="about_icon" style="color:maroon;">receipt</mat-icon>
+                            </div>
+                            <div fxFlex="80%">
+                                End User License Agreement
+                            </div>
+                        </div>
                     </mat-tab>
                 </mat-tab-group>
             </div>

@@ -160,11 +160,11 @@
 }
 
 .user-avatar {
-    height: 80px;
-    width: 80px;
+    height: 50px;
+    width: 50px;
     border-radius: 50%;
     flex-shrink: 0;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 .card-header-img {
@@ -184,4 +184,22 @@
 
 .card_bg {
     background: #fafafa;
+}
+
+.listing-avatar {
+    margin-top: 5px;
+    margin-left: 5px;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.card-header {
+    padding-bottom: 10px;
+    background: #e4e2e2;
+}
+
+.title-spacer {
+    flex: 1 1 auto;
 }
