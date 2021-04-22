@@ -605,7 +605,13 @@ const propertyLeaseReducer = createReducer(
       loaded: true,
       invoiceList: updatedInvoice
     });
-  })
+  }),
+
+  on(LeaseActions.updateInvoiceFailure, (state) => ({
+    ...state,
+    loading: true,
+    loaded: false
+  }))
 
 );
 

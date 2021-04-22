@@ -94,73 +94,76 @@
                                 </div>
                             </div>
                         </div>
-                        <div style="width: 100%;font-size: .9em;overflow-x: hidden;" *ngIf="invoiceList.length > 0">
-                            <form novalidate [formGroup]="updateInvoiceForm" style="width: 100%;border: 1px solid;margin-bottom: 5px;padding: 5px;">
-                                <div fxLayout="column" fxLayoutAlign="start start">
-                                    <div fxLayout="row" fxLayoutAlign="start start" style="width: 100%;">
-                                        <div fxFlex="30%">
-                                            <!-- <mat-form-field fxFlex.xs="100%" style="margin-left: 10px;margin-right: 10px;width: 95%;"></mat-form-field> -->
-                                            <!-- <mat-checkbox class="example-margin" formControlName="isPaid" [checked]="workOrder.invoice.isPaid">Checked</mat-checkbox> -->
-                                            <!-- </mat-form-field> -->
-                                            <div style="width: 95%;">
-                                                <mat-form-field>
-                                                    <mat-label>Invovice Paid</mat-label>
-                                                    <mat-label>Paid Amount</mat-label>
-                                                    <input type="text" matInput placeholder="Paid Amount" formControlName="paymentAmount" [ngModel]="invoiceList[0].paymentAmount">
+                        <div *ngIf="invoiceList">
+                            <div style="width: 100%;font-size: .9em;overflow-x: hidden;" *ngIf="invoiceList.length > 0">
+                                <form novalidate [formGroup]="updateInvoiceForm" style="width: 100%;border: 1px solid;margin-bottom: 5px;padding: 5px;">
+                                    <div fxLayout="column" fxLayoutAlign="start start">
+                                        <div fxLayout="row" fxLayoutAlign="start start" style="width: 100%;">
+                                            <div fxFlex="30%">
+                                                <!-- <mat-form-field fxFlex.xs="100%" style="margin-left: 10px;margin-right: 10px;width: 95%;"></mat-form-field> -->
+                                                <!-- <mat-checkbox class="example-margin" formControlName="isPaid" [checked]="workOrder.invoice.isPaid">Checked</mat-checkbox> -->
+                                                <!-- </mat-form-field> -->
+                                                <div style="width: 95%;">
+                                                    <mat-form-field>
+                                                        <mat-label>Invovice Paid</mat-label>
+                                                        <mat-label>Paid Amount</mat-label>
+                                                        <input type="text" matInput placeholder="Paid Amount" formControlName="paymentAmount" [ngModel]="invoiceList[0].paymentAmount">
+                                                    </mat-form-field>
+                                                </div>
+
+                                            </div>
+                                            <div fxFlex="30%">
+                                                <mat-checkbox class="example-margin" style="margin-left: 35px;" formControlName="isPaid" [ngModel]="invoiceList[0].isPaid">&nbsp; Paid</mat-checkbox>
+                                            </div>
+                                            <div fxFlex="40%">
+                                                <mat-form-field fxFlex.xs="100%" style="margin-left: 10px;margin-right: 10px;width: 95%;">
+                                                    <mat-label>Payment Method</mat-label>
+                                                    <mat-select formControlName="paymentMethod" [ngModel]="invoiceList[0].paymentMethod">
+                                                        <mat-option value="Cash">Cash</mat-option>
+                                                        <mat-option value="Cheque">Cheque</mat-option>
+                                                        <mat-option value="Transfer">E-Transfer</mat-option>
+                                                        <mat-option value="Other">Other</mat-option>
+                                                    </mat-select>
+                                                    <!-- </mat-form-field> -->
                                                 </mat-form-field>
                                             </div>
-
                                         </div>
-                                        <div fxFlex="30%">
-                                            <mat-checkbox class="example-margin" style="margin-left: 35px;" formControlName="isPaid" [ngModel]="invoiceList[0].isPaid">&nbsp; Paid</mat-checkbox>
+                                        <div fxLayout="row" fxLayoutAlign="start start" style="width: 100%;">
+                                            <div fxFlex="50%">
+                                                <mat-form-field>
+                                                    <mat-label>Notes</mat-label>
+                                                    <textarea type="text" matInput placeholder="Notes" formControlName="note" [ngModel]="invoiceList[0].note"></textarea>
+                                                </mat-form-field>
+                                            </div>
+                                            <div fxFlex="50%">
+                                                <mat-form-field style="width: 98%;">
+                                                    <mat-label>Completed On</mat-label>
+                                                    <input matInput [matDatepicker]="picker5" formControlName="paymentDate" [ngModel]="invoiceList[0].paymentDate">
+                                                    <mat-datepicker-toggle matSuffix [for]="picker5"></mat-datepicker-toggle>
+                                                    <mat-datepicker #picker5></mat-datepicker>
+                                                </mat-form-field>
+                                            </div>
                                         </div>
-                                        <div fxFlex="40%">
-                                            <mat-form-field fxFlex.xs="100%" style="margin-left: 10px;margin-right: 10px;width: 95%;">
-                                                <mat-label>Payment Method</mat-label>
-                                                <mat-select formControlName="paymentMethod" [ngModel]="invoiceList[0].paymentMethod">
-                                                    <mat-option value="Cash">Cash</mat-option>
-                                                    <mat-option value="Cheque">Cheque</mat-option>
-                                                    <mat-option value="Transfer">E-Transfer</mat-option>
-                                                    <mat-option value="Other">Other</mat-option>
-                                                </mat-select>
-                                                <!-- </mat-form-field> -->
-                                            </mat-form-field>
-                                        </div>
-                                    </div>
-                                    <div fxLayout="row" fxLayoutAlign="start start" style="width: 100%;">
-                                        <div fxFlex="50%">
-                                            <mat-form-field>
-                                                <mat-label>Notes</mat-label>
-                                                <textarea type="text" matInput placeholder="Notes" formControlName="note" [ngModel]="invoiceList[0].note"></textarea>
-                                            </mat-form-field>
-                                        </div>
-                                        <div fxFlex="50%">
-                                            <mat-form-field style="width: 98%;">
-                                                <mat-label>Completed On</mat-label>
-                                                <input matInput [matDatepicker]="picker5" formControlName="paymentDate" [ngModel]="invoiceList[0].paymentDate">
-                                                <mat-datepicker-toggle matSuffix [for]="picker5"></mat-datepicker-toggle>
-                                                <mat-datepicker #picker5></mat-datepicker>
-                                            </mat-form-field>
-                                        </div>
-                                    </div>
 
 
-                                </div>
-                                <div fxLayout="row" fxLayoutGap="7px" fxLayoutAlign="end center" style="width: 98%;">
-                                    <!-- <span *ngIf="showMsg" style="color: rgb(189, 150, 25);">Updated successfully!</span>
-<img *ngIf=" loading" class="pl-2" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
-/> [disabled]="f.invalid || !f.dirty"-->
-                                    <div *ngIf="loading$ | async">
-                                        <app-loading></app-loading>
                                     </div>
-                                    <button [disabled]="!updateInvoiceForm.dirty" type="button" mat-raised-button color="primary" (click)="upateInvoice()">UPDATE</button>
-                                    <button mat-raised-button color="accent" [mat-dialog-close]="true">CLOSE</button>
-                                </div>
-                            </form>
+                                    <div fxLayout="row" fxLayoutGap="7px" fxLayoutAlign="end center" style="width: 98%;">
+                                        <!-- <span *ngIf="showMsg" style="color: rgb(189, 150, 25);">Updated successfully!</span>
+  <img *ngIf=" loading" class="pl-2" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+  /> [disabled]="f.invalid || !f.dirty"-->
+                                        <div *ngIf="loading$ | async">
+                                            <app-loading></app-loading>
+                                        </div>
+                                        <button [disabled]="!updateInvoiceForm.dirty" type="button" mat-raised-button color="primary" (click)="upateInvoice()">UPDATE</button>
+                                        <button mat-raised-button color="accent" [mat-dialog-close]="true">CLOSE</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div *ngIf="invoiceList.length === 0" style="margin-top: 20px;">
+                                No Invoice
+                            </div>
                         </div>
-                        <div *ngIf="invoiceList.length === 0" style="margin-top: 20px;">
-                            No Invoice
-                        </div>
+
                     </mat-tab>
 
                 </mat-tab-group>
