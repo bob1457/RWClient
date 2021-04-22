@@ -183,18 +183,18 @@
                                                             <mat-form-field>
                                                                 <mat-label>Invovice Paid</mat-label>
                                                                 <mat-label>Paid Amount</mat-label>
-                                                                <input type="text" matInput placeholder="Paid Amount" formControlName="paymentAmount" [ngModel]="workorder.invoice.paymentAmount">
+                                                                <input type="text" matInput placeholder="Paid Amount" formControlName="paymentAmount" [ngModel]="invoices[0].paymentAmount">
                                                             </mat-form-field>
                                                         </div>
 
                                                     </div>
                                                     <div fxFlex="30%">
-                                                        <mat-checkbox class="example-margin" style="margin-left: 35px;" formControlName="isPaid" [ngModel]="workorder.invoice.isPaid">&nbsp; Paid</mat-checkbox>
+                                                        <mat-checkbox class="example-margin" style="margin-left: 35px;" formControlName="isPaid" [ngModel]="invoices[0].isPaid">&nbsp; Paid</mat-checkbox>
                                                     </div>
                                                     <div fxFlex="40%">
                                                         <mat-form-field fxFlex.xs="100%" style="margin-left: 10px;margin-right: 10px;width: 95%;">
                                                             <mat-label>Payment Method</mat-label>
-                                                            <mat-select formControlName="paymentMethod" [ngModel]="workorder.invoice.paymentMethod">
+                                                            <mat-select formControlName="paymentMethod" [ngModel]="invoices[0].paymentMethod">
                                                                 <mat-option value="Cash">Cash</mat-option>
                                                                 <mat-option value="Cheque">Cheque</mat-option>
                                                                 <mat-option value="Transfer">E-Transfer</mat-option>
@@ -208,7 +208,7 @@
                                                     <div fxFlex="50%">
                                                         <mat-form-field style="width: 95%;">
                                                             <mat-label>Notes</mat-label>
-                                                            <textarea type="text" matInput placeholder="Notes" formControlName="note" [ngModel]="workorder.invoice.note"></textarea>
+                                                            <textarea type="text" matInput placeholder="Notes" formControlName="note" [ngModel]="invoices[0].note"></textarea>
                                                         </mat-form-field>
                                                     </div>
                                                     <div fxFlex="10%"></div>
@@ -232,7 +232,7 @@
                                                     <app-loading></app-loading>
                                                 </div>
                                                 <button [disabled]="!updateInvoiceForm.dirty" type="button" mat-raised-button color="primary" (click)="upateInvoice()">UPDATE</button>
-                                                <button mat-raised-button color="accent" [mat-dialog-close]="true">CLOSE</button>
+                                                <!-- <button mat-raised-button color="accent" [mat-dialog-close]="true">CLOSE</button> -->
                                             </div>
                                         </form>
                                     </div>

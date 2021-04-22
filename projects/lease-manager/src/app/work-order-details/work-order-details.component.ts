@@ -21,7 +21,7 @@ export class WorkOrderDetailsComponent implements OnInit {
   loading$: Observable<boolean>;
   workorder;
   invoice;
-  invoiceList: any[];
+  invoices: any[];
   detailsForm: FormGroup;
   updateInvoiceForm: FormGroup;
 
@@ -38,11 +38,11 @@ export class WorkOrderDetailsComponent implements OnInit {
                             // this.detailsForm.patchValue(data);
                             console.log('workorder', data);
 
-                            this.store.select(InvoiceList)
+                            this.store.select(invoiceList)
                                 .subscribe(list => {
                                   if (list && this.workorder) {
-                                    this.invoiceList = list.filter(i => i.workOrderId === this.workorder.id);
-                                    console.log('invoice in work order details', this.invoiceList);
+                                    this.invoices = list.filter(i => i.workOrderId === this.workorder.id);
+                                    console.log('invoice in work order details', this.invoices);
                                   }
                                 });
                             // this.dataSource.data = this.lease;
@@ -56,7 +56,7 @@ export class WorkOrderDetailsComponent implements OnInit {
 
     this.store.dispatch(getWorkOrderDetails({payload: this.id}));
 
-    // this.store.dispatch(getAllInvoices());
+    this.store.dispatch(getAllInvoices());
 
     this.detailsForm = this.formBuilder.group({
       workOrderId: [],
