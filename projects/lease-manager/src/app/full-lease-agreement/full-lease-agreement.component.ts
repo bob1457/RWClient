@@ -22,6 +22,9 @@ export class FullLeaseAgreementComponent implements OnInit {
   agreement$: Observable<any>;
   numberOfTenants;
   numberOfLandlords;
+  totalEntity = 0;
+  page2 = false;
+  totalPageNumber = 1;
 
   @ViewChild('pdfdoc', {static: false}) pdfdoc: ElementRef;
 
@@ -37,6 +40,9 @@ export class FullLeaseAgreementComponent implements OnInit {
                       this.agreementDetails = lease;
                       this.numberOfTenants = this.agreementDetails.tenant.length;
                       this.numberOfLandlords = this.agreementDetails.rentalProperty.rentalPropertyOwners.length;
+
+                      this.totalEntity = this.numberOfTenants + this.numberOfLandlords;
+                      console.log('total entity', this.totalPageNumber);
                       console.log('No. Tenants',this.numberOfTenants);
                       console.log('No. Landloard',this.numberOfLandlords);
                       console.log('agreement', this.agreementDetails);
@@ -44,8 +50,17 @@ export class FullLeaseAgreementComponent implements OnInit {
               }
 
   ngOnInit() {
+    debugger;
 
     this.agreement$ = this.store.select(leaseDetails);
+
+    // this.totalEntity = this.agreementDetails.rentalPropertyOwners.length + this.agreementDetails.tenant.length;
+    // console.log('total entity', this.totalPageNumber);
+
+    if ( this.totalEntity > 7 && this.totalEntity < 10) {
+      this.page2 = true;
+      this.totalPageNumber = 2;
+    }
 
   }
 
