@@ -24,6 +24,7 @@ export class FullLeaseAgreementComponent implements OnInit {
   numberOfLandlords;
   totalEntity = 0;
   page2 = false;
+  pageNumber = 1;
   totalPageNumber = 1;
 
   @ViewChild('pdfdoc', {static: false}) pdfdoc: ElementRef;
@@ -57,9 +58,19 @@ export class FullLeaseAgreementComponent implements OnInit {
     // this.totalEntity = this.agreementDetails.rentalPropertyOwners.length + this.agreementDetails.tenant.length;
     // console.log('total entity', this.totalPageNumber);
 
-    if ( this.totalEntity > 7 && this.totalEntity < 10) {
+    // if ( this.totalEntity > 7 && this.totalEntity < 10) {
+    //   this.page2 = true;
+    //   this.totalPageNumber = 2;
+    // }
+
+    if ( this.numberOfLandlords > 2 && this.numberOfLandlords < 6) {
       this.page2 = true;
-      this.totalPageNumber = 2;
+      if (this.numberOfTenants > 2) { // additional tenatns
+        this.totalPageNumber = 2;
+        this.pageNumber = 2;
+      } else { // no additional tenants, only additioanl landloard, only one additional page
+        this.totalPageNumber = 1;
+      }
     }
 
   }

@@ -15,6 +15,7 @@ export class AgreementPartyViewComponent implements OnInit {
 
   isLandlord1 = false;
   isLandlord2 = false;
+  isLandlord3 = false;
   isTenant1 = false;
   isTenant2 = false;
   isTenant3 = false;
@@ -36,6 +37,12 @@ export class AgreementPartyViewComponent implements OnInit {
           break;
         case 4:
           this.isLandlord2 = true;
+          this.isLandlord1 = true;
+          break;
+        case 5:
+          this.isLandlord2 = true;
+          this.isLandlord1 = true;
+          this.isLandlord3 = true;
           break;
         default:
       }
@@ -47,11 +54,17 @@ export class AgreementPartyViewComponent implements OnInit {
           this.isTenant1 = true;
           break;
         case 4:
+          this.isTenant1 = true;
           this.isTenant2 = true;
           break;
-          case 4:
-            this.isTenant3 = true;
-            break;
+        case 5:
+          this.isTenant1 = true;
+          this.isTenant2 = true;
+          this.isTenant3 = true;
+          break;
+        case 5:
+          this.isTenant3 = true;
+          break;
         default:
       }
     }

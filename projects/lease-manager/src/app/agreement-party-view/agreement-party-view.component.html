@@ -48,17 +48,33 @@
             <span style="margin-left: 15px;">Other<input type="text" style="width: 250px; margin-left: 20px; height: 35px;"></span>
         </p>
         <p style="font-weight: bold; margin-bottom: -10px;margin-left: 15px;">
+            <!-- Group 1 -->
             Full Legal Name:
         </p>
         <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
-            <div fxFlex="33%" style="margin-left: 15px;">
-                <input type="text" [value]="lease.tenant[2].firstName" [name]="lease.tenant[2].firstName">
+            <div *ngIf="lease.tenant[2]">
+                <!-- with data binding -->
+                <div fxFlex="33%" style="margin-left: 15px;">
+                    <input type="text" [value]="lease.tenant[2].lastName" [name]="lease.tenant[2].lastName">
+                </div>
+                <div fxFlex="33%">
+                    <input type="text" [value]="lease.tenant[2].firstName" [name]="lease.tenant[2].firstName">
+                </div>
+                <div fxFlex="34%">
+                    <input type="text">
+                </div>
             </div>
-            <div fxFlex="33%">
-                <input type="text" [value]="lease.tenant[2].lastName" [name]="lease.tenant[2].lastName">
-            </div>
-            <div fxFlex="34%">
-                <input type="text">
+            <div *ngIf="!lease.tenant[2]">
+                <!-- without data binding -->
+                <div fxFlex="33%" style="margin-left: 15px;">
+                    <input type="text">
+                </div>
+                <div fxFlex="33%">
+                    <input type="text">
+                </div>
+                <div fxFlex="34%">
+                    <input type="text">
+                </div>
             </div>
         </div>
         <p style="margin-top:-10px"></p>
@@ -119,7 +135,20 @@
         </div>
         <p style="margin-top:-20px"></p>
         <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
-            <div fxFlex="33%" style="margin-left: 15px;font-size: .8em;">
+            <div *ngIf="lease.tenant[2]" fxFlex="33%" style="margin-left: 15px;font-size: .8em;">
+                <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
+                    <div fxFlex="30%">
+                        <input type="text" [value]="lease.tenant[2].contactTelephone1 | slice:0:3">
+                    </div>
+                    <div fxFlex="70%" style="margin-right:5px;">
+                        <input type="text" [value]="lease.tenant[2].contactTelephone1 | slice:3:11">
+                    </div>
+                </div>
+                <div style="margin-top: -5px;">
+                    Area Code <span style="margin-left: 15px;">Home phone number</span>
+                </div>
+            </div>
+            <div *ngIf="!lease.tenant[2]" fxFlex="33%" style="margin-left: 15px;font-size: .8em;">
                 <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
                     <div fxFlex="30%">
                         <input type="text">
@@ -169,6 +198,7 @@
 
     </div> -->
         <p style="margin-left: 15px;margin-bottom: 0;margin-top: -20px;">
+            <!-- Group 2-->
             <span style="font-style:italic;">(Check one)</span><span style="font-weight: bold;margin-left: 10px;"><input type="radio" [checked]="isLandlord2"> Landloard</span><span style="font-weight: bold;margin-left: 20px;"><input type="radio" [checked]="isTenant2"> Tenant</span>
             <span style="margin-left: 15px;">Other<input type="text" style="width: 250px; margin-left: 20px; height: 35px;"></span>
         </p>
@@ -245,7 +275,15 @@
         <p style="margin-top:-20px"></p>
         <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
             <div fxFlex="33%" style="margin-left: 15px;font-size: .8em;">
-                <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
+                <div *ngIf="lease.tenant[3]" fxLayout="row" fxLayoutAlign="start" fxFlexFill>
+                    <div fxFlex="30%">
+                        <input type="text" [value]="lease.tenant[3].contactTelephone1 | slice:0:3">
+                    </div>
+                    <div fxFlex="70%" style="margin-right:5px;">
+                        <input type="text" [value]="lease.tenant[3].contactTelephone1 | slice:0:3">
+                    </div>
+                </div>
+                <div *ngIf="!lease.tenant[3]" fxLayout="row" fxLayoutAlign="start" fxFlexFill>
                     <div fxFlex="30%">
                         <input type="text">
                     </div>
@@ -294,6 +332,7 @@
 
   </div> -->
         <p style="margin-left: 15px;margin-bottom: 0;margin-top: -20px;">
+            <!-- Group 3-->
             <span style="font-style:italic;">(Check one)</span><span style="font-weight: bold;margin-left: 10px;"><input type="radio"> Landloard</span><span style="font-weight: bold;margin-left: 20px;"><input type="radio" [checked]="isTenant3"> Tenant</span>
             <span style="margin-left: 15px;">Other<input type="text" style="width: 250px; margin-left: 20px; height: 35px;"></span>
         </p>
@@ -301,15 +340,29 @@
             Full Legal Name:
         </p>
         <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
-            <div fxFlex="33%" style="margin-left: 15px;">
-                <input type="text">
+            <div *ngIf="lease.tenant[3]">
+                <div fxFlex="33%" style="margin-left: 15px;">
+                    <input type="text" [value]="lease.tenant[3].lastName" [name]="lease.tenant[3].lastName">
+                </div>
+                <div fxFlex="33%">
+                    <input type="text" [value]="lease.tenant[3].firstName" [name]="lease.tenant[3].firstName">
+                </div>
+                <div fxFlex="34%">
+                    <input type="text">
+                </div>
             </div>
-            <div fxFlex="33%">
-                <input type="text">
+            <div *ngIf="!lease.tenant[3]">
+                <div fxFlex="33%" style="margin-left: 15px;">
+                    <input type="text">
+                </div>
+                <div fxFlex="33%">
+                    <input type="text">
+                </div>
+                <div fxFlex="34%">
+                    <input type="text">
+                </div>
             </div>
-            <div fxFlex="34%">
-                <input type="text">
-            </div>
+
         </div>
         <p style="margin-top:-10px"></p>
         <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
