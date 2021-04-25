@@ -1,7 +1,4 @@
 <!-- <p>
-  agreement-party-view2 works!
-</p> -->
-<!-- <p>
     agreement-party-view works!
 </p> -->
 <div class="container" fxLayout="row" fxLayoutAlign="end" fxFlexFill>
@@ -55,7 +52,7 @@
             Full Legal Name:
         </p>
         <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
-            <div *ngIf="lease.tenant[2]">
+            <div *ngIf="lease.rentalPropertyOwners[2]">
                 <!-- with data binding -->
                 <div fxFlex="33%" style="margin-left: 15px;">
                     <input type="text" [value]="lease.rentalPropertyOwners[2].lastName" [name]="lease.rentalPropertyOwners[2].lastName">
@@ -67,7 +64,7 @@
                     <input type="text">
                 </div>
             </div>
-            <div *ngIf="!lease.tenant[2]">
+            <div *ngIf="!lease.rentalPropertyOwners[2]">
                 <!-- without data binding -->
                 <div fxFlex="33%" style="margin-left: 15px;">
                     <input type="text">
@@ -96,25 +93,27 @@
             Address:
         </p>
         <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
-            <div fxFlex="10%" style="margin-left: 15px;">
-                <input type="text">
+            <div *ngIf="lease.rentalPropertyOwners[2]">
+                <div fxFlex="10%" style="margin-left: 15px;">
+                    <input type="text">
+                </div>
+                <div fxFlex="10%">
+                    <input type="text">
+                </div>
+                <div fxFlex="30%">
+                    <input type="text" [value]="lease.rentalPropertyOwners[2].ownerAddress.streetNumber" [name]="lease.rentalPropertyOwners[2].ownerAddress.streetNumber">
+                </div>
+                <div fxFlex="25%">
+                    <input type="text" [value]="lease.rentalPropertyOwners[2].ownerAddress.city" [name]="lease.rentalPropertyOwners[2].ownerAddress.city">
+                </div>
+                <div fxFlex="10%">
+                    <input type="text" [value]="lease.rentalPropertyOwners[2].ownerAddress.stateProvince" [name]="lease.rentalPropertyOwners[2].ownerAddress.stateProvince">
+                </div>
+                <div fxFlex="15%">
+                    <input type="text" [value]="lease.rentalPropertyOwners[2].ownerAddress.zipPostCode" [name]="lease.rentalPropertyOwners[2].ownerAddress.zipPostCode">
+                </div>
             </div>
-            <div fxFlex="10%">
-                <input type="text">
-                <!--[value]="lease.rentalPropertyOwners[2].ownerAddress.streetNumber" need to extract street numer ONLY-->
-            </div>
-            <div fxFlex="30%">
-                <input type="text" [value]="lease.rentalPropertyOwners[2].ownerAddress.streetNumber">
-            </div>
-            <div fxFlex="25%">
-                <input type="text" [value]="lease.rentalPropertyOwners[2].ownerAddress.city">
-            </div>
-            <div fxFlex="10%">
-                <input type="text" [value]="lease.rentalPropertyOwners[2].ownerAddress.stateProvince">
-            </div>
-            <div fxFlex="15%">
-                <input type="text" [value]="lease.rentalPropertyOwners[2].ownerAddress.zipPostCode">
-            </div>
+
         </div>
         <p style="margin-top:-13px"></p>
         <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
@@ -139,20 +138,20 @@
         </div>
         <p style="margin-top:-20px"></p>
         <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
-            <div *ngIf="lease.tenant[2]" fxFlex="33%" style="margin-left: 15px;font-size: .8em;">
+            <div *ngIf="lease.rentalPropertyOwners[2]" fxFlex="33%" style="margin-left: 15px;font-size: .8em;">
                 <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
                     <div fxFlex="30%">
-                        <input type="text" [value]="lease.rentalPropertyOwners[2].contactTelephone | slice:0:3">
+                        <input type="text" [value]="lease.rentalPropertyOwners[2].contactTelephone1 | slice:0:3">
                     </div>
                     <div fxFlex="70%" style="margin-right:5px;">
-                        <input type="text" [value]="lease.tenant[2].contactTelephone | slice:3:11">
+                        <input type="text" [value]="lease.rentalPropertyOwners[2].contactTelephone1 | slice:3:11">
                     </div>
                 </div>
                 <div style="margin-top: -5px;">
                     Area Code <span style="margin-left: 15px;">Home phone number</span>
                 </div>
             </div>
-            <div *ngIf="!lease.tenant[2]" fxFlex="33%" style="margin-left: 15px;font-size: .8em;">
+            <div *ngIf="!lease.rentalPropertyOwners[2]" fxFlex="33%" style="margin-left: 15px;font-size: .8em;">
                 <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
                     <div fxFlex="30%">
                         <input type="text">
@@ -203,22 +202,37 @@
   </div> -->
         <p style="margin-left: 15px;margin-bottom: 0;margin-top: -20px;">
             <!-- Group 2-->
-            <span style="font-style:italic;">(Check one)</span><span style="font-weight: bold;margin-left: 10px;"><input type="radio" [checked]="isLandlord2"> Landloard</span><span style="font-weight: bold;margin-left: 20px;"><input type="radio" [checked]="isTenant2"> Tenant</span>
+            <span style="font-style:italic;">(Check one)</span><span style="font-weight: bold;margin-left: 10px;"><input type="radio" [checked]="isLandlord2"> Landloard</span><span style="font-weight: bold;margin-left: 20px;"><input type="radio" [checked]="isrentalPropertyOwners2"> rentalPropertyOwners</span>
             <span style="margin-left: 15px;">Other<input type="text" style="width: 250px; margin-left: 20px; height: 35px;"></span>
         </p>
         <p style="font-weight: bold; margin-bottom: -10px;margin-left: 15px;">
             Full Legal Name:
         </p>
         <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
-            <div fxFlex="33%" style="margin-left: 15px;">
-                <input type="text">
+            <div *ngIf="lease.rentalPropertyOwners[3]">
+                <!-- with data binding -->
+                <div fxFlex="33%" style="margin-left: 15px;">
+                    <input type="text" [value]="lease.rentalPropertyOwners[3].lastName" [name]="lease.rentalPropertyOwners[3].lastName">
+                </div>
+                <div fxFlex="33%">
+                    <input type="text" [value]="lease.rentalPropertyOwners[3].firstName" [name]="lease.rentalPropertyOwners[3].firstName">
+                </div>
+                <div fxFlex="34%">
+                    <input type="text">
+                </div>
             </div>
-            <div fxFlex="33%">
-                <input type="text">
+            <div *ngIf="!lease.rentalPropertyOwners[3]">
+                <div fxFlex="33%" style="margin-left: 15px;">
+                    <input type="text">
+                </div>
+                <div fxFlex="33%">
+                    <input type="text">
+                </div>
+                <div fxFlex="34%">
+                    <input type="text">
+                </div>
             </div>
-            <div fxFlex="34%">
-                <input type="text">
-            </div>
+
         </div>
         <p style="margin-top:-10px"></p>
         <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
@@ -236,24 +250,47 @@
             Address:
         </p>
         <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
-            <div fxFlex="10%" style="margin-left: 15px;">
-                <input type="text">
+            <div *ngIf="lease.rentalPropertyOwners[3]">
+                <div fxFlex="10%" style="margin-left: 15px;">
+                    <input type="text">
+                </div>
+                <div fxFlex="10%">
+                    <input type="text">
+                </div>
+                <div fxFlex="30%">
+                    <input type="text" [value]="lease.rentalPropertyOwners[3].ownerAddress.streetNumber" [name]="lease.rentalPropertyOwners[3].ownerAddress.streetNumber">
+                </div>
+                <div fxFlex="25%">
+                    <input type="text" [value]="lease.rentalPropertyOwners[3].ownerAddress.city" [name]="lease.rentalPropertyOwners[3].ownerAddress.city">
+                </div>
+                <div fxFlex="10%">
+                    <input type="text" [value]="lease.rentalPropertyOwners[3].ownerAddress.stateProvince" [name]="lease.rentalPropertyOwners[3].ownerAddress.stateProvince">
+                </div>
+                <div fxFlex="15%">
+                    <input type="text" [value]="lease.rentalPropertyOwners[3].ownerAddress.zipPostCode" [name]="lease.rentalPropertyOwners[3].ownerAddress.zipPostCode">
+                </div>
             </div>
-            <div fxFlex="10%">
-                <input type="text">
+            <div *ngIf="!lease.rentalPropertyOwners[2]">
+                <div fxFlex="10%" style="margin-left: 15px;">
+                    <input type="text">
+                </div>
+                <div fxFlex="10%">
+                    <input type="text">
+                </div>
+                <div fxFlex="30%">
+                    <input type="text">
+                </div>
+                <div fxFlex="25%">
+                    <input type="text">
+                </div>
+                <div fxFlex="10%">
+                    <input type="text">
+                </div>
+                <div fxFlex="15%">
+                    <input type="text">
+                </div>
             </div>
-            <div fxFlex="30%">
-                <input type="text">
-            </div>
-            <div fxFlex="25%">
-                <input type="text">
-            </div>
-            <div fxFlex="10%">
-                <input type="text">
-            </div>
-            <div fxFlex="15%">
-                <input type="text">
-            </div>
+
         </div>
         <p style="margin-top:-13px"></p>
         <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
@@ -278,28 +315,20 @@
         </div>
         <p style="margin-top:-20px"></p>
         <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
-            <div fxFlex="33%" style="margin-left: 15px;font-size: .8em;">
-                <div *ngIf="lease.tenant[3]" fxLayout="row" fxLayoutAlign="start" fxFlexFill>
+            <div *ngIf="lease.rentalPropertyOwners[3]" fxFlex="33%" style="margin-left: 15px;font-size: .8em;">
+                <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
                     <div fxFlex="30%">
-                        <input type="text" [value]="lease.tenant[3].contactTelephone1 | slice:0:3">
+                        <input type="text" [value]="lease.rentalPropertyOwners[3].contactTelephone1 | slice:0:3">
                     </div>
                     <div fxFlex="70%" style="margin-right:5px;">
-                        <input type="text" [value]="lease.tenant[3].contactTelephone1 | slice:0:3">
-                    </div>
-                </div>
-                <div *ngIf="!lease.tenant[3]" fxLayout="row" fxLayoutAlign="start" fxFlexFill>
-                    <div fxFlex="30%">
-                        <input type="text">
-                    </div>
-                    <div fxFlex="70%" style="margin-right:5px;">
-                        <input type="text">
+                        <input type="text" [value]="lease.rentalPropertyOwners[3].contactTelephone1 | slice:3:11">
                     </div>
                 </div>
                 <div style="margin-top: -5px;">
                     Area Code <span style="margin-left: 15px;">Home phone number</span>
                 </div>
             </div>
-            <div fxFlex="33%" style="font-size: .8em;">
+            <div *ngIf="!lease.rentalPropertyOwners[3]" fxFlex="33%" style="margin-left: 15px;font-size: .8em;">
                 <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
                     <div fxFlex="30%">
                         <input type="text">
@@ -309,7 +338,7 @@
                     </div>
                 </div>
                 <div style="margin-top: -5px;">
-                    Area Code <span style="margin-left: 15px;">Business phone number</span>
+                    Area Code <span style="margin-left: 15px;">Home phone number</span>
                 </div>
             </div>
             <div fxFlex="34%" style="font-size: .8em;">
@@ -337,25 +366,25 @@
 </div> -->
         <p style="margin-left: 15px;margin-bottom: 0;margin-top: -20px;">
             <!-- Group 3-->
-            <span style="font-style:italic;">(Check one)</span><span style="font-weight: bold;margin-left: 10px;"><input type="radio"> Landloard</span><span style="font-weight: bold;margin-left: 20px;"><input type="radio" [checked]="isTenant3"> Tenant</span>
+            <span style="font-style:italic;">(Check one)</span><span style="font-weight: bold;margin-left: 10px;"><input type="radio"> Landloard</span><span style="font-weight: bold;margin-left: 20px;"><input type="radio" [checked]="isrentalPropertyOwners3"> rentalPropertyOwners</span>
             <span style="margin-left: 15px;">Other<input type="text" style="width: 250px; margin-left: 20px; height: 35px;"></span>
         </p>
         <p style="font-weight: bold; margin-bottom: -10px;margin-left: 15px;">
             Full Legal Name:
         </p>
         <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
-            <div *ngIf="lease.tenant[3]">
+            <div *ngIf="lease.rentalPropertyOwners[4]">
                 <div fxFlex="33%" style="margin-left: 15px;">
-                    <input type="text" [value]="lease.tenant[3].lastName" [name]="lease.tenant[3].lastName">
+                    <input type="text" [value]="lease.rentalPropertyOwners[4].lastName" [name]="lease.rentalPropertyOwners[4].lastName">
                 </div>
                 <div fxFlex="33%">
-                    <input type="text" [value]="lease.tenant[3].firstName" [name]="lease.tenant[3].firstName">
+                    <input type="text" [value]="lease.rentalPropertyOwners[4].firstName" [name]="lease.rentalPropertyOwners[4].firstName">
                 </div>
                 <div fxFlex="34%">
                     <input type="text">
                 </div>
             </div>
-            <div *ngIf="!lease.tenant[3]">
+            <div *ngIf="!lease.rentalPropertyOwners[4]">
                 <div fxFlex="33%" style="margin-left: 15px;">
                     <input type="text">
                 </div>
@@ -384,23 +413,45 @@
             Address:
         </p>
         <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
-            <div fxFlex="10%" style="margin-left: 15px;">
-                <input type="text">
+            <div *ngIf="lease.rentalPropertyOwners[4]">
+                <div fxFlex="10%" style="margin-left: 15px;">
+                    <input type="text">
+                </div>
+                <div fxFlex="10%">
+                    <input type="text">
+                </div>
+                <div fxFlex="30%">
+                    <input type="text" [value]="lease.rentalPropertyOwners[4].ownerAddress.streetNumber" [name]="lease.rentalPropertyOwners[4].ownerAddress.streetNumber">
+                </div>
+                <div fxFlex="25%">
+                    <input type="text" [value]="lease.rentalPropertyOwners[4].ownerAddress.city" [name]="lease.rentalPropertyOwners[4].ownerAddress.city">
+                </div>
+                <div fxFlex="10%">
+                    <input type="text" [value]="lease.rentalPropertyOwners[4].ownerAddress.stateProvince" [name]="lease.rentalPropertyOwners[4].ownerAddress.stateProvince">
+                </div>
+                <div fxFlex="15%">
+                    <input type="text" [value]="lease.rentalPropertyOwners[4].ownerAddress.zipPostCode" [name]="lease.rentalPropertyOwners[4].ownerAddress.zipPostCode">
+                </div>
             </div>
-            <div fxFlex="10%">
-                <input type="text">
-            </div>
-            <div fxFlex="30%">
-                <input type="text">
-            </div>
-            <div fxFlex="25%">
-                <input type="text">
-            </div>
-            <div fxFlex="10%">
-                <input type="text">
-            </div>
-            <div fxFlex="15%">
-                <input type="text">
+            <div *ngIf="!lease.rentalPropertyOwners[4]">
+                <div fxFlex="10%" style="margin-left: 15px;">
+                    <input type="text">
+                </div>
+                <div fxFlex="10%">
+                    <input type="text">
+                </div>
+                <div fxFlex="30%">
+                    <input type="text">
+                </div>
+                <div fxFlex="25%">
+                    <input type="text">
+                </div>
+                <div fxFlex="10%">
+                    <input type="text">
+                </div>
+                <div fxFlex="15%">
+                    <input type="text">
+                </div>
             </div>
         </div>
         <p style="margin-top:-13px"></p>
@@ -426,7 +477,20 @@
         </div>
         <p style="margin-top:-20px"></p>
         <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
-            <div fxFlex="33%" style="margin-left: 15px;font-size: .8em;">
+            <div *ngIf="lease.rentalPropertyOwners[4]" fxFlex="33%" style="margin-left: 15px;font-size: .8em;">
+                <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
+                    <div fxFlex="30%">
+                        <input type="text" [value]="lease.rentalPropertyOwners[4].contactTelephone1 | slice:0:3">
+                    </div>
+                    <div fxFlex="70%" style="margin-right:5px;">
+                        <input type="text" [value]="lease.rentalPropertyOwners[4].contactTelephone1 | slice:3:11">
+                    </div>
+                </div>
+                <div style="margin-top: -5px;">
+                    Area Code <span style="margin-left: 15px;">Home phone number</span>
+                </div>
+            </div>
+            <div *ngIf="!lease.rentalPropertyOwners[4]" fxFlex="33%" style="margin-left: 15px;font-size: .8em;">
                 <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
                     <div fxFlex="30%">
                         <input type="text">
@@ -437,19 +501,6 @@
                 </div>
                 <div style="margin-top: -5px;">
                     Area Code <span style="margin-left: 15px;">Home phone number</span>
-                </div>
-            </div>
-            <div fxFlex="33%" style="font-size: .8em;">
-                <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
-                    <div fxFlex="30%">
-                        <input type="text">
-                    </div>
-                    <div fxFlex="70%" style="margin-right:5px;">
-                        <input type="text">
-                    </div>
-                </div>
-                <div style="margin-top: -5px;">
-                    Area Code <span style="margin-left: 15px;">Business phone number</span>
                 </div>
             </div>
             <div fxFlex="34%" style="font-size: .8em;">
@@ -471,7 +522,7 @@
     </div>
 
     <p style="font-weight: bold;text-align: center;margin-bottom: 0;font-size: .85em;margin-top: -15px;">FOR MORE INFORMATION</p>
-    <p style="font-weight: bold;text-align: center;margin-bottom: 0;font-size: .85em; ">RTB website: www.gov.bc.ca/landlordtenant</p>
+    <p style="font-weight: bold;text-align: center;margin-bottom: 0;font-size: .85em; ">RTB website: www.gov.bc.ca/landlordrentalPropertyOwners</p>
     <p style="font-weight: bold;text-align: center;margin-bottom: 0;font-size: .85em;">Public Information Lines 1-800-665-8779 (toll-free) <span style="margin-left: 15px">Greater Vancouver 604-660-1020</span> <span style="margin-left: 15px">Victoria 250-387-1602</span></p>
 </div>
 <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
