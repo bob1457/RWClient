@@ -7,10 +7,10 @@
         <app-agreement-header></app-agreement-header>
         <app-agreement-content [lease]="agreement$ | async"></app-agreement-content>
         <div *ngIf="numberOfTenants > 2">
-            <app-agreement-party-view [pageNumber]="totalPageNumber" [tenantNo]="numberOfTenants" [landlordNo]="numberOfLandlords" [pageNum]="1" [lease]="agreement$ | async"></app-agreement-party-view>
+            <app-agreement-party-view [pageNumber]="totalPageNumber" [tenantNo]="numberOfTenants" [pageNum]="1" [lease]="agreement$ | async"></app-agreement-party-view>
         </div>
         <div *ngIf="numberOfLandlords > 2">
-            <app-agreement-party-view [pageNumber]="totalPageNumber" [pageNum]="pageNumber" [lease]="agreement$ | async"></app-agreement-party-view>
+            <app-agreement-party-view2 [pageNumber]="totalPageNumber" [pageNum]="pageNumber" [landlordNo]="numberOfLandlords" [lease]="agreement$ | async"></app-agreement-party-view2>
         </div>
 
     </div>

@@ -44,7 +44,7 @@ import { FullLeaseAgreementComponent } from './full-lease-agreement/full-lease-a
 import { AgreementHeaderComponent } from './agreement-header/agreement-header.component';
 import { AgreementContentComponent } from './agreement-content/agreement-content.component';
 import { WorkorderDetailsDialogComponent } from './dialogs/workorder-details-dialog/workorder-details-dialog.component';
-
+import { AgreementPartyView2Component } from './agreement-party-view2/agreement-party-view2.component';
 
 // import { CdkColumnDef } from '@angular/cdk/table';
 
@@ -104,7 +104,8 @@ const routes: Routes = [
     AddRentDialogComponent,
     FullLeaseAgreementComponent,
     AgreementHeaderComponent,
-    AgreementContentComponent
+    AgreementContentComponent,
+    AgreementPartyView2Component
   ],
   imports: [
     // BrowserModule,

@@ -11,7 +11,7 @@ export class AgreementPartyViewComponent implements OnInit {
   @Input() pageNumber;
   @Input() pageNum;
   @Input() tenantNo;
-  @Input() landlordNo;
+  // @Input() landlordNo;
 
   isLandlord1 = false;
   isLandlord2 = false;
@@ -30,23 +30,23 @@ export class AgreementPartyViewComponent implements OnInit {
     //   this.page2 = true;
     // }
 
-    if (this.landlordNo > 2 ) {
-      switch (this.landlordNo) {
-        case 3:
-          this.isLandlord1 = true;
-          break;
-        case 4:
-          this.isLandlord2 = true;
-          this.isLandlord1 = true;
-          break;
-        case 5:
-          this.isLandlord2 = true;
-          this.isLandlord1 = true;
-          this.isLandlord3 = true;
-          break;
-        default:
-      }
-    }
+    // if (this.landlordNo > 2 ) {
+    //   switch (this.landlordNo) {
+    //     case 3:
+    //       this.isLandlord1 = true;
+    //       break;
+    //     case 4:
+    //       this.isLandlord2 = true;
+    //       this.isLandlord1 = true;
+    //       break;
+    //     case 5:
+    //       this.isLandlord2 = true;
+    //       this.isLandlord1 = true;
+    //       this.isLandlord3 = true;
+    //       break;
+    //     default:
+    //   }
+    // }
 
     if (this.tenantNo > 2 ) {
       switch (this.tenantNo) {
