@@ -58,7 +58,7 @@
                         </div>
 
                     </div>
-                    <div *ngIf="listings && listings.length === 0" fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="15px" style="height: 340px;">
+                    <div *ngIf="!listings" fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="15px" style="height: 340px;">
                         <div style="height: 50px;margin-top: 15px;">
                             <p style="text-align:center;">
                                 No property listing at this time!
@@ -87,7 +87,7 @@
                         </mat-card>
 
                     </div>
-                    <div *ngIf="applications && applications.length === 0" fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="15px" style="height: 340px;">
+                    <div *ngIf="!applications" fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="15px" style="height: 340px;">
                         <div style="height: 50px;margin-top: 15px;">
                             <p style="text-align:center;">
                                 No applications at this time!
@@ -113,7 +113,7 @@
                         </mat-card>
 
                     </div>
-                    <div *ngIf="openhouses && openhouses.length === 0" fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="15px" style="height: 340px;">
+                    <div *ngIf="!openhouses" fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="15px" style="height: 340px;">
                         <div style="height: 50px;margin-top: 15px;">
                             <p style="text-align:center;">
                                 No open house at this time!

@@ -5,7 +5,7 @@ import { PropertyListingState } from '../store/marketing.state';
 import { Store, select } from '@ngrx/store';
 import { Location } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
-import { getPropertyListingDetails, updatePropertyListing, uploadPropertyImage, addOpenHouseToListing, updateOpenHouseToListingFailure, updateOpenHouseToListing, getPropertyImageList, getOpenHouseList } from '../store/actions/marketing.actions';
+import { getPropertyListingDetails, updatePropertyListing, uploadPropertyImage, addOpenHouseToListing, updateOpenHouseToListingFailure, updateOpenHouseToListing, getPropertyImageList, getOpenHouseList, deletePropertyImage } from '../store/actions/marketing.actions';
 import { propertyListingDetails, loadingStatus, propertyImgList, loadedStatus, openHouses } from '../store/reducers';
 import { Observable } from 'rxjs';
 
@@ -25,7 +25,13 @@ export class ListingDetailsComponent implements OnInit {
   // loaded = false;
   imgList: any[] = [];
 
+
+  img = {
+    id: 0
+  };
+
   tabIndex = 0;
+  showDelete: boolean;
 
   iconImg: any;
   addOpenHouse = false;
@@ -56,9 +62,9 @@ export class ListingDetailsComponent implements OnInit {
                               this.imgList = imgs;
 
                               // this.imgList = this.listing.rentalProperty.propertyImg;
-                              // this.imgList = imgs.filter(i => i.rentalPropertyId == this.listing.rentalProperty.Id);
+                              this.imgList = imgs.filter(i => i.rentalPropertyId == this.listing.rentalProperty.id);
                               this.iconImg = this.imgList.filter((value, index) => index === 0);
-
+                              console.log('icon img', this.iconImg);
                             });
 
 
@@ -109,7 +115,7 @@ export class ListingDetailsComponent implements OnInit {
 
     debugger;
 
-
+    this.showDelete = false;
     // this.store.pipe(select(propertyImgList))
     // .subscribe(img => {
     //   var pId = this.listing.rentalPropertyId;
@@ -125,7 +131,6 @@ export class ListingDetailsComponent implements OnInit {
       note: [],
       created: [],
       modified: [],
-
       rentalPropertyId: [],
 
       contactName: [],
@@ -229,6 +234,21 @@ export class ListingDetailsComponent implements OnInit {
 
   publish() {
     // this.store.dispatch(updatePropertyListingStatus(payload:))
+  }
+
+  showButton() {
+    this.showDelete = true;
+  }
+
+  hideButton() {
+    this.showDelete = false;
+  }
+
+  remove(id: any) { // delete property image
+    debugger;
+    console.log('remove this', id);
+    this.img.id = id;
+    this.store.dispatch(deletePropertyImage({payload: this.img}));
   }
 
   updateOpenHouse() {

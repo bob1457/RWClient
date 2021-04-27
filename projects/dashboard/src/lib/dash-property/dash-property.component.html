@@ -99,7 +99,7 @@
                             </div>
 
                         </div>
-                        <div *ngIf="propertyList && propertyList.length === 0" fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="15px" style="height: 340px;">
+                        <div *ngIf="!propertyList" fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="15px" style="height: 340px;">
                             <div style="height: 50px;margin-top: 15px;">
                                 <p style="text-align:center;">
                                     No records found!
@@ -132,7 +132,7 @@
                        </mat-card-actions> -->
                             </mat-card>
                         </div>
-                        <div *ngIf="ownerList && ownerList.length === 0" fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="15px" style="height: 340px;">
+                        <div *ngIf="!ownerList" fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="15px" style="height: 340px;">
                             <div style="height: 50px;margin-top: 15px;">
                                 <p style="text-align:center;">
                                     No property owners!
@@ -176,7 +176,7 @@
                        </mat-card-actions> -->
                             </mat-card>
                         </div>
-                        <div *ngIf="contractList && contractList.length === 0" fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="15px" style="height: 340px;">
+                        <div *ngIf="!contractList" fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="15px" style="height: 340px;">
                             <div style="height: 50px;margin-top: 15px;">
                                 <p style="text-align:center;">
                                     No management contracts!

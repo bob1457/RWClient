@@ -64,6 +64,27 @@ export const uploadPropertyImageFailure = createAction(
 );
 
 /**
+ * Remove property images
+ */
+
+export const deletePropertyImage = createAction(
+  '[Marketing] Delete Property Image',
+  props<{payload: any}>()
+);
+
+export const deletePropertyImageSuccess = createAction(
+  '[Marketing] Delete Property Image Success',
+  props<{payload: any}>()
+);
+
+export const deletePropertyImageFailure = createAction(
+  '[Property] Delete Property Image Failure',
+  // props<{payload: any}>()
+  (errorMessage = 'Error deleting property image') => ({ payload: { errorMessage }})
+
+);
+
+/**
  * Get Property Image List Actions
  */
 export const getPropertyImageList = createAction(

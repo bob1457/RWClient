@@ -62,7 +62,7 @@
 
                         </mat-grid-list>
                     </div>
-                    <div *ngIf="tenants && tenants.length === 0" class="container" fxLayout="column" fxLayoutAlign="start" fxLayoutGap="1%" fxFlexFill>
+                    <div *ngIf="!tenants" class="container" fxLayout="column" fxLayoutAlign="start" fxLayoutGap="1%" fxFlexFill>
                         <div style="height: 50px;margin-top: 15px;">
                             <p style="text-align:center;">
                                 No records found!
@@ -98,7 +98,7 @@
                             </mat-grid-tile>
                         </mat-grid-list>
                     </div>
-                    <div *ngIf="rentals && rentals.length === 0" class="container" fxLayout="column" fxLayoutAlign="start" fxLayoutGap="1%" fxFlexFill>
+                    <div *ngIf="!rentals" class="container" fxLayout="column" fxLayoutAlign="start" fxLayoutGap="1%" fxFlexFill>
                         <div style="height: 50px;margin-top: 15px;">
                             <p style="text-align:center;">
                                 No records found!

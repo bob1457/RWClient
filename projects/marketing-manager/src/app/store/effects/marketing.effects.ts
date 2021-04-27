@@ -132,6 +132,8 @@ export class MarketingEffects {
     )
   );
 
+
+
   updatePropertyListing$ = createEffect(() =>
     this.actions$.pipe(
       // ofType('[Property] Get Property List'),
@@ -180,6 +182,31 @@ export class MarketingEffects {
           //   } // EMPTY
           // )
           catchError(error => of(ListingActions.uploadPropertyImageFailure(error.message)))
+        )
+      )
+    )
+  );
+
+  removePropertyImage$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(ListingActions.deletePropertyImage),
+      tap(() => console.log('got here to remove property image !!!')),
+      // tslint:disable-next-line: no-unused-expression
+      // map(action => {action.payload, action.rentalPropertyId; }),
+      switchMap((action) =>
+        this.marketingService.removeImagesToListing(action.payload).pipe(
+          map((propertyImg: any) => ({
+            type: '[Marketing] Delete Property Image Success',
+            payload: propertyImg
+          })),
+          // tap(res => {console.log('response: ' + res); }),
+          // catchError(
+          //   err => {
+          //     return of('[Marketing] Update Property Listing Failure', err.error);
+          //   } // EMPTY
+          // )
+          catchError(error => of(ListingActions.deletePropertyImageSuccess(error.message)))
         )
       )
     )

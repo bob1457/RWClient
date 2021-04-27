@@ -63,7 +63,7 @@ export class FullLeaseAgreementComponent implements OnInit {
     //   this.totalPageNumber = 2;
     // }
 
-    if ( this.numberOfLandlords > 2 && this.numberOfLandlords < 6) {
+    if ( this.numberOfLandlords > 2 && this.numberOfLandlords < 4) {
       this.page2 = true;
       if (this.numberOfTenants > 2) { // additional tenatns
         this.totalPageNumber = 2;

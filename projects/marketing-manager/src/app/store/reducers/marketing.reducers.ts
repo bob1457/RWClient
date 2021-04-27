@@ -211,6 +211,46 @@ const propertyListingReducer = createReducer(
     });
   }),
 
+
+  /**
+   *  Delete property image
+   */
+
+   on(ListingActions.deletePropertyImage, state => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+  on(ListingActions.deletePropertyImageSuccess, (state, { payload }) => {
+    debugger;
+    // const imgList = state.propertyImgList.map(
+    //   item => payload.id === item.id ? payload : item
+    // );
+
+    const imagesList = state.propertyImgList.filter(img => img.id !== payload.id);
+
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      propertyImgList: imagesList // ,
+      // listing: {
+      //   ...state.listing.rentalProperty.peroptyImg, payload
+      // }
+    });
+  }),
+
+  on(ListingActions.deletePropertyImageFailure, (state) => {
+    return ({
+      ...state,
+      loading: false,
+      errorMessage: 'Failed to upload property image'
+    });
+  }),
+
+
+
   /**
    * Get rental applications
    */

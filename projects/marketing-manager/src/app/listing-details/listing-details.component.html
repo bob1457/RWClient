@@ -18,9 +18,9 @@
         <div class="images">
             <ul style="list-style-type: none;margin-left: -50px;">
                 <li *ngFor="let img of imgList" style="display: inline;">
-                    <span *ngIf="img.rentalPropertyId == listing.rentalPropertyId">
-                  <img attr.src={{serverUrl}}{{img.propertyImgUrl}} width="45px" height="45px" title="{{img.rentalPropertyId}}">
-                </span>
+                    <!-- <span *ngIf="img.rentalPropertyId == listing.rentalPropertyId"> -->
+                    <img attr.src={{serverUrl}}{{img.propertyImgUrl}} width="45px" height="45px" title="{{img.rentalPropertyId}}">
+                    <!-- </span> -->
                 </li>
                 <!-- <div *ngIf="imgList == null">  *ngIf="img.rentalPropertyId == listing.rentalPropertyId"
                     <li *ngFor="let img of listing.rentalProperty.propertyImg" style="display: inline;">
@@ -194,6 +194,41 @@
                         <!-- <div mat-card-avatar class="tenant-avatar">
                                       <img src="../../assets/images/tenant.png" width="50px" height="50px" style="border-radius: 50%;">
                                   </div> listing.rentalProperty.openHouse-->
+                        <mat-tab label="Property Images" style="background: #f5f5f5;overflow-x: hidden;">
+                            <section>
+                                <p style="margin-top: 15px;
+                                margin-left: 25px;
+                                font-weight: 500;
+                                text-transform: uppercase;">
+                                    Property Image List
+                                </p>
+
+                                <ul fxLayout="row wrap" fxLayoutGap="20px" fxLayoutAlign="flex-start" style="list-style-type: none;margin-left: -15px;">
+                                    <li *ngFor="let img of imgList; let i = index" style="display: inline;position: relative;" (mouseenter)="i=i+1" (mouseleave)="i = 0">
+                                        <button mat-button [matMenuTriggerFor]="menu" style="padding: 0;">
+                                        <img attr.src={{serverUrl}}{{img.propertyImgUrl}} width="80px" height="80px" title="{{img.rentalPropertyId}}">
+                                      </button>
+
+                                        <span style="position: absolute;
+                                          top: 60px;
+                                          cursor: pointer;
+                                          left: 70px;">
+                                          <a title="Delete Image">
+                                            <mat-icon style="color: #632007;" (click)="remove(img.id)">clear</mat-icon>
+                                            <!-- <mat-icon *ngIf="i != 0" style="color: #632007;" (click)="remove(img.id)">delete-forever</mat-icon> -->
+                                            <!-- {{img.id}} *ngIf="i != 0"  -->
+                                          </a>
+                                        </span>
+
+                                        <mat-menu #menu="matMenu">
+                                            <img attr.src={{serverUrl}}{{img.propertyImgUrl}} width="100%" height="auto" title="{{img.rentalPropertyId}}">
+                                        </mat-menu>
+                                    </li>
+
+                                </ul>
+
+                            </section>
+                        </mat-tab>
 
                         <mat-tab label="Open Houses" style="background: #f5f5f5;">
                             <div *ngIf="openhouse">
