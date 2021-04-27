@@ -211,7 +211,6 @@ const propertyListingReducer = createReducer(
     });
   }),
 
-
   /**
    *  Delete property image
    */

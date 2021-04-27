@@ -214,7 +214,12 @@
                                           cursor: pointer;
                                           left: 70px;">
                                           <a title="Delete Image">
-                                            <mat-icon style="color: #632007;" (click)="remove(img.id)">clear</mat-icon>
+                                            <mat-icon style="color: #f3ece9;
+                                            background: #de3333;
+                                            padding-bottom: 5px;
+                                            border-radius: 50%;
+                                            cursor: pointer;
+                                            padding-right: 6px;" (click)="remove(img.id)">delete_forever</mat-icon>
                                             <!-- <mat-icon *ngIf="i != 0" style="color: #632007;" (click)="remove(img.id)">delete-forever</mat-icon> -->
                                             <!-- {{img.id}} *ngIf="i != 0"  -->
                                           </a>
