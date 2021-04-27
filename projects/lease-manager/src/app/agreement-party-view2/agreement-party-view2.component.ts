@@ -15,6 +15,9 @@ export class AgreementPartyView2Component implements OnInit {
   isLandlord1 = false;
   isLandlord2 = false;
   isLandlord3 = false;
+  isTenant1 = false;
+  isTenant2 = false;
+  isTenant3 = false;
 
   constructor() { }
 
