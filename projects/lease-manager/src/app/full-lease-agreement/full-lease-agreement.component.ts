@@ -36,7 +36,40 @@ export class FullLeaseAgreementComponent implements OnInit {
                 this.id = this.actRoute.snapshot.params.id;
                 console.log(this.id);
 
-                this.store.select(leaseDetails)
+              //   this.store.select(leaseDetails)
+              //       .subscribe(lease => {
+              //         if (lease) {
+              //           this.agreementDetails = lease;
+              //           localStorage.setItem('agreement', JSON.stringify(this.agreementDetails));
+              //         } else {
+              //           this.agreementDetails = JSON.parse(localStorage.getItem('agreement'));
+              //         }
+
+              //         this.numberOfTenants = this.agreementDetails.tenant.length;
+              //         this.numberOfLandlords = this.agreementDetails.rentalProperty.rentalPropertyOwners.length;
+
+              //         this.totalEntity = this.numberOfTenants + this.numberOfLandlords;
+              //         console.log('total entity', this.totalPageNumber);
+              //         console.log('No. Tenants',this.numberOfTenants);
+              //         console.log('No. Landloard',this.numberOfLandlords);
+              //         console.log('agreement', this.agreementDetails);
+              //       });
+              }
+
+  ngOnInit() {
+    debugger;
+
+    this.agreement$ = this.store.select(leaseDetails);
+
+    // this.totalEntity = this.agreementDetails.rentalPropertyOwners.length + this.agreementDetails.tenant.length;
+    // console.log('total entity', this.totalPageNumber);
+
+    // if ( this.totalEntity > 7 && this.totalEntity < 10) {
+    //   this.page2 = true;
+    //   this.totalPageNumber = 2;
+    // }
+
+    this.store.select(leaseDetails)
                     .subscribe(lease => {
                       if (lease) {
                         this.agreementDetails = lease;
@@ -54,20 +87,7 @@ export class FullLeaseAgreementComponent implements OnInit {
                       console.log('No. Landloard',this.numberOfLandlords);
                       console.log('agreement', this.agreementDetails);
                     });
-              }
 
-  ngOnInit() {
-    debugger;
-
-    this.agreement$ = this.store.select(leaseDetails);
-
-    // this.totalEntity = this.agreementDetails.rentalPropertyOwners.length + this.agreementDetails.tenant.length;
-    // console.log('total entity', this.totalPageNumber);
-
-    // if ( this.totalEntity > 7 && this.totalEntity < 10) {
-    //   this.page2 = true;
-    //   this.totalPageNumber = 2;
-    // }
 
     if ( this.numberOfLandlords > 2 && this.numberOfLandlords < 4) {
       this.page2 = true;
