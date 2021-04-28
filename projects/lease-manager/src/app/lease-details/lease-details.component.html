@@ -217,11 +217,13 @@
                                     </div>
 
                                     <div fxLayout="row" fxLayoutAlign="start center" style="width: 75%;margin-bottom: 15px;">
-                                        <div fxFlex="50%">
+                                        <div fxFlex="28%">
                                             <button type="button" routerLink="/Manage/lease/agreementview/{{id}}" mat-raised-button>View Agreement</button>
                                         </div>
                                         <div fxFlex="50%">
                                             <!-- (click)="viewAgreement()"" -->
+                                            <button *ngIf="lease.isAddendumAvailable" type="button" routerLink="/Manage/lease/agreementview/{{id}}" mat-raised-button>View Addendum</button>
+                                            <button *ngIf="!lease.isAddendumAvailable" type="button" routerLink="/Manage/lease/agreementview/{{id}}" mat-raised-button>Add Addendum</button>
                                         </div>
                                     </div>
 
