@@ -3,8 +3,8 @@
 </p> -->
 <div class="view-container">
     <div id="pdfdoc" #pdfdoc>
-        <app-contract-header [user]="pm" [contract]="contract"></app-contract-header>
-        <app-contract-content></app-contract-content>
+        <app-contract-header [user]="pm"></app-contract-header>
+        <app-contract-content [user]="pm" [contract]="contract"></app-contract-content>
         <app-contract-footer></app-contract-footer>
     </div>
 </div>

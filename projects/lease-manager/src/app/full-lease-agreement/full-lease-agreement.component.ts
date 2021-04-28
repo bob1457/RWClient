@@ -38,7 +38,13 @@ export class FullLeaseAgreementComponent implements OnInit {
 
                 this.store.select(leaseDetails)
                     .subscribe(lease => {
-                      this.agreementDetails = lease;
+                      if (lease) {
+                        this.agreementDetails = lease;
+                        localStorage.setItem('agreement', JSON.stringify(this.agreementDetails));
+                      } else {
+                        this.agreementDetails = JSON.parse(localStorage.getItem('agreement'));
+                      }
+
                       this.numberOfTenants = this.agreementDetails.tenant.length;
                       this.numberOfLandlords = this.agreementDetails.rentalProperty.rentalPropertyOwners.length;
 

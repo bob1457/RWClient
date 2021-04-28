@@ -38,8 +38,13 @@ export class ContractViewComponent implements OnInit {
     debugger;
     this.store.pipe(select(contractDetails))
               .subscribe(data => {
-                this.contract = data;
-                this.contractTitle = data.ManagementContractTitle;
+                if(data) {
+                  this.contract = data;
+                  this.contractTitle = data.ManagementContractTitle;
+                  localStorage.setItem('contract', JSON.stringify(this.contract));
+                } else {
+                  this.contract = JSON.parse(localStorage.getItem('contract'));
+                }
                 console.log(this.contractTitle);
               });
     this.store.pipe(select(getUserInfo))
@@ -50,7 +55,7 @@ export class ContractViewComponent implements OnInit {
                 } else {
                   this.pm = JSON.parse(localStorage.getItem('auth'));
                 }
-
+                console.log('pm', this.pm);
               });
   }
 

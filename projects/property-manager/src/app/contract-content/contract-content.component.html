@@ -1,5 +1,32 @@
 <div fxLayout="column" fxLayoutAlign="center" class="container">
-    <p>
+
+    <div style="text-align: left;margin-top: 20px;line-height: 2;">
+        <div style="text-align: center;">
+            This agreement made and entered into this ___day of ___________, 20___ by and between
+        </div>
+
+        <div style="text-align: center;">
+            <span style="font-weight: 600;">{{contract.property.ownerProperty[0].propertyOwner.firstName}} {{contract.property.ownerProperty[0].propertyOwner.lastName}}</span> (NAME OF THE OWNER) (“Owner” herein),
+        </div>
+        <div style="text-align: center;">
+            and
+        </div>
+        <div style="text-align: center;">
+            <span style="font-weight: 600;">{{user.firstname}} {{user.lastname}}</span>, the Property Management Agent, ((“Agent” herein).
+        </div>
+
+        <!-- This is a management contract between {{user.firstname}} {{user.lastname}} (Property Manager) and  (Client(s)) for the property -->
+        <!-- {{contract.property.propertyName}} located on {{contract.property.address.propertyNumber}} {{contract.property.address.propertyStreet}} {{contract.property.address.propertyCity}} {{contract.property.address.propertyStateProvince}} {{contract.property.address.zipPostCode}}
+    {{contract.property.address.propertyCountry}}. -->
+    </div>
+    <div style="margin-top: 10px;">
+        In consideration of the mutual covenants set forth herein, the parties agree as follows:
+    </div>
+
+
+
+
+    <!-- <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste aliquam quia beatae similique consectetur iusto perspiciatis, autem deleniti quis unde ratione eveniet, soluta maiores quisquam quas fugit ducimus, laudantium tenetur!
     </p>
     <p>
@@ -13,5 +40,5 @@
     </p>
     <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste aliquam quia beatae similique consectetur iusto perspiciatis, autem deleniti quis unde ratione eveniet, soluta maiores quisquam quas fugit ducimus, laudantium tenetur!
-    </p>
+    </p> -->
 </div>
