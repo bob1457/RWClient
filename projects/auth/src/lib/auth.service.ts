@@ -9,7 +9,8 @@ import { map } from 'rxjs/operators';
 })
 export class AuthService {
 
-  private baseUrl = 'https://localhost:44336/api';
+  // private baseUrl = 'https://localhost:44336/api';
+  private baseUrl = 'http://localhost:58088/api';
 
   private currentUserSubject: BehaviorSubject<User>;
   public currentUser: Observable<User>;
