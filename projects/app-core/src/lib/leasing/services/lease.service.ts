@@ -150,12 +150,27 @@ export class LeaseService {
 
   addInvoice(data: any) {
     debugger;
-    return this.http.post<any>(`${this.baseUrl}/Workorder/invoice/add`, data)
+    return this.http.post<any>(`${this.baseUrl}/Workorder/invoice/add`, data);
   }
 
   updateInvoice(data: any) {
     debugger;
     return this.http.post<any>(`${this.baseUrl}/Workorder/invoice/update`, data );
+  }
+
+  addAddendum(data: any) {
+    debugger;
+    return this.http.post<any>(`${this.baseUrl}/Lease/addAddendum`, data);
+  }
+
+  addAddendumItem(data: any) {
+    debugger;
+    return this.http.post<any>(`${this.baseUrl}/Lease/addAddendumItem`, data);
+  }
+
+  updateAddendumItem(data: any) {
+    debugger;
+    return this.http.post<any>(`${this.baseUrl}/Lease/updateAddendumItem`, data);
   }
 
 }

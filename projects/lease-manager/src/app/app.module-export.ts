@@ -45,6 +45,8 @@ import { AgreementHeaderComponent } from './agreement-header/agreement-header.co
 import { AgreementContentComponent } from './agreement-content/agreement-content.component';
 import { WorkorderDetailsDialogComponent } from './dialogs/workorder-details-dialog/workorder-details-dialog.component';
 import { AgreementPartyView2Component } from './agreement-party-view2/agreement-party-view2.component';
+import { AddendumViewComponent } from './addendum-view/addendum-view.component';
+import { AddAddendumComponent } from './add-addendum/add-addendum.component';
 
 // import { CdkColumnDef } from '@angular/cdk/table';
 
@@ -66,7 +68,9 @@ const routes: Routes = [
       { path: 'servicerequestdetails/:id', component: ServieRequestDetailsComponent},
       { path: 'vendors', component: VendorListComponent},
       { path: 'vendordetails/:id', component: VendorDetailsComponent},
-      { path: 'agreementview/:id', component: FullLeaseAgreementComponent}
+      { path: 'agreementview/:id', component: FullLeaseAgreementComponent},
+      { path: 'addendumview/:id', component: AddendumViewComponent},
+      { path: 'addaddendum', component: AddAddendumComponent}
       // { path: 'applications', component: ApplicationListComponent}
     ]
   }//,
@@ -105,7 +109,9 @@ const routes: Routes = [
     FullLeaseAgreementComponent,
     AgreementHeaderComponent,
     AgreementContentComponent,
-    AgreementPartyView2Component
+    AgreementPartyView2Component,
+    AddendumViewComponent,
+    AddAddendumComponent
   ],
   imports: [
     // BrowserModule,

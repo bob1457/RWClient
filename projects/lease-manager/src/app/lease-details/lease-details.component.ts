@@ -49,6 +49,7 @@ export class LeaseDetailsComponent implements OnInit {
   hide = false;
   // rentAmtDue;
   // rentDueOn;
+  addaddendum = false;
 
   loading$: Observable<boolean>;
 
@@ -698,6 +699,14 @@ export class LeaseDetailsComponent implements OnInit {
   onServieRequestChange(value) {
     this.chosenServiceRequestId = value;
     console.log('service req id', value);
+  }
+
+  cancelAdd() {
+    this.addaddendum = false;
+  }
+
+  enableAdd() {
+    this.addaddendum = true;
   }
 
 }

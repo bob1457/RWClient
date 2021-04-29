@@ -222,8 +222,8 @@
                                         </div>
                                         <div fxFlex="50%">
                                             <!-- (click)="viewAgreement()"" -->
-                                            <button *ngIf="lease.isAddendumAvailable" type="button" routerLink="/Manage/lease/agreementview/{{id}}" mat-raised-button>View Addendum</button>
-                                            <button *ngIf="!lease.isAddendumAvailable" type="button" routerLink="/Manage/lease/agreementview/{{id}}" mat-raised-button>Add Addendum</button>
+                                            <button *ngIf="lease.isAddendumAvailable" type="button" routerLink="/Manage/lease/addendumview/{{id}}" mat-raised-button>View Addendum</button>
+                                            <button *ngIf="!lease.isAddendumAvailable" type="button" routerLink="/Manage/lease/addaddendum" mat-raised-button>Add Addendum</button>
                                         </div>
                                     </div>
 

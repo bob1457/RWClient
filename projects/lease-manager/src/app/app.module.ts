@@ -40,6 +40,8 @@ import { AgreementContentComponent } from './agreement-content/agreement-content
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { WorkorderDetailsDialogComponent } from './dialogs/workorder-details-dialog/workorder-details-dialog.component';
 import { AgreementPartyView2Component } from './agreement-party-view2/agreement-party-view2.component';
+import { AddendumViewComponent } from './addendum-view/addendum-view.component';
+import { AddAddendumComponent } from './add-addendum/add-addendum.component';
 
 
 @NgModule({
@@ -76,7 +78,9 @@ import { AgreementPartyView2Component } from './agreement-party-view2/agreement-
     AgreementHeaderComponent,
     AgreementContentComponent,
     WorkorderDetailsDialogComponent,
-    AgreementPartyView2Component
+    AgreementPartyView2Component,
+    AddendumViewComponent,
+    AddAddendumComponent
   ],
   imports: [
     BrowserModule,
