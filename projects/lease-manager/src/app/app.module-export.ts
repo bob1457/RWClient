@@ -47,6 +47,7 @@ import { WorkorderDetailsDialogComponent } from './dialogs/workorder-details-dia
 import { AgreementPartyView2Component } from './agreement-party-view2/agreement-party-view2.component';
 import { AddendumViewComponent } from './addendum-view/addendum-view.component';
 import { AddAddendumComponent } from './add-addendum/add-addendum.component';
+import { AddVendorComponent } from './add-vendor/add-vendor.component';
 
 // import { CdkColumnDef } from '@angular/cdk/table';
 
@@ -70,8 +71,8 @@ const routes: Routes = [
       { path: 'vendordetails/:id', component: VendorDetailsComponent},
       { path: 'agreementview/:id', component: FullLeaseAgreementComponent},
       { path: 'addendumview/:id', component: AddendumViewComponent},
-      { path: 'addaddendum', component: AddAddendumComponent}
-      // { path: 'applications', component: ApplicationListComponent}
+      { path: 'addaddendum', component: AddAddendumComponent},
+      { path: 'addVendor', component: AddVendorComponent}
     ]
   }//,
   // { path: 'tenants', component: AllTenantsComponent}
@@ -87,6 +88,7 @@ const routes: Routes = [
     LoadingComponent,
     AddLeaseComponent,
     AddTenantComponent,
+    AddendumViewComponent,
     TenantDetailsComponent,
     AgreementPartyViewComponent,
     YesNoPipe,
@@ -111,7 +113,8 @@ const routes: Routes = [
     AgreementContentComponent,
     AgreementPartyView2Component,
     AddendumViewComponent,
-    AddAddendumComponent
+    AddAddendumComponent,
+    AddVendorComponent
   ],
   imports: [
     // BrowserModule,

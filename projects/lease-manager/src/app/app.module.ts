@@ -42,6 +42,7 @@ import { WorkorderDetailsDialogComponent } from './dialogs/workorder-details-dia
 import { AgreementPartyView2Component } from './agreement-party-view2/agreement-party-view2.component';
 import { AddendumViewComponent } from './addendum-view/addendum-view.component';
 import { AddAddendumComponent } from './add-addendum/add-addendum.component';
+import { AddVendorComponent } from './add-vendor/add-vendor.component';
 
 
 @NgModule({
@@ -80,7 +81,8 @@ import { AddAddendumComponent } from './add-addendum/add-addendum.component';
     WorkorderDetailsDialogComponent,
     AgreementPartyView2Component,
     AddendumViewComponent,
-    AddAddendumComponent
+    AddAddendumComponent,
+    AddVendorComponent
   ],
   imports: [
     BrowserModule,
