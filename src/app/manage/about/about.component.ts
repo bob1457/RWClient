@@ -1,11 +1,26 @@
 import { Component, OnInit } from '@angular/core';
-
+import { environment } from '../../../environments/environment';
 @Component({
   selector: 'app-about',
   templateUrl: './about.component.html',
   styleUrls: ['./about.component.css']
 })
 export class AboutComponent implements OnInit {
+
+  sysInfo = {
+    version: environment.appVersion,
+    appName: environment.appName,
+    desc: environment.appDescription,
+    pVersion: environment.versions.app,
+    appFramework: environment.versions.angular,
+    appStateManagement: environment.versions.ngrx,
+    appUI:environment.versions.material,
+
+
+  };
+
+  more = false;
+
 
   tabs = [
     {tab: 'System Info'},
@@ -15,10 +30,15 @@ export class AboutComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+
   }
 
   goBack() {
 
+  }
+
+  showMore() {
+    this.more = !this.more;
   }
 
 }

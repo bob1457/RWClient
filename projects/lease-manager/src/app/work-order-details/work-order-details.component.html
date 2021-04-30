@@ -14,6 +14,10 @@
             <span style="font-weight: 500;">Rental Property</span>
             <p>{{workorder.rentalProperty.propertyName}}<br> {{workorder.rentalProperty.address.city}} {{workorder.rentalProperty.address.stateProvince}} {{workorder.rentalProperty.address.zipPostCode}} <br> {{workorder.rentalProperty.address.country}}
             </p>
+            <!-- <p>
+              <span>Service Provider</span>
+              {{workorder.vendor.vendorBusinessName}}
+            </p> -->
 
         </div>
 
@@ -21,6 +25,15 @@
             <span style="font-weight: 500;">Service Request</span>
             <p>{{workorder.serviceRequest.requestSubject}}<br> Details: <br>{{workorder.serviceRequest.requestDetails}}
                 <br>Status: {{workorder.serviceRequest.status | status}} <br>Note: <br> {{workorder.serviceRequest.notes}}
+            </p>
+
+        </div>
+
+        <div style="margin-top: 25px;width: 60%;">
+            <span style="font-weight: 500;">Service Provider</span>
+            <p style="font-size: .85em;"><span style="font-size: .9em;">{{workorder.vendor.vendorBusinessName}}</span> ({{workorder.vendor.vendorSpecialty}})<br> Details:
+                <br> {{workorder.vendor.vendorContactEmail}}
+                <br>{{workorder.vendor.vendorContactTelephone1}}
             </p>
 
         </div>

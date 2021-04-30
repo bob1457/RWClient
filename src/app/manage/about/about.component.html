@@ -40,10 +40,13 @@
                   </mat-icon>
                 </span>
                 <span style="color: #bdbbbb;">WORKS</span>
+                <span style="font-size: .5em;
+                font-weight: normal;
+                font-style: italic">&nbsp;&nbsp;&nbsp;Version {{sysInfo.version}}</span>
             </p>
         </div>
         <div class="sub-title">
-            <p>Realestate property managememt system</p>
+            <p>{{sysInfo.desc}}</p>
         </div>
         <div class="about-content">
             <div [@.disabled]="true" style="width: 100%;">
@@ -53,30 +56,128 @@
                             <div fxFlex="10%">
                                 <mat-icon class="about_icon" style="color: teal;">settings</mat-icon>
                             </div>
-                            <div fxFlex="80%">
+                            <div fxFlex="80%" class="about-tab-title">
                                 System Information
                             </div>
-                        </div>
 
+                        </div>
+                        <div style="width: 75%;margin-bottom: 10px;
+                          max-height: 250px;
+                          overflow-y: auto;margin-top: 40px;">
+                            <div class="sysinfo-panel" style="margin-left: 85px;">
+                                <div>
+                                    <span style="font-weight: 500;">Applicatino Name</span>: {{sysInfo.appName}}
+                                </div>
+                                <div>
+                                    <span style="font-weight: 500;">Applicatino Version</span>: {{sysInfo.version}}
+                                </div>
+                                <div>
+                                    <span style="font-weight: 500;">Applicatino Description</span>: {{sysInfo.desc}}
+                                </div>
+                                <p style="margin-top: 25px;">
+                                    <a mat-button (click)="showMore()"><span *ngIf="!more" style="font-weight: 500;">More...</span><span *ngIf="more" style="font-weight: 500;">Hide...</span></a>
+                                </p>
+                                <div *ngIf="more">
+                                    <div>
+                                        <span style="font-weight: 500;">Applicatino Framework</span>: Angular &nbsp;&nbsp;{{sysInfo.appFramework}}
+                                    </div>
+                                    <div>
+                                        <span style="font-weight: 500;">State Management</span>: NGRX &nbsp;&nbsp;{{sysInfo.appStateManagement}}
+                                    </div>
+                                    <div>
+                                        <span style="font-weight: 500;">UI Framework</span>: Angular Material Design &nbsp;&nbsp;{{sysInfo.appUI}}
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
                     </mat-tab>
-                    <mat-tab label="Support Info">
+                    <mat-tab label="Customer Support">
                         <div class="tab-content" fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px">
                             <div fxFlex="10%">
                                 <mat-icon class="about_icon" style="color: orangered;">thumb_up_off_alt</mat-icon>
                             </div>
-                            <div fxFlex="80%">
+                            <div fxFlex="80%" class="about-tab-title">
                                 Customer Support
                             </div>
                         </div>
+                        <div style="width: 75%;margin-bottom: 10px;
+                          max-height: 250px;
+                          overflow-y: auto;margin-top: 40px;">
+                            <div class="sysinfo-panel" style="margin-left: 85px;">
+                                <div>
+                                    <span style="font-weight: 500;">Support Contact</span>: support@skayware.com
+                                </div>
+
+                            </div>
+
+
+                        </div>
                     </mat-tab>
-                    <mat-tab label="End User License Agreement">
+                    <mat-tab label="License Agreement">
                         <div class="tab-content" fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px">
                             <div fxFlex="10%">
                                 <mat-icon class="about_icon" style="color:maroon;">receipt</mat-icon>
                             </div>
-                            <div fxFlex="80%">
+                            <div fxFlex="80%" class="about-tab-title">
                                 End User License Agreement
                             </div>
+                        </div>
+                        <div style="width: 75%;margin-bottom: 10px;
+                        max-height: 250px;
+                        overflow-y: auto;" class="eula-panel">
+                            <p style="text-align: center;font-weight: 600;text-transform: uppercase;">
+                                End-User License Agreement ("Agreement")
+                            </p>
+                            <p class="eula-content">
+                                This End-User License Agreement ("Agreement") to the end users who uses <span style="text-transform: uppercase;">realwork</span> ("Application").
+                            </p>
+                            <p class="eula-content">
+                                By accessing the Application over Internet, you are agreeing to be bound by the terms and conditions of this Agreement.
+                            </p>
+                            <p style="text-transform: uppercase;font-weight: 600;margin-top: 10px;margin-bottom: 10px;font-size: .95em;">
+                                license
+                            </p>
+                            <p class="eula-content">
+                                Skyware Systems Solutions Inc. grants you a revocable, non-exclusive, non-transferable, limited license to use the Application solely for your personal and commercial purposes strictly in accordance with the terms of this Agreement.
+                            </p>
+                            <p style="text-transform: uppercase;font-weight: 600;margin-top: 10px;margin-bottom: 10px;font-size: .95em;">
+                                Term and Termination
+                            </p>
+                            <p class="eula-content">
+                                This Agreement shall remain in effect until terminated by you or Skyware Systems Solutions Inc.
+                            </p>
+                            <p class="eula-content">
+                                Skyware Systems Solutions Inc. may, in its sole discretion, at any time and for any or no reason, suspend or terminate this Agreement with or without prior notice.
+                            </p>
+
+                            <p class="eula-content">
+                                This Agreement will terminate immediately, without prior notice from Skyware Systems Solutions Inc., in the event that you fail to comply with any provision of this Agreement. You may also terminate this Agreement by deleting the Application and all copies
+                                thereof from your mobile device or from your desktop
+                            </p>
+
+                            <p class="eula-content">
+                                Skyware Systems Solutions Inc. may, in its sole discretion, at any time and for any or no reason, suspend or terminate this Agreement with or without prior notice.
+                            </p>
+
+                            <p class="eula-content">
+                                Upon termination of this Agreement, you shall cease all use of the Application and delete all copies of the Application from your mobile device or from your desktop.
+                            </p>
+                            <p style="text-transform: uppercase;font-weight: 600;margin-top: 10px;margin-bottom: 10px;font-size: .95em;">
+                                Amendments
+                            </p>
+                            <p class="eula-content">
+                                Skyware Systems Solutions Inc. reserves the right, at its sole discretion, to modify or replace this Agreement at any time. If a revision is material we will provide at least 60 days' notice prior to any new terms taking effect. What constitutes a material
+                                change will be determined at our sole discretion.
+                            </p>
+                            <p style="text-transform: uppercase;font-weight: 600;margin-top: 10px;margin-bottom: 10px;font-size: .95em;">
+                                Contact Information
+                            </p>
+                            <p class="eula-content">
+                                If you have any questions about this Agreement, please contact us: info@skyware.com
+                            </p>
+
                         </div>
                     </mat-tab>
                 </mat-tab-group>
