@@ -109,7 +109,12 @@ export class AddPropertyComponent implements OnInit {
     // });
 // debugger;
     this.store.pipe(select(getUserInfo))
-    .subscribe(user => this.currentUser = user);
+    .subscribe(user => {
+      if (user) {
+        this.currentUser = localStorage.getItem('auth');
+      }
+      this.currentUser = user;
+    });
 
     this.addForm.get('propertyManagerUserName').setValue(this.currentUser.username);
   }
