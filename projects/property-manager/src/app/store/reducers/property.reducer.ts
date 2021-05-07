@@ -440,7 +440,7 @@ on(PropertyActions.getContractDetails, (state) => ({
     });
   }),
 
-  on(PropertyActions.updatePropertyFailure, (state) => {
+  on(PropertyActions.updateContractFailure, (state) => {
     return ({
       ...state,
       loading: false,

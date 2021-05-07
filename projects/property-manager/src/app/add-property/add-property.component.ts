@@ -110,17 +110,24 @@ export class AddPropertyComponent implements OnInit {
 // debugger;
     this.store.pipe(select(getUserInfo))
     .subscribe(user => {
-      if (user) {
-        this.currentUser = localStorage.getItem('auth');
+      if (!user) {
+        this.currentUser = JSON.parse(localStorage.getItem('auth'));
+      } else {
+        this.currentUser = user;
       }
-      this.currentUser = user;
+      console.log('current user', this.currentUser);
     });
+
+
 
     this.addForm.get('propertyManagerUserName').setValue(this.currentUser.username);
   }
 
   submit() {
     debugger;
+
+    // this.addForm.get('propertyManagerUserName').setValue(this.currentUser.username);
+
     console.log(this.addForm.value);
     this.pStore.dispatch(PropertyActions.addProperty({payload: this.addForm.value}));
     this.location.back();
