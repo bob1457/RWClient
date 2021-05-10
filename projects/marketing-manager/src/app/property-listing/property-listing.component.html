@@ -58,8 +58,8 @@
 
                     <ng-container matColumnDef="listingDesc">
                         <th class="table-header-text" style="text-align: center;" mat-header-cell *matHeaderCellDef> Description </th>
-                        <td mat-cell *matCellDef="let element">
-                            {{element.listingDesc}}
+                        <td style="text-align: left;" mat-cell *matCellDef="let element">
+                            {{element.listingDesc | slice:0:51}}
                         </td>
                     </ng-container>
 

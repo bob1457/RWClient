@@ -6,13 +6,13 @@
         <i class="far fa-arrow-alt-circle-left" title="back to list" style="cursor: pointer; color: seagreen; font-size: 1.5em;" (click)="goBack()"></i>
     </div>
     <div fxFlex="20%" fxLayout="column" class="avatar_sec" fxLayoutAlign="start center">
-        <span *ngIf="iconImg; else default">
+        <span *ngIf="iconImg[0]">
           <img attr.src="{{serverUrl}}{{iconImg[0].propertyImgUrl}}" style="border-radius: 50%;margin-top: 20px;" width="120px " height="120px" title="">
         </span>
 
-        <ng-template #default>
+        <span *ngIf="!iconImg[0]">
             <img src="../../assets/images/10621.jpg" style="border-radius: 50%;margin-top: 20px;" width="120px " height="120px" title="">
-        </ng-template>
+        </span>
 
 
         <div class="images">

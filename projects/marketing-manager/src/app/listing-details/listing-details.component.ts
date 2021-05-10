@@ -62,7 +62,7 @@ export class ListingDetailsComponent implements OnInit {
                               this.imgList = imgs;
 
                               // this.imgList = this.listing.rentalProperty.propertyImg;
-                              this.imgList = imgs.filter(i => i.rentalPropertyId == this.listing.rentalProperty.id);
+                              this.imgList = imgs.filter(i => i.rentalPropertyId == this.listing.rentalPropertyId);
                               this.iconImg = this.imgList.filter((value, index) => index === 0);
                               console.log('icon img', this.iconImg);
                             });
