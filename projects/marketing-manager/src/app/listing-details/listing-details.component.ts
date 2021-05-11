@@ -377,7 +377,7 @@ export class ListingDetailsComponent implements OnInit {
         break;
       }
       case 1 : {
-        if (!this.openhouse) {
+        if (this.openhouse && this.openhouse.length === 0) {
           this.store.dispatch(getOpenHouseList());
         }
         break;

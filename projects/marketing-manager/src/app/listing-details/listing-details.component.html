@@ -286,7 +286,7 @@
                                 </p>-->
                             </div>
 
-                            <div *ngIf="!openhouse">
+                            <div *ngIf="openhouse && openhouse.length === 0">
                                 <p style="margin: 20px;">No open house</p>
 
                                 <!-- <a [routerLink]="['/Manage/marketing/openhouses']">Add Open House</a> -->

@@ -20,7 +20,7 @@ export class ContractDetailsComponent implements OnInit {
   loading$: Observable<boolean>;
 
   detailsForm: FormGroup;;
-  contract: ManagementContract;
+  contract: any;// ManagementContract;
   editSignDate = false;
 
   // contract$ = this.store.pipe(select(contractDetails))
@@ -98,7 +98,10 @@ export class ContractDetailsComponent implements OnInit {
 
   submit() {
     debugger;
-    console.log(this.detailsForm.value);
+    this.detailsForm.patchValue({
+      contractSignDate: this.contract.contractSignDate
+    });
+    console.log('contract update form', this.detailsForm.value);
     this.store.dispatch(updateContract({payload: this.detailsForm.value}));
     this.editSignDate = false; // how to maek it done when update is finished and data returned??
   }

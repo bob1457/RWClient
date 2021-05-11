@@ -67,6 +67,7 @@ export class AddListingComponent implements OnInit {
     debugger;
     console.log('form data: ', this.addForm.value);
     this.store.dispatch(addPropertyListing({payload: this.addForm.value}));
+    this.location.back();
   }
 
   cancel() {

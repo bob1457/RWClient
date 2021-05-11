@@ -59,7 +59,7 @@
                     <ng-container matColumnDef="listingDesc">
                         <th class="table-header-text" style="text-align: center;" mat-header-cell *matHeaderCellDef> Description </th>
                         <td style="text-align: left;" mat-cell *matCellDef="let element">
-                            {{element.listingDesc | slice:0:51}}
+                            {{element.listingDesc | slice:0:51}} <span *ngIf="element.listingDesc.lenght > 50">...</span>
                         </td>
                     </ng-container>
 

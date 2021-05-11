@@ -125,6 +125,7 @@
                                             <mat-label>Rental Status</mat-label>
                                             <mat-select [disabled]="true" [(value)]="status" id="status" formControlName="status" [ngModel]="property.status">
                                                 <!-- <mat-option>None</mat-option> -->
+                                                <mat-option value="New">New</mat-option>
                                                 <mat-option value="Rented">Rented</mat-option>
                                                 <mat-option value="Vacant">Vacant</mat-option>
                                                 <mat-option value="Pending">Pending</mat-option>
