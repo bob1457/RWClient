@@ -239,7 +239,7 @@
                             <div *ngIf="openhouse">
                                 <ul>
                                     <li *ngFor="let oh of openhouse" style="list-style: none;" fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="1%" fxFlexFill>
-                                        <mat-card class="oh-card">
+                                        <mat-card class="oh-card" style="width: 75%;">
                                             <mat-card-header>
 
                                                 <mat-card-title> Current Open House </mat-card-title>
@@ -247,27 +247,55 @@
                                             </mat-card-header>
                                             <mat-card-content fxLayoutAlign="center center">
                                                 <!-- Date: {{oh.openhouseDate | date: 'EEEE, MMMM d, y'}} <br>Time: {{oh.startTime}} to {{oh.endTime}} -->
-                                                <form novalidate fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" [formGroup]="ohForm" (ngSubmit)="updateOpenHouse()">
-                                                    <mat-form-field style="margin-right: 10px; width: 90%;">
-                                                        <mat-label>Open House Date</mat-label>
-                                                        <input matInput [matDatepicker]="picker" formControlName="openhouseDate" [ngModel]="oh.openhouseDate">
-                                                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                                                        <mat-datepicker #picker></mat-datepicker>
-                                                    </mat-form-field>
-                                                    <mat-form-field class="owner-full-width" fxFlex="25%" style="margin-right: 8px;">
-                                                        <input type="text" id="startTime" formControlName="startTime" matInput placeholder="Start Time" [ngModel]="oh.startTime" name="email">
-                                                    </mat-form-field>
-                                                    <mat-form-field class="owner-full-width" fxFlex="20%" style="margin-right: 8px;">
-                                                        <input type="text" id="endTime" formControlName="endTime" matInput placeholder="End time" [ngModel]="oh.endTime">
-                                                    </mat-form-field>
-                                                    <div style="width: 90%;margin-top: 10px;">
-                                                        <mat-checkbox formControlName="isActive" [ngModel]="oh.isActive" [(checked)]="oh.isActive" class="vendor-full-width">Active</mat-checkbox>
+                                                <form novalidate fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" [formGroup]="ohForm" (ngSubmit)="updateOpenHouse()" style="width: 95%;">
+                                                    <div fxLayout="row" fxLayoutAlign="start start" *ngIf="!editOpenHouseDate" style="width: 100%;">
+                                                        <div fxFlex="75%">
+                                                            <mat-form-field style="margin-right: 10px; width: 100%;">
+                                                                <mat-label>Open House Date</mat-label>
+                                                                <input readonly matInput formControlName="openhouseDate" [value]="oh.openhouseDate">
+
+                                                            </mat-form-field>
+                                                        </div>
+                                                        <div fxFlex="2%" style="margin-top: 10px;">
+                                                            <span *ngIf="!editOpenHouseDate" style="margin-right: -15px; cursor: pointer; width: 5%;margin-top: 10px;color: green;" title="update"><mat-icon (click)="editOhDate()">edit_calenda</mat-icon></span>
+                                                        </div>
+
                                                     </div>
-                                                    <mat-form-field class="owner-full-width" fxFlex="20%">
-                                                        <textarea id="notes" formControlName="notes" matInput placeholder="Notes" [ngModel]="oh.notes"></textarea>
-                                                    </mat-form-field>
-                                                    <button type="submit" mat-button>UPDATE</button>
+                                                    <div fxLayout="row" fxLayoutAlign="start start" *ngIf="editOpenHouseDate" style="width: 100%;">
+                                                        <div fxFlex="75%">
+                                                            <mat-form-field style="margin-right: 10px; width: 100%;">
+                                                                <mat-label>Open House Date</mat-label>
+                                                                <input matInput [matDatepicker]="picker" formControlName="openhouseDate" [ngModel]="oh.openhouseDate">
+                                                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                                                <mat-datepicker #picker></mat-datepicker>
+                                                            </mat-form-field>
+                                                        </div>
+                                                        <div fxFlex="2%" style="margin-top: 10px;">
+                                                            <span *ngIf="editOpenHouseDate" style="margin-right: -15px; cursor: pointer; width: 5%;margin-top: 10px; color: orangered;" title="cancel update"><mat-icon (click)="editOhDate()">edit_off</mat-icon></span>
+                                                        </div>
+
+                                                    </div>
+                                                    <div fxLayout="column" fxLayoutAlign="start start" style="width: 100%;">
+                                                        <mat-form-field class="owner-full-width" style="margin-right: 8px;">
+                                                            <input type="text" id="startTime" formControlName="startTime" matInput placeholder="Start Time" [ngModel]="oh.startTime" name="email">
+                                                        </mat-form-field>
+                                                        <mat-form-field class="owner-full-width" style="margin-right: 8px;">
+                                                            <input type="text" id="endTime" formControlName="endTime" matInput placeholder="End time" [ngModel]="oh.endTime">
+                                                        </mat-form-field>
+                                                        <div style="width: 90%;margin-top: 10px;">
+                                                            <mat-checkbox formControlName="isActive" [ngModel]="oh.isActive" [(checked)]="oh.isActive" class="vendor-full-width">Active</mat-checkbox>
+                                                        </div>
+                                                        <mat-form-field class="owner-full-width">
+                                                            <textarea id="notes" formControlName="notes" matInput placeholder="Notes" [ngModel]="oh.notes"></textarea>
+                                                        </mat-form-field>
+                                                        <button type="submit" mat-button>UPDATE</button>
+                                                    </div>
+
+
+
+
                                                 </form>
+                                                <!-- <h6 style="margin-left: 60px;margin-bottom: 15px;">Registered Viewers</h6> -->
                                             </mat-card-content>
                                             <mat-card-actions>
                                                 <!-- <button mat-button (click)="updateOpenHouse()">UPDATE</button> -->
@@ -275,7 +303,7 @@
                                         </mat-card>
                                     </li>
                                 </ul>
-                                <h6 style="margin-left: 60px;margin-bottom: 15px;">Registered Viewers</h6>
+                                <!-- <h6 style="margin-left: 60px;margin-bottom: 15px;">Registered Viewers</h6> -->
                                 <!-- <ul *ngIf="listing.rentalProperty.openHouse[0].openHouseViewer != null" style="list-style: none;margin-left: 20px;">
                                     <li *ngFor="let viewer of listing.rentalProperty.openHouse[0].openHouseViewer" style="margin-bottom: 8px;">
                                         <span style="font-style: italic; font-weight: bold;">{{viewer.firstName}} {{viewer.lastName}}</span> -- Email: {{viewer.contactEmail}}, Tel: {{viewer.contactTel}}
@@ -284,6 +312,7 @@
                                 <p style="margin-left: 60px;" *ngIf="listing.rentalProperty.openHouse[0].openHouseViewer == null">
                                     No viewers registered at this moment!
                                 </p>-->
+                                <!-- <button mat-button (click)="updateOpenHouse()">UPDATE</button> -->
                             </div>
 
                             <div *ngIf="openhouse && openhouse.length === 0">

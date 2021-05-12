@@ -32,6 +32,7 @@ export class ListingDetailsComponent implements OnInit {
 
   tabIndex = 0;
   showDelete: boolean;
+  editOpenHouseDate = false;
 
   iconImg: any;
   addOpenHouse = false;
@@ -259,6 +260,7 @@ export class ListingDetailsComponent implements OnInit {
     });
     console.log('update open house form', this.ohForm.value);
     this.store.dispatch(updateOpenHouseToListing({payload: this.ohForm.value}));
+    this.editOpenHouseDate = false;
   }
 
   submit() {
@@ -356,6 +358,10 @@ export class ListingDetailsComponent implements OnInit {
     this.addForm.reset();
   }
 
+
+  editOhDate() {
+    this.editOpenHouseDate = !this.editOpenHouseDate;
+  }
 
   tabSelected(e) {
     this.tabIndex = e.index;
