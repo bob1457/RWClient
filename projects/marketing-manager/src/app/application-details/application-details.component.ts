@@ -7,6 +7,7 @@ import { PropertyListingState } from '../store/marketing.state';
 import { propertyApplicationDetails, loadingStatus, loadedStatus } from '../store/reducers';
 import { getRentalApplicationDetails } from '../store/actions/marketing.actions';
 import { Observable } from 'rxjs';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-application-details',
@@ -17,28 +18,45 @@ export class ApplicationDetailsComponent implements OnInit {
 
   id: number;
   application: any;
+  approveAppForm: FormGroup;
 
   loading$: Observable<boolean>;
   loaded = false;
+  loading = false;
+  msg = '';
 
   // detailsForm: FormGroup;
 
   constructor(private store: Store<PropertyListingState>,
               private router: Router,
+              private formBuilder: FormBuilder,
               private actRoute: ActivatedRoute,
               // private formBuilder: FormBuilder,
-              private propertyService: MarketingService) {
+              private marketingService: MarketingService) {
                 this.id = this.actRoute.snapshot.params.id;
                 console.log(this.id);
 
                 this.store.pipe(select(propertyApplicationDetails)) // select date from state in store
                           .subscribe(app => {
                             this.application = app;
+                            // console.log('app', this.application);
                 });
 
               }
 
   ngOnInit() {
+
+    this.approveAppForm = this.formBuilder.group({
+      applicationId: [0],
+      appStatus: [],
+      userName: [''],
+      firstName: [''],
+      lastName: [''],
+      contactEmail: [''],
+      contactTelephone1: [''],
+      contactTelephone2: [''],
+      contactOthers: ['']
+    });
 
     this.GetApplicationDetails(this.id);
   }
@@ -78,6 +96,32 @@ export class ApplicationDetailsComponent implements OnInit {
   }
 
   submit() {
+
+  }
+
+  approveApplication(id: any) {
+    this.approveAppForm.patchValue({
+      applicationId: this.application.id,
+      appStatus: 2, // Approved
+      userName: 'NotSet',
+      firstName:  this.application.rentalApplicant.firstName,
+      lastName: this.application.rentalApplicant.lastName,
+      contactEmail: this.application.rentalApplicant.contactEmail,
+      contactTelephone1: this.application.rentalApplicant.contactTel,
+      contactTelephone2: this.application.rentalApplicant.contactSms,
+      contactOthers: this.application.rentalApplicant.contactOthers
+    });
+
+    console.log('form', this.approveAppForm.value);
+
+    this.loading = true;
+    this.marketingService.approveApplication(this.approveAppForm.value)
+                          .subscribe(() => {
+                            console.log('done');
+                            this.loading = false;
+                            this.msg = 'Done!'
+                            setTimeout(this.msg = '', 3000);
+                          });
 
   }
 
