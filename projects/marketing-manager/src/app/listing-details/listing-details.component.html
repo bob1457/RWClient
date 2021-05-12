@@ -265,7 +265,7 @@
                                                         <div fxFlex="75%">
                                                             <mat-form-field style="margin-right: 10px; width: 100%;">
                                                                 <mat-label>Open House Date</mat-label>
-                                                                <input matInput [matDatepicker]="picker" formControlName="openhouseDate" [ngModel]="oh.openhouseDate">
+                                                                <input matInput [matDatepicker]="picker" formControlName="openhouseDate" [ngModel]="oh.openhouseDate" [value]="getToday()">
                                                                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                                                                 <mat-datepicker #picker></mat-datepicker>
                                                             </mat-form-field>

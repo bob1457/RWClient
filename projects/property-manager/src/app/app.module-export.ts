@@ -2,7 +2,7 @@ import { ContractListComponent } from './contract-list/contract-list.component';
 import { AppMaterialModule } from '@lib/app-material';
 // import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { AppPmComponent } from './app.component';
 import { PropertyHomeComponent } from './property-home/property-home.component';
@@ -113,6 +113,7 @@ const routes: Routes = [
     MatSortModule
   ],
   providers: [
+    DatePipe
     // {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2500, panelClass: ['notif']}}
   ],
   bootstrap: [AppPmComponent]

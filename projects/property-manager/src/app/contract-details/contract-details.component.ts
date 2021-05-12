@@ -7,6 +7,7 @@ import { getContractDetails, updateContract } from '../store/actions/property.ac
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { selectPropertyState, contractDetails, loadingStatus } from '../store/reducers';
 import { Observable } from 'rxjs';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-contract-details',
@@ -29,6 +30,7 @@ export class ContractDetailsComponent implements OnInit {
   //             });
 
   constructor(private actRoute: ActivatedRoute,
+              private datePipe: DatePipe,
               private store: Store<PropertyState>,
               private formBuilder: FormBuilder,
               private router: Router,
@@ -125,6 +127,13 @@ export class ContractDetailsComponent implements OnInit {
     // const primativeFileList: FileList = control.value;
     // const cloneFiles = { ...primativeFileList};
     // this.store.dispatch(uploadPropertyImage({payload: files, rentalPropertyId: this.listing.rentalPropertyId}));
+  }
+
+  getToday() {
+    let d = new Date();
+    // d.setDate(d.getDate() + 1);
+    d.getDate();
+    return this.datePipe.transform(d, 'yyyy-MM-dd');
   }
 
   goBack() {

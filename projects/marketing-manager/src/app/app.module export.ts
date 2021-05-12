@@ -1,7 +1,7 @@
 import { reducer } from './store/reducers/marketing.reducers';
 import { AppMaterialModule } from '@lib/app-material';
 // import { BrowserModule } from '@angular/platform-browser';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -87,7 +87,9 @@ const routes: Routes = [
     EffectsModule.forFeature([MarketingEffects])
     // AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    DatePipe
+  ],
   bootstrap: [AppMkComponent]
 })
 export class AppMkModule { }

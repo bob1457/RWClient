@@ -116,7 +116,7 @@
                             <div *ngIf="editSignDate" style="margin-right: 10px; width: 45%;">
                                 <mat-form-field style="width: 100%;">
                                     <mat-label>Sign Date</mat-label>
-                                    <input matInput [matDatepicker]="picker3" formControlName="contractSignDate" [ngModel]="contract.contractSignDate">
+                                    <input matInput [matDatepicker]="picker3" formControlName="contractSignDate" [ngModel]="contract.contractSignDate" [value]="getToday()">
                                     <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
                                     <mat-datepicker #picker3></mat-datepicker>
                                 </mat-form-field>

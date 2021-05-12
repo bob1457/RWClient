@@ -3,7 +3,7 @@ import { PropertyListing, MarketingService } from '@lib/app-core';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { PropertyListingState } from '../store/marketing.state';
 import { Store, select } from '@ngrx/store';
-import { Location } from '@angular/common';
+import { DatePipe, Location } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { getPropertyListingDetails, updatePropertyListing, uploadPropertyImage, addOpenHouseToListing, updateOpenHouseToListingFailure, updateOpenHouseToListing, getPropertyImageList, getOpenHouseList, deletePropertyImage } from '../store/actions/marketing.actions';
 import { propertyListingDetails, loadingStatus, propertyImgList, loadedStatus, openHouses } from '../store/reducers';
@@ -46,6 +46,7 @@ export class ListingDetailsComponent implements OnInit {
 
   constructor(private store: Store<PropertyListingState>,
               private router: Router,
+              private datePipe: DatePipe,
               private actRoute: ActivatedRoute,
               private location: Location,
               private formBuilder: FormBuilder,
@@ -316,6 +317,13 @@ export class ListingDetailsComponent implements OnInit {
     debugger;
     console.log('rental p', this.propertyForm.value);
 
+  }
+
+  getToday() {
+    let d = new Date();
+    // d.setDate(d.getDate() + 1);
+    d.getDate();
+    return this.datePipe.transform(d, 'yyyy-MM-dd');
   }
 
   cancel() {
