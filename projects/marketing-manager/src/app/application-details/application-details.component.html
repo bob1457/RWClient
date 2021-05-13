@@ -45,7 +45,7 @@
             </mat-card-header>
             <mat-card-content class="applicant-details-card-content">
                 <div fxLayout="column" fxLayoutAlign="start center">
-                    <h6>Rental Application - Status: <span [style.color]="application.status ===  2 ? 'green' : 'orange'">{{application.status | appStatus}}</span></h6>
+                    <h6>Rental Application - Status: <span style="text-transform: uppercase;" [style.color]="application.status ===  2 ? 'green' : 'orange'">{{application.status | appStatus}}</span></h6>
                     <table class="app-table">
                         <tr>
                             <td class="title-cell">First Name</td>
@@ -77,11 +77,11 @@
                         </tr>
                         <tr>
                             <td class="title-cell">Immigrantion Status</td>
-                            <td class="value-cell">{{application.rentalApplicant.status}}</td>
+                            <td class="value-cell">{{application.rentalApplicant.status | imStatus}}</td>
                         </tr>
                         <tr>
                             <td class="title-cell">Credit Rating</td>
-                            <td class="value-cell">{{application.rentalApplicant.creditRating}}</td>
+                            <td class="value-cell">{{application.rentalApplicant.creditRating }}</td>
                         </tr>
                         <tr>
                             <td class="title-cell">Employment Status</td>

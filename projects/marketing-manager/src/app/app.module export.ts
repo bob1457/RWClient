@@ -31,6 +31,9 @@ import { AllOpenHousesComponent } from '../app/all-open-houses/all-open-houses.c
 import { OpenHouseDetailsComponent } from '../app/open-house-details/open-house-details.component';
 import { OhStatusPipe } from './oh-status.pipe';
 import { metaReducers } from './store/metaReducers';
+import { EmpyStatusPipe } from './empy-status.pipe';
+import { ImStatusPipe } from './im-status.pipe';
+
 
 const routes: Routes = [
   // { path: '', component: PropertyListingComponent},
@@ -73,7 +76,9 @@ const routes: Routes = [
     AllOpenHousesComponent,
     AppStatusPipe,
     OhStatusPipe,
-    AllOpenHousesComponent
+    AllOpenHousesComponent,
+    EmpyStatusPipe,
+    ImStatusPipe
   ],
   imports: [
     // BrowserModule,

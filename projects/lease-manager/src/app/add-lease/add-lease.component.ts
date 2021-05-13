@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { Location }  from '@angular/common';
 import { addLease } from '../store/actions/lease.actions';
 import { PropertyLeaseState } from '../store/lease-state';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import { AuthState, getUserInfo, User } from '@lib/auth';
 
 
@@ -27,8 +27,8 @@ export class AddLeaseComponent implements OnInit {
               private store: Store<PropertyLeaseState>,
               private authStore: Store<AuthState>,
               private leaseService: LeaseService ) {
-                this.authStore.select(getUserInfo)
-                    .subscribe( user => this.user = user);
+                // this.authStore.select(getUserInfo)
+                //     .subscribe( user => this.user = user);
               }
 
 
@@ -39,9 +39,22 @@ export class AddLeaseComponent implements OnInit {
     // .subscribe(data => this.properties = data);
     debugger;
 
-    var today = new Date();
+    // this.authStore.select(getUserInfo)
+    //                 .subscribe( user => this.user = user);
 
-    var date = today.getFullYear() + '-' + (today.getMonth() + 1 ) + '-' + today.getDate();
+    this.store.pipe(select(getUserInfo))
+                    .subscribe(user => {
+                      if (!user) {
+                        this.user = JSON.parse(localStorage.getItem('auth'));
+                      } else {
+                        this.user = user;
+                      }
+                      console.log('current user', this.user);
+                    });
+
+    const today = new Date();
+
+    const date = today.getFullYear() + '-' + (today.getMonth() + 1 ) + '-' + today.getDate();
 
     this.properties$ = this.leaseService.getAllRentalProperties();
     this.newTenants$ = this.leaseService.getAllNewTenants();

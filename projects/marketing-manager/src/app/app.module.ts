@@ -23,6 +23,8 @@ import { ListingDetailsMainComponent } from './listing-details-main/listing-deta
 import { ListingDetailsSecondaryComponent } from './listing-details-secondary/listing-details-secondary.component';
 import { AppStatusPipe } from './app-status.pipe';
 import { OhStatusPipe } from './oh-status.pipe';
+import { EmpyStatusPipe } from './empy-status.pipe';
+import { ImStatusPipe } from './im-status.pipe';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,9 @@ import { OhStatusPipe } from './oh-status.pipe';
     ListingDetailsMainComponent,
     ListingDetailsSecondaryComponent,
     AppStatusPipe,
-    OhStatusPipe
+    OhStatusPipe,
+    EmpyStatusPipe,
+    ImStatusPipe
   ],
   imports: [
     BrowserModule,
