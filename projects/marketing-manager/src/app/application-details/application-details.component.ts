@@ -24,6 +24,7 @@ export class ApplicationDetailsComponent implements OnInit {
   loaded = false;
   loading = false;
   msg = '';
+  disableApproveButton = false;
 
   // detailsForm: FormGroup;
 
@@ -121,6 +122,7 @@ export class ApplicationDetailsComponent implements OnInit {
                             this.loading = false;
                             this.msg = 'Done!'
                             setTimeout(this.msg = '', 3000);
+                            this.disableApproveButton = true;
                           });
 
   }

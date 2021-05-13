@@ -82,7 +82,7 @@
                         <td mat-cell *matCellDef="let element">
                             <i style="border: 2px solid;
                     padding: 3px;
-                    border-radius: 50%;" title="{{element.rentalApplicationStatus | appStatus}}" class="material-icons" [style.color]="element.rentalApplicationStatus == '2' ? 'green': element.rentalApplicationStatus == '1'? 'orange' :'red'">
+                    border-radius: 50%;" title="{{element.rentalApplicationStatus | appStatus}}" class="material-icons" [style.color]="element.rentalApplicationStatus == 2 ? 'green': element.rentalApplicationStatus == '1'? 'orange' :'red'">
                     house
                   </i>
                         </td>
