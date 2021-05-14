@@ -50,8 +50,8 @@ export class OwnerListComponent implements OnInit {
             this.list = data;
             this.dataSource.data = this.list;
 
-            // this.dataSource.sort = this.sort;
-            // this.dataSource.paginator = this.paginator;
+            this.dataSource.sort = this.sort;
+            this.dataSource.paginator = this.paginator;
 
             setTimeout(() =>  {this.dataSource.paginator = this.paginator; this.dataSource.sort = this.sort; });
       });

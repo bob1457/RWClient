@@ -47,6 +47,8 @@ export class PropertyListComponent implements OnInit, AfterViewInit {
 
                     this.dataSource.sort = this.sort;
                     this.dataSource.paginator = this.paginator;
+
+                    setTimeout(() =>  {this.dataSource.paginator = this.paginator; this.dataSource.sort = this.sort; });
                   });
 
                 this.router.events.subscribe((routerEvent: Event) => {
