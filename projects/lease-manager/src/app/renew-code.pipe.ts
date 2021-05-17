@@ -9,27 +9,35 @@ export class RenewCodePipe implements PipeTransform {
 
     switch (value) {
       case 0 : {
-        return 'NotSet';
+        return 'N/A';
         break;
       }
       case 1 : {
         return 'Renew Month by Month';
         break;
       }
-      case 2 : {
+      case 21 : {
         return 'Renew by Other Term';
         break;
       }
       case 3 : {
-        return 'Fied Term and Renew by Term';
+        return 'Fixed Term';
         break;
       }
-      case 4 : {
+      case 31 : {
+        return 'Fixed Term and Renew by Month';
+        break;
+      }
+      case 32 : {
         return 'Fixed Term and Vacant';
         break;
       }
+      // case 4 : {
+      //   return 'Fixed Term and Vacant';
+      //   break;
+      // }
       default : {
-        return 'NotSet';
+        return 'N/A';
         break;
       }
     }

@@ -45,7 +45,7 @@
                         <span class="tab-label">Tenants <span *ngIf="tenants">({{tenants.length}})</span></span>
                     </ng-template>
                     <div class="container" fxLayout="column" fxLayoutAlign="start" fxLayoutGap="1%" fxFlexFill *ngIf="!(loading$ | async) && tenants; else spinner">
-                        <mat-grid-list cols="1" rowHeight="85px" style="overflow-x: auto; overflow-y: hidden;">
+                        <mat-grid-list cols="1" rowHeight="85px">
                             <mat-grid-tile *ngFor="let tenant of tenants">
                                 <mat-card class="user-card" style="margin-left: 5px;">
                                     <mat-card-header>
@@ -54,7 +54,7 @@
                                         </div>
                                         <mat-card-title style="font-size: .85em; font-weight: bold;">{{tenant.firstName}} {{tenant.lastName | uppercase}}</mat-card-title>
                                         <mat-card-subtitle style="font-size: 12px; color: black;">Tenant</mat-card-subtitle>
-                                        <div style="margin-left: 25px;font-size: 12px;text-align: left;">{{tenant.contactEmail}}<br>{{tenant.contactTelephone1}}</div>
+                                        <div style="font-size: 12px;text-align: left;">{{tenant.contactEmail}}<br>{{tenant.contactTelephone1}}</div>
                                         <!--{{user.email}}{{user.tel}}-->
                                     </mat-card-header>
                                 </mat-card>
