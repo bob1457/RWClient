@@ -66,6 +66,9 @@ export class LeaseDetailsComponent implements OnInit {
   chosenVendorId;
   chosenServiceRequestId;
 
+  finalized = false;
+  getFinalize = false;
+
   months = [
     {name: 'January'},
     {name: 'February'},
@@ -291,7 +294,7 @@ export class LeaseDetailsComponent implements OnInit {
       damageDepositAmount: [0],
       petDepositAmount: [0],
       leaseSignDate: [''],
-      isActive: [true],
+      isActive: [false],
       isAddendumAvailable: [false],
       // endLeaseCode: [''],
       renewTerm: [''],
@@ -516,15 +519,27 @@ export class LeaseDetailsComponent implements OnInit {
 
   submit() {
     debugger;
+
+    let active = false;
+
+    if (this.getFinalize) {
+      active = true;
+    }
+
     this.detailsForm.patchValue(
       {
         rentalPropertyId: this.lease.rentalPropertyId,
         term: this.lease.term,
+        isActive: active,
         endLeaseCode: this.lease.endLeaseCode
       }
       );
     console.log('form data', this.detailsForm.value);
     this.store.dispatch(updateLease({payload: this.detailsForm.value}));
+
+    if (active) {
+      this.finalized = true;
+    }
 
   }
 
@@ -707,6 +722,10 @@ export class LeaseDetailsComponent implements OnInit {
 
   enableAdd() {
     this.addaddendum = true;
+  }
+
+  showFinalize() {
+    this.getFinalize = !this.getFinalize;
   }
 
 }

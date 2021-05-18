@@ -181,6 +181,14 @@ const propertyLeaseReducer = createReducer(
     });
   }),
 
+  on(LeaseActions.updateLeaseFailure, (state) => {
+    return ({
+      ...state,
+      loading: false,
+      errorMessage: 'Failed to add lease'
+    });
+  }),
+
   // on(LeaseActions.updateTenantSuccess, (state, { payload }) => {
 
   //   const updatedLeases = state.leases.map(
