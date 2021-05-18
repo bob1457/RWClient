@@ -16,12 +16,12 @@ export class RenewCodePipe implements PipeTransform {
         return 'Renew Month by Month';
         break;
       }
-      case 21 : {
-        return 'Renew by Other Term';
-        break;
-      }
-      case 3 : {
-        return 'Fixed Term';
+      // case 21 : {
+      //   return 'Renew by Other Term';
+      //   break;
+      // }
+      case 23 : {
+        return 'Renew by Another Term';
         break;
       }
       case 31 : {
