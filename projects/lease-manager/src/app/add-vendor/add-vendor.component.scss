@@ -1,0 +1,40 @@
+.vendor-add-card {
+    width: 100%;
+    background: transparent;
+}
+
+.vendor-add-card-content {
+    min-height: 650px;
+    background: #fafafa;
+}
+
+.add-form {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.selection {
+    margin-top: 10px;
+}
+
+.content {
+    border: 1px solid;
+    padding: 10px;
+    height: 500px;
+    background: #ecebeb;
+    overflow-y: auto;
+}
+
+.submit-button {
+    align-items: end;
+    /* align-content: end; */
+    /* float: right; */
+    /* float: left; */
+    width: 100%;
+    margin-top: 35px;
+}
+
+.icon-pos {
+    vertical-align: middle;
+}

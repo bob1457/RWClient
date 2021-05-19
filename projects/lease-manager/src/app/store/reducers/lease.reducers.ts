@@ -325,6 +325,32 @@ const propertyLeaseReducer = createReducer(
     });
   }),
 
+/**
+     * Add vendor
+     */
+ on(LeaseActions.addVendor, state => ({
+  ...state,
+  loading: true,
+  loaded: false
+})),
+
+on(LeaseActions.addVendorSuccess, (state, { payload }) => {
+  return ({
+    ...state,
+    loading: false,
+    loaded: true,
+    vendors: [...state.vendors, payload ]
+  });
+}),
+
+on(LeaseActions.addVendorFailure, (state) => {
+  return ({
+    ...state,
+    loading: false,
+    errorMessage: 'Failed to add vendor'
+  });
+}),
+
 
   /**
    * Update vendor

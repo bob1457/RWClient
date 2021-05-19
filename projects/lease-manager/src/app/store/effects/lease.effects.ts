@@ -276,6 +276,34 @@ export class LeaseEffects {
     )
   );
 
+  addVendor$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(LeaseActions.addVendor),
+      tap(() => console.log('got here to add vendor !!!')),
+      map(action => action.payload),
+      switchMap((payload) =>
+        this.leaseService.addVendor(payload).pipe(
+          map((order: any) => ({
+            type: '[Leases] Add Vendors Success',
+            payload: order
+          })),
+          tap( () => {
+            // window.alert('done');
+            this.openSnackBar('Vendor added successfully.', 'close', 'notify');
+           }), // display notificaiton
+
+          catchError(error => {
+            this.openSnackBar(error.message, 'dismiss', 'error');
+            return of(LeaseActions.addVendorFailure(error.message));
+            }
+          )
+          // catchError(error => of(LeaseActions.addLeaseFailure(error.message)))
+        )
+      )
+    )
+  );
+
   updateWVendor$ = createEffect(() =>
     this.actions$.pipe(
       // ofType('[Property] Get Property List'),
