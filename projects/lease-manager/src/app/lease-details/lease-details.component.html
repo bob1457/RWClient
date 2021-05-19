@@ -63,7 +63,12 @@
                             <input readonly type="text" id="leaseId" formControlName="id" matInput placeholder="Lease Agreement ID" [ngModel]="lease.id">
                         </mat-form-field> -->
                                     <!-- [ngModel]="lease.id" -->
-                                    <mat-form-field class="lease-full-width" style="margin-top: 25px;">
+                                    <mat-radio-group aria-label="Select an option" style="width:75%;margin-top: 25px; padding-right: 5px;" (change)="onChange($event)" formControlName="type">
+                                        <mat-radio-button value=0 [checked]="lease.type === 0" style="padding-right: 10px;margin-right: 25px;">New</mat-radio-button>
+                                        <mat-radio-button value=1 [checked]="lease.type === 1">Renewal</mat-radio-button>
+                                    </mat-radio-group>
+
+                                    <mat-form-field class="lease-full-width" style="margin-top: 20px;">
                                         <span class="icon-pos" matPrefix><mat-icon>notes</mat-icon> &nbsp;</span>
                                         <input type="text" id="leaseTitle" formControlName="leaseTitle" matInput placeholder="Lease Title" [ngModel]="lease.leaseTitle">
                                     </mat-form-field>
@@ -976,8 +981,9 @@
                         <!-- <span *ngIf="showMsg" style="color: rgb(189, 150, 25);">Updated successfully!</span>
 <img *ngIf=" loading" class="pl-2" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
 /> [disabled]="f.invalid || !f.dirty"-->
-                        <button [hidden]="hide" [disabled]="lease.isActive" type="submit" mat-raised-button color="primary">UPDATE</button>
-                        <button type="button" [hidden]="hide" mat-raised-button color="accent" (click)="goBack()"><span *ngIf="!lease.isActive">CANCEL</span><span *ngIf="lease.isActive">Ok</span></button>
+                        <button [hidden]="hide" [disabled]="lease.isActive && !enableRenwal" type="submit" mat-raised-button color="primary"><mat-icon style="color: green;">done</mat-icon> <span *ngIf="!enableRenwal">UPDATE</span><span *ngIf="enableRenwal">RENEW</span></button>
+                        <!-- <button [hidden]="hide" [disabled]="lease.type === 0" type="submit" mat-raised-button color="primary"><mat-icon style="color: green;">done</mat-icon> RENEW</button> -->
+                        <button type="button" [hidden]="hide" mat-raised-button color="accent" (click)="goBack()"><span *ngIf="!lease.isActive"><mat-icon style="color: orangered;vertical-align: middle;">clear</mat-icon> CANCEL</span><span *ngIf="lease.isActive"><mat-icon style="color: green;vertical-align: middle;">thumb_up_alt</mat-icon> Ok</span></button>
                     </div>
 
                 </form>

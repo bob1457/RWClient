@@ -43,6 +43,7 @@ import { AgreementPartyView2Component } from './agreement-party-view2/agreement-
 import { AddendumViewComponent } from './addendum-view/addendum-view.component';
 import { AddAddendumComponent } from './add-addendum/add-addendum.component';
 import { AddVendorComponent } from './add-vendor/add-vendor.component';
+import { TypePipe } from './type.pipe';
 
 
 @NgModule({
@@ -82,7 +83,8 @@ import { AddVendorComponent } from './add-vendor/add-vendor.component';
     AgreementPartyView2Component,
     AddendumViewComponent,
     AddAddendumComponent,
-    AddVendorComponent
+    AddVendorComponent,
+    TypePipe
   ],
   imports: [
     BrowserModule,

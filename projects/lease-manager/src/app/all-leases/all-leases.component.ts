@@ -22,7 +22,7 @@ export class AllLeasesComponent implements OnInit {
   list: PropertyLease[];
 
   // tslint:disable-next-line:max-line-length
-  displayedColumns: string[] = ['icon', 'id', 'leaseTitle', 'term', 'rentAmount', 'leaseStartDate', 'leaseEndDate', 'created', 'modified', 'action'];
+  displayedColumns: string[] = ['icon', 'id', 'leaseTitle', 'type', 'term', 'rentAmount', 'leaseStartDate', 'leaseEndDate', 'created', 'modified', 'action'];
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: false}) sort: MatSort;
 

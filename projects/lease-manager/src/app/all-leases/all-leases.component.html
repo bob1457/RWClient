@@ -53,10 +53,15 @@
                         <td mat-cell *matCellDef="let element"> {{element.leaseTitle}} </td>
                     </ng-container>
 
+                    <ng-container matColumnDef="type">
+                        <th class="table-header-text" mat-header-cell *matHeaderCellDef mat-sort-header> Type </th>
+                        <td mat-cell *matCellDef="let element"> {{element.type | type}} </td>
+                    </ng-container>
+
                     <ng-container matColumnDef="term">
                         <th class="table-header-text" style="text-align: center;" mat-header-cell *matHeaderCellDef> Term </th>
                         <td mat-cell *matCellDef="let element">
-                            {{element.term}}
+                            {{element.term | term}}
                         </td>
                     </ng-container>
 

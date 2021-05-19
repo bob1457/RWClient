@@ -60,6 +60,7 @@ export class AddLeaseComponent implements OnInit {
     this.newTenants$ = this.leaseService.getAllNewTenants();
 
     this.addForm = this.formBuilder.group({
+      // type: [0],
       leaseTitle: [''],
       leaseDesc: [''],
       rentalPropertyId: [0],

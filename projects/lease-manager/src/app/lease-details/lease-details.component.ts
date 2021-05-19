@@ -6,7 +6,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LeaseService, PropertyLease, Vendor } from '@lib/app-core';
 import { addRentPayment, addTenant, addWorkOrder, getAllInvoices, getLeaseDetails, getRentPaymenttDetails, getWorkOrderDetails, updateLease, updateRentPayment } from '../store/actions/lease.actions';
 import { invoiceList, leaseDetails, loadingStatus, rentPaymentDetails, rentPaymentList, serviceRequestList,
-         tenantList, vendorList, workOrderList } from '../store/reducers';
+         tenantList, vendorDetails, vendorList, workOrderList } from '../store/reducers';
 import { getAllServiceRequests, getAllVendors,
   getAllWorkOrders, getRentPaymentList, getAllTenants } from '../store/actions/lease.actions';
 import { Observable } from 'rxjs';
@@ -47,6 +47,9 @@ export class LeaseDetailsComponent implements OnInit {
 
   tabIndex = 0;
   hide = false;
+
+  enableRenwal = false;
+  renewStatus = 0;
   // rentAmtDue;
   // rentDueOn;
   addaddendum = false;
@@ -276,6 +279,7 @@ export class LeaseDetailsComponent implements OnInit {
 
     this.detailsForm = this.formBuilder.group({
       id: [0],
+      type: Number([0]),
       leaseTitle: [''],
       leaseDesc: [''],
       rentalPropertyId: [0],
@@ -526,8 +530,13 @@ export class LeaseDetailsComponent implements OnInit {
       active = true;
     }
 
+    if(this.enableRenwal) {
+      this.renewStatus = 1;
+    }
+
     this.detailsForm.patchValue(
       {
+        type: this.renewStatus,
         rentalPropertyId: this.lease.rentalPropertyId,
         term: this.lease.term,
         isActive: active,
@@ -535,7 +544,7 @@ export class LeaseDetailsComponent implements OnInit {
       }
       );
     console.log('form data', this.detailsForm.value);
-    this.store.dispatch(updateLease({payload: this.detailsForm.value}));
+    // this.store.dispatch(updateLease({payload: this.detailsForm.value})); // Disable for
 
     if (active) {
       this.finalized = true;
@@ -726,6 +735,16 @@ export class LeaseDetailsComponent implements OnInit {
 
   showFinalize() {
     this.getFinalize = !this.getFinalize;
+  }
+
+  onChange(event) {
+    console.log('tag', event);
+    if (event.value == '1') {
+      this.enableRenwal = true;
+    } else {
+      this.enableRenwal = false;
+    }
+    console.log('renewal', this.enableRenwal)
   }
 
 }
