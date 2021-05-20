@@ -84,11 +84,28 @@
                                             </mat-form-field>
                                         </div>
                                         <div fxFlex="50%">
-                                            <mat-form-field fxFlex="100%">
-                                                <span class="icon-pos" matPrefix><mat-icon>date_range</mat-icon> &nbsp;</span>
-                                                <input type="text" id="leaseEndDate" formControlName="leaseEndDate" matInput placeholder="Lease End Date" [ngModel]="lease.leaseEndDate | date">
-                                            </mat-form-field>
+                                            <div *ngIf="!editEndDate">
+                                                <mat-form-field fxFlex="100%">
+                                                    <span class="icon-pos" matPrefix><mat-icon>date_range</mat-icon> &nbsp;</span>
+                                                    <input type="text" id="leaseEndDate" formControlName="leaseEndDate" matInput placeholder="Lease End Date" [ngModel]="lease.leaseEndDate | date">
+                                                </mat-form-field>
+                                            </div>
+                                            <div *ngIf="editEndDate">
+                                                <mat-form-field fxFlex="90%" style="margin-right: 10px;">
+                                                    <mat-label>End Date</mat-label>
+                                                    <input matInput [matDatepicker]="picker2" formControlName="leaseEndDate">
+                                                    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                                                    <mat-datepicker #picker2></mat-datepicker>
+                                                </mat-form-field>
+                                            </div>
+
                                         </div>
+                                        <span *ngIf="!editEndDate" class="material-icons-outlined" (click)="enableEdit()" style="color:green;cursor: pointer;margin-right: -40px;">
+                                          <mat-icon>edit</mat-icon>
+                                        </span>
+                                        <span *ngIf="editEndDate" class="material-icons-outlined" (click)="enableEdit()" style="color:orangered;cursor: pointer;margin-right: -40px;">
+                                          <mat-icon>clear</mat-icon>
+                                        </span>
                                     </div>
                                     <!-- [value]="detailsForm.get('term') | term" -->
                                     <div fxLayout="row" fxLayoutAlign="start start" style="width: 75%;">

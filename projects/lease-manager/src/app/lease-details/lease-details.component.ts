@@ -50,9 +50,12 @@ export class LeaseDetailsComponent implements OnInit {
 
   enableRenwal = false;
   renewStatus = 0;
+  editEndDate = false;
+
   // rentAmtDue;
   // rentDueOn;
   addaddendum = false;
+
 
   loading$: Observable<boolean>;
 
@@ -544,7 +547,9 @@ export class LeaseDetailsComponent implements OnInit {
       }
       );
     console.log('form data', this.detailsForm.value);
-    // this.store.dispatch(updateLease({payload: this.detailsForm.value})); // Disable for
+    this.store.dispatch(updateLease({payload: this.detailsForm.value})); // Disable for
+    this.enableRenwal = false;
+    this.editEndDate = false;
 
     if (active) {
       this.finalized = true;
@@ -731,6 +736,10 @@ export class LeaseDetailsComponent implements OnInit {
 
   enableAdd() {
     this.addaddendum = true;
+  }
+
+  enableEdit() {
+    this.editEndDate = !this.editEndDate;
   }
 
   showFinalize() {
