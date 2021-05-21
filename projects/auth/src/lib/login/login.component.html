@@ -13,7 +13,7 @@
     <div class="container" fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="15px" style="margin-top: 30px; margin-bottom: 55px;">
         <div fxFlex="20%"></div>
         <div class="" fxFlex="40%" style="margin-top: 30px;">
-            <mat-card class="signup-card" style="margin-left: 10px;margin-right: 10px;">
+            <mat-card class="signup-card" style="margin-left: 10px;margin-right: 10px;min-height: 350px;">
                 <mat-card-header>
                     <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px" style="width: 80%;">
                         <div fxFlex="50%">
@@ -59,19 +59,15 @@
                         {{ errMsg }}
                     </div>
                     <!-- Workaround for not being able to display selected state, to be fixed later -->
-                    <div>
-                        <a style="cursor:pointer" (click)="openDialog()">Forgot password?</a
-            >
-          </div>
-          <div
-            *ngIf="email"
-            style="text-align:center; color:blue; margin-top: 20px;"
-          >
-            An email has been sent to: {{ email }}!
-          </div>
-        </mat-card-content>
-      </mat-card>
+                    <div style="margin-top: 20px;text-align: center;">
+                        <a style="cursor:pointer" (click)="openDialog()">Forgot password?</a>
+                    </div>
+                    <div *ngIf="email" style="text-align:center; color:blue; margin-top: 20px;">
+                        An email has been sent to: {{ email }}!
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </div>
+        <div fxFlex="20%"></div>
     </div>
-    <div fxFlex="20%"></div>
-  </div>
 </section>
