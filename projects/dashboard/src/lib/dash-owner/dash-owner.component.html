@@ -30,14 +30,14 @@
                     <div fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="0px" style="height: 340px;" *ngIf="!(loading$ | async) && listings; else spinner">
                         <div fxLayout="row wrap" fxLayoutGap="5px" fxLayoutAlign="flex-start">
                             <ng-container *ngFor="let listing of listings">
-                                <mat-card style="width: 30%; padding: 0; margin-top: 15px; margin-left: 5px; height: 180px;" [ngStyle.xs]="{'width': '30%'}">
+                                <mat-card style="padding: 0; margin-top: 15px; margin-left: 5px; height: 180px;width: 180px;">
                                     <mat-card-header class="card-header" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center">
                                         <div mat-card-avatar>
                                             <img class="listing-avatar" src="../../assets/images/listing.png" style="border-radius: 50%; margin: 5px; margin-left: -15px;">
                                         </div>
                                         <span class="title-spacer"></span>
                                         <div style="font-size: 10px;margin-right: 5px;">ID: {{listing.id}}<br>{{listing.status}}</div>
-                                        <!-- <mat-card-title style="font-size: 10px;margin-top: 5px;" [ngStyle.xs]="{'font-size': '9px'}">{{listing.title}}</mat-card-title> -->
+                                        <!-- <mat-card-title style="font-size: 10px;margin-top: 5px;" [ngStyle.xs]="{'font-size': '9px'}">{{listing.title}}</mat-card-title> [ngStyle.xs]="{'width': '30%'}"-->
                                     </mat-card-header>
                                     <div style="text-align: left;margin-top: 5px;margin-left:5px;">
                                         <p style="margin-bottom: 2px;">
