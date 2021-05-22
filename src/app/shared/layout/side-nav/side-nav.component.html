@@ -49,27 +49,34 @@
             <div fxLayout="row" color="primary" style="height: 150px; overflow-x: hidden;background-color: #373737;">
                 <!--background-color: cadetblue;-->
 
-
-                <div class="brand" style="width: 100%;">
-                    <span [style.display]="SideToggleButtonDisplay">
-                  <!-- side bar clock -->
-                    <app-clock
-                      style="border: 1px solid white; border-radius: 10px; width: 70px;height: 60px; float: left;margin-left: -15px;">
-                    </app-clock>
-                    <!-- <app-weather></app-weather> --> <!-- For future consideration-->
-                <!-- background: #5a5757; -->
-                    <img src="../../../../assets/images/logo.png" width="90px" height="90px" style="margin-left: 30px;">
-                  </span>
-                    <span *ngIf="smLogo">
-                  <img src="../../../../assets/images/R.png" width="35px;" style="margin-right: 40px; margin-top: 10px;float: right;" />
+                <span *ngIf="smLogo">
+                  <img src="http://placehold.it/35x35" width="40px;" height="40px" style="border-radius: 50%;margin-right: 40px; margin-top: 10px;float: right;margin-left: 10px;" />
                 </span>
-                    <!-- <img src="../../../../assets/images/R.png" width="35px;" style="margin-right: 40px; margin-top: 10px;float: right;" /> -->
-                    <!--possiblly margin-top:-20px;-->
+                <div fxFlex="70%" class="brand" style="width: 100%;text-align: center;">
+                    <img src="../../../../assets/images/logo.png" width="90px" height="90px" style="margin-left: 40px;"><br>
+                    <!-- <span style="color: white;">tagline</span> -->
+                    <p style="margin-left: 35px;">
+                        <span style="color: red;font-weight: bold;">R</span><span style="color:rgb(236, 65, 65); margin-right: -10px;">EAL</span>
+                        <span style="font-size: 1.2em;">
+                        <!-- <mat-icon style="font-size: 1em;
+                        vertical-align: top;
+                        margin-right: -8px;
+                        padding-top: 5px;
+                        padding-right: 5px;">
+                          home
+                        </mat-icon> -->
+                      </span>
+                        <span style="color:#b3b1b1;margin-left: 5px;">WORKS</span>
 
+                    </p>
                 </div>
-                <button mat-icon-button style="float: right;margin-right: 16px;" (click)="changeSideNav()">
-                  <mat-icon style="color:white;">menu</mat-icon>
-                </button>
+                <div fxFlex="30%" *ngIf="!smLogo">
+                    <button mat-icon-button style="float: right;margin-right: 16px;margin-top: 5px;" (click)="changeSideNav()">
+                    <mat-icon style="color:white;">menu</mat-icon>
+                  </button>
+                </div>
+
+
             </div>
             <main [@changeSideBarSize]="currentState" class="side" *ngIf="role === 'pm'; else client">
                 <mat-nav-list>
