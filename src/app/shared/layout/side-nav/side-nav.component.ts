@@ -97,6 +97,7 @@ export class SideNavComponent implements OnInit {
   gravatar = '';
   imgUrl:any = null;
   gAvatar = true;
+  smLogo = false;
 
   // theme$ = 'dark-theme'; // this is default -- selecting theme can be implemented using observable from rxjs... later.
   theme$ = 'light-theme';
@@ -236,10 +237,12 @@ export class SideNavComponent implements OnInit {
     this.sidenavWidth = 17.5;
     this.SideToggleButtonDisplay = '';
     // console.log('increase sidenav width');
+    this.smLogo = false;
   }
   decrease() {
     this.sidenavWidth = 4;
     // console.log('decrease sidenav width');
+    this.smLogo = true;
   }
 
   changeSideNav() {
@@ -247,10 +250,12 @@ export class SideNavComponent implements OnInit {
       this.sidenavWidth = 4; // mini side nav
       this.ToggleButtonDisplay = 'none';
       this.SideToggleButtonDisplay = 'none';
+      this.smLogo = true;
     } else {
       this.sidenavWidth = 17.5; // full width side nav
       this.ToggleButtonDisplay = 'none';
       this.SideToggleButtonDisplay = '';
+      // this.smLogo = false;
     }
     // console.log('side nav width changed to ' + this.sidenavWidth);
   }
