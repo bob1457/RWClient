@@ -29,7 +29,6 @@ import { metaReducers } from './store/metareducres';
 import { CustomLayoutGapStyleBuilder } from './shared/LayoutGapBuilder';
 import { appReducer } from './store/app.state';
 
-
 @NgModule({
   declarations: [
     AppComponent

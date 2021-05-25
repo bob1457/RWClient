@@ -20,6 +20,7 @@ import { PropertyList, ContractList, TenantList, RentalList, OwnerList, Marketin
 // import { StateService } from '@lib/auth';
 import { StateService } from 'projects/auth/src/public-api';
 import { VendorList, WorkOrderList, ServiceRequestList } from 'projects/dashboard/src/projects';
+import { ownerList, propertyList } from 'projects/property-manager/src/app/store/reducers';
 
 
 
@@ -159,12 +160,25 @@ export class SideNavComponent implements OnInit {
 
     });
 
-    this.store.pipe(select(PropertyList)).subscribe(data => {
+    this.store.pipe(select(propertyList)).subscribe(data => {
+      if (data ) {
         this.property = data;
+        } else {
+          this.store.select(PropertyList).subscribe(plist => {
+            this.property = plist;
+          });
+        }
+
       });
 
-    this.store.pipe(select(OwnerList)).subscribe(data => {
+    this.store.pipe(select(ownerList)).subscribe(data => {
+      if (data) {
         this.owners = data;
+        } else {
+          this.store.select(OwnerList).subscribe(olist => {
+            this.owners = olist;
+          });
+        }
       });
 
     this.store.pipe(select(ContractList)).subscribe(data => {
