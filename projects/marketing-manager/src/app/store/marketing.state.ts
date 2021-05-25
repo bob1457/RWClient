@@ -23,7 +23,7 @@ export interface PropertyListingState   { // extends  EntityState<Property>
 }
 
 export const reducer = {
-  marketing: marketing.reducer
+  marketing: marketing.m_reducer
 };
 
 export const selectMarketingState = createFeatureSelector<PropertyListingState>('marketing');

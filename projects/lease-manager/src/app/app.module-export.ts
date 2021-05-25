@@ -13,7 +13,7 @@ import { AllTenantsComponent } from './all-tenants/all-tenants.component';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
-import { reducer } from './store/reducers/lease.reducers';
+import { l_reducer } from './store/reducers/lease.reducers';
 import { LeaseEffects } from './store/effects/lease.effects';
 import { LeaseHomeComponent } from './lease-home/lease-home.component';
 import { TenantDetailsComponent } from './tenant-details/tenant-details.component';
@@ -125,7 +125,7 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forChild(routes),
-    StoreModule.forFeature('lease', reducer),
+    StoreModule.forFeature('lease', l_reducer),
     EffectsModule.forFeature([LeaseEffects])
     // AppRoutingModule
   ],

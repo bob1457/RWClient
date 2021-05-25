@@ -18,7 +18,7 @@ export interface PropertyState   { //extends  EntityState<Property>
 }
 
 export const reducer = {
-  property: property.reducer
+  property: property.p_reducer
 };
 
 export const selectPropertyState = createFeatureSelector<PropertyState>('property');

@@ -6,7 +6,7 @@ import { AppLMComponent } from './app.component';
 import { AllLeasesComponent } from './all-leases/all-leases.component';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { reducer } from './store/reducers/lease.reducers';
+import { l_reducer } from './store/reducers/lease.reducers';
 import { LeaseEffects } from './store/effects/lease.effects';
 import { AllTenantsComponent } from './all-tenants/all-tenants.component';
 import { LeaseHomeComponent } from './lease-home/lease-home.component';
@@ -90,7 +90,7 @@ import { TypePipe } from './type.pipe';
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    StoreModule.forFeature('lease', reducer),
+    StoreModule.forFeature('lease', l_reducer),
     EffectsModule.forFeature([LeaseEffects])
   ],
   providers: [],

@@ -10,7 +10,7 @@ import { PropertyHomeComponent } from './property-home/property-home.component';
 import { PropertyListComponent } from './property-list/property-list.component';
 import { PropertyDetailsComponent } from './property-details/property-details.component';
 import { StoreModule } from '@ngrx/store';
-import { reducer } from './store/reducers';
+import { p_reducer } from './store/reducers';
 import { PropertyEffects } from './store/effects/property.effects';
 import { OwnerListComponent } from './owner-list/owner-list.component';
 import { ContractListComponent } from './contract-list/contract-list.component';
@@ -80,7 +80,7 @@ import { SignDatePipe } from './sign-date.pipe';
     MatSortModule,
     MatPaginatorModule,
     StoreModule.forRoot([]),
-    StoreModule.forFeature('property', reducer),
+    StoreModule.forFeature('property', p_reducer),
     EffectsModule.forFeature([PropertyEffects])
   ],
   providers: [

@@ -9,7 +9,7 @@ import { PropertyHomeComponent } from './property-home/property-home.component';
 import { PropertyListComponent } from './property-list/property-list.component';
 import { PropertyDetailsComponent } from './property-details/property-details.component';
 import { StoreModule } from '@ngrx/store';
-import { reducer } from './store/reducers';
+import { p_reducer } from './store/reducers';
 import { OwnerListComponent } from './owner-list/owner-list.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AddPropertyComponent } from './add-property/add-property.component';
@@ -107,7 +107,7 @@ const routes: Routes = [
     ReactiveFormsModule,
     NgxMaskModule.forRoot(),
     RouterModule.forChild(routes),
-    StoreModule.forFeature('property', reducer, {metaReducers})
+    StoreModule.forFeature('property', p_reducer, {metaReducers})
   ],
   exports: [
     MatSortModule

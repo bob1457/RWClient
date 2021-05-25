@@ -1,4 +1,4 @@
-import { reducer } from './store/reducers/marketing.reducers';
+import { m_reducer } from './store/reducers/marketing.reducers';
 import { AppMaterialModule } from '@lib/app-material';
 // import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule, DatePipe } from '@angular/common';
@@ -88,7 +88,7 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forChild(routes),
-    StoreModule.forFeature('marketing', reducer, {metaReducers}),
+    StoreModule.forFeature('marketing', m_reducer, {metaReducers}),
     EffectsModule.forFeature([MarketingEffects])
     // AppRoutingModule
   ],

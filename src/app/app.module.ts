@@ -27,6 +27,7 @@ import { FlexLayoutModule, LayoutGapStyleBuilder } from '@angular/flex-layout';
 
 import { metaReducers } from './store/metareducres';
 import { CustomLayoutGapStyleBuilder } from './shared/LayoutGapBuilder';
+import { appReducer } from './store/app.state';
 
 
 @NgModule({
@@ -42,7 +43,7 @@ import { CustomLayoutGapStyleBuilder } from './shared/LayoutGapBuilder';
     ManageModule,
     SharedModule,
     EffectsModule.forRoot([AuthEffects, PropertyEffects]),
-    StoreModule.forRoot({router: routerReducer},
+    StoreModule.forRoot(appReducer,
       {
         // metaReducers,
         runtimeChecks: {

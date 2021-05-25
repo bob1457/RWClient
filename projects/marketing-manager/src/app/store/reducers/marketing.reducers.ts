@@ -1,6 +1,9 @@
 import { PropertyListingState } from '../marketing.state';
 import { createReducer, on, Action, createSelector, createFeatureSelector } from '@ngrx/store';
 import * as ListingActions from '../actions/marketing.actions';
+export const MARKETING_STATE_NAME = 'marketing';
+
+
 
 
 export const initialState: PropertyListingState =  { // adapter.getInitialState
@@ -356,7 +359,7 @@ const propertyListingReducer = createReducer(
 
 
 // Selectors
-export const selectPropertyListingState = createFeatureSelector<PropertyListingState>('marketing');
+export const selectPropertyListingState = createFeatureSelector<PropertyListingState>(MARKETING_STATE_NAME);
 
 export const getLoadingStatus = (state: PropertyListingState) => state.loading;
 export const getLoadedStatus = (state: PropertyListingState) => state.loaded;
@@ -381,7 +384,7 @@ export const openHouses = createSelector(selectPropertyListingState, getOpenHous
 export const loadingStatus = createSelector(selectPropertyListingState, getLoadingStatus);
 export const loadedStatus = createSelector(selectPropertyListingState, getLoadedStatus);
 
-export function reducer(state: PropertyListingState | undefined, action: Action) {
+export function m_reducer(state: PropertyListingState | undefined, action: Action) {
   return propertyListingReducer(state, action);
 }
 
