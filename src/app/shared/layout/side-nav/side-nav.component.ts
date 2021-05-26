@@ -20,7 +20,9 @@ import { PropertyList, ContractList, TenantList, RentalList, OwnerList, Marketin
 // import { StateService } from '@lib/auth';
 import { StateService } from 'projects/auth/src/public-api';
 import { VendorList, WorkOrderList, ServiceRequestList } from 'projects/dashboard/src/projects';
-import { ownerList, propertyList } from 'projects/property-manager/src/app/store/reducers';
+import { contractList, ownerList, propertyList } from 'projects/property-manager/src/app/store/reducers';
+import { leaseList, serviceRequestList, tenantList, vendorList, workOrderList } from 'projects/lease-manager/src/app/store/reducers';
+import { openHouses, propertyApplications, propertyListing } from 'projects/marketing-manager/src/app/store/reducers';
 
 
 
@@ -181,41 +183,101 @@ export class SideNavComponent implements OnInit {
         }
       });
 
-    this.store.pipe(select(ContractList)).subscribe(data => {
+    this.store.pipe(select(contractList)).subscribe(data => {
+      if (data && data.length > 1) {
         this.contracts = data;
+        } else {
+          this.store.select(ContractList).subscribe(clist => {
+            this.contracts = clist;
+          });
+        }
+
       });
 
-    this.store.pipe(select(TenantList)).subscribe(data => {
+    this.store.select(tenantList).subscribe(data => {
+      if ( data && data.length > 0) {
         this.tenant = data;
-      });
+        } else {
+          this.store.pipe(select(TenantList)).subscribe(tlist => {
+          this.tenant = tlist;
+        });
+      }
+    });
 
-    this.store.pipe(select(RentalList)).subscribe(data => {
+    this.store.pipe(select(leaseList)).subscribe(data => {
+      if (data && data.length > 1) {
         this.rentalList = data;
-      });
+        } else {
+          this.store.pipe(select(RentalList)).subscribe(rlist => {
+          this.rentalList = rlist;
+        });
+      }
+    });
 
-    this.store.pipe(select(MarketingList)).subscribe(data => {
+    this.store.select(propertyListing).subscribe(data => {
+      if(data && data.length > 1) {
         this.propertyLisitng = data;
-      });
+        } else {
+          this.store.pipe(select(MarketingList)).subscribe(mlist => {
+          this.propertyLisitng = mlist;
+        });
+      }
+    });
 
-    this.store.pipe(select(RentalAppList)).subscribe(data => {
+
+    this.store.select(propertyApplications).subscribe(data => {
+      if( data && data.length > 1 ){
         this.applicatons = data;
+      }else {
+        this.store.pipe(select(RentalAppList)).subscribe(alist => {
+        this.applicatons = alist;
       });
-
-    this.store.select(OpenHouseList).subscribe(data => {
-      this.openHouses = data;
+      }
     });
 
-    this.store.select(VendorList).subscribe(data => {
-      this.vendors = data;
+
+    this.store.select(openHouses).subscribe(data => {
+      if ( data && data.length > 1 ) {
+        this.openHouses = data;
+      } else {
+        this.store.select(OpenHouseList).subscribe(olist => {
+          this.openHouses = olist;
+        });
+      }
     });
 
-    this.store.select(WorkOrderList).subscribe(data => {
-      this.workorders = data;
+
+    this.store.select(vendorList).subscribe(data => {
+      if(data && data.length > 1) {
+        this.vendors = data;
+      } else {
+        this.store.select(VendorList).subscribe(vlist => {
+          this.vendors = vlist;
+        });
+      }
     });
 
-    this.store.select(ServiceRequestList).subscribe(data => {
-      this.servicerequests = data;
+    this.store.select(workOrderList).subscribe(data => {
+      if(data && data.length > 1) {
+        this.workorders = data;
+       }else {
+        this.store.select(WorkOrderList).subscribe(wlist => {
+          this.workorders = wlist;
+        });
+      }
     });
+
+    this.store.select(serviceRequestList).subscribe(data => {
+      if (data && data.length > 1){
+        this.servicerequests = data;
+        } else {
+          this.store.select(ServiceRequestList).subscribe(slist => {
+        this.servicerequests = slist;
+        });
+      }
+    });
+
+
 
     // select single state then use async pipe in template for sub/unsub using *ngIf which returns a boolean value // console.log(userData);
     // this.avatar$ = this.store.select(ustate => ustate.user.avatarUrl);
