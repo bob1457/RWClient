@@ -8,9 +8,9 @@ import * as fromDash from '@lib/dashboard';
 import * as fromMarketing from '../../../projects/marketing-manager/src/app/store/marketing.state';
 import * as fromLease from '../../../projects/lease-manager/src/app/store/lease-state';
 
-import { PROPERTY_STATE_NAME, p_reducer} from '../../../projects/property-manager/src/app/store/reducers';
-import { MARKETING_STATE_NAME, m_reducer } from 'projects/marketing-manager/src/app/store/reducers';
-import { LEASE_STATE_NAME, l_reducer } from 'projects/lease-manager/src/app/store/reducers';
+import { property, p_reducer} from '../../../projects/property-manager/src/app/store/reducers';
+import { marketing, m_reducer } from 'projects/marketing-manager/src/app/store/reducers';
+import { lease, l_reducer } from 'projects/lease-manager/src/app/store/reducers';
 
 export interface AppState {
   auth: fromAuth.AuthState;
@@ -25,7 +25,7 @@ export const appReducer = {
   // [SHARED_STATE_NAME]: SharedReducer,
   // [AUTH_STATE_NAME]: AuthReducer,
   // router: routerReducer,
-  PROPERTY_STATE_NAME: p_reducer,
-  MARKETING_STATE_NAME: m_reducer,
-  LEASE_STATE_NAME: l_reducer
+  property: p_reducer,
+  marketing: m_reducer,
+  lease: l_reducer
 };

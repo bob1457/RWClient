@@ -161,7 +161,7 @@ export class SideNavComponent implements OnInit {
     });
 
     this.store.pipe(select(propertyList)).subscribe(data => {
-      if (data ) {
+      if (data && data.length > 1 ) {
         this.property = data;
         } else {
           this.store.select(PropertyList).subscribe(plist => {
@@ -172,7 +172,7 @@ export class SideNavComponent implements OnInit {
       });
 
     this.store.pipe(select(ownerList)).subscribe(data => {
-      if (data) {
+      if (data && data.length > 1) {
         this.owners = data;
         } else {
           this.store.select(OwnerList).subscribe(olist => {

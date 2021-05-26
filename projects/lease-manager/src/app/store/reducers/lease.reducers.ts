@@ -3,7 +3,7 @@ import { createReducer, on, Action, createFeatureSelector, createSelector } from
 import * as LeaseActions from '../actions/lease.actions';
 import { getRentPaymentListFailure } from 'projects/dashboard/src/lib/store/dash.actions';
 
-export const LEASE_STATE_NAME = 'lease';
+export const lease = 'lease';
 
 export const initialState: PropertyLeaseState =  { // adapter.getInitialState
   loading: false,
@@ -653,7 +653,7 @@ on(LeaseActions.addVendorFailure, (state) => {
  *
  * State Selectors
  */
-export const selectLeaseyState = createFeatureSelector<PropertyLeaseState>(LEASE_STATE_NAME);
+export const selectLeaseyState = createFeatureSelector<PropertyLeaseState>(lease);
 
 export const getLoadingStatus = (state: PropertyLeaseState) => state.loading;
 

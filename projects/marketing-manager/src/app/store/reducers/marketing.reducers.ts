@@ -1,7 +1,7 @@
 import { PropertyListingState } from '../marketing.state';
 import { createReducer, on, Action, createSelector, createFeatureSelector } from '@ngrx/store';
 import * as ListingActions from '../actions/marketing.actions';
-export const MARKETING_STATE_NAME = 'marketing';
+export const marketing = 'marketing';
 
 
 
@@ -359,7 +359,7 @@ const propertyListingReducer = createReducer(
 
 
 // Selectors
-export const selectPropertyListingState = createFeatureSelector<PropertyListingState>(MARKETING_STATE_NAME);
+export const selectPropertyListingState = createFeatureSelector<PropertyListingState>(marketing);
 
 export const getLoadingStatus = (state: PropertyListingState) => state.loading;
 export const getLoadedStatus = (state: PropertyListingState) => state.loaded;

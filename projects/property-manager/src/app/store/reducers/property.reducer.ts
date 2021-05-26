@@ -4,7 +4,7 @@ import { PropertyState } from '../property.state';
 import * as PropertyActions from '../actions/property.actions';
 import { EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 
-export const PROPERTY_STATE_NAME = 'property';
+export const property = 'property';
 // const adapter: EntityAdapter<Property> = createEntityAdapter<Property>();
 
 // tslint:disable-next-line:one-variable-per-declaration
@@ -453,7 +453,7 @@ on(PropertyActions.getContractDetails, (state) => ({
  *
  * State Selectors
  */
-export const selectPropertyState = createFeatureSelector<PropertyState>(PROPERTY_STATE_NAME);
+export const selectPropertyState = createFeatureSelector<PropertyState>(property);
 
 export const getLoadingStatus = (state: PropertyState) => state.loading;
 
