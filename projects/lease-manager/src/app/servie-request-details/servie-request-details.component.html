@@ -31,8 +31,8 @@
             <ul style="list-style: none;font-size:.85em">
                 <li style="margin-left: -20px;" *ngFor="let wo of request.lease.rentalProperty.workOrder">
                     <span *ngIf="request.lease.rentalProperty.workOrder">
-                  {{wo.workOrderName}} --- {{wo.workOrderStatus}}
-                </span>
+                  {{wo.workOrderName}} --- <span style="font-style: italic;" [style.color]="wo.workOrderStatus == 'Completed' ? 'green' : wo.workOrderStatus == 'In Progress' ? 'orange' : 'red'">{{wo.workOrderStatus}}</span>
+                    </span>
                     <span *ngIf="request.lease.rentalProperty.workOrder && request.lease.rentalProperty.workOrder.length === 0">
                   No work orders
                 </span>
