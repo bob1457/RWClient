@@ -26,7 +26,18 @@
                 <!--  {{request.lease.rentalProperty.address.city}} {{request.lease.rentalProperty.address.stateProvince}} <br>{{request.lease.rentalProperty.address.zipPostCode}} <br> {{requestlease.rentalProperty.address.country}} -->
             </p>
 
-
+            <p></p>
+            <span style="font-weight: 500;">Work Orders</span>
+            <ul style="list-style: none;font-size:.85em">
+                <li style="margin-left: -20px;" *ngFor="let wo of request.lease.rentalProperty.workOrder">
+                    <span *ngIf="request.lease.rentalProperty.workOrder">
+                  {{wo.workOrderName}} --- {{wo.workOrderStatus}}
+                </span>
+                    <span *ngIf="request.lease.rentalProperty.workOrder && request.lease.rentalProperty.workOrder.length === 0">
+                  No work orders
+                </span>
+                </li>
+            </ul>
             <!-- <p>History</p> -->
             <!-- <ul style="list-style: none;">
                 <li *ngFor="let order of vendor.workOrder" style="font-size: .75em; margin-bottom: 7px;">

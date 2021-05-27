@@ -10,6 +10,7 @@ import { Routes, RouterModule } from '@angular/router';
 // import { DashhomeComponent } from '../../../projects/dashboard/src/lib/dashhome/dashhome.component';
 import { DashboardComponent } from '@lib/dashboard';
 import { AboutComponent } from './about/about.component';
+import { HelpComponent } from './help/help.component';
 
 const routes: Routes = [
   {path: 'Manage',
@@ -20,6 +21,7 @@ const routes: Routes = [
       { path: 'dashboard', component: DashboardComponent},
       { path: 'profile', component: ProfileHomeComponent},
       { path: 'about', component: AboutComponent},
+      { path: 'help', component: HelpComponent},
       // { path: 'property', loadChildren: '../../../projects/property-manager/src/app/app.module-export#AppPmModule'}
       // tslint:disable-next-line:max-line-length
       { path: 'property', loadChildren: () => import('../../../projects/property-manager/src/app/app.module-export').then(m => m.AppPmModule)},

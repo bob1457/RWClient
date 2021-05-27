@@ -12,12 +12,14 @@ import { HomeComponent } from './home/home.component';
 import { SharedModule } from '../shared/shared.module';
 import { BreadcrumbsComponent } from '../shared/breadcrumbs/breadcrumbs.component';
 import { AboutComponent } from './about/about.component';
+import { HelpComponent } from './help/help.component';
 
 
 @NgModule({
   declarations: [
     HomeComponent,
-    AboutComponent    
+    AboutComponent,
+    HelpComponent    
   ],
   imports: [
     CommonModule,

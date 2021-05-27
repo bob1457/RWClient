@@ -652,28 +652,49 @@
             </button> -->
 
                         <!-- To be reviewed -->
-                        <button mat-icon-button (click)="drawer2.toggle()">
+                        <!-- Disabled for now -- future version-->
+                        <!-- <button mat-icon-button (click)="drawer2.toggle()">
               <mat-icon
                 style="color: #09af00;  font-size: 1.5em;"
                 title="Quick Links"
                 >settings</mat-icon
               >
+            </button> -->
+                        <button mat-icon-button [matMenuTriggerFor]="menuRef">
+              <mat-icon style="color: #09af00; font-size: 1.5em;">more_vert</mat-icon>
             </button>
+                        <!-- Second menu from toolbar -->
+                        <mat-menu #menuRef="matMenu">
+                            <button mat-menu-item [routerLink]="['/Manage/help']" style="margin-top: -10px;">
+                <mat-icon style="color: #883f14;">notifications</mat-icon> Notifications
+              </button>
+                            <button mat-menu-item [routerLink]="['/Manage/help']">
+                <mat-icon style="color: #2618a3;">message</mat-icon> Inbox(Messages)
+              </button>
+                            <button mat-menu-item [routerLink]="['/Manage/help']" style="margin-top: -10px;">
+                <mat-icon style="color: #881488;">public</mat-icon> Chat
+              </button>
+                            <mat-divider></mat-divider>
+                            <button mat-menu-item [routerLink]="['/Manage/help']">
+                <mat-icon style="color: #2fca2f;">help</mat-icon> Help
+              </button>
+                        </mat-menu>
 
                         <mat-menu #menu="matMenu" [overlapTrigger]="false">
                             <button [routerLink]="['/Manage/profile']" mat-menu-item style="margin-top: -8px;
-                height: 50px;
-                background: #e1e2e1;">
-                <mat-icon style="color: black;">account_circle</mat-icon>
-                <!--<i class="far fa-user-circle" style="color: #09af00;"></i>-->
-                <span>&nbsp; My Account</span><br />
+                  height: 50px;
+                  background: #e1e2e1;">
+                  <mat-icon style="color: black;">account_circle</mat-icon>
+                  <!--<i class="far fa-user-circle" style="color: #09af00;"></i>-->
+                  <span>&nbsp; My Account</span><br />
 
-              </button>
+                </button>
                             <span style="margin-left: 25px;
-              color: #2e60ac;
-              margin-top: 15px;
-              display: inline-block;
-              font-size: .8em;">{{user.firstname}} {{user.lastname}} -- <span style="font-style: italic">{{user.role}}</span></span>
+                color: #2e60ac;
+                margin-top: 15px;
+                display: inline-block;
+                font-size: .8em;">{{user.firstname}} {{user.lastname}} -- <span style="font-style: italic">{{user.role}}</span>
+                            </span>
                             <hr>
                             <button mat-menu-item>
                 <!--disabled-->
