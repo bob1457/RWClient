@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class ReantalApplicationServiceService {
-  baseUrl = 'http://localhost:21799';
+  baseUrl = 'http://realgateway:21799';
 
   constructor(protected http: HttpClient) { }
 

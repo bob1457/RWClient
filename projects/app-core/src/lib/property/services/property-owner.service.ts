@@ -8,7 +8,7 @@ import { PropertyOwner } from '../models/property-owner.model';
 })
 export class PropertyOwnerService {
 
-  baseUrl = 'http://localhost:21799';
+  baseUrl = 'http://realgateway:21799';
 
   constructor(protected http: HttpClient) { }
 

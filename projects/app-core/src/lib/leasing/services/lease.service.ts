@@ -13,7 +13,7 @@ import { ServiceRequest } from '../models/service-request.model';
 })
 export class LeaseService {
 
-  baseUrl = 'http://localhost:21799';
+  baseUrl = 'http://realgateway:21799';
 
   constructor(protected http: HttpClient) { }
 

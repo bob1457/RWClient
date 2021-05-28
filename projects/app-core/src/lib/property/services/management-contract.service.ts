@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ManagementContractService {
 
-  baseUrl = 'http://localhost:21799';
+  baseUrl = 'http://realgateway:21799';
 
   constructor(private http: HttpClient) { }
 

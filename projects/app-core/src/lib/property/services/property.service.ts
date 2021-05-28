@@ -24,7 +24,7 @@ import { PropertyOwner } from '../models/property-owner.model';
 */
 export class PropertyService {
 
-  baseUrl = 'http://localhost:21799';
+  baseUrl = 'http://realgateway:21799';
   // baseUrl = 'http://localhost:19807/api'; // for testing
   propertyList: Property[];
   property: Property;

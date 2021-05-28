@@ -10,7 +10,7 @@ import { OpenHouse } from '../models/openHouse.model';
 })
 export class MarketingService {
 
-  baseUrl = 'http://localhost:21799';
+  baseUrl = 'http://realgateway:21799';
 
   constructor(protected http: HttpClient) { }
 
