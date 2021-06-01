@@ -288,7 +288,7 @@
                                                         <mat-form-field class="owner-full-width">
                                                             <textarea id="notes" formControlName="notes" matInput placeholder="Notes" [ngModel]="oh.notes"></textarea>
                                                         </mat-form-field>
-                                                        <button type="submit" mat-button>UPDATE</button>
+                                                        <button type="submit" mat-button><mat-icon style="color: green;">done</mat-icon> &nbsp;UPDATE</button>
                                                     </div>
 
 
@@ -336,30 +336,30 @@
 
 
                                 <div *ngIf="addOpenHouse">
-                                    <h6 style="margin-left: 20px;margin-top: 20px;">Add Open House</h6>
-                                    <form fxLayout="column" fxLayoutGap="7px" fxLayoutAlign="start start" [formGroup]="addForm" (ngSubmit)="AddOpenHouse()" style="margin-left: 20px;">
-                                        <mat-form-field style="margin-right: 10px; width: 30%;">
+                                    <h6 style="margin-left: 20px;margin-top: 20px;text-align: center;">Add Open House</h6>
+                                    <form fxLayout="column" fxLayoutGap="7px" fxLayoutAlign="start center" [formGroup]="addForm" (ngSubmit)="AddOpenHouse()" style="margin-left: 20px;">
+                                        <mat-form-field style="margin-right: 10px; width: 70%;">
                                             <mat-label>Open House Date</mat-label>
                                             <input matInput [matDatepicker]="picker" formControlName="openhouseDate">
                                             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                                             <mat-datepicker #picker></mat-datepicker>
                                         </mat-form-field>
-                                        <mat-form-field class="form-content" style="width: 30%;">
+                                        <mat-form-field class="form-content" style="width: 70%;">
                                             <mat-icon matSuffix>av_timer</mat-icon>
                                             <input formControlName="startTime" matInput placeholder="Start Time: e.g. 2pm">
                                         </mat-form-field>
-                                        <mat-form-field class="form-content" style="width: 30%;">
+                                        <mat-form-field class="form-content" style="width: 70%;">
                                             <mat-icon matSuffix>av_timer</mat-icon>
                                             <input formControlName="endTime" matInput placeholder="End Time: e.g. 4pm">
                                         </mat-form-field>
-                                        <mat-form-field class="property-full-width" style="width: 30%;">
+                                        <mat-form-field class="property-full-width" style="width: 70%;">
                                             <mat-label>Note</mat-label>
                                             <textarea matInput formControlName="notes"></textarea>
                                         </mat-form-field>
-                                        <div fxLayout="row" fxLayoutGap="7px" fxLayoutAlign="end center" style="width: 30%; margin-bottom: 20px;">
+                                        <div fxLayout="row" fxLayoutGap="7px" fxLayoutAlign="end center" style="width: 70%; margin-bottom: 20px;">
 
-                                            <button type="submit" mat-raised-button color="primary">CREATE</button>
-                                            <button type="button" mat-raised-button color="accent" (click)="clear()">CANCEL</button>
+                                            <button type="submit" mat-raised-button color="primary"><mat-icon style="color: green;">done</mat-icon> &nbsp;CREATE</button>
+                                            <button type="button" mat-raised-button color="accent" (click)="clear()"><mat-icon style="color: orangered;">clear</mat-icon> &nbsp;CANCEL</button>
                                         </div>
                                     </form>
                                 </div>
