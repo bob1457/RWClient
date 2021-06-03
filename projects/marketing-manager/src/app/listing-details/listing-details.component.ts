@@ -25,6 +25,8 @@ export class ListingDetailsComponent implements OnInit {
   // loaded = false;
   imgList: any[] = [];
 
+  fieUploadError = 'Only images are accepted!';
+  showErr = false;
 
   img = {
     id: 0
@@ -340,10 +342,24 @@ export class ListingDetailsComponent implements OnInit {
 
   onChange( files ) {
     debugger;
+    // const file = files.[0];
+
+    console.log(files);
+
+    this.showErr = false;
+
+    if (files[0].type === 'image/png' || files[0].type === 'image/jpg' || files[0].type === 'image/jpeg' || files[0].type === 'image/gif') {
+      this.store.dispatch(uploadPropertyImage({payload: files, rentalPropertyId: this.listing.rentalPropertyId}));
+      // alert('ACCEPTED !!!');
+    } else {
+      // alert('ONLY images are accepted');
+      this.showErr = true;
+    }
+    // console.log('file type', file.type);
     // var control = new FormControl();
     // const primativeFileList: FileList = control.value;
     // const cloneFiles = { ...primativeFileList};
-    this.store.dispatch(uploadPropertyImage({payload: files, rentalPropertyId: this.listing.rentalPropertyId}));
+
   }
 
   // selectPropertyListingDetails() {

@@ -45,12 +45,16 @@
                 <!--*ngIf="loading | async" -->
                 <i class="fas fa-arrow-circle-up"></i>
                 <span>&nbsp; Add Image</span>
-
+                <br>
+                <br>
+                <span *ngIf="showErr" style="color: red;">
+                  {{fieUploadError}}
+                </span>
             </a>
 
         </div>
 
-        <input #file id="fileInput" (change)="onChange(file.files)" hidden type="file">
+        <input #file id="fileInput" (change)="onChange(file.files)" hidden type="file" accept="image/png, image/gif, image/jpg, image/jpeg">
 
         <div style="margin-top: 25px;">
             <span style="font-weight: 500;">Property Information</span>
