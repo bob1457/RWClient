@@ -34,7 +34,31 @@
             <span style="font-weight: 500;">Owner Information</span>
             <ul class="owner-list">
                 <li *ngFor="let owner of property.ownerList" style="margin-left: -40px;">
-                    {{owner.firstName}} {{owner.lastName}} <a href="" style="cursor: pointer;">details</a>
+
+                    <a mat-button [matMenuTriggerFor]="menu" style="border: 1px solid grey; margin-bottom: 10px;">{{owner.firstName}} {{owner.lastName}}</a>
+                    <mat-menu #menu="matMenu">
+                        <div style="font-size: .8em;padding: 10px;">
+                            <span style="font-weight: 600;">
+                            OWNER ID: {{owner.id}}
+                          </span><br><br>
+                            <span>
+                          First Name:  {{owner.firstName}}
+                          </span><br>
+                            <span>
+                            Last Name:  {{owner.lastName}}
+                          </span><br><br>
+                            <span>
+                            {{owner.address.streetNumber}}, {{owner.address.city}}
+                          </span><br>
+                            <span>
+                            {{owner.address.stateProvince}} {{owner.address.zipPostCode}} <br>{{owner.address.country}}
+                          </span>
+                            <br>
+                            <a routerLink="/Manage/property/ownerdetails/{{owner.id}}">more details</a>
+                        </div>
+
+
+                    </mat-menu>
                 </li>
             </ul>
         </div>
@@ -277,8 +301,8 @@
                         />
                         </span> -->
                         <!-- <span *ngIf="showMsg" style="margin-right: 20px;"> Updated successfully!</span>&nbsp;&nbsp; -->
-                        <button [disabled]="loading$ | async" type="submit" mat-raised-button color="primary">UPDATE</button>
-                        <button mat-raised-button color="accent" (click)="goBack()">CANCEL</button>
+                        <button [disabled]="loading$ | async" type="submit" mat-raised-button color="primary"><mat-icon style="color: green;">check</mat-icon>&nbsp; UPDATE</button>
+                        <button mat-raised-button color="accent" (click)="goBack()"><mat-icon style="color: orangered;">clear</mat-icon>&nbsp; CANCEL</button>
                     </div>
                 </form>
             </mat-card-content>
