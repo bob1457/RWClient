@@ -23,6 +23,7 @@ export class ContractDetailsComponent implements OnInit {
   detailsForm: FormGroup;;
   contract: any;// ManagementContract;
   editSignDate = false;
+  serverUrl = 'http://localhost:19807/';
 
   // contract$ = this.store.pipe(select(contractDetails))
   //             .subscribe(data => {

@@ -56,8 +56,8 @@
                         </mat-form-field>
                         <div class="selection" style="width: 70%;" fxLayoutAlign="start start">
                             <mat-radio-group style="margin-top: 13px; padding-right: 5px;" formControlName="type" [ngModel]="contract.type">
-                                <mat-radio-button value=1 style="padding-right: 10px;margin-right: 25px;" [checked]="contract.type == 1">New</mat-radio-button>
-                                <mat-radio-button value=2 [checked]="contract.type == 2">Renewal</mat-radio-button>
+                                <mat-radio-button disabled value=1 style="padding-right: 10px;margin-right: 25px;" [checked]="contract.type == 1">New</mat-radio-button>
+                                <mat-radio-button disabled value=2 [checked]="contract.type == 2">Renewal</mat-radio-button>
                             </mat-radio-group>
                         </div>
                         <div fxLayout="row" fxLayout.xs="column" style="width: 70%;">
@@ -161,7 +161,14 @@
 
                             <a (click)="openInput()" style="cursor: pointer;"><span class="material-icons" style="vertical-align: bottom;">save</span>&nbsp;Save Signed Contract</a>
                             <input #file id="fileInput" (change)="onChange(file.files)" hidden type="file">
+                            <div style="margin-top: 8px; margin-left: 10px;cursor: pointer;" *ngIf="contract.managementContractDocUrl">
+                                <a style="margin-top: 5px;" [href]="'http://localhost:19807/' + contract.managementContractDocUrl" target="_blank" title="Signed contract">
+                                    <mat-icon>description</mat-icon>
+                                </a>
+
+                            </div>
                         </div>
+                        <p style="margin-top: 20px;"></p>
                         <div fxLayout="row" fxLayoutGap="7px" fxLayoutAlign="end center" style="width: 75%;margin-bottom: 20px;">
                             <!-- <span *ngIf="showMsg" style="color: rgb(189, 150, 25);">Updated successfully!</span>
                 <img *ngIf=" loading" class="pl-2" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
