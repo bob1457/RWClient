@@ -149,50 +149,70 @@ export class SideNavComponent implements OnInit {
 
 
 
-      console.log(userData);
-      if (userData == null) {
+      // console.log('logged in user in main app', userData);
+      if (!userData) {
         this.user = JSON.parse(localStorage.getItem('auth'));
+        console.log('user from localsgtorage', this.user);
         this.role = this.user.role;
         console.log(this.user);
       } else {
         this.user = userData;
+
+        console.log('user name from subscription', this.user.username);
         localStorage.setItem('auth', JSON.stringify(userData));
         this.role = userData.role;
       }
 
     });
 
-    this.store.pipe(select(propertyList)).subscribe(data => {
-      if (data && data.length > 1 ) {
-        this.property = data;
-        } else {
-          this.store.select(PropertyList).subscribe(plist => {
-            this.property = plist;
-          });
-        }
+    // this.store.pipe(select(propertyList)).subscribe(data => {
+    //   if (data && data.length > 1 ) {
+    //     this.property = data;
+    //     } else {
+    //       this.store.select(PropertyList).subscribe(plist => {
+    //         this.property = plist;
+    //       });
+    //     }
 
+    //   });
+
+    this.store.select(PropertyList).subscribe(plist => {
+        this.property = plist;
       });
 
-    this.store.pipe(select(ownerList)).subscribe(data => {
-      if (data && data.length > 1) {
-        this.owners = data;
-        } else {
-          this.store.select(OwnerList).subscribe(olist => {
-            this.owners = olist;
-          });
-        }
+    // this.store.pipe(select(ownerList)).subscribe(data => {
+    //   if (data && data.length > 1) {
+    //     this.owners = data;
+    //     } else {
+    //       this.store.select(OwnerList).subscribe(olist => {
+    //         this.owners = olist;
+    //       });
+    //     }
+    //   });
+
+    this.store.select(OwnerList).subscribe(olist => {
+        this.owners = olist;
       });
 
-    this.store.pipe(select(contractList)).subscribe(data => {
-      if (data && data.length > 1) {
-        this.contracts = data;
-        } else {
-          this.store.select(ContractList).subscribe(clist => {
-            this.contracts = clist;
-          });
-        }
+    // this.store.pipe(select(contractList)).subscribe(data => {
+    //   if (data && data.length > 1) {
+    //     this.contracts = data;
+    //     } else {
+    //       this.store.select(ContractList).subscribe(clist => {
+    //         this.contracts = clist;
+    //       });
+    //     }
 
+    //   });
+
+    this.store.select(ContractList).subscribe(clist => {
+        this.contracts = clist;
       });
+
+
+
+
+
 
     this.store.select(tenantList).subscribe(data => {
       if ( data && data.length > 0) {

@@ -25,9 +25,10 @@ export class DashboardEffects {
     this.actions$.pipe(
       // ofType('[Property] Get Property List'),
       ofType(DashActions.getPropertyList),
+      map(action => action.payload),
       tap(() => console.log('got here for property list from dash lib')),
-      switchMap(() =>
-        this.dashService.getPropertyList().pipe(
+      switchMap((payload) =>
+        this.dashService.getPropertyList(payload).pipe(
           map((properties: Property[]) => ({
             type: '[Property] Get Property List Success',
             payload: properties
@@ -71,9 +72,10 @@ export class DashboardEffects {
     this.actions$.pipe(
       // ofType('[Property] Get Property List'),
       ofType(DashActions.getPropertyOwnerList),
+      map(action => action.payload),
       tap(() => console.log('got here to call service for retrieving owners from dash lib')),
-      switchMap(() =>
-        this.dashService.getPropertyOwnerList().pipe(
+      switchMap((payload) =>
+        this.dashService.getPropertyOwnerList(payload).pipe(
           map((owners: PropertyOwner[]) => ({
             type: '[Property] Get Property Owner List Success',
             payload: owners
@@ -94,9 +96,10 @@ export class DashboardEffects {
     this.actions$.pipe(
       // ofType('[Property] Get Property List'),
       ofType(DashActions.getContractList),
+      map(action => action.payload),
       tap(() => console.log('got here to call service for retrieving contracts from dashboard lib')),
-      switchMap(() =>
-        this.dashService.getManagementContractList().pipe(
+      switchMap((payload) =>
+        this.dashService.getManagementContractList(payload).pipe(
           map((contracts: ManagementContract[]) => ({
             type: '[Property] Get Contract List Success',
             payload: contracts

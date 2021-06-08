@@ -3,7 +3,8 @@ import { map } from 'rxjs/operators';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 import { getPropertyList, getPropertyOwnerList, getContractList } from '../store/dash.actions';
 import { DashState } from '../store/dash.state';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
+import { getUserInfo } from '@lib/auth';
 
 @Component({
   selector: 'lib-dashhome',
@@ -13,6 +14,8 @@ import { Store } from '@ngrx/store';
 export class DashhomeComponent {
 
   breakpoint: number;
+
+  username;
 
   /** Based on the screen size, switch from standard to one column per row
   cards = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
@@ -41,10 +44,12 @@ export class DashhomeComponent {
     this.breakpoint = (window.innerWidth <= 640) ? 2 : 1;
     debugger;
 
+
+
     // getPropertyList();
     // getPropertyOwnerList();
     // return this.store.dispatch(getPropertyOwnerList()) ;
-    return this.store.dispatch(getContractList()) ;
+    return this.store.dispatch(getContractList(this.username)) ;
   }
 
   onResize(event) {
@@ -58,5 +63,19 @@ export class DashhomeComponent {
   // getPropertyOwnerList() {
   //   return this.store.dispatch(getPropertyOwnerList()) ;
   // }
+
+  getCurrentUser() {
+    this.store.pipe(select(getUserInfo)).subscribe(userData => { // this.user = userData;
+
+      console.log(userData);
+      if (userData == null) {
+        this.username = JSON.parse(localStorage.getItem('auth'));
+        console.log(this.username);
+      } else {
+        this.username = userData;
+      }
+
+    });
+  }
 
 }

@@ -12,7 +12,8 @@ debugger;
  * Get Property List Actions
  */
 export const getPropertyList = createAction(
-  '[Property] Get Property List'
+  '[Property] Get Property List',
+  props<{payload: string}>()
 );
 
 export const getPropertyListSuccess = createAction(
@@ -54,7 +55,8 @@ export const getPropertyImageListFailure = createAction(
  * Get Property Owner List Actions
  */
 export const getPropertyOwnerList = createAction(
-  '[Property] Get Property Owner List'
+  '[Property] Get Property Owner List',
+  props<{payload: string}>()
 );
 
 export const getPropertyOwnerListSuccess = createAction(
@@ -74,7 +76,8 @@ export const getPropertyOwnerListFailure = createAction(
  * Get Management Contract List Actions
  */
 export const getContractList = createAction(
-  '[Property] Get Contract List'
+  '[Property] Get Contract List',
+  props<{payload: string}>()
 );
 
 export const getContractListSuccess = createAction(

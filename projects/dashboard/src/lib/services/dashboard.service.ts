@@ -20,10 +20,10 @@ export class DashboardService {
 
   constructor(private http: HttpClient) { }
 
-  getPropertyList() {
+  getPropertyList(user: string) { // user: property manager username/id
     debugger;
-
-    return this.http.get<Property[]>(`${this.baseUrl}/property/all`);
+    console.log('username in property service', user);
+    return this.http.get<Property[]>(`${this.baseUrl}/property/all/${user}`);
   }
 
   getAllPropertyImages() {
@@ -31,14 +31,19 @@ export class DashboardService {
     return this.http.get<PropertyImg[]>(`${this.baseUrl}/listing/allimgs`);
   }
 
-  getPropertyOwnerList() {
+  getPropertyOwnerList(user: string) {
     debugger;
-    return this.http.get<PropertyOwner[]>(`${this.baseUrl}/property/owners`);
+    console.log('username in owner service', user);
+    // return this.http.get<PropertyOwner[]>(`${this.baseUrl}/property/ownersbyppt/${user}`);
+    const url = this.baseUrl + '/property/ownersbyppt/' + user;
+    console.log('url for owner list', url);
+    return this.http.get<PropertyOwner[]>(url);
   }
 
-  getManagementContractList() {
+  getManagementContractList(user: string) {
     debugger;
-    return this.http.get<ManagementContract[]>(`${this.baseUrl}/property/contracts`);
+    console.log('username in contract service', user);
+    return this.http.get<ManagementContract[]>(`${this.baseUrl}/property/contractsbypm/${user}`);
   }
 
   getAllPropertyListings() {

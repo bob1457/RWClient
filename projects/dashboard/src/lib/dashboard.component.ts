@@ -12,6 +12,8 @@ import { PropertyService, ManagementContract, PropertyTenant, PropertyLease, Ren
 import { PropertyOwner } from './models/property-owner.model';
 import { PropertyListing } from './models/property-listing.model';
 import { OpenHouse } from './models/openhouse.model';
+import { getUserInfo } from '@lib/auth';
+// import { ActivatedRoute } from '@angular/router';
 
 // import { vendorList } from 'projects/lease-manager/src/app/store/reducers';
 
@@ -43,8 +45,11 @@ export class DashboardComponent implements OnInit {
 
   loading: boolean;
 
+  username;
+
   constructor(private breakpointObserver: BreakpointObserver,
               private store: Store<DashState>,
+              // private actRoute: ActivatedRoute,
               private propertyService: PropertyService) {
                 this.$propertyList = this.store.select(PropertyList);
                 this.contractList$ = this.store.select(ContractList);
@@ -59,19 +64,26 @@ export class DashboardComponent implements OnInit {
                 this.workOrderList$ = this.store.select(WorkOrderList);
                 this.serviceRequestList$ = this.store.select(ServiceRequestList);
                 this.invoiceList$ = this.store.select(InvoiceList);
+
+                // this.username = actRoute.snapshot.params.user;
               }
 
   ngOnInit() {
+
+    this.getCurrentUser();
+    console.log('got username or not', this.username);
+
     this.breakpoint = (window.innerWidth <= 640) ? 4 : 1;
     this.bp = (window.innerWidth <= 640) ? 4 : 2;
     this.bp2 = (window.innerWidth <= 640) ? 4 : 3;
     this.bp1 = (window.innerWidth <= 640) ? 2 : 1;
 
-    this.store.dispatch(getPropertyList()) ;
+    this.store.dispatch(getPropertyList({payload: this.username})) ;
     this.store.dispatch(getAllLeases());
     this.store.dispatch(getAllTenants());
-    this.store.dispatch(getContractList());
-    this.store.dispatch(getPropertyOwnerList());
+    this.store.dispatch(getContractList({payload: this.username}));
+    // this.store.dispatch(getPropertyOwnerList({payload: this.username}));
+    this.store.dispatch(getPropertyOwnerList({payload: this.username}));
     this.store.dispatch(getRentalApplicationList());
 
     this.store.dispatch(getPropertyImageList());
@@ -113,6 +125,21 @@ export class DashboardComponent implements OnInit {
     //   console.log('All properties: ' + this.list);
     // });
 
+  }
+
+  getCurrentUser() {
+    return this.store.pipe(select(getUserInfo)).subscribe(userData => { // this.user = userData;
+            console.log('loggged in user', userData.username);
+            if (!userData) {
+              const uname = JSON.parse(localStorage.getItem('auth'));
+              this.username = uname.username;
+              console.log('get from dash localstorage', this.username);
+            } else {
+              this.username = userData.username;
+              console.log('get from state', this.username);
+            }
+
+          });
   }
 
 }

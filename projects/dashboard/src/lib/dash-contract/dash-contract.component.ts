@@ -18,7 +18,7 @@ export class DashContractComponent implements OnInit {
     this.breakpoint = (window.innerWidth <= 640) ? 2 : 1;
     debugger;
     // return this.store.dispatch(getPropertyOwnerList()) ;
-    return this.store.dispatch(getContractList()) ;
+    // return this.store.dispatch(getContractList()) ;
   }
 
 }

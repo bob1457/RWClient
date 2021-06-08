@@ -17,11 +17,14 @@ export class DashOwnerComponent implements OnInit {
 
   loading$: Observable<boolean>;
 
+
+
   breakpoint: number;
 
   @Input() listings: PropertyListing[];
   @Input() applications: RentalApplication[];
   @Input() openhouses: OpenHouse[];
+  @Input() username;
 
   constructor(private store: Store<DashState>) { }
 
@@ -32,7 +35,7 @@ export class DashOwnerComponent implements OnInit {
     this.breakpoint = (window.innerWidth <= 640) ? 2 : 1;
     debugger;
     // return this.store.dispatch(getPropertyOwnerList()) ;
-    return this.store.dispatch(getPropertyOwnerList()) ;
+    return this.store.dispatch(getPropertyOwnerList(this.username)) ;
   }
 
   onResize(event) {
