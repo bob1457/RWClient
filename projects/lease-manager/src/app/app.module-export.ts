@@ -49,6 +49,7 @@ import { AddendumViewComponent } from './addendum-view/addendum-view.component';
 import { AddAddendumComponent } from './add-addendum/add-addendum.component';
 import { AddVendorComponent } from './add-vendor/add-vendor.component';
 import { TypePipe } from './type.pipe';
+import { AddServiceRequestComponent } from './add-service-request/add-service-request.component';
 // import { CdkColumnDef } from '@angular/cdk/table';
 
 
@@ -72,7 +73,8 @@ const routes: Routes = [
       { path: 'agreementview/:id', component: FullLeaseAgreementComponent},
       { path: 'addendumview/:id', component: AddendumViewComponent},
       { path: 'addaddendum', component: AddAddendumComponent},
-      { path: 'addVendor', component: AddVendorComponent}
+      { path: 'addVendor', component: AddVendorComponent},
+      { path: 'addRequest', component: AddServiceRequestComponent}
     ]
   }//,
   // { path: 'tenants', component: AllTenantsComponent}
@@ -115,7 +117,8 @@ const routes: Routes = [
     AddendumViewComponent,
     AddAddendumComponent,
     AddVendorComponent,
-    TypePipe
+    TypePipe,
+    AddServiceRequestComponent
   ],
   imports: [
     // BrowserModule,

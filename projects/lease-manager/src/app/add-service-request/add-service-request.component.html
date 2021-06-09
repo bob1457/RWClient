@@ -1,0 +1,110 @@
+<mat-card class="request-add-card">
+    <mat-card-header style="background-color: #f5f5f5;">
+        <div mat-card-avatar class="property-list-header-image">
+            <i class="material-icons" style="font-size: 2.5em;color: #0c8f1e; margin-left: 5px;">
+      send
+    </i>
+            <!-- <img src="../../assets/images/pmgmnt.png" height="40px" width="40px"> (ngSubmit)="onSubmit()"-->
+        </div>
+        <mat-card-title>Add New Service Request</mat-card-title>
+        <mat-card-subtitle>Add new service request</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content class="lease-add-card-content">
+        <form novalidate [formGroup]="addForm" class="add-form" (ngSubmit)="submit()">
+            <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center start" fxLayoutGap="1%" fxFlexFill>
+                <div fxFlex="50%" fxFlex.xs="80%">
+                    <mat-form-field style="margin-top: 25px;width: 90%;">
+                        <span class="icon-pos" matPrefix><mat-icon>apartment</mat-icon> &nbsp;</span>
+                        <input matInput type="text" placeholder="Subject" formControlName="requestSubject">
+                        <!-- <mat-hint align="end">Not more then 60 characters long.</mat-hint>
+<mat-error *ngIf="hasError('title', 'required')">Name is required</mat-error>
+<mat-error *ngIf="hasError('title', 'maxlength')">You have more than 60 characters</mat-error> -->
+                    </mat-form-field>
+                    <mat-form-field style="width: 90%;">
+                        <mat-label>Service Catgory</mat-label>
+                        <mat-select id="vendorSpecialty" formControlName="serviceCategory">
+                            <mat-option value="Plumbing">Plumbing</mat-option>
+                            <mat-option value="Electrician">Electrician</mat-option>
+                            <mat-option value="General">Renovation</mat-option>
+                            <mat-option value="Janitorial">Janitorial</mat-option>
+                            <mat-option value="Gardening">Gardening</mat-option>
+                            <mat-option value="Other">Other</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field class="lease-full-width" style="width: 90%;">
+                        <span class="icon-pos" matPrefix><mat-icon>notes</mat-icon> &nbsp;</span>
+                        <textarea type="text" id="notes" formControlName="requestDetails" matInput placeholder="Details"></textarea>
+                    </mat-form-field>
+
+                    <mat-form-field style="width: 90%;">
+                        <mat-label>Select Rental Agreement</mat-label>
+                        <mat-select #mySelect (selectionChange)="onPLeaseChange(mySelect.value)">
+                            <div *ngIf="leaseAgreemnts$ | async; else loading">
+                                <mat-option *ngFor="let lease of leaseAgreemnts$ | async" [value]="lease.id">
+                                    {{lease.leaseTitle}}
+                                </mat-option>
+                            </div>
+                            <ng-template #loading>
+                                <mat-option>
+                                    <img src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==">
+                                </mat-option>
+                            </ng-template>
+
+
+                        </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field style="width: 90%;">
+                        <mat-label>Select Requesting Temant</mat-label>
+                        <mat-select #mySelect2 (selectionChange)="onTenantChange(mySelect2.value)">
+                            <div *ngIf="tenantsOnLease; else loading">
+                                <mat-option *ngFor="let tenant of tenantsOnLease" [value]="tenant.id">
+                                    <!-- <span [class.hide]="tenant.leaseId !== selectedLeaseId"> -->
+                                    {{tenant.firstName}} {{tenant.lastName}}
+                                    <!-- </span> -->
+
+                                </mat-option>
+                            </div>
+                            <ng-template #loading>
+                                <mat-option>
+                                    <img src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==">
+                                </mat-option>
+                            </ng-template>
+
+
+                        </mat-select>
+                    </mat-form-field>
+
+
+                    <div>
+                        <mat-checkbox formControlName="urgent">Is Urgent</mat-checkbox>
+                    </div>
+
+
+
+
+
+
+                    <mat-form-field style="width: 90%;">
+                        <span class="icon-pos" matPrefix><mat-icon>share</mat-icon> &nbsp;</span>
+                        <textarea matInput type="text" placeholder="Notes" formControlName="notes"></textarea>
+                        <!-- <mat-hint align="end">Not more then 60 characters long.</mat-hint>
+<mat-error *ngIf="hasError('title', 'required')">Name is required</mat-error>
+<mat-error *ngIf="hasError('title', 'maxlength')">You have more than 60 characters</mat-error> -->
+                    </mat-form-field>
+
+                </div>
+                <div fxFlex="50%" fxFlex.xs="80%" fxLayout="column" fxFlexFill>
+
+                </div>
+            </div>
+            <div fxLayout="row" fxLayoutGap="7px" fxLayoutAlign="end center" style="width: 45%;">
+                <!-- <span *ngIf="showMsg" style="color: rgb(189, 150, 25);">Updated successfully!</span>
+<img *ngIf=" loading" class="pl-2" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+/> [disabled]="f.invalid || !f.dirty"-->
+                <button type="submit" mat-raised-button color="primary"><mat-icon style="color: green;">done</mat-icon> ADD</button>
+                <button type="button" mat-raised-button color="accent" (click)="cancel()"><mat-icon style="color: orangered;">clear</mat-icon> CANCEL</button>
+            </div>
+        </form>
+    </mat-card-content>
+</mat-card>
