@@ -11,10 +11,30 @@
     <div fxFlex="20%" fxLayout="column" class="avatar_sec" fxLayoutAlign="start center">
         <img src="../../assets/images/owner2.png" style="border-radius: 50%;" width="120px" height="120px">
         <div style="margin-top: 25px;">
-            <span style="font-weight: 500;">Owned Property</span>
+            <span style="font-weight: 500;margin-left: 50px;">Owned Property</span><br><br>
             <ul class="property-list">
-                <li *ngFor="let property of owner.ownerProperty" style="margin-left: -40px;">
-                    {{property.property.propertyName}} <a href="" style="cursor: pointer;">details</a>
+                <li *ngFor="let property of owner.ownerProperty" style="display: inline;">
+                    <!-- {{property.property.propertyName}} <a href="" style="cursor: pointer;">details</a> -->
+                    <button mat-button [matMenuTriggerFor]="menu" style="border: 1px solid grey; margin-bottom: 10px;margin-right: 5px;" title="{{property.property.propertyName}}"><mat-icon >house</mat-icon><br></button>
+                    <mat-menu #menu="matMenu">
+                        <div style="font-size: .8em;padding: 10px;">
+                            <span style="font-weight: 600;"> {{property.property.propertyName}}</span>
+                            <span><br>
+                            Property ID: {{property.property.id}}
+                          </span><br><br>
+
+                            <span>
+                            {{property.property.address.propertySuiteNumber}} {{property.property.address.propertyNumber}} {{property.property.address.propertyStreet}}, {{property.property.address.propertyCity}}
+                          </span><br>
+                            <span>
+                            {{property.property.address.propertyStateProvince}} {{property.property.address.propertyZipPostCode}} <br>{{property.property.address.propertyCountry}}
+                          </span>
+                            <br><br>
+                            <a routerLink="/Manage/property/propertydetails/{{property.property.id}}">more details</a>
+                        </div>
+
+
+                    </mat-menu>
                 </li>
             </ul>
         </div>

@@ -150,7 +150,32 @@
                                 <div>
                                     <ul class="owner-list" style="margin-left: -40px;">
                                         <li *ngFor="let owner of contract.property.ownerProperty">
-                                            {{owner.propertyOwner.firstName}} {{owner.propertyOwner.lastName}} <a href="" style="cursor: pointer;">details</a>
+                                            <!-- {{owner.propertyOwner.firstName}} {{owner.propertyOwner.lastName}} <a href="" style="cursor: pointer;">details</a> -->
+                                            <a mat-button [matMenuTriggerFor]="menu" style="margin-bottom: 10px;">
+                                                <mat-icon>person</mat-icon> &nbsp;{{owner.propertyOwner.firstName}} {{owner.propertyOwner.lastName}}</a>
+                                            <mat-menu #menu="matMenu">
+                                                <div style="font-size: .8em;padding: 10px;">
+                                                    <span style="font-weight: 600;">
+                                                  OWNER ID: {{owner.propertyOwner.id}}
+                                                </span><br><br>
+                                                    <span>
+                                                First Name:  {{owner.propertyOwner.firstName}}
+                                                </span><br>
+                                                    <span>
+                                                  Last Name:  {{owner.propertyOwner.lastName}}
+                                                </span><br><br>
+                                                    <span>
+                                                  Email:  {{owner.propertyOwner.contactEmail}}
+                                                  </span><br>
+                                                    <span>
+                                                    Telephone:  {{owner.propertyOwner.contactTelephone1}}
+                                                    </span><br>
+                                                    <br>
+                                                    <a routerLink="/Manage/property/ownerdetails/{{owner.propertyOwner.id}}">more details</a>
+                                                </div>
+
+
+                                            </mat-menu>
                                         </li>
                                     </ul>
                                 </div>

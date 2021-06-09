@@ -17,14 +17,14 @@
             <p> </p>
         </div>
 
-        <div style="margin-top: 25px;">
+        <!-- <div style="margin-top: 25px;">
             <span style="font-weight: 500;">Tenants</span>
             <ul class="tenant-list">
                 <li *ngFor="let tenant of lease.tenant" style="margin-left: -40px;">
                     {{tenant.firstName}} {{tenant.lastName}} <a href="" style="cursor: pointer;">details</a>
                 </li>
             </ul>
-        </div>
+        </div> -->
         <div class="date-time">
             <p>
                 Created: {{lease.created | date }}
@@ -516,6 +516,9 @@
                                                                 <div style="font-weight: bold;">{{element.firstName}} {{element.lastName | uppercase}}</div>
                                                                 <div>{{element.contactEmail}}</div>
                                                                 <div>{{element.contactTelephone1 }}</div>
+                                                                <div style="margin-top: 20px;">
+                                                                    <a routerLink="/Manage/lease/tenantdetails/{{element.id}}">more information</a>
+                                                                </div>
                                                             </div>
                                                             <div fxFlex="40%" style="text-align: left;margin-top: 7px;">
                                                                 <div><span style="font-weight: bold;">Rental Property</span>: &nbsp;{{element.propertyName}}</div>

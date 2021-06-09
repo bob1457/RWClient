@@ -35,7 +35,8 @@
             <ul class="owner-list">
                 <li *ngFor="let owner of property.ownerList" style="margin-left: -40px;">
 
-                    <a mat-button [matMenuTriggerFor]="menu" style="border: 1px solid grey; margin-bottom: 10px;">{{owner.firstName}} {{owner.lastName}}</a>
+                    <a mat-button [matMenuTriggerFor]="menu" style="border: 1px solid grey; margin-bottom: 10px;">
+                        <mat-icon>person</mat-icon> &nbsp;{{owner.firstName}} {{owner.lastName}}</a>
                     <mat-menu #menu="matMenu">
                         <div style="font-size: .8em;padding: 10px;">
                             <span style="font-weight: 600;">
@@ -72,10 +73,31 @@
         </div>
 
         <div style="margin-top: 25px;">
-            <span style="font-weight: 500;">Management Contracts</span>
+            <span style="font-weight: 500;margin-left: 50px;">Management Contracts</span>
             <ul class="owner-list">
-                <li *ngFor="let contract of property.contractList" style="margin-left: -40px;">
-                    {{contract.managementContractTitle}} {{contract.type | type }} {{contract.isActive | yesNo}}<a href="" style="cursor: pointer;">details</a>
+                <li *ngFor="let contract of property.contractList" style="">
+                    <!-- {{contract.managementContractTitle}} {{contract.type | type }} {{contract.isActive | yesNo}}<a href="" style="cursor: pointer;">details</a> -->
+                    <button mat-button [matMenuTriggerFor]="menu2" style="border: 1px solid grey; margin-bottom: 10px;"><mat-icon>description</mat-icon></button>
+                    <mat-menu #menu2="matMenu">
+                        <div style="font-size: .8em;padding: 10px;">
+                            <span style="font-weight: 600;">
+                            CONTRACT ID: {{contract.id}}
+                          </span><br><br>
+                            <span>
+                          Title:  {{contract.managementContractTitle}}
+                          </span><br>
+                            <span>
+                            Type:  {{contract.type | type}}
+                          </span><br><br>
+                            <span>
+                            Active: {{contract.isActive | yesNo}}
+                          </span><br>
+                            <br>
+                            <a routerLink="/Manage/property/contractdetails/{{contract.id}}">more details</a>
+                        </div>
+
+
+                    </mat-menu>
                 </li>
             </ul>
         </div>
