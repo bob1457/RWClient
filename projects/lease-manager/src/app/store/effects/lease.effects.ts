@@ -115,6 +115,41 @@ export class LeaseEffects {
     )
   );
 
+
+  addServiceRequest$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(LeaseActions.addServiceRequest),
+      tap(() => console.log('got here to add service request !!!')),
+      map(action => action.payload),
+      switchMap((payload) =>
+        this.leaseService.addServiceRequest(payload).pipe(
+          map((request: any) => ({
+            type: '[Leases] Add Service Request Success',
+            payload: request
+          })),
+          tap( () => {
+            // window.alert('done');
+            this.openSnackBar('Tenant added successfully.', 'close', 'notify');
+           }), // display notificaiton
+
+          catchError(error => {
+            this.openSnackBar(error.message, 'dismiss', 'error');
+            return of(LeaseActions.addServiceRequestFailure(error.message));
+            }
+          )
+          // catchError(error => of(LeaseActions.addLeaseFailure(error.message)))
+        )
+      )
+    )
+  );
+
+
+
+
+
+
+
   addTenant$ = createEffect(() =>
     this.actions$.pipe(
       // ofType('[Property] Get Property List'),

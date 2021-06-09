@@ -6,6 +6,7 @@ import { Location }  from '@angular/common';
 import { Store } from '@ngrx/store';
 import { PropertyLeaseState } from '../store/lease-state';
 import { tenantList } from '../store/reducers';
+import { addServiceRequest } from '../store/actions/lease.actions';
 
 @Component({
   selector: 'app-add-service-request',
@@ -93,6 +94,9 @@ export class AddServiceRequestComponent implements OnInit {
       status: 1
     });
     console.log('form submitted', this.addForm.value);
+
+    this.store.dispatch(addServiceRequest({payload: this.addForm.value}));
+    this.location.back();
   }
 
   cancel() {

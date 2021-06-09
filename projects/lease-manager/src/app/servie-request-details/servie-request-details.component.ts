@@ -4,7 +4,7 @@ import { PropertyLeaseState } from '../store/lease-state';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { loadingStatus, serviceRequestDetails } from '../store/reducers';
+import { loadingStatus, serviceRequestDetails, tenantList } from '../store/reducers';
 import { getServiceRequestDetails } from '../store/actions/lease.actions';
 
 @Component({
@@ -17,6 +17,7 @@ export class ServieRequestDetailsComponent implements OnInit {
   id: number;
   loading$: Observable<boolean>;
   request;
+  requestingTenant;
 
   detailsForm: FormGroup;
 
@@ -28,14 +29,24 @@ export class ServieRequestDetailsComponent implements OnInit {
                 this.id = this.actRoute.snapshot.params.id;
                 console.log(this.id);
 
-                this.store.pipe(select(serviceRequestDetails))
-                          .subscribe(data => {
-                            this.request = data;
-                            // this.detailsForm.patchValue(data);
-                            console.log('request', data);
-                            // this.dataSource.data = this.lease;
-                            // console.log('payment', this.dataSource.data);
-                          });
+                // this.store.pipe(select(serviceRequestDetails))
+                //           .subscribe(data => {
+                //             this.request = data;
+                //             // this.detailsForm.patchValue(data);
+                //             console.log('request', data);
+                //             // this.dataSource.data = this.lease;
+                //             // console.log('payment', this.dataSource.data);
+
+
+                //             this.store.select(getTenantList)
+                //               .subscribe(tenant => {
+                //                 if (tenant) {
+                //                   const requestor = tenant.filter(t => t.id == this.request.requestorId);
+                //                   this.requestingTenant = requestor;
+                //                   console.log('requesting tenant', this.requestingTenant);
+                //                 }
+                //               });
+                //           });
               }
 
   ngOnInit() {
@@ -50,6 +61,32 @@ export class ServieRequestDetailsComponent implements OnInit {
     //   serviceCategory: [''],
     //   requestDetails: ['']
     // });
+
+
+    this.store.pipe(select(serviceRequestDetails))
+                          .subscribe(data => {
+                            if (data) {
+                              this.request = data;
+                            // this.detailsForm.patchValue(data);
+                              console.log('request', data);
+
+                              this.store.select(tenantList)
+                              .subscribe(tenant => {
+                                if (tenant) {
+                                  const requestor = tenant.filter(t => t.id == this.request.requestorId);
+                                  this.requestingTenant = requestor;
+                                  console.log('requesting tenant', this.requestingTenant);
+                                } else {
+                                  const tenatlist = JSON.parse(localStorage.getItem('tenants'));
+                                  this.requestingTenant = tenatlist.filter(t => t.id == this.request.requestorId);
+                                }
+                              });
+                            }
+
+                            // this.dataSource.data = this.lease;
+                            // console.log('payment', this.dataSource.data);
+
+                          });
 
   }
 
