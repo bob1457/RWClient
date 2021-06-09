@@ -11,27 +11,28 @@
             <i class="far fa-arrow-alt-circle-left" title="back to list" style="cursor: pointer; color: seagreen; font-size: 1.5em;" (click)="goBack()"></i>
         </div>
     </div>
-    <div fxFlex="20%" fxLayout="column" class="avatar_sec" fxLayoutAlign="start center">
+    <div fxFlex="20%" fxLayout="column" class="avatar_sec" fxLayoutAlign="start start">
         <img src="../../assets/images/tenant.png" style="border-radius: 50%;margin-top: 20px;" width="120px " height="120px" title="">
 
-        <div style="margin-top: 25px; font-size: .8em;">
-            <span style="font-weight: 500;">Rental Property</span>
-            <p>
+        <div style="margin-top: 25px;width: 170px;">
+            <span style="font-weight: 500;"><mat-icon style="vertical-align: bottom;color: #9210b3;">house</mat-icon>&nbsp; Rental Property</span>
+            <p style="margin-top: 10px;">
                 {{tenant.lease.rentalProperty.propertyName}}
             </p>
-            <p>Address</p>
-            <p>
+            <p style="font-size:.85em;font-weight: 600;">Address</p>
+            <p style="font-size: .85em;">
                 {{tenant.lease.rentalProperty.address.streetNum}} <br> {{tenant.lease.rentalProperty.address.city}} {{tenant.lease.rentalProperty.address.stateProvince}} {{tenant.lease.rentalProperty.address.zipPostCode}} <br> {{tenant.lease.rentalProperty.address.country}}
             </p>
         </div>
-        <div style="margin-top: 25px; font-size: .8em;">
-            <span style="font-weight: 500;">Rental Agreement</span>
-            <p>
+
+        <div style="margin-top: 25px;width:170px;">
+            <span style="font-weight: 500;"><mat-icon style="vertical-align: bottom;color: #10a4b3;">description</mat-icon>&nbsp; Rental Agreement</span>
+            <p style="margin-top: 10px;">
                 {{tenant.lease.leaseTitle}}
             </p>
-            <p>Details</p>
-            <p>
-                Start Date: {{tenant.lease.leaseStartDate | date}} <br>End Date: {{tenant.lease.leaseEndDate | date}} <br> Sign Date: {{tenant.lease.leaseSignDate | date}} <br> Rental Term: {{tenant.lease.term}} <br> After End: {{tenant.lease.endLeaseCode}}
+            <p style="font-size: .95em;font-weight: 600;">Details</p>
+            <p style="font-size: .85em;">
+                <span style="font-weight: 600;">Start Date:</span> {{tenant.lease.leaseStartDate | date}} <br><span style="font-weight: 600;">End Date: </span>{{tenant.lease.leaseEndDate | date}} <br> <span style="font-weight: 600;">Sign Date:</span>                {{tenant.lease.leaseSignDate | date}} <br> <span style="font-weight: 600;">Rental Term:</span> {{tenant.lease.term}} <br> <span style="font-weight: 600;">After End:</span> {{tenant.lease.endLeaseCode | renewCode}}
             </p>
         </div>
         <div class="date-time">
