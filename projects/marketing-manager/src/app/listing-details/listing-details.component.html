@@ -38,7 +38,7 @@
             <!-- <img src="http://placehold.it/50x50">
             <img src="http://placehold.it/50x50">   listing.rentalProperty.propertyImg
             <img src="http://placehold.it/50x50">-->
-            <a (click)="openInput()" class="up-icon" style="margin-left:0px;cursor: pointer;" title="update property image">
+            <a (click)="openInput()" class="up-icon" style="margin-left:0px;cursor: pointer;" title="upload property image">
                 <!-- <i class="material-icons">
                 publish  attr.src="{{serverUrl}}{{user.avatarUrl}}"
                 </i> -->
@@ -57,15 +57,16 @@
         <input #file id="fileInput" (change)="onChange(file.files)" hidden type="file" accept="image/png, image/gif, image/jpg, image/jpeg">
 
         <div style="margin-top: 25px;">
-            <span style="font-weight: 500;">Property Information</span>
+            <span style="font-weight: 500;"><mat-icon style="vertical-align: bottom;color: rgb(48, 48, 185);">house</mat-icon> &nbsp; Property Information</span>
             <p>
                 {{listing.rentalProperty.propertyName}}
             </p>
-            <p>
+            <p style="font-size: .85em;">
                 {{listing.rentalProperty.address.streetNum}} <br> {{listing.rentalProperty.address.city}} {{listing.rentalProperty.address.stateProvince}} {{listing.rentalProperty.address.zipPostCode}} <br> {{listing.rentalProperty.address.country}}
             </p>
-            <p>
-                Status: <span *ngIf="listing.rentalProperty.status != 0; else status">{{listing.rentalProperty.status | status}}</span>
+            <p style="font-size: .85em;">
+                Status: <span *ngIf="listing.rentalProperty.status != 0; else status"><span [style.color]="listing.rentalProperty.status == 'Rented' ? 'green': listing.rentalProperty.status == 'Pending'? 'orange' :  listing.rentalProperty.status == 'New'? 'grey':'red'"></span>{{listing.rentalProperty.status
+                | status}}</span>
                 <span><ng-template #status>Not Listed</ng-template></span>
             </p>
 

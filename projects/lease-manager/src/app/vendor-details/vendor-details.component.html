@@ -32,10 +32,10 @@
 
                 <mat-menu #menuRef="matMenu">
                     <ul style="list-style:none">
-                        <li *ngFor="let order of vendor.workOrder;">
+                        <li *ngFor="let order of vendor.workOrder;" style="height: 25px;margin-left: -35px;">
                             <a mat-menu-item routerLink="/Manage/lease/workorderdetails/{{order.id}}" style="font-size: .75em; margin-bottom: 7px;">
-                        {{order.workOrderName}}
-                      </a>
+                                <mat-icon style="color: aqua;margin-right: 10px;">check</mat-icon> &nbsp; {{order.workOrderName}}
+                            </a>
                         </li>
                     </ul>
 

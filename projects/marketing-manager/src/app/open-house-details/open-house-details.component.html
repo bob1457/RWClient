@@ -10,7 +10,8 @@
         <img src="../../assets/images/10621.jpg" style="border-radius: 50%;" width="120px " height="120px" title="">
       </span>
         <div class="side-info">
-            <h6>Open house Attendees</h6>
+            <h6>
+                <mat-icon style="vertical-align: bottom;color: rgb(172, 36, 138);">people</mat-icon> &nbsp; Open house Attendees</h6>
             <div>
                 <ul *ngIf="openhouse.viewers;else msg" style="list-style: none;margin-left: -30px;font-size: .8em;">
                     <li *ngFor="let viewer of openhouse.viewers" style="margin-bottom: 8px;">
@@ -50,7 +51,8 @@
                             <h6>Property & Listing Info</h6>
                             <p></p>
                             <p></p>
-                            <p style="font-weight: bold;">Listing:</p>
+                            <p style="font-weight: bold;">
+                                <mat-icon style="vertical-align: bottom;color: rgb(48, 48, 185);">description</mat-icon> &nbsp; Listing:</p>
                             <p></p>
                             <p>
                                 <span style="font-style:italic;">Listing ID:</span> &nbsp; {{listing.id}} - {{listing.title}}<br> {{listing.propertyType}}
@@ -58,7 +60,8 @@
                                 <span style="font-style:italic;">Monthly Rent:</span>{{listing.monthlyRent}}
                             </p>
 
-                            <p style="font-weight: bold;">Property</p>
+                            <p style="font-weight: bold;">
+                                <mat-icon style="vertical-align: bottom;color: rgb(48, 48, 185);">house</mat-icon> &nbsp; Property</p>
                             <p>
                                 <span style="font-style:italic;">Property Name/Alias:</span> &nbsp; {{openhouse.propertyName}}<br>
                             </p>
@@ -103,8 +106,8 @@
                         <!-- <span *ngIf="showMsg" style="color: rgb(189, 150, 25);">Updated successfully!</span>
 <img *ngIf=" loading" class="pl-2" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
 /> [disabled]="f.invalid || !f.dirty"-->
-                        <button type="submit" mat-raised-button color="primary">UPDATE</button>
-                        <button type="button" mat-raised-button color="accent" (click)="clear()">CANCEL</button>
+                        <button type="submit" mat-raised-button color="primary"><mat-icon style="color: green;">check</mat-icon> &nbsp; UPDATE</button>
+                        <button type="button" mat-raised-button color="accent" (click)="clear()"><mat-icon style="vertical-align: bottom;color: orangered;">clear</mat-icon> &nbsp; CANCEL</button>
                     </div>
                 </form>
             </mat-card-content>
