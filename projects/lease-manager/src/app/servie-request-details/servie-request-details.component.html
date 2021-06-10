@@ -11,14 +11,14 @@
         <img src="../../assets/images/tenant.png" style="border-radius: 50%;margin-top: 20px;" width="120px " height="120px" title="">
 
         <div style="margin-top: 25px;">
-            <span style="font-weight: 500;">Lease Info</span>
+            <span style="font-weight: 500;"><mat-icon style="vertical-align: bottom;color: green;">description</mat-icon>&nbsp; Lease Info</span>
             <!-- <p>{{lease.rentalProperty.propertyName}}<br> {{lease.rentalProperty.address.city}} {{lease.rentalProperty.address.stateProvince}} {{lease.rentalProperty.address.zipPostCode}} <br> {{lease.rentalProperty.address.country}} -->
             <!-- </p> -->
             <p style="font-size:.85em">
                 {{request.lease.leaseTitle}}<br>{{request.lease.leaseDesc}}<br>{{request.lease.leaseStartDate | date}}
             </p>
             <p></p>
-            <span style="font-weight: 500;">Rental Unit</span>
+            <span style="font-weight: 500;"><mat-icon style="vertical-align: bottom;color: rgb(106, 14, 143);">house</mat-icon>&nbsp; Rental Unit</span>
             <!-- <p style="font-size:.85em" *ngIf="request.lease.rentalProperty">{{request.lease.rentalProperty.propertyName}}<br> {{request.lease.rentalProperty.address.city}} {{request.lease.rentalProperty.address.stateProvince}} {{request.lease.rentalProperty.address.zipPostCode}} <br> {{requestlease.rentalProperty.address.country}} -->
 
             <p style="font-size:.85em">
@@ -28,22 +28,13 @@
 
             <p></p>
 
-            <span style="font-weight: 500;">Requesting Tenant</span>
+            <span style="font-weight: 500;"><mat-icon style="vertical-align: bottom;color: rgb(206, 38, 75);">person</mat-icon>&nbsp; Requesting Tenant</span>
             <!-- <p>{{lease.rentalProperty.propertyName}}<br> {{lease.rentalProperty.address.city}} {{lease.rentalProperty.address.stateProvince}} {{lease.rentalProperty.address.zipPostCode}} <br> {{lease.rentalProperty.address.country}} -->
             <!-- </p> -->
             <p style="font-size:.85em">
                 {{requestingTenant[0].firstName}} {{requestingTenant[0].lastName}}<br> {{requestingTenant[0].contactEmail}}
                 <br> {{requestingTenant[0].contactTelephone1}}
             </p>
-            <p></p>
-            <span style="font-weight: 500;">Rental Unit</span>
-            <!-- <p style="font-size:.85em" *ngIf="request.lease.rentalProperty">{{request.lease.rentalProperty.propertyName}}<br> {{request.lease.rentalProperty.address.city}} {{request.lease.rentalProperty.address.stateProvince}} {{request.lease.rentalProperty.address.zipPostCode}} <br> {{requestlease.rentalProperty.address.country}} -->
-
-            <p style="font-size:.85em">
-                {{request.lease.rentalProperty.propertyName}}<br> {{request.lease.rentalProperty.address.streetNum}}<br> {{request.lease.rentalProperty.address.city}} {{request.lease.rentalProperty.address.stateProvince}} <br>{{request.lease.rentalProperty.address.zipPostCode}}
-                <!--  {{request.lease.rentalProperty.address.city}} {{request.lease.rentalProperty.address.stateProvince}} <br>{{request.lease.rentalProperty.address.zipPostCode}} <br> {{requestlease.rentalProperty.address.country}} -->
-            </p>
-
             <p></p>
 
 

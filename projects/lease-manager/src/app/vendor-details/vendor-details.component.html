@@ -17,13 +17,31 @@
             <p>{{vendor.vendorBusinessName}}</p>
 
 
-            <p>Work Orders History</p>
+            <p>
+                <mat-icon style="vertical-align: bottom;color: rgb(56, 28, 180);">subject</mat-icon>&nbsp; Work Orders History</p>
             <ul style="list-style: none;">
-                <li *ngFor="let order of vendor.workOrder" style="font-size: .75em; margin-bottom: 7px;">
+                <li *ngFor="let order of vendor.workOrder | slice:0:3;" style="font-size: .75em; margin-bottom: 7px;">
                     {{order.workOrderName}}, started: {{order.startDate | date}}, Completed: {{order.endDate | date}} <br> ----------------------
                 </li>
             </ul>
+            <div *ngIf="vendor.workOrder.length > 3" style="margin-left: 30px;font-size: .85em;">
+                <a></a>
+                <a mat-button [matMenuTriggerFor]="menuRef">
+                    Show All
+                </a>
 
+                <mat-menu #menuRef="matMenu">
+                    <ul style="list-style:none">
+                        <li *ngFor="let order of vendor.workOrder;">
+                            <a mat-menu-item routerLink="/Manage/lease/workorderdetails/{{order.id}}" style="font-size: .75em; margin-bottom: 7px;">
+                        {{order.workOrderName}}
+                      </a>
+                        </li>
+                    </ul>
+
+                </mat-menu>
+                <!--user a menu -->
+            </div>
 
         </div>
         <div style="margin-top: 25px;font-size: .75em;
