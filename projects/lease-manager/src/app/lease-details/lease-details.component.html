@@ -11,7 +11,7 @@
         <img src="../../assets/images/agreement.png" style="border-radius: 50%;margin-top: 20px;" width="120px " height="120px" title="">
 
         <div style="margin-top: 25px;">
-            <span style="font-weight: 500;">Rental Property</span>
+            <span style="font-weight: 500;"><mat-icon style="vertical-align: bottom;color: rgb(56, 28, 180);">house</mat-icon>&nbsp; Rental Property</span>
             <p>{{lease.rentalProperty.propertyName}}<br> {{lease.rentalProperty.address.city}} {{lease.rentalProperty.address.stateProvince}} {{lease.rentalProperty.address.zipPostCode}} <br> {{lease.rentalProperty.address.country}}
             </p>
             <p> </p>
@@ -216,7 +216,7 @@
 
                                     <mat-form-field class="lease-full-width">
                                         <span class="icon-pos" matPrefix><mat-icon>notes</mat-icon> &nbsp;</span>
-                                        <input type="text" id="renewTerm" formControlName="renewTerm" matInput placeholder="Vacant Resean" [ngModel]="lease.renewTerm">
+                                        <input type="text" id="renewTerm" formControlName="renewTerm" matInput placeholder="Vacant Reason" [ngModel]="lease.renewTerm">
                                     </mat-form-field>
                                     <!-- This field is used as Reason to end tenancy -->
 
