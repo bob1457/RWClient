@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
 import { PropertyLeaseState } from '../store/lease-state';
 import { Router, ActivatedRoute } from '@angular/router';
-import { getWorkOrderDetails, updateWorkOrder, getAllInvoices, updateInvoice } from '../store/actions/lease.actions';
+import { getWorkOrderDetails, updateWorkOrder, getAllInvoices, updateInvoice, addInvoice } from '../store/actions/lease.actions';
 import { InvoiceList } from '@lib/dashboard';
 import { getInviceList, invoiceList, workOrderDetails } from '../store/reducers';
 import { Observable } from 'rxjs';
@@ -24,6 +24,11 @@ export class WorkOrderDetailsComponent implements OnInit {
   invoices: any[];
   detailsForm: FormGroup;
   updateInvoiceForm: FormGroup;
+  addInvoiceForm: FormGroup;
+
+  showAdd = false;
+
+
 
   constructor(private store: Store<PropertyLeaseState>,
               private router: Router,
@@ -52,6 +57,8 @@ export class WorkOrderDetailsComponent implements OnInit {
 
   ngOnInit() {
 
+    const today = new Date()
+
     this.loading$ = this.store.pipe(select(loadingStatus));
 
     this.store.dispatch(getWorkOrderDetails({payload: this.id}));
@@ -71,6 +78,19 @@ export class WorkOrderDetailsComponent implements OnInit {
       isOwnerAuthorized: [''],
       note: ['']
 
+    });
+
+    this.addInvoiceForm = this.formBuilder.group({
+      invoiceTitle: [''],
+      invoiceAmount: 0,
+      invoiceDocUrl: [''],
+      invoiceDate: [''],
+      isPaid: [false],
+      paymentDate: [''],
+      paymentMethod:[''],
+      paymentAmount: 0,
+      workOrderId: [],
+      note: ['']
     });
 
     this.updateInvoiceForm = this.formBuilder.group({
@@ -105,8 +125,26 @@ export class WorkOrderDetailsComponent implements OnInit {
     }
   }
 
+  showAddnvoice() {
+    this.showAdd = !this.showAdd;
+  }
+
   goBack() {
     this.router.navigate(['/Manage/lease/workorders']);
+  }
+
+  cancel() {
+    this.showAdd = false;
+  }
+
+  addInvoice() {
+    this.addInvoiceForm.patchValue({
+      workOrderId: Number(this.id),
+    });
+    console.log('add form', this.addInvoiceForm.value);
+    this.store.dispatch(addInvoice({payload: this.addInvoiceForm.value}));
+
+    this.showAdd = false;
   }
 
 }

@@ -12,8 +12,20 @@
 
         <div style="margin-top: 25px;width: 70%;">
             <span style="font-weight: 500;"><mat-icon style="vertical-align: bottom;color: rgb(56, 28, 180);">house</mat-icon>&nbsp; Rental Property</span>
-            <p>{{workorder.rentalProperty.propertyName}}<br> {{workorder.rentalProperty.address.city}} {{workorder.rentalProperty.address.stateProvince}} {{workorder.rentalProperty.address.zipPostCode}} <br> {{workorder.rentalProperty.address.country}}
-            </p>
+            <button mat-button [matMenuTriggerFor]="menuRef1">
+              {{workorder.rentalProperty.propertyName}}
+            </button>
+
+            <mat-menu #menuRef1="matMenu">
+                <div style="font-size: .85em;padding: 10px;padding-top: 15px;">
+                    <span style="font-weight: 600;">Address</span><br> {{workorder.rentalProperty.address.streetNum}}
+                    <br> {{workorder.rentalProperty.address.city}} {{workorder.rentalProperty.address.stateProvince}} <br>{{workorder.rentalProperty.address.zipPostCode}} {{workorder.rentalProperty.address.country}}
+                    <br><br>
+                    <a routerLink="/Manage/property/propertydetails/{{workorder.rentalProperty.originalId}}">more...</a>
+                </div>
+            </mat-menu>
+
+
             <!-- <p>
               <span>Service Provider</span>
               {{workorder.vendor.vendorBusinessName}}
@@ -23,15 +35,29 @@
 
         <div style="margin-top: 25px;width: 70%;">
             <span style="font-weight: 500;"><mat-icon style="vertical-align: bottom;color: rgb(106, 14, 143);">description</mat-icon>&nbsp; Service Request</span>
-            <p>{{workorder.serviceRequest.requestSubject}}<br> Details: <br>{{workorder.serviceRequest.requestDetails}}
-                <br>Status: {{workorder.serviceRequest.status | status}} <br>Note: <br> {{workorder.serviceRequest.notes}}
-            </p>
+            <button mat-button [matMenuTriggerFor]="menuRef">
+              {{workorder.serviceRequest.requestSubject}}
+            </button>
+
+            <mat-menu #menuRef="matMenu">
+                <div style="font-size: .85em;padding: 10px;padding-top: 15px;">
+                    <span style="font-weight: 600;">Details</span><br><br> {{workorder.serviceRequest.requestDetails}}
+                    <br>Status: {{workorder.serviceRequest.status | status}}
+                    <br><br>
+                    <a routerLink="/Manage/lease/servicerequestdetails/{{workorder.serviceRequest.id}}">more...</a>
+                </div>
+
+            </mat-menu>
+
+            <!-- <p style="font-size: .85em;"><br> Details: <br>{{workorder.serviceRequest.requestDetails}}
+                <br>Status: {{workorder.serviceRequest.status | status}}
+            </p> -->
 
         </div>
 
         <div style="margin-top: 25px;width: 70%;">
             <span style="font-weight: 500;"><mat-icon style="vertical-align: bottom;color: rgb(28, 141, 56);">person</mat-icon>&nbsp; Service Provider</span>
-            <p style="font-size: .85em;"><span style="font-size: .9em;">{{workorder.vendor.vendorBusinessName}}</span> ({{workorder.vendor.vendorSpecialty}})<br> Details:
+            <p style="font-size: .85em;"><span style="font-size: .9em;"><a  routerLink="/Manage/lease/vendordetails/{{workorder.vendor.id}}">{{workorder.vendor.vendorBusinessName}} ({{workorder.vendor.vendorSpecialty}})</a></span><br> Contact:
                 <br> {{workorder.vendor.vendorContactEmail}}
                 <br>{{workorder.vendor.vendorContactTelephone1}}
             </p>
@@ -257,8 +283,82 @@
                                 <mat-card-footer>
                                     Footer
                                 </mat-card-footer> -->
+
+
                             </mat-card>
-                            <p *ngIf="!workorder.invoice" class="no-invoice-text">No invoice</p>
+                            <p *ngIf="!workorder.invoice" class="no-invoice-text">No invoice &nbsp; &nbsp; &nbsp;
+                                <mat-icon title="Add an invoice" *ngIf="!showAdd" style="color: green;vertical-align: bottom;cursor: pointer;padding-top: 2px;" (click)="showAddnvoice()">add_circle</mat-icon>
+                                <mat-icon title="CAncel" *ngIf="showAdd" style="color: orangered;vertical-align: bottom;cursor: pointer;padding-top: 2px;" (click)="showAddnvoice()">clear</mat-icon>
+                            </p>
+                            <mat-card class="invoice-card" *ngIf="showAdd">
+                                <mat-card-header>
+                                    <mat-card-title>Add An Invoice</mat-card-title>
+                                    <mat-card-subtitle>Add a new invoice for this work order</mat-card-subtitle>
+                                </mat-card-header>
+
+
+                                <mat-card-content>
+                                    <form novalidate [formGroup]="addInvoiceForm" style="width: 100%;border: 1px solid;margin-bottom: 5px;padding: 5px;">
+                                        <div fxLayout="column" fxLayoutAlign="start start">
+                                            <div fxLayout="row" fxLayoutAlign="start start" style="width: 100%;">
+                                                <div fxFlex="40%">
+                                                    <mat-form-field>
+                                                        <mat-label>Invovice Title</mat-label>
+                                                        <input type="text" matInput placeholder="Invoice Title" formControlName="invoiceTitle">
+                                                    </mat-form-field>
+                                                </div>
+                                                <div fxFlex="30%">
+                                                    <mat-form-field>
+                                                        <mat-label>Invovice Amount</mat-label>
+                                                        <input type="text" matInput placeholder="Invoice Amount" formControlName="invoiceAmount">
+                                                    </mat-form-field>
+                                                </div>
+                                                <div fxFlex="30%">
+                                                    <mat-form-field fxFlex.xs="100%" style="margin-left: 10px;margin-right: 10px;width: 75%;">
+                                                        <mat-label>Payment Method</mat-label>
+                                                        <mat-select formControlName="paymentMethod">
+                                                            <mat-option value="Cash">Cash</mat-option>
+                                                            <mat-option value="Cheque">Cheque</mat-option>
+                                                            <mat-option value="Transfer">E-Transfer</mat-option>
+                                                            <mat-option value="Other">Other</mat-option>
+                                                        </mat-select>
+                                                        <!-- </mat-form-field> -->
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
+                                            <div fxLayout="row" fxLayoutAlign="start start" style="width: 100%;">
+                                                <div fxFlex="40%">
+                                                    <mat-form-field style="width: 95%;">
+                                                        <mat-label>Notes</mat-label>
+                                                        <textarea type="text" matInput placeholder="Notes" formControlName="note"></textarea>
+                                                    </mat-form-field>
+                                                </div>
+                                                <div fxFlex="30%">
+                                                    <mat-form-field style="width: 90%;margin-top: 15px;">
+                                                        <mat-label>Invoice Date</mat-label>
+                                                        <input matInput [matDatepicker]="picker6" formControlName="invoiceDate">
+                                                        <mat-datepicker-toggle matSuffix [for]="picker6"></mat-datepicker-toggle>
+                                                        <mat-datepicker #picker6></mat-datepicker>
+                                                    </mat-form-field>
+                                                </div>
+                                                <div fxFlex="30%">
+                                                    <mat-form-field style="width: 85%;margin-top: 15px;">
+                                                        <mat-label>Due Date</mat-label>
+                                                        <input matInput [matDatepicker]="picker7" formControlName="paymentDate">
+                                                        <mat-datepicker-toggle matSuffix [for]="picker7"></mat-datepicker-toggle>
+                                                        <mat-datepicker #picker7></mat-datepicker>
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
+                                            <div fxLayout="row" fxLayoutAlign="end end" style="width: 100%;">
+                                                <button [disabled]="!addInvoiceForm.dirty" type="button" mat-raised-button color="primary" (click)="addInvoice()"><mat-icon style="color: green;">check</mat-icon>&nbsp; UPDATE</button>&nbsp;&nbsp;
+                                                <button mat-raised-button color="accent" (click)="cancel()"><mat-icon style="color: orangered;">clear</mat-icon>&nbsp; CANCEL</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </mat-card-content>
+
+                            </mat-card>
                         </mat-tab>
 
                     </mat-tab-group>
