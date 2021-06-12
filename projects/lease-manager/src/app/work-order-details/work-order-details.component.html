@@ -190,24 +190,24 @@
                             </form>
                         </mat-tab>
                         <mat-tab label="Invoice" style="background: #f5f5f5;">
-                            <mat-card class="invoice-card" *ngIf="workorder.invoice">
+                            <mat-card class="invoice-card" *ngIf="invoices && invoices.length > 0">
                                 <mat-card-header>
-                                    <mat-card-title>{{workorder.invoice.invoiceTitle}}</mat-card-title>
+                                    <mat-card-title>{{invoices[0].invoiceTitle}}</mat-card-title>
                                     <mat-card-subtitle>Sent by {{workorder.vendor.vendorBusinessName}}</mat-card-subtitle>
                                 </mat-card-header>
                                 <!-- <img matCardImage src="Card wide image source"> -->
                                 <mat-card-content>
                                     <div fxLayout="row" fxLayoutAlign="start" style="font-size: .9em; margin-left: 20px;">
                                         <div style="width: 50%;">
-                                            <p class="bottom-margin"><span style="font-weight: bold;">Invoice Id:</span> <span style="font-style: italic;">&nbsp; {{workorder.invoice.id}}</span></p>
-                                            <p class="bottom-margin"><span style="font-weight: bold;">Subject:</span> <span style="font-style: italic;">&nbsp; {{workorder.invoice.invoiceTitle}}</span></p>
-                                            <p><span style="font-weight: bold;">Amount Due:</span> <span style="font-style: italic;">&nbsp; {{workorder.invoice.invoiceAmount}}</span></p>
+                                            <p class="bottom-margin"><span style="font-weight: bold;">Invoice Id:</span> <span style="font-style: italic;">&nbsp; {{invoices[0].id}}</span></p>
+                                            <p class="bottom-margin"><span style="font-weight: bold;">Subject:</span> <span style="font-style: italic;">&nbsp; {{invoices[0].invoiceTitle}}</span></p>
+                                            <p><span style="font-weight: bold;">Amount Due:</span> <span style="font-style: italic;">&nbsp; {{invoices[0].invoiceAmount}}</span></p>
 
                                         </div>
                                         <div style="width: 50%;">
-                                            <p class="bottom-margin"><span style="font-weight: bold;">Due Date:</span> <span style="font-style: italic;">&nbsp; {{workorder.invoice.paymentDate | date }}</span></p>
-                                            <p class="bottom-margin"><span style="font-weight: bold;">Prefered Payment Method:</span> <span style="font-style: italic;">&nbsp; {{workorder.invoice.paymentMethod}}</span></p>
-                                            <p><span style="font-weight: bold;">Is Paid:</span> <span style="font-style: italic;">&nbsp; {{workorder.invoice.isPaid | yesNo}}</span></p>
+                                            <p class="bottom-margin"><span style="font-weight: bold;">Due Date:</span> <span style="font-style: italic;">&nbsp; {{invoices[0].paymentDate | date }}</span></p>
+                                            <p class="bottom-margin"><span style="font-weight: bold;">Prefered Payment Method:</span> <span style="font-style: italic;">&nbsp; {{invoices[0].paymentMethod}}</span></p>
+                                            <p><span style="font-weight: bold;">Is Paid:</span> <span style="font-style: italic;">&nbsp; {{invoices[0].isPaid | yesNo}}</span></p>
                                         </div>
                                     </div>
                                     <div>
@@ -254,7 +254,7 @@
                                                     <div fxFlex="40%">
                                                         <mat-form-field style="width: 98%;">
                                                             <mat-label>Completed On</mat-label>
-                                                            <input matInput [matDatepicker]="picker5" formControlName="paymentDate" [ngModel]="workorder.invoice.paymentDate">
+                                                            <input matInput [matDatepicker]="picker5" formControlName="paymentDate" [ngModel]="invoices[0].paymentDate">
                                                             <mat-datepicker-toggle matSuffix [for]="picker5"></mat-datepicker-toggle>
                                                             <mat-datepicker #picker5></mat-datepicker>
                                                         </mat-form-field>
@@ -286,7 +286,7 @@
 
 
                             </mat-card>
-                            <p *ngIf="!workorder.invoice" class="no-invoice-text">No invoice &nbsp; &nbsp; &nbsp;
+                            <p *ngIf="invoices && invoices.length == 0" class="no-invoice-text">No invoice &nbsp; &nbsp; &nbsp;
                                 <mat-icon title="Add an invoice" *ngIf="!showAdd" style="color: green;vertical-align: bottom;cursor: pointer;padding-top: 2px;" (click)="showAddnvoice()">add_circle</mat-icon>
                                 <mat-icon title="CAncel" *ngIf="showAdd" style="color: orangered;vertical-align: bottom;cursor: pointer;padding-top: 2px;" (click)="showAddnvoice()">clear</mat-icon>
                             </p>
@@ -351,7 +351,7 @@
                                                 </div>
                                             </div>
                                             <div fxLayout="row" fxLayoutAlign="end end" style="width: 100%;">
-                                                <button [disabled]="!addInvoiceForm.dirty" type="button" mat-raised-button color="primary" (click)="addInvoice()"><mat-icon style="color: green;">check</mat-icon>&nbsp; UPDATE</button>&nbsp;&nbsp;
+                                                <button [disabled]="!addInvoiceForm.dirty" type="button" mat-raised-button color="primary" (click)="addInvoice()"><mat-icon style="color: green;">check</mat-icon>&nbsp; ADD</button>&nbsp;&nbsp;
                                                 <button mat-raised-button color="accent" (click)="cancel()"><mat-icon style="color: orangered;">clear</mat-icon>&nbsp; CANCEL</button>
                                             </div>
                                         </div>
