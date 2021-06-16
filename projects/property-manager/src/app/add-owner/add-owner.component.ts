@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { PropertyState } from '../store/property.state';
 import { Store, select } from '@ngrx/store';
-import { Property, PropertyOwner } from '@lib/app-core';
+import { Property, PropertyOwner, PropertyService } from '@lib/app-core';
 import { propertyList, ownerList } from '../store/reducers';
 import { Location } from '@angular/common';
 import * as PropertyActions from '../store/actions/property.actions';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material';
 
 @Component({
   selector: 'app-add-owner',
@@ -42,9 +43,12 @@ export class AddOwnerComponent implements OnInit {
   selected = false;
   sameAddress = false;
 
+  emailExists = false;
 
   constructor(private formBuilder: FormBuilder,
+              private propertyService: PropertyService,
               private location: Location,
+              private snackBar: MatSnackBar,
               private store: Store<PropertyState>) { }
 
   ngOnInit() {
@@ -140,13 +144,52 @@ export class AddOwnerComponent implements OnInit {
       this.addForm.get('roleId').setValue(2);
     }
     // console.log(formValue);
-    this.store.dispatch(PropertyActions.addPropertyOwner({payload: this.addForm.value}));
 
-    this.location.back();
+
+    // Check if the email already exists
+
+    // this.uerEmailExists( this.addForm.controls['contactEmail'].value );
+
+
+
+    this.propertyService.checUserkEmail(this.addForm.controls['contactEmail'].value)
+    .subscribe(res => {
+      let emailexists;
+      emailexists = res;
+      console.log('email check result', emailexists);
+
+      if (emailexists) {
+        alert(this.addForm.controls['contactEmail'].value + ' already exists!');
+        this.openSnackBar(this.addForm.controls['contactEmail'].value + ' already exists!', 'dismiss', 'error');
+      } else {
+        this.store.dispatch(PropertyActions.addPropertyOwner({payload: this.addForm.value})); // disabled for testing
+        // alert('ok, go ahead to create owner');
+        this.location.back();
+      }
+
+    });
+
   }
 
   cancel() {
     this.location.back();
   }
 
+  // uerEmailExists(email) {
+
+  //   console.log('incoming email', email);
+
+  //   return this.propertyService.checUserkEmail(email)
+  //   .subscribe(res => {
+  //     this.emailExists = res;
+  //     console.log('email check result', this.emailExists);
+  //   });
+  // }
+
+  openSnackBar(message: string, action: string, type: string) {
+    const config = new MatSnackBarConfig();
+    config.panelClass = [type];
+    config.duration = 3000;
+    this.snackBar.open(message, action, config);
+  }
 }

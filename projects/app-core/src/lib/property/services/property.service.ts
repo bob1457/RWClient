@@ -102,5 +102,9 @@ export class PropertyService {
     return this.http.get<PropertyOwner>(`${this.baseUrl}/property/owner/${id}`);
   }
 
+  checUserkEmail(email){
+    return this.http.get<boolean>(`${this.baseUrl}/property/owners/checkemail/${email}`);
+  }
+
 
 }
