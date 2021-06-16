@@ -45,6 +45,7 @@
                         <div style="margin-top: 35px;" fxFlex="50" fxFlex.xs="85">
 
                             <div class="selection" fxLayout="row">
+
                                 <mat-radio-group aria-label="Select an option" style="margin-top: 13px;padding-right: 5px;" formControlName="ownerOption" [(ngModel)]="ownerOption">
                                     <mat-radio-button value="existing" checked style="padding-right: 10px;">Add existing property owner</mat-radio-button>
                                     <mat-radio-button value="new">Add a new property owner</mat-radio-button>
@@ -143,7 +144,11 @@
                         </div>
                     </div>
 
-                    <div class="submit-button">
+
+                    <div class="submit-button" fxLayout="row" fxLayoutAlign="end end">
+                        <div *ngIf="loading" style="margin-right: 20px;">
+                            <img src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==">
+                        </div>
                         <button mat-button type="button" style="float: right;background: #ff5722; color: white;margin-right: 5px;" (click)="cancel()">Cancel</button>
                         <button mat-button type="submit" style="float: right;background: #11c447; color: white;">Submit</button>
 
