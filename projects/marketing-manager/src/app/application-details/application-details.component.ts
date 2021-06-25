@@ -40,7 +40,7 @@ export class ApplicationDetailsComponent implements OnInit {
                 this.store.pipe(select(propertyApplicationDetails)) // select date from state in store
                           .subscribe(app => {
                             this.application = app;
-                            // console.log('app', this.application);
+                            console.log('app', this.application);
                 });
 
               }
