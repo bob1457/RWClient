@@ -129,13 +129,186 @@
                             </div>
                         </mat-tab>
                         <mat-tab label="Co-Applicants" style="background: #f5f5f5;">
+                            <!-- <ul fxLayout="column" fxLayoutAlign="start center" style="list-style: none;margin-top: 25px;margin-right: 25px;">
+                                <li style="display: inline;">
+                                    <mat-card class="user-card">
+                                        <mat-card-header>
+                                            <div mat-card-avatar>
+                                                <img class="user-avatar" src="../../assets/images/user_a.png">
+                                            </div>
+                                            <mat-card-title>Co Applicant</mat-card-title>
+                                            <mat-card-subtitle></mat-card-subtitle>
+                                        </mat-card-header>
 
+                                        <mat-card-content>
+
+                                        </mat-card-content>
+
+                                    </mat-card>
+                                </li>
+                                <li>
+                                    <mat-card class="user-card">
+                                        <mat-card-header>
+                                            <div mat-card-avatar>
+                                                <img class="user-avatar" src="../../assets/images/user_a.png">
+                                            </div>
+                                            <mat-card-title>Co Applicant</mat-card-title>
+                                            <mat-card-subtitle></mat-card-subtitle>
+                                        </mat-card-header>
+
+                                        <mat-card-content>
+
+                                        </mat-card-content>
+
+                                    </mat-card>
+                                </li>
+                                <li>
+                                    <mat-card class="user-card">
+                                        <mat-card-header>
+                                            <div mat-card-avatar>
+                                                <img class="user-avatar" src="../../assets/images/user_a.png">
+                                            </div>
+                                            <mat-card-title>Co Applicant</mat-card-title>
+                                            <mat-card-subtitle></mat-card-subtitle>
+                                        </mat-card-header>
+
+                                        <mat-card-content>
+
+                                        </mat-card-content>
+
+                                    </mat-card>
+                                </li>
+                            </ul> -->
+                            <mat-grid-list cols="4" rowHeight="fit" [style.height]="'100px'" [gutterSize]="'1px'" style="margin-top: 20px;
+                            width: 90%;
+                            margin-left: auto;
+                            margin-right: auto;" *ngFor="let applicant of application.coApplicantList">
+                                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                                    <mat-card class="user-card">
+                                        <mat-card-header>
+                                            <div mat-card-avatar>
+                                                <img class="user-avatar" src="../../assets/images/user_a.png">
+                                            </div>
+                                            <mat-card-title style="font-size: 1.2em; text-transform: uppercase;">{{applicant.firstName}}<br>{{applicant.lastName}}</mat-card-title>
+                                            <mat-card-subtitle></mat-card-subtitle>
+                                        </mat-card-header>
+
+                                        <mat-card-content>
+                                            <!-- <p style="margin-bottom: 0;">applicant.contactEmail</p>
+                                            <p style="margin-bottom: 0;">applicant.contactTel</p> -->
+
+                                            <a style="float: right;cursor: pointer;" [matMenuTriggerFor]="menuRef">
+                                                <span style="color:blue;">Details</span>
+                                            </a>
+
+                                            <mat-menu #menuRef="matMenu">
+                                                <div class="details-panel">
+                                                    <span style="font-weight: 600;font-size: 1.1em;">Co Applicant Information</span><br><br>
+                                                    <span style="font-weight: 600;">First Name:</span> {{applicant.firstName}}<br>
+                                                    <span style="font-weight: 600;">Last Name:</span> {{applicant.lastName }}<br>
+                                                    <span style="font-weight: 600;">Immigration Status:</span> {{applicant.status | imStatus}}<br>
+                                                    <span style="font-weight: 600;">Employment Status:</span> {{applicant.empoyedStatus }}<br>
+                                                    <span style="font-weight: 600;">Annual Incom:</span> ${{applicant.annualIncome }}<br>
+                                                    <span style="font-weight: 600;">Credit Rating:</span> {{applicant.creditRating }}<br>
+                                                </div>
+
+                                            </mat-menu>
+                                        </mat-card-content>
+                                    </mat-card>
+                                </mat-grid-tile>
+                            </mat-grid-list>
+                            <div style="margin-top: 20px;margin-left: 20px;font-weight: 500;" *ngIf="application.coApplicantList.length === 0">
+                                No co-applicants
+                            </div>
                         </mat-tab>
                         <mat-tab label="Children" style="background: #f5f5f5;">
+                            <mat-grid-list cols="4" rowHeight="fit" [style.height]="'100px'" [gutterSize]="'1px'" style="margin-top: 20px;
+                            width: 90%;
+                            margin-left: auto;
+                            margin-right: auto;" *ngFor="let child of application.childList">
+                                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                                    <mat-card class="user-card">
+                                        <mat-card-header>
+                                            <div mat-card-avatar>
+                                                <img class="user-avatar" src="../../assets/images/child2.png">
+                                            </div>
+                                            <mat-card-title style="font-size: 1.2em; text-transform: uppercase;">{{child.firstName}}<br>{{child.lastName}}</mat-card-title>
+                                            <mat-card-subtitle></mat-card-subtitle>
+                                        </mat-card-header>
 
+                                        <mat-card-content>
+                                            <span style="font-weight: 600;">Gender:</span> {{child.gender}}<br>
+                                            <span style="font-weight: 600;">Age</span> {{child.age }}<br>
+                                            <!-- <p style="margin-bottom: 0;">applicant.contactEmail</p>
+                                            <p style="margin-bottom: 0;">applicant.contactTel</p> -->
+
+                                            <!-- <a style="float: right;cursor: pointer;" [matMenuTriggerFor]="menuRef">
+                                                <span style="color:blue;">Details</span>
+                                            </a>
+
+                                            <mat-menu #menuRef="matMenu">
+                                                <div class="details-panel">
+                                                    <span style="font-weight: 600;font-size: 1.1em;">Accompanion Child</span><br><br>
+                                                    <span style="font-weight: 600;">First Name:</span> {{child.firstName}}<br>
+                                                    <span style="font-weight: 600;">Last Name:</span> {{child.lastName }}<br>
+                                                    <span style="font-weight: 600;">Gender:</span> {{child.gender}}<br>
+                                                    <span style="font-weight: 600;">Age</span> {{child.age }}<br>
+                                                </div>
+
+                                            </mat-menu>-->
+                                        </mat-card-content>
+                                    </mat-card>
+                                </mat-grid-tile>
+                            </mat-grid-list>
+                            <div style="margin-top: 20px;margin-left: 20px;font-weight: 500;" *ngIf="application.childList.length === 0">
+                                No accompanion child/children
+                            </div>
                         </mat-tab>
                         <mat-tab label="Refenrences" style="background: #f5f5f5;">
+                            <mat-grid-list cols="4" rowHeight="130px" [gutterSize]="'1px'" style="margin-top: 20px;
+                            width: 90%;
+                            margin-left: auto;
+                            margin-right: auto;" *ngFor="let contact of application.referenceList">
+                                <mat-grid-tile [colspan]="2" [rowspan]="1">
+                                    <mat-card class="user-card">
+                                        <mat-card-header>
+                                            <div mat-card-avatar>
+                                                <img class="user-avatar" src="../../assets/images/contact-ref.jpg">
+                                            </div>
+                                            <mat-card-title style="font-size: 1.2em; text-transform: uppercase;">Refernence<br><span style="font-size: .8em;">{{contact.type | referenceType}}</span></mat-card-title>
+                                            <mat-card-subtitle></mat-card-subtitle>
+                                        </mat-card-header>
 
+                                        <mat-card-content>
+                                            <span *ngIf="contact.type === 3"><span style="font-weight: 600;">Employer:</span> {{contact.contactEntityName}}</span><br>
+
+                                            <span style="font-weight: 600;">Contact Name:</span> {{contact.contactName}}<br>
+                                            <span style="font-weight: 600;">Email:</span> {{contact.contactEmail}}<br>
+                                            <span style="font-weight: 600;">Telephone</span> {{contact.contactTel }}<br>
+                                            <!-- <p style="margin-bottom: 0;">applicant.contactEmail</p>
+                                            <p style="margin-bottom: 0;">applicant.contactTel</p> -->
+
+                                            <!-- <a style="float: right;cursor: pointer;" [matMenuTriggerFor]="menuRef">
+                                                <span style="color:blue;">Details</span>
+                                            </a>
+
+                                            <mat-menu #menuRef="matMenu">
+                                                <div class="details-panel">
+                                                    <span style="font-weight: 600;font-size: 1.1em;">Accompanion Child</span><br><br>
+                                                    <span style="font-weight: 600;">First Name:</span> {{child.firstName}}<br>
+                                                    <span style="font-weight: 600;">Last Name:</span> {{child.lastName }}<br>
+                                                    <span style="font-weight: 600;">Gender:</span> {{child.gender}}<br>
+                                                    <span style="font-weight: 600;">Age</span> {{child.age }}<br>
+                                                </div>
+
+                                            </mat-menu>-->
+                                        </mat-card-content>
+                                    </mat-card>
+                                </mat-grid-tile>
+                            </mat-grid-list>
+                            <div style="margin-top: 20px;margin-left: 20px;font-weight: 500;" *ngIf="application.childList.length === 0">
+                                No reference contacts
+                            </div>
                         </mat-tab>
                     </mat-tab-group>
                 </div>
