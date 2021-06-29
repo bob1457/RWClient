@@ -23,6 +23,10 @@ export class ReferenceTypePipe implements PipeTransform {
         return 'Employer';
         break;
       }
+      case 4 : {
+        return 'Other';
+        break;
+      }
       default : {
         return 'Other';
         break;
