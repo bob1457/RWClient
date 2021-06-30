@@ -55,6 +55,7 @@ export class LeaseDetailsComponent implements OnInit {
   // rentAmtDue;
   // rentDueOn;
   addaddendum = false;
+  existingCoAplicant = true;
 
 
   loading$: Observable<boolean>;
@@ -754,6 +755,15 @@ export class LeaseDetailsComponent implements OnInit {
       this.enableRenwal = false;
     }
     console.log('renewal', this.enableRenwal)
+  }
+
+  onAddTenantChange(event) {
+    console.log('add tenant option', event.value);
+    if (event.value === 1) {
+      this.existingCoAplicant = true;
+    } else {
+      this.existingCoAplicant = false;
+    }
   }
 
 }

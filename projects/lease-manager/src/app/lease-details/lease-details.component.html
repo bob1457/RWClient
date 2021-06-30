@@ -376,47 +376,71 @@
                                   </button>
                                     </div>
 
-                                    <div *ngIf="addTenant" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center" stye="width: 95%;margin-left: 10px; margin-right: 10px;">
-                                        <form novalidate fxLayoutAlign="center center" [formGroup]="addTenantForm" style="width: 100%;border: 1px solid;
-                                        margin-bottom: 5px;
-                                        padding: 5px;" (ngSubmit)="addAdditionalTenant()">
-                                            <mat-form-field fxFlex="15%" fxFlex.xs="90%" style="width: 15%;margin-left: 10px;">
-                                                <mat-label>First Name</mat-label>
-                                                <input type="text" matInput placeholder="First Name" formControlName="firstName">
-                                            </mat-form-field>
-                                            <mat-form-field fxFlex="15%" fxFlex.xs="90%" style="width:15%;margin-left: 10px;">
-                                                <mat-label>First Name</mat-label>
-                                                <input type="text" matInput placeholder="Last Name" formControlName="lastName">
-                                            </mat-form-field>
-                                            <mat-form-field fxFlex="15%" fxFlex.xs="90%" appearance="standard" style="width:20%;margin-top: -12px; margin-left: 10px;">
-                                                <mat-label>Email</mat-label>
-                                                <input type="text" matInput placeholder="Contact Email" formControlName="contactEmail">
-                                                <!-- <mat-icon matSuffix>payment</mat-icon> -->
-                                            </mat-form-field>
-                                            <mat-form-field fxFlex="10%" fxFlex.xs="90%" style="width:15%;margin-left: 10px;">
-                                                <mat-label>Telephone</mat-label>
-                                                <input type="text" matInput placeholder="Contact Telephone" formControlName="contactTelephone1">
-                                            </mat-form-field>
+                                    <div *ngIf="addTenant" fxLayout="column" fxLayout.xs="column" fxLayoutAlign="center center" stye="width: 95%;margin-left: 10px; margin-right: 10px;">
+                                        <div style="width: 100%;margin-bottom: 10px;">
+                                            <mat-radio-group aria-label="Select an option" style="margin-top: 13px;margin-left: 25px;padding-right: 5px;" (change)="onAddTenantChange($event)">
+                                                <mat-radio-button [value]=1 checked style="padding-right: 10px;">Select Co-applicant</mat-radio-button>
+                                                <mat-radio-button [value]=2>Add new tenant</mat-radio-button>
+                                            </mat-radio-group>
+                                        </div>
+                                        <div style="width: 100%;">
+                                            <form novalidate fxLayout="column" fxLayoutAlign="center center" [formGroup]="addTenantForm" style="width: 100%;border: 1px solid;
+                                          margin-bottom: 5px;
+                                          padding: 5px;" (ngSubmit)="addAdditionalTenant()">
+                                                <div *ngIf="!existingCoAplicant" style="width: 100%;">
+                                                    <mat-form-field fxFlex="15%" fxFlex.xs="90%" style="width: 15%;margin-left: 10px;">
+                                                        <mat-label>First Name</mat-label>
+                                                        <input type="text" matInput placeholder="First Name" formControlName="firstName">
+                                                    </mat-form-field>
+                                                    <mat-form-field fxFlex="15%" fxFlex.xs="90%" style="width:15%;margin-left: 10px;">
+                                                        <mat-label>First Name</mat-label>
+                                                        <input type="text" matInput placeholder="Last Name" formControlName="lastName">
+                                                    </mat-form-field>
+                                                    <mat-form-field fxFlex="15%" fxFlex.xs="90%" appearance="standard" style="width:20%;margin-top: -12px; margin-left: 10px;">
+                                                        <mat-label>Email</mat-label>
+                                                        <input type="text" matInput placeholder="Contact Email" formControlName="contactEmail">
+                                                        <!-- <mat-icon matSuffix>payment</mat-icon> -->
+                                                    </mat-form-field>
+                                                    <mat-form-field fxFlex="15%" fxFlex.xs="90%" style="width:15%;margin-left: 10px;">
+                                                        <mat-label>Telephone</mat-label>
+                                                        <input type="text" matInput placeholder="Contact Telephone" formControlName="contactTelephone1">
+                                                    </mat-form-field>
 
-                                            <mat-form-field fxFlex="10%" fxFlex.xs="90%" style="margin-left: 10px;margin-right: 10px;">
-                                                <mat-label>Telephone 2</mat-label>
-                                                <input type="text" matInput placeholder="Contact Telephone 2" formControlName="contactTelephone2">
-                                            </mat-form-field>
+                                                    <mat-form-field fxFlex="15%" fxFlex.xs="90%" style="margin-left: 10px;margin-right: 10px;">
+                                                        <mat-label>Telephone 2</mat-label>
+                                                        <input type="text" matInput placeholder="Contact Telephone 2" formControlName="contactTelephone2">
+                                                    </mat-form-field>
 
-                                            <mat-form-field fxFlex="10%" fxFlex.xs="90%" style="margin-left: 10px;margin-right: 10px;">
-                                                <mat-label>Other Contact</mat-label>
-                                                <input type="text" matInput placeholder="Contact Others" formControlName="contactOthers">
-                                            </mat-form-field>
-                                            <div fxFlex="20%" fxFlex.xs="90%">
+                                                    <mat-form-field fxFlex="15%" fxFlex.xs="90%" style="margin-left: 10px;margin-right: 10px;">
+                                                        <mat-label>Other Contact</mat-label>
+                                                        <input type="text" matInput placeholder="Contact Others" formControlName="contactOthers">
+                                                    </mat-form-field>
+                                                </div>
+                                                <div *ngIf="existingCoAplicant" style="width: 100%;text-align: center;">
+                                                    <mat-form-field style="width: 90%;">
+                                                        <mat-label>Select Co Applicant</mat-label>
+                                                        <mat-select id="term">
+                                                            <mat-option [value]=0>None</mat-option>
+                                                            <mat-option [value]=1>One Year</mat-option>
+                                                            <mat-option [value]=2>Three Month</mat-option>
+                                                            <mat-option [value]=3>Six Month</mat-option>
+                                                            <mat-option [value]=4>Other</mat-option>
+                                                        </mat-select>
+                                                    </mat-form-field>
+                                                </div>
+
+                                                <!-- <div fxFlex="20%" fxFlex.xs="90%"> -->
                                                 <button type="submit" mat-raised-button color="primary" style="margin-right: 5px; width: 100%; color: green;">
-                                          <!-- Add -->
-                                          Add <mat-icon style="font-size: 2.5em;color: green;font-weight: bold;vertical-align: top;">check</mat-icon>
-                                        </button>
+                                                    <!-- Add -->
+                                                    Add <mat-icon style="font-size: 2.5em;color: green;font-weight: bold;vertical-align: top;">check</mat-icon>
+                                                </button>
                                                 <!-- <button type="button" (click)="reset()" mat-button mat-stroked-button color="accent">
-                                          Reset
-                                        </button> -->
-                                            </div>
-                                        </form>
+                                            Reset
+                                          </button> -->
+                                                <!-- </div> -->
+                                            </form>
+                                        </div>
+
 
                                         <!-- <mat-radio-group aria-label="Select an option" style="margin-top: 13px;margin-left: 25px;padding-right: 5px;">
                                       <mat-radio-button value="1" checked style="padding-right: 10px;">Active</mat-radio-button>
