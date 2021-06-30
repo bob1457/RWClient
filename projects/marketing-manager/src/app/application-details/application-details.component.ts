@@ -8,6 +8,7 @@ import { propertyApplicationDetails, loadingStatus, loadedStatus } from '../stor
 import { getRentalApplicationDetails } from '../store/actions/marketing.actions';
 import { Observable } from 'rxjs';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material';
 
 @Component({
   selector: 'app-application-details',
@@ -31,6 +32,7 @@ export class ApplicationDetailsComponent implements OnInit {
   constructor(private store: Store<PropertyListingState>,
               private router: Router,
               private formBuilder: FormBuilder,
+              private snackBar: MatSnackBar,
               private actRoute: ActivatedRoute,
               // private formBuilder: FormBuilder,
               private marketingService: MarketingService) {
@@ -102,15 +104,15 @@ export class ApplicationDetailsComponent implements OnInit {
 
   approveApplication(id: any) {
     this.approveAppForm.patchValue({
-      applicationId: this.application.id,
+      applicationId: this.application.rentalApplicationId,
       appStatus: 2, // Approved
       userName: 'NotSet',
-      firstName:  this.application.rentalApplicant.firstName,
-      lastName: this.application.rentalApplicant.lastName,
-      contactEmail: this.application.rentalApplicant.contactEmail,
-      contactTelephone1: this.application.rentalApplicant.contactTel,
-      contactTelephone2: this.application.rentalApplicant.contactSms,
-      contactOthers: this.application.rentalApplicant.contactOthers
+      firstName:  this.application.applicatnFirstName,
+      lastName: this.application.applicatnLastName,
+      contactEmail: this.application.applicantContactEmail,
+      contactTelephone1: this.application.applicantContactTel,
+      contactTelephone2: '', //this.application.rentalApplicant.contactSms,
+      contactOthers: '' // this.application.rentalApplicant.contactOthers
     });
 
     console.log('form', this.approveAppForm.value);
@@ -120,15 +122,24 @@ export class ApplicationDetailsComponent implements OnInit {
                           .subscribe(() => {
                             console.log('done');
                             this.loading = false;
-                            this.msg = 'Done!'
+                            this.msg = 'Rental application approved successfully!';
                             setTimeout(this.msg = '', 3000);
                             this.disableApproveButton = true;
+
+                            this.openSnackBar('Rental application approved successfully.', 'close', 'notify');
                           });
 
   }
 
   goBack() {
     this.router.navigate(['/Manage/marketing/applications']);
+  }
+
+  openSnackBar(message: string, action: string, type: string) {
+    const config = new MatSnackBarConfig();
+    config.panelClass = [type];
+    config.duration = 3000;
+    this.snackBar.open(message, action, config);
   }
 
 }
