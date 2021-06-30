@@ -18,7 +18,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import {Overlay} from '@angular/cdk/overlay';
 import { WorkorderDetailsDialogComponent } from '../dialogs/workorder-details-dialog/workorder-details-dialog.component';
 
-import { ServiceRequestList } from '@lib/dashboard';
+import { DashState, RentalAppList, ServiceRequestList } from '@lib/dashboard';
 
 @Component({
   selector: 'app-lease-details',
@@ -56,6 +56,7 @@ export class LeaseDetailsComponent implements OnInit {
   // rentDueOn;
   addaddendum = false;
   existingCoAplicant = true;
+  coApplicantList;
 
 
   loading$: Observable<boolean>;
@@ -150,6 +151,7 @@ export class LeaseDetailsComponent implements OnInit {
   private dialogConfig;
 
   constructor(private store: Store<PropertyLeaseState>,
+              private dasStore: Store<DashState>,
               private router: Router,
               private actRoute: ActivatedRoute,
               private dialog: MatDialog,
@@ -249,6 +251,18 @@ export class LeaseDetailsComponent implements OnInit {
                                 this.invoiceList = invoices;
                               }
                             });
+
+                  this.dasStore.select(RentalAppList)
+                              .subscribe(applist => {
+                                if (applist) {
+                                  this.coApplicantList = applist;
+                                } else {
+                                  this.coApplicantList = JSON.parse(localStorage.getItem('applications'));
+                                }
+
+                                this.coApplicantList = this.coApplicantList.filter(l => l.propertyId == this.lease.rentalProperty.id);
+                                console.log('co apps', this.coApplicantList);
+                              });
                 });
               }
 
@@ -604,6 +618,10 @@ export class LeaseDetailsComponent implements OnInit {
   }
 
   getTenantDetails(id: number) {
+
+  }
+
+  getCoApplicants() {
 
   }
 
