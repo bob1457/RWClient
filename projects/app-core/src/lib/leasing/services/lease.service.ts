@@ -47,6 +47,12 @@ export class LeaseService {
     return this.http.get<NewTenant[]>(`${this.baseUrl}/lease/newtenants`);
   }
 
+  getAlCoApplicants() {
+    debugger;
+    return this.http.get<RentalProperty[]>(`${this.baseUrl}/application/coapplicant`);
+  }
+
+
   addLease(lease: PropertyLease) {
     debugger;
     return this.http.post<PropertyLease>(`${this.baseUrl}/lease/add`, lease);
