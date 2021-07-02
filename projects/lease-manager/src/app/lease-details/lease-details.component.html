@@ -419,12 +419,17 @@
                                                 <div *ngIf="existingCoAplicant" style="width: 100%;text-align: center;">
                                                     <mat-form-field style="width: 90%;">
                                                         <mat-label>Select Co Applicant</mat-label>
-                                                        <mat-select id="term">
-                                                            <mat-option [value]=0>None</mat-option>
-                                                            <mat-option [value]=1>One Year</mat-option>
-                                                            <mat-option [value]=2>Three Month</mat-option>
-                                                            <mat-option [value]=3>Six Month</mat-option>
-                                                            <mat-option [value]=4>Other</mat-option>
+                                                        <mat-select id="term" #mySelect2 (selectionChange)="onCpApplicantChange(mySelect2.value)">
+                                                            <div *ngIf="coApplicantList$ | async; else loading">
+                                                                <mat-option *ngFor="let coapp of coApplicantList$ | async" [value]="coapp">
+                                                                    {{coapp.firstName}} {{coapp.lastName}}
+                                                                </mat-option>
+                                                            </div>
+                                                            <ng-template #loading>
+                                                                <mat-option>
+                                                                    <img src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==">
+                                                                </mat-option>
+                                                            </ng-template>
                                                         </mat-select>
                                                     </mat-form-field>
                                                 </div>
