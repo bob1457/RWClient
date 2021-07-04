@@ -30,7 +30,49 @@
 <mat-error *ngIf="hasError('title', 'required')">Name is required</mat-error>
 <mat-error *ngIf="hasError('title', 'maxlength')">You have more than 60 characters</mat-error> -->
                     </mat-form-field>
+
                     <mat-form-field style="width: 90%;">
+                        <mat-label>Select Rental Application</mat-label>
+                        <mat-select #myAppSelect (selectionChange)="onApplicationChange(myAppSelect.value)">
+                            <div *ngIf="applicantList; else loading">
+                                <mat-option *ngFor="let application of applicantList" [value]="application">
+                                    {{application.applicatnFirstName}} {{application.applicatnLastName}} -- {{application.propertyName}}
+                                </mat-option>
+                            </div>
+                            <ng-template #loading>
+                                <mat-option>
+                                    <img src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==">
+                                </mat-option>
+                            </ng-template>
+
+
+                        </mat-select>
+                    </mat-form-field>
+
+                    <!-- Use FormGroup to have a nested form containing all required data for new tenant-->
+                    <p *ngIf="selectedProperty">
+                        <span style="font-weight: 600;">Rental Property: {{selectedProperty.propertyName}} </span><br><br>
+                        <span>{{selectedProperty.propertyAddress.streetNum}} <br>{{selectedProperty.propertyAddress.city}} {{selectedProperty.propertyAddress.stateProvince}} {{selectedProperty.propertyAddress.streetNum}}</span>
+                    </p>
+
+                    <div *ngIf="selectedProperty">
+                        <span style="font-weight: 600;">Applicant:</span><br><br> {{selectedProperty.applicatnFirstName}} {{selectedProperty.applicatnLastName}}<br><br>
+                        <span style="font-weight: 600;">Co-Applicant(s)</span>
+                        <ul style="list-style: none;margin-top: 10px; margin-left: -30px">
+                            <li *ngFor="let applicant of applicants; let no = index;">
+                                {{no + 1}} - First Name: {{applicant.firstName}} Last Name: {{applicant.lastName}}
+                            </li>
+                        </ul>
+                        <span *ngIf="applicants.length == 0">
+                          No co-applicant(s)
+                        </span>
+
+                    </div>
+
+
+
+
+                    <!-- <mat-form-field style="width: 90%;">
                         <mat-label>Select Rental Property</mat-label>
                         <mat-select #mySelect (selectionChange)="onPropertyChange(mySelect.value)">
                             <div *ngIf="properties$ | async; else loading">
@@ -62,7 +104,12 @@
                             </ng-template>
 
                         </mat-select>
-                    </mat-form-field>
+                    </mat-form-field> -->
+
+
+
+
+
                     <div fxLayout="row" fxLayout.xs="column" style="width: 90%;">
                         <mat-form-field fxFlex="50%" fxFlex.xs="90%" style="margin-right: 10px;">
                             <mat-label>Start Date</mat-label>

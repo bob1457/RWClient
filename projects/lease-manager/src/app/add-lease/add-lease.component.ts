@@ -7,6 +7,7 @@ import { addLease } from '../store/actions/lease.actions';
 import { PropertyLeaseState } from '../store/lease-state';
 import { select, Store } from '@ngrx/store';
 import { AuthState, getUserInfo, User } from '@lib/auth';
+import { DashState, RentalAppList } from '@lib/dashboard';
 
 
 @Component({
@@ -21,14 +22,32 @@ export class AddLeaseComponent implements OnInit {
 
   properties$: Observable<RentalProperty[]>;
   newTenants$: Observable<NewTenant[]>;
+  applicantList;
+  selectedProperty;
+  applicants;
 
   constructor(private formBuilder: FormBuilder,
               private location: Location,
               private store: Store<PropertyLeaseState>,
               private authStore: Store<AuthState>,
+              private dashStore: Store<DashState>,
               private leaseService: LeaseService ) {
                 // this.authStore.select(getUserInfo)
                 //     .subscribe( user => this.user = user);
+                this.dashStore.select(RentalAppList)
+                              .subscribe(applist => {
+                                if (applist) {
+                                  this.applicantList = applist;
+                                  console.log('app list', this.applicantList);
+                                } else {
+                                  this.applicantList = JSON.parse(localStorage.getItem('applications'));
+                                }
+
+                                // this.coApplicantList = this.coApplicantList.filter(l => l.propertyId == this.lease.rentalPropertyId);
+                                // console.log('lease id', this.lease.rentalProperty.id);
+                                // console.log('co apps', this.coApplicantList);
+
+                              });
               }
 
 
@@ -208,6 +227,26 @@ export class AddLeaseComponent implements OnInit {
   onPropertyChange(id) {
     this.addForm.get('rentalPropertyId').setValue(id);
     console.log('p', id);
+  }
+
+  onApplicationChange(app) {
+    console.log('app', app);
+    this.dashStore.select(RentalAppList)
+                  .subscribe(applist => {
+                    if (applist) {
+                      this.applicantList = applist;
+                      console.log('app list', this.applicantList);
+
+                      this.selectedProperty = this.applicantList.find(l => l.rentalApplicationId == app.rentalApplicationId);
+                      this.applicants = this.selectedProperty.coApplicantList;
+                      // console.log('lease id', this.lease.rentalProperty.id);
+                      console.log('selected app', this.selectedProperty);
+                      console.log('applicants from the application', this.applicants);
+                    // } else {
+                    //   this.applicantList = JSON.parse(localStorage.getItem('applications'));
+                    }
+                  });
+
   }
 
   onTenantChange(id) {
