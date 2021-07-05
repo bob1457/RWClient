@@ -23,7 +23,7 @@ export class AddLeaseComponent implements OnInit {
   properties$: Observable<RentalProperty[]>;
   newTenants$: Observable<NewTenant[]>;
   applicantList;
-  selectedProperty;
+  selectedApplication;
   applicants;
 
   constructor(private formBuilder: FormBuilder,
@@ -237,10 +237,10 @@ export class AddLeaseComponent implements OnInit {
                       this.applicantList = applist;
                       console.log('app list', this.applicantList);
 
-                      this.selectedProperty = this.applicantList.find(l => l.rentalApplicationId == app.rentalApplicationId);
-                      this.applicants = this.selectedProperty.coApplicantList;
+                      this.selectedApplication = this.applicantList.find(l => l.rentalApplicationId == app.rentalApplicationId);
+                      this.applicants = this.selectedApplication.coApplicantList;
                       // console.log('lease id', this.lease.rentalProperty.id);
-                      console.log('selected app', this.selectedProperty);
+                      console.log('selected app', this.selectedApplication);
                       console.log('applicants from the application', this.applicants);
                     // } else {
                     //   this.applicantList = JSON.parse(localStorage.getItem('applications'));

@@ -50,24 +50,27 @@
                     </mat-form-field>
 
                     <!-- Use FormGroup to have a nested form containing all required data for new tenant-->
-                    <p *ngIf="selectedProperty">
-                        <span style="font-weight: 600;">Rental Property: {{selectedProperty.propertyName}} </span><br><br>
-                        <span>{{selectedProperty.propertyAddress.streetNum}} <br>{{selectedProperty.propertyAddress.city}} {{selectedProperty.propertyAddress.stateProvince}} {{selectedProperty.propertyAddress.streetNum}}</span>
-                    </p>
+                    <div *ngIf="selectedApplication" style="border: 1px solid #afa7a7;padding: 10px;width: 500px;">
+                        <p *ngIf="selectedApplication">
+                            <span style="font-weight: 600;">Rental Property: &nbsp;&nbsp;<span style="font-style:italic;">{{selectedApplication.propertyName}}</span> </span><br><br>
+                            <span>{{selectedApplication.propertyAddress.streetNum}} <br>{{selectedApplication.propertyAddress.city}} {{selectedApplication.propertyAddress.stateProvince}} {{selectedApplication.propertyAddress.streetNum}}</span>
+                        </p>
 
-                    <div *ngIf="selectedProperty">
-                        <span style="font-weight: 600;">Applicant:</span><br><br> {{selectedProperty.applicatnFirstName}} {{selectedProperty.applicatnLastName}}<br><br>
-                        <span style="font-weight: 600;">Co-Applicant(s)</span>
-                        <ul style="list-style: none;margin-top: 10px; margin-left: -30px">
-                            <li *ngFor="let applicant of applicants; let no = index;">
-                                {{no + 1}} - First Name: {{applicant.firstName}} Last Name: {{applicant.lastName}}
-                            </li>
-                        </ul>
-                        <span *ngIf="applicants.length == 0">
+                        <div *ngIf="selectedApplication">
+                            <span style="font-weight: 600;">Applicant:</span>&nbsp;&nbsp;&nbsp; {{selectedApplication.applicatnFirstName}} {{selectedApplication.applicatnLastName}}<br><br>
+                            <span style="font-weight: 600;">Co-Applicant(s)</span>
+                            <ul style="list-style: none;margin-top: 10px; margin-left: -30px">
+                                <li *ngFor="let applicant of applicants; let no = index;">
+                                    {{no + 1}} - First Name: {{applicant.firstName}} Last Name: {{applicant.lastName}}
+                                </li>
+                            </ul>
+                            <span *ngIf="applicants.length == 0">
                           No co-applicant(s)
                         </span>
 
+                        </div>
                     </div>
+
 
 
 
