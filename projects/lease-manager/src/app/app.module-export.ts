@@ -1,5 +1,5 @@
 // import { BrowserModule } from '@angular/platform-browser';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { AppMaterialModule } from '@lib/app-material';
 import { NgModule } from '@angular/core';
 
@@ -133,7 +133,8 @@ const routes: Routes = [
     // AppRoutingModule
   ],
   providers: [
-    // CdkColumnDef
+    // CdkColumnDef providers: [DatePipe]
+    DatePipe
   ],
   entryComponents: [
     PaymentDetailsDialogComponent,
