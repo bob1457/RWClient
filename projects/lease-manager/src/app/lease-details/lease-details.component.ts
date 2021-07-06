@@ -501,9 +501,9 @@ export class LeaseDetailsComponent implements OnInit {
       }
       case 2 : {
         this.hide = true;
-        if (!this.tenants) {
-          this.store.dispatch(getAllTenants());
-        }
+        // if (!this.tenants) {
+        this.store.dispatch(getAllTenants());
+        // }
         // console.log('all app list', this.coApplicantList);
         // this.coApplicantList = this.applicantList.filter(l => l.propertyId === this.lease.rentalProperty.id);
         // console.log('selected app list', this.coApplicantList);
