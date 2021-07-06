@@ -52,7 +52,7 @@
                     <!-- Use FormGroup to have a nested form containing all required data for new tenant-->
                     <div *ngIf="selectedApplication" style="border: 1px solid #afa7a7;padding: 10px;width: 500px;">
                         <p *ngIf="selectedApplication">
-                            <span style="font-weight: 600;">Rental Property: &nbsp;&nbsp;<span style="font-style:italic;">{{selectedApplication.propertyName}}</span> </span><br><br>
+                            <span style="font-weight: 600;">Rental Property: &nbsp;&nbsp;<span style="font-style:italic;">{{selectedApplication.propertyName}}({{selectedApplication.propertyId}})</span> </span><br><br>
                             <span>{{selectedApplication.propertyAddress.streetNum}} <br>{{selectedApplication.propertyAddress.city}} {{selectedApplication.propertyAddress.stateProvince}} {{selectedApplication.propertyAddress.streetNum}}</span>
                         </p>
 
