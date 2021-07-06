@@ -274,7 +274,7 @@ export class AddLeaseComponent implements OnInit {
 
                       // tslint:disable-next-line:one-variable-per-declaration
                       this.tenantList().push(new FormControl({
-                        userName: '',
+                        userName: 'NotSet',
                         firstName: this.selectedApplication.applicatnFirstName,
                         lastName: this.selectedApplication.applicatnLastName,
                         contactEmail: this.selectedApplication.applicantContactEmail,
@@ -292,7 +292,7 @@ export class AddLeaseComponent implements OnInit {
                       this.applicants.forEach(t => {
                         console.log('returned t', t);
                         this.tenantList().push(new FormControl({
-                          userName: '',
+                          userName: 'NotSet',
                           firstName: t.firstName,
                           lastName: t.lastName,
                           contactEmail: t.contactEmail,
