@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray, FormControl  } from '@angular/forms';
-import { Property, RentalProperty, LeaseService, NewTenant } from '@lib/app-core';
+import { Property, RentalProperty, LeaseService, NewTenant, MarketingService } from '@lib/app-core';
 import { Observable } from 'rxjs';
 import { DatePipe, Location }  from '@angular/common';
 import { addLease } from '../store/actions/lease.actions';
@@ -27,6 +27,7 @@ export class AddLeaseComponent implements OnInit {
   selectedApplication;
   applicants;
 
+  allAplicatons;
 
   currentDate = new Date();
 
@@ -36,6 +37,7 @@ export class AddLeaseComponent implements OnInit {
               private authStore: Store<AuthState>,
               private datePipe: DatePipe,
               private dashStore: Store<DashState>,
+              private marketingService: MarketingService,
               private leaseService: LeaseService ) {
                 // this.authStore.select(getUserInfo)
                 //     .subscribe( user => this.user = user);
@@ -251,71 +253,115 @@ export class AddLeaseComponent implements OnInit {
 
   onApplicationChange(app) {
     console.log('app', app);
-    this.dashStore.select(RentalAppList)
-                  .subscribe(applist => {
-                    if (applist) {
-                      this.applicantList = applist;
-                      console.log('app list', this.applicantList);
+    // this.dashStore.select(RentalAppList)
+    //               .subscribe(applist => {
+    //                 if (applist) {
+    //                   this.applicantList = applist;
+    //                   console.log('app list', this.applicantList);
 
-                      this.selectedApplication = this.applicantList.find(l => l.rentalApplicationId == app.rentalApplicationId);
-                      this.applicants = this.selectedApplication.coApplicantList;
-                      // console.log('lease id', this.lease.rentalProperty.id);
-                      console.log('selected app', this.selectedApplication);
-                      console.log('applicants from the application', this.applicants);
-                    // } else {
-                    //   this.applicantList = JSON.parse(localStorage.getItem('applications'));
-                      // const tenants = this.addForm.get('tenantList') as FormArray;
-                      this.addForm.patchValue({
-                        rentalPropertyId: this.selectedApplication.propertyId
-                      });
-                      // this.applicants.map( item => {
-                      //   tenants.push(this.newTenant());
-                      // });
+    //                   this.selectedApplication = this.applicantList.find(l => l.rentalApplicationId == app.rentalApplicationId);
+    //                   this.applicants = this.selectedApplication.coApplicantList;
+    //                   // console.log('lease id', this.lease.rentalProperty.id);
+    //                   console.log('selected app', this.selectedApplication);
+    //                   console.log('applicants from the application', this.applicants);
+    //                 // } else {
+    //                 //   this.applicantList = JSON.parse(localStorage.getItem('applications'));
+    //                   // const tenants = this.addForm.get('tenantList') as FormArray;
+    //                   this.addForm.patchValue({
+    //                     rentalPropertyId: this.selectedApplication.propertyId
+    //                   });
+    //                   // this.applicants.map( item => {
+    //                   //   tenants.push(this.newTenant());
+    //                   // });
 
-                      // tslint:disable-next-line:one-variable-per-declaration
-                      this.tenantList().push(new FormControl({
-                        userName: 'NotSet',
-                        firstName: this.selectedApplication.applicatnFirstName,
-                        lastName: this.selectedApplication.applicatnLastName,
-                        contactEmail: this.selectedApplication.applicantContactEmail,
-                        ContactTelephone1: this.selectedApplication.applicantContactTel,
-                        ContactTelephone2: this.selectedApplication.applicantContactTel,
-                        ContactOthers: '',
-                        onlineAccessEnbaled: false,
-                        isActive: true,
-                        userAvartaImgUrl:'',
-                        roleId: 3//,
-                        // created: this.datePipe.transform(this.currentDate, 'yyyy-MM-dd:hh:mm:ss'),
-                        // modified: this.datePipe.transform(this.currentDate, 'yyyy-MM-dd:hh:mm:ss')
-                      }));
+    //                   // tslint:disable-next-line:one-variable-per-declaration
+    //                   this.tenantList().push(new FormControl({
+    //                     userName: 'NotSet',
+    //                     firstName: this.selectedApplication.applicatnFirstName,
+    //                     lastName: this.selectedApplication.applicatnLastName,
+    //                     contactEmail: this.selectedApplication.applicantContactEmail,
+    //                     ContactTelephone1: this.selectedApplication.applicantContactTel,
+    //                     ContactTelephone2: this.selectedApplication.applicantContactTel,
+    //                     ContactOthers: '',
+    //                     onlineAccessEnbaled: false,
+    //                     isActive: true,
+    //                     userAvartaImgUrl:'',
+    //                     roleId: 3//,
+    //                     // created: this.datePipe.transform(this.currentDate, 'yyyy-MM-dd:hh:mm:ss'),
+    //                     // modified: this.datePipe.transform(this.currentDate, 'yyyy-MM-dd:hh:mm:ss')
+    //                   }));
 
-                      this.applicants.forEach(t => {
-                        console.log('returned t', t);
-                        this.tenantList().push(new FormControl({
-                          userName: 'NotSet',
-                          firstName: t.firstName,
-                          lastName: t.lastName,
-                          contactEmail: t.contactEmail,
-                          ContactTelephone1: t.contactTel,
-                          ContactTelephone2: t.contactSms,
-                          ContactOthers: t.contactOthers,
-                          onlineAccessEnbaled: false,
-                          isActive: true,
-                          userAvartaImgUrl: '',
-                          roleId: 3//,
-                          // created: this.datePipe.transform(this.currentDate, 'yyyy-MM-dd:hh:mm:ss'),
-                          // modified: this.datePipe.transform(this.currentDate, 'yyyy-MM-dd:hh:mm:ss')
-                        }));
-                      });
+    //                   this.applicants.forEach(t => {
+    //                     console.log('returned t', t);
+    //                     this.tenantList().push(new FormControl({
+    //                       userName: 'NotSet',
+    //                       firstName: t.firstName,
+    //                       lastName: t.lastName,
+    //                       contactEmail: t.contactEmail,
+    //                       ContactTelephone1: t.contactTel,
+    //                       ContactTelephone2: t.contactSms,
+    //                       ContactOthers: t.contactOthers,
+    //                       onlineAccessEnbaled: false,
+    //                       isActive: true,
+    //                       userAvartaImgUrl: '',
+    //                       roleId: 3//,
+    //                       // created: this.datePipe.transform(this.currentDate, 'yyyy-MM-dd:hh:mm:ss'),
+    //                       // modified: this.datePipe.transform(this.currentDate, 'yyyy-MM-dd:hh:mm:ss')
+    //                     }));
+    //                   });
 
-                      // for(const tenant of this.applicants) {
-                      //   console.log('tenant returned', tenant);
-                      //   this.tenantList().push(new FormControl(tenant)) ;                     }
+    //                   // for(const tenant of this.applicants) {
+    //                   //   console.log('tenant returned', tenant);
+    //                   //   this.tenantList().push(new FormControl(tenant)) ;                     }
 
-                      console.log('tenant list', this.tenantList);
-                    }
-                  });
+    //                   console.log('tenant list', this.tenantList);
+    //                 }
+    //               });
 
+    this.marketingService.getAllRentalApplications()
+        .subscribe( applicatons => {
+          this.allAplicatons = applicatons;
+          console.log('all applications', this.allAplicatons);
+          this.selectedApplication = this.applicantList.find(l => l.rentalApplicationId == app.rentalApplicationId);
+          this.applicants = this.selectedApplication.coApplicantList;
+
+          console.log('selected app', this.selectedApplication);
+
+          this.tenantList().push(new FormControl({
+              userName: 'NotSet',
+              firstName: this.selectedApplication.applicatnFirstName,
+              lastName: this.selectedApplication.applicatnLastName,
+              contactEmail: this.selectedApplication.applicantContactEmail,
+              ContactTelephone1: this.selectedApplication.applicantContactTel,
+              ContactTelephone2: this.selectedApplication.applicantContactTel,
+              ContactOthers: '',
+              onlineAccessEnbaled: false,
+              isActive: true,
+              userAvartaImgUrl:'',
+              roleId: 3//,
+              // created: this.datePipe.transform(this.currentDate, 'yyyy-MM-dd:hh:mm:ss'),
+              // modified: this.datePipe.transform(this.currentDate, 'yyyy-MM-dd:hh:mm:ss')
+            }));
+
+          this.applicants.forEach(t => {
+            console.log('returned t', t);
+            this.tenantList().push(new FormControl({
+              userName: 'NotSet',
+              firstName: t.firstName,
+              lastName: t.lastName,
+              contactEmail: t.contactEmail,
+              ContactTelephone1: t.contactTel,
+              ContactTelephone2: t.contactSms,
+              ContactOthers: t.contactOthers,
+              onlineAccessEnbaled: false,
+              isActive: true,
+              userAvartaImgUrl: '',
+              roleId: 3// ,
+              // created: this.datePipe.transform(this.currentDate, 'yyyy-MM-dd:hh:mm:ss'),
+              // modified: this.datePipe.transform(this.currentDate, 'yyyy-MM-dd:hh:mm:ss')
+            }));
+          });
+        });
 
   }
 
