@@ -320,14 +320,16 @@ export class AddLeaseComponent implements OnInit {
 
     this.marketingService.getAllRentalApplications()
         .subscribe( applicatons => {
-          this.allAplicatons = applicatons;
-          console.log('all applications', this.allAplicatons);
-          this.selectedApplication = this.applicantList.find(l => l.rentalApplicationId == app.rentalApplicationId);
-          this.applicants = this.selectedApplication.coApplicantList;
 
-          console.log('selected app', this.selectedApplication);
+          if(applicatons) {
+            this.allAplicatons = applicatons;
+            console.log('all applications', this.allAplicatons);
+            this.selectedApplication = this.applicantList.find(l => l.rentalApplicationId == app.rentalApplicationId);
+            this.applicants = this.selectedApplication.coApplicantList;
 
-          this.tenantList().push(new FormControl({
+            console.log('selected app', this.selectedApplication);
+
+            this.tenantList().push(new FormControl({
               userName: 'NotSet',
               firstName: this.selectedApplication.applicatnFirstName,
               lastName: this.selectedApplication.applicatnLastName,
@@ -343,7 +345,7 @@ export class AddLeaseComponent implements OnInit {
               // modified: this.datePipe.transform(this.currentDate, 'yyyy-MM-dd:hh:mm:ss')
             }));
 
-          this.applicants.forEach(t => {
+            this.applicants.forEach(t => {
             console.log('returned t', t);
             this.tenantList().push(new FormControl({
               userName: 'NotSet',
@@ -359,8 +361,10 @@ export class AddLeaseComponent implements OnInit {
               roleId: 3// ,
               // created: this.datePipe.transform(this.currentDate, 'yyyy-MM-dd:hh:mm:ss'),
               // modified: this.datePipe.transform(this.currentDate, 'yyyy-MM-dd:hh:mm:ss')
-            }));
-          });
+              }));
+            });
+          }
+
         });
 
   }
