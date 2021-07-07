@@ -78,6 +78,8 @@ export class LeaseDetailsComponent implements OnInit {
   finalized = false;
   getFinalize = false;
 
+  toRenew = true;
+
   months = [
     {name: 'January'},
     {name: 'February'},
@@ -801,6 +803,16 @@ export class LeaseDetailsComponent implements OnInit {
       this.enableRenwal = false;
     }
     console.log('renewal', this.enableRenwal)
+  }
+
+  renew() {
+    this.enableRenwal = true;
+    this.toRenew = false;
+  }
+
+  cancel_renew() {
+    this.enableRenwal = false;
+    this.toRenew = true;
   }
 
   onAddTenantChange(event) {
