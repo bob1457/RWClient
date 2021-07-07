@@ -64,8 +64,8 @@
                         </mat-form-field> -->
                                     <!-- [ngModel]="lease.id" -->
                                     <mat-radio-group aria-label="Select an option" style="width:75%;margin-top: 25px; padding-right: 5px;" (change)="onChange($event)" formControlName="type">
-                                        <mat-radio-button value=0 [checked]="lease.type === 0" style="padding-right: 10px;margin-right: 25px;">New</mat-radio-button>
-                                        <mat-radio-button value=1 [checked]="lease.type === 1">Renewal</mat-radio-button>
+                                        <mat-radio-button [value]=0 [checked]="lease.type === 0" style="padding-right: 10px;margin-right: 25px;">New</mat-radio-button>
+                                        <mat-radio-button [value]=1 [checked]="lease.type === 1">Renewal</mat-radio-button>
                                     </mat-radio-group>
 
                                     <mat-form-field class="lease-full-width" style="margin-top: 20px;">

@@ -323,7 +323,7 @@ export class LeaseDetailsComponent implements OnInit {
 
       damageDepositAmount: [0],
       petDepositAmount: [0],
-      leaseSignDate: [''],
+      leaseSignDate: ['Jan 1, 2021'],
       isActive: [false],
       isAddendumAvailable: [false],
       // endLeaseCode: [''],
@@ -592,6 +592,7 @@ export class LeaseDetailsComponent implements OnInit {
     this.store.dispatch(updateLease({payload: this.detailsForm.value})); // Disable for
     this.enableRenwal = false;
     this.editEndDate = false;
+    this.getFinalize = false;
 
     if (active) {
       this.finalized = true;
