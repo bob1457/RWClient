@@ -51,20 +51,20 @@
 
                     <!-- Use FormGroup to have a nested form containing all required data for new tenant-->
                     <div *ngIf="selectedApplication" style="border: 1px solid #afa7a7;padding: 10px;width: 500px;">
-                        <p *ngIf="selectedApplication">
-                            <span style="font-weight: 600;">Rental Property: &nbsp;&nbsp;<span style="font-style:italic;">{{selectedApplication.propertyName}}({{selectedApplication.propertyId}})</span> </span><br><br>
+                        <p *ngIf="selectedApplication.propertyAddress">
+                            <span style="font-weight: 600;">Rental Property: &nbsp;&nbsp;<span style="font-style:italic;">{{selectedApplication.propertyName}} ({{selectedApplication.propertyId}})</span> </span><br><br>
                             <span>{{selectedApplication.propertyAddress.streetNum}} <br>{{selectedApplication.propertyAddress.city}} {{selectedApplication.propertyAddress.stateProvince}} {{selectedApplication.propertyAddress.streetNum}}</span>
                         </p>
 
                         <div *ngIf="selectedApplication">
                             <span style="font-weight: 600;">Applicant:</span>&nbsp;&nbsp;&nbsp; {{selectedApplication.applicatnFirstName}} {{selectedApplication.applicatnLastName}}<br><br>
                             <span style="font-weight: 600;">Co-Applicant(s)</span>
-                            <ul style="list-style: none;margin-top: 10px; margin-left: -30px">
+                            <ul *ngIf="applicants" style="list-style: none;margin-top: 10px; margin-left: -30px">
                                 <li *ngFor="let applicant of applicants; let no = index;">
                                     {{no + 1}} - First Name: {{applicant.firstName}} Last Name: {{applicant.lastName}}
                                 </li>
                             </ul>
-                            <span *ngIf="applicants.length == 0">
+                            <span *ngIf="applicants.length == 0 || !applicants">
                           No co-applicant(s)
                         </span>
 

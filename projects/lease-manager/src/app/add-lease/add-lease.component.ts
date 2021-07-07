@@ -44,8 +44,8 @@ export class AddLeaseComponent implements OnInit {
                                 if (applist) {
                                   this.applicantList = applist;
                                   console.log('app list', this.applicantList);
-                                } else {
-                                  this.applicantList = JSON.parse(localStorage.getItem('applications'));
+                                // } else {
+                                //   this.applicantList = JSON.parse(localStorage.getItem('applications'));
                                 }
 
 
