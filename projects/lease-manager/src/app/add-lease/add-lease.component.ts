@@ -405,7 +405,7 @@ export class AddLeaseComponent implements OnInit {
     });
 
     console.log('add form', this.addForm.value);
-    // this.store.dispatch(addLease({payload: this.addForm.value}));
+    this.store.dispatch(addLease({payload: this.addForm.value}));
     this.location.back();
   }
 
