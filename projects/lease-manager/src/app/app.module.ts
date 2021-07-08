@@ -45,6 +45,7 @@ import { AddAddendumComponent } from './add-addendum/add-addendum.component';
 import { AddVendorComponent } from './add-vendor/add-vendor.component';
 import { TypePipe } from './type.pipe';
 import { AddServiceRequestComponent } from './add-service-request/add-service-request.component';
+import { AppStatusPipe } from './app-status.pipe';
 
 
 @NgModule({
@@ -86,7 +87,8 @@ import { AddServiceRequestComponent } from './add-service-request/add-service-re
     AddAddendumComponent,
     AddVendorComponent,
     TypePipe,
-    AddServiceRequestComponent
+    AddServiceRequestComponent,
+    AppStatusPipe
   ],
   imports: [
     BrowserModule,

@@ -36,7 +36,7 @@
                         <mat-select #myAppSelect (selectionChange)="onApplicationChange(myAppSelect.value)">
                             <div *ngIf="applicantList; else loading">
                                 <mat-option *ngFor="let application of applicantList" [value]="application">
-                                    {{application.applicatnFirstName}} {{application.applicatnLastName}} -- {{application.propertyName}}
+                                    {{application.applicatnFirstName}} {{application.applicatnLastName}} --{{application.status | appStatus}} ({{application.propertyName}})
                                 </mat-option>
                             </div>
                             <ng-template #loading>

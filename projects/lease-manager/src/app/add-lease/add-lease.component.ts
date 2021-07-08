@@ -45,6 +45,7 @@ export class AddLeaseComponent implements OnInit {
                               .subscribe(applist => {
                                 if (applist) {
                                   this.applicantList = applist;
+                                  this.applicantList = this.applicantList.filter(a => a.status == 2);
                                   console.log('app list', this.applicantList);
                                 // } else {
                                 //   this.applicantList = JSON.parse(localStorage.getItem('applications'));
@@ -323,11 +324,16 @@ export class AddLeaseComponent implements OnInit {
 
           if(applicatons) {
             this.allAplicatons = applicatons;
+            this.allAplicatons = this.allAplicatons.filter(a => a.status == 2);
             console.log('all applications', this.allAplicatons);
             this.selectedApplication = this.applicantList.find(l => l.rentalApplicationId == app.rentalApplicationId);
             this.applicants = this.selectedApplication.coApplicantList;
 
             console.log('selected app', this.selectedApplication);
+
+            this.addForm.patchValue({
+              rentalPropertyId: this.selectedApplication.propertyId
+            });
 
             this.tenantList().push(new FormControl({
               userName: 'NotSet',
@@ -399,7 +405,7 @@ export class AddLeaseComponent implements OnInit {
     });
 
     console.log('add form', this.addForm.value);
-    this.store.dispatch(addLease({payload: this.addForm.value}));
+    // this.store.dispatch(addLease({payload: this.addForm.value}));
     this.location.back();
   }
 

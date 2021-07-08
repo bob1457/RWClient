@@ -51,6 +51,7 @@ import { AddVendorComponent } from './add-vendor/add-vendor.component';
 import { TypePipe } from './type.pipe';
 import { AddServiceRequestComponent } from './add-service-request/add-service-request.component';
 // import { CdkColumnDef } from '@angular/cdk/table';
+import { AppStatusPipe } from './app-status.pipe';
 
 
 const routes: Routes = [
@@ -118,7 +119,8 @@ const routes: Routes = [
     AddAddendumComponent,
     AddVendorComponent,
     TypePipe,
-    AddServiceRequestComponent
+    AddServiceRequestComponent,
+    AppStatusPipe
   ],
   imports: [
     // BrowserModule,
