@@ -23,7 +23,7 @@
 <mat-error *ngIf="hasError('title', 'required')">Name is required</mat-error>
 <mat-error *ngIf="hasError('title', 'maxlength')">You have more than 60 characters</mat-error> -->
                     </mat-form-field>
-                    <mat-form-field style="margin-top: 25px;width: 90%;">
+                    <mat-form-field style="width: 90%;">
                         <span class="icon-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
                         <input matInput type="text" placeholder="Description" formControlName="leaseDesc" id="desc">
                         <!-- <mat-hint align="end">Not more then 60 characters long.</mat-hint>
@@ -144,7 +144,7 @@
                             <mat-form-field style="width: 90%;">
                                 <mat-label>Rent Frequency</mat-label>
                                 <mat-select id="rentFrequency" formControlName="rentFrequency">
-                                    <mat-option>None</mat-option>
+                                    <!-- <mat-option>None</mat-option> -->
                                     <mat-option value="Monthly">Monthly</mat-option>
                                     <mat-option value="Quarterly">Quarterly</mat-option>
                                     <mat-option value="Six Month">Six Month</mat-option>
@@ -179,7 +179,7 @@
                             <mat-form-field style="width: 90%;">
                                 <mat-label>Rent Due Date</mat-label>
                                 <mat-select id="rentDueOn" formControlName="rentDueOn">
-                                    <mat-option>None</mat-option>
+                                    <!-- <mat-option>None</mat-option> -->
                                     <mat-option value="1st">Frist Day of Month</mat-option>
                                     <mat-option value="15th">15th Day of Month</mat-option>
                                     <mat-option value="last">Last Day of Month</mat-option>
@@ -228,6 +228,7 @@
                                     <mat-option [value]=32>Fixed Term and Vacant</mat-option>
                                 </mat-select>
                             </mat-form-field>
+                            <mat-checkbox formControlName="serviceAgent" class="property-full-width">Use agent as service contact</mat-checkbox>
                         </div>
                         <div fxFlex="50%">
                             <mat-form-field class="lease-full-width">
@@ -267,12 +268,13 @@
                             <mat-checkbox formControlName="storage" class="property-full-width">Storage</mat-checkbox>
                             <mat-checkbox formControlName="recreationFacility" class="property-full-width">Recreation Facility</mat-checkbox>
                             <mat-checkbox formControlName="garbageCollection" class="property-full-width">Garbage Collection</mat-checkbox>
-                            <mat-checkbox formControlName="recycleServices" class="property-full-width">Recycle Services</mat-checkbox>
+                            <!-- <mat-checkbox formControlName="recycleServices" class="property-full-width">Recycle Services</mat-checkbox> -->
                         </div>
                         <div fxLayout="column" fxLayoutAlign="start start" fxFlex="30" fxLayoutGap="10px">
                             <mat-checkbox formControlName="kitchenScrapCollection" class="property-full-width">Laundry</mat-checkbox>
                             <mat-checkbox formControlName="laundry" class="property-full-width">Window Blinds</mat-checkbox>
-                            <mat-checkbox formControlName="sewageDisposal" class="property-full-width">Furniture</mat-checkbox>
+                            <!-- <mat-checkbox formControlName="sewageDisposal" class="property-full-width">Furniture</mat-checkbox> -->
+                            <mat-checkbox formControlName="recycleServices" class="property-full-width">Recycle Services</mat-checkbox>
 
                         </div>
 

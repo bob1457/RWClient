@@ -113,6 +113,7 @@ export class AddLeaseComponent implements OnInit {
       // endLeaseCode: [''],
       renewTerm: [''],
       notes: [''],
+      serviceAgent: [false],
       newTenantId: [],
       // rentalProperty: this.formBuilder.group({
       //   propertyName: [],
@@ -383,6 +384,7 @@ export class AddLeaseComponent implements OnInit {
   submit() {
     debugger;
     // Get user data
+
     this.addForm.patchValue({
       agentFirstName: this.user.firstname,
 

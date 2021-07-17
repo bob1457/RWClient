@@ -24,13 +24,15 @@ export class AgreementContentComponent implements OnInit {
 
   newTerm = '';
 
+  // userAgentService = false;
+
   constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit() {
     debugger;
     console.log('lease', this.lease);
 
-    let month = [
+    const month = [
       'January',
       'February',
       'March',
@@ -79,7 +81,7 @@ export class AgreementContentComponent implements OnInit {
     this.todayYear = today.getFullYear();
     console.log('(current date)', this.todayDate + ' ' + this.todayMonth + ' ' + this.todayYear);
 
-
+    // this.userAgentService = this.lease.serviceAgent;
 
   }
 
