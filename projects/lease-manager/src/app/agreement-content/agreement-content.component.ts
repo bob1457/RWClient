@@ -30,7 +30,7 @@ export class AgreementContentComponent implements OnInit {
 
   ngOnInit() {
     debugger;
-    console.log('lease', this.lease);
+    console.log('lease received from parant component', this.lease);
 
     const month = [
       'January',

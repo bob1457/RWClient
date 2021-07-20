@@ -52,6 +52,7 @@ export class LeaseDetailsComponent implements OnInit {
   renewStatus = 0;
   editEndDate = false;
 
+
   // rentAmtDue;
   // rentDueOn;
   addaddendum = false;
@@ -331,7 +332,7 @@ export class LeaseDetailsComponent implements OnInit {
       // endLeaseCode: [''],
       renewTerm: [''],
       notes: [''],
-
+      serviceAgent: [false],
       // rentalProperty: this.formBuilder.group({
       //   propertyName: [],
       //   address: this.formBuilder.group({
