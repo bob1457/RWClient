@@ -70,6 +70,24 @@ export class PropertyService {
     return this.http.get<Property[]>(`${this.baseUrl}/property/all`); // return type could be <Property[]>?
   }
 
+  addCouncil(data: any) {
+    return this.http.post(`${this.baseUrl}/property/update`, data);
+  }
+
+  getCouncilList() {
+    debugger;
+
+    return this.http.get<any[]>(`${this.baseUrl}/property/stratalist`); // return type could be <Property[]>?
+  }
+
+  getCouncilDetails(id: number) {
+    return this.http.get<any>(`${this.baseUrl}/property/strata/${id}`);
+  }
+
+  updateCouncil(data: any) {
+    return this.http.post(`${this.baseUrl}/property/updatestrata`, data);
+  }
+
   getPropertyDetails(id: number) {
     // return this.http.get<Property>(`${this.baseUrl}/property/${id});
     return this.http.get<Property>(`${this.baseUrl}/property/${id}`);

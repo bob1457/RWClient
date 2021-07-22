@@ -88,6 +88,52 @@ export const updatePropertyFailure = createAction(
 
 );
 
+
+
+
+/**
+ * Get Strata Council List Actions
+ */
+export const getCouncilList = createAction(
+  '[Property] Get Council List'
+);
+
+export const getCouncilListSuccess = createAction(
+  '[Property] Get Council List Success',
+  props<{payload: any[]}>()
+);
+
+export const getCouncilListFailure = createAction(
+  '[Property] Get Council List Failure',
+  // props<{payload: any}>()
+  (errorMessage = 'Error loading property list') => {
+    return ({ payload: { errorMessage } });
+  }
+);
+
+/**
+ * Add Council Actions
+ */
+
+export const addCouncil = createAction(
+  '[Property] Add Council',
+  props<{payload: any}>()
+);
+
+export const addCouncilSuccess = createAction(
+  '[Property] Add Council Success',
+  props<{payload: any}>()
+);
+
+export const addCouncilFailure = createAction(
+  '[Property] Add Council Failure',
+  // props<{payload: any}>()
+  (errorMessage = 'Error adding property') => ({ payload: { errorMessage }})
+
+);
+
+
+
 export const updatePropertyStatus = createAction(
   '[Property] Update Property Status',
   props<{payload: Property}>() // PropertyStatus

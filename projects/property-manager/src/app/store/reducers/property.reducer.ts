@@ -17,6 +17,7 @@ export const initialState: PropertyState =  { // adapter.getInitialState
   ownersOfProperty: null,
   selectedOwner: null,
   contracts: null,
+  councils: null,
   contractsForProperty: null,
   selectedContract: null,
   errorMessage: null
@@ -120,6 +121,21 @@ on(PropertyActions.getPropertyDetails, (state) => ({
       loaded: true,
       properties: updatedProperties, // [...state.property[index], payload ] // ,
       property: payload
+    });
+  }),
+
+  on(PropertyActions.getCouncilList, state => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+  on(PropertyActions.getCouncilListSuccess, (state, { payload }) => {
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      councils: payload
     });
   }),
 
@@ -463,6 +479,7 @@ export const getContractList = (state: PropertyState) => state.contracts;
 export const getPropertyDetails = (state: PropertyState) => state.property;
 export const getOwnerDetails = (state: PropertyState) => state.selectedOwner;
 export const getContractDetails = (state: PropertyState) => state.selectedContract;
+export const getCouncilList = (state: PropertyState) => state.councils;
 
 export const loadingStatus = createSelector(selectPropertyState, getLoadingStatus);
 
@@ -482,6 +499,7 @@ export const propertyDetrails = createSelector(selectPropertyState, getPropertyD
 //   });
 export const ownerDetails = createSelector(selectPropertyState, getOwnerDetails);
 export const contractDetails = createSelector(selectPropertyState, getContractDetails);
+export const councilList = createSelector(selectPropertyState, getCouncilList);
 
 
 

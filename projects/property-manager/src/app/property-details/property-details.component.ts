@@ -5,7 +5,7 @@ import { getPropertyDetails } from '../store/actions/property.actions';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Property, PropertyService } from '@lib/app-core';
-import { propertyDetrails, loadingStatus } from '../store/reducers';
+import { propertyDetrails, loadingStatus, councilList } from '../store/reducers';
 import { Observable } from 'rxjs';
 import * as PropertyActions from '../store/actions/property.actions';
 import { propertyImgList } from 'projects/marketing-manager/src/app/store/reducers';
@@ -24,6 +24,8 @@ export class PropertyDetailsComponent implements OnInit {
 
   loading$: Observable<boolean>;
   imgList;
+  council;
+  property;
   serverUrl = 'http://localhost:63899/';
 
   property$ = this.store.pipe(select(propertyDetrails))
@@ -61,12 +63,37 @@ export class PropertyDetailsComponent implements OnInit {
 
                 this.store.pipe(select(propertyDetrails))
                   .subscribe(data => {
-                    this.property = data;
+
+                    if(data){
+                       this.property = data;
+                       console.log(data);
+                       this.store.select(councilList).subscribe(list => {
+
+                        if (list) {
+                          this.council = list;
+                          this.council = this.council.filter(p => p.id === this.property.strataCouncilId);
+                          console.log('this council', this.council[0]);
+                        }
+
+
+                      });
+                    }
+
                     // this.detailsForm.patchValue(data);
                     // if (this.property) {
                     //   localStorage.setItem('pId', this.property.propertyId);
                     // }
-                    console.log(data);
+                  //   console.log(data);
+                  //   this.store.select(councilList).subscribe(list => {
+
+                  //   if (list) {
+                  //     this.council = list;
+                  //     this.council = this.council.filter(p => p.id === this.property.strataCouncilId);
+                  //     console.log('this council', this.council[0]);
+                  //   }
+
+
+                  // });
                 });
 
                 this.dashStore.pipe(select(PropertyImgList))
@@ -84,7 +111,7 @@ export class PropertyDetailsComponent implements OnInit {
   propertyId: any = 1;
   id: number;
   // property$: Observable<Property[]>;
-  property: any;
+  // property: any;
   current = '';
   shared = '';
   basement = '';
