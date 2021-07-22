@@ -10,6 +10,9 @@ import { Observable } from 'rxjs';
 import * as PropertyActions from '../store/actions/property.actions';
 import { propertyImgList } from 'projects/marketing-manager/src/app/store/reducers';
 import { DashState, PropertyImgList } from '@lib/dashboard';
+import { MatDialog } from '@angular/material';
+import {Overlay} from '@angular/cdk/overlay';
+import { AddStrataDialogComponent } from '../dialogs/add-strata-dialog/add-strata-dialog.component';
 @Component({
   selector: 'app-property-details',
   templateUrl: './property-details.component.html',
@@ -42,6 +45,8 @@ export class PropertyDetailsComponent implements OnInit {
               private router: Router,
               private actRoute: ActivatedRoute,
               private formBuilder: FormBuilder,
+              private dialog: MatDialog,
+              public overlay: Overlay,
               private propertyService: PropertyService) {
                 this.id = this.actRoute.snapshot.params.id;
                 console.log(this.id);
@@ -148,6 +153,14 @@ export class PropertyDetailsComponent implements OnInit {
       basementAvailable: [0],
       totalLivingArea: [0],
       featureNotes: [''],
+
+      councilName: [''],
+      // creationDate: [''],
+      description: [''],
+      inChargeManagerContactEmail: [''],
+      inChargeManagerContactTel: [''],
+      inChargeManagerFirstName: [''],
+      inChargeManagerLastName:[''],
 
       // creationDate: [''],
       // updateDate: [''],
@@ -319,5 +332,35 @@ export class PropertyDetailsComponent implements OnInit {
   //   debugger;
   //   return this.store.dispatch(PropertyActions.updateProperty({payload: property}));
   // }
+
+  addStrata() {
+    const dialogRef = this.dialog.open(AddStrataDialogComponent, {
+      height: '400px',
+      width: '550px',
+      disableClose: true,
+      scrollStrategy: this.overlay.scrollStrategies.noop(),
+      panelClass: 'my-custom-dialog-class',
+      data: {
+        // id: id,
+        // py: this.paymentDetails,
+        // txt: 'test'
+
+        // rentDueAmount: this.rentAmtDue,
+        // rentDue: this.rentDueOn
+      }
+    });
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(AddStrataDialogComponent, {
+      width: '250px',
+      data: {}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      // this.animal = result;
+    });
+  }
 
 }

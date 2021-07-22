@@ -38,6 +38,7 @@ import { ContractViewComponent } from './contract-view/contract-view.component';
 import { TypePipe } from './type.pipe';
 import { PropertyTypePipe } from './property-type.pipe';
 import { SignDatePipe } from './sign-date.pipe';
+import { AddStrataDialogComponent } from './dialogs/add-strata-dialog/add-strata-dialog.component';
 
 
 @NgModule({
@@ -70,7 +71,8 @@ import { SignDatePipe } from './sign-date.pipe';
     ContractViewComponent,
     TypePipe,
     PropertyTypePipe,
-    SignDatePipe
+    SignDatePipe,
+    AddStrataDialogComponent
   ],
   imports: [
     BrowserModule,
