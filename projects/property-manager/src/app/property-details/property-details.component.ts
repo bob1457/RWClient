@@ -371,6 +371,26 @@ export class PropertyDetailsComponent implements OnInit {
 
   tabSelected(e) {
     this.tabIndex = e.index;
+    console.log('tab seelcted', this.tabIndex);
+
+    switch(this.tabIndex) {
+      case 0: {
+        this.hideButton = false;
+        break;
+      }
+      case 1: {
+        this.hideButton = false;
+        break;
+      }
+      case 2: {
+        this.hideButton = true;
+        break;
+      }
+      default: {
+        this.hideButton = false;
+        break;
+      }
+    }
     if (this.tabIndex == 2) {
       this.hideButton = true;
     }
