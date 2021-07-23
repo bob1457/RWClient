@@ -132,7 +132,7 @@
             <!-- <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 25]"></mat-paginator> -->
         </div>
     </mat-card-content>
-    <mat-paginator *ngIf="list" [pageSize]="10" [pageSizeOptions]="[5, 10, 25]"></mat-paginator>
+    <mat-paginator *ngIf="!(loading$ | async) && list; else spinner" [pageSize]="10" [pageSizeOptions]="[5, 10, 25]"></mat-paginator>
 </mat-card>
 <!-- <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 25]"></mat-paginator> -->
 <!-- </div> -->

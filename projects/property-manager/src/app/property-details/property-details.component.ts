@@ -26,6 +26,8 @@ export class PropertyDetailsComponent implements OnInit {
   imgList;
   council;
   property;
+  tabIndex = 0;
+  hideButton = false;
   serverUrl = 'http://localhost:63899/';
 
   property$ = this.store.pipe(select(propertyDetrails))
@@ -365,6 +367,13 @@ export class PropertyDetailsComponent implements OnInit {
       console.log('The dialog was closed');
       // this.animal = result;
     });
+  }
+
+  tabSelected(e) {
+    this.tabIndex = e.index;
+    if (this.tabIndex == 2) {
+      this.hideButton = true;
+    }
   }
 
 }
