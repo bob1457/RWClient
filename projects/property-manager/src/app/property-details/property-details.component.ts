@@ -53,18 +53,10 @@ export class PropertyDetailsComponent implements OnInit {
                 this.id = this.actRoute.snapshot.params.id;
                 console.log(this.id);
 
-                // this.store.pipe(select(propertyImgList))
-                // .subscribe(img => {
-                //   if (img) {
-                //     this.imgList = img; // .filter(p => p.rentalPropertyId === this.listing.rentalPropertyId)
-                //     console.log('imgs', this.imgList);
-                //   }
-                // });
-
                 this.store.pipe(select(propertyDetrails))
                   .subscribe(data => {
 
-                    if(data){
+                    if (data) {
                        this.property = data;
                        console.log(data);
                        this.store.select(councilList).subscribe(list => {
@@ -79,21 +71,6 @@ export class PropertyDetailsComponent implements OnInit {
                       });
                     }
 
-                    // this.detailsForm.patchValue(data);
-                    // if (this.property) {
-                    //   localStorage.setItem('pId', this.property.propertyId);
-                    // }
-                  //   console.log(data);
-                  //   this.store.select(councilList).subscribe(list => {
-
-                  //   if (list) {
-                  //     this.council = list;
-                  //     this.council = this.council.filter(p => p.id === this.property.strataCouncilId);
-                  //     console.log('this council', this.council[0]);
-                  //   }
-
-
-                  // });
                 });
 
                 this.dashStore.pipe(select(PropertyImgList))
@@ -187,8 +164,8 @@ export class PropertyDetailsComponent implements OnInit {
       inChargeManagerContactEmail: [''],
       inChargeManagerContactTel: [''],
       inChargeManagerFirstName: [''],
-      inChargeManagerLastName:[''],
-
+      inChargeManagerLastName: [''],
+      notes: [''],
       // creationDate: [''],
       // updateDate: [''],
 
