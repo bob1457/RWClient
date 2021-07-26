@@ -44,6 +44,7 @@ import { metaReducers } from './store/metareducers';
 import { NgxMaskModule, IConfig } from 'ngx-mask';
 import { SignDatePipe } from './sign-date.pipe';
 import { AddStrataDialogComponent } from './dialogs/add-strata-dialog/add-strata-dialog.component';
+import { StrataCouncilListComponent } from './strata-council-list/strata-council-list.component';
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 
 const routes: Routes = [
@@ -58,7 +59,8 @@ const routes: Routes = [
       { path: 'ownerdetails/:id', component: OwnerDetailsComponent},
       { path: 'contracts', component: ContractListComponent },
       { path: 'contractdetails/:id', component: ContractDetailsComponent},
-      { path: 'contractview/:id', component: ContractViewComponent}
+      { path: 'contractview/:id', component: ContractViewComponent},
+      { path: 'stratas', component: StrataCouncilListComponent },
     ]
   }//,
   // { path: 'owners', component: OwnerListComponent,  outlet: 'property'},
@@ -96,7 +98,8 @@ const routes: Routes = [
     ContractHeaderComponent,
     ContractFooterComponent,
     ContractContentEditorComponent,
-    ContractViewComponent
+    ContractViewComponent,
+    StrataCouncilListComponent
   ],
   imports: [
     // BrowserModule,

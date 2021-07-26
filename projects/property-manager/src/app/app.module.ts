@@ -39,6 +39,7 @@ import { TypePipe } from './type.pipe';
 import { PropertyTypePipe } from './property-type.pipe';
 import { SignDatePipe } from './sign-date.pipe';
 import { AddStrataDialogComponent } from './dialogs/add-strata-dialog/add-strata-dialog.component';
+import { StrataCouncilListComponent } from './strata-council-list/strata-council-list.component';
 
 
 @NgModule({
@@ -72,7 +73,8 @@ import { AddStrataDialogComponent } from './dialogs/add-strata-dialog/add-strata
     TypePipe,
     PropertyTypePipe,
     SignDatePipe,
-    AddStrataDialogComponent
+    AddStrataDialogComponent,
+    StrataCouncilListComponent
   ],
   imports: [
     BrowserModule,
