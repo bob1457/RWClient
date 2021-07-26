@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 import { Store, select } from '@ngrx/store';
 import { PropertyState } from '../store/property.state';
 import { getPropertyDetails } from '../store/actions/property.actions';
@@ -46,6 +47,7 @@ export class PropertyDetailsComponent implements OnInit {
 
   constructor(private store: Store<PropertyState>,
               private dashStore: Store<DashState>,
+              private location: Location,
               private router: Router,
               private actRoute: ActivatedRoute,
               private formBuilder: FormBuilder,
@@ -288,6 +290,7 @@ export class PropertyDetailsComponent implements OnInit {
 
   goBack() {
     this.router.navigate(['/Manage/property/']);
+    // this.location.back();
   }
 
 
