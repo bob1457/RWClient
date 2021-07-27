@@ -1,0 +1,142 @@
+<div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="1%" fxFlexFill *ngIf="strata">
+    <!-- <div> -->
+    <div fxFlex="10%" fxLayoutAlign="end">
+        <i class="far fa-arrow-alt-circle-left" title="back to list" style="cursor: pointer; color: seagreen; font-size: 1.5em;" (click)="goBack()"></i>
+    </div>
+    <div fxFlex="20%" fxLayout="column" class="avatar_sec" fxLayoutAlign="start center">
+        <img src="../../assets/images/owner2.png" style="border-radius: 50%;" width="120px" height="120px">
+        <div style="margin-top: 25px;">
+            <span style="font-weight: 500;">Managed Property</span><br><br>
+            <ul style="list-style-type: none">
+                <li *ngFor="let property of managedProperties" style="margin-left: -30px;">
+
+                    <!-- <button mat-button routerLink="/Manage/property/propertydetails/{{property.id}}" style="border: 1px solid #9e9d9d;"> <mat-icon style="color: rgb(32, 168, 32);">home</mat-icon> &nbsp;{{property.propertyName}}</button> -->
+
+                    <button mat-button [matMenuTriggerFor]="menuRef">
+                      <mat-icon style="color: rgb(32, 168, 32);">home</mat-icon> &nbsp;{{property.propertyName}}
+                    </button>
+
+                    <mat-menu #menuRef="matMenu">
+                        <div style="padding: 10px;">
+                            <p><span style="font-weight: 600;">Property</span>: {{property.propertyName}}</p>
+                            <p>
+                                <span style="font-weight: 500;">Type: {{property.type}}</span><br>
+                                <span>
+                            {{property.propertySuiteNumber}} - {{property.propertyStreet}}<br>
+                            {{property.propertyCity}}  {{property.propertyStateProvince}}  {{property.propertyZipPostCode}}
+                          </span>
+                            </p>
+                            <p><a routerLink="/Manage/property/propertydetails/{{property.id}}">more...</a></p>
+                        </div>
+                    </mat-menu>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+    <div fxFlex="70%">
+        <mat-card class="council-details-card ">
+            <mat-card-header style="background-color: #f5f5f5; ">
+                <div mat-card-avatar class="property-details-header-image ">
+                    <i class="material-icons " style="font-size: 2.5em;color: #e64a19; margin-left: 5px; ">
+        person
+      </i>
+                    <!-- <img src="../../assets/images/pmgmnt.png " height="40px " width="40px "> *ngIf="property*ngIf="detailsForm.value" {{owner.contactEmail}} {{owner.contactTelephone1}}{{owner.firstName}} {{owner.lastName}} -->
+                </div>
+                <mat-card-title>Strata Council: <span style="font-size: .8em; font-style: italic;"></span></mat-card-title>
+                <mat-card-subtitle>Contact: </mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content class="council-details-card-content">
+                <div fxLayout="column" fxLayoutAlign="start center">
+                    <form novalidate fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" [formGroup]="detailsForm" (ngSubmit)="submit()" style="width: 100%;">
+
+                        <mat-form-field class="council-full-width-1" style="display: none;">
+                            <span class="icon-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
+                            <input type="text" formControlName="id" matInput placeholder="Id" [ngModel]="strata.id" name="id">
+
+                        </mat-form-field>
+
+                        <mat-form-field class="council-full-width-1" style="margin-top: 25px;">
+                            <span class="icon-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
+                            <input type="text" formControlName="councilName" matInput placeholder="Management Company Name" [ngModel]="strata.councilName" name="councilName">
+                            <!-- {{firstName}} -->
+
+                            <!-- <mat-hint>Should be a valid email address</mat-hint>
+              <mat-error *ngIf="emailInput.hasError('required')">Email is required</mat-error>
+              <mat-error *ngIf="!emailInput.hasError('required')">Email is invalid</mat-error> -->
+                        </mat-form-field>
+
+                        <mat-form-field class="council-full-width">
+                            <span class="icon-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
+                            <textarea formControlName="description" matInput placeholder="Description" [ngModel]="strata.description" name="description"></textarea>
+                            <!-- {{firstName}} -->
+
+                            <!-- <mat-hint>Should be a valid email address</mat-hint>
+                <mat-error *ngIf="emailInput.hasError('required')">Email is required</mat-error>
+                <mat-error *ngIf="!emailInput.hasError('required')">Email is invalid</mat-error> -->
+                        </mat-form-field>
+
+                        <mat-form-field class="council-full-width">
+                            <span class="icon-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
+                            <input type="text" formControlName="inChargeManagerFirstName" matInput placeholder="Manager First Name" [ngModel]="strata.inChargeManagerFirstName" name="inChargeManagerFirstName">
+                            <!-- {{firstName}} -->
+
+                            <!-- <mat-hint>Should be a valid email address</mat-hint>
+          <mat-error *ngIf="emailInput.hasError('required')">Email is required</mat-error>
+          <mat-error *ngIf="!emailInput.hasError('required')">Email is invalid</mat-error> -->
+                        </mat-form-field>
+
+                        <mat-form-field class="council-full-width">
+                            <span class="icon-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
+                            <input type="text" formControlName="inChargeManagerLastName" matInput placeholder="Manager Last Name" [ngModel]="strata.inChargeManagerLastName" name="inChargeManagerLastName">
+                            <!-- {{firstName}} -->
+
+                            <!-- <mat-hint>Should be a valid email address</mat-hint>
+              <mat-error *ngIf="emailInput.hasError('required')">Email is required</mat-error>
+              <mat-error *ngIf="!emailInput.hasError('required')">Email is invalid</mat-error> -->
+                        </mat-form-field>
+
+
+
+                        <mat-form-field class="council-full-width">
+                            <span class="icon-pos" matPrefix><mat-icon>library_books</mat-icon> &nbsp;</span>
+                            <input type="text" formControlName="inChargeManagerContactEmail" matInput placeholder="Manager Contact Email" [ngModel]="strata.inChargeManagerContactEmail" name="inChargeManagerContactEmail">
+                        </mat-form-field>
+                        <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="start start" style="width: 75%;">
+                            <mat-form-field class="council-full-width" fxFlex="50%">
+                                <span class="icon-pos" matPrefix><mat-icon>library_books</mat-icon> &nbsp;</span>
+                                <input type="text" formControlName="inChargeManagerContactTel" matInput placeholder="MabagerContact Tel" [ngModel]="strata.inChargeManagerContactTel" name="inChargeManagerContactTel">
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="start start" style="width: 75%;">
+                            <div style="margin-right: 10px; width: 50%;">
+                                <mat-checkbox formControlName="isActive" [ngModel]="strata.isActive" [(checked)]="strata.isActive" class="property-full-width">Active</mat-checkbox>
+                            </div>
+
+                        </div>
+                        <mat-form-field class="council-full-width">
+                            <mat-label>Notes</mat-label>
+                            <textarea matInput formControlName="notes" [ngModel]="strata.notes" name="notes"></textarea>
+                        </mat-form-field>
+
+
+
+                        <div fxLayout="row" fxLayoutGap="7px" fxLayoutAlign="end center" style="width: 75%;">
+                            <!-- <span *ngIf="showMsg" style="color: rgb(189, 150, 25);">Updated successfully!</span>
+          <img *ngIf=" loading" class="pl-2" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+          /> [disabled]="f.invalid || !f.dirty"-->
+                            <button type="submit" mat-raised-button color="primary"><mat-icon style="color: green;">check</mat-icon>&nbsp; UPDATE</button>
+                            <button type="button" mat-raised-button color="accent" (click)="goBack()"><mat-icon style="color: orangered;">clear</mat-icon>&nbsp; CANCEL</button>
+                        </div>
+
+                    </form>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+    <!-- </div> -->
+</div>
+
+<div *ngIf="loading$ | async">
+    <app-loading></app-loading>
+</div>

@@ -112,6 +112,27 @@ export const getCouncilListFailure = createAction(
 );
 
 /**
+ * Get Council Details Actions
+ */
+export const getCouncilDetails = createAction(
+  '[Property] Get Council Details',
+  props<{payload: number}>()
+);
+
+export const getCouncilDetailsSuccess = createAction(
+  '[Property] Get Council Details Success',
+  props<{payload: any}>()
+);
+
+export const getCouncilDetailsFailure = createAction(
+  '[Property] Get Council Details Failure',
+  // props<{payload: any}>()
+  (errorMessage = 'Error loading council details') => {
+    return ({ payload: { errorMessage } });
+  }
+);
+
+/**
  * Add Council Actions
  */
 

@@ -18,6 +18,7 @@ export const initialState: PropertyState =  { // adapter.getInitialState
   selectedOwner: null,
   contracts: null,
   councils: null,
+  council: null,
   contractsForProperty: null,
   selectedContract: null,
   errorMessage: null
@@ -144,6 +145,31 @@ on(PropertyActions.getPropertyDetails, (state) => ({
       ...state,
       loading: false,
       errorMessage: 'Failed to update property'
+    });
+  }),
+
+  on(PropertyActions.getCouncilDetails, (state) => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+  on(PropertyActions.getCouncilDetailsSuccess, (state, { payload }) => {
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      council: payload
+    });
+  }),
+
+  on(PropertyActions.getCouncilDetailsFailure, (state) => {
+    return ({
+      ...state,
+      loading: false,
+      loaded: false,
+      selectedOwner: null,
+      errorMessage: 'Failed to load property owner details'
     });
   }),
 
@@ -480,6 +506,7 @@ export const getPropertyDetails = (state: PropertyState) => state.property;
 export const getOwnerDetails = (state: PropertyState) => state.selectedOwner;
 export const getContractDetails = (state: PropertyState) => state.selectedContract;
 export const getCouncilList = (state: PropertyState) => state.councils;
+export const getCouncilDetails = (state: PropertyState) => state.council;
 
 export const loadingStatus = createSelector(selectPropertyState, getLoadingStatus);
 
@@ -488,6 +515,7 @@ export const propertyList = createSelector(selectPropertyState, getPropertyList)
 export const contractList = createSelector(selectPropertyState, getContractList);
 // export const propertyDetails = (id: any) => createSelector(selectPropertyState, getPropertyList => getPropertyList[id]);
 export const propertyDetrails = createSelector(selectPropertyState, getPropertyDetails);
+export const councilDetails = createSelector(selectPropertyState, getCouncilDetails);
 // export const ownerDetails = (id: any) => createSelector(getOwnerDetails, (ownerList) => {
 //   if (ownerList) {
 //     return ownerList.find(item => {

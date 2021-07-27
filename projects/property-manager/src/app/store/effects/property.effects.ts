@@ -519,6 +519,31 @@ export class PropertyEffects {
     )
   );
 
+  getStrataCouncilDetails$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(PropertyActions.getCouncilDetails),
+      tap(() => console.log('got here for strata council details: ')),
+      map(action => action.payload),
+      switchMap((payload) =>
+        this.propertyService.getCouncilDetails(payload).pipe(
+          // tap(() => console.log('got here 2: ' + payload)),
+          map((strata: any) => ({
+            type: '[Property] Get Council Details Success',
+            payload: strata
+          })),
+          // tap(res => {console.log('response: ' + res); }),
+          // catchError(
+          //   err => {
+          //     return of(PropertyActions.getContractDetailsFailure([err.error]));
+          //   } // EMPTY // return of('[Property] Get Property Details Failure', err.error);
+          // )
+          catchError(error => of(PropertyActions.getCouncilDetailsFailure(error.message)))
+        )
+      )
+    )
+  );
+
   openSnackBar(message: string, action: string, type: string) {
     const config = new MatSnackBarConfig();
     config.panelClass = [type];

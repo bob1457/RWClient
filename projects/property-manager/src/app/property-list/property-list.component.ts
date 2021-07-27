@@ -140,6 +140,7 @@ export class PropertyListComponent implements OnInit, AfterViewInit {
     propertyName: 'Real Property',
     propertyDesc: 'string',
     type: '',
+    strataCouncilId: 0,
     propertyManagerUserName: 'string',
     propertyLogoImgUrl: 'string',
     propertyVideoUrl: 'string',
