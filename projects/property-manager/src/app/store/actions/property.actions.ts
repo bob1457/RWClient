@@ -153,7 +153,21 @@ export const addCouncilFailure = createAction(
 
 );
 
+export const updateCouncil = createAction(
+  '[Property] Update Council',
+  props<{payload: any}>() // PropertyStatus
+);
 
+export const updateCouncilSuccess = createAction(
+  '[Property] Update Council Success',
+  props<{payload: any}>()
+);
+
+export const updateCouncilFailure = createAction(
+  '[Property] Update Council Failure',
+  // props<{payload: PropertyStatus}>()
+  (errorMessage = 'Error updating council') => ({ payload: { errorMessage }})
+);
 
 export const updatePropertyStatus = createAction(
   '[Property] Update Property Status',

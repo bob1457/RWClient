@@ -469,7 +469,7 @@ export class PropertyEffects {
   updateStrataCouncil$ = createEffect(() =>
     this.actions$.pipe(
       // ofType('[Property] Get Property List'),
-      ofType(PropertyActions.addCouncil),
+      ofType(PropertyActions.updateCouncil),
       // tap(() => console.log('got here: ')),
       map(action => action.payload),
       switchMap((payload) =>

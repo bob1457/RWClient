@@ -5,7 +5,7 @@ import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { PropertyState } from '../store/property.state';
 import { councilDetails, loadingStatus, propertyList,  } from '../store/reducers';
-import { getCouncilDetails} from '../store/actions/property.actions';
+import { getCouncilDetails, updateCouncil} from '../store/actions/property.actions';
 
 @Component({
   selector: 'app-strata-details',
@@ -58,6 +58,21 @@ export class StrataDetailsComponent implements OnInit {
 
     });
 
+  }
+
+  submit() {
+    debugger;
+    this.detailsForm.patchValue({
+      id: Number(this.id)
+    });
+
+    console.log('update council form', this.detailsForm.value);
+
+    this.store.dispatch(updateCouncil({payload: this.detailsForm.value}));
+  }
+
+  goBack() {
+    this.router.navigate(['/Manage/property/stratas']);
   }
 
 }

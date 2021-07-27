@@ -140,6 +140,35 @@ on(PropertyActions.getPropertyDetails, (state) => ({
     });
   }),
 
+
+  on(PropertyActions.updateCouncil, (state) => {
+    return ({
+      ...state,
+      loading: true,
+      loaded: false
+      // property: payload
+    });
+  }),
+
+  on(PropertyActions.updateCouncilSuccess, (state, {payload}) => {
+    debugger;
+    const index = state.councils.findIndex(x => x.id === payload.id);
+
+    const updatedCouncils = state.councils.map(
+      item => payload.id === item.id ? payload : item
+    );
+
+
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      councils: updatedCouncils, // [...state.property[index], payload ] // ,
+      council: payload
+    });
+  }),
+
+
   on(PropertyActions.updatePropertyFailure, (state) => {
     return ({
       ...state,
