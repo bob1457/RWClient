@@ -17,7 +17,8 @@ export function localStorageSyncReducer(reducer: ActionReducer<any>): ActionRedu
       'vendors',
       'servierequests',
       'openHouses',
-      'invoiceList'
+      'invoiceList',
+      'councilList'
   ],
     rehydrate: true
   })(reducer);

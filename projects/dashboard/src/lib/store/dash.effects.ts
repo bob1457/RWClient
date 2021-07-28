@@ -343,4 +343,27 @@ export class DashboardEffects {
     )
   );
 
+  getAllCouncils$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(DashActions.getCouncilList),
+      tap(() => console.log('got here for invoices!!!')),
+      switchMap(() =>
+        this.dashService.getAllCouncils().pipe(
+          map((list: any[]) => ({
+            type: '[Property] Get Council List Success',
+            payload: list
+          })),
+          // tap(res => {console.log('response: ' + res); }),
+          // catchError(
+          //   err => {
+          //     return of('[Leases] Get all leases Failure', err.error);
+          //   } // EMPTY
+          // )
+          catchError(error => of(DashActions.getCouncilListFailure(error.message)))// EMPTY
+        )
+      )
+    )
+  );
+
 }

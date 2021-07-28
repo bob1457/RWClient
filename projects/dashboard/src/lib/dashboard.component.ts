@@ -5,13 +5,14 @@ import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Property } from './models/property.model';
 import { Store, select } from '@ngrx/store';
-import { PropertyList, ContractList, TenantList, RentalList, OwnerList, MarketingList, RentalAppList, OpenHouseList, RentPaymentHistory, VendorList, WorkOrderList, ServiceRequestList, InvoiceList } from './store/dash.reducer';
+import { PropertyList, ContractList, TenantList, RentalList, OwnerList, MarketingList, RentalAppList, OpenHouseList, RentPaymentHistory, VendorList, WorkOrderList, ServiceRequestList, InvoiceList, CouncilList } from './store/dash.reducer';
 // tslint:disable-next-line:max-line-length
-import { getPropertyList, getAllLeases, getAllTenants, getContractList, getPropertyOwnerList, getRentalApplicationList, getPropertyImageList, getOpenHouseList, getRentPaymentList, getAllVendors, getAllWorkOrders, getAllServiceRequests, getAllInvoices } from './store/dash.actions';
+import { getPropertyList, getAllLeases, getAllTenants, getContractList, getPropertyOwnerList, getRentalApplicationList, getPropertyImageList, getOpenHouseList, getRentPaymentList, getAllVendors, getAllWorkOrders, getAllServiceRequests, getAllInvoices, getCouncilList } from './store/dash.actions';
 import { PropertyService, ManagementContract, PropertyTenant, PropertyLease, RentalApplication } from '@lib/app-core';
 import { PropertyOwner } from './models/property-owner.model';
 import { PropertyListing } from './models/property-listing.model';
 import { OpenHouse } from './models/openhouse.model';
+
 
 // import { vendorList } from 'projects/lease-manager/src/app/store/reducers';
 
@@ -40,6 +41,7 @@ export class DashboardComponent implements OnInit {
   workOrderList$: Observable<any[]>;
   serviceRequestList$: Observable<any[]>;
   invoiceList$: Observable<any[]>;
+  councilList$: Observable<any[]>;
 
   loading: boolean;
 
@@ -59,6 +61,7 @@ export class DashboardComponent implements OnInit {
                 this.workOrderList$ = this.store.select(WorkOrderList);
                 this.serviceRequestList$ = this.store.select(ServiceRequestList);
                 this.invoiceList$ = this.store.select(InvoiceList);
+                this.councilList$ = this.store.select(CouncilList)
               }
 
   ngOnInit() {
@@ -83,6 +86,7 @@ export class DashboardComponent implements OnInit {
     this.store.dispatch(getAllWorkOrders());
     this.store.dispatch(getAllServiceRequests());
     this.store.dispatch(getAllInvoices());
+    this.store.dispatch(getCouncilList());
     // this.getAllPropertyList();
   }
 

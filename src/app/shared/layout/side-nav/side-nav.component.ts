@@ -19,8 +19,8 @@ import * as sparkmd5 from 'spark-md5';
 import { PropertyList, ContractList, TenantList, RentalList, OwnerList, MarketingList, RentalAppList, OpenHouseList } from '@lib/dashboard';
 // import { StateService } from '@lib/auth';
 import { StateService } from 'projects/auth/src/public-api';
-import { VendorList, WorkOrderList, ServiceRequestList } from 'projects/dashboard/src/projects';
-import { contractList, ownerList, propertyList } from 'projects/property-manager/src/app/store/reducers';
+import { VendorList, WorkOrderList, ServiceRequestList, CouncilList } from 'projects/dashboard/src/projects';
+import { contractList, ownerList, propertyList, councilList } from 'projects/property-manager/src/app/store/reducers';
 import { leaseList, serviceRequestList, tenantList, vendorList, workOrderList } from 'projects/lease-manager/src/app/store/reducers';
 import { openHouses, propertyApplications, propertyListing } from 'projects/marketing-manager/src/app/store/reducers';
 
@@ -66,6 +66,7 @@ export class SideNavComponent implements OnInit {
   property: any[] = [];
   owners: any[] = [];
   contracts: any[] = [];
+  councils: any[];
 
   tenant: any[] = [];
   applicatons: any[] = [];
@@ -193,6 +194,18 @@ export class SideNavComponent implements OnInit {
         }
 
       });
+
+    this.store.select(councilList).subscribe(data => {
+      if (data && data.length > 1) {
+        this.councils = data;
+        } else {
+          // this.councils = JSON.parse(localStorage.getItem('councils'));
+          this.store.select(CouncilList).subscribe(clist => {
+            this.councils = clist;
+          });
+        }
+    });
+
 
     this.store.select(tenantList).subscribe(data => {
       if ( data && data.length > 0) {
