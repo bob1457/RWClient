@@ -177,6 +177,34 @@ on(PropertyActions.getPropertyDetails, (state) => ({
     });
   }),
 
+  on(PropertyActions.addCouncil, (state) => {
+    return ({
+      ...state,
+      loading: true,
+      loaded: false
+      // property: payload
+    });
+  }),
+
+  on(PropertyActions.addCouncilSuccess, (state, {payload}) => {
+    debugger;
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      councils: [...state.councils, payload ] // ,
+      // property: payload
+    });
+  }),
+
+  on(PropertyActions.addCouncilFailure, (state) => {
+    return ({
+      ...state,
+      loading: true,
+      errorMessage: 'Failed to add strata council'
+    });
+  }),
+
   on(PropertyActions.getCouncilDetails, (state) => ({
     ...state,
     loading: true,

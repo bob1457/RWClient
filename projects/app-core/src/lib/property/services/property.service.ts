@@ -71,7 +71,7 @@ export class PropertyService {
   }
 
   addCouncil(data: any) {
-    return this.http.post(`${this.baseUrl}/property/update`, data);
+    return this.http.post(`${this.baseUrl}/property/addstrata`, data);
   }
 
   getCouncilList() {
