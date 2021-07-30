@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-mutual-agreement',
@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./mutual-agreement.component.scss']
 })
 export class MutualAgreementComponent implements OnInit {
+
+  @Input() agreement;
 
   constructor() { }
 

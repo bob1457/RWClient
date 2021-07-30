@@ -35,8 +35,8 @@
         <td style="border-bottom: 0;padding-left: 6px;font-size: .9em;border-right: 1px solid;">Last name(s)</td>
     </tr>
     <tr style="height: 40px;background: #e4ebf3;">
-        <td style="border-top: 0;padding-left: 5px;border-right: 1px solid;">John</td>
-        <td style="border-top: 0;padding-left: 5px;">Doe</td>
+        <td style="border-top: 0;padding-left: 5px;border-right: 1px solid;">{{agreement.rentalProperty.rentalPropertyOwners[0].firstName}}</td>
+        <td style="border-top: 0;padding-left: 5px;">{{agreement.rentalProperty.rentalPropertyOwners[0].lastName}}</td>
     </tr>
 </table>
 <p class="section-title" style="margin-bottom: 0;">
@@ -51,11 +51,11 @@
         <td style="width:15%;font-size: .85em;padding-left: 5px;"> postal code</td>
     </tr>
     <tr style="height: 40px;background: #e4ebf3;">
-        <td style="width: 15%;border-bottom: 0;font-size: .85em;border-right: 1px solid;padding-left: 5px;">s</td>
-        <td style="width: 35%;border-bottom: 0;font-size: .85em;border-right: 1px solid;padding-left: 5px;">123 Main Street</td>
-        <td style="width: 20%;border-bottom: 0;font-size: .85em;border-right: 1px solid;padding-left: 5px;">Vancouver</td>
-        <td style="width:15%; font-size: .85em;border-right: 1px solid;padding-left: 5px;">BC</td>
-        <td style="width:15%;font-size: .85em;padding-left: 5px;">V1V 1V1</td>
+        <td style="width: 15%;border-bottom: 0;font-size: .85em;border-right: 1px solid;padding-left: 5px;"></td>
+        <td style="width: 35%;border-bottom: 0;font-size: .85em;border-right: 1px solid;padding-left: 5px;">{{agreement.rentalProperty.rentalPropertyOwners[0].ownerAddress.streetNumber}}</td>
+        <td style="width: 20%;border-bottom: 0;font-size: .85em;border-right: 1px solid;padding-left: 5px;">{{agreement.rentalProperty.rentalPropertyOwners[0].ownerAddress.city}}</td>
+        <td style="width:15%; font-size: .85em;border-right: 1px solid;padding-left: 5px;">{{agreement.rentalProperty.rentalPropertyOwners[0].ownerAddress.stateProvince}}</td>
+        <td style="width:15%;font-size: .85em;padding-left: 5px;">{{agreement.rentalProperty.rentalPropertyOwners[0].ownerAddress.zipPostCode}}</td>
     </tr>
 
 </table>
@@ -65,7 +65,7 @@
         <td style="border-bottom: 0;padding-left: 6px;font-size: .9em;">Other Phone</td>
     </tr>
     <tr style="height: 40px;background: #e4ebf3;">
-        <td style="border-top: 0;padding-left: 5px;border-right: 1px solid;">123-345-7890</td>
+        <td style="border-top: 0;padding-left: 5px;border-right: 1px solid;">{{agreement.rentalProperty.rentalPropertyOwners[0].contactTelephone}}</td>
         <td style="border-top: 0;padding-left: 5px;"></td>
     </tr>
 </table>
@@ -79,8 +79,8 @@
         <td style="border-bottom: 0;padding-left: 6px;font-size: .9em;border-right: 1px solid;">Last name(s)</td>
     </tr>
     <tr style="height: 40px;background: #e4ebf3;">
-        <td style="border-top: 0;padding-left: 5px;border-right: 1px solid;">John</td>
-        <td style="border-top: 0;padding-left: 5px;">Doe</td>
+        <td style="border-top: 0;padding-left: 5px;border-right: 1px solid;">{{agreement.tenant[0].firstName}}</td>
+        <td style="border-top: 0;padding-left: 5px;">{{agreement.tenant[0].lastName}}</td>
     </tr>
 </table>
 <table>
@@ -93,11 +93,11 @@
         <td style="width:15%;font-size: .85em;padding-left: 5px;"> postal code</td>
     </tr>
     <tr style="height: 40px;background: #e4ebf3;">
-        <td style="width: 15%;border-bottom: 0;font-size: .85em;border-right: 1px solid;padding-left: 5px;">s</td>
-        <td style="width: 36%;border-bottom: 0;font-size: .85em;border-right: 1px solid;padding-left: 5px;">123 Main Street</td>
-        <td style="width: 20%;border-bottom: 0;font-size: .85em;border-right: 1px solid;padding-left: 5px;">Vancouver</td>
-        <td style="width:15%; font-size: .85em;border-right: 1px solid;padding-left: 5px;">BC</td>
-        <td style="width:15%;font-size: .85em;padding-left: 5px;">V1V 1V1</td>
+        <td style="width: 15%;border-bottom: 0;font-size: .85em;border-right: 1px solid;padding-left: 5px;"></td>
+        <td style="width: 36%;border-bottom: 0;font-size: .85em;border-right: 1px solid;padding-left: 5px;">{{agreement.rentalProperty.address.streetNum}}</td>
+        <td style="width: 20%;border-bottom: 0;font-size: .85em;border-right: 1px solid;padding-left: 5px;">{{agreement.rentalProperty.address.city}}</td>
+        <td style="width:15%; font-size: .85em;border-right: 1px solid;padding-left: 5px;">{{agreement.rentalProperty.address.stateProvince}}</td>
+        <td style="width:15%;font-size: .85em;padding-left: 5px;">{{agreement.rentalProperty.address.zipPostCode}}</td>
     </tr>
 
 </table>
@@ -107,8 +107,8 @@
         <td style="border-bottom: 0;padding-left: 6px;font-size: .9em;">Other Phone</td>
     </tr>
     <tr style="height: 40px;background: #e4ebf3;">
-        <td style="border-top: 0;padding-left: 5px;border-right: 1px solid;">123-345-7890</td>
-        <td style="border-top: 0;padding-left: 5px;"></td>
+        <td style="border-top: 0;padding-left: 5px;border-right: 1px solid;">{{agreement.tenant[0].contactTelephone1}}</td>
+        <td style="border-top: 0;padding-left: 5px;">{{agreement.tenant[0].contactTelephone2}}</td>
     </tr>
 </table>
 <p class="section-title" style="margin-bottom: 0;">
@@ -131,11 +131,11 @@
     </tr>
     <tr style="height: 40px;">
         <td style="width: 25%;background: #e4ebf3;padding-left: 5px;">
-            12:00
+            1:00
         </td>
         <td style="width: 25%;padding-left: 15px;">
             <input type="radio"> &nbsp;AM
-            <input type="radio"> &nbsp;PM
+            <input type="radio" checked> &nbsp;PM
         </td>
         <td style="width: 50%;background: #e4ebf3;padding-left: 5px;">
         </td>

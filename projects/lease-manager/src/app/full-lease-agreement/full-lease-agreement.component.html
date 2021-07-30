@@ -13,7 +13,7 @@
             <app-agreement-party-view2 [pageNumber]="totalPageNumber" [pageNum]="pageNumber" [landlordNo]="numberOfLandlords" [lease]="agreementDetails"></app-agreement-party-view2>
         </div>
         <div *ngIf="!muutalAgreement">
-            <app-mutual-agreement></app-mutual-agreement>
+            <app-mutual-agreement [agreement]="agreementDetails"></app-mutual-agreement>
         </div>
 
     </div>
