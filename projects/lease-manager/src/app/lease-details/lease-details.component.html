@@ -248,6 +248,7 @@
                                         </div>
                                     </div>
                                     <mat-checkbox style="width: 75%;" formControlName="serviceAgent" [ngModel]="lease.serviceAgent" class="tenant-full-width">Use agent for service contact</mat-checkbox>
+                                    <mat-checkbox style="width: 75%;" formControlName="muutalAgreement" [ngModel]="lease.muutalAgreement" class="tenant-full-width">Mutual Agreement to vacatn at the end of tenancy</mat-checkbox>
                                     <p style="width: 80%;" *ngIf="!lease.isActive">
                                         <span *ngIf="!getFinalize"><a mat-button (click)="showFinalize()"><mat-icon style="color: green;">done</mat-icon> &nbsp;Fianlize Agreement</a></span>
                                         <span *ngIf="getFinalize"><a mat-button (click)="showFinalize()"><mat-icon style="color: red;">clear</mat-icon> &nbsp;Cancel</a></span>

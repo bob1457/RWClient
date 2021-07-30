@@ -231,22 +231,25 @@
                             <mat-checkbox formControlName="serviceAgent" class="property-full-width">Use agent as service contact</mat-checkbox>
                         </div>
                         <div fxFlex="50%">
-                            <mat-form-field class="lease-full-width">
+                            <!-- <mat-form-field class="lease-full-width">
                                 <span class="icon-pos" matPrefix><mat-icon>notes</mat-icon> &nbsp;</span>
                                 <input type="text" id="renewTerm" formControlName="renewTerm" matInput placeholder="Reason to vacant">
-                            </mat-form-field>
+                            </mat-form-field> -->
                             <!-- <mat-form-field class="lease-full-width">
                                 <span class="icon-pos" matPrefix><mat-icon>notes</mat-icon> &nbsp;</span>
                                 <input type="text" id="endLeaseCode" formControlName="leaseEndCode" matInput placeholder="End Lease Code">
                             </mat-form-field> -->
                         </div>
                     </div>
+                    <div fxLayout="column" fxLayoutAlign="start start" style="width: 90%;">
+                        <mat-checkbox formControlName="muutalAgreement" class="property-full-width" (change)="onChange($event)">Add a mutual agreement to vacant at the end of tenancy</mat-checkbox>
+                        <mat-form-field class="lease-full-width" *ngIf="muutalAgreement" style="width: 97%;">
+                            <span class="icon-pos" matPrefix><mat-icon>notes</mat-icon> &nbsp;</span>
+                            <input type="text" id="renewTerm" formControlName="renewTerm" matInput placeholder="Reason to vacant">
+                        </mat-form-field>
+                    </div>
 
 
-                    <!-- <mat-form-field class="lease-full-width" style="width: 90%;">
-                        <span class="icon-pos" matPrefix><mat-icon>notes</mat-icon> &nbsp;</span>
-                        <textarea type="text" id="notes" formControlName="notes" matInput placeholder="Notes"></textarea>
-                    </mat-form-field> -->
 
                 </div>
                 <div fxFlex="50%" fxFlex.xs="80%" fxLayout="column" fxFlexFill>

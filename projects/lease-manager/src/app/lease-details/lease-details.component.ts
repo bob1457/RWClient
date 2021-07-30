@@ -333,6 +333,7 @@ export class LeaseDetailsComponent implements OnInit {
       renewTerm: [''],
       notes: [''],
       serviceAgent: [false],
+      muutalAgreement: [false],
       // rentalProperty: this.formBuilder.group({
       //   propertyName: [],
       //   address: this.formBuilder.group({

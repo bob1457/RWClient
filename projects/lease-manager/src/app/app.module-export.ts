@@ -52,6 +52,7 @@ import { TypePipe } from './type.pipe';
 import { AddServiceRequestComponent } from './add-service-request/add-service-request.component';
 // import { CdkColumnDef } from '@angular/cdk/table';
 import { AppStatusPipe } from './app-status.pipe';
+import { MutualAgreementComponent } from './mutual-agreement/mutual-agreement.component';
 
 
 const routes: Routes = [
@@ -120,7 +121,8 @@ const routes: Routes = [
     AddVendorComponent,
     TypePipe,
     AddServiceRequestComponent,
-    AppStatusPipe
+    AppStatusPipe,
+    MutualAgreementComponent
   ],
   imports: [
     // BrowserModule,

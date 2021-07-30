@@ -26,6 +26,7 @@ export class AddLeaseComponent implements OnInit {
   applicantList;
   selectedApplication;
   applicants;
+  muutalAgreement = false;
 
   allAplicatons;
 
@@ -165,6 +166,7 @@ export class AddLeaseComponent implements OnInit {
 
       onlineAccessEnbaled: [false],
       userAvartaImgUrl: [''],
+      muutalAgreement: [false]
 
       // leaseTitle: [],
       // leaseDesc: [],
@@ -409,6 +411,11 @@ export class AddLeaseComponent implements OnInit {
     console.log('add form', this.addForm.value);
     this.store.dispatch(addLease({payload: this.addForm.value}));
     this.location.back();
+  }
+
+  onChange(event) {
+    console.log('agreement?', event.checked);
+    this.muutalAgreement = event.checked;
   }
 
   back() {
