@@ -95,5 +95,9 @@ export class AddStrataComponent implements OnInit {
     }
   }
 
+  cancel() {
+    this.location.back();
+  }
+
 
 }
