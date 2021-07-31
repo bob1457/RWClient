@@ -39,6 +39,16 @@ export class PropertyListComponent implements OnInit, AfterViewInit {
   constructor(private propertyService: PropertyService,
               private router: Router,
               private store: Store<PropertyState>) {
+                this.router.events.subscribe((routerEvent: Event) => {
+                  if (routerEvent instanceof NavigationStart) {
+                    this.loadingIndicator = true;
+                  }
+
+                  if (routerEvent instanceof NavigationEnd ){
+                    this.loadingIndicator = false;
+                  }
+
+                });
 
                 this.store.pipe(
                   select(propertyList)).subscribe(data => {
@@ -52,6 +62,8 @@ export class PropertyListComponent implements OnInit, AfterViewInit {
 
                     setTimeout(() =>  {this.dataSource.paginator = this.paginator; this.dataSource.sort = this.sort; });
                   });
+
+                setTimeout(() =>  {this.dataSource.paginator = this.paginator; this.dataSource.sort = this.sort; });
 
                 this.store.select(councilList).subscribe( res => {
                   this.councils = res;
