@@ -315,7 +315,6 @@ RemoveProperty() {
     propertyId: 1002,
     active: false
   };
-
   debugger;
   return this.store.dispatch(removeProperty({payload: propertyToRemove}));
 }
