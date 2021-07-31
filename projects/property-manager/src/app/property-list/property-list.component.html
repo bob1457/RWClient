@@ -31,8 +31,8 @@
         <mat-card-title>Rental Properties ({{list.length}})</mat-card-title>
         <mat-card-subtitle>All rental properties under management</mat-card-subtitle>
     </mat-card-header>
-    <mat-card-content *ngIf="!(loading$ | async) && list; else spinner" class="property-list-card-content">
-        <div class="container text-center" fxLayout="column" fxLayoutAlign="start" fxLayoutGap="1%" fxFlexFill>
+    <mat-card-content class="property-list-card-content">
+        <div *ngIf="!(loading$ | async) && list; else spinner" class="container text-center" fxLayout="column" fxLayoutAlign="start" fxLayoutGap="1%" fxFlexFill>
             <div fxLayout="row" fxLayoutAlign="end">
                 <mat-form-field fxLayout fxLayoutAlign="start center">
                     <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="Filter">
@@ -129,8 +129,9 @@
             </table>
             <!-- <div fxFlex="10%" fxLayoutAlign="end"></div> -->
             <span class="spacer"></span>
-            <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 25]"></mat-paginator>
+            <!-- <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 25]"></mat-paginator> -->
         </div>
+        <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 25]"></mat-paginator>
     </mat-card-content>
     <!-- <mat-paginator *ngIf="!(loading$ | async) && list; else spinner" [pageSize]="10" [pageSizeOptions]="[5, 10, 25]"></mat-paginator> -->
 </mat-card>
