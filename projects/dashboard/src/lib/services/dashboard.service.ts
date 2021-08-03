@@ -96,5 +96,10 @@ export class DashboardService {
     return this.http.get<any[]>(`${this.baseUrl}/Workorder/invoice/all`);
   }
 
+  getAllCouncils() {
+    debugger;
+    return this.http.get<any[]>(`${this.baseUrl}/property/stratalist`);
+  }
+
 
 }

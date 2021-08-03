@@ -18,7 +18,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import {Overlay} from '@angular/cdk/overlay';
 import { WorkorderDetailsDialogComponent } from '../dialogs/workorder-details-dialog/workorder-details-dialog.component';
 
-import { ServiceRequestList } from '@lib/dashboard';
+import { DashState, RentalAppList, ServiceRequestList } from '@lib/dashboard';
 
 @Component({
   selector: 'app-lease-details',
@@ -52,10 +52,14 @@ export class LeaseDetailsComponent implements OnInit {
   renewStatus = 0;
   editEndDate = false;
 
+
   // rentAmtDue;
   // rentDueOn;
   addaddendum = false;
-
+  existingCoAplicant = true;
+  applicantList;
+  coApplicantList$: Observable<any>;
+  coAppList;
 
   loading$: Observable<boolean>;
 
@@ -74,6 +78,8 @@ export class LeaseDetailsComponent implements OnInit {
 
   finalized = false;
   getFinalize = false;
+
+  toRenew = true;
 
   months = [
     {name: 'January'},
@@ -149,6 +155,7 @@ export class LeaseDetailsComponent implements OnInit {
   private dialogConfig;
 
   constructor(private store: Store<PropertyLeaseState>,
+              private dasStore: Store<DashState>,
               private router: Router,
               private actRoute: ActivatedRoute,
               private dialog: MatDialog,
@@ -248,12 +255,27 @@ export class LeaseDetailsComponent implements OnInit {
                                 this.invoiceList = invoices;
                               }
                             });
+
+                  this.dasStore.select(RentalAppList)
+                              .subscribe(applist => {
+                                if (applist && this.lease) {
+                                  this.applicantList = applist;
+                                  console.log('co apps before', this.applicantList);
+                                } else {
+                                  this.applicantList = JSON.parse(localStorage.getItem('applications'));
+                                }
+
+                                // this.coApplicantList = this.coApplicantList.filter(l => l.propertyId == this.lease.rentalPropertyId);
+                                // console.log('lease id', this.lease.rentalProperty.id);
+                                // console.log('co apps', this.coApplicantList);
+
+                              });
                 });
               }
 
   ngOnInit() {
 
-    console.log('start tab index', this.tabIndex);
+    // console.log('start tab index', this.tabIndex);
     // this.currentMonth = (new Date().getMonth() + 1).toString();
     // this.currentYear = (new Date().getFullYear).toString();
 
@@ -276,7 +298,11 @@ export class LeaseDetailsComponent implements OnInit {
       }
     };
 
-
+    this.coApplicantList$ = this.propertyService.getAlCoApplicants();
+    this.propertyService.getAlCoApplicants().subscribe(coapps => {
+      this.coAppList = coapps;
+      console.log('coapps', this.coAppList);
+    });
 
     // this.GetLeaseDetails(this.id);
 
@@ -300,13 +326,14 @@ export class LeaseDetailsComponent implements OnInit {
 
       damageDepositAmount: [0],
       petDepositAmount: [0],
-      leaseSignDate: [''],
+      leaseSignDate: ['Jan 1, 2021'],
       isActive: [false],
       isAddendumAvailable: [false],
       // endLeaseCode: [''],
       renewTerm: [''],
       notes: [''],
-
+      serviceAgent: [false],
+      muutalAgreement: [false],
       // rentalProperty: this.formBuilder.group({
       //   propertyName: [],
       //   address: this.formBuilder.group({
@@ -478,9 +505,28 @@ export class LeaseDetailsComponent implements OnInit {
       }
       case 2 : {
         this.hide = true;
-        if (!this.tenants) {
-          this.store.dispatch(getAllTenants());
-        }
+        // if (!this.tenants) {
+        this.store.dispatch(getAllTenants());
+        // }
+        // console.log('all app list', this.coApplicantList);
+        // this.coApplicantList = this.applicantList.filter(l => l.propertyId === this.lease.rentalProperty.id);
+        // console.log('selected app list', this.coApplicantList);
+
+        // this.dasStore.select(RentalAppList) // GET LIST OF APPLICATIONS FOR RETRIEVING CO=APPLICATNT - to be considered in the future
+        //                       .subscribe(applist => {
+        //                         if (applist && this.lease) {
+        //                           this.applicantList = applist;
+        //                           console.log('co apps before', this.applicantList);
+        //                         } else {
+        //                           this.applicantList = JSON.parse(localStorage.getItem('applications'));
+        //                         }
+
+        //                         this.coApplicantList = this.applicantList.filter(l => l.propertyId == this.lease.rentalPropertyId);
+        //                         console.log('lease id', this.lease.rentalProperty.id);
+        //                         console.log('co apps', this.coApplicantList);
+
+        //                       });
+
         break;
       }
       case 3 : {
@@ -550,6 +596,7 @@ export class LeaseDetailsComponent implements OnInit {
     this.store.dispatch(updateLease({payload: this.detailsForm.value})); // Disable for
     this.enableRenwal = false;
     this.editEndDate = false;
+    this.getFinalize = false;
 
     if (active) {
       this.finalized = true;
@@ -605,6 +652,10 @@ export class LeaseDetailsComponent implements OnInit {
   getTenantDetails(id: number) {
 
   }
+
+  // getCoApplicants() {
+
+  // }
 
   addR() {
     this.addRent = true;
@@ -754,6 +805,39 @@ export class LeaseDetailsComponent implements OnInit {
       this.enableRenwal = false;
     }
     console.log('renewal', this.enableRenwal)
+  }
+
+  renew() {
+    this.enableRenwal = true;
+    this.toRenew = false;
+  }
+
+  cancel_renew() {
+    this.enableRenwal = false;
+    this.toRenew = true;
+  }
+
+  onAddTenantChange(event) {
+    console.log('add tenant option', event.value);
+    if (event.value === 1) {
+      this.existingCoAplicant = true;
+    } else {
+      this.existingCoAplicant = false;
+    }
+  }
+
+  onCpApplicantChange(event) {
+    console.log('get co apps', event);
+
+    this.addTenantForm.patchValue({
+      firstName: event.firstName,
+      lastName: event.lastName,
+      contactEmail: event.contactEmail,
+      contactTelephone1: event.contactTel,
+      contactTelephone2: '',
+      contactOthers: event.contactOthers
+    });
+
   }
 
 }

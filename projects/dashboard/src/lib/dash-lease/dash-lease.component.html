@@ -47,7 +47,7 @@
                     <div class="container" fxLayout="column" fxLayoutAlign="start" fxLayoutGap="1%" fxFlexFill *ngIf="!(loading$ | async) && tenants; else spinner">
                         <mat-grid-list cols="1" rowHeight="85px">
                             <mat-grid-tile *ngFor="let tenant of tenants">
-                                <mat-card class="user-card" style="margin-left: 5px;">
+                                <mat-card class="user-card" style="margin-left: 5px;margin-right: 20px;">
                                     <mat-card-header>
                                         <div mat-card-avatar>
                                             <img class="user-avatar" src="../../assets/images/user_a.png">

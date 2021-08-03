@@ -20,8 +20,8 @@
   <button mat-button color="accent" (click) = RemoveProperty()>Remove Property</button>
 </p> -->
 <!-- <div class="grid-container" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="1%" fxFlexFill> *ngIf="list"-->
-<mat-card class="property-list-card" *ngIf="!(loading$ | async) && list; else spinner">
-    <mat-card-header style="background-color: #f5f5f5;">
+<mat-card class="property-list-card">
+    <mat-card-header *ngIf="!(loading$ | async) && list; else spinner" style="background-color: #f5f5f5;">
         <div mat-card-avatar class="property-list-header-image">
             <i class="material-icons" style="font-size: 2.5em;color: #e64a19; margin-left: 5px;">
             account_balance
@@ -32,7 +32,7 @@
         <mat-card-subtitle>All rental properties under management</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content class="property-list-card-content">
-        <div class="container text-center" fxLayout="column" fxLayoutAlign="start" fxLayoutGap="1%" fxFlexFill>
+        <div *ngIf="!(loading$ | async) && list; else spinner" class="container text-center" fxLayout="column" fxLayoutAlign="start" fxLayoutGap="1%" fxFlexFill>
             <div fxLayout="row" fxLayoutAlign="end">
                 <mat-form-field fxLayout fxLayoutAlign="start center">
                     <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="Filter">
@@ -129,12 +129,13 @@
             </table>
             <!-- <div fxFlex="10%" fxLayoutAlign="end"></div> -->
             <span class="spacer"></span>
-            <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 25]"></mat-paginator>
+            <!-- <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 25]"></mat-paginator> -->
         </div>
-
-
+        <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 25]"></mat-paginator>
     </mat-card-content>
+    <!-- <mat-paginator *ngIf="!(loading$ | async) && list; else spinner" [pageSize]="10" [pageSizeOptions]="[5, 10, 25]"></mat-paginator> -->
 </mat-card>
+<!-- <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 25]"></mat-paginator> -->
 <!-- </div> -->
 
 <ng-template #spinner>

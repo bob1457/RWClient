@@ -6,6 +6,7 @@ export interface Property {
     propertyName: string;
     propertyDesc: string;
     type: string;
+    strataCouncilId: number;
     propertyManagerUserName: string;
     propertyLogoImgUrl: string;
     propertyVideoUrl: string;

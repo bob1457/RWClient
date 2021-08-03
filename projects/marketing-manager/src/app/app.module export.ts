@@ -33,6 +33,7 @@ import { OhStatusPipe } from './oh-status.pipe';
 import { metaReducers } from './store/metaReducers';
 import { EmpyStatusPipe } from './empy-status.pipe';
 import { ImStatusPipe } from './im-status.pipe';
+import { ReferenceTypePipe } from './reference-type.pipe';
 
 
 const routes: Routes = [
@@ -78,7 +79,8 @@ const routes: Routes = [
     OhStatusPipe,
     AllOpenHousesComponent,
     EmpyStatusPipe,
-    ImStatusPipe
+    ImStatusPipe,
+    ReferenceTypePipe
   ],
   imports: [
     // BrowserModule,

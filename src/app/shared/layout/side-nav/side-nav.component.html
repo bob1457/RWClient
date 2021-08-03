@@ -154,6 +154,21 @@
                   <mat-icon>info</mat-icon>
                 </button>-->
                             </mat-list-item>
+                            <mat-list-item>
+                                <mat-icon style="color: rgb(90, 20, 219);" [routerLink]="['/Manage/property/stratas']" [routerLinkActive]="['active']" matListIcon>account_balance</mat-icon>
+                                <a matLine [routerLink]="['/Manage/property/stratas']" [routerLinkActive]="['active']">Strata Councils</a>
+                                <mat-chip *ngIf="councils" title="{{councils.length}}" style="background-color: rgb(230, 119, 16);
+                                color: yellow;
+                                padding-right: 7px;
+                                padding-left:7px;
+                                /* border-radius: 50%; */
+                                border: 0 transparent;
+                                font-size: 12px;">{{councils.length}}
+                                </mat-chip>
+                                <!--<button mat-icon-button (click)="showInfo(link)">
+                <mat-icon>info</mat-icon>
+              </button>-->
+                            </mat-list-item>
                         </mat-list>
                     </mat-expansion-panel>
 

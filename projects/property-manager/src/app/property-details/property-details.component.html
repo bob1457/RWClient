@@ -35,7 +35,8 @@
             <ul class="owner-list">
                 <li *ngFor="let owner of property.ownerList" style="margin-left: -40px;">
 
-                    <a mat-button [matMenuTriggerFor]="menu" style="border: 1px solid grey; margin-bottom: 10px;">{{owner.firstName}} {{owner.lastName}}</a>
+                    <a mat-button [matMenuTriggerFor]="menu" style="border: 1px solid grey; margin-bottom: 10px;">
+                        <mat-icon>person</mat-icon> &nbsp;{{owner.firstName}} {{owner.lastName}}</a>
                     <mat-menu #menu="matMenu">
                         <div style="font-size: .8em;padding: 10px;">
                             <span style="font-weight: 600;">
@@ -74,11 +75,36 @@
         <div style="margin-top: 25px;">
             <span style="font-weight: 500;">Management Contracts</span>
             <ul class="owner-list">
-                <li *ngFor="let contract of property.contractList" style="margin-left: -40px;">
-                    {{contract.managementContractTitle}} {{contract.type | type }} {{contract.isActive | yesNo}}<a href="" style="cursor: pointer;">details</a>
+                <li *ngFor="let contract of property.contractList" style="">
+                    <!-- {{contract.managementContractTitle}} {{contract.type | type }} {{contract.isActive | yesNo}}<a href="" style="cursor: pointer;">details</a> -->
+                    <button mat-button [matMenuTriggerFor]="menu2" style="border: 1px solid grey; margin-bottom: 10px;"><mat-icon>description</mat-icon></button>
+                    <mat-menu #menu2="matMenu">
+                        <div style="font-size: .8em;padding: 10px;">
+                            <span style="font-weight: 600;">
+                            CONTRACT ID: {{contract.id}}
+                          </span><br><br>
+                            <span>
+                          Title:  {{contract.managementContractTitle}}
+                          </span><br>
+                            <span>
+                            Type:  {{contract.type | type}}
+                          </span><br><br>
+                            <span>
+                            Active: {{contract.isActive | yesNo}}
+                          </span><br>
+                            <br>
+                            <a routerLink="/Manage/property/contractdetails/{{contract.id}}">more details</a>
+                        </div>
+
+
+                    </mat-menu>
                 </li>
             </ul>
         </div>
+
+        <!-- <div *ngIf="(property.propertyType1 == 'Apartment' || property.propertyType1 == 'TownHouse') && !property.councilName">
+            <button mat-button (click)="addStrata()">Add Strata Council</button>
+        </div> -->
 
     </div>
     <div fxFlex="70%">
@@ -96,7 +122,7 @@
             <mat-card-content class="property-details-card-content">
                 <form novalidate fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" [formGroup]="detailsForm" (ngSubmit)="submit()">
                     <div [@.disabled]="true" style="width: 100%;">
-                        <mat-tab-group>
+                        <mat-tab-group (selectedTabChange)="tabSelected($event)">
                             <mat-tab label="General" style="background: #f5f5f5;">
                                 <!-- <mat-form-field class="property-full-width">
                 <span class="icon-pos" matPrefix><mat-icon>person</mat-icon> &nbsp;</span>
@@ -290,9 +316,107 @@
                             <!-- <mat-tab label="Facilities" style="background: #f5f5f5;">
                                 <app-property-details-facilities [detailsForm]="detailsForm" fxLayout="column"></app-property-details-facilities>
                             </mat-tab> -->
+                            <mat-tab *ngIf="council[0]" label="Strata Council" style="background: #f5f5f5;">
+
+                                <div fxLayout="column" fxLayoutAlign="start center">
+                                    <mat-form-field class="property-full-width" style="margin-top: 25px;">
+                                        <span class="icon-pos" matPrefix><mat-icon>swap_calls</mat-icon> &nbsp;</span>
+                                        <input readonly type="text" id="propertyId" formControlName="councilName" matInput placeholder="Strata Council Name" [ngModel]="council[0].councilName">
+                                    </mat-form-field>
+                                </div>
+                                <div fxLayout="column" fxLayoutAlign="start center">
+                                    <mat-form-field class="property-full-width" style="margin-top: 25px;">
+                                        <span class="icon-pos" matPrefix><mat-icon>swap_calls</mat-icon> &nbsp;</span>
+                                        <input readonly type="text" id="propertyId" formControlName="description" matInput placeholder="Description" [ngModel]="council[0].description">
+                                    </mat-form-field>
+                                </div>
+                                <div fxLayout="column" fxLayoutAlign="start center">
+                                    <mat-form-field class="property-full-width" style="margin-top: 25px;">
+                                        <span class="icon-pos" matPrefix><mat-icon>swap_calls</mat-icon> &nbsp;</span>
+                                        <input readonly type="text" id="propertyId" formControlName="inChargeManagerFirstName" matInput placeholder="Property Manager First Name" [ngModel]="council[0].inChargeManagerFirstName">
+                                    </mat-form-field>
+                                </div>
+                                <div fxLayout="column" fxLayoutAlign="start center">
+                                    <mat-form-field class="property-full-width" style="margin-top: 25px;">
+                                        <span class="icon-pos" matPrefix><mat-icon>swap_calls</mat-icon> &nbsp;</span>
+                                        <input readonly type="text" id="propertyId" formControlName="inChargeManagerLastName" matInput placeholder="Property Manager Last Name" [ngModel]="council[0].inChargeManagerLastName">
+                                    </mat-form-field>
+                                </div>
+                                <div fxLayout="column" fxLayoutAlign="start center">
+                                    <mat-form-field class="property-full-width" style="margin-top: 25px;">
+                                        <span class="icon-pos" matPrefix><mat-icon>phone</mat-icon> &nbsp;</span>
+                                        <input readonly type="text" id="propertyId" formControlName="inChargeManagerContactTel" matInput placeholder="Property Manager Telephone" [ngModel]="council[0].inChargeManagerContactTel">
+                                    </mat-form-field>
+                                </div>
+                                <div fxLayout="column" fxLayoutAlign="start center">
+                                    <mat-form-field class="property-full-width" style="margin-top: 25px;">
+                                        <span class="icon-pos" matPrefix><mat-icon>mail</mat-icon> &nbsp;</span>
+                                        <input readonly type="text" id="propertyId" formControlName="inChargeManagerContactEmail" matInput placeholder="Property Manager Email" [ngModel]="council[0].inChargeManagerContactEmail">
+                                    </mat-form-field>
+                                </div>
+                                <div fxLayout="column" fxLayoutAlign="start center">
+                                    <mat-form-field class="property-full-width" style="margin-top: 25px;">
+                                        <span class="icon-pos" matPrefix><mat-icon>description</mat-icon> &nbsp;</span>
+                                        <textarea readonly type="text" id="propertyId" formControlName="notes" matInput placeholder="Property Manager Email" [ngModel]="council[0].notes"></textarea>
+                                    </mat-form-field>
+                                </div>
+                            </mat-tab>
+
+
+                            <!-- <ng-template #strata> -->
+                            <mat-tab *ngIf="property.councilName && !council[0]" label="Strata Council" style="background: #f5f5f5;">
+
+                                <div fxLayout="column" fxLayoutAlign="start center">
+                                    <mat-form-field class="property-full-width" style="margin-top: 25px;">
+                                        <span class="icon-pos" matPrefix><mat-icon>swap_calls</mat-icon> &nbsp;</span>
+                                        <input readonly type="text" id="propertyId" formControlName="councilName" matInput placeholder="Strata Council Name" [ngModel]="property.councilName">
+                                    </mat-form-field>
+                                </div>
+                                <div fxLayout="column" fxLayoutAlign="start center">
+                                    <mat-form-field class="property-full-width" style="margin-top: 25px;">
+                                        <span class="icon-pos" matPrefix><mat-icon>swap_calls</mat-icon> &nbsp;</span>
+                                        <input readonly type="text" id="propertyId" formControlName="description" matInput placeholder="Description" [ngModel]="property.description">
+                                    </mat-form-field>
+                                </div>
+                                <div fxLayout="column" fxLayoutAlign="start center">
+                                    <mat-form-field class="property-full-width" style="margin-top: 25px;">
+                                        <span class="icon-pos" matPrefix><mat-icon>swap_calls</mat-icon> &nbsp;</span>
+                                        <input readonly type="text" id="propertyId" formControlName="inChargeManagerFirstName" matInput placeholder="Property Manager First Name" [ngModel]="property.inChargeManagerFirstName">
+                                    </mat-form-field>
+                                </div>
+                                <div fxLayout="column" fxLayoutAlign="start center">
+                                    <mat-form-field class="property-full-width" style="margin-top: 25px;">
+                                        <span class="icon-pos" matPrefix><mat-icon>swap_calls</mat-icon> &nbsp;</span>
+                                        <input readonly type="text" id="propertyId" formControlName="inChargeManagerLastName" matInput placeholder="Property Manager Last Name" [ngModel]="property.inChargeManagerLastName">
+                                    </mat-form-field>
+                                </div>
+                                <div fxLayout="column" fxLayoutAlign="start center">
+                                    <mat-form-field class="property-full-width" style="margin-top: 25px;">
+                                        <span class="icon-pos" matPrefix><mat-icon>phone</mat-icon> &nbsp;</span>
+                                        <input readonly type="text" id="propertyId" formControlName="inChargeManagerContactTel" matInput placeholder="Property Manager Telephone" [ngModel]="property.inChargeManagerContactTel">
+                                    </mat-form-field>
+                                </div>
+                                <div fxLayout="column" fxLayoutAlign="start center">
+                                    <mat-form-field class="property-full-width" style="margin-top: 25px;">
+                                        <span class="icon-pos" matPrefix><mat-icon>mail</mat-icon> &nbsp;</span>
+                                        <input readonly type="text" id="propertyId" formControlName="inChargeManagerContactEmail" matInput placeholder="Property Manager Email" [ngModel]="property.inChargeManagerContactEmail">
+                                    </mat-form-field>
+                                </div>
+                                <div fxLayout="column" fxLayoutAlign="start center">
+                                    <mat-form-field class="property-full-width" style="margin-top: 25px;">
+                                        <span class="icon-pos" matPrefix><mat-icon>description</mat-icon> &nbsp;</span>
+                                        <textarea readonly type="text" id="propertyId" formControlName="notes" matInput placeholder="Property Manager Email" [ngModel]="property.notes"></textarea>
+                                    </mat-form-field>
+                                </div>
+                            </mat-tab>
+                            <!-- </ng-template> -->
+
+
+
+
                         </mat-tab-group>
                     </div>
-                    <div fxLayout="row" fxLayoutGap="7px" fxLayoutAlign="end center" style="width: 75%;">
+                    <div *ngIf="!hideButton" fxLayout="row" fxLayoutGap="7px" fxLayoutAlign="end center" style="width: 75%;">
                         <!-- <span *ngIf="showMsg" style="color: rgb(189, 150, 25);">Updated successfully!</span>
             <img *ngIf=" loading" class="pl-2" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
             /> [disabled]="f.invalid || !f.dirty"          ; $event.preventDefault()            UpdateProperty()  (click)="submit(detailsForm.value)"     -->

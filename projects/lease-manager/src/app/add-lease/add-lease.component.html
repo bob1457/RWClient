@@ -23,14 +23,64 @@
 <mat-error *ngIf="hasError('title', 'required')">Name is required</mat-error>
 <mat-error *ngIf="hasError('title', 'maxlength')">You have more than 60 characters</mat-error> -->
                     </mat-form-field>
-                    <mat-form-field style="margin-top: 25px;width: 90%;">
+                    <mat-form-field style="width: 90%;">
                         <span class="icon-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
                         <input matInput type="text" placeholder="Description" formControlName="leaseDesc" id="desc">
                         <!-- <mat-hint align="end">Not more then 60 characters long.</mat-hint>
 <mat-error *ngIf="hasError('title', 'required')">Name is required</mat-error>
 <mat-error *ngIf="hasError('title', 'maxlength')">You have more than 60 characters</mat-error> -->
                     </mat-form-field>
+
                     <mat-form-field style="width: 90%;">
+                        <mat-label>Select Rental Application</mat-label>
+                        <mat-select #myAppSelect (selectionChange)="onApplicationChange(myAppSelect.value)">
+                            <div *ngIf="applicantList; else loading">
+                                <mat-option *ngFor="let application of applicantList" [value]="application">
+                                    {{application.applicatnFirstName}} {{application.applicatnLastName}} --{{application.status | appStatus}} ({{application.propertyName}})
+                                </mat-option>
+                            </div>
+                            <ng-template #loading>
+                                <mat-option>
+                                    <img src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==">
+                                </mat-option>
+                            </ng-template>
+
+
+                        </mat-select>
+                    </mat-form-field>
+
+                    <!-- Use FormGroup to have a nested form containing all required data for new tenant-->
+                    <div *ngIf="selectedApplication" style="border: 1px solid #afa7a7;padding: 10px;width: 500px;">
+                        <p *ngIf="selectedApplication.propertyAddress">
+                            <span style="font-weight: 600;">Rental Property: &nbsp;&nbsp;<span style="font-style:italic;">{{selectedApplication.propertyName}} ({{selectedApplication.propertyId}})</span> </span><br><br>
+                            <span>{{selectedApplication.propertyAddress.streetNum}} <br>{{selectedApplication.propertyAddress.city}} {{selectedApplication.propertyAddress.stateProvince}} {{selectedApplication.propertyAddress.streetNum}}</span>
+                        </p>
+
+                        <div *ngIf="selectedApplication">
+                            <span style="font-weight: 600;">Applicant:</span>&nbsp;&nbsp;&nbsp; {{selectedApplication.applicatnFirstName}} {{selectedApplication.applicatnLastName}}<br><br>
+                            <span style="font-weight: 600;">Co-Applicant(s)</span>
+                            <ul *ngIf="applicants" style="list-style: none;margin-top: 10px; margin-left: -30px">
+                                <li *ngFor="let applicant of applicants; let no = index;">
+                                    {{no + 1}} - First Name: {{applicant.firstName}} Last Name: {{applicant.lastName}}
+                                </li>
+                            </ul>
+                            <span *ngIf="applicants.length == 0 || !applicants">
+                          No co-applicant(s)
+                        </span>
+
+                        </div>
+                        <!-- <ng-template #loading2>
+                            <mat-option>
+                                <img src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==">
+                            </mat-option>
+                        </ng-template> -->
+                    </div>
+
+
+
+
+
+                    <!-- <mat-form-field style="width: 90%;">
                         <mat-label>Select Rental Property</mat-label>
                         <mat-select #mySelect (selectionChange)="onPropertyChange(mySelect.value)">
                             <div *ngIf="properties$ | async; else loading">
@@ -62,7 +112,12 @@
                             </ng-template>
 
                         </mat-select>
-                    </mat-form-field>
+                    </mat-form-field> -->
+
+
+
+
+
                     <div fxLayout="row" fxLayout.xs="column" style="width: 90%;">
                         <mat-form-field fxFlex="50%" fxFlex.xs="90%" style="margin-right: 10px;">
                             <mat-label>Start Date</mat-label>
@@ -89,7 +144,7 @@
                             <mat-form-field style="width: 90%;">
                                 <mat-label>Rent Frequency</mat-label>
                                 <mat-select id="rentFrequency" formControlName="rentFrequency">
-                                    <mat-option>None</mat-option>
+                                    <!-- <mat-option>None</mat-option> -->
                                     <mat-option value="Monthly">Monthly</mat-option>
                                     <mat-option value="Quarterly">Quarterly</mat-option>
                                     <mat-option value="Six Month">Six Month</mat-option>
@@ -124,7 +179,7 @@
                             <mat-form-field style="width: 90%;">
                                 <mat-label>Rent Due Date</mat-label>
                                 <mat-select id="rentDueOn" formControlName="rentDueOn">
-                                    <mat-option>None</mat-option>
+                                    <!-- <mat-option>None</mat-option> -->
                                     <mat-option value="1st">Frist Day of Month</mat-option>
                                     <mat-option value="15th">15th Day of Month</mat-option>
                                     <mat-option value="last">Last Day of Month</mat-option>
@@ -173,24 +228,28 @@
                                     <mat-option [value]=32>Fixed Term and Vacant</mat-option>
                                 </mat-select>
                             </mat-form-field>
+                            <mat-checkbox formControlName="serviceAgent" class="property-full-width">Use agent as service contact</mat-checkbox>
                         </div>
                         <div fxFlex="50%">
-                            <mat-form-field class="lease-full-width">
+                            <!-- <mat-form-field class="lease-full-width">
                                 <span class="icon-pos" matPrefix><mat-icon>notes</mat-icon> &nbsp;</span>
                                 <input type="text" id="renewTerm" formControlName="renewTerm" matInput placeholder="Reason to vacant">
-                            </mat-form-field>
+                            </mat-form-field> -->
                             <!-- <mat-form-field class="lease-full-width">
                                 <span class="icon-pos" matPrefix><mat-icon>notes</mat-icon> &nbsp;</span>
                                 <input type="text" id="endLeaseCode" formControlName="leaseEndCode" matInput placeholder="End Lease Code">
                             </mat-form-field> -->
                         </div>
                     </div>
+                    <div fxLayout="column" fxLayoutAlign="start start" style="width: 90%;">
+                        <mat-checkbox formControlName="muutalAgreement" class="property-full-width" (change)="onChange($event)">Add a mutual agreement to vacant at the end of tenancy</mat-checkbox>
+                        <mat-form-field class="lease-full-width" *ngIf="muutalAgreement" style="width: 97%;">
+                            <span class="icon-pos" matPrefix><mat-icon>notes</mat-icon> &nbsp;</span>
+                            <input type="text" id="renewTerm" formControlName="renewTerm" matInput placeholder="Reason to vacant">
+                        </mat-form-field>
+                    </div>
 
 
-                    <!-- <mat-form-field class="lease-full-width" style="width: 90%;">
-                        <span class="icon-pos" matPrefix><mat-icon>notes</mat-icon> &nbsp;</span>
-                        <textarea type="text" id="notes" formControlName="notes" matInput placeholder="Notes"></textarea>
-                    </mat-form-field> -->
 
                 </div>
                 <div fxFlex="50%" fxFlex.xs="80%" fxLayout="column" fxFlexFill>
@@ -212,12 +271,13 @@
                             <mat-checkbox formControlName="storage" class="property-full-width">Storage</mat-checkbox>
                             <mat-checkbox formControlName="recreationFacility" class="property-full-width">Recreation Facility</mat-checkbox>
                             <mat-checkbox formControlName="garbageCollection" class="property-full-width">Garbage Collection</mat-checkbox>
-                            <mat-checkbox formControlName="recycleServices" class="property-full-width">Recycle Services</mat-checkbox>
+                            <!-- <mat-checkbox formControlName="recycleServices" class="property-full-width">Recycle Services</mat-checkbox> -->
                         </div>
                         <div fxLayout="column" fxLayoutAlign="start start" fxFlex="30" fxLayoutGap="10px">
                             <mat-checkbox formControlName="kitchenScrapCollection" class="property-full-width">Laundry</mat-checkbox>
                             <mat-checkbox formControlName="laundry" class="property-full-width">Window Blinds</mat-checkbox>
-                            <mat-checkbox formControlName="sewageDisposal" class="property-full-width">Furniture</mat-checkbox>
+                            <!-- <mat-checkbox formControlName="sewageDisposal" class="property-full-width">Furniture</mat-checkbox> -->
+                            <mat-checkbox formControlName="recycleServices" class="property-full-width">Recycle Services</mat-checkbox>
 
                         </div>
 

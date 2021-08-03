@@ -44,6 +44,9 @@ import { AddendumViewComponent } from './addendum-view/addendum-view.component';
 import { AddAddendumComponent } from './add-addendum/add-addendum.component';
 import { AddVendorComponent } from './add-vendor/add-vendor.component';
 import { TypePipe } from './type.pipe';
+import { AddServiceRequestComponent } from './add-service-request/add-service-request.component';
+import { AppStatusPipe } from './app-status.pipe';
+import { MutualAgreementComponent } from './mutual-agreement/mutual-agreement.component';
 
 
 @NgModule({
@@ -84,7 +87,10 @@ import { TypePipe } from './type.pipe';
     AddendumViewComponent,
     AddAddendumComponent,
     AddVendorComponent,
-    TypePipe
+    TypePipe,
+    AddServiceRequestComponent,
+    AppStatusPipe,
+    MutualAgreementComponent
   ],
   imports: [
     BrowserModule,

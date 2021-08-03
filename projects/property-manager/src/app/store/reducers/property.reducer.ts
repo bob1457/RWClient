@@ -17,6 +17,8 @@ export const initialState: PropertyState =  { // adapter.getInitialState
   ownersOfProperty: null,
   selectedOwner: null,
   contracts: null,
+  councils: null,
+  council: null,
   contractsForProperty: null,
   selectedContract: null,
   errorMessage: null
@@ -123,11 +125,108 @@ on(PropertyActions.getPropertyDetails, (state) => ({
     });
   }),
 
+  on(PropertyActions.getCouncilList, state => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+  on(PropertyActions.getCouncilListSuccess, (state, { payload }) => {
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      councils: payload
+    });
+  }),
+
+
+  on(PropertyActions.updateCouncil, (state) => {
+    return ({
+      ...state,
+      loading: true,
+      loaded: false
+      // property: payload
+    });
+  }),
+
+  on(PropertyActions.updateCouncilSuccess, (state, {payload}) => {
+    debugger;
+    const index = state.councils.findIndex(x => x.id === payload.id);
+
+    const updatedCouncils = state.councils.map(
+      item => payload.id === item.id ? payload : item
+    );
+
+
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      councils: updatedCouncils, // [...state.property[index], payload ] // ,
+      council: payload
+    });
+  }),
+
+
   on(PropertyActions.updatePropertyFailure, (state) => {
     return ({
       ...state,
       loading: false,
       errorMessage: 'Failed to update property'
+    });
+  }),
+
+  on(PropertyActions.addCouncil, (state) => {
+    return ({
+      ...state,
+      loading: true,
+      loaded: false
+      // property: payload
+    });
+  }),
+
+  on(PropertyActions.addCouncilSuccess, (state, {payload}) => {
+    debugger;
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      councils: [...state.councils, payload ] // ,
+      // property: payload
+    });
+  }),
+
+  on(PropertyActions.addCouncilFailure, (state) => {
+    return ({
+      ...state,
+      loading: true,
+      errorMessage: 'Failed to add strata council'
+    });
+  }),
+
+  on(PropertyActions.getCouncilDetails, (state) => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+  on(PropertyActions.getCouncilDetailsSuccess, (state, { payload }) => {
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      council: payload
+    });
+  }),
+
+  on(PropertyActions.getCouncilDetailsFailure, (state) => {
+    return ({
+      ...state,
+      loading: false,
+      loaded: false,
+      selectedOwner: null,
+      errorMessage: 'Failed to load property owner details'
     });
   }),
 
@@ -463,6 +562,8 @@ export const getContractList = (state: PropertyState) => state.contracts;
 export const getPropertyDetails = (state: PropertyState) => state.property;
 export const getOwnerDetails = (state: PropertyState) => state.selectedOwner;
 export const getContractDetails = (state: PropertyState) => state.selectedContract;
+export const getCouncilList = (state: PropertyState) => state.councils;
+export const getCouncilDetails = (state: PropertyState) => state.council;
 
 export const loadingStatus = createSelector(selectPropertyState, getLoadingStatus);
 
@@ -471,6 +572,7 @@ export const propertyList = createSelector(selectPropertyState, getPropertyList)
 export const contractList = createSelector(selectPropertyState, getContractList);
 // export const propertyDetails = (id: any) => createSelector(selectPropertyState, getPropertyList => getPropertyList[id]);
 export const propertyDetrails = createSelector(selectPropertyState, getPropertyDetails);
+export const councilDetails = createSelector(selectPropertyState, getCouncilDetails);
 // export const ownerDetails = (id: any) => createSelector(getOwnerDetails, (ownerList) => {
 //   if (ownerList) {
 //     return ownerList.find(item => {
@@ -482,6 +584,7 @@ export const propertyDetrails = createSelector(selectPropertyState, getPropertyD
 //   });
 export const ownerDetails = createSelector(selectPropertyState, getOwnerDetails);
 export const contractDetails = createSelector(selectPropertyState, getContractDetails);
+export const councilList = createSelector(selectPropertyState, getCouncilList);
 
 
 

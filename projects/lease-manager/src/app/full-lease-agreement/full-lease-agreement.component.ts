@@ -85,7 +85,7 @@ export class FullLeaseAgreementComponent implements OnInit {
                       console.log('total entity', this.totalPageNumber);
                       console.log('No. Tenants',this.numberOfTenants);
                       console.log('No. Landloard',this.numberOfLandlords);
-                      console.log('agreement', this.agreementDetails);
+                      console.log('agreement sent to rpt view', this.agreementDetails);
                     });
 
 

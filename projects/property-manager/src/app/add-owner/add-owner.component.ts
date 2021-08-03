@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { PropertyState } from '../store/property.state';
 import { Store, select } from '@ngrx/store';
-import { Property, PropertyOwner } from '@lib/app-core';
+import { Property, PropertyOwner, PropertyService } from '@lib/app-core';
 import { propertyList, ownerList } from '../store/reducers';
 import { Location } from '@angular/common';
 import * as PropertyActions from '../store/actions/property.actions';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material';
 
 @Component({
   selector: 'app-add-owner',
@@ -42,9 +43,14 @@ export class AddOwnerComponent implements OnInit {
   selected = false;
   sameAddress = false;
 
+  emailExists = false;
+
+  loading = false;
 
   constructor(private formBuilder: FormBuilder,
+              private propertyService: PropertyService,
               private location: Location,
+              private snackBar: MatSnackBar,
               private store: Store<PropertyState>) { }
 
   ngOnInit() {
@@ -112,10 +118,10 @@ export class AddOwnerComponent implements OnInit {
     .subscribe(res => {
       const owner = this.owners.find(o => o.id === id); // const owner: any = this.owners.find(o => o.id === id);
       this.addForm.get('propertyOwnerId').setValue(owner.id);
-      this.addForm.get('firstName').setValue(owner.firstName);
-      this.addForm.get('lastName').setValue(owner.lastName);
-      this.addForm.get('contactEmail').setValue(owner.contactEmail);
-      this.addForm.get('contactTelephone1').setValue(owner.contactTelephone1);
+      // this.addForm.get('firstName').setValue(owner.firstName);
+      // this.addForm.get('lastName').setValue(owner.lastName);
+      // this.addForm.get('contactEmail').setValue(owner.contactEmail);
+      // this.addForm.get('contactTelephone1').setValue(owner.contactTelephone1);
       // this.ownerAddress.street = owner.streetNumber;
       // this.ownerAddress.city = owner.city;
       // this.ownerAddress.provState = owner.stateProv;
@@ -138,15 +144,86 @@ export class AddOwnerComponent implements OnInit {
       this.addForm.get('onlineAccessEnabled').setValue(false);
       this.addForm.get('userName').setValue('NotSet');
       this.addForm.get('roleId').setValue(2);
+
+      this.propertyService.checUserkEmail(this.addForm.controls['contactEmail'].value)
+          .subscribe(res => {
+            let emailexists;
+            emailexists = res;
+            console.log('email check result', emailexists);
+
+            if (emailexists) {
+              // alert(this.addForm.controls['contactEmail'].value + ' already exists!');
+              this.openSnackBar(this.addForm.controls['contactEmail'].value + ' already exists!', 'dismiss', 'error');
+            } else {
+              this.store.dispatch(PropertyActions.addPropertyOwner({payload: this.addForm.value})); // disabled for testing
+              // alert('ok, go ahead to create owner');
+              this.location.back();
+            }
+
+          });
+
+    } else {
+      // call service directly to add existing owenr
+      try{
+        debugger;
+
+        this.loading = true;
+
+        this.propertyService.addOwner(this.addForm.value)
+              .subscribe((owner) => {
+                this.loading = false;
+                console.log('owner added', owner);
+              });
+        // console.log('add owner form', this.addForm.value);
+        this.openSnackBar('Owner added successfully!', 'close', 'notify');
+        this.location.back();
+      } catch(err) {
+        this.openSnackBar(err.message, 'dismiss', 'error');
+      }
     }
     // console.log(formValue);
-    this.store.dispatch(PropertyActions.addPropertyOwner({payload: this.addForm.value}));
 
-    this.location.back();
+
+    // Check if the email already exists
+
+    // this.propertyService.checUserkEmail(this.addForm.controls['contactEmail'].value)
+    // .subscribe(res => {
+    //   let emailexists;
+    //   emailexists = res;
+    //   console.log('email check result', emailexists);
+
+    //   if (emailexists) {
+    //     // alert(this.addForm.controls['contactEmail'].value + ' already exists!');
+    //     this.openSnackBar(this.addForm.controls['contactEmail'].value + ' already exists!', 'dismiss', 'error');
+    //   } else {
+    //     this.store.dispatch(PropertyActions.addPropertyOwner({payload: this.addForm.value})); // disabled for testing
+    //     // alert('ok, go ahead to create owner');
+    //     this.location.back();
+    //   }
+
+    // });
+
   }
 
   cancel() {
     this.location.back();
   }
 
+  // uerEmailExists(email) {
+
+  //   console.log('incoming email', email);
+
+  //   return this.propertyService.checUserkEmail(email)
+  //   .subscribe(res => {
+  //     this.emailExists = res;
+  //     console.log('email check result', this.emailExists);
+  //   });
+  // }
+
+  openSnackBar(message: string, action: string, type: string) {
+    const config = new MatSnackBarConfig();
+    config.panelClass = [type];
+    config.duration = 3000;
+    this.snackBar.open(message, action, config);
+  }
 }

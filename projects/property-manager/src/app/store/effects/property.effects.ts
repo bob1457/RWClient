@@ -436,6 +436,114 @@ export class PropertyEffects {
     )
   ));
 
+  addStrataCouncil$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(PropertyActions.addCouncil),
+      // tap(() => console.log('got here: ')),
+      map(action => action.payload),
+      switchMap((payload) =>
+        this.propertyService.addCouncil(payload).pipe( // this.propertyService.addOwner(payload).pipe(
+          tap(() => console.log('called to add council: ' + payload)),
+          map(( council: any) => ({
+            type: '[Property] Add Council Success',
+            payload: council
+          })),
+          tap( () => {
+            // window.alert('done');
+            this.openSnackBar('Council Added successfully.', 'close', 'notify');
+           }), // display notificaiton
+
+          catchError(error => {
+            this.openSnackBar(error.message, 'dismiss', 'error');
+            return of(PropertyActions.addCouncilFailure(error.message));
+            }
+          )
+          // catchError(error => of(PropertyActions.addPropertyOwnerFailure(error.message)))
+        )
+      )
+    )
+  );
+
+
+  updateStrataCouncil$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(PropertyActions.updateCouncil),
+      // tap(() => console.log('got here: ')),
+      map(action => action.payload),
+      switchMap((payload) =>
+        this.propertyService.updateCouncil(payload).pipe( // this.propertyService.addOwner(payload).pipe(
+          tap(() => console.log('called property owner service to update council: ' + payload)),
+          map(( council: any) => ({
+            type: '[Property] Update Council Success',
+            payload: council
+          })),
+          tap( () => {
+            // window.alert('done');
+            this.openSnackBar('Council updated successfully.', 'close', 'notify');
+           }), // display notificaiton
+
+          catchError(error => {
+            this.openSnackBar(error.message, 'dismiss', 'error');
+            return of(PropertyActions.updateContractFailure(error.message));
+            }
+          )
+          // catchError(error => of(PropertyActions.addPropertyOwnerFailure(error.message)))
+        )
+      )
+    )
+  );
+
+
+  getStrataCouncilList$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(PropertyActions.getCouncilList),
+      // tap(() => console.log('got here to call service for retrieving contracts')),
+      switchMap(() =>
+        this.propertyService.getCouncilList().pipe(
+          map((council: ManagementContract[]) => ({
+            type: '[Property] Get Council List Success',
+            payload: council
+          })),
+          // tap(res => {console.log('response: ' + res); }),
+          // catchError(
+          //   err => {
+          //     return of('[[Property] Get Contract List Failure', err.error);
+          //   } // EMPTY
+          // )
+          catchError(error => of(PropertyActions.getCouncilListFailure(error.message)))
+        )
+      )
+    )
+  );
+
+  getStrataCouncilDetails$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(PropertyActions.getCouncilDetails),
+      tap(() => console.log('got here for strata council details: ')),
+      map(action => action.payload),
+      switchMap((payload) =>
+        this.propertyService.getCouncilDetails(payload).pipe(
+          // tap(() => console.log('got here 2: ' + payload)),
+          map((strata: any) => ({
+            type: '[Property] Get Council Details Success',
+            payload: strata
+          })),
+          // tap(res => {console.log('response: ' + res); }),
+          // catchError(
+          //   err => {
+          //     return of(PropertyActions.getContractDetailsFailure([err.error]));
+          //   } // EMPTY // return of('[Property] Get Property Details Failure', err.error);
+          // )
+          catchError(error => of(PropertyActions.getCouncilDetailsFailure(error.message)))
+        )
+      )
+    )
+  );
+
   openSnackBar(message: string, action: string, type: string) {
     const config = new MatSnackBarConfig();
     config.panelClass = [type];

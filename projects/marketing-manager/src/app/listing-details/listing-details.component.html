@@ -5,7 +5,7 @@
     <div fxFlex="10%" fxLayoutAlign="end">
         <i class="far fa-arrow-alt-circle-left" title="back to list" style="cursor: pointer; color: seagreen; font-size: 1.5em;" (click)="goBack()"></i>
     </div>
-    <div fxFlex="20%" fxLayout="column" class="avatar_sec" fxLayoutAlign="start center">
+    <div fxFlex="20%" fxLayout="column" class="avatar_sec" fxLayoutAlign="start start">
         <span *ngIf="iconImg[0]">
           <img attr.src="{{serverUrl}}{{iconImg[0].propertyImgUrl}}" style="border-radius: 50%;margin-top: 20px;" width="120px " height="120px" title="">
         </span>
@@ -38,7 +38,7 @@
             <!-- <img src="http://placehold.it/50x50">
             <img src="http://placehold.it/50x50">   listing.rentalProperty.propertyImg
             <img src="http://placehold.it/50x50">-->
-            <a (click)="openInput()" class="up-icon" style="margin-left:0px;cursor: pointer;" title="update property image">
+            <a (click)="openInput()" class="up-icon" style="margin-left:0px;cursor: pointer;" title="upload property image">
                 <!-- <i class="material-icons">
                 publish  attr.src="{{serverUrl}}{{user.avatarUrl}}"
                 </i> -->
@@ -57,15 +57,18 @@
         <input #file id="fileInput" (change)="onChange(file.files)" hidden type="file" accept="image/png, image/gif, image/jpg, image/jpeg">
 
         <div style="margin-top: 25px;">
-            <span style="font-weight: 500;">Property Information</span>
+            <span style="font-weight: 500;"><mat-icon style="vertical-align: bottom;color: rgb(48, 48, 185);">house</mat-icon> &nbsp; Property Information</span>
             <p>
                 {{listing.rentalProperty.propertyName}}
             </p>
-            <p>
+            <p style="font-size: .85em;">
                 {{listing.rentalProperty.address.streetNum}} <br> {{listing.rentalProperty.address.city}} {{listing.rentalProperty.address.stateProvince}} {{listing.rentalProperty.address.zipPostCode}} <br> {{listing.rentalProperty.address.country}}
             </p>
-            <p>
-                Status: <span *ngIf="listing.rentalProperty.status != 0; else status">{{listing.rentalProperty.status | status}}</span>
+            <p style="font-size: .85em;">
+                <span style="font-weight:600;">Status:</span>
+                <span style="font-style:italic;" *ngIf="listing.rentalProperty.status != 0; else status"> &nbsp;
+                  <span [style.color]="listing.rentalProperty.status == 3 ? 'green': listing.rentalProperty.status == 1 ? 'orange': 'red'">{{listing.rentalProperty.status| status}}</span>
+                </span>
                 <span><ng-template #status>Not Listed</ng-template></span>
             </p>
 
@@ -210,7 +213,7 @@
                                 <ul fxLayout="row wrap" fxLayoutGap="20px" fxLayoutAlign="flex-start" style="list-style-type: none;margin-left: -15px;">
                                     <li *ngFor="let img of imgList; let i = index" style="display: inline;position: relative;" (mouseenter)="i=i+1" (mouseleave)="i = 0">
                                         <button mat-button [matMenuTriggerFor]="menu" style="padding: 0;">
-                                        <img attr.src={{serverUrl}}{{img.propertyImgUrl}} width="80px" height="80px" title="{{img.rentalPropertyId}}">
+                                        <img style="margin-bottom: 10px;" attr.src={{serverUrl}}{{img.propertyImgUrl}} width="80px" height="80px" title="{{img.rentalPropertyId}}">
                                       </button>
 
                                         <span style="position: absolute;
@@ -292,7 +295,7 @@
                                                         <mat-form-field class="owner-full-width">
                                                             <textarea id="notes" formControlName="notes" matInput placeholder="Notes" [ngModel]="oh.notes"></textarea>
                                                         </mat-form-field>
-                                                        <button type="submit" mat-button><mat-icon style="color: green;">done</mat-icon> &nbsp;UPDATE</button>
+                                                        <button type="submit" mat-button><mat-icon style="color: green;">done</mat-icon> &nbsp;ADD</button>
                                                     </div>
 
 

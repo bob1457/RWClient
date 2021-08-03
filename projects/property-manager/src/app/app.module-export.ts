@@ -43,6 +43,10 @@ import { metaReducers } from './store/metareducers';
 // ngx-mask ref: https://www.npmjs.com/package/ngx-mask
 import { NgxMaskModule, IConfig } from 'ngx-mask';
 import { SignDatePipe } from './sign-date.pipe';
+import { AddStrataDialogComponent } from './dialogs/add-strata-dialog/add-strata-dialog.component';
+import { StrataCouncilListComponent } from './strata-council-list/strata-council-list.component';
+import { StrataDetailsComponent } from './strata-details/strata-details.component';
+import { AddStrataComponent } from './add-strata/add-strata.component';
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 
 const routes: Routes = [
@@ -57,7 +61,10 @@ const routes: Routes = [
       { path: 'ownerdetails/:id', component: OwnerDetailsComponent},
       { path: 'contracts', component: ContractListComponent },
       { path: 'contractdetails/:id', component: ContractDetailsComponent},
-      { path: 'contractview/:id', component: ContractViewComponent}
+      { path: 'contractview/:id', component: ContractViewComponent},
+      { path: 'stratas', component: StrataCouncilListComponent },
+      { path: 'addstrata', component: AddStrataComponent},
+      { path: 'stratadetails/:id', component: StrataDetailsComponent}
     ]
   }//,
   // { path: 'owners', component: OwnerListComponent,  outlet: 'property'},
@@ -86,6 +93,7 @@ const routes: Routes = [
     ContractListComponent,
     ContractDetailsComponent,
     ContractContentComponent,
+    AddStrataDialogComponent,
     YesNoPipe,
     TypePipe,
     SignDatePipe,
@@ -94,7 +102,10 @@ const routes: Routes = [
     ContractHeaderComponent,
     ContractFooterComponent,
     ContractContentEditorComponent,
-    ContractViewComponent
+    ContractViewComponent,
+    StrataCouncilListComponent,
+    StrataDetailsComponent,
+    AddStrataComponent
   ],
   imports: [
     // BrowserModule,
@@ -115,6 +126,9 @@ const routes: Routes = [
   providers: [
     DatePipe
     // {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2500, panelClass: ['notif']}}
+  ],
+  entryComponents:[
+    AddStrataDialogComponent
   ],
   bootstrap: [AppPmComponent]
 })

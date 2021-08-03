@@ -1,5 +1,5 @@
 // import { BrowserModule } from '@angular/platform-browser';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { AppMaterialModule } from '@lib/app-material';
 import { NgModule } from '@angular/core';
 
@@ -49,7 +49,10 @@ import { AddendumViewComponent } from './addendum-view/addendum-view.component';
 import { AddAddendumComponent } from './add-addendum/add-addendum.component';
 import { AddVendorComponent } from './add-vendor/add-vendor.component';
 import { TypePipe } from './type.pipe';
+import { AddServiceRequestComponent } from './add-service-request/add-service-request.component';
 // import { CdkColumnDef } from '@angular/cdk/table';
+import { AppStatusPipe } from './app-status.pipe';
+import { MutualAgreementComponent } from './mutual-agreement/mutual-agreement.component';
 
 
 const routes: Routes = [
@@ -72,7 +75,8 @@ const routes: Routes = [
       { path: 'agreementview/:id', component: FullLeaseAgreementComponent},
       { path: 'addendumview/:id', component: AddendumViewComponent},
       { path: 'addaddendum', component: AddAddendumComponent},
-      { path: 'addVendor', component: AddVendorComponent}
+      { path: 'addVendor', component: AddVendorComponent},
+      { path: 'addRequest', component: AddServiceRequestComponent}
     ]
   }//,
   // { path: 'tenants', component: AllTenantsComponent}
@@ -115,7 +119,10 @@ const routes: Routes = [
     AddendumViewComponent,
     AddAddendumComponent,
     AddVendorComponent,
-    TypePipe
+    TypePipe,
+    AddServiceRequestComponent,
+    AppStatusPipe,
+    MutualAgreementComponent
   ],
   imports: [
     // BrowserModule,
@@ -130,7 +137,8 @@ const routes: Routes = [
     // AppRoutingModule
   ],
   providers: [
-    // CdkColumnDef
+    // CdkColumnDef providers: [DatePipe]
+    DatePipe
   ],
   entryComponents: [
     PaymentDetailsDialogComponent,

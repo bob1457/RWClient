@@ -351,7 +351,15 @@ const propertyListingReducer = createReducer(
       loaded: true,
       openHouses: updatedOpenHouse
     });
-  })
+  }),
+
+  on(ListingActions.updateOpenHouseToListingFailure, (state) => {
+    return ({
+      ...state,
+      loading: false,
+      errorMessage: 'Failed to update open house'
+    });
+  }),
 
 );
 

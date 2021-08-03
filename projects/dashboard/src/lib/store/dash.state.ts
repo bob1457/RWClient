@@ -24,6 +24,7 @@ export interface DashState {
   vendors: any[];
   servierequests: any[];
   invoiceList: any[];
+  councilList: any[];
 }
 
 

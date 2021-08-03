@@ -1,7 +1,7 @@
 <!-- <p>
   agreement-content works!
 </p> -->
-<div class="container" style="margin-top: 5px;">
+<div class="container" style="margin-top: 5px;margin-bottom: 5px;">
     <span style="font-weight: bold;color:#1150af;">RESIDENTIAL TENANCY AGREEMENT between:</span> <span style="font-style: italic;color:grey">(use full, correct legal names)</span>
     <p style="margin-top: 7px;">
         <span style="font-size: .9em;font-weight: bold;">the LANDLORD(S):</span> <span style="font-size: .75em;font-weight: bold;font-style: italic;">(if entry for landlord is a business name, use the ’last name’ field box to enter the full legal business name)</span>
@@ -140,7 +140,7 @@
                 </div>
             </div>
             <p style="margin-top: 7px;margin-bottom: -5px;">
-                <span style="font-size: .9em;font-weight: bold;">ADDRESS FOR SERVICE of the</span><span style="margin-left: 25px;font-weight: bold;"><input type="checkbox" [checked]="true"> &nbsp;landlord</span> <span style="margin-left: 25px; font-weight: bold;"><input type="checkbox"> &nbsp;landlord's agent</span>
+                <span style="font-size: .9em;font-weight: bold;">ADDRESS FOR SERVICE of the</span><span style="margin-left: 25px;font-weight: bold;"><input type="checkbox" [checked]="!lease.serviceAgent"> &nbsp;landlord</span> <span style="margin-left: 25px; font-weight: bold;"><input type="checkbox" [checked]="lease.serviceAgent"> &nbsp;landlord's agent</span>
             </p>
             <div fxLayout="row" fxLayoutAlign="start" fxFlexFill style="margin-top: -15px;">
                 <div style="width: 10%;">
@@ -148,19 +148,23 @@
                     <label>unit/site #</label>
                 </div>
                 <div style="width: 35%;">
-                    <input readonly type="text" [value]="lease.rentalProperty.rentalPropertyOwners[0].ownerAddress.streetNumber" [name]="lease.rentalProperty.rentalPropertyOwners[0].ownerAddress.streetNum">
+                    <input *ngIf="!lease.serviceAgent" readonly type="text" [value]="lease.rentalProperty.rentalPropertyOwners[0].ownerAddress.streetNumber" [name]="lease.rentalProperty.rentalPropertyOwners[0].ownerAddress.streetNum">
+                    <input *ngIf="lease.serviceAgent" readonly type="text" [value]="lease.agent[0].addressStreetNumber" [name]="lease.agent[0].addressStreetNumber">
                     <label>street number and street name</label>
                 </div>
                 <div style="width: 30%;">
-                    <input readonly type="text" [value]="lease.rentalProperty.rentalPropertyOwners[0].ownerAddress.city" [name]="lease.rentalProperty.rentalPropertyOwners[0].ownerAddress.city">
+                    <input *ngIf="!lease.serviceAgent" readonly type="text" [value]="lease.rentalProperty.rentalPropertyOwners[0].ownerAddress.city" [name]="lease.rentalProperty.rentalPropertyOwners[0].ownerAddress.city">
+                    <input *ngIf="lease.serviceAgent" readonly type="text" [value]="lease.agent[0].addressCity" [name]="lease.agent[0].addressCity">
                     <label>city</label>
                 </div>
                 <div style="width: 10%;">
-                    <input readonly type="text" [value]="lease.rentalProperty.rentalPropertyOwners[0].ownerAddress.stateProvince" [name]="lease.rentalProperty.rentalPropertyOwners[0].ownerAddress.stateProvince">
+                    <input *ngIf="!lease.serviceAgent" readonly type="text" [value]="lease.rentalProperty.rentalPropertyOwners[0].ownerAddress.stateProvince" [name]="lease.rentalProperty.rentalPropertyOwners[0].ownerAddress.stateProvince">
+                    <input *ngIf="lease.serviceAgent" readonly type="text" [value]="lease.agent[0].addressStateProv" [name]="lease.agent[0].addressStateProv">
                     <label>province</label>
                 </div>
                 <div style="width: 15%;">
-                    <input readonly type="text" [value]="lease.rentalProperty.rentalPropertyOwners[0].ownerAddress.zipPostCode" [name]="lease.rentalProperty.rentalPropertyOwners[0].ownerAddress.zipPostCode">
+                    <input *ngIf="!lease.serviceAgent" readonly type="text" [value]="lease.rentalProperty.rentalPropertyOwners[0].ownerAddress.zipPostCode" [name]="lease.rentalProperty.rentalPropertyOwners[0].ownerAddress.zipPostCode">
+                    <input *ngIf="lease.serviceAgent" readonly type="text" [value]="lease.agent[0].addressZipPostCode" [name]="lease.agent[0].addressZipPostCode">
                     <label>postal code</label>
                 </div>
             </div>
@@ -169,21 +173,26 @@
                     <input readonly type="text">
                 </div>
                 <div style="width: 25%;">
-                    <input readonly type="text" [value]="lease.rentalProperty.rentalPropertyOwners[0].contactTelephone" [name]="lease.rentalProperty.rentalPropertyOwners[0].contactTelephone" style="width: 90%;">
+                    <input *ngIf="!lease.serviceAgent" readonly type="text" [value]="lease.rentalProperty.rentalPropertyOwners[0].contactTelephone" [name]="lease.rentalProperty.rentalPropertyOwners[0].contactTelephone" style="width: 90%;">
+                    <input *ngIf="lease.serviceAgent" readonly type="text" [value]="lease.agent[0].contztTel" [name]="lease.agent[0].contztTel" style="width: 90%;">
                     <label style="margin-left: -60px;">daytime phone number</label>
                 </div>
                 <div style="width: 8%;">
                     <input readonly type="text">
                 </div>
                 <div style="width: 25%;">
-                    <input type="text" [value]="lease.rentalProperty.rentalPropertyOwners[0].contactTelephone" [name]="lease.rentalProperty.rentalPropertyOwners[0].contactTelephone" style="width: 90%;">
+                    <!-- <input type="text" [value]="lease.rentalProperty.rentalPropertyOwners[0].contactTelephone" [name]="lease.rentalProperty.rentalPropertyOwners[0].contactTelephone" style="width: 90%;"> -->
+                    <input *ngIf="!lease.serviceAgent" readonly type="text" [value]="lease.rentalProperty.rentalPropertyOwners[0].contactTelephone" [name]="lease.rentalProperty.rentalPropertyOwners[0].contactTelephone" style="width: 90%;">
+                    <input *ngIf="lease.serviceAgent" readonly type="text" [value]="lease.agent[0].contztTel" [name]="lease.agent[0].contztTel" style="width: 90%;">
                     <label style="margin-left: -60px;">other phone number</label>
                 </div>
                 <div style="width: 8%;">
                     <input readonly type="text">
                 </div>
                 <div style="width: 25%;">
-                    <input type="text" [value]="lease.rentalProperty.rentalPropertyOwners[0].contactTelephone" [name]="lease.rentalProperty.rentalPropertyOwners[0].contactTelephone" style="width: 90%;">
+                    <!-- <input type="text" [value]="lease.rentalProperty.rentalPropertyOwners[0].contactTelephone" [name]="lease.rentalProperty.rentalPropertyOwners[0].contactTelephone" style="width: 90%;"> -->
+                    <input *ngIf="!lease.serviceAgent" readonly type="text" [value]="lease.rentalProperty.rentalPropertyOwners[0].contactTelephone" [name]="lease.rentalProperty.rentalPropertyOwners[0].contactTelephone" style="width: 90%;">
+                    <input *ngIf="lease.serviceAgent" readonly type="text" [value]="lease.agent[0].contztTel" [name]="lease.agent[0].contztTel" style="width: 90%;">
                     <label style="margin-left: -60px;">fax phone for services</label>
                 </div>
             </div>
@@ -328,7 +337,7 @@
                                             <p style="font-weight: bold;margin-top: 18px;">Reason tenant must vacate (required):</p>
                                         </div>
                                         <div fxFlex="60%">
-                                            <input type="text" style="height: 35px;">
+                                            <input type="text" style="height: 35px;" [value]="lease.renewTerm" name="lease.renewTerm">
                                         </div>
                                     </div>
                                 </div>

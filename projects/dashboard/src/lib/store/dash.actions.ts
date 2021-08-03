@@ -294,3 +294,23 @@ export const getAllInvoicesFailure = createAction(
     return ({ payload: { errorMessage } });
   }
 );
+
+/**
+ * Get Council List Actions
+ */
+export const getCouncilList = createAction(
+  '[Property] Get Council List'
+);
+
+export const getCouncilListSuccess = createAction(
+  '[Property] Get Council List Success',
+  props<{payload: any[]}>()
+);
+
+export const getCouncilListFailure = createAction(
+  '[Property] Get Council List Failure',
+  // props<{payload: any}>()
+  (errorMessage = 'Error loading property list') => {
+    return ({ payload: { errorMessage } });
+  }
+);

@@ -1,0 +1,110 @@
+.container {
+    width: 100%;
+    // background: #e0e0e0;
+    background-color: white;
+    padding: 10px;
+    border-bottom: 8px solid #1150af;
+}
+
+.container2 {
+    width: 100%;
+    background: #e0e0e0;
+    background-color: white;
+    padding: 10px;
+    padding-top: 0;
+    border-bottom: 4px dashed #1150af 3px;
+}
+
+.container3 {
+    width: 98%;
+    background: #e0e0e0;
+    background-color: white;
+    padding: 10px;
+    padding-top: 0;
+    border-bottom: 10px solid #1150af;
+}
+
+.page-container {
+    width: 100%;
+    background-color: white;
+    border-bottom: 8px solid #1150af;
+}
+
+// input[type=text] {
+//     width: 98%;
+//     // padding: 12px 20px;
+//     padding: 6px 20px;
+//     margin: 8px 0;
+//     box-sizing: border-box;
+//     margin-bottom: -4px;
+//     background-color: #e4ebf3;
+//     height: 40px;
+//     font-size: 0.9em;
+// }
+// label {
+//     font-size: .75em;
+// }
+.section-title {
+    font-size: .9em;
+    font-weight: 500;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: white;
+    background: rgb(17, 80, 175);
+    padding-left: 5px;
+}
+
+.container-padding {
+    padding-top: 0;
+    background-color: white;
+}
+
+.spacer {
+    flex: 1 1 auto;
+}
+
+.page-container {
+    width: 100%;
+    background-color: white;
+    border-bottom: 8px solid #1150af;
+}
+
+input[type=text] {
+    width: 98%;
+    padding: 12px 10px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    margin-bottom: -4px;
+    background-color: #e4ebf3;
+    height: 35px;
+    font-size: 0.9em;
+    border: thin solid black;
+}
+
+label {
+    font-size: .75em;
+}
+
+table {
+    width: 100%;
+    border: 1px solid;
+    border-collapse: collapse;
+    border-spacing: 0;
+    padding: 0px;
+}
+
+tr.address td {
+    border-top: 0;
+}
+
+tr.address-title td {
+    border-bottom: 0;
+}
+
+td,
+th {
+    // height: 15px;
+    // padding-top: 0;
+    // padding-bottom: 0;
+    padding: 0px;
+}

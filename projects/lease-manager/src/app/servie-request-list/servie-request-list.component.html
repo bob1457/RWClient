@@ -23,13 +23,14 @@
                     <mat-radio-button value="0">All</mat-radio-button>
                 </mat-radio-group>
                 <span class="spacer"></span>
-                <button [routerLink]="['/Manage/marketing/addVendor']" mat-button mat-mini-fab style="background: #c2125b;color: white;">
+                <button [routerLink]="['/Manage/lease/addRequest']" mat-button mat-mini-fab style="background: #c2125b;color: white;">
               <i class="material-icons" title="Add Sevice Rquest">
                 control_point_duplicate
               </i>
             </button>
             </div>
         </div>
+
         <div fxLayoutAlign="center">
             <table mat-table [dataSource]="dataSource" matSort class="my-table mat-elevation-z8" style="width: 98%;">
 

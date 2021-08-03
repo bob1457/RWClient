@@ -25,6 +25,7 @@ import { AppStatusPipe } from './app-status.pipe';
 import { OhStatusPipe } from './oh-status.pipe';
 import { EmpyStatusPipe } from './empy-status.pipe';
 import { ImStatusPipe } from './im-status.pipe';
+import { ReferenceTypePipe } from './reference-type.pipe';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { ImStatusPipe } from './im-status.pipe';
     AppStatusPipe,
     OhStatusPipe,
     EmpyStatusPipe,
-    ImStatusPipe
+    ImStatusPipe,
+    ReferenceTypePipe
   ],
   imports: [
     BrowserModule,

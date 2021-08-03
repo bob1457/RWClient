@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators  } from '@angular/forms';
-import { Property, RentalProperty, LeaseService, NewTenant } from '@lib/app-core';
+import { FormGroup, FormBuilder, Validators, FormArray, FormControl  } from '@angular/forms';
+import { Property, RentalProperty, LeaseService, NewTenant, MarketingService } from '@lib/app-core';
 import { Observable } from 'rxjs';
-import { Location }  from '@angular/common';
+import { DatePipe, Location }  from '@angular/common';
 import { addLease } from '../store/actions/lease.actions';
 import { PropertyLeaseState } from '../store/lease-state';
 import { select, Store } from '@ngrx/store';
 import { AuthState, getUserInfo, User } from '@lib/auth';
+import { DashState, RentalAppList } from '@lib/dashboard';
+import { tenantList } from '../store/reducers';
 
 
 @Component({
@@ -21,14 +23,42 @@ export class AddLeaseComponent implements OnInit {
 
   properties$: Observable<RentalProperty[]>;
   newTenants$: Observable<NewTenant[]>;
+  applicantList;
+  selectedApplication;
+  applicants;
+  muutalAgreement = false;
+
+  allAplicatons;
+
+  currentDate = new Date();
 
   constructor(private formBuilder: FormBuilder,
               private location: Location,
               private store: Store<PropertyLeaseState>,
               private authStore: Store<AuthState>,
+              private datePipe: DatePipe,
+              private dashStore: Store<DashState>,
+              private marketingService: MarketingService,
               private leaseService: LeaseService ) {
                 // this.authStore.select(getUserInfo)
                 //     .subscribe( user => this.user = user);
+                this.dashStore.select(RentalAppList)
+                              .subscribe(applist => {
+                                if (applist) {
+                                  this.applicantList = applist;
+                                  this.applicantList = this.applicantList.filter(a => a.status == 2);
+                                  console.log('app list', this.applicantList);
+                                // } else {
+                                //   this.applicantList = JSON.parse(localStorage.getItem('applications'));
+                                }
+
+
+                                // this.coApplicantList = this.coApplicantList.filter(l => l.propertyId == this.lease.rentalPropertyId);
+                                // console.log('lease id', this.lease.rentalProperty.id);
+                                // console.log('co apps', this.coApplicantList);
+
+                              });
+
               }
 
 
@@ -60,6 +90,7 @@ export class AddLeaseComponent implements OnInit {
     this.newTenants$ = this.leaseService.getAllNewTenants();
 
     this.addForm = this.formBuilder.group({
+      tenantList:this.formBuilder.array([]),
       // type: [0],
       leaseTitle: [''],
       leaseDesc: [''],
@@ -83,6 +114,7 @@ export class AddLeaseComponent implements OnInit {
       // endLeaseCode: [''],
       renewTerm: [''],
       notes: [''],
+      serviceAgent: [false],
       newTenantId: [],
       // rentalProperty: this.formBuilder.group({
       //   propertyName: [],
@@ -134,6 +166,7 @@ export class AddLeaseComponent implements OnInit {
 
       onlineAccessEnbaled: [false],
       userAvartaImgUrl: [''],
+      muutalAgreement: [false]
 
       // leaseTitle: [],
       // leaseDesc: [],
@@ -210,6 +243,141 @@ export class AddLeaseComponent implements OnInit {
     console.log('p', id);
   }
 
+
+  tenantList(): FormArray {
+    return this.addForm.get('tenantList') as FormArray;
+  }
+
+// newTenant(): FormGroup {
+//   return this.formBuilder.group({
+//     firstName: [''],
+//     lastName: ['']
+//   });
+// }
+
+  onApplicationChange(app) {
+    console.log('app', app);
+    // this.dashStore.select(RentalAppList)
+    //               .subscribe(applist => {
+    //                 if (applist) {
+    //                   this.applicantList = applist;
+    //                   console.log('app list', this.applicantList);
+
+    //                   this.selectedApplication = this.applicantList.find(l => l.rentalApplicationId == app.rentalApplicationId);
+    //                   this.applicants = this.selectedApplication.coApplicantList;
+    //                   // console.log('lease id', this.lease.rentalProperty.id);
+    //                   console.log('selected app', this.selectedApplication);
+    //                   console.log('applicants from the application', this.applicants);
+    //                 // } else {
+    //                 //   this.applicantList = JSON.parse(localStorage.getItem('applications'));
+    //                   // const tenants = this.addForm.get('tenantList') as FormArray;
+    //                   this.addForm.patchValue({
+    //                     rentalPropertyId: this.selectedApplication.propertyId
+    //                   });
+    //                   // this.applicants.map( item => {
+    //                   //   tenants.push(this.newTenant());
+    //                   // });
+
+    //                   // tslint:disable-next-line:one-variable-per-declaration
+    //                   this.tenantList().push(new FormControl({
+    //                     userName: 'NotSet',
+    //                     firstName: this.selectedApplication.applicatnFirstName,
+    //                     lastName: this.selectedApplication.applicatnLastName,
+    //                     contactEmail: this.selectedApplication.applicantContactEmail,
+    //                     ContactTelephone1: this.selectedApplication.applicantContactTel,
+    //                     ContactTelephone2: this.selectedApplication.applicantContactTel,
+    //                     ContactOthers: '',
+    //                     onlineAccessEnbaled: false,
+    //                     isActive: true,
+    //                     userAvartaImgUrl:'',
+    //                     roleId: 3//,
+    //                     // created: this.datePipe.transform(this.currentDate, 'yyyy-MM-dd:hh:mm:ss'),
+    //                     // modified: this.datePipe.transform(this.currentDate, 'yyyy-MM-dd:hh:mm:ss')
+    //                   }));
+
+    //                   this.applicants.forEach(t => {
+    //                     console.log('returned t', t);
+    //                     this.tenantList().push(new FormControl({
+    //                       userName: 'NotSet',
+    //                       firstName: t.firstName,
+    //                       lastName: t.lastName,
+    //                       contactEmail: t.contactEmail,
+    //                       ContactTelephone1: t.contactTel,
+    //                       ContactTelephone2: t.contactSms,
+    //                       ContactOthers: t.contactOthers,
+    //                       onlineAccessEnbaled: false,
+    //                       isActive: true,
+    //                       userAvartaImgUrl: '',
+    //                       roleId: 3//,
+    //                       // created: this.datePipe.transform(this.currentDate, 'yyyy-MM-dd:hh:mm:ss'),
+    //                       // modified: this.datePipe.transform(this.currentDate, 'yyyy-MM-dd:hh:mm:ss')
+    //                     }));
+    //                   });
+
+    //                   // for(const tenant of this.applicants) {
+    //                   //   console.log('tenant returned', tenant);
+    //                   //   this.tenantList().push(new FormControl(tenant)) ;                     }
+
+    //                   console.log('tenant list', this.tenantList);
+    //                 }
+    //               });
+
+    this.marketingService.getAllRentalApplications()
+        .subscribe( applicatons => {
+
+          if(applicatons) {
+            this.allAplicatons = applicatons;
+            this.allAplicatons = this.allAplicatons.filter(a => a.status == 2);
+            console.log('all applications', this.allAplicatons);
+            this.selectedApplication = this.applicantList.find(l => l.rentalApplicationId == app.rentalApplicationId);
+            this.applicants = this.selectedApplication.coApplicantList;
+
+            console.log('selected app', this.selectedApplication);
+
+            this.addForm.patchValue({
+              rentalPropertyId: this.selectedApplication.propertyId
+            });
+
+            this.tenantList().push(new FormControl({
+              userName: 'NotSet',
+              firstName: this.selectedApplication.applicatnFirstName,
+              lastName: this.selectedApplication.applicatnLastName,
+              contactEmail: this.selectedApplication.applicantContactEmail,
+              ContactTelephone1: this.selectedApplication.applicantContactTel,
+              ContactTelephone2: this.selectedApplication.applicantContactTel,
+              ContactOthers: '',
+              onlineAccessEnbaled: false,
+              isActive: true,
+              userAvartaImgUrl:'',
+              roleId: 3//,
+              // created: this.datePipe.transform(this.currentDate, 'yyyy-MM-dd:hh:mm:ss'),
+              // modified: this.datePipe.transform(this.currentDate, 'yyyy-MM-dd:hh:mm:ss')
+            }));
+
+            this.applicants.forEach(t => {
+            console.log('returned t', t);
+            this.tenantList().push(new FormControl({
+              userName: 'NotSet',
+              firstName: t.firstName,
+              lastName: t.lastName,
+              contactEmail: t.contactEmail,
+              ContactTelephone1: t.contactTel,
+              ContactTelephone2: t.contactSms,
+              ContactOthers: t.contactOthers,
+              onlineAccessEnbaled: false,
+              isActive: true,
+              userAvartaImgUrl: '',
+              roleId: 3// ,
+              // created: this.datePipe.transform(this.currentDate, 'yyyy-MM-dd:hh:mm:ss'),
+              // modified: this.datePipe.transform(this.currentDate, 'yyyy-MM-dd:hh:mm:ss')
+              }));
+            });
+          }
+
+        });
+
+  }
+
   onTenantChange(id) {
     this.addForm.get('newTenantId').setValue(id);
     console.log('t', id);
@@ -218,6 +386,7 @@ export class AddLeaseComponent implements OnInit {
   submit() {
     debugger;
     // Get user data
+
     this.addForm.patchValue({
       agentFirstName: this.user.firstname,
 
@@ -225,7 +394,13 @@ export class AddLeaseComponent implements OnInit {
       agentContactEmail: this.user.email,
       contatTel: this.user.telephone1,
       // agentContactOthers:[],
+
+
       isPropertyManage: true,
+      roleId: 3,
+
+
+      newTenantId: 999, // backward compatibility
       addressStreetNumber: this.user.addressstreet,
       addressCity: this.user.addresscity,
       addressStateProv: this.user.addressprovstate,
@@ -236,6 +411,11 @@ export class AddLeaseComponent implements OnInit {
     console.log('add form', this.addForm.value);
     this.store.dispatch(addLease({payload: this.addForm.value}));
     this.location.back();
+  }
+
+  onChange(event) {
+    console.log('agreement?', event.checked);
+    this.muutalAgreement = event.checked;
   }
 
   back() {

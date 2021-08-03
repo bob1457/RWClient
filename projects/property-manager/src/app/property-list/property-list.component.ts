@@ -3,8 +3,9 @@ import { Property, PropertyService } from '@lib/app-core';
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Store, select } from '@ngrx/store';
-import { getPropertyList, getPropertyDetails, addProperty, updateProperty, updatePropertyStatus, removeProperty } from '../store/actions/property.actions';
-import { propertyList, loadingStatus} from '../store/reducers/property.reducer';
+import { getPropertyList, getPropertyDetails, addProperty, updateProperty,
+         updatePropertyStatus, removeProperty, getCouncilList } from '../store/actions/property.actions';
+import { propertyList, loadingStatus, councilList} from '../store/reducers/property.reducer';
 import { MatPaginator, MatSort } from '@angular/material';
 import { Observable } from 'rxjs';
 
@@ -28,6 +29,7 @@ export class PropertyListComponent implements OnInit, AfterViewInit {
   propertyId: any = 1;
 
   list: Property[];
+  councils: any[];
   propertyList$: Observable<Property[]>;
   // tslint:disable-next-line: max-line-length
   displayedColumns: string[] = ['icon', 'id', 'propertyName', 'propertyNumber', 'type', 'status', 'createdDate', 'updateDate', 'action'];
@@ -37,6 +39,16 @@ export class PropertyListComponent implements OnInit, AfterViewInit {
   constructor(private propertyService: PropertyService,
               private router: Router,
               private store: Store<PropertyState>) {
+                this.router.events.subscribe((routerEvent: Event) => {
+                  if (routerEvent instanceof NavigationStart) {
+                    this.loadingIndicator = true;
+                  }
+
+                  if (routerEvent instanceof NavigationEnd ){
+                    this.loadingIndicator = false;
+                  }
+
+                });
 
                 this.store.pipe(
                   select(propertyList)).subscribe(data => {
@@ -50,6 +62,13 @@ export class PropertyListComponent implements OnInit, AfterViewInit {
 
                     setTimeout(() =>  {this.dataSource.paginator = this.paginator; this.dataSource.sort = this.sort; });
                   });
+
+                setTimeout(() =>  {this.dataSource.paginator = this.paginator; this.dataSource.sort = this.sort; });
+
+                this.store.select(councilList).subscribe( res => {
+                  this.councils = res;
+                  console.log('council list', this.councils);
+                });
 
                 this.router.events.subscribe((routerEvent: Event) => {
                   if (routerEvent instanceof NavigationStart) {
@@ -74,6 +93,8 @@ export class PropertyListComponent implements OnInit, AfterViewInit {
     if (this.list == null) {
       this.store.dispatch(getPropertyList());
     }
+
+    this.store.dispatch(getCouncilList());
 
     // this.store.dispatch(getPropertyImageList());
 
@@ -131,6 +152,7 @@ export class PropertyListComponent implements OnInit, AfterViewInit {
     propertyName: 'Real Property',
     propertyDesc: 'string',
     type: '',
+    strataCouncilId: 0,
     propertyManagerUserName: 'string',
     propertyLogoImgUrl: 'string',
     propertyVideoUrl: 'string',
@@ -293,7 +315,6 @@ RemoveProperty() {
     propertyId: 1002,
     active: false
   };
-
   debugger;
   return this.store.dispatch(removeProperty({payload: propertyToRemove}));
 }
