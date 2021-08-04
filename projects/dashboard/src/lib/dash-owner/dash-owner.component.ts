@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { getPropertyOwnerList } from '../store/dash.actions';
+import { getPropertyOwnerList, getPropertyOwnerListByPm } from '../store/dash.actions';
 import { select, Store } from '@ngrx/store';
 import { DashState } from '../store/dash.state';
 import { RentalApplication } from '../models/application.model';
@@ -25,6 +25,7 @@ export class DashOwnerComponent implements OnInit {
   @Input() applications: RentalApplication[];
   @Input() openhouses: OpenHouse[];
   @Input() username;
+  @Input() userrole;
 
   constructor(private store: Store<DashState>) { }
 
@@ -34,8 +35,13 @@ export class DashOwnerComponent implements OnInit {
 
     this.breakpoint = (window.innerWidth <= 640) ? 2 : 1;
     debugger;
-    // return this.store.dispatch(getPropertyOwnerList()) ;
-    return this.store.dispatch(getPropertyOwnerList(this.username)) ;
+
+    // if (this.userrole === 'admin') {
+    //   return this.store.dispatch(getPropertyOwnerList()) ;
+    // } else {
+    //   return this.store.dispatch(getPropertyOwnerListByPm(this.username)) ;
+    // }
+
   }
 
   onResize(event) {

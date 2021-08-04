@@ -33,6 +33,14 @@ export class ManagementContractService {
     return this.http.get<ManagementContract[]>(`${this.baseUrl}/property/contracts`);
   }
 
+  getManagementContractListByPm(pm: any) {
+    if (pm) {
+      return this.http.get<ManagementContract[]>(`${this.baseUrl}/property/contracts/${pm}`);
+    } else {
+      return this.http.get<ManagementContract[]>(`${this.baseUrl}/property/contracts`);
+    }
+  }
+
   getManagementContractDetails(id: number) {
     // return this.http.get<Property>(`${this.baseUrl}/property/${id});
     return this.http.get<ManagementContract>(`${this.baseUrl}/property/contract/${id}`);

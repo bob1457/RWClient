@@ -47,9 +47,26 @@ const dashReducer = createReducer(
     });
   }),
 
-   /**
-   * Get property imge list
-   */
+  on(DashActions.getPropertyListByPm, state => {
+    return ({
+      ...state,
+      loading: true,
+      loaded: false
+    });
+  }),
+
+  on(DashActions.getPropertyListByPmSuccess, (state, { payload }) => {
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      properties: payload
+    });
+  }),
+
+/**
+ * Get property imge list
+ */
   on(DashActions.getPropertyImageList, state => ({
     ...state,
     loading: true,
@@ -88,6 +105,28 @@ const dashReducer = createReducer(
     errorMessage: 'Failed to load property owners'
   })),
 
+  on(DashActions.getPropertyOwnerListByPm, state => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+  on(DashActions.getPropertyOwnerListByPmSuccess, (state, { payload }) => {
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      owners: payload
+    });
+  }),
+
+  on(DashActions.getPropertyOwnerListByPmFailure, (state) => ({
+    ...state,
+    loading: false,
+    loaded: false,
+    errorMessage: 'Failed to load property owners'
+  })),
+
   on(DashActions.getContractList, state => ({
     ...state,
     loading: true,
@@ -104,6 +143,31 @@ const dashReducer = createReducer(
   }),
 
   on(DashActions.getContractListFailure, (state) => {
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      contracts: null,
+      errorMessage: 'Failed to load contract details'
+    });
+  }),
+
+  on(DashActions.getContractListByPm, state => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+  on(DashActions.getContractListByPmSuccess, (state, { payload }) => {
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      contracts: payload
+    });
+  }),
+
+  on(DashActions.getContractListByPmFailure, (state) => {
     return ({
       ...state,
       loading: false,

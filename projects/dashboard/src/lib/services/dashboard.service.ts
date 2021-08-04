@@ -20,10 +20,15 @@ export class DashboardService {
 
   constructor(private http: HttpClient) { }
 
-  getPropertyList(user: string) { // user: property manager username/id
+  getPropertyList() { // user: property manager username/id
     debugger;
-    console.log('username in property service', user);
-    return this.http.get<Property[]>(`${this.baseUrl}/property/all/${user}`);
+
+    return this.http.get<Property[]>(`${this.baseUrl}/property/all/`);
+  }
+
+  getPropertyListByPm(pm: any) {
+    debugger;
+    return this.http.get<Property[]>(`${this.baseUrl}/property/all/${pm}`); // return type could be <Property[]>?
   }
 
   getAllPropertyImages() {
@@ -31,19 +36,31 @@ export class DashboardService {
     return this.http.get<PropertyImg[]>(`${this.baseUrl}/listing/allimgs`);
   }
 
-  getPropertyOwnerList(user: string) {
+  getPropertyOwnerList() {
     debugger;
-    console.log('username in owner service', user);
+
     // return this.http.get<PropertyOwner[]>(`${this.baseUrl}/property/ownersbyppt/${user}`);
-    const url = this.baseUrl + '/property/ownersbyppt/' + user;
+    const url = this.baseUrl + '/property/owners/';
     console.log('url for owner list', url);
     return this.http.get<PropertyOwner[]>(url);
   }
 
-  getManagementContractList(user: string) {
+  getPropertyOwnerListByPm(user: any) {
     debugger;
-    console.log('username in contract service', user);
-    return this.http.get<ManagementContract[]>(`${this.baseUrl}/property/contractsbypm/${user}`);
+    console.log('username in owner service', user);
+    // return this.http.get<PropertyOwner[]>(`${this.baseUrl}/property/ownersbyppt/${user}`);
+    const url = this.baseUrl + '/property/ownersbypm/' + user;
+    console.log('url for owner list', url);
+    return this.http.get<PropertyOwner[]>(url);
+  }
+
+  getManagementContractList() {
+    debugger;
+    return this.http.get<ManagementContract[]>(`${this.baseUrl}/property/contracts/`);
+  }
+
+  getManagementContractListByPm(pm: any) {
+    return this.http.get<ManagementContract[]>(`${this.baseUrl}/property/contractsbypm/${pm}`);
   }
 
   getAllPropertyListings() {

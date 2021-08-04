@@ -5,14 +5,20 @@ import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Property } from './models/property.model';
 import { Store, select } from '@ngrx/store';
+// tslint:disable-next-line:max-line-length
 import { PropertyList, ContractList, TenantList, RentalList, OwnerList, MarketingList, RentalAppList, OpenHouseList, RentPaymentHistory, VendorList, WorkOrderList, ServiceRequestList, InvoiceList, CouncilList } from './store/dash.reducer';
 // tslint:disable-next-line:max-line-length
-import { getPropertyList, getAllLeases, getAllTenants, getContractList, getPropertyOwnerList, getRentalApplicationList, getPropertyImageList, getOpenHouseList, getRentPaymentList, getAllVendors, getAllWorkOrders, getAllServiceRequests, getAllInvoices, getCouncilList } from './store/dash.actions';
-import { PropertyService, ManagementContract, PropertyTenant, PropertyLease, RentalApplication } from '@lib/app-core';
+import { getPropertyList, getAllLeases, getAllTenants, getContractList, getPropertyOwnerList, getRentalApplicationList, getPropertyImageList, getOpenHouseList, getRentPaymentList, getAllVendors, getAllWorkOrders, getAllServiceRequests, getAllInvoices, getCouncilList, getPropertyListByPm, getPropertyOwnerListByPm } from './store/dash.actions';
+// import { PropertyService, ManagementContract, PropertyTenant, PropertyLease, RentalApplication } from '@lib/app-core';
+// import { PropertyService, ManagementContract, PropertyTenant, PropertyLease, RentalApplication } from './services/dashboard.service';
 import { PropertyOwner } from './models/property-owner.model';
 import { PropertyListing } from './models/property-listing.model';
 import { OpenHouse } from './models/openhouse.model';
 import { getUserInfo } from '@lib/auth';
+import { ManagementContract } from './models/management-contract.model';
+import { PropertyTenant } from './models/property-tenant.model';
+import { PropertyLease } from './models/property-lease.model';
+import { RentalApplication } from './models/application.model';
 // import { ActivatedRoute } from '@angular/router';
 
 
@@ -48,11 +54,15 @@ export class DashboardComponent implements OnInit {
   loading: boolean;
 
   username;
+  userrole;
 
   constructor(private breakpointObserver: BreakpointObserver,
-              private store: Store<DashState>,
+              private store: Store<DashState>// ,
               // private actRoute: ActivatedRoute,
-              private propertyService: PropertyService) {
+              // private propertyService: PropertyService
+              ) {
+                this.getCurrentUser();
+
                 this.$propertyList = this.store.select(PropertyList);
                 this.contractList$ = this.store.select(ContractList);
                 this.tenantList$ = this.store.select(TenantList);
@@ -71,7 +81,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
 
-    this.getCurrentUser();
+    // this.getCurrentUser();
     console.log('got username or not', this.username);
 
     this.breakpoint = (window.innerWidth <= 640) ? 4 : 1;
@@ -79,12 +89,26 @@ export class DashboardComponent implements OnInit {
     this.bp2 = (window.innerWidth <= 640) ? 4 : 3;
     this.bp1 = (window.innerWidth <= 640) ? 2 : 1;
 
-    this.store.dispatch(getPropertyList({payload: this.username})) ;
+    if (this.userrole == 'admin') {
+      this.store.dispatch(getPropertyList());
+    } else {
+      this.store.dispatch(getPropertyListByPm({payload: this.username})) ;
+    }
+
+    if (this.userrole == 'pm') {
+      console.log('get here for owner by pm: role: ', this.userrole);
+      this.store.dispatch(getPropertyOwnerListByPm({payload: this.username}));
+    } else {
+      this.store.dispatch(getPropertyOwnerList());
+    }
+
+    // this.store.dispatch(getPropertyList({payload: this.username})) ;
     this.store.dispatch(getAllLeases());
     this.store.dispatch(getAllTenants());
     this.store.dispatch(getContractList({payload: this.username}));
     // this.store.dispatch(getPropertyOwnerList({payload: this.username}));
-    this.store.dispatch(getPropertyOwnerList({payload: this.username}));
+
+
     this.store.dispatch(getRentalApplicationList());
 
     this.store.dispatch(getPropertyImageList());
@@ -135,12 +159,17 @@ export class DashboardComponent implements OnInit {
             if (!userData) {
               const uname = JSON.parse(localStorage.getItem('auth'));
               this.username = uname.username;
-              console.log('get from dash localstorage', this.username);
+              this.userrole = uname.role;
+              console.log('get from dash localstorage', this.username+ " " + this.userrole);
             } else {
               this.username = userData.username;
-              console.log('get from state', this.username);
+              this.userrole = userData.role;
+              console.log('get from state', this.username + " " + this.userrole);
             }
 
+            // this.username = userData.username;
+            // this.userrole = userData.role;
+            // console.log('get from state', this.username + " " + this.userrole);
           });
   }
 
