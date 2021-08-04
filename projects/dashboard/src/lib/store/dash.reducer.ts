@@ -194,6 +194,23 @@ const dashReducer = createReducer(
     });
   }),
 
+  on(DashActions.getPropertyListingByPm, state => {
+    return ({
+      ...state,
+      loading: true,
+      loaded: false
+    });
+  }),
+
+  on(DashActions.getPropertyListingByPmSuccess, (state, { payload }) => {
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      listings: payload
+    });
+  }),
+
   on(DashActions.getPropertyOwnerListFailure, state => ({
     ...state,
     loading: false,

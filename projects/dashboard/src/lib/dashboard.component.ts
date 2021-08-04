@@ -8,7 +8,7 @@ import { Store, select } from '@ngrx/store';
 // tslint:disable-next-line:max-line-length
 import { PropertyList, ContractList, TenantList, RentalList, OwnerList, MarketingList, RentalAppList, OpenHouseList, RentPaymentHistory, VendorList, WorkOrderList, ServiceRequestList, InvoiceList, CouncilList } from './store/dash.reducer';
 // tslint:disable-next-line:max-line-length
-import { getPropertyList, getAllLeases, getAllTenants, getContractList, getPropertyOwnerList, getRentalApplicationList, getPropertyImageList, getOpenHouseList, getRentPaymentList, getAllVendors, getAllWorkOrders, getAllServiceRequests, getAllInvoices, getCouncilList, getPropertyListByPm, getPropertyOwnerListByPm } from './store/dash.actions';
+import { getPropertyList, getAllLeases, getAllTenants, getContractList, getPropertyOwnerList, getRentalApplicationList, getPropertyImageList, getOpenHouseList, getRentPaymentList, getAllVendors, getAllWorkOrders, getAllServiceRequests, getAllInvoices, getCouncilList, getPropertyListByPm, getPropertyOwnerListByPm, getContractListByPm, getPropertyListingByPm, getPropertyListing } from './store/dash.actions';
 // import { PropertyService, ManagementContract, PropertyTenant, PropertyLease, RentalApplication } from '@lib/app-core';
 // import { PropertyService, ManagementContract, PropertyTenant, PropertyLease, RentalApplication } from './services/dashboard.service';
 import { PropertyOwner } from './models/property-owner.model';
@@ -98,14 +98,19 @@ export class DashboardComponent implements OnInit {
     if (this.userrole == 'pm') {
       console.log('get here for owner by pm: role: ', this.userrole);
       this.store.dispatch(getPropertyOwnerListByPm({payload: this.username}));
+      this.store.dispatch(getContractListByPm({payload: this.username}));
+      this.store.dispatch(getPropertyListingByPm({payload: this.username}))
     } else {
       this.store.dispatch(getPropertyOwnerList());
+      this.store.dispatch(getContractList());
+      this.store.dispatch(getPropertyListing());
+
     }
 
     // this.store.dispatch(getPropertyList({payload: this.username})) ;
     this.store.dispatch(getAllLeases());
     this.store.dispatch(getAllTenants());
-    this.store.dispatch(getContractList({payload: this.username}));
+
     // this.store.dispatch(getPropertyOwnerList({payload: this.username}));
 
 

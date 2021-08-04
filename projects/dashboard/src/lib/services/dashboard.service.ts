@@ -68,6 +68,11 @@ export class DashboardService {
     return this.http.get<PropertyListing[]>(`${this.baseUrl}/listings`);
   }
 
+  getAllPropertyListingsByPm(pm: any) {
+    debugger;
+    return this.http.get<PropertyListing[]>(`${this.baseUrl}/listings/${pm}`);
+  }
+
   getLeaseAgreementList() {
     debugger;
     return this.http.get<PropertyLease[]>(`${this.baseUrl}/leases`);

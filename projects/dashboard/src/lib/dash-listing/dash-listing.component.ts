@@ -42,7 +42,7 @@ export class DashListingComponent implements OnInit {
     debugger;
     // return this.store.dispatch(getPropertyOwnerList()) ;
     // return
-    this.store.dispatch(getPropertyListing()) ;
+    // this.store.dispatch(getPropertyListing()) ;
     this.getPieChartData();
     this.getMarketingPieChartData();
   }

@@ -54,7 +54,7 @@ export class DashboardEffects {
       switchMap((payload) =>
         this.dashService.getPropertyListByPm(payload).pipe(
           map((properties: Property[]) => ({
-            type: '[Property] Get Property List Success',
+            type: '[Property] Get Property List By PM Success',
             payload: properties
           })),
           // tap(res => {console.log('response: ' + res); }),
@@ -125,7 +125,7 @@ export class DashboardEffects {
       switchMap((payload) =>
         this.dashService.getPropertyOwnerListByPm(payload).pipe(
           map((owners: PropertyOwner[]) => ({
-            type: '[Property] Get Property Owner List Success',
+            type: '[Property] Get Property Owner List By PM Success',
             payload: owners
           })),
           // tap(res => {console.log('response: ' + res); }),
@@ -144,7 +144,7 @@ export class DashboardEffects {
     this.actions$.pipe(
       // ofType('[Property] Get Property List'),
       ofType(DashActions.getContractList),
-      map(action => action.payload),
+      // map(action => action.payload),
       tap(() => console.log('got here to call service for retrieving contracts from dashboard lib')),
       switchMap(() =>
         this.dashService.getManagementContractList().pipe(
@@ -167,13 +167,13 @@ export class DashboardEffects {
   getContractListByPm$ = createEffect(() =>
     this.actions$.pipe(
       // ofType('[Property] Get Property List'),
-      ofType(DashActions.getContractList),
+      ofType(DashActions.getContractListByPm),
       map(action => action.payload),
       tap(() => console.log('got here to call service for retrieving contracts by PM from dashboard lib')),
       switchMap((payload) =>
         this.dashService.getManagementContractListByPm(payload).pipe(
           map((contracts: ManagementContract[]) => ({
-            type: '[Property] Get Contract List Success',
+            type: '[Property] Get Contract List By PM Success',
             payload: contracts
           })),
           // tap(res => {console.log('response: ' + res); }),
@@ -182,7 +182,7 @@ export class DashboardEffects {
           //     return of('[Property] Get Contract List Failure', err.error);
           //   } // EMPTY
           // )
-          catchError(error => of(DashActions.getContractListFailure(error.message)))
+          catchError(error => of(DashActions.getContractListByPmFailure(error.message)))
         )
       )
     )
@@ -192,7 +192,7 @@ export class DashboardEffects {
     this.actions$.pipe(
       // ofType('[Property] Get Property List'),
       ofType(DashActions.getPropertyListing),
-      // tap(() => console.log('got here for (marketing) property listing from dash lib')),
+      tap(() => console.log('got here for (marketing) property listing from dash lib')),
       switchMap(() =>
         this.dashService.getAllPropertyListings().pipe(
           map((listings: PropertyListing[]) => ({
@@ -206,6 +206,30 @@ export class DashboardEffects {
           //   } // EMPTY
           // )
           catchError(error => of(DashActions.getPropertyListingFailure(error.message)))
+        )
+      )
+    )
+  );
+
+  getPropertyListingByPm$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(DashActions.getPropertyListingByPm),
+      map(action => action.payload),
+      tap(() => console.log('got here for (marketing) property listing by PM from dash lib')),
+      switchMap((payload) =>
+        this.dashService.getAllPropertyListingsByPm(payload).pipe(
+          map((listings: PropertyListing[]) => ({
+            type: '[Marketing] Get Property Listing By PM Success',
+            payload: listings
+          })),
+          // tap(res => {console.log('response: ' + res); }),
+          // catchError(
+          //   err => {
+          //     return of('[Marketing] Get Property Listing Failure', err.error);
+          //   } // EMPTY
+          // )
+          catchError(error => of(DashActions.getPropertyListingByPmFailure(error.message)))
         )
       )
     )

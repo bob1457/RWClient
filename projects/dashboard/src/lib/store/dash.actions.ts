@@ -34,17 +34,17 @@ export const getPropertyListFailure = createAction(
  * Get Property List by Prperty Manager Actions
  */
 export const getPropertyListByPm = createAction(
-  '[Property] Get Property List',
+  '[Property] Get Property By PM List',
   props<{payload: string}>()
 );
 
 export const getPropertyListByPmSuccess = createAction(
-  '[Property] Get Property List Success',
+  '[Property] Get Property List By PM Success',
   props<{payload: Property[]}>()
 );
 
 export const getPropertyListByPmFailure = createAction(
-  '[Property] Get Property List Failure',
+  '[Property] Get Property List By PM Failure',
   // props<{payload: any}>()
   (errorMessage = 'Error loading property list') => {
     return ({ payload: { errorMessage } });
@@ -77,17 +77,17 @@ export const getPropertyImageListFailure = createAction(
  * Get Property Owner List Actions
  */
 export const getPropertyOwnerListByPm = createAction(
-  '[Property] Get Property Owner List',
+  '[Property] Get Property Owner List By PM',
   props<{payload: string}>()
 );
 
 export const getPropertyOwnerListByPmSuccess = createAction(
-  '[Property] Get Property Owner List Success',
+  '[Property] Get Property Owner List By PM Success',
   props<{payload: PropertyOwner[]}>()
 );
 
 export const getPropertyOwnerListByPmFailure = createAction(
-  '[Property] Get Property List Failure',
+  '[Property] Get Property List By PM Failure',
   // props<{payload: any}>()
   (errorMessage = 'Error loading property Owner list') => {
     return ({ payload: { errorMessage } });
@@ -122,7 +122,7 @@ export const getPropertyOwnerListFailure = createAction(
  */
 export const getContractList = createAction(
   '[Property] Get Contract List',
-  props<{payload: string}>()
+  // props<{payload: string}>()
 );
 
 export const getContractListSuccess = createAction(
@@ -142,17 +142,17 @@ export const getContractListFailure = createAction(
  * Get Management Contract List Actions
  */
 export const getContractListByPm = createAction(
-  '[Property] Get Contract List' // ,
-  // props<{payload: string}>()
+  '[Property] Get Contract List By PM',
+  props<{payload: string}>()
 );
 
 export const getContractListByPmSuccess = createAction(
-  '[Property] Get Contract List Success',
+  '[Property] Get Contract List By PM Success',
   props<{payload: ManagementContract[]}>()
 );
 
 export const getContractListByPmFailure = createAction(
-  '[Property] Get Contract List Failure',
+  '[Property] Get Contract List By PM Failure',
   // props<{payload: any}>()
   (errorMessage = 'Error loading contract list') => {
     return ({ payload: { errorMessage } });
@@ -174,6 +174,27 @@ export const getPropertyListingSuccess = createAction(
 
 export const getPropertyListingFailure = createAction(
   '[Marketing] Get Property Listing Failure',
+  // props<{payload: any}>()
+  (errorMessage = 'Error loading property listing') => {
+    return ({ payload: { errorMessage } });
+  }
+);
+
+/**
+ * Get Marketing Property Listing Actions
+ */
+export const getPropertyListingByPm = createAction(
+  '[Marketing] Get Property Listing By PM',
+  props<{payload: any}>()
+);
+
+export const getPropertyListingByPmSuccess = createAction(
+  '[Marketing] Get Property Listing By PM Success',
+  props<{payload: PropertyListing[]}>()
+);
+
+export const getPropertyListingByPmFailure = createAction(
+  '[Marketing] Get Property Listing By PM Failure',
   // props<{payload: any}>()
   (errorMessage = 'Error loading property listing') => {
     return ({ payload: { errorMessage } });

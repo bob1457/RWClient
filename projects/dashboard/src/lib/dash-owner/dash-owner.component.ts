@@ -25,7 +25,7 @@ export class DashOwnerComponent implements OnInit {
   @Input() applications: RentalApplication[];
   @Input() openhouses: OpenHouse[];
   @Input() username;
-  @Input() userrole;
+  // @Input() userrole;
 
   constructor(private store: Store<DashState>) { }
 

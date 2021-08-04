@@ -199,8 +199,8 @@
               <div>Others</div>
 
           </mat-card-content>
-      </mat-card> -->
-            <lib-dash-owner [username]="username" [userrole]="userrole" [listings]="marketingList$ | async" [applications]="rentalAppList$ | async" [openhouses]="openHouseList$ | async"></lib-dash-owner>
+      </mat-card> [userrole]="userrole"-->
+            <lib-dash-owner [username]="username" [listings]="marketingList$ | async" [applications]="rentalAppList$ | async" [openhouses]="openHouseList$ | async"></lib-dash-owner>
         </mat-grid-tile>
 
         <mat-grid-tile [colspan]="bp" [rowspan]="1" (window:resize)="onResize($event)">
@@ -223,7 +223,7 @@
 
                 </div>
             </mat-card-content>
-        </mat-card> -->
+        </mat-card> [user]="username" [role]="userrole"-->
             <lib-dash-listing></lib-dash-listing>
         </mat-grid-tile>
 

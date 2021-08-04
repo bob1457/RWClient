@@ -49,7 +49,7 @@ export class DashhomeComponent {
     // getPropertyList();
     // getPropertyOwnerList();
     // return this.store.dispatch(getPropertyOwnerList()) ;
-    return this.store.dispatch(getContractList(this.username)) ;
+    // return this.store.dispatch(getContractList(this.username)) ;
   }
 
   onResize(event) {
