@@ -32,7 +32,7 @@ export class AuthService {
   logIn(user): Observable<any> { // it is email before, now try to use username, instead.
     debugger;
     const url = `${this.baseUrl}/Auth/signin`;
-    console.log(user);
+    // console.log(user);
     return this.httpClient.post<any>(url, user)
     .pipe(map(response => {
       localStorage.setItem('currentUser', JSON.stringify(response.token));

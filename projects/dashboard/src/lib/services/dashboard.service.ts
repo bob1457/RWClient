@@ -88,9 +88,19 @@ export class DashboardService {
     return this.http.get<RentalApplication[]>(`${this.baseUrl}/applications`);
   }
 
+  getRentalApplicationListByPm(pm: any) {
+    debugger;
+    return this.http.get<RentalApplication[]>(`${this.baseUrl}/applications/${pm}`);
+  }
+
   getOpenHouseList() {
     debugger;
     return this.http.get<OpenHouse[]>(`${this.baseUrl}/listing/allopenhouses`);
+  }
+
+  getOpenHouseListByPm(pm: any) {
+    debugger;
+    return this.http.get<OpenHouse[]>(`${this.baseUrl}/listing/allopenhouses/${pm}`);
   }
 
   getRentPaymentList() {

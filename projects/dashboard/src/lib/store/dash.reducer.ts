@@ -278,7 +278,32 @@ const dashReducer = createReducer(
       loading: false,
       loaded: true,
       applications: null,
-      errorMessage: 'Failed to load contract details'
+      errorMessage: 'Failed to load application details'
+    });
+  }),
+
+  on(DashActions.getRentalApplicationListByPm, state => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+  on(DashActions.getRentalApplicationListByPmSuccess, (state, { payload }) => {
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      applications: payload
+    });
+  }),
+
+  on(DashActions.getRentalApplicationListByPmFailure, (state) => {
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      applications: null,
+      errorMessage: 'Failed to load application details'
     });
   }),
 
@@ -295,6 +320,27 @@ const dashReducer = createReducer(
 
 
   on(DashActions.getOpenHouseListSuccess, (state, { payload }) => {
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      openHouses: payload
+    });
+  }),
+
+  /**
+   * Get all open houses
+   */
+
+
+  on(DashActions.getOpenHouseListByPm, state => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+
+  on(DashActions.getOpenHouseListByPmSuccess, (state, { payload }) => {
     return ({
       ...state,
       loading: false,

@@ -6,9 +6,19 @@ import { Observable } from 'rxjs';
 import { Property } from './models/property.model';
 import { Store, select } from '@ngrx/store';
 // tslint:disable-next-line:max-line-length
-import { PropertyList, ContractList, TenantList, RentalList, OwnerList, MarketingList, RentalAppList, OpenHouseList, RentPaymentHistory, VendorList, WorkOrderList, ServiceRequestList, InvoiceList, CouncilList } from './store/dash.reducer';
+import {
+  PropertyList, ContractList, TenantList, RentalList, OwnerList, MarketingList,
+  RentalAppList, OpenHouseList, RentPaymentHistory, VendorList, WorkOrderList,
+  ServiceRequestList, InvoiceList, CouncilList
+} from './store/dash.reducer';
 // tslint:disable-next-line:max-line-length
-import { getPropertyList, getAllLeases, getAllTenants, getContractList, getPropertyOwnerList, getRentalApplicationList, getPropertyImageList, getOpenHouseList, getRentPaymentList, getAllVendors, getAllWorkOrders, getAllServiceRequests, getAllInvoices, getCouncilList, getPropertyListByPm, getPropertyOwnerListByPm, getContractListByPm, getPropertyListingByPm, getPropertyListing } from './store/dash.actions';
+import {
+  getPropertyList, getAllLeases, getAllTenants, getContractList, getPropertyOwnerList,
+  getRentalApplicationList, getPropertyImageList, getOpenHouseList, getRentPaymentList,
+  getAllVendors, getAllWorkOrders, getAllServiceRequests, getAllInvoices, getCouncilList,
+  getPropertyListByPm, getPropertyOwnerListByPm, getContractListByPm, getPropertyListingByPm,
+  getPropertyListing, getRentalApplicationListByPm, getOpenHouseListByPm
+} from './store/dash.actions';
 // import { PropertyService, ManagementContract, PropertyTenant, PropertyLease, RentalApplication } from '@lib/app-core';
 // import { PropertyService, ManagementContract, PropertyTenant, PropertyLease, RentalApplication } from './services/dashboard.service';
 import { PropertyOwner } from './models/property-owner.model';
@@ -89,21 +99,27 @@ export class DashboardComponent implements OnInit {
     this.bp2 = (window.innerWidth <= 640) ? 4 : 3;
     this.bp1 = (window.innerWidth <= 640) ? 2 : 1;
 
-    if (this.userrole == 'admin') {
-      this.store.dispatch(getPropertyList());
-    } else {
-      this.store.dispatch(getPropertyListByPm({payload: this.username})) ;
-    }
+    // if (this.userrole == 'admin') {
+    //   this.store.dispatch(getPropertyList());
+    // } else {
+    //   this.store.dispatch(getPropertyListByPm({payload: this.username})) ;
+    // }
 
     if (this.userrole == 'pm') {
+      this.store.dispatch(getPropertyListByPm({ payload: this.username }));
       console.log('get here for owner by pm: role: ', this.userrole);
       this.store.dispatch(getPropertyOwnerListByPm({payload: this.username}));
       this.store.dispatch(getContractListByPm({payload: this.username}));
-      this.store.dispatch(getPropertyListingByPm({payload: this.username}))
+      this.store.dispatch(getPropertyListingByPm({ payload: this.username }));
+      this.store.dispatch(getRentalApplicationListByPm({ payload: this.username }));
+      this.store.dispatch(getOpenHouseListByPm({payload: this.username}));
     } else {
+      this.store.dispatch(getPropertyList());
       this.store.dispatch(getPropertyOwnerList());
       this.store.dispatch(getContractList());
       this.store.dispatch(getPropertyListing());
+      this.store.dispatch(getRentalApplicationList());
+      this.store.dispatch(getOpenHouseList());
 
     }
 
@@ -114,11 +130,11 @@ export class DashboardComponent implements OnInit {
     // this.store.dispatch(getPropertyOwnerList({payload: this.username}));
 
 
-    this.store.dispatch(getRentalApplicationList());
+    // this.store.dispatch(getRentalApplicationList());
 
     this.store.dispatch(getPropertyImageList());
 
-    this.store.dispatch(getOpenHouseList());
+    // this.store.dispatch(getOpenHouseList());
     this.store.dispatch(getRentPaymentList());
 
     this.store.dispatch(getAllVendors());

@@ -261,6 +261,28 @@ export const getRentalApplicationListFailure = createAction(
   }
 );
 
+
+/**
+ * Get Property Rental Application By PMActions
+ */
+
+export const getRentalApplicationListByPm = createAction(
+  '[Marketing] Get Rental Application List by PM',
+  props<{payload: any}>()
+);
+
+export const getRentalApplicationListByPmSuccess = createAction(
+  '[Marketing] Get Rental Application List by PM Success',
+  props<{ payload: RentalApplication[] }>()
+);
+
+export const getRentalApplicationListByPmFailure = createAction(
+  '[Marketing] Get Rental Application List by PM Failure',
+  (errorMessage = 'Error loading rental application list') => {
+    return ({ payload: { errorMessage } });
+  }
+);
+
 /**
  * Get all open houses Actions
  */
@@ -280,6 +302,30 @@ export const getOpenHouseListFailure = createAction(
     return ({ payload: { errorMessage } });
   }
 );
+
+
+/**
+ * Get all open houses By PM Actions
+ */
+export const getOpenHouseListByPm = createAction(
+  '[Marketing] Get OpenHouse List by PM',
+  props<{ payload: any }>()
+);
+
+export const getOpenHouseListByPmSuccess = createAction(
+  '[Marketing] Get OpenHouse List by PM Success',
+  props<{ payload: OpenHouse[] }>()
+);
+
+export const getOpenHouseListByPmFailure = createAction(
+  '[Marketing] Get OpenHouse List by PM Failure',
+  // props<{payload: any}>()
+  (errorMessage = 'Error loading open house list') => {
+    return ({ payload: { errorMessage } });
+  }
+);
+
+
 
 /**
  * Get all rent payments Actions

@@ -256,7 +256,7 @@ export class SideNavComponent implements OnInit {
     this.store.select(propertyApplications).subscribe(data => {
       if( data && data.length > 1 ){
         this.applicatons = data;
-      }else {
+      } else {
         this.store.pipe(select(RentalAppList)).subscribe(alist => {
         this.applicatons = alist;
       });
@@ -276,7 +276,7 @@ export class SideNavComponent implements OnInit {
 
 
     this.store.select(vendorList).subscribe(data => {
-      if(data && data.length > 1) {
+      if (data && data.length > 1) {
         this.vendors = data;
       } else {
         this.store.select(VendorList).subscribe(vlist => {
@@ -288,7 +288,7 @@ export class SideNavComponent implements OnInit {
     this.store.select(workOrderList).subscribe(data => {
       if(data && data.length > 1) {
         this.workorders = data;
-       }else {
+       } else {
         this.store.select(WorkOrderList).subscribe(wlist => {
           this.workorders = wlist;
         });

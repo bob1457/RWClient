@@ -303,6 +303,53 @@ export class DashboardEffects {
           )
   );
 
+  // getRentalApplicationsByPm$ = createEffect(() =>
+  //   this.actions$.pipe(
+  //     ofType(DashActions.getRentalApplicationListByPm),
+  //     // tap(() => console.log(' get here for rental app from dash lib')),
+  //     map(action => action.payload),
+  //     switchMap((payload) =>
+  //       this.dashService.getRentalApplicationListbyPm(payload).pipe(
+  //         map((applicaitons: RentalApplication[]) => ({
+  //           type: '[Marketing] Get Rental Application List by PM Success',
+  //           payload: applicaitons
+  //         })),
+  //         tap(res => { console.log('response: ' + res); }),
+  //         // catchError(
+  //         //   err => {
+  //         //     return of('[Leases] Get all applications Failure', err.error);
+  //         //   }
+  //         // )
+  //         catchError(error => of(DashActions.getRentalApplicationListByPmFailure(error.message)))
+  //       )
+  //     )
+  //   )
+  // );
+
+  getRentalApplicationsByPm$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(DashActions.getRentalApplicationListByPm),
+      map(action => action.payload),
+      tap(() => console.log('got here to call service for retrieving applications by PM from dashboard lib')),
+      switchMap((payload) =>
+        this.dashService.getRentalApplicationListByPm(payload).pipe(
+          map((applications: RentalApplication[]) => ({
+            type: '[Marketing] Get Rental Application List by PM Success',
+            payload: applications
+          })),
+          // tap(res => {console.log('response: ' + res); }),
+          // catchError(
+          //   err => {
+          //     return of('[Property] Get Contract List Failure', err.error);
+          //   } // EMPTY
+          // )
+          catchError(error => of(DashActions.getRentalApplicationListByPmFailure(error.message)))
+        )
+      )
+    )
+  );
+
   getOpenHouseList$ = createEffect(() =>
     this.actions$.pipe(
       // ofType('[Property] Get Property List'),
@@ -321,6 +368,30 @@ export class DashboardEffects {
           //   } // EMPTY
           // )
           catchError(error => of(DashActions.getOpenHouseListFailure(error.message)))
+        )
+      )
+    )
+  );
+
+  getOpenHouseListByPm$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(DashActions.getOpenHouseListByPm),
+      map(action => action.payload),
+      tap(() => console.log('got here to call service for openhouse by PM from dashboard lib')),
+      switchMap((payload) =>
+        this.dashService.getOpenHouseListByPm(payload).pipe(
+          map((openhouse: OpenHouse[]) => ({
+            type: '[Marketing] Get OpenHouse List by PM Success',
+            payload: openhouse
+          })),
+          // tap(res => {console.log('response: ' + res); }),
+          // catchError(
+          //   err => {
+          //     return of('[Property] Get Contract List Failure', err.error);
+          //   } // EMPTY
+          // )
+          catchError(error => of(DashActions.getOpenHouseListByPmFailure(error.message)))
         )
       )
     )
