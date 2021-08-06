@@ -232,6 +232,21 @@ const dashReducer = createReducer(
     });
   }),
 
+  on(DashActions.getAllLeasesByPm, state => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+  on(DashActions.getAllLeasesByPmSuccess, (state, { payload }) => {
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      leases: payload
+    });
+  }),
+
   on(DashActions.getAllTenants, state => ({
     ...state,
     loading: true,
@@ -248,6 +263,31 @@ const dashReducer = createReducer(
   }),
 
   on(DashActions.getAllTenantsFailure, (state) => {
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      tenants: null,
+      errorMessage: 'Failed to load contract details'
+    });
+  }),
+
+  on(DashActions.getAllTenantsByPm, state => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+  on(DashActions.getAllTenantsByPmSuccess, (state, { payload }) => {
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      tenants: payload
+    });
+  }),
+
+  on(DashActions.getAllTenantsByPmFailure, (state) => {
     return ({
       ...state,
       loading: false,
@@ -412,6 +452,22 @@ const dashReducer = createReducer(
     });
   }),
 
+  on(DashActions.getAllWorkOrderByPm, state => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+
+  on(DashActions.getAllWorkOrdersByPmSuccess, (state, { payload }) => {
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      workorders: payload
+    });
+  }),
+
   /**
    * Get all service request list
    */
@@ -425,6 +481,23 @@ const dashReducer = createReducer(
 
 
   on(DashActions.getAllServiceRequestsSuccess, (state, { payload }) => {
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      servierequests: payload
+    });
+  }),
+
+
+  on(DashActions.getAllServiceRequestsByPm, state => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+
+  on(DashActions.getAllServiceRequestsByPmSuccess, (state, { payload }) => {
     return ({
       ...state,
       loading: false,

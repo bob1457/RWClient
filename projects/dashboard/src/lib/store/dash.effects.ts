@@ -26,7 +26,7 @@ export class DashboardEffects {
       // ofType('[Property] Get Property List'),
       ofType(DashActions.getPropertyList),
       // map(action => action.payload),
-      tap(() => console.log('got here for property list from dash lib')),
+      // tap(() => console.log('got here for property list from dash lib')),
       switchMap(() =>
         this.dashService.getPropertyList().pipe(
           map((properties: Property[]) => ({
@@ -50,7 +50,7 @@ export class DashboardEffects {
       // ofType('[Property] Get Property List'),
       ofType(DashActions.getPropertyListByPm),
       map(action => action.payload),
-      tap(() => console.log('got here for property list by PM from dash lib')),
+      // tap(() => console.log('got here for property list by PM from dash lib')),
       switchMap((payload) =>
         this.dashService.getPropertyListByPm(payload).pipe(
           map((properties: Property[]) => ({
@@ -121,7 +121,7 @@ export class DashboardEffects {
       // ofType('[Property] Get Property List'),
       ofType(DashActions.getPropertyOwnerListByPm),
       map(action => action.payload),
-      tap(() => console.log('got here to call service for retrieving owners by PM from dash lib')),
+      // tap(() => console.log('got here to call service for retrieving owners by PM from dash lib')),
       switchMap((payload) =>
         this.dashService.getPropertyOwnerListByPm(payload).pipe(
           map((owners: PropertyOwner[]) => ({
@@ -169,7 +169,7 @@ export class DashboardEffects {
       // ofType('[Property] Get Property List'),
       ofType(DashActions.getContractListByPm),
       map(action => action.payload),
-      tap(() => console.log('got here to call service for retrieving contracts by PM from dashboard lib')),
+      // tap(() => console.log('got here to call service for retrieving contracts by PM from dashboard lib')),
       switchMap((payload) =>
         this.dashService.getManagementContractListByPm(payload).pipe(
           map((contracts: ManagementContract[]) => ({
@@ -216,7 +216,7 @@ export class DashboardEffects {
       // ofType('[Property] Get Property List'),
       ofType(DashActions.getPropertyListingByPm),
       map(action => action.payload),
-      tap(() => console.log('got here for (marketing) property listing by PM from dash lib')),
+      // tap(() => console.log('got here for (marketing) property listing by PM from dash lib')),
       switchMap((payload) =>
         this.dashService.getAllPropertyListingsByPm(payload).pipe(
           map((listings: PropertyListing[]) => ({
@@ -258,11 +258,35 @@ export class DashboardEffects {
     )
   );
 
+  getAllLeasesByPm$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(DashActions.getAllLeasesByPm),
+      map(action => action.payload),
+      // tap(() => console.log('got here for property leases!!! from dash')),
+      switchMap((payload) =>
+        this.dashService.getLeaseAgreementListByPm(payload).pipe(
+          map((leases: PropertyLease[]) => ({
+            type: '[Leases] Get all leases by PM Success',
+            payload: leases
+          })),
+          // tap(res => {console.log('response: ' + res); }),
+          // catchError(
+          //   err => {
+          //     return of('[Leases] Get all leases Failure', err.error);
+          //   } // EMPTY
+          // )
+          catchError(error => of(DashActions.getPAllLeasesFailure(error.message)))
+        )
+      )
+    )
+  );
+
   getTenantListing$ = createEffect(() =>
     this.actions$.pipe(
       // ofType('[Property] Get Property List'),
       ofType(DashActions.getAllTenants),
-      // tap(() => console.log('got here for (marketing) property tenants from dash lib')),
+      tap(() => console.log('got here for (marketing) property tenants from dash lib')),
       switchMap(() =>
         this.dashService.getTenantList().pipe(
           map((tenants: PropertyTenant[]) => ({
@@ -276,6 +300,30 @@ export class DashboardEffects {
           //   } // EMPTY
           // )
           catchError(error => of(DashActions.getAllTenantsFailure(error.message)))
+        )
+      )
+    )
+  );
+
+  getTenantListingByPm$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(DashActions.getAllTenantsByPm),
+      map(action => action.payload),
+      tap(() => console.log('got here for (marketing) property tenants by PM from dash lib')),
+      switchMap((payload) =>
+        this.dashService.getTenantListByPm(payload).pipe(
+          map((tenants: PropertyTenant[]) => ({
+            type: '[Leases] Get all tenants by PM Success',
+            payload: tenants
+          })),
+          tap(res => { console.log('response: ' + res); }),
+          // catchError(
+          //   err => {
+          //     return of('[Leases] Get all tenants Failure', err.error);
+          //   } // EMPTY
+          // )
+          catchError(error => of(DashActions.getAllTenantsByPmFailure(error.message)))
         )
       )
     )
@@ -331,7 +379,7 @@ export class DashboardEffects {
       // ofType('[Property] Get Property List'),
       ofType(DashActions.getRentalApplicationListByPm),
       map(action => action.payload),
-      tap(() => console.log('got here to call service for retrieving applications by PM from dashboard lib')),
+      // tap(() => console.log('got here to call service for retrieving applications by PM from dashboard lib')),
       switchMap((payload) =>
         this.dashService.getRentalApplicationListByPm(payload).pipe(
           map((applications: RentalApplication[]) => ({
@@ -378,7 +426,7 @@ export class DashboardEffects {
       // ofType('[Property] Get Property List'),
       ofType(DashActions.getOpenHouseListByPm),
       map(action => action.payload),
-      tap(() => console.log('got here to call service for openhouse by PM from dashboard lib')),
+      // tap(() => console.log('got here to call service for openhouse by PM from dashboard lib')),
       switchMap((payload) =>
         this.dashService.getOpenHouseListByPm(payload).pipe(
           map((openhouse: OpenHouse[]) => ({
@@ -467,6 +515,30 @@ export class DashboardEffects {
     )
   );
 
+  getWorkOrderListByPm$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(DashActions.getAllWorkOrderByPm),
+      map(action => action.payload),
+      // tap(() => console.log('got here for work order list!!!')),
+      switchMap((payload) =>
+        this.dashService.getWorkOrderListByPm(payload).pipe(
+          map((vendors: any[]) => ({
+            type: '[Leases] Get All Work Orders by PM Success',
+            payload: vendors
+          })),
+          // tap(res => {console.log('response: ' + res); }),
+          // catchError(
+          //   err => {
+          //     return of('[Marketing] Get Rental Applications Failure', err.error);
+          //   } // EMPTY
+          // )
+          catchError(error => of(DashActions.getAllWorkOrdersByPmFailure(error.message)))
+        )
+      )
+    )
+  );
+
   getServiceRequestList$ = createEffect(() =>
     this.actions$.pipe(
       // ofType('[Property] Get Property List'),
@@ -485,6 +557,30 @@ export class DashboardEffects {
           //   } // EMPTY
           // )
           catchError(error => of(DashActions.getAllServiceRequestsFailure(error.message)))
+        )
+      )
+    )
+  );
+
+  getServiceRequestListByPm$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(DashActions.getAllServiceRequestsByPm),
+      map(action => action.payload),
+      // tap(() => console.log('got here for service request list!!!')),
+      switchMap(() =>
+        this.dashService.getServiceList().pipe(
+          map((requests: any[]) => ({
+            type: '[Leases] Get All Service Request by PM Success',
+            payload: requests
+          })),
+          // tap(res => {console.log('response: ' + res); }),
+          // catchError(
+          //   err => {
+          //     return of('[Marketing] Get Rental Applications Failure', err.error);
+          //   } // EMPTY
+          // )
+          catchError(error => of(DashActions.getAllServiceRequestsByPmFailure(error.message)))
         )
       )
     )

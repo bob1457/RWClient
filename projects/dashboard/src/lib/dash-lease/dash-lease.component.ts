@@ -31,8 +31,8 @@ export class DashLeaseComponent implements OnInit {
     this.breakpoint = (window.innerWidth <= 640) ? 2 : 1;
     debugger;
     // return this.store.dispatch(getPropertyOwnerList()) ;
-    this.store.dispatch(getAllLeases()) ;
-    this.store.dispatch(getAllTenants());
+    // this.store.dispatch(getAllLeases()) ;
+    // this.store.dispatch(getAllTenants());
   }
 
   onResize(event) {

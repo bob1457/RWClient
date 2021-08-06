@@ -33,7 +33,7 @@ export class DashTenantComponent implements OnInit {
     this.breakpoint = (window.innerWidth <= 640) ? 2 : 1;
     debugger;
     // return
-    this.store.dispatch(getAllTenants());
+    // this.store.dispatch(getAllTenants());
     this.getChartData();
     this.getChartData2();
   }

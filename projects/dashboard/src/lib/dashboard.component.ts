@@ -17,14 +17,16 @@ import {
   getRentalApplicationList, getPropertyImageList, getOpenHouseList, getRentPaymentList,
   getAllVendors, getAllWorkOrders, getAllServiceRequests, getAllInvoices, getCouncilList,
   getPropertyListByPm, getPropertyOwnerListByPm, getContractListByPm, getPropertyListingByPm,
-  getPropertyListing, getRentalApplicationListByPm, getOpenHouseListByPm
+  getPropertyListing, getRentalApplicationListByPm, getOpenHouseListByPm, getAllLeasesByPm, getAllTenantsByPm,
+  getAllWorkOrderByPm,
+  getAllServiceRequestsByPm
 } from './store/dash.actions';
 // import { PropertyService, ManagementContract, PropertyTenant, PropertyLease, RentalApplication } from '@lib/app-core';
 // import { PropertyService, ManagementContract, PropertyTenant, PropertyLease, RentalApplication } from './services/dashboard.service';
 import { PropertyOwner } from './models/property-owner.model';
 import { PropertyListing } from './models/property-listing.model';
 import { OpenHouse } from './models/openhouse.model';
-import { getUserInfo } from '@lib/auth';
+import { getUserInfo } from '@lib/auth'; // ???????????????????
 import { ManagementContract } from './models/management-contract.model';
 import { PropertyTenant } from './models/property-tenant.model';
 import { PropertyLease } from './models/property-lease.model';
@@ -112,7 +114,11 @@ export class DashboardComponent implements OnInit {
       this.store.dispatch(getContractListByPm({payload: this.username}));
       this.store.dispatch(getPropertyListingByPm({ payload: this.username }));
       this.store.dispatch(getRentalApplicationListByPm({ payload: this.username }));
-      this.store.dispatch(getOpenHouseListByPm({payload: this.username}));
+      this.store.dispatch(getOpenHouseListByPm({ payload: this.username }));
+      this.store.dispatch(getAllLeasesByPm({ payload: this.username }));
+      this.store.dispatch(getAllTenantsByPm({ payload: this.username }));
+      this.store.dispatch(getAllWorkOrderByPm({ payload: this.username }));
+      this.store.dispatch(getAllServiceRequestsByPm({ payload: this.username }));
     } else {
       this.store.dispatch(getPropertyList());
       this.store.dispatch(getPropertyOwnerList());
@@ -120,12 +126,15 @@ export class DashboardComponent implements OnInit {
       this.store.dispatch(getPropertyListing());
       this.store.dispatch(getRentalApplicationList());
       this.store.dispatch(getOpenHouseList());
-
+      this.store.dispatch(getAllLeases());
+      this.store.dispatch(getAllTenants());
+      this.store.dispatch(getAllWorkOrders());
+      this.store.dispatch(getAllServiceRequests());
     }
 
     // this.store.dispatch(getPropertyList({payload: this.username})) ;
-    this.store.dispatch(getAllLeases());
-    this.store.dispatch(getAllTenants());
+    // this.store.dispatch(getAllLeases());
+    // this.store.dispatch(getAllTenants());
 
     // this.store.dispatch(getPropertyOwnerList({payload: this.username}));
 
@@ -138,8 +147,8 @@ export class DashboardComponent implements OnInit {
     this.store.dispatch(getRentPaymentList());
 
     this.store.dispatch(getAllVendors());
-    this.store.dispatch(getAllWorkOrders());
-    this.store.dispatch(getAllServiceRequests());
+    // this.store.dispatch(getAllWorkOrders());
+    // this.store.dispatch(getAllServiceRequests());
     this.store.dispatch(getAllInvoices());
     this.store.dispatch(getCouncilList());
     // this.getAllPropertyList();
@@ -152,27 +161,27 @@ export class DashboardComponent implements OnInit {
     this.bp1 = (window.innerWidth <= 640) ? 2 : 1;
   }
 
-  getAllPropertyList() {
-    debugger;
-    this.$propertyList = this.store.select(PropertyList);
-    this.contractList$ = this.store.select(ContractList);
-    this.tenantList$ = this.store.select(TenantList);
-    this.rentalList$ = this.store.select(RentalList);
-    this.ownerList$ = this.store.select(OwnerList);
-    this.marketingList$ = this.store.select(MarketingList);
-    this.rentalAppList$ = this.store.select(RentalAppList);
+  // getAllPropertyList() {
+  //   debugger;
+  //   this.$propertyList = this.store.select(PropertyList);
+  //   this.contractList$ = this.store.select(ContractList);
+  //   this.tenantList$ = this.store.select(TenantList);
+  //   this.rentalList$ = this.store.select(RentalList);
+  //   this.ownerList$ = this.store.select(OwnerList);
+  //   this.marketingList$ = this.store.select(MarketingList);
+  //   this.rentalAppList$ = this.store.select(RentalAppList);
 
 
-    // this.store.pipe(select(PropertyList)).subscribe((pList: Property[]) => {
-    //   this.list = pList;
-    //   console.log(pList);
-    // });
-    // this.propertyService.getPropertyList().subscribe((properties:Property[]) => {
-    //   this.list = properties;
-    //   console.log('All properties: ' + this.list);
-    // });
+  //   // this.store.pipe(select(PropertyList)).subscribe((pList: Property[]) => {
+  //   //   this.list = pList;
+  //   //   console.log(pList);
+  //   // });
+  //   // this.propertyService.getPropertyList().subscribe((properties:Property[]) => {
+  //   //   this.list = properties;
+  //   //   console.log('All properties: ' + this.list);
+  //   // });
 
-  }
+  // }
 
   getCurrentUser() {
     return this.store.pipe(select(getUserInfo)).subscribe(userData => { // this.user = userData;

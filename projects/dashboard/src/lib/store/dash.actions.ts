@@ -222,6 +222,27 @@ export const getPAllLeasesFailure = createAction(
 );
 
 /**
+ * Get Property Leasing Agreements By PM  Actions
+ */
+export const getAllLeasesByPm = createAction(
+  '[Leases] Get all leases by PM',
+  props<{ payload: any }>()
+);
+
+export const getAllLeasesByPmSuccess = createAction(
+  '[Leases] Get all leases by PM Success',
+  props<{ payload: PropertyLease[] }>()
+);
+
+export const getPAllLeasesByPmFailure = createAction(
+  '[Leases] Get all leases by PM Failure',
+  // props<{payload: any}>()
+  (errorMessage = 'Error loading property listing') => {
+    return ({ payload: { errorMessage } });
+  }
+);
+
+/**
  * Get Property Leasing Tenants Actions
  */
 export const getAllTenants = createAction(
@@ -235,6 +256,28 @@ export const getAllTenantsSuccess = createAction(
 
 export const getAllTenantsFailure = createAction(
   '[Leases] Get all tenants Failure',
+  // props<{payload: any}>()
+  (errorMessage = 'Error loading property listing') => {
+    return ({ payload: { errorMessage } });
+  }
+);
+
+
+/**
+ * Get Property Leasing Tenants By PM  Actions
+ */
+export const getAllTenantsByPm = createAction(
+  '[Leases] Get all tenants by PM',
+  props<{ payload: any }>()
+);
+
+export const getAllTenantsByPmSuccess = createAction(
+  '[Leases] Get all tenants by PM Success',
+  props<{payload: PropertyTenant[]}>()
+);
+
+export const getAllTenantsByPmFailure = createAction(
+  '[Leases] Get all tenants by PM Failure',
   // props<{payload: any}>()
   (errorMessage = 'Error loading property listing') => {
     return ({ payload: { errorMessage } });
@@ -388,6 +431,27 @@ export const getAllWorkOrdersFailure = createAction(
 );
 
 /**
+ * Get All Work Orders by PM Actions
+ */
+export const getAllWorkOrderByPm = createAction(
+  '[Leases] Get All  Work Orders by PM',
+  props<{ payload: any }>()
+);
+
+export const getAllWorkOrdersByPmSuccess = createAction(
+  '[Leases] Get All Work Orders by PM Success',
+  props<{ payload: WorkOrder[] }>()
+);
+
+export const getAllWorkOrdersByPmFailure = createAction(
+  '[Leases] Get All  Work Orders by PM Failure',
+  // props<{payload: any}>()
+  (errorMessage = 'Error loading work orders') => {
+    return ({ payload: { errorMessage } });
+  }
+);
+
+/**
  * Get All Service Request Actions
  */
 export const getAllServiceRequests = createAction(
@@ -401,6 +465,27 @@ export const getAllServiceRequestsSuccess = createAction(
 
 export const getAllServiceRequestsFailure = createAction(
   '[Leases] Get All Service Request Failure',
+  // props<{payload: any}>()
+  (errorMessage = 'Error loading Service Request') => {
+    return ({ payload: { errorMessage } });
+  }
+);
+
+/**
+ * Get All Service Request By PM Actions
+ */
+export const getAllServiceRequestsByPm = createAction(
+  '[Leases] Get All Service Request by PM',
+  props<{ payload: any }>()
+);
+
+export const getAllServiceRequestsByPmSuccess = createAction(
+  '[Leases] Get All Service Request by PM Success',
+  props<{ payload: ServiceRequest[] }>()
+);
+
+export const getAllServiceRequestsByPmFailure = createAction(
+  '[Leases] Get All Service Request by PM Failure',
   // props<{payload: any}>()
   (errorMessage = 'Error loading Service Request') => {
     return ({ payload: { errorMessage } });

@@ -78,9 +78,19 @@ export class DashboardService {
     return this.http.get<PropertyLease[]>(`${this.baseUrl}/leases`);
   }
 
+  getLeaseAgreementListByPm(pm: any) {
+    debugger;
+    return this.http.get<PropertyLease[]>(`${this.baseUrl}/leases/${pm}`);
+  }
+
   getTenantList() {
     debugger;
     return this.http.get<PropertyTenant[]>(`${this.baseUrl}/tenants`);
+  }
+
+  getTenantListByPm(pm: any) {
+    debugger;
+    return this.http.get<PropertyTenant[]>(`${this.baseUrl}/tenants/${pm}`);
   }
 
   getRentalApplicationList() {
@@ -118,9 +128,19 @@ export class DashboardService {
     return this.http.get<any[]>(`${this.baseUrl}/WorkOrder/all`);
   }
 
+  getWorkOrderListByPm(pm: any) {
+    debugger;
+    return this.http.get<any[]>(`${this.baseUrl}/WorkOrder/all/${pm}`);
+  }
+
   getServiceList() {
     debugger;
     return this.http.get<any[]>(`${this.baseUrl}/WorkOrder/ServiceRequest/all`);
+  }
+
+  getServiceListByPm(pm: any) {
+    debugger;
+    return this.http.get<any[]>(`${this.baseUrl}/WorkOrder/ServiceRequest/all/${pm}`);
   }
 
   getAllInvoices() {
