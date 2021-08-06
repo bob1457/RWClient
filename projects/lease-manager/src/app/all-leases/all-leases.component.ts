@@ -2,12 +2,13 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { PropertyLeaseState } from '../store/lease-state';
 import { getAllLeases, getAllServiceRequests, getAllVendors,
-        getAllWorkOrders, getRentPaymentList, getAllTenants } from '../store/actions/lease.actions';
+        getAllWorkOrders, getRentPaymentList, getAllTenants, getAllLeasesByPm } from '../store/actions/lease.actions';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator, MatSort } from '@angular/material';
 import { PropertyLease } from '@lib/app-core';
 import { leaseList, loadingStatus } from '../store/reducers';
 import { Observable } from 'rxjs';
+import { getUserInfo } from '@lib/auth';
 
 
 @Component({
@@ -20,6 +21,8 @@ export class AllLeasesComponent implements OnInit {
   loading$: Observable<boolean>;
 
   list: PropertyLease[];
+  username;
+  userrole;
 
   // tslint:disable-next-line:max-line-length
   displayedColumns: string[] = ['icon', 'id', 'leaseTitle', 'type', 'term', 'rentAmount', 'leaseStartDate', 'leaseEndDate', 'created', 'modified', 'action'];
@@ -78,10 +81,20 @@ export class AllLeasesComponent implements OnInit {
     // return this.propertyService.getPropertyList().subscribe((pList: Property[]) => {this.list = pList; console.log(pList)});
     this.loading$ = this.store.pipe(select(loadingStatus));
 
-    if (!this.list) {
+    this.getCurrentUser();
+
+
+    if (this.userrole == 'pm') {
+      console.log('get there for pm');
+      this.store.dispatch(getAllLeasesByPm({ payload: this.username }));
+    } else {
+      console.log('get there for all');
       this.store.dispatch(getAllLeases());
-      console.log('dispatched');
     }
+    // if (!this.list) {
+    //   this.store.dispatch(getAllLeases());
+    //   console.log('dispatched');
+    // }
 
     // this.store.pipe(
     //   select(leaseList)).subscribe(data => {
@@ -131,6 +144,26 @@ export class AllLeasesComponent implements OnInit {
 
   public doFilter = (value: string) => {
     this.dataSource.filter = value.trim().toLocaleLowerCase();
+  }
+
+  getCurrentUser() {
+    return this.store.pipe(select(getUserInfo)).subscribe(userData => { // this.user = userData;
+
+      if (!userData) {
+        const uname = JSON.parse(localStorage.getItem('auth'));
+        this.username = uname.username;
+        this.userrole = uname.role;
+        console.log('get from pppt manager localstorage', this.username + " " + this.userrole);
+      } else {
+        this.username = userData.username;
+        this.userrole = userData.role;
+        console.log('get from state', this.username + " " + this.userrole);
+      }
+
+      // this.username = userData.username;
+      // this.userrole = userData.role;
+      // console.log('get from state', this.username + " " + this.userrole);
+    });
   }
 
 }

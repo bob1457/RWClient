@@ -7,7 +7,8 @@ import { PropertyLeaseState } from '../store/lease-state';
 import { leaseList, workOrderList } from '../store/reducers';
 import { getAllLeases } from '@lib/dashboard/lib/store/dash.actions';
 import { loadingStatus } from '@lib/dashboard';
-import { getAllWorkOrders } from '../store/actions/lease.actions';
+import { getAllWorkOrders, getAllWorkOrdersByPm } from '../store/actions/lease.actions';
+import { getUserInfo } from '@lib/auth';
 
 @Component({
   selector: 'app-all-work-orders',
@@ -17,6 +18,8 @@ import { getAllWorkOrders } from '../store/actions/lease.actions';
 export class AllWorkOrdersComponent implements OnInit {
 
   loading$: Observable<boolean>;
+  username;
+  userrole;
 
   list: WorkOrder[];
 
@@ -46,9 +49,21 @@ export class AllWorkOrdersComponent implements OnInit {
 
     this.loading$ = this.store.pipe(select(loadingStatus));
 
-    if (!this.list) {
+    this.getCurrentUser();
+
+
+    if (this.userrole == 'pm') {
+      console.log('get there for pm');
+      this.store.dispatch(getAllWorkOrdersByPm({ payload: this.username }));
+    } else {
+      console.log('get there for all');
       this.store.dispatch(getAllWorkOrders());
     }
+
+
+    // if (!this.list) {
+    //   this.store.dispatch(getAllWorkOrders());
+    // }
 
 
   }
@@ -60,6 +75,26 @@ export class AllWorkOrdersComponent implements OnInit {
 
   public doFilter = (value: string) => {
     this.dataSource.filter = value.trim().toLocaleLowerCase();
+  }
+
+  getCurrentUser() {
+    return this.store.pipe(select(getUserInfo)).subscribe(userData => { // this.user = userData;
+
+      if (!userData) {
+        const uname = JSON.parse(localStorage.getItem('auth'));
+        this.username = uname.username;
+        this.userrole = uname.role;
+        console.log('get from pppt manager localstorage', this.username + " " + this.userrole);
+      } else {
+        this.username = userData.username;
+        this.userrole = userData.role;
+        console.log('get from state', this.username + " " + this.userrole);
+      }
+
+      // this.username = userData.username;
+      // this.userrole = userData.role;
+      // console.log('get from state', this.username + " " + this.userrole);
+    });
   }
 
 }

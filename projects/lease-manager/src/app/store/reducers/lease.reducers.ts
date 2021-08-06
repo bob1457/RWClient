@@ -51,6 +51,21 @@ const propertyLeaseReducer = createReducer(
     });
   }),
 
+  on(LeaseActions.getAllLeasesByPm, state => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+  on(LeaseActions.getAllLeasesByPmSuccess, (state, { payload }) => {
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      leases: payload
+    });
+  }),
+
   on(LeaseActions.getLeaseDetails, (state) => ({
     ...state,
     loading: true,
@@ -78,6 +93,21 @@ const propertyLeaseReducer = createReducer(
   })),
 
   on(LeaseActions.getAllTenantsSuccess, (state, { payload }) => {
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      tenants: payload
+    });
+  }),
+
+  on(LeaseActions.getAllTenantsByPm, state => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+  on(LeaseActions.getAllTenantsByPmSuccess, (state, { payload }) => {
     return ({
       ...state,
       loading: false,
@@ -269,6 +299,21 @@ const propertyLeaseReducer = createReducer(
     });
   }),
 
+  on(LeaseActions.getAllWorkOrdersByPmFailure, state => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+  on(LeaseActions.getAllWorkOrdersByPmSuccess, (state, { payload }) => {
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      workorders: payload
+    });
+  }),
+
   on(LeaseActions.updateWorkOrderFailure, (state) => ({
     ...state,
     loading: false,
@@ -302,6 +347,13 @@ const propertyLeaseReducer = createReducer(
 
 
   on(LeaseActions.getAllWorkOrdersFailure, (state) => ({
+    ...state,
+    loading: false,
+    loaded: false,
+    errorMessage: 'Failed to load work orders'
+  })),
+
+  on(LeaseActions.getAllWorkOrdersByPmFailure, (state) => ({
     ...state,
     loading: false,
     loaded: false,
@@ -408,6 +460,28 @@ on(LeaseActions.addVendorFailure, (state) => {
   }),
 
   on(LeaseActions.getAllServiceRequestsFailure, (state) => ({
+    ...state,
+    loading: false,
+    loaded: false,
+    errorMessage: 'Failed to load service requests'
+  })),
+
+  on(LeaseActions.getAllServiceRequestsByPm, state => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+  on(LeaseActions.getAllServiceRequestsByPmSuccess, (state, { payload }) => {
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      servierequests: payload
+    });
+  }),
+
+  on(LeaseActions.getAllServiceRequestsByPmFailure, (state) => ({
     ...state,
     loading: false,
     loaded: false,

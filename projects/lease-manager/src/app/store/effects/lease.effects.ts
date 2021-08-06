@@ -39,6 +39,30 @@ export class LeaseEffects {
     )
   );
 
+  getAllLeasesByPm$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(LeaseActions.getAllLeasesByPm),
+      tap(() => console.log('got here for property leases by PM!!!')),
+      map(action => action.payload),
+      switchMap((payload) =>
+        this.leaseService.getAllLeasesByPm(payload).pipe(
+          map((listings: PropertyLease[]) => ({
+            type: '[Leases] Get all leasess by PM Success',
+            payload: listings
+          })),
+          // tap(res => {console.log('response: ' + res); }),
+          // catchError(
+          //   err => {
+          //     return of('[Leases] Get all leases Failure', err.error);
+          //   } // EMPTY
+          // )
+          catchError(error => of(LeaseActions.getPAllLeasesByPmFailure(error.message)))// EMPTY
+        )
+      )
+    )
+  );
+
   getLeaseDetails$ = createEffect(() =>
     this.actions$.pipe(
       // ofType('[Property] Get Property List'),
@@ -83,6 +107,31 @@ export class LeaseEffects {
           //   }
           // )
           catchError(error => of(LeaseActions.getAllTenantsFailure(error.message)))// EMPTY
+        )
+      )
+    )
+  );
+
+  getAllTenantsByPm$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(LeaseActions.getAllTenantsByPm),
+      tap(() => console.log('got here for property tenants!!!')),
+      map(action => action.payload),
+      switchMap((payload) =>
+        this.leaseService.getAllTenantsByPm(payload).pipe(
+          map((tenants: PropertyTenant[]) => ({
+            // tslint:disable-next-line:max-line-length
+            type: '[Leases] Get all tenants Success by PM', // the name of the action(string) must match the string in the Action, case senstive
+            payload: tenants
+          })),
+          // tap(res => {console.log('response: ' + res); }),
+          // catchError(
+          //   err => {
+          //     return of('[Leases] Get all tenants Failure', err.error);
+          //   }
+          // )
+          catchError(error => of(LeaseActions.getAllTenantsByPmFailure(error.message)))// EMPTY
         )
       )
     )
@@ -390,6 +439,30 @@ export class LeaseEffects {
     )
   );
 
+  getAllWorkOrdersByPm$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(LeaseActions.getAllWorkOrdersByPm),
+      map(action => action.payload),
+      // tap(() => console.log('got here for work order leases!!!')),
+      switchMap((payload) =>
+        this.leaseService.getAllWorkOrdersByPm(payload).pipe(
+          map((list: WorkOrder[]) => ({
+            type: '[Leases] Get All Work Orders Success by PM',
+            payload: list
+          })),
+          // tap(res => {console.log('response: ' + res); }),
+          // catchError(
+          //   err => {
+          //     return of('[Leases] Get all leases Failure', err.error);
+          //   } // EMPTY
+          // )
+          catchError(error => of(LeaseActions.getAllWorkOrdersByPmFailure(error.message)))// EMPTY
+        )
+      )
+    )
+  );
+
   getWorkOrderDetails$ = createEffect(() =>
   this.actions$.pipe(
     // ofType('[Property] Get Property List'),
@@ -555,7 +628,7 @@ export class LeaseEffects {
     this.actions$.pipe(
       // ofType('[Property] Get Property List'),
       ofType(LeaseActions.getAllServiceRequests),
-      tap(() => console.log('got here for service requests!!!')),
+      // tap(() => console.log('got here for service requests!!!')),
       switchMap(() =>
         this.leaseService.getAllServiceRequests().pipe(
           map((list: ServiceRequest[]) => ({
@@ -569,6 +642,30 @@ export class LeaseEffects {
           //   } // EMPTY
           // )
           catchError(error => of(LeaseActions.getAllServiceRequestsFailure(error.message)))// EMPTY
+        )
+      )
+    )
+  );
+
+  getAllServiceRequestsByPm$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(LeaseActions.getAllServiceRequestsByPm),
+      // tap(() => console.log('got here for service requests!!!')),
+      map(action => action.payload),
+      switchMap((payload) =>
+        this.leaseService.getAllServiceRequestsByPm(payload).pipe(
+          map((list: ServiceRequest[]) => ({
+            type: '[Leases] Get All Service Request Success by PM',
+            payload: list
+          })),
+          // tap(res => {console.log('response: ' + res); }),
+          // catchError(
+          //   err => {
+          //     return of('[Leases] Get all leases Failure', err.error);
+          //   } // EMPTY
+          // )
+          catchError(error => of(LeaseActions.getAllServiceRequestsByPmFailure(error.message)))// EMPTY
         )
       )
     )

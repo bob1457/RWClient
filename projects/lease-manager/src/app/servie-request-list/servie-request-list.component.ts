@@ -3,9 +3,10 @@ import { ServiceRequest, Vendor } from '@lib/app-core';
 import { Store, select } from '@ngrx/store';
 import { PropertyLeaseState } from '../store/lease-state';
 import { serviceRequestList, getServiceRequestList, loadingStatus } from '../store/reducers/lease.reducers';
-import { getAllServiceRequests } from '../store/actions/lease.actions';
+import { getAllServiceRequests, getAllServiceRequestsByPm } from '../store/actions/lease.actions';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { Observable } from 'rxjs';
+import { getUserInfo } from '@lib/auth';
 
 @Component({
   selector: 'app-servie-request-list',
@@ -15,6 +16,8 @@ import { Observable } from 'rxjs';
 export class ServieRequestListComponent implements OnInit {
 
   loading$: Observable<boolean>;
+  username;
+  userrole;
 
   list: ServiceRequest[];
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
@@ -49,15 +52,46 @@ export class ServieRequestListComponent implements OnInit {
 
     this.loading$ = this.store.pipe(select(loadingStatus));
 
-    if(!this.list) {
+    this.getCurrentUser();
+
+
+    if (this.userrole == 'pm') {
+      console.log('get there for pm');
+      this.store.dispatch(getAllServiceRequestsByPm({ payload: this.username }));
+    } else {
+      console.log('get there for all');
       this.store.dispatch(getAllServiceRequests());
     }
+
+    // if(!this.list) {
+    //   this.store.dispatch(getAllServiceRequests());
+    // }
 
   }
 
 
   public doFilter = (value: string) => {
     this.dataSource.filter = value.trim().toLocaleLowerCase();
+  }
+
+  getCurrentUser() {
+    return this.store.pipe(select(getUserInfo)).subscribe(userData => { // this.user = userData;
+
+      if (!userData) {
+        const uname = JSON.parse(localStorage.getItem('auth'));
+        this.username = uname.username;
+        this.userrole = uname.role;
+        console.log('get from pppt manager localstorage', this.username + " " + this.userrole);
+      } else {
+        this.username = userData.username;
+        this.userrole = userData.role;
+        console.log('get from state', this.username + " " + this.userrole);
+      }
+
+      // this.username = userData.username;
+      // this.userrole = userData.role;
+      // console.log('get from state', this.username + " " + this.userrole);
+    });
   }
 
 }
