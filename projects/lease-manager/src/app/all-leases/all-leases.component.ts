@@ -41,29 +41,29 @@ export class AllLeasesComponent implements OnInit {
 
               });
 
-    // this.store.pipe(select(leaseList))
-    //       .subscribe(data => {
-    //         if (data != null) { // select data from state store if data exists
-    //           this.list = data;
-    //           this.dataSource.data = this.list;
-    //           // this.detailsForm.patchValue(data);
-    //         } else {
-    //           this.store.dispatch(getAllLeases()); // dispatch the action if state has no data
+    this.store.pipe(select(leaseList))
+          .subscribe(data => {
+            if (data != null) { // select data from state store if data exists
+              this.list = data;
+              this.dataSource.data = this.list;
+              // this.detailsForm.patchValue(data);
+            } else {
+              // this.store.dispatch(getAllLeases()); // dispatch the action if state has no data
 
-    //           // this.store.pipe(select(leaseList)) // select date from state in store
-    //           // .subscribe(list => {
-    //           //   this.list = list;
-    //           //   this.dataSource.data = this.list;
+              // this.store.pipe(select(leaseList)) // select date from state in store
+              // .subscribe(list => {
+              //   this.list = list;
+              //   this.dataSource.data = this.list;
 
-    //           //   this.dataSource.sort = this.sort;
-    //           //   this.dataSource.paginator = this.paginator;
+              //   this.dataSource.sort = this.sort;
+              //   this.dataSource.paginator = this.paginator;
 
-    //           // });
-    //         }
-    //         console.log(data);
+              // });
+            }
+            console.log(data);
 
-    //         setTimeout(() =>  {this.dataSource.paginator = this.paginator; this.dataSource.sort = this.sort; });
-    //   });
+            setTimeout(() =>  {this.dataSource.paginator = this.paginator; this.dataSource.sort = this.sort; });
+      });
 
     // this.store.dispatch(getRentPaymentList());
     // this.store.dispatch(getAllWorkOrders());
