@@ -651,12 +651,12 @@ export class LeaseEffects {
     this.actions$.pipe(
       // ofType('[Property] Get Property List'),
       ofType(LeaseActions.getAllServiceRequestsByPm),
-      // tap(() => console.log('got here for service requests!!!')),
+      tap(() => console.log('got here for service by PM requests!!!')),
       map(action => action.payload),
       switchMap((payload) =>
         this.leaseService.getAllServiceRequestsByPm(payload).pipe(
           map((list: ServiceRequest[]) => ({
-            type: '[Leases] Get All Service Request Success by PM',
+            type: '[Leases] Get All Service Request by PM Success',
             payload: list
           })),
           // tap(res => {console.log('response: ' + res); }),

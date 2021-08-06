@@ -568,8 +568,8 @@ export class DashboardEffects {
       ofType(DashActions.getAllServiceRequestsByPm),
       map(action => action.payload),
       // tap(() => console.log('got here for service request list!!!')),
-      switchMap(() =>
-        this.dashService.getServiceList().pipe(
+      switchMap((payload) =>
+        this.dashService.getServiceListByPm(payload).pipe(
           map((requests: any[]) => ({
             type: '[Leases] Get All Service Request by PM Success',
             payload: requests
