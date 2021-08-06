@@ -323,6 +323,21 @@ on(PropertyActions.getPropertyDetails, (state) => ({
     });
   }),
 
+  on(PropertyActions.getPropertyOwnerListByPm, state => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+  on(PropertyActions.getPropertyOwnerListByPmSuccess, (state, { payload }) => {
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      owners: payload
+    });
+  }),
+
   on(PropertyActions.getPropertyOwnerDetails, (state) => ({
     ...state,
     loading: true,
@@ -464,6 +479,31 @@ on(PropertyActions.getPropertyDetails, (state) => ({
   }),
 
   on(PropertyActions.getContractListFailure, (state) => {
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      contracts: null,
+      errorMessage: 'Failed to load contract details'
+    });
+  }),
+
+  on(PropertyActions.getContractListByPm, state => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+  on(PropertyActions.getContractListByPmSuccess, (state, { payload }) => {
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      contracts: payload
+    });
+  }),
+
+  on(PropertyActions.getContractListByPmFailure, (state) => {
     return ({
       ...state,
       loading: false,

@@ -27,11 +27,31 @@ export class MarketingEffects {
             payload: listings
           })),
           // tap(res => {console.log('response: ' + res); }),
-          catchError(
-            err => {
-              return of('[Marketing] Get Property Listing Failure', err.error);
-            } // EMPTY
-          )
+          catchError(error => of(ListingActions.getPropertyListingFailure(error.message)))
+        )
+      )
+    )
+  );
+
+  getPropertyListingByPm$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(ListingActions.getPropertyListingByPm),
+      map(action => action.payload),
+      tap(() => console.log('got here for property listing by PM !!!')),
+      switchMap((payload) =>
+        this.marketingService.getAllPropertyListingsByPm(payload).pipe(
+          map((listings: PropertyListing[]) => ({
+            type: '[Marketing] Get Property Listing by PM Success',
+            payload: listings
+          })),
+          // tap(res => {console.log('response: ' + res); }),
+          // catchError(
+          //   err => {
+          //     return of('[Marketing] Get Property Listing Failure', err.error);
+          //   } // EMPTY
+          // )
+          catchError(error => of(ListingActions.getPropertyListingByPmFailure(error.message)))
         )
       )
     )
@@ -235,6 +255,30 @@ export class MarketingEffects {
     )
   );
 
+  getRentalApplicationsByPm$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(ListingActions.getRentalApplicationListByPm),
+      tap(() => console.log('got here for rental application by PM list!!!')),
+      map(action => action.payload),
+      switchMap((payload) =>
+        this.marketingService.getAllRentalApplicationsByPm(payload).pipe(
+          map((applications: RentalApplication[]) => ({
+            type: '[Marketing] Get Rental Applications by PM Success',
+            payload: applications
+          })),
+          // tap(res => {console.log('response: ' + res); }),
+          // catchError(
+          //   err => {
+          //     return of('[Marketing] Get Rental Applications Failure', err.error);
+          //   } // EMPTY
+          // )
+          catchError(error => of(ListingActions.getRentalApplicationListByPmFailure(error.message)))
+        )
+      )
+    )
+  );
+
   getRentalApplicationDetails$ = createEffect(() =>
     this.actions$.pipe(
       // ofType('[Property] Get Property List'),
@@ -357,6 +401,31 @@ export class MarketingEffects {
           //   } // EMPTY
           // )
           catchError(error => of(ListingActions.getOpenHouseListFailure(error.message)))
+        )
+      )
+    )
+  );
+
+  getOpenHouseListByPm$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(ListingActions.getOpenHouseListByPm),
+      tap(() => console.log('got here for open house by PM list!!!')),
+      map(action => action.payload),
+      switchMap((payload) =>
+        this.marketingService.getOpenHouseListByPm(payload).pipe(
+          map((openhouses: OpenHouse[]) => ({
+            // type: '[Marketing] Get OpenHouse List by PM  Success',
+            type: '[Marketing] Get OpenHouse List by PM  Success',
+            payload: openhouses
+          })),
+          // tap(res => {console.log('response: ' + res); }),
+          // catchError(
+          //   err => {
+          //     return of('[Marketing] Get Rental Applications Failure', err.error);
+          //   } // EMPTY
+          // )
+          catchError(error => of(ListingActions.getOpenHouseListByPmFailure(error.message)))
         )
       )
     )

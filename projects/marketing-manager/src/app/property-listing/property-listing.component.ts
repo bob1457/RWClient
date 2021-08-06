@@ -1,4 +1,4 @@
-import { updatePropertyListing, getPropertyImageList, getOpenHouseList } from './../store/actions/marketing.actions';
+import { updatePropertyListing, getPropertyImageList, getOpenHouseList, getPropertyListingByPm } from './../store/actions/marketing.actions';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { PropertyListingState } from '../store/marketing.state';
@@ -9,6 +9,7 @@ import { Router, Event, NavigationStart, NavigationEnd } from '@angular/router';
 import { propertyList } from 'projects/property-manager/src/app/store/reducers';
 import { propertyListing, loadingStatus, loadedStatus } from '../store/reducers';
 import { Observable } from 'rxjs';
+import { getUserInfo } from '@lib/auth';
 
 @Component({
   selector: 'app-property-listing',
@@ -21,6 +22,8 @@ export class PropertyListingComponent implements OnInit {
 
   loading$: Observable<boolean>;
   loaded = false;
+  username;
+  userrole;
 
   // tslint:disable-next-line: max-line-length
   displayedColumns: string[] = ['icon', 'id', 'title', 'listingDesc', 'propertyName', 'isActive', 'created', 'updated', 'action'];
@@ -71,7 +74,18 @@ export class PropertyListingComponent implements OnInit {
     // this.store.select(loadedStatus)
     // .subscribe( res => this.loaded = res);
 
-    if (!this.list) {
+    // if (!this.list) {
+    //   this.store.dispatch(getPropertyListing());
+    // }
+
+    this.getCurrentUser();
+
+    // if (this.list == null) {
+    if (this.userrole == 'pm') {
+      console.log('get there for pm');
+      this.store.dispatch(getPropertyListingByPm({ payload: this.username }));
+    } else {
+      console.log('get there for all');
       this.store.dispatch(getPropertyListing());
     }
 
@@ -162,5 +176,24 @@ export class PropertyListingComponent implements OnInit {
   //   return this.store.dispatch(updatePropertyListing({payload: listing}));
 
   // }
+
+  getCurrentUser() {
+    return this.store.pipe(select(getUserInfo)).subscribe(userData => { // this.user = userData;
+      if (!userData) {
+        const uname = JSON.parse(localStorage.getItem('auth'));
+        this.username = uname.username;
+        this.userrole = uname.role;
+        console.log('get from pppt manager localstorage', this.username + " " + this.userrole);
+      } else {
+        this.username = userData.username;
+        this.userrole = userData.role;
+        console.log('get from state', this.username + " " + this.userrole);
+      }
+
+      // this.username = userData.username;
+      // this.userrole = userData.role;
+      // console.log('get from state', this.username + " " + this.userrole);
+    });
+  }
 
 }

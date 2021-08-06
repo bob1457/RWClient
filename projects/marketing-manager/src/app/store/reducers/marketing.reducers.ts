@@ -47,6 +47,21 @@ const propertyListingReducer = createReducer(
     });
   }),
 
+  on(ListingActions.getPropertyListingByPm, state => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+  on(ListingActions.getPropertyListingByPmSuccess, (state, { payload }) => {
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      listings: payload
+    });
+  }),
+
    /**
    * Get property imge list
    */
@@ -271,6 +286,21 @@ const propertyListingReducer = createReducer(
     });
   }),
 
+  on(ListingActions.getRentalApplicationListByPm, state => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+  on(ListingActions.getRentalApplicationListByPmSuccess, (state, { payload }) => {
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      applications: payload
+    });
+  }),
+
   /**
    * Get rental application details
    */
@@ -303,6 +333,23 @@ const propertyListingReducer = createReducer(
 
 
   on(ListingActions.getOpenHouseListSuccess, (state, { payload }) => {
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      openHouses: payload
+    });
+  }),
+
+
+  on(ListingActions.getOpenHouseListByPm, state => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+
+  on(ListingActions.getOpenHouseListByPmSuccess, (state, { payload }) => {
     return ({
       ...state,
       loading: false,

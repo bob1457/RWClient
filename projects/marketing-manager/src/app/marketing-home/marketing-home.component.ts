@@ -13,7 +13,7 @@ export class MarketingHomeComponent implements OnInit {
   constructor(private store: Store<PropertyListingState>) { }
 
   ngOnInit() {
-    debugger;
+    // debugger;
     // return this.propertyService.getPropertyList().subscribe((pList: Property[]) => {this.list = pList; console.log(pList)});
     // return this.store.dispatch(getPropertyListing())  ;
   }

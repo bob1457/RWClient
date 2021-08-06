@@ -22,9 +22,19 @@ export class LeaseService {
     return this.http.get<PropertyLease[]>(`${this.baseUrl}/leases`);
   }
 
+  getAllLeasesByPm(pm: any) {
+    debugger;
+    return this.http.get<PropertyLease[]>(`${this.baseUrl}/leases/${pm}`);
+  }
+
   getAllTenants() {
     debugger;
     return this.http.get<PropertyTenant[]>(`${this.baseUrl}/tenants`);
+  }
+
+  getAllTenantsByPm(pm: any) {
+    debugger;
+    return this.http.get<PropertyTenant[]>(`${this.baseUrl}/tenants/${pm}`);
   }
 
   getLeaseDetails(id: number) {
@@ -78,6 +88,11 @@ export class LeaseService {
     return this.http.get<WorkOrder[]>(`${this.baseUrl}/workorder/all`);
   }
 
+  getAllWorkOrdersByPm(pm: any) {
+    debugger;
+    return this.http.get<WorkOrder[]>(`${this.baseUrl}/workorder/all/${pm}`);
+  }
+
   getWorkOrderDetails(id: number) {
     debugger;
     return this.http.get<WorkOrder>(`${this.baseUrl}/WorkOrder/details/${id}`);
@@ -117,6 +132,11 @@ export class LeaseService {
   getAllServiceRequests() {
     debugger;
     return this.http.get<ServiceRequest[]>(`${this.baseUrl}/workorder/ServiceRequest/all`);
+  }
+
+  getAllServiceRequestsByPm(pm: any) {
+    debugger;
+    return this.http.get<ServiceRequest[]>(`${this.baseUrl}/workorder/ServiceRequest/all/${pm}`);
   }
 
   getDetails(id: number) {

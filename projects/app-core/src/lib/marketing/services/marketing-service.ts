@@ -19,6 +19,11 @@ export class MarketingService {
     return this.http.get<PropertyListing[]>(`${this.baseUrl}/listings`);
   }
 
+  getAllPropertyListingsByPm(pm: any) {
+    debugger;
+    return this.http.get<PropertyListing[]>(`${this.baseUrl}/listings/${pm}`);
+  }
+
   getAllRentalProperties() {
     debugger;
     return this.http.get<any[]>(`${this.baseUrl}/listings/allrentalproperties`);
@@ -42,6 +47,11 @@ export class MarketingService {
   getAllRentalApplications() {
     debugger;
     return this.http.get<RentalApplication[]>(`${this.baseUrl}/applications`);
+  }
+
+  getAllRentalApplicationsByPm(pm: any) {
+    debugger;
+    return this.http.get<RentalApplication[]>(`${this.baseUrl}/applications/${pm}`);
   }
 
   getRentalApplicationDetails(id: number) {
@@ -110,6 +120,11 @@ export class MarketingService {
   getOpenHouseList() {
     debugger;
     return this.http.get<OpenHouse[]>(`${this.baseUrl}/listing/allopenhouses`);
+  }
+
+  getOpenHouseListByPm(pm: any) {
+    debugger;
+    return this.http.get<OpenHouse[]>(`${this.baseUrl}/listing/allopenhouses/${pm}`);
   }
 
   // addOpenHouseViewer() {}

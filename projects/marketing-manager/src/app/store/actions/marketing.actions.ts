@@ -25,6 +25,27 @@ export const getPropertyListingFailure = createAction(
   }
 );
 
+/**
+ * Get Property Listing by PM Actions
+ */
+export const getPropertyListingByPm = createAction(
+  '[Marketing] Get Property Listing by PM',
+  props<{ payload: any }>()
+);
+
+export const getPropertyListingByPmSuccess = createAction(
+  '[Marketing] Get Property Listing by PM Success',
+  props<{ payload: PropertyListing[] }>()
+);
+
+export const getPropertyListingByPmFailure = createAction(
+  '[Marketing] Get Property Listing Failure',
+  // props<{payload: any}>()
+  (errorMessage = 'Error loading property by PM listing') => {
+    return ({ payload: { errorMessage } });
+  }
+);
+
 export const getAllRentalProperties = createAction(
   '[Marketing] Get All Rental Properties'
 );
@@ -171,13 +192,34 @@ export const updatePropertyListingFailure = createAction(
 /**
  * Get all rental application List Actions
  */
+export const getRentalApplicationListByPm = createAction(
+  '[Marketing] Get Rental Applications by PM',
+  props<{ payload: any }>()
+);
+
+export const getRentalApplicationListByPmSuccess = createAction(
+  '[Marketing] Get Rental Applications by PM Success',
+  props<{payload: RentalApplication[]}>()
+);
+
+export const getRentalApplicationListByPmFailure = createAction(
+  '[Marketing] Get Rental Applications by PM Failure',
+  // props<{payload: any}>()
+  (errorMessage = 'Error loading property listing') => {
+    return ({ payload: { errorMessage } });
+  }
+);
+
+/**
+ * Get all rental application List by PM Actions
+ */
 export const getRentalApplicationList = createAction(
   '[Marketing] Get Rental Applications'
 );
 
 export const getRentalApplicationListSuccess = createAction(
   '[Marketing] Get Rental Applications Success',
-  props<{payload: RentalApplication[]}>()
+  props<{ payload: RentalApplication[] }>()
 );
 
 export const getRentalApplicationListFailure = createAction(
@@ -238,6 +280,27 @@ export const getOpenHouseListSuccess = createAction(
 
 export const getOpenHouseListFailure = createAction(
   '[Marketing] Get OpenHouse List Failure',
+  // props<{payload: any}>()
+  (errorMessage = 'Error loading open house list') => {
+    return ({ payload: { errorMessage } });
+  }
+);
+
+/**
+ * Get all open houses by PM Actions
+ */
+export const getOpenHouseListByPm = createAction(
+  '[Marketing] Get OpenHouse List by PM ',
+  props<{ payload: any }>()
+);
+
+export const getOpenHouseListByPmSuccess = createAction(
+  '[Marketing] Get OpenHouse List by PM  Success',
+  props<{ payload: OpenHouse[] }>()
+);
+
+export const getOpenHouseListByPmFailure = createAction(
+  '[Marketing] Get OpenHouse List by PM  Failure',
   // props<{payload: any}>()
   (errorMessage = 'Error loading open house list') => {
     return ({ payload: { errorMessage } });
