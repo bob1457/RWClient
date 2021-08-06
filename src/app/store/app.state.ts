@@ -25,6 +25,7 @@ export const appReducer = {
   // [SHARED_STATE_NAME]: SharedReducer,
   // [AUTH_STATE_NAME]: AuthReducer,
   // router: routerReducer,
+  auth: fromAuth.reducer,
   property: p_reducer,
   marketing: m_reducer,
   lease: l_reducer

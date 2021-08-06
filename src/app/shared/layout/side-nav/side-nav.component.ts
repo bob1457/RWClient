@@ -165,50 +165,54 @@ export class SideNavComponent implements OnInit {
       }
 
     });
-
-    // this.store.pipe(select(propertyList)).subscribe(data => {
-    //   if (data && data.length > 1 ) {
-    //     this.property = data;
-    //     } else {
-    //       this.store.select(PropertyList).subscribe(plist => {
-    //         this.property = plist;
-    //       });
-    //     }
-
-    //   });
-
     this.store.select(PropertyList).subscribe(plist => {
         this.property = plist;
       });
 
-    // this.store.pipe(select(ownerList)).subscribe(data => {
-    //   if (data && data.length > 1) {
-    //     this.owners = data;
-    //     } else {
-    //       this.store.select(OwnerList).subscribe(olist => {
-    //         this.owners = olist;
-    //       });
-    //     }
-    //   });
+    this.store.pipe(select(propertyList)).subscribe(data => {
+      if (data && data.length > 1 ) {
+        this.property = data;
+        } else {
+          this.store.select(PropertyList).subscribe(plist => {
+            this.property = plist;
+          });
+        }
+      });
+
+
 
     this.store.select(OwnerList).subscribe(olist => {
         this.owners = olist;
       });
 
-    // this.store.pipe(select(contractList)).subscribe(data => {
-    //   if (data && data.length > 1) {
-    //     this.contracts = data;
-    //     } else {
-    //       this.store.select(ContractList).subscribe(clist => {
-    //         this.contracts = clist;
-    //       });
-    //     }
+    this.store.pipe(select(ownerList)).subscribe(data => {
+      if (data && data.length > 1) {
+        this.owners = data;
+        } else {
+          this.store.select(OwnerList).subscribe(olist => {
+            this.owners = olist;
+          });
+        }
+      });
 
-    //   });
+
 
     this.store.select(ContractList).subscribe(clist => {
         this.contracts = clist;
       });
+
+    this.store.pipe(select(contractList)).subscribe(data => {
+      if (data && data.length > 1) {
+        this.contracts = data;
+        } else {
+          this.store.select(ContractList).subscribe(clist => {
+            this.contracts = clist;
+          });
+        }
+
+      });
+
+
 
     this.store.select(councilList).subscribe(data => {
       if (data && data.length > 1) {
@@ -227,15 +231,15 @@ export class SideNavComponent implements OnInit {
       console.log('select tenat list from main app', this.tenant);
     });
 
-    // this.store.select(tenantList).subscribe(data => {
-    //   if ( data && data.length > 0) {
-    //     this.tenant = data;
-    //     } else {
-    //       this.store.pipe(select(TenantList)).subscribe(tlist => {
-    //       this.tenant = tlist;
-    //     });
-    //   }
-    // });
+    this.store.select(tenantList).subscribe(data => {
+      if ( data && data.length > 0) {
+        this.tenant = data;
+        } else {
+          this.store.pipe(select(TenantList)).subscribe(tlist => {
+          this.tenant = tlist;
+        });
+      }
+    });
 
     this.store.pipe(select(leaseList)).subscribe(data => {
       if (data && data.length > 1) {
@@ -294,29 +298,29 @@ export class SideNavComponent implements OnInit {
       this.workorders = wlist;
     });
 
-    // this.store.select(workOrderList).subscribe(data => {
-    //   if(data && data.length > 1) {
-    //     this.workorders = data;
-    //    } else {
-    //     this.store.select(WorkOrderList).subscribe(wlist => {
-    //       this.workorders = wlist;
-    //     });
-    //   }
-    // });
+    this.store.select(workOrderList).subscribe(data => {
+      if(data && data.length > 1) {
+        this.workorders = data;
+       } else {
+        this.store.select(WorkOrderList).subscribe(wlist => {
+          this.workorders = wlist;
+        });
+      }
+    });
 
     this.store.select(ServiceRequestList).subscribe(slist => {
       this.servicerequests = slist;
     });
 
-    // this.store.select(serviceRequestList).subscribe(data => {
-    //   if (data && data.length > 1){
-    //     this.servicerequests = data;
-    //     } else {
-    //       this.store.select(ServiceRequestList).subscribe(slist => {
-    //     this.servicerequests = slist;
-    //     });
-    //   }
-    // });
+    this.store.select(serviceRequestList).subscribe(data => {
+      if (data && data.length > 1){
+        this.servicerequests = data;
+        } else {
+          this.store.select(ServiceRequestList).subscribe(slist => {
+        this.servicerequests = slist;
+        });
+      }
+    });
 
 
 

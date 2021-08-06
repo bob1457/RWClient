@@ -45,6 +45,30 @@ export class PropertyEffects {
     )
   ); //mergeMap was used
 
+  getPropertyListByPm$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(PropertyActions.getPropertyListByPm),
+      map(action => action.payload),
+      tap(() => console.log('got here for property list by PM !!!')),
+      switchMap((payload) =>
+        this.propertyService.getPropertyListByPm(payload).pipe(
+          map((properties: Property[]) => ({
+            type: '[Property] Get Property List by PM Success',
+            payload: properties
+          })),
+          // tap(res => {console.log('response: ' + res); }),
+          // catchError(
+          //   err => {
+          //     return of('[Property] Get Property List Failure', err.error);
+          //   } // EMPTY
+          // )
+          catchError(error => of(PropertyActions.getPropertyListByPmFailure(error.message)))
+        )
+      )
+    )
+  );
+
   getPropertyDetails$ = createEffect(() =>
     this.actions$.pipe(
       // ofType('[Property] Get Property List'),
@@ -189,7 +213,7 @@ export class PropertyEffects {
       ofType(PropertyActions.getPropertyOwnerList),
       tap(() => console.log('got here to call service for retrieving owners')),
       switchMap(() =>
-        this.propertyService.getPropertyOwnerList().pipe(
+        this.propertyOwnerService.getPropertyOwnerList().pipe(
           map((owners: PropertyOwner[]) => ({
             type: '[Property] Get Property Owner List Success',
             payload: owners
@@ -202,6 +226,32 @@ export class PropertyEffects {
           //   } // EMPTY
           // )
           catchError(error => of(PropertyActions.getPropertyOwnerListFailure(error.message)))
+        )
+      )
+    )
+  );
+
+
+  getPropertyOwnerListByPm$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(PropertyActions.getPropertyOwnerListByPm),
+      tap(() => console.log('got here to call service for retrieving owners by PM')),
+      map(action => action.payload),
+      switchMap((payload) =>
+        this.propertyOwnerService.getPropertyOwnerListByPm(payload).pipe(
+          map((owners: PropertyOwner[]) => ({
+            type: '[Property] Get Property Owner List by PM Success',
+            payload: owners
+          })),
+          // tap(res => {console.log('response: ' + res); }),
+          // catchError(
+          //   err => {
+          //     // return of('[Property] Get Property Owner List Failure', err.error);
+          //     return of(PropertyActions.getPropertyOwnerListFailure(err.error));
+          //   } // EMPTY
+          // )
+          catchError(error => of(PropertyActions.getPropertyOwnerListByPmFailure(error.message)))
         )
       )
     )
@@ -338,6 +388,30 @@ export class PropertyEffects {
           //   } // EMPTY
           // )
           catchError(error => of(PropertyActions.getContractListFailure(error.message)))
+        )
+      )
+    )
+  );
+
+  getContractLisByPmt$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(PropertyActions.getContractListByPm),
+      tap(() => console.log('got here to call service for retrieving contracts by PM')),
+      map(action => action.payload),
+      switchMap((payload) =>
+        this.contractService.getManagementContractListByPm(payload).pipe(
+          map((contracts: ManagementContract[]) => ({
+            type: '[Property] Get Contract List by PM Success',
+            payload: contracts
+          })),
+          // tap(res => {console.log('response: ' + res); }),
+          // catchError(
+          //   err => {
+          //     return of('[[Property] Get Contract List Failure', err.error);
+          //   } // EMPTY
+          // )
+          catchError(error => of(PropertyActions.getContractListByPmFailure(error.message)))
         )
       )
     )

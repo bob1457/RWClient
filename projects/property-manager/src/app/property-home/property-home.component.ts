@@ -23,11 +23,11 @@ export class PropertyHomeComponent implements OnInit {
   ngOnInit() {
     debugger;
     // return this.propertyService.getPropertyList().subscribe((pList: Property[]) => {this.list = pList; console.log(pList)});
-    // return 
-    this.store.dispatch(getPropertyList())  ;
+    // return
+    // this.store.dispatch(getPropertyList())  ;
     // propertyService.getPropertyList().subscribe((pList: Property[]) => {this.list = pList; console.log(pList)});
     // this.router.navigateByUrl('/Manage/property/propertylist');
-    console.log(this.router.url); 
+    console.log(this.router.url);
   }
 
   // MOVED to property-list component

@@ -2,13 +2,14 @@ import { ManagementContract } from '@lib/app-core';
 import { ManagementContractService } from './../../../../app-core/src/lib/property/services/management-contract.service';
 import { PropertyState } from './../store/property.state';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { getContractList, getContractDetails, addManagementContract, updateContract } from '../store/actions/property.actions';
+import { getContractList, getContractDetails, addManagementContract, updateContract, getContractListByPm } from '../store/actions/property.actions';
 import { contractList, loadingStatus } from '../store/reducers/property.reducer';
 import { Store, select } from '@ngrx/store';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { Observable } from 'rxjs';
 
 import { Router, Event, NavigationStart, NavigationEnd } from '@angular/router';
+import { getUserInfo } from '@lib/auth';
 
 @Component({
   selector: 'app-contract-list',
@@ -23,6 +24,8 @@ export class ContractListComponent implements OnInit {
 
   list: ManagementContract[];
   contractList$: Observable<ManagementContract[]>;
+  username;
+  userrole;
 
   displayedColumns: string[] = ['icon', 'id', 'managementContractTitle', 'propertyName', 'managementContractType', 'startDate', 'endDate', 'contractSignDate',  'action'];
 
@@ -62,7 +65,18 @@ export class ContractListComponent implements OnInit {
     debugger;
     this.loading$ = this.store.pipe(select(loadingStatus));
 
-    if (this.list == null) {
+    // if (this.list == null) {
+    //   this.store.dispatch(getContractList());
+    // }
+
+    this.getCurrentUser();
+
+    // if (this.list == null) {
+    if (this.userrole == 'pm') {
+      console.log('get there for pm');
+      this.store.dispatch(getContractListByPm({ payload: this.username }));
+    } else {
+      console.log('get there for all');
       this.store.dispatch(getContractList());
     }
 
@@ -141,6 +155,26 @@ export class ContractListComponent implements OnInit {
 
     return this.store.dispatch(updateContract({payload: contract}));
 
+  }
+
+  getCurrentUser() {
+    return this.store.pipe(select(getUserInfo)).subscribe(userData => { // this.user = userData;
+      console.log('loggged in user', userData.username);
+      if (!userData) {
+        const uname = JSON.parse(localStorage.getItem('auth'));
+        this.username = uname.username;
+        this.userrole = uname.role;
+        console.log('get from pppt manager localstorage', this.username + " " + this.userrole);
+      } else {
+        this.username = userData.username;
+        this.userrole = userData.role;
+        console.log('get from state', this.username + " " + this.userrole);
+      }
+
+      // this.username = userData.username;
+      // this.userrole = userData.role;
+      // console.log('get from state', this.username + " " + this.userrole);
+    });
   }
 
 }

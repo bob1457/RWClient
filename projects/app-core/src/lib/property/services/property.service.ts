@@ -72,12 +72,7 @@ export class PropertyService {
 
   getPropertyListByPm(pm: any) {
     debugger;
-
-    if (pm) {
-      return this.http.get<Property[]>(`${this.baseUrl}/property/all/${pm}`); // return type could be <Property[]>?
-    } else {
-      return this.http.get<Property[]>(`${this.baseUrl}/property/all`); // return type could be <Property[]>?
-    }
+    return this.http.get<Property[]>(`${this.baseUrl}/property/all/${pm}`); // return type could be <Property[]>?
   }
 
   addCouncil(data: any) {

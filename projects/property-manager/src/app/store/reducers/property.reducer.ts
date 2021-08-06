@@ -43,6 +43,21 @@ const propertyReducer = createReducer(
     });
   }),
 
+  on(PropertyActions.getPropertyListByPm, state => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+  on(PropertyActions.getPropertyLisByPmtSuccess, (state, { payload }) => {
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      properties: payload
+    });
+  }),
+
 on(PropertyActions.getPropertyDetails, (state) => ({
     ...state,
     loading: true,

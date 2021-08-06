@@ -185,8 +185,9 @@ export class DashboardComponent implements OnInit {
 
   getCurrentUser() {
     return this.store.pipe(select(getUserInfo)).subscribe(userData => { // this.user = userData;
-            console.log('loggged in user', userData.username);
-            if (!userData) {
+
+      if (!userData) {
+              console.log('loggged in user', userData.username);
               const uname = JSON.parse(localStorage.getItem('auth'));
               this.username = uname.username;
               this.userrole = uname.role;

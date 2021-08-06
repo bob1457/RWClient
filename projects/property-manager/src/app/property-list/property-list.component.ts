@@ -4,13 +4,14 @@ import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Store, select } from '@ngrx/store';
 import { getPropertyList, getPropertyDetails, addProperty, updateProperty,
-         updatePropertyStatus, removeProperty, getCouncilList } from '../store/actions/property.actions';
+         updatePropertyStatus, removeProperty, getCouncilList, getPropertyListByPm } from '../store/actions/property.actions';
 import { propertyList, loadingStatus, councilList} from '../store/reducers/property.reducer';
 import { MatPaginator, MatSort } from '@angular/material';
 import { Observable } from 'rxjs';
 
 import { Router, Event, NavigationStart, NavigationEnd } from '@angular/router';
 import { getPropertyImageList } from 'projects/marketing-manager/src/app/store/actions/marketing.actions';
+import { getUserInfo } from '@lib/auth';
 
 
 @Component({
@@ -27,6 +28,8 @@ export class PropertyListComponent implements OnInit, AfterViewInit {
   baseUrl = 'http://localhost:21799';
 
   propertyId: any = 1;
+  username;
+  userrole;
 
   list: Property[];
   councils: any[];
@@ -39,6 +42,9 @@ export class PropertyListComponent implements OnInit, AfterViewInit {
   constructor(private propertyService: PropertyService,
               private router: Router,
               private store: Store<PropertyState>) {
+
+                // this.getCurrentUser();
+
                 this.router.events.subscribe((routerEvent: Event) => {
                   if (routerEvent instanceof NavigationStart) {
                     this.loadingIndicator = true;
@@ -90,9 +96,30 @@ export class PropertyListComponent implements OnInit, AfterViewInit {
     // this.getPropertyList();
     // this.propertyList$ =
     // this.store.select(propertyList);
-    if (this.list == null) {
+
+    // this.getCurrentUser();
+
+    const userInfo = JSON.parse(localStorage.getItem('auth'));
+    this.username = userInfo.username;
+    this.userrole = userInfo.role;
+
+    console.log('user info', userInfo);
+
+    console.log('user name', userInfo.username);
+    console.log('user role', userInfo.role);
+
+
+    // this.store.dispatch(getPropertyListByPm({ payload: this.username }));
+    // if (this.list == null) {
+    if (this.userrole == 'pm') {
+      console.log('get there for pm');
+      this.store.dispatch(getPropertyListByPm({payload: this.username}));
+    } else {
+      console.log('get there for all');
       this.store.dispatch(getPropertyList());
-    }
+      }
+
+    // }
 
     this.store.dispatch(getCouncilList());
 
@@ -248,78 +275,96 @@ export class PropertyListComponent implements OnInit, AfterViewInit {
   debugger;
   return this.store.dispatch(addProperty({payload: property}));
 
-}
+  }
 
-UpdateProperty() {
-  const property: any = {
-    propertyId: 1003,
-    propertyName: 'Last Update REAL',
-    propertyDesc: 'update again!!!',
-    type: 0,
-    propertyManagerId: 0,
-    propertyLogoImgUrl: 'string',
-    propertyVideoUrl: 'string',
-    propertyBuildYear: 0,
-    isActive: true,
-    isShared: true,
-    furnishingId: 0,
-    status: 1,
-    isBasementSuite: true,
-    propertySuiteNumber: '101',
-    propertyNumber: '9876',
-    propertyStreet: '102 Street',
-    propertyCity: 'Surrey',
-    propertyStateProvince: 'string',
-    propertyCountry: 'string',
-    propertyZipPostCode: 'string',
-    stove: true,
-    refrigerator: true,
-    dishwasher: true,
-    airConditioner: true,
-    laundry: true,
-    blindsCurtain: true,
-    furniture: true,
-    tvinternet: true,
-    commonFacility: false,
-    securitySystem: true,
-    utilityIncluded: true,
-    fireAlarmSystem: true,
-    others: 'string',
-    facilityNotes: 'string',
-    numberOfBedrooms: 3,
-    numberOfBathrooms: 0,
-    numberOfLayers: 2,
-    numberOfParking: 1,
-    basementAvailable: true,
-    totalLivingArea: 0,
-    featureNotes: 'string'
-  };
-  debugger;
-  return this.store.dispatch(updateProperty({payload: property}));
-}
+  UpdateProperty() {
+    const property: any = {
+      propertyId: 1003,
+      propertyName: 'Last Update REAL',
+      propertyDesc: 'update again!!!',
+      type: 0,
+      propertyManagerId: 0,
+      propertyLogoImgUrl: 'string',
+      propertyVideoUrl: 'string',
+      propertyBuildYear: 0,
+      isActive: true,
+      isShared: true,
+      furnishingId: 0,
+      status: 1,
+      isBasementSuite: true,
+      propertySuiteNumber: '101',
+      propertyNumber: '9876',
+      propertyStreet: '102 Street',
+      propertyCity: 'Surrey',
+      propertyStateProvince: 'string',
+      propertyCountry: 'string',
+      propertyZipPostCode: 'string',
+      stove: true,
+      refrigerator: true,
+      dishwasher: true,
+      airConditioner: true,
+      laundry: true,
+      blindsCurtain: true,
+      furniture: true,
+      tvinternet: true,
+      commonFacility: false,
+      securitySystem: true,
+      utilityIncluded: true,
+      fireAlarmSystem: true,
+      others: 'string',
+      facilityNotes: 'string',
+      numberOfBedrooms: 3,
+      numberOfBathrooms: 0,
+      numberOfLayers: 2,
+      numberOfParking: 1,
+      basementAvailable: true,
+      totalLivingArea: 0,
+      featureNotes: 'string'
+    };
+    debugger;
+    return this.store.dispatch(updateProperty({payload: property}));
+  }
 
-UpdatePropertyStatus() {
-  const propertyStatus: any = {
-    id: 1003,
-    status: 2
-  };
+  UpdatePropertyStatus() {
+    const propertyStatus: any = {
+      id: 1003,
+      status: 2
+    };
 
-  debugger;
-  return this.store.dispatch(updatePropertyStatus({payload: propertyStatus}));
-
-
-}
-
-RemoveProperty() {
-  const propertyToRemove: any = {
-    propertyId: 1002,
-    active: false
-  };
-  debugger;
-  return this.store.dispatch(removeProperty({payload: propertyToRemove}));
-}
+    debugger;
+    return this.store.dispatch(updatePropertyStatus({payload: propertyStatus}));
 
 
+  }
+
+  RemoveProperty() {
+    const propertyToRemove: any = {
+      propertyId: 1002,
+      active: false
+    };
+    debugger;
+    return this.store.dispatch(removeProperty({payload: propertyToRemove}));
+  }
+
+  getCurrentUser() {
+    return this.store.pipe(select(getUserInfo)).subscribe(userData => { // this.user = userData;
+      console.log('loggged in user', userData.username);
+      if (!userData) {
+        const uname = JSON.parse(localStorage.getItem('auth'));
+        this.username = uname.username;
+        this.userrole = uname.role;
+        console.log('get from pppt manager localstorage', this.username + " " + this.userrole);
+      } else {
+        this.username = userData.username;
+        this.userrole = userData.role;
+        console.log('get from state', this.username + " " + this.userrole);
+      }
+
+      // this.username = userData.username;
+      // this.userrole = userData.role;
+      // console.log('get from state', this.username + " " + this.userrole);
+    });
+  }
 
 
 

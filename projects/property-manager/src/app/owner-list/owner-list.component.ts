@@ -6,13 +6,15 @@ import { getPropertyOwnerList,
          getPropertyOwnerDetails,
          addPropertyOwner,
          updatePropertyOwner,
-         removePropertyOwner } from '../store/actions/property.actions';
+         removePropertyOwner,
+         getPropertyOwnerListByPm} from '../store/actions/property.actions';
 import {ownerList, loadingStatus } from '../store/reducers/property.reducer';
 // import { OwnerList } from '@lib/dashboard';
 // import { PropertyList, ContractList, TenantList, RentalList, ownerList, MarketingList, RentalAppList } from '../store/reducers/property.reducer';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
+import { getUserInfo } from '@lib/auth';
 // import { MatTableDataSource } from '@lib/app-material';
 
 @Component({
@@ -30,6 +32,8 @@ export class OwnerListComponent implements OnInit {
   owners$: Observable<PropertyOwner[]>;
   list: any[];
   id: number;
+  username;
+  userrole;
 
   ownerList$: Observable<PropertyOwner[]>;
 
@@ -63,9 +67,18 @@ export class OwnerListComponent implements OnInit {
     debugger;
     this.loading$ = this.store.pipe(select(loadingStatus));
 
-    if (this.list == null) {
+    this.getCurrentUser();
+
+    // if (this.list == null) {
+    if (this.userrole == 'pm') {
+      console.log('get there for pm');
+      this.store.dispatch(getPropertyOwnerListByPm({ payload: this.username }));
+    } else {
+      console.log('get there for all');
       this.store.dispatch(getPropertyOwnerList());
     }
+
+    // }
 
     // this.getOwnerList();
   }
@@ -182,6 +195,26 @@ export class OwnerListComponent implements OnInit {
 
     debugger;
     return this.store.dispatch(removePropertyOwner({payload: ownerToRemove}));
+  }
+
+  getCurrentUser() {
+    return this.store.pipe(select(getUserInfo)).subscribe(userData => { // this.user = userData;
+      console.log('loggged in user', userData.username);
+      if (!userData) {
+        const uname = JSON.parse(localStorage.getItem('auth'));
+        this.username = uname.username;
+        this.userrole = uname.role;
+        console.log('get from pppt manager localstorage', this.username + " " + this.userrole);
+      } else {
+        this.username = userData.username;
+        this.userrole = userData.role;
+        console.log('get from state', this.username + " " + this.userrole);
+      }
+
+      // this.username = userData.username;
+      // this.userrole = userData.role;
+      // console.log('get from state', this.username + " " + this.userrole);
+    });
   }
 
 }
