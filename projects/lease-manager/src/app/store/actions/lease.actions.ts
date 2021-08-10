@@ -346,6 +346,24 @@ export const getAllVendorsFailure = createAction(
   }
 );
 
+export const getAllVendorsByUser = createAction(
+  '[Leases] Get All Vendors By User',
+  props<{ payload: any }>()
+);
+
+export const getAllVendorsByUserSuccess = createAction(
+  '[Leases] Get All Vendors By User Success',
+  props<{ payload: Vendor[] }>()
+);
+
+export const getAllVendorsByUserFailure = createAction(
+  '[Leases] Get All Vendors By User Failure',
+  // props<{payload: any}>()
+  (errorMessage = 'Error loading vendors') => {
+    return ({ payload: { errorMessage } });
+  }
+);
+
 /**
  * Get Vendor Details Actions
  */

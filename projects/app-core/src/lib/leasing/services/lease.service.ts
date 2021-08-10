@@ -114,6 +114,11 @@ export class LeaseService {
     return this.http.get<Vendor[]>(`${this.baseUrl}/workorder/vendor/all`);
   }
 
+  getAllVendorsByCreator(user: any) {
+    debugger;
+    return this.http.get<Vendor[]>(`${this.baseUrl}/workorder/vendor/all/${user}`);
+  }
+
   getVendorDetails(id: number) {
     debugger;
     return this.http.get<Vendor>(`${this.baseUrl}/workorder/vendor/details/${id}`);

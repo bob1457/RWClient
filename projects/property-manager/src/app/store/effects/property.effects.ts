@@ -593,6 +593,30 @@ export class PropertyEffects {
     )
   );
 
+  getStrataCouncilListByUser$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(PropertyActions.getCouncilListByUser),
+      map(action => action.payload),
+      // tap(() => console.log('got here to call service for retrieving contracts')),
+      switchMap((payload) =>
+        this.propertyService.getCouncilListByCreator(payload).pipe(
+          map((council: ManagementContract[]) => ({
+            type: '[Property] Get Council List By User Success',
+            payload: council
+          })),
+          // tap(res => {console.log('response: ' + res); }),
+          // catchError(
+          //   err => {
+          //     return of('[[Property] Get Contract List Failure', err.error);
+          //   } // EMPTY
+          // )
+          catchError(error => of(PropertyActions.getCouncilListByUserFailure(error.message)))
+        )
+      )
+    )
+  );
+
   getStrataCouncilDetails$ = createEffect(() =>
     this.actions$.pipe(
       // ofType('[Property] Get Property List'),

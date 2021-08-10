@@ -33,7 +33,9 @@ export class AddVendorComponent implements OnInit {
       userName: ['NotSet'],
       roleId: [3],
       onlineAccessEnbaled: [false],
-      userAvartaImgUrl: ['']
+      userAvartaImgUrl: [''],
+      createdBy: [''],
+      updatedBy: ['']
     });
   }
 

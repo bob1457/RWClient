@@ -56,7 +56,9 @@ export class VendorDetailsComponent implements OnInit {
       vendorContactOthers: [''],
       vendorContactEmail: [''],
       isActive: [true],
-      userAvartaImgUrl: ['']
+      userAvartaImgUrl: [''],
+      // createdBy: [''],
+      updatedBy: ['']
     });
   }
 

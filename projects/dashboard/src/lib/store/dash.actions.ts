@@ -411,6 +411,27 @@ export const getAllVendorsFailure = createAction(
 );
 
 /**
+ * Get All Vendors Actions
+ */
+export const getAllVendorsByUser = createAction(
+  '[Leases] Get All Vendors By User',
+  props<{ payload: any }>()
+);
+
+export const getAllVendorsByUserSuccess = createAction(
+  '[Leases] Get All Vendors By User Success',
+  props<{ payload: Vendor[] }>()
+);
+
+export const getAllVendorsByUserFailure = createAction(
+  '[Leases] Get All Vendors By User Failure',
+  // props<{payload: any}>()
+  (errorMessage = 'Error loading vendors') => {
+    return ({ payload: { errorMessage } });
+  }
+);
+
+/**
  * Get All Work Orders Actions
  */
 export const getAllWorkOrders = createAction(
@@ -513,6 +534,7 @@ export const getAllInvoicesFailure = createAction(
   }
 );
 
+
 /**
  * Get Council List Actions
  */
@@ -527,6 +549,27 @@ export const getCouncilListSuccess = createAction(
 
 export const getCouncilListFailure = createAction(
   '[Property] Get Council List Failure',
+  // props<{payload: any}>()
+  (errorMessage = 'Error loading property list') => {
+    return ({ payload: { errorMessage } });
+  }
+);
+
+/**
+ * Get Council List by user Actions
+ */
+export const getCouncilListByUser = createAction(
+  '[Property] Get Council List By User',
+  props<{ payload: any }>()
+);
+
+export const getCouncilListByUserSuccess = createAction(
+  '[Property] Get Council List By User Success',
+  props<{ payload: any[] }>()
+);
+
+export const getCouncilListByUserFailure = createAction(
+  '[Property] Get Council List By User Failure',
   // props<{payload: any}>()
   (errorMessage = 'Error loading property list') => {
     return ({ payload: { errorMessage } });

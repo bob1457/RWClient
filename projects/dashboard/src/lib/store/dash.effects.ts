@@ -474,10 +474,35 @@ export class DashboardEffects {
       // ofType('[Property] Get Property List'),
       ofType(DashActions.getAllVendors),
       // tap(() => console.log('got here for vendor list!!!')),
-      switchMap(() =>
-        this.dashService.getVendorList().pipe(
+      // map(action => action.payload),
+      switchMap((payload) =>
+        this.dashService.getVendorListByCreator(payload).pipe(
           map((vendors: any[]) => ({
             type: '[Leases] Get All Vendors Success',
+            payload: vendors
+          })),
+          // tap(res => {console.log('response: ' + res); }),
+          // catchError(
+          //   err => {
+          //     return of('[Marketing] Get Rental Applications Failure', err.error);
+          //   } // EMPTY
+          // )
+          catchError(error => of(DashActions.getAllVendorsByUserFailure(error.message)))
+        )
+      )
+    )
+  );
+
+  getVendorListByUser$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(DashActions.getAllVendorsByUser),
+      // tap(() => console.log('got here for vendor list!!!')),
+      map(action => action.payload),
+      switchMap((payload) =>
+        this.dashService.getVendorListByCreator(payload).pipe(
+          map((vendors: any[]) => ({
+            type: '[Leases] Get All Vendors By User Success',
             payload: vendors
           })),
           // tap(res => {console.log('response: ' + res); }),
@@ -627,6 +652,30 @@ export class DashboardEffects {
           //   } // EMPTY
           // )
           catchError(error => of(DashActions.getCouncilListFailure(error.message)))// EMPTY
+        )
+      )
+    )
+  );
+
+  getAllCouncilsByUser$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(DashActions.getCouncilListByUser),
+      // tap(() => console.log('got here for invoices!!!')),
+      map(action => action.payload),
+      switchMap((payload) =>
+        this.dashService.getAllCouncilsByCreator(payload).pipe(
+          map((list: any[]) => ({
+            type: '[Property] Get Council List By User Success',
+            payload: list
+          })),
+          // tap(res => {console.log('response: ' + res); }),
+          // catchError(
+          //   err => {
+          //     return of('[Leases] Get all leases Failure', err.error);
+          //   } // EMPTY
+          // )
+          catchError(error => of(DashActions.getCouncilListByUserFailure(error.message)))// EMPTY
         )
       )
     )

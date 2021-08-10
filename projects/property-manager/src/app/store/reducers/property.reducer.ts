@@ -155,6 +155,21 @@ on(PropertyActions.getPropertyDetails, (state) => ({
     });
   }),
 
+  on(PropertyActions.getCouncilListByUser, state => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+  on(PropertyActions.getCouncilListByUserSuccess, (state, { payload }) => {
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      councils: payload
+    });
+  }),
+
 
   on(PropertyActions.updateCouncil, (state) => {
     return ({

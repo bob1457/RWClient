@@ -431,6 +431,22 @@ const dashReducer = createReducer(
     });
   }),
 
+  on(DashActions.getAllVendorsByUser, state => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+
+  on(DashActions.getAllVendorsByUserSuccess, (state, { payload }) => {
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      vendors: payload
+    });
+  }),
+
   /**
    * Get all workk order list
    */
@@ -543,6 +559,23 @@ const dashReducer = createReducer(
   }),
 
   on(DashActions.getCouncilListSuccess, (state, { payload }) => {
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      councilList: payload
+    });
+  }),
+
+  on(DashActions.getCouncilListByUser, state => {
+    return ({
+      ...state,
+      loading: true,
+      loaded: false
+    });
+  }),
+
+  on(DashActions.getCouncilListByUserSuccess, (state, { payload }) => {
     return ({
       ...state,
       loading: false,

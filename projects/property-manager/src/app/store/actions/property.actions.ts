@@ -132,6 +132,28 @@ export const getCouncilListFailure = createAction(
   }
 );
 
+
+/**
+ * Get Strata Council List Actions
+ */
+export const getCouncilListByUser = createAction(
+  '[Property] Get Council List By User',
+  props<{ payload: any }>()
+);
+
+export const getCouncilListByUserSuccess = createAction(
+  '[Property] Get Council List By User Success',
+  props<{ payload: any[] }>()
+);
+
+export const getCouncilListByUserFailure = createAction(
+  '[Property] Get Council List By User Failure',
+  // props<{payload: any}>()
+  (errorMessage = 'Error loading property list') => {
+    return ({ payload: { errorMessage } });
+  }
+);
+
 /**
  * Get Council Details Actions
  */

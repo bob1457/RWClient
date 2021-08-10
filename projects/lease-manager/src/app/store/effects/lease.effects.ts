@@ -310,7 +310,7 @@ export class LeaseEffects {
       )
     )
   );
-
+  // By User
   getAllVendors$ = createEffect(() =>
     this.actions$.pipe(
       // ofType('[Property] Get Property List'),
@@ -329,6 +329,30 @@ export class LeaseEffects {
           //   } // EMPTY
           // )
           catchError(error => of(LeaseActions.getAllVendorsFailure(error.message)))// EMPTY
+        )
+      )
+    )
+  );
+
+  getAllVendorsByUser$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(LeaseActions.getAllVendorsByUser),
+      map(action => action.payload),
+      tap(() => console.log('got here for vendors by creator!!!')),
+      switchMap((payload) =>
+        this.leaseService.getAllVendorsByCreator(payload).pipe(
+          map((vendors: Vendor[]) => ({
+            type: '[Leases] Get All Vendors By User Success',
+            payload: vendors
+          })),
+          // tap(res => {console.log('response: ' + res); }),
+          // catchError(
+          //   err => {
+          //     return of('[Leases] Get all leases Failure', err.error);
+          //   } // EMPTY
+          // )
+          catchError(error => of(LeaseActions.getAllVendorsByUserFailure(error.message)))// EMPTY
         )
       )
     )

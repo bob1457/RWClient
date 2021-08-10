@@ -42,7 +42,9 @@ export class AddStrataComponent implements OnInit {
       inChargeManagerContactEmail: [''],
       isActive:[true],
       notes:[''],
-      strataOption: []
+      strataOption: [],
+      createdBy: [''],
+      updatedBy: ['']
     });
 
     this.store.select(propertyList).subscribe(list => {

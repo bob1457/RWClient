@@ -85,6 +85,12 @@ export class PropertyService {
     return this.http.get<any[]>(`${this.baseUrl}/property/stratalist`); // return type could be <Property[]>?
   }
 
+  getCouncilListByCreator(user: any) {
+    debugger;
+
+    return this.http.get<any[]>(`${this.baseUrl}/property/stratalist/${user}`); // return type could be <Property[]>?
+  }
+
   getCouncilDetails(id: number) {
     return this.http.get<any>(`${this.baseUrl}/property/strata/${id}`);
   }

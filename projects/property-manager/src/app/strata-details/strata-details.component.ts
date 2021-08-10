@@ -45,7 +45,9 @@ export class StrataDetailsComponent implements OnInit {
       inChargeManagerContactEmail: [''],
       isActive:[true],
       notes:[''],
-      id: []
+      id: [],
+      // createdBy: [''],
+      updatedBy: ['']
     });
 
 

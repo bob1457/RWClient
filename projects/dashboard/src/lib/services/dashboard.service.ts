@@ -123,6 +123,11 @@ export class DashboardService {
     return this.http.get<any[]>(`${this.baseUrl}/WorkOrder/vendor/all`);
   }
 
+  getVendorListByCreator(user: any) {
+    debugger;
+    return this.http.get<any[]>(`${this.baseUrl}/workorder/vendor/all/${user}`);
+  }
+
   getWorkOrderList() {
     debugger;
     return this.http.get<any[]>(`${this.baseUrl}/WorkOrder/all`);
@@ -151,6 +156,12 @@ export class DashboardService {
   getAllCouncils() {
     debugger;
     return this.http.get<any[]>(`${this.baseUrl}/property/stratalist`);
+  }
+
+  getAllCouncilsByCreator(user: any) {
+    debugger;
+
+    return this.http.get<any[]>(`${this.baseUrl}/property/stratalist/${user}`); // return type could be <Property[]>?
   }
 
 

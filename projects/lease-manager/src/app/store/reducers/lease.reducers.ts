@@ -275,6 +275,21 @@ const propertyLeaseReducer = createReducer(
     });
   }),
 
+  on(LeaseActions.getAllVendorsByUser, state => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+  on(LeaseActions.getAllVendorsByUserSuccess, (state, { payload }) => {
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      vendors: payload
+    });
+  }),
+
   on(LeaseActions.getAllVendorsFailure, (state) => ({
     ...state,
     loading: false,

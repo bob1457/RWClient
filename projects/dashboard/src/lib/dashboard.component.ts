@@ -19,7 +19,9 @@ import {
   getPropertyListByPm, getPropertyOwnerListByPm, getContractListByPm, getPropertyListingByPm,
   getPropertyListing, getRentalApplicationListByPm, getOpenHouseListByPm, getAllLeasesByPm, getAllTenantsByPm,
   getAllWorkOrderByPm,
-  getAllServiceRequestsByPm
+  getAllServiceRequestsByPm,
+  getAllVendorsByUser,
+  getCouncilListByUser
 } from './store/dash.actions';
 // import { PropertyService, ManagementContract, PropertyTenant, PropertyLease, RentalApplication } from '@lib/app-core';
 // import { PropertyService, ManagementContract, PropertyTenant, PropertyLease, RentalApplication } from './services/dashboard.service';
@@ -119,6 +121,8 @@ export class DashboardComponent implements OnInit {
       this.store.dispatch(getAllTenantsByPm({ payload: this.username }));
       this.store.dispatch(getAllWorkOrderByPm({ payload: this.username }));
       this.store.dispatch(getAllServiceRequestsByPm({ payload: this.username }));
+      this.store.dispatch(getAllVendorsByUser({ payload: this.username }));
+      this.store.dispatch(getCouncilListByUser({payload: this.username}));
     } else {
       this.store.dispatch(getPropertyList());
       this.store.dispatch(getPropertyOwnerList());
@@ -130,6 +134,8 @@ export class DashboardComponent implements OnInit {
       this.store.dispatch(getAllTenants());
       this.store.dispatch(getAllWorkOrders());
       this.store.dispatch(getAllServiceRequests());
+      this.store.dispatch(getAllVendors());
+      this.store.dispatch(getCouncilList());
     }
 
     // this.store.dispatch(getPropertyList({payload: this.username})) ;
@@ -146,11 +152,11 @@ export class DashboardComponent implements OnInit {
     // this.store.dispatch(getOpenHouseList());
     this.store.dispatch(getRentPaymentList());
 
-    this.store.dispatch(getAllVendors());
+    // this.store.dispatch(getAllVendors());
     // this.store.dispatch(getAllWorkOrders());
     // this.store.dispatch(getAllServiceRequests());
     this.store.dispatch(getAllInvoices());
-    this.store.dispatch(getCouncilList());
+    // this.store.dispatch(getCouncilList());
     // this.getAllPropertyList();
   }
 
