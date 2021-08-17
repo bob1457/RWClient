@@ -52,9 +52,12 @@
                                         <div mat-card-avatar>
                                             <img class="user-avatar" src="../../assets/images/user_a.png">
                                         </div>
-                                        <mat-card-title style="font-size: .85em; font-weight: bold;">{{tenant.firstName}} {{tenant.lastName | uppercase}}</mat-card-title>
-                                        <mat-card-subtitle style="font-size: 12px; color: black;">Tenant</mat-card-subtitle>
-                                        <div style="font-size: 12px;text-align: left;">{{tenant.contactEmail}}<br>{{tenant.contactTelephone1}}</div>
+                                        <mat-card-title style="font-size: .85em; font-weight: bold;">
+                                            {{tenant.firstName}} {{tenant.lastName | uppercase}}<br>
+                                            <span style="font-size: .9em;font-weight: normal;">{{tenant.contactEmail}}<br>{{tenant.contactTelephone1}}</span>
+                                        </mat-card-title>
+                                        <!-- <mat-card-subtitle style="font-size: 12px; color: black;">Tenant</mat-card-subtitle>
+                                        <div style="font-size: 12px;text-align: left;">{{tenant.contactEmail}}<br>{{tenant.contactTelephone1}}</div> -->
                                         <!--{{user.email}}{{user.tel}}-->
                                     </mat-card-header>
                                 </mat-card>

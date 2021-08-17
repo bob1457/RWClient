@@ -105,7 +105,8 @@
 .user-card {
     /* width: 400px; */
     margin: 5px;
-    width: 100%;
+    min-width: 100%;
+    text-align: left;
 }
 
 .user-avatar {
