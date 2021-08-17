@@ -8,12 +8,20 @@ import { propertyApplicationDetails, loadingStatus, loadedStatus } from '../stor
 import { getRentalApplicationDetails } from '../store/actions/marketing.actions';
 import { Observable } from 'rxjs';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { MatSnackBar, MatSnackBarConfig } from '@angular/material';
+import { MatSnackBar, MatSnackBarConfig, MatTableDataSource } from '@angular/material';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-application-details',
   templateUrl: './application-details.component.html',
-  styleUrls: ['./application-details.component.scss']
+  styleUrls: ['./application-details.component.scss'],
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed', style({ height: '0px', minHeight: '0' })),
+      state('expanded', style({ height: '*' })),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+  ]
 })
 export class ApplicationDetailsComponent implements OnInit {
 
@@ -26,6 +34,10 @@ export class ApplicationDetailsComponent implements OnInit {
   loading = false;
   msg = '';
   disableApproveButton = false;
+
+  displayedColumns: string[] = ['icon', 'id', 'streetNumber', 'city', 'provinceState', 'postZipCode', 'country','action'];
+
+  dataSource = new MatTableDataSource<any>();
 
   // detailsForm: FormGroup;
 
@@ -42,6 +54,10 @@ export class ApplicationDetailsComponent implements OnInit {
                 this.store.pipe(select(propertyApplicationDetails)) // select date from state in store
                           .subscribe(app => {
                             this.application = app;
+                            if (this.application) {
+                              this.dataSource.data = this.application.prevAddressList;
+                              console.log('address', this.application.prevAddressList);
+                            }
                             console.log('app', this.application);
                 });
 
@@ -62,6 +78,8 @@ export class ApplicationDetailsComponent implements OnInit {
     });
 
     this.GetApplicationDetails(this.id);
+
+
   }
 
   GetApplicationDetails(id: any) {

@@ -73,3 +73,86 @@
     padding: 10px;
     font-size: .8em;
 }
+
+td,
+th {
+    white-space: normal;
+    word-wrap: break-word;
+    max-width: 200px;
+    text-align: center;
+}
+
+tr.mat-header-row {
+    background: #fb8c00;
+}
+
+.mat-row:nth-child(even) {
+    background-color: #e4e0e0;
+}
+
+.mat-row:nth-child(odd) {
+    background-color: #ece5e5;
+}
+
+.mat-row:hover {
+    background-color: rgb(233, 221, 221);
+}
+
+.mat-sort-header-button {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.table-header-text {
+    font-size: 1.15em;
+    color: white;
+}
+
+.add-tenant-card {
+    background: #00c853;
+    color: white;
+    margin-top: 25px;
+    width: 100px;
+    height: 90px;
+    margin-left: 12px;
+}
+
+.tenant-card {
+    background: #006cc8;
+    color: white;
+    margin-top: 25px;
+    width: 100px;
+    height: 90px;
+    margin-left: 12px;
+}
+
+.tenant-avatar {
+    text-align: center;
+}
+
+tr.example-detail-row {
+    height: 0;
+}
+
+.example-detail-row {
+    height: 0;
+}
+
+tr.example-element-row:not(.example-expanded-row):hover {
+    background: whitesmoke;
+}
+
+tr.example-element-row:not(.example-expanded-row):active {
+    background: #efefef;
+}
+
+.example-element-row td {
+    border-bottom-width: 0;
+}
+
+.example-element-detail {
+    overflow: hidden;
+    display: flex;
+    height: 100px;
+    margin-top: 20px;
+}
