@@ -827,6 +827,88 @@ export class LeaseEffects {
     )
   );
 
+  addNotice$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(LeaseActions.addNotice),
+      tap(() => console.log('got here to add notice !!!')),
+      map(action => action.payload),
+      switchMap((payload) =>
+        this.leaseService.addNotice(payload).pipe(
+          map((order: any) => ({
+            type: '[Leases] Add Notice Success',
+            payload: order
+          })),
+          tap(() => {
+            // window.alert('done');
+            this.openSnackBar('Notice added successfully.', 'close', 'notify');
+          }), // display notificaiton
+
+          catchError(error => {
+            this.openSnackBar(error.message, 'dismiss', 'error');
+            return of(LeaseActions.addNoticeFailure(error.message));
+          }
+          )
+          // catchError(error => of(LeaseActions.addLeaseFailure(error.message)))
+        )
+      )
+    )
+  );
+
+  getAllNoticeForLease$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(LeaseActions.getAllNoticeForLease),
+      // tap(() => console.log('got here: ')),
+      map(action => action.payload),
+      switchMap((payload) =>
+        this.leaseService.getAllNoticeForLeas(payload).pipe(
+          tap(() => console.log('got here for all notice for lease')),
+          map((notice: any) => ({
+            // tslint:disable-next-line:max-line-length
+            type: '[Leases] Get All Notice for Lease Success', // the name of the action(string) must match the string in the Action, case senstive
+            payload: notice
+          })),
+          // tap(res => {console.log('response: ' + res); }),
+          // catchError(
+          //   err => {
+          //     tap( () => console.log('err'));
+          //     return of(LeaseActions.getTenantDetailsFailure([err.error]));
+          //   } // EMPTY // return of('[Property] Get Property Details Failure', err.error);
+          // )
+          catchError(error => of(LeaseActions.getAllNoticeForLeaseFailure(error.message)))
+        )
+      )
+    )
+  );
+
+  getNoticeDetails$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(LeaseActions.getVendorDetails),
+      // tap(() => console.log('got here: ')),
+      map(action => action.payload),
+      switchMap((payload) =>
+        this.leaseService.getNoticeDetails(payload).pipe(
+          tap(() => console.log('got here for notice details')),
+          map((notice: any) => ({
+            // tslint:disable-next-line:max-line-length
+            type: '[Leases] Get Noticet Details Success', // the name of the action(string) must match the string in the Action, case senstive
+            payload: notice
+          })),
+          // tap(res => {console.log('response: ' + res); }),
+          // catchError(
+          //   err => {
+          //     tap( () => console.log('err'));
+          //     return of(LeaseActions.getTenantDetailsFailure([err.error]));
+          //   } // EMPTY // return of('[Property] Get Property Details Failure', err.error);
+          // )
+          catchError(error => of(LeaseActions.getNoticeDetailsFailure(error.message)))
+        )
+      )
+    )
+  );
+
 
   openSnackBar(message: string, action: string, type: string) {
     const config = new MatSnackBarConfig();

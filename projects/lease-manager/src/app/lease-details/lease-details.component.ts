@@ -4,8 +4,8 @@ import { PropertyLeaseState } from '../store/lease-state';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LeaseService, PropertyLease, Vendor } from '@lib/app-core';
-import { addRentPayment, addTenant, addWorkOrder, getAllInvoices, getLeaseDetails, getRentPaymenttDetails, getWorkOrderDetails, updateLease, updateRentPayment } from '../store/actions/lease.actions';
-import { invoiceList, leaseDetails, loadingStatus, rentPaymentDetails, rentPaymentList, serviceRequestList,
+import { addRentPayment, addTenant, addWorkOrder, getAllInvoices, getAllNoticeForLease, getLeaseDetails, getRentPaymenttDetails, getWorkOrderDetails, updateLease, updateRentPayment } from '../store/actions/lease.actions';
+import { getNoticeList, invoiceList, leaseDetails, loadingStatus, noticeList, rentPaymentDetails, rentPaymentList, serviceRequestList,
          tenantList, vendorDetails, vendorList, workOrderList } from '../store/reducers';
 import { getAllServiceRequests, getAllVendors,
   getAllWorkOrders, getRentPaymentList, getAllTenants } from '../store/actions/lease.actions';
@@ -43,7 +43,8 @@ export class LeaseDetailsComponent implements OnInit {
   addWorkOrder = false;
   workOrders: any;
   requests: any [];
-  tenants: any [];
+  tenants: any[];
+  notices: any[];
 
   tabIndex = 0;
   hide = false;
@@ -270,6 +271,13 @@ export class LeaseDetailsComponent implements OnInit {
                                 // console.log('co apps', this.coApplicantList);
 
                               });
+
+                  this.store.select(noticeList)
+                    .subscribe(notices => {
+                      if (notices) {
+                        this.notices = notices;
+                      }
+                    });
                 });
               }
 
@@ -545,6 +553,18 @@ export class LeaseDetailsComponent implements OnInit {
 
         if (!this.workOrders) {
            this.store.dispatch(getAllWorkOrders());
+        }
+        break;
+      }
+      case 5: {
+        this.hide = true;
+        // if (!this.vendors) {
+        //   this.store.dispatch(getAllVendors());
+        //   // this.vendors$ = this.propertyService.getAllVendors();
+        // }
+
+        if (!this.notices) {
+          this.store.dispatch(getAllNoticeForLease({payload: this.id}));
         }
         break;
       }

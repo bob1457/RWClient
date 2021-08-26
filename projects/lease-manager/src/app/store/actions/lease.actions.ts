@@ -1,6 +1,8 @@
 import { createAction, props } from '@ngrx/store';
 import { PropertyLease, PropertyTenant, WorkOrder, Vendor } from '@lib/app-core';
 import { ServiceRequest } from 'projects/app-core/src/lib/leasing/models/service-request.model';
+import { AnonymousSubject } from 'rxjs/internal/Subject';
+import { AnyFn } from '@ngrx/store/src/selector';
 
 debugger;
 
@@ -634,7 +636,62 @@ export const updateRentPaymentFailure = createAction(
 
 );
 
+/**
+ * Add Notice Actions
+ */
 
+export const addNotice = createAction(
+  '[Leases] Add Notice',
+  props<{ payload: any }>()
+);
+
+export const addNoticeSuccess = createAction(
+  '[Leases] Add Notice Success',
+  props<{ payload: any }>()
+);
+
+export const addNoticeFailure = createAction(
+  '[[Leases] Add Notice Failure',
+  // props<{payload: any}>()
+  (errorMessage = 'Error adding notice') => ({ payload: { errorMessage } })
+
+);
+
+export const getAllNoticeForLease = createAction(
+  '[Leases] Get All Notice for Lease',
+  props<{ payload: number }>()
+);
+
+export const getAllNoticeForLeaseSuccess = createAction(
+  '[Leases] Get All Notice for Lease Success',
+  props<{ payload: any }>()
+);
+
+export const getAllNoticeForLeaseFailure = createAction(
+  '[Leases] Get All Notice for Lease Failure',
+  // props<{payload: any}>()
+  (errorMessage = 'Error loading notice details') => {
+    return ({ payload: { errorMessage } });
+  }
+);
+
+export const getNoticeDetails = createAction(
+  '[Leases] Get Notice Details',
+  props<{ payload: number }>()
+);
+
+export const getNoticeDetailssSuccess = createAction(
+  '[Leases] Get Noticet Details Success',
+  props<{ payload: any }>()
+);
+
+export const getNoticeDetailsFailure = createAction(
+  '[Leases] Get Notice Details Failure',
+  // props<{payload: any}>()
+  (errorMessage = 'Error loading notice details') => {
+    return ({ payload: { errorMessage } });
+  }
+);
 
 
 
