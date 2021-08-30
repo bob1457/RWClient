@@ -219,4 +219,9 @@ export class LeaseService {
     return this.http.get<any>(`${this.baseUrl}/Lease/allnotice/${id}`);
   }
 
+  getNoticeReasonItems(type: number) {
+    debugger;
+    return this.http.get<any>(`${this.baseUrl}/Lease/reasonitems/${type}`);
+  }
+
 }

@@ -39,6 +39,7 @@ import { StatusPipe } from './status.pipe';
 import { WorkOrderDatePipe } from './work-order-date.pipe';
 import { PaymentMethodPipe } from './payment-method.pipe';
 import { PaymentDetailsDialogComponent } from './dialogs/payment-details-dialog/payment-details-dialog.component';
+import { AddNoticeDialogComponent } from './dialogs/add-notice-dialog/add-notice-dialog.component';
 import { AddRentDialogComponent } from './dialogs/add-rent-dialog/add-rent-dialog.component';
 import { FullLeaseAgreementComponent } from './full-lease-agreement/full-lease-agreement.component';
 import { AgreementHeaderComponent } from './agreement-header/agreement-header.component';
@@ -53,6 +54,7 @@ import { AddServiceRequestComponent } from './add-service-request/add-service-re
 // import { CdkColumnDef } from '@angular/cdk/table';
 import { AppStatusPipe } from './app-status.pipe';
 import { MutualAgreementComponent } from './mutual-agreement/mutual-agreement.component';
+import { NoticeTypePipe } from './notice-type.pipe';
 
 
 const routes: Routes = [
@@ -111,6 +113,7 @@ const routes: Routes = [
     PaymentMethodPipe,
     PaymentDetailsDialogComponent,
     WorkorderDetailsDialogComponent,
+    AddNoticeDialogComponent,
     AddRentDialogComponent,
     FullLeaseAgreementComponent,
     AgreementHeaderComponent,
@@ -122,7 +125,8 @@ const routes: Routes = [
     TypePipe,
     AddServiceRequestComponent,
     AppStatusPipe,
-    MutualAgreementComponent
+    MutualAgreementComponent,
+    NoticeTypePipe
   ],
   imports: [
     // BrowserModule,
@@ -143,7 +147,8 @@ const routes: Routes = [
   entryComponents: [
     PaymentDetailsDialogComponent,
     WorkorderDetailsDialogComponent,
-    AddRentDialogComponent
+    AddRentDialogComponent,
+    AddNoticeDialogComponent
   ],
   bootstrap: [AppLMComponent]
 })

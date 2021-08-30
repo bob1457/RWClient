@@ -47,6 +47,8 @@ import { TypePipe } from './type.pipe';
 import { AddServiceRequestComponent } from './add-service-request/add-service-request.component';
 import { AppStatusPipe } from './app-status.pipe';
 import { MutualAgreementComponent } from './mutual-agreement/mutual-agreement.component';
+import { NoticeTypePipe } from './notice-type.pipe';
+import { AddNoticeDialogComponent } from './dialogs/add-notice-dialog/add-notice-dialog.component';
 
 
 @NgModule({
@@ -90,7 +92,9 @@ import { MutualAgreementComponent } from './mutual-agreement/mutual-agreement.co
     TypePipe,
     AddServiceRequestComponent,
     AppStatusPipe,
-    MutualAgreementComponent
+    MutualAgreementComponent,
+    NoticeTypePipe,
+    AddNoticeDialogComponent
   ],
   imports: [
     BrowserModule,

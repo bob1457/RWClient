@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { PropertyLeaseState } from '../store/lease-state';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LeaseService, PropertyLease, Vendor } from '@lib/app-core';
 import { addRentPayment, addTenant, addWorkOrder, getAllInvoices, getAllNoticeForLease, getLeaseDetails, getRentPaymenttDetails, getWorkOrderDetails, updateLease, updateRentPayment } from '../store/actions/lease.actions';
 import { getNoticeList, invoiceList, leaseDetails, loadingStatus, noticeList, rentPaymentDetails, rentPaymentList, serviceRequestList,
@@ -19,6 +19,7 @@ import {Overlay} from '@angular/cdk/overlay';
 import { WorkorderDetailsDialogComponent } from '../dialogs/workorder-details-dialog/workorder-details-dialog.component';
 
 import { DashState, RentalAppList, ServiceRequestList } from '@lib/dashboard';
+import { AddNoticeDialogComponent } from '../dialogs/add-notice-dialog/add-notice-dialog.component';
 
 @Component({
   selector: 'app-lease-details',
@@ -69,6 +70,8 @@ export class LeaseDetailsComponent implements OnInit {
   addForm2: FormGroup; // Add work order
   addTenantForm: FormGroup;
   updateRenForm: FormGroup;
+  addNoticeForm: FormGroup;
+  reasonItemList: FormGroup;
   // updateWorkOrderForm: FormGroup;
 
   vendors:any [];
@@ -152,6 +155,13 @@ export class LeaseDetailsComponent implements OnInit {
   @ViewChild('Sort3', {static: true}) sort3: MatSort;
 
   dataSource3 = new MatTableDataSource<any>();
+
+
+  displayedColumns4: string[] = ['icon', 'id', 'type', 'description', 'created', 'served', 'active', 'action'];
+  @ViewChild('paginator4', { static: false }) paginator4: MatPaginator;
+  @ViewChild('Sort4', { static: true }) sort4: MatSort;
+
+  dataSource4 = new MatTableDataSource<any>();
 
   private dialogConfig;
 
@@ -276,6 +286,9 @@ export class LeaseDetailsComponent implements OnInit {
                     .subscribe(notices => {
                       if (notices) {
                         this.notices = notices;
+                        this.dataSource4.data = notices;
+                        console.log('notices', this.dataSource4.data);
+                        setTimeout(() => { this.dataSource4.paginator = this.paginator4; this.dataSource4.sort = this.sort4; });
                       }
                     });
                 });
@@ -305,6 +318,13 @@ export class LeaseDetailsComponent implements OnInit {
         // rentDue: this.rentDueOn
       }
     };
+
+    this.propertyService.getNoticeReasonItems(0)
+      .subscribe(items => {
+        console.log('reason itemes', items);
+        this.reasonItems = items;
+        console.log('in reason group', this.reasonItems);
+      });
 
     this.coApplicantList$ = this.propertyService.getAlCoApplicants();
     this.propertyService.getAlCoApplicants().subscribe(coapps => {
@@ -450,6 +470,33 @@ export class LeaseDetailsComponent implements OnInit {
 
     });
 
+    this.addNoticeForm = this.formBuilder.group({
+
+      reasonInNotice: this.formBuilder.array([]),
+
+      leaseId: [],
+      type: Number([]),
+      noticeDesc: [''],
+      isServed: [true],
+      howIsServed: Number([]),
+      serviceDate: [''],
+      isActive: [true],
+      outstandingRent: [0],
+      outstandingUtilities: [0],
+      utilityDueDate: [''],
+      requiredMoveOutDate: [''],
+
+      // The following needs to be a form array
+
+      // reasonInNotice: this.formBuilder.group({
+      //   serviceNoticeId: [],
+      //   reasonCodeId: [],
+      //   applied: [false]
+      // })
+    });
+
+
+
     // this.store.dispatch(getRentPaymentList());
     // this.store.dispatch(getAllWorkOrders());
       // this.store.dispatch(getAllVendors());
@@ -459,13 +506,26 @@ export class LeaseDetailsComponent implements OnInit {
     this.GetLeaseDetails(this.id);
   }
 
+  reasonInNotice(): FormArray {
+    return this.addNoticeForm.get('reasonInNotice') as FormArray;
+  }
 
+  reasonItems(): FormGroup {
+    return this.formBuilder.group({
+      serviceNoticeId: [],
+      reasonCodeId: [],
+      applied: [false]
+    });
+  }
 
+  addReasonItems() {
+    this.reasonInNotice().push(this.reasonItems());
+  }
 
-    GetLeaseDetails(id: any) {
-      debugger;
-      // Always dispatch because new detailw are not available and must be coming from server
-      this.store.dispatch(getLeaseDetails({payload: id}));
+  GetLeaseDetails(id: any) {
+    debugger;
+    // Always dispatch because new detailw are not available and must be coming from server
+    this.store.dispatch(getLeaseDetails({payload: id}));
 
 
 
@@ -562,10 +622,10 @@ export class LeaseDetailsComponent implements OnInit {
         //   this.store.dispatch(getAllVendors());
         //   // this.vendors$ = this.propertyService.getAllVendors();
         // }
-
-        if (!this.notices) {
-          this.store.dispatch(getAllNoticeForLease({payload: this.id}));
-        }
+        this.store.dispatch(getAllNoticeForLease({ payload: this.id }));
+        // if (!this.notices) {
+        //   this.store.dispatch(getAllNoticeForLease({payload: this.id}));
+        // }
         break;
       }
         default: {
@@ -622,6 +682,24 @@ export class LeaseDetailsComponent implements OnInit {
       this.finalized = true;
     }
 
+  }
+
+  addNotice() {
+    let dialogRef = this.dialog.open(AddNoticeDialogComponent, {
+      height: '700px',
+      width: '550px',
+      disableClose: false, // to be reviewed later
+      scrollStrategy: this.overlay.scrollStrategies.noop(),
+      panelClass: 'my-custom-dialog-class',
+      data: {
+        // id: id,
+        // py: this.paymentDetails,
+        // txt: 'test'
+
+        // rentDueAmount: this.rentAmtDue,
+        // rentDue: this.rentDueOn
+      }
+    });
   }
 
   getRentPaymentDetails(id: number) {
@@ -773,6 +851,10 @@ export class LeaseDetailsComponent implements OnInit {
 
   public doFilter3 = (value: string) => {
     this.dataSource3.filter = value.trim().toLowerCase();
+  }
+
+  public doFilter4 = (value: string) => {
+    this.dataSource4.filter = value.trim().toLocaleLowerCase();
   }
 
   openDialog():void {
