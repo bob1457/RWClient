@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { LeaseService } from '@lib/app-core';
 
 @Component({
   selector: 'app-add-notice-dialog',
@@ -10,12 +11,28 @@ export class AddNoticeDialogComponent implements OnInit {
 
   addNoticeForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) { }
+  reasons = new FormControl();
+  reasonList; // = [];
+
+  constructor(private formBuilder: FormBuilder,
+              private leaseService: LeaseService) { }
 
   ngOnInit() {
 
+    debugger;
+    this.leaseService.getNoticeReasonItems(0)
+      .subscribe(items => {
+        console.log('reason list', items);
+        this.reasonList = items;
+        console.log('reason list in dialog', this.reasonList);
+        this.addReasonItems();
+      });
+
     this.addNoticeForm = this.formBuilder.group({
-      reasonInNotice: this.formBuilder.array([]),
+      reasonInNotice: this.formBuilder.array([
+        // this.reasonItems(),
+        // this.reasonItems()
+      ]),
 
       leaseId: [],
       type: Number([]),
@@ -29,6 +46,8 @@ export class AddNoticeDialogComponent implements OnInit {
       utilityDueDate: [''],
       requiredMoveOutDate: [''],
     });
+
+    // this.addReasonItems();
   }
 
   reasonInNotice(): FormArray {
@@ -39,12 +58,34 @@ export class AddNoticeDialogComponent implements OnInit {
     return this.formBuilder.group({
       serviceNoticeId: [],
       reasonCodeId: [],
-      applied: [false]
+      applied: [false],
+      reasonClause: ['']
     });
   }
 
   addReasonItems() {
-    this.reasonInNotice().push(this.reasonItems());
+    // for (const item of Object.keys(this.reasonList)) {
+    //   // this.reasonInNotice().push(this.reasonItems());
+    //   this.reasonInNotice().push(this.formBuilder.group({
+    //       serviceNoticeId: 0,
+    //       reasonCodeId: item[0],
+    //       applied: false,
+    //       reasonClause: item[2]
+    //     })
+    //   );
+    // }
+    // tslint:disable-next-line:prefer-for-of
+    for (let i = 0; i < this.reasonList.length; i++) {
+      this.reasonInNotice().push(this.reasonItems());
+    }
+
+  }
+
+
+  CreateNotice() {
+    debugger;
+    // this.addNoticeForm.value;
+    console.log('notice form', this.addNoticeForm.value);
   }
 
 }

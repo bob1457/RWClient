@@ -47,11 +47,27 @@
                     </mat-form-field>
                     <div>
                         <button mat-button mat-stroked-button (click)="addReasonItems()">Add Ending Tenancy Reason</button>
-
-
                     </div>
+                    <div formArrayName="reasonInNotice">
+                        <div *ngFor="let reason of reasonList; let reasonIndex=index">
+                            <div [formGroupName]="reasonIndex">
+                                <mat-checkbox class="" formControlName="applied">{{reason.reasonClause}}</mat-checkbox>
+                                <input hidden matInput formControlName="reasonCodeId" [ngModel]="reason.id">
+                            </div>
 
+                        </div>
+                        <!-- <div [formGroupName]="0">
+                            <mat-checkbox class="" formControlName="applied">Reasons to end tenancy 01</mat-checkbox>
+                        </div> -->
+                        <!-- <div [formGroupName]="1">
+                            <mat-checkbox class="" formControlName="applied">Reasons to end tenancy 02</mat-checkbox>
+                        </div> -->
+                    </div>
+                    <!-- <div *ngFor="let reason of reasonList">
+                        <mat-checkbox class="">{{reason.reasonClause}}</mat-checkbox>
+                    </div> -->
 
+                    <button mat-button (click)="CreateNotice()">Create</button>
 
                 </div>
             </form>
