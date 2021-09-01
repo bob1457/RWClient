@@ -49,6 +49,7 @@ import { AppStatusPipe } from './app-status.pipe';
 import { MutualAgreementComponent } from './mutual-agreement/mutual-agreement.component';
 import { NoticeTypePipe } from './notice-type.pipe';
 import { AddNoticeDialogComponent } from './dialogs/add-notice-dialog/add-notice-dialog.component';
+import { ActivePipe } from './active.pipe';
 
 
 @NgModule({
@@ -94,7 +95,8 @@ import { AddNoticeDialogComponent } from './dialogs/add-notice-dialog/add-notice
     AppStatusPipe,
     MutualAgreementComponent,
     NoticeTypePipe,
-    AddNoticeDialogComponent
+    AddNoticeDialogComponent,
+    ActivePipe
   ],
   imports: [
     BrowserModule,

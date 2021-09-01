@@ -692,7 +692,7 @@ export class LeaseDetailsComponent implements OnInit {
       scrollStrategy: this.overlay.scrollStrategies.noop(),
       panelClass: 'my-custom-dialog-class',
       data: {
-        // id: id,
+        id: this.id,
         // py: this.paymentDetails,
         // txt: 'test'
 
@@ -711,7 +711,7 @@ export class LeaseDetailsComponent implements OnInit {
       scrollStrategy: this.overlay.scrollStrategies.noop(),
       panelClass: 'my-custom-dialog-class',
       data: {
-        id: id,
+        id: this.id,
         // py: this.paymentDetails,
         // txt: 'test'
 
@@ -734,7 +734,7 @@ export class LeaseDetailsComponent implements OnInit {
       scrollStrategy: this.overlay.scrollStrategies.noop(),
       panelClass: 'my-custom-dialog-class',
       data: {
-        id: id,
+        id: Number(this.id),
         // py: this.paymentDetails,
         // txt: 'test'
 
@@ -857,7 +857,7 @@ export class LeaseDetailsComponent implements OnInit {
     this.dataSource4.filter = value.trim().toLocaleLowerCase();
   }
 
-  openDialog():void {
+  openDialog(): void {
     const dialogRef = this.dialog.open(PaymentDetailsDialogComponent, {
       width: '250px',
       data: {}

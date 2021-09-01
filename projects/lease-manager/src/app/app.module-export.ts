@@ -55,6 +55,7 @@ import { AddServiceRequestComponent } from './add-service-request/add-service-re
 import { AppStatusPipe } from './app-status.pipe';
 import { MutualAgreementComponent } from './mutual-agreement/mutual-agreement.component';
 import { NoticeTypePipe } from './notice-type.pipe';
+import { ActivePipe } from './active.pipe';
 
 
 const routes: Routes = [
@@ -126,7 +127,8 @@ const routes: Routes = [
     AddServiceRequestComponent,
     AppStatusPipe,
     MutualAgreementComponent,
-    NoticeTypePipe
+    NoticeTypePipe,
+    ActivePipe
   ],
   imports: [
     // BrowserModule,

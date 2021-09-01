@@ -7,11 +7,10 @@
                 <div class="form-container">
                     <mat-form-field style="width: 90%;">
                         <mat-label>Notice Type</mat-label>
-                        <mat-select formControlName="type">
-                            <mat-option>None</mat-option>
+                        <mat-select formControlName="type" #mySelect2 (selectionChange)="onTypeChange(mySelect2.value)">
                             <mat-option value=0>Ten Day Notice (Tenancy Termination)</mat-option>
                             <mat-option value=1>One Month Notice (Tenancy Termination)</mat-option>
-                            <mat-option value=2>TTwo Month Notice (Tenancy Termination)</mat-option>
+                            <mat-option value=2>Two Month Notice (Tenancy Termination)</mat-option>
                             <mat-option value=3>Others</mat-option>
                         </mat-select>
                     </mat-form-field>
@@ -34,7 +33,7 @@
                     </div>
                     <mat-form-field style="width: 90%;">
                         <mat-label>Serving Method</mat-label>
-                        <mat-select formControlName="howIsServed">
+                        <mat-select type="number" formControlName="howIsServed" #mySelect (selectionChange)="onMethodChange(mySelect.value)">
                             <mat-option>Serving Method</mat-option>
                             <mat-option value=0>In Person</mat-option>
                             <mat-option value=1>Attached on the OnDoor</mat-option>
@@ -46,28 +45,59 @@
                         </mat-select>
                     </mat-form-field>
                     <div>
-                        <button mat-button mat-stroked-button (click)="addReasonItems()">Add Ending Tenancy Reason</button>
+                        <!-- <button mat-button mat-stroked-button (click)="addReasonItems()">Add Ending Tenancy Reason</button> -->
+                        <p>Select Ending Tenancy Reason(s):</p>
                     </div>
-                    <div formArrayName="reasonInNotice">
-                        <div *ngFor="let reason of reasonList; let reasonIndex=index">
-                            <div [formGroupName]="reasonIndex">
-                                <mat-checkbox class="" formControlName="applied">{{reason.reasonClause}}</mat-checkbox>
-                                <input hidden matInput formControlName="reasonCodeId" [ngModel]="reason.id">
+                    <div class="reason-panel">
+                        <div formArrayName="reasonInNotice">
+                            <div *ngFor="let reason of reasonList; let reasonIndex=index">
+                                <div [formGroupName]="reasonIndex">
+                                    <mat-checkbox class="" formControlName="applied">{{reason.reasonClause}}</mat-checkbox>
+                                    <input hidden matInput formControlName="reasonCodeId" [ngModel]="reason.id">
+                                </div>
+
+                            </div>
+                            <!-- <div [formGroupName]="0">
+                            <mat-checkbox class="" formControlName="applied">Reasons to end tenancy 01</mat-checkbox>
+                        </div> -->
+                            <!-- <div [formGroupName]="1">
+                            <mat-checkbox class="" formControlName="applied">Reasons to end tenancy 02</mat-checkbox>
+                        </div> -->
+                        </div>
+                        <hr style="margin-top: 10px;">
+                        <div fxLayout="row" *ngIf="noticeType == 0">
+                            <div fxFlex="30%">
+                                <mat-form-field fxFlex.xs="90%" style="margin-right: 10px;width: 85%;">
+                                    <mat-label>Outstanding Rent</mat-label>
+                                    <input matInput formControlName="outstandingRent">
+
+                                </mat-form-field>
+                            </div>
+                            <div fxFlex="30%">
+                                <mat-form-field fxFlex.xs="90%" style="margin-right: 10px;width: 85%;">
+                                    <mat-label>Outstanding Utility</mat-label>
+                                    <input matInput formControlName="outstandingUtilities">
+
+                                </mat-form-field>
+                            </div>
+                            <div fxFlex="40%">
+                                <mat-form-field fxFlex.xs="90%" style="margin-right: 10px;width: 85%;">
+                                    <mat-label>Move Out Date</mat-label>
+                                    <input matInput [matDatepicker]="picker10" formControlName="requiredMoveOutDate">
+                                    <mat-datepicker-toggle matSuffix [for]="picker10"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker10></mat-datepicker>
+                                </mat-form-field>
                             </div>
 
                         </div>
-                        <!-- <div [formGroupName]="0">
-                            <mat-checkbox class="" formControlName="applied">Reasons to end tenancy 01</mat-checkbox>
-                        </div> -->
-                        <!-- <div [formGroupName]="1">
-                            <mat-checkbox class="" formControlName="applied">Reasons to end tenancy 02</mat-checkbox>
-                        </div> -->
+
                     </div>
+
                     <!-- <div *ngFor="let reason of reasonList">
                         <mat-checkbox class="">{{reason.reasonClause}}</mat-checkbox>
                     </div> -->
 
-                    <button mat-button (click)="CreateNotice()">Create</button>
+                    <button mat-raised-button color="primary" (click)="CreateNotice()" style="margin-top: 20px;">Create</button>
 
                 </div>
             </form>
