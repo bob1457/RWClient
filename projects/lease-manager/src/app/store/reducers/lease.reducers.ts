@@ -780,6 +780,24 @@ on(LeaseActions.addVendorFailure, (state) => {
     loaded: false
   })),
 
+  /**
+   * Add Notice to lease
+   */
+  on(LeaseActions.addNotice, state => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+  on(LeaseActions.addNoticeSuccess, (state, { payload }) => {
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      noticeList: [...state.noticeList, payload]
+    });
+  }),
+
 );
 
 /**

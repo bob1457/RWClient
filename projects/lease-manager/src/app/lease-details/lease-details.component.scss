@@ -126,6 +126,10 @@ th {
     text-align: center;
 }
 
+th.mat-header-cell {
+    text-align: center;
+}
+
 tr.mat-header-row {
     background: #fb8c00;
 }
@@ -142,7 +146,7 @@ tr.mat-header-row {
     background-color: rgb(233, 221, 221);
 }
 
-.mat-sort-header-button {
+::ng-deep .mat-sort-header-button {
     margin-left: auto;
     margin-right: auto;
 }
@@ -150,6 +154,7 @@ tr.mat-header-row {
 .table-header-text {
     font-size: 1.15em;
     color: white;
+    text-align: center;
 }
 
 .add-tenant-card {

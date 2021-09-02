@@ -69,14 +69,14 @@
                             <div fxFlex="30%">
                                 <mat-form-field fxFlex.xs="90%" style="margin-right: 10px;width: 85%;">
                                     <mat-label>Outstanding Rent</mat-label>
-                                    <input matInput formControlName="outstandingRent">
+                                    <input type="number" matInput formControlName="outstandingRent">
 
                                 </mat-form-field>
                             </div>
                             <div fxFlex="30%">
                                 <mat-form-field fxFlex.xs="90%" style="margin-right: 10px;width: 85%;">
                                     <mat-label>Outstanding Utility</mat-label>
-                                    <input matInput formControlName="outstandingUtilities">
+                                    <input type="number" matInput formControlName="outstandingUtilities">
 
                                 </mat-form-field>
                             </div>
@@ -86,6 +86,26 @@
                                     <input matInput [matDatepicker]="picker10" formControlName="requiredMoveOutDate">
                                     <mat-datepicker-toggle matSuffix [for]="picker10"></mat-datepicker-toggle>
                                     <mat-datepicker #picker10></mat-datepicker>
+                                </mat-form-field>
+                            </div>
+
+                        </div>
+                        <div fxLayout="row" *ngIf="noticeType == 0">
+                            <div fxFlex="50%">
+                                <mat-form-field fxFlex.xs="90%" style="margin-right: 10px;width: 85%;">
+                                    <mat-label>Rent Due Date</mat-label>
+                                    <input matInput [matDatepicker]="picker11" formControlName="requiredMoveOutDate">
+                                    <mat-datepicker-toggle matSuffix [for]="picker11"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker11></mat-datepicker>
+                                </mat-form-field>
+                            </div>
+
+                            <div fxFlex="50%">
+                                <mat-form-field fxFlex.xs="90%" style="margin-right: 10px;width: 85%;">
+                                    <mat-label>Utility Due Date</mat-label>
+                                    <input matInput [matDatepicker]="picker12" formControlName="utilityDueDate">
+                                    <mat-datepicker-toggle matSuffix [for]="picker12"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker12></mat-datepicker>
                                 </mat-form-field>
                             </div>
 

@@ -1,7 +1,12 @@
 import { Component, Inject, OnInit, Optional } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { LeaseService } from '@lib/app-core';
+import { select, Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { addNotice } from '../../store/actions/lease.actions';
+import { PropertyLeaseState } from '../../store/lease-state';
+import { loadingStatus } from '../../store/reducers/lease.reducers';
 
 @Component({
   selector: 'app-add-notice-dialog',
@@ -17,11 +22,17 @@ export class AddNoticeDialogComponent implements OnInit {
   noticeType;
   methodType;
 
+  loading$: Observable<boolean>;
+
   constructor(private formBuilder: FormBuilder,
+              private store: Store<PropertyLeaseState>,
+              public dialogRef: MatDialogRef<AddNoticeDialogComponent>,
               private leaseService: LeaseService,
               @Optional() @Inject(MAT_DIALOG_DATA) public data: { id: number }) { }
 
   ngOnInit() {
+
+    this.loading$ = this.store.select(loadingStatus);
 
     debugger;
     // Note, the following API call should be implemented on Dropdown box of notice type is selected (so that type is available)
@@ -47,8 +58,8 @@ export class AddNoticeDialogComponent implements OnInit {
       howIsServed: Number([]),
       serviceDate: [''],
       isActive: [true],
-      outstandingRent: [0],
-      outstandingUtilities: [0],
+      outstandingRent: Number([0]),
+      outstandingUtilities: Number([0]),
       utilityDueDate: [''],
       requiredMoveOutDate: [''],
     });
@@ -118,6 +129,16 @@ export class AddNoticeDialogComponent implements OnInit {
     });
     // this.addNoticeForm.value;
     console.log('notice form', this.addNoticeForm.value);
+
+    try {
+      this.store.dispatch(addNotice({ payload: this.addNoticeForm.value }));
+      this.dialogRef.close();
+    } catch (err) {
+      console.log('error occured', err.message);
+    }
+
+    // this.dialogRef.close();
+
   }
 
 }
