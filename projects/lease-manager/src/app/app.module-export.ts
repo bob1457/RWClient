@@ -56,6 +56,7 @@ import { AppStatusPipe } from './app-status.pipe';
 import { MutualAgreementComponent } from './mutual-agreement/mutual-agreement.component';
 import { NoticeTypePipe } from './notice-type.pipe';
 import { ActivePipe } from './active.pipe';
+import { NoticeDetailsDialogComponent } from './dialogs/notice-details-dialog/notice-details-dialog.component';
 
 
 const routes: Routes = [
@@ -116,6 +117,7 @@ const routes: Routes = [
     WorkorderDetailsDialogComponent,
     AddNoticeDialogComponent,
     AddRentDialogComponent,
+    NoticeDetailsDialogComponent,
     FullLeaseAgreementComponent,
     AgreementHeaderComponent,
     AgreementContentComponent,
@@ -150,7 +152,8 @@ const routes: Routes = [
     PaymentDetailsDialogComponent,
     WorkorderDetailsDialogComponent,
     AddRentDialogComponent,
-    AddNoticeDialogComponent
+    AddNoticeDialogComponent,
+    NoticeDetailsDialogComponent
   ],
   bootstrap: [AppLMComponent]
 })

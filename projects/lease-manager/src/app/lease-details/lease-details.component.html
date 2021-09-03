@@ -1114,7 +1114,7 @@
 
                                                 <!-- <a (click)="openDialog('Update',element)">Edit</a> |
                     <a (click)="openDialog('Delete',element)">Delete</a> ['/details', 1]-->
-                                                <button type="button" mat-raised-button color="primary">Details</button> &nbsp;
+                                                <button type="button" mat-raised-button color="primary" (click)="getNoticeDetails(element.id)">Details</button> &nbsp;
                                                 <!-- <button mat-raised-button color="accent " (click)="openDialog( 'Delete',element) ">Delete</button> -->
                                                 <!-- (click)="getWorkOrderDetails(element.id)" -->
                                             </td>

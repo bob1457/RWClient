@@ -20,6 +20,7 @@ import { WorkorderDetailsDialogComponent } from '../dialogs/workorder-details-di
 
 import { DashState, RentalAppList, ServiceRequestList } from '@lib/dashboard';
 import { AddNoticeDialogComponent } from '../dialogs/add-notice-dialog/add-notice-dialog.component';
+import { NoticeDetailsDialogComponent } from '../dialogs/notice-details-dialog/notice-details-dialog.component';
 
 @Component({
   selector: 'app-lease-details',
@@ -689,6 +690,26 @@ export class LeaseDetailsComponent implements OnInit {
       height: '700px',
       width: '550px',
       disableClose: false, // to be reviewed later
+      scrollStrategy: this.overlay.scrollStrategies.noop(),
+      panelClass: 'my-custom-dialog-class',
+      data: {
+        id: this.id,
+        // py: this.paymentDetails,
+        // txt: 'test'
+
+        // rentDueAmount: this.rentAmtDue,
+        // rentDue: this.rentDueOn
+      }
+    });
+  }
+
+  getNoticeDetails(id: number) {
+    debugger;
+
+    let dialogRef = this.dialog.open(NoticeDetailsDialogComponent, {
+      height: '500px',
+      width: '880px',
+      disableClose: false,
       scrollStrategy: this.overlay.scrollStrategies.noop(),
       panelClass: 'my-custom-dialog-class',
       data: {
