@@ -51,6 +51,7 @@ import { NoticeTypePipe } from './notice-type.pipe';
 import { AddNoticeDialogComponent } from './dialogs/add-notice-dialog/add-notice-dialog.component';
 import { ActivePipe } from './active.pipe';
 import { NoticeDetailsDialogComponent } from './dialogs/notice-details-dialog/notice-details-dialog.component';
+import { ServeMethodPipe } from './serve-method.pipe';
 
 
 @NgModule({
@@ -98,7 +99,8 @@ import { NoticeDetailsDialogComponent } from './dialogs/notice-details-dialog/no
     NoticeTypePipe,
     AddNoticeDialogComponent,
     ActivePipe,
-    NoticeDetailsDialogComponent
+    NoticeDetailsDialogComponent,
+    ServeMethodPipe
   ],
   imports: [
     BrowserModule,

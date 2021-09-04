@@ -1,4 +1,64 @@
 .header {
-    border-bottom: 8px blue solid;
+    // border-bottom: 8px blue solid;
     padding-bottom: 10px;
 }
+
+// table {
+//     border: 1px solid blue;
+//     border-collapse: collapse;
+//     border-spacing: 0;
+//     padding: 0;
+// }
+td,
+th {
+    padding: 0;
+}
+
+table,
+td,
+th {
+    border: 1px solid black;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid black;
+}
+
+td {
+    padding-left: 5px;
+}
+
+tr.address td {
+    border-top: 0;
+}
+
+tr.address-title td,
+tr.address-title {
+    border-bottom: 0;
+}
+
+.spacer {
+    flex: 1 1 auto;
+}
+
+input[type=text] {
+    width: 98%;
+    // padding: 12px 20px;
+    padding: 6px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    margin-bottom: -4px;
+    background-color: #e4ebf3;
+    height: 40px;
+    font-size: 0.9em;
+}
+
+label {
+    font-size: .75em;
+}
+
+// .spacer {
+//     flex: 1 1 auto;
+// }

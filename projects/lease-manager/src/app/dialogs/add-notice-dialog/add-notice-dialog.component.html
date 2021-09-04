@@ -16,7 +16,7 @@
                     </mat-form-field>
                     <mat-form-field style="width: 90%;">
                         <mat-label>Description</mat-label>
-                        <textarea matInput formControlName="noticeDesc" style="width: 100%;"></textarea>
+                        <textarea matInput formControlName="noticeDesc" style="width: 100%;" value="Ten day notice to end tenancy duo to unpaid rent and/or unpaid utility"></textarea>
                     </mat-form-field>
                     <div fxLayout="row" fxLayoutAlign="start" style="font-size: .9em;width: 100%;">
                         <div fxFlex="35%">
@@ -36,7 +36,7 @@
                         <mat-select type="number" formControlName="howIsServed" #mySelect (selectionChange)="onMethodChange(mySelect.value)">
                             <mat-option>Serving Method</mat-option>
                             <mat-option value=0>In Person</mat-option>
-                            <mat-option value=1>Attached on the OnDoor</mat-option>
+                            <mat-option value=1>Attached on Door</mat-option>
                             <mat-option value=2>By Registered Mail</mat-option>
                             <mat-option value=3>Leave In MailBox</mat-option>
                             <mat-option value=4>By Email</mat-option>

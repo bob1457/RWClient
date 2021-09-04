@@ -57,6 +57,7 @@ import { MutualAgreementComponent } from './mutual-agreement/mutual-agreement.co
 import { NoticeTypePipe } from './notice-type.pipe';
 import { ActivePipe } from './active.pipe';
 import { NoticeDetailsDialogComponent } from './dialogs/notice-details-dialog/notice-details-dialog.component';
+import { ServeMethodPipe } from './serve-method.pipe';
 
 
 const routes: Routes = [
@@ -130,7 +131,8 @@ const routes: Routes = [
     AppStatusPipe,
     MutualAgreementComponent,
     NoticeTypePipe,
-    ActivePipe
+    ActivePipe,
+    ServeMethodPipe
   ],
   imports: [
     // BrowserModule,

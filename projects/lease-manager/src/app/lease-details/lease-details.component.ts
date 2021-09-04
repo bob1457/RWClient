@@ -713,7 +713,7 @@ export class LeaseDetailsComponent implements OnInit {
       scrollStrategy: this.overlay.scrollStrategies.noop(),
       panelClass: 'my-custom-dialog-class',
       data: {
-        id: this.id,
+        id: id,
         // py: this.paymentDetails,
         // txt: 'test'
 

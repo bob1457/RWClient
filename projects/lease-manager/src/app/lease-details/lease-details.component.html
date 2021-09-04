@@ -1064,7 +1064,7 @@
                                   </button> -->
                                 </div>
                                 <div fxLayout="column" fxLayoutAlign="center">
-                                    <table mat-table [dataSource]="dataSource4" #Sort4="matSort" matSort class="my-table mat-elevation-z8" style="width: 100%;">
+                                    <table mat-table multiTemplateDataRows [dataSource]="dataSource4" #Sort4="matSort" matSort class="my-table mat-elevation-z8" style="width: 100%;">
                                         <ng-container matColumnDef="id">
                                             <th class="table-header-text" style="text-align: center;" mat-header-cell *matHeaderCellDef> ID </th>
                                             <td mat-cell *matCellDef="let element"> {{element.id}} </td>
@@ -1114,14 +1114,55 @@
 
                                                 <!-- <a (click)="openDialog('Update',element)">Edit</a> |
                     <a (click)="openDialog('Delete',element)">Delete</a> ['/details', 1]-->
-                                                <button type="button" mat-raised-button color="primary" (click)="getNoticeDetails(element.id)">Details</button> &nbsp;
+                                                <button type="button" mat-raised-button color="primary" disabled (click)="getNoticeDetails(element.id)">Details</button> &nbsp;
                                                 <!-- <button mat-raised-button color="accent " (click)="openDialog( 'Delete',element) ">Delete</button> -->
                                                 <!-- (click)="getWorkOrderDetails(element.id)" -->
                                             </td>
                                         </ng-container>
 
+                                        <!-- Additionsl -->
+
+                                        <ng-container matColumnDef="expandedDetail">
+                                            <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns4.length">
+
+                                                <div class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+
+                                                    <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px" style="width: 100%;">
+                                                        <p style="margin-top: 15px;"></p>
+                                                        <div fxFlex="10%">
+                                                            <img src="../../assets/images/doc.png" height="50px" width="50px">
+                                                        </div>
+                                                        <div fxFlex="40%" style="text-align: left;margin-top: 7px;">
+                                                            <div style="font-weight: bold;">{{element.type | noticeType | uppercase}}</div>
+                                                            <div>{{element.noticeDesc}}</div>
+                                                            <div style="margin-top: 10px;"><span style="font-weight: 600;">Served on </span>{{element.serviceDate | date }}</div>
+                                                            <div><span style="font-weight: 600;">Served</span> {{element.howIsServed | serveMethod}}</div>
+                                                            <!-- <div style="margin-top: 20px;">
+                                                                    <a routerLink="/Manage/lease/tenantdetails/{{element.id}}">more information</a>
+                                                                </div> -->
+                                                        </div>
+                                                        <div fxFlex="40%" style="text-align: left;margin-top: 7px;">
+                                                            <div *ngIf="!element.outstandingRent == 0"><span style="font-weight: bold;">Unpaid Rent</span>: &nbsp;${{element.outstandingRent}}</div>
+                                                            <div *ngIf="!element.outstandingUtilities == 0"><span style="font-weight: bold;">Unpaid Utility</span>: &nbsp;${{element.outstandingUtilities}}</div>
+                                                            <div><span style="font-weight: bold;">Required Move Out Date</span>: &nbsp;{{element.requiredMoveOutDate | date}}</div>
+                                                            <p></p>
+                                                            <div>Added on: &nbsp;{{element.created | date}} <button type="button" mat-raised-button color="primary" (click)="getNoticeDetails(element.id)">Details</button> &nbsp;</div>
+                                                            <!-- <div>Last updated on: &nbsp;{{element.modified | date}}</div> -->
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                            </td>
+                                        </ng-container>
+
+
                                         <tr mat-header-row *matHeaderRowDef="displayedColumns4"></tr>
-                                        <tr mat-row *matRowDef="let row; columns: displayedColumns4;"></tr>
+                                        <!-- <tr mat-row *matRowDef="let row; columns: displayedColumns4;"></tr> -->
+                                        <tr mat-row *matRowDef="let element; columns: displayedColumns4;" class="example-element-row" [class.example-expanded-row]="expandedElement === element" (click)="expandedElement = expandedElement === element ? null : element">
+                                        </tr>
+
+                                        <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
 
                                     </table>
                                     <table style="width: 100%;">

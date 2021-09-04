@@ -9,15 +9,15 @@ export class NoticeTypePipe implements PipeTransform {
     // return null;
     switch (value) {
       case 0: {
-        return 'Ten Day';
+        return 'Ten Day Notice';
         break;
       }
       case 1: {
-        return 'One Month';
+        return 'One Month Notice';
         break;
       }
       case 2: {
-        return 'Two Month';
+        return 'Two Month Notice';
         break;
       }
       // case 3: {
