@@ -159,13 +159,15 @@
             </div>
             <div style="width:25%">
                 <mat-form-field style="margin-right: 10px;width: 85%;">
-                    <input matInput type="text" formControlName="outstandingRent" style="height: 30px;padding-left: 0;margin-top: -30px;margin-left: 10px;" [value]="notice.outstandingRent | currency: 'CAD'" name="outstandingRent">
+                    <input *ngIf="notice.outstandingRent > 0" matInput type="text" formControlName="outstandingRent" style="height: 30px;padding-left: 0;margin-top: -30px;margin-left: 10px;" [value]="notice.outstandingRent | currency: 'CAD'" name="outstandingRent">
+                    <input *ngIf="notice.outstandingRent === 0" matInput type="text" formControlName="outstandingRent" style="height: 30px;padding-left: 0;margin-top: -30px;margin-left: 10px;">
                 </mat-form-field>
             </div>
             <div style="width:25%">Due on (DD/MM/YYYY)</div>
             <div style="width:25%">
                 <mat-form-field style="margin-right: 10px;width: 85%;">
-                    <input matInput type="text" formControlName="outstandingUtilities" style="height: 30px;padding-left: 0;margin-top: -30px;margin-left: 10px;" [value]="notice.utilityDueDate | date: 'MM/dd/yyyy'" name="utilityDueDate">
+                    <input *ngIf="notice.outstandingRent > 0" matInput type="text" formControlName="rentDueDate" style="height: 30px;padding-left: 0;margin-top: -30px;margin-left: 10px;" [value]="notice.rentDueDate | date: 'MM/dd/yyyy'" name="rentDueDate">
+                    <input *ngIf="notice.outstandingRent === 0" matInput type="text" formControlName="rentDueDate" style="height: 30px;padding-left: 0;margin-top: -30px;margin-left: 10px;">
                 </mat-form-field>
             </div>
 

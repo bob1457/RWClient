@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit, Optional } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { LeaseService } from '@lib/app-core';
 import { select, Store } from '@ngrx/store';
@@ -60,7 +60,8 @@ export class AddNoticeDialogComponent implements OnInit {
       isActive: [true],
       outstandingRent: Number([0]),
       outstandingUtilities: Number([0]),
-      utilityDueDate: [''],
+      utilityDueDate: [new Date(), Validators.required],
+      rentDueDate: [new Date(), Validators.required],
       requiredMoveOutDate: [''],
     });
 

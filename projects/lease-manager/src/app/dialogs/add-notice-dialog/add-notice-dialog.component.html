@@ -36,12 +36,12 @@
                         <mat-select type="number" formControlName="howIsServed" #mySelect (selectionChange)="onMethodChange(mySelect.value)">
                             <mat-option>Serving Method</mat-option>
                             <mat-option value=0>In Person</mat-option>
-                            <mat-option value=1>Attached on Door</mat-option>
-                            <mat-option value=2>By Registered Mail</mat-option>
-                            <mat-option value=3>Leave In MailBox</mat-option>
-                            <mat-option value=4>By Email</mat-option>
-                            <mat-option value=5>By Fax</mat-option>
-                            <mat-option value=6>Director Order</mat-option>
+                            <mat-option value=1>By Registered Mail</mat-option>
+                            <mat-option value=2>Leave In MailBox</mat-option>
+                            <mat-option value=3>Attached on Door</mat-option>
+                            <mat-option value=4>By Fax</mat-option>
+                            <mat-option value=5>By Email</mat-option>
+                            <mat-option value=6>On Director Order</mat-option>
                         </mat-select>
                     </mat-form-field>
                     <div>
@@ -94,7 +94,7 @@
                             <div fxFlex="50%">
                                 <mat-form-field fxFlex.xs="90%" style="margin-right: 10px;width: 85%;">
                                     <mat-label>Rent Due Date</mat-label>
-                                    <input matInput [matDatepicker]="picker11" formControlName="requiredMoveOutDate">
+                                    <input matInput [matDatepicker]="picker11" formControlName="rentDueDate">
                                     <mat-datepicker-toggle matSuffix [for]="picker11"></mat-datepicker-toggle>
                                     <mat-datepicker #picker11></mat-datepicker>
                                 </mat-form-field>

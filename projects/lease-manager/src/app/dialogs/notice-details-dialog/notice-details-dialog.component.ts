@@ -64,6 +64,7 @@ export class NoticeDetailsDialogComponent implements OnInit {
       outstandingRent: Number([1850]),
       outstandingUtilities: Number([0]),
       utilityDueDate: [''],
+      rentDueDate: [''],
       requiredMoveOutDate: [''],
     });
 
