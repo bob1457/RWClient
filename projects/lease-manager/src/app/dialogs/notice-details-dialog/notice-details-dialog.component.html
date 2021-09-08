@@ -1,207 +1,332 @@
 <!-- <app-agreement-header></app-agreement-header> -->
-<div fxLayout="row" fxLayoutAlign="end" class="header" *ngIf="notice">
-    <!-- <div fxFlex="30%"></div> -->
-    <div fxFlex="30%" style="align-items:end;margin-right: 15px;">
-        <!-- LOGO -->
-        <img src="../../assets/images/bc-gov.png" width="75%" style="margin-bottom: -15px;">
-    </div>
-    <!-- <div fxFlex="30%"></div> -->
-    <div fxFlex="70%" style="text-align: right;font-weight: bold;font-size: 1.2em;">
-        10 Day Notice to End Tenancy For Unpaid Rent or Utilities<br>
-        <span style="font-size: .65em;font-weight: 100;">
-          Residential Tenancy Act, s.46 (1) Manufactured Home Park Tenancy Act, s.39 (1)
-        </span><br>
-        <span>#RTB-30</span>
-    </div>
-</div>
-<div style="border: 1px black solid;">
-    <p style="font-weight: bold;color: white;background-color: #1150af;padding: 10px;margin-bottom: 0;">Tenant: This is a legal notice that could lead to you being evicted from your home</p>
-    <p style="text-align: center;padding: 10px;font-size: .9em;margin-bottom: 0;">
-        HOW TO DISPUTE THIS NOTICE<br> You have 5 days to pay rent and/or utilities to the landlord or fi le an Application for Dispute Resolution with the Residential Tenancy Branch online, in person at any Service BC Off i ce or by going to the Residential
-        Tenancy Branch Off i ce at #400 - 5021 Kingsway in Burnaby. If you do not apply within the required time limit, you are presumed to accept that the tenancy is ending and must move out of the rental unit by the eff ective date of this Notice.
-    </p>
-</div>
-<div>
-    <p style="font-weight: bold;color: white;background-color: #1150af;padding: 10px;margin-bottom: 0;">To the Tenant: (use Schedule of Parties form #RTB- 26 to list additional tenants)</p>
-    <table>
-        <tr style="border-bottom:0 ;">
-            <td style="border-bottom:0 ;">first and middle name</td>
-            <td style="border-bottom:0 ;">last name</td>
-        </tr>
-        <tr style="height: 40px; background: #c3c3ef; border-top: 0;">
-            <td style="width: 50%;border-top: 0;">{{lease.tenant[0].firstName}}</td>
-            <td style="border-top:0 ;">{{lease.tenant[0].lastName}}</td>
-        </tr>
-        <tr style="border-bottom:0 ;">
-            <td style="border-bottom:0 ;">first and middle name</td>
-            <td style="border-bottom:0 ;">last name</td>
-        </tr>
-        <tr style="height: 40px; background: #c3c3ef; border-top: 0;">
-            <td style="width: 50%;border-top: 0;"><span *ngIf="lease.tenant.length > 1">{{lease.tenant[1].firstName}}</span></td>
-            <td style="border-top:0 ;"><span *ngIf="lease.tenant[1]">{{lease.tenant[1].lastName}}</span></td>
-        </tr>
-        <tr style="border-bottom:0 ;">
-            <td style="border-bottom:0 ;">main phone</td>
-            <td style="border-bottom:0 ;">other phone</td>
-        </tr>
-        <tr style="height: 40px; background: #c3c3ef; border-top: 0;">
-            <td style="width: 50%;border-top: 0;">{{lease.tenant[0].contactTelephone1}}</td>
-            <td style="border-top:0 ;">{{lease.tenant[0].contactTelephone2}}</td>
-        </tr>
-    </table>
-    <p style="font-weight: bold;color: white;background-color: #1150af;padding: 10px;margin-bottom: 0;">Tenant Address</p>
-    <table>
-        <tr style="border-bottom:0 ;">
-            <td style="width: 10%; border-bottom:0 ;">unit #</td>
-            <td style="width: 40%; border-bottom:0 ;">street # and name</td>
-            <td style="width: 25%;border-bottom:0 ;">city</td>
-            <td style="width: 10%;border-bottom:0 ;">province</td>
-            <td style="width: 15%;border-bottom:0 ;">postal code</td>
-        </tr>
-        <tr style="height: 40px; background: #c3c3ef; border-top: 0;">
-            <td style="border-top: 0;"></td>
-            <td style="border-top:0 ;">{{lease.rentalProperty.address.streetNum}}</td>
-            <td style="border-top: 0;">{{lease.rentalProperty.address.city}}</td>
-            <td style="border-top:0 ;">{{lease.rentalProperty.address.stateProvince}}</td>
-            <td style="border-top: 0;">{{lease.rentalProperty.address.zipPostCode}}</td>
-        </tr>
-
-    </table>
-    <p style="font-weight: bold;color: white;background-color: #1150af;padding: 10px;margin-bottom: 0;">From the Landlord: (use Schedule of Parties #RTB- 26 to list additional landlords)</p>
-    <table>
-        <tr style="border-bottom:0 ;">
-            <td style="border-bottom:0 ;">first and middle name</td>
-            <td style="border-bottom:0 ;">last name</td>
-        </tr>
-        <tr style="height: 40px; background: #c3c3ef; border-top: 0;">
-            <td style="width: 50%;border-top: 0;">{{lease.rentalProperty.rentalPropertyOwners[0].firstName}}</td>
-            <td style="border-top:0 ;">{{lease.rentalProperty.rentalPropertyOwners[0].lastName}}</td>
-        </tr>
-        <tr style="border-bottom:0 ;">
-            <td style="border-bottom:0 ;">main phone</td>
-            <td style="border-bottom:0 ;">other phone</td>
-        </tr>
-        <tr style="height: 40px; background: #c3c3ef; border-top: 0;">
-            <td style="width: 50%;border-top: 0;">{{lease.rentalProperty.rentalPropertyOwners[0].contactTelephone}}</td>
-            <td style="border-top:0 ;"></td>
-        </tr>
-    </table>
-    <p style="font-weight: bold;color: white;background-color: #b4bac4;padding: 10px;margin-bottom: 0;">I, the Landlord, give you 10 days’ notice to move out of the rental unit/site located at:</p>
-    <table>
-        <tr style="border-bottom:0 ;">
-            <td style="width: 10%; border-bottom:0 ;">unit #</td>
-            <td style="width: 40%; border-bottom:0 ;">street # and name</td>
-            <td style="width: 25%;border-bottom:0 ;">city</td>
-            <td style="width: 10%;border-bottom:0 ;">province</td>
-            <td style="width: 15%;border-bottom:0 ;">postal code</td>
-        </tr>
-        <tr style="height: 40px; background: #c3c3ef; border-top: 0;">
-            <td style="border-top: 0;"></td>
-            <td style="border-top:0 ;">{{lease.rentalProperty.address.streetNum}}</td>
-            <td style="border-top: 0;">{{lease.rentalProperty.address.city}}</td>
-            <td style="border-top:0 ;">{{lease.rentalProperty.address.stateProvince}}</td>
-            <td style="border-top: 0;">{{lease.rentalProperty.address.zipPostCode}}</td>
-        </tr>
-
-    </table>
-    <table style="margin-top: -1px;" *ngIf="ntoice">
-        <tr style="height: 40px; background: #c3c3ef; border-top: 0;">
-            <td style="width: 50%;border-top: 0;">You must move out of the rental unit by: <span style="color: #949393;">(DD/MM/YYYY)</span></td>
-            <td style="border-top:0 ;">{{notice.requiredMoveOutDate | date: 'MM/dd/yyyy'}} </td>
-            <!-- <td style="border-top: 0;">Vancouver</td>
-            <td style="border-top:0 ;">BC</td>
-            <td style="border-top: 0;">V1V 1V1</td> -->
-        </tr>
-    </table>
-    <table>
-        <tr style="border-bottom:0 ;">
-            <td style="width: 33%; border-bottom:0 ;">name of landlord/agent</td>
-            <td style="width: 33%;border-bottom:0 ;">signature of landlord/agent</td>
-            <td style="width: 33%;border-bottom:0 ;">date signed DD/MM/YYYY</td>
-        </tr>
-        <tr style="height: 40px; background: #c3c3ef; border-top: 0;">
-            <td style="border-top: 0;">John</td>
-            <td style="border-top:0 ;"></td>
-            <td style="border-top:0 ;"></td>
-        </tr>
-    </table>
-    <p style="text-align: center; border-bottom: 10px solid #1150af;font-size: .85em;">
-        Your personal information is collected under section 26 (a) and (c) of the Freedom of Information and Protection of Privacy Act for the purpose of administering the Residential Tenancy Act. If you have any questions regarding the collection of your personal
-        information, please call 604-660-1020 in Greater Vancouver; 250-387-1602 in Victoria; or 1-800-665-8779 elsewhere in B.C.
-    </p>
-</div>
-<div fxLayout="row" fxLayoutAlign="start">
-    <div style="width: 35%;font-size: .95em;">
-        <span style="font-weight:bold;">
-              Residential Tenancy Branch
-            </span><br>
-        <span style="font-size: .85em;">
-              Office of Housing and<br>
-              Construction Standards<br>
-              #RTB-30 (2020/03/03)
-            </span>
-    </div>
-    <div style="width: 45%;" class="spacer">
-        Landlord must sign page 1 and give the tenant all pages of this Notice.
-    </div>
-    <div style="width: 30%;text-align: right;">
-        <span style="font-weight:400;">page 1 of 3 pages</span>
-    </div>
-
-</div>
-<div style="border: 1px solid black;" *ngIf="notice">
-    <p style="font-weight: bold;color: white;background-color: #1150af;padding: 10px;margin-bottom: 0;">I am ending your tenancy because:</p>
-    <form [formGroup]="detailsForm">
-        <div fxLayout="row" fxLayoutAlign="start">
-            <div style="width:25%" style="margin-left: 5px;">
-                <input type="checkbox" [checked]="notice.outstandingRent > 0">&nbsp;Yuo have failed to pay the rent in the amount of
-                <!-- [checked]="outstandingRent > 0" -->
-            </div>
-            <div style="width:25%">
-                <mat-form-field style="margin-right: 10px;width: 85%;">
-                    <input *ngIf="notice.outstandingRent > 0" matInput type="text" formControlName="outstandingRent" style="height: 30px;padding-left: 0;margin-top: -30px;margin-left: 10px;" [value]="notice.outstandingRent | currency: 'CAD'" name="outstandingRent">
-                    <input *ngIf="notice.outstandingRent === 0" matInput type="text" formControlName="outstandingRent" style="height: 30px;padding-left: 0;margin-top: -30px;margin-left: 10px;">
-                </mat-form-field>
-            </div>
-            <div style="width:25%">Due on (DD/MM/YYYY)</div>
-            <div style="width:25%">
-                <mat-form-field style="margin-right: 10px;width: 85%;">
-                    <input *ngIf="notice.outstandingRent > 0" matInput type="text" formControlName="rentDueDate" style="height: 30px;padding-left: 0;margin-top: -30px;margin-left: 10px;" [value]="notice.rentDueDate | date: 'MM/dd/yyyy'" name="rentDueDate">
-                    <input *ngIf="notice.outstandingRent === 0" matInput type="text" formControlName="rentDueDate" style="height: 30px;padding-left: 0;margin-top: -30px;margin-left: 10px;">
-                </mat-form-field>
-            </div>
-
+<div id="pdfdoc" #pdfdoc>
+    <div fxLayout="row" fxLayoutAlign="end" class="header" *ngIf="notice">
+        <!-- <div fxFlex="30%"></div> -->
+        <div fxFlex="30%" style="align-items:end;margin-right: 15px;">
+            <!-- LOGO -->
+            <img src="../../assets/images/bc-gov.png" width="75%" style="margin-bottom: -15px;">
         </div>
-        <div fxLayout="row" fxLayoutAlign="start">
-            <div style="width:25%" style="margin-left: 5px;">
-                <input type="checkbox" [checked]="notice.outstandingUtilities > 0">&nbsp;Yuo have failed to pay the utility in the amount of
-                <!-- [checked]="outstandingRent > 0" -->
-            </div>
-            <div style="width:25%">
-                <mat-form-field style="margin-right: 10px;width: 85%;">
-                    <input *ngIf="notice.outstandingUtilities > 0" matInput type="text" formControlName="outstandingUtilities" style="height: 30px;padding-left: 0;margin-top: -30px;margin-left: 10px;" [value]="notice.outstandingRent | currency: 'CAD'" name="outstandingRent">
-                    <input *ngIf="notice.outstandingUtilities === 0" matInput type="text" formControlName="outstandingUtilities" style="height: 30px;padding-left: 0;margin-top: -30px;margin-left: 10px;">
-                </mat-form-field>
-            </div>
-            <div style="width:25%">Due on (DD/MM/YYYY)</div>
-            <div style="width:25%">
-                <mat-form-field style="margin-right: 10px;width: 85%;">
-                    <input *ngIf="notice.outstandingUtilities > 0" matInput type="text" formControlName="utilityDueDate" style="height: 30px;padding-left: 0;margin-top: -30px;margin-left: 10px;" [value]="notice.utilityDueDate | date: 'MM/dd/yyyy'" name="utilityDueDate">
-                    <input *ngIf="notice.outstandingUtilities === 0" matInput type="text" formControlName="utilityDueDate" style="height: 30px;padding-left: 0;margin-top: -30px;margin-left: 10px;">
-                </mat-form-field>
-            </div>
-
-
+        <!-- <div fxFlex="30%"></div> -->
+        <div fxFlex="70%" style="text-align: right;font-weight: bold;font-size: 1.2em;">
+            10 Day Notice to End Tenancy For Unpaid Rent or Utilities<br>
+            <span style="font-size: .65em;font-weight: 100;">
+            Residential Tenancy Act, s.46 (1) Manufactured Home Park Tenancy Act, s.39 (1)
+          </span><br>
+            <span>#RTB-30</span>
         </div>
-        <p style="font-weight: bold;color: white;background-color: #1150af;padding: 10px;margin-bottom: 0;">
-            Complete the details below at the time of service (not required on landlord’s copy; failure to complete does not invalidate notice). Served by:
+    </div>
+    <div style="border: 1px black solid;">
+        <p style="font-weight: bold;color: white;background-color: #1150af;padding: 10px;margin-bottom: 0;">Tenant: This is a legal notice that could lead to you being evicted from your home</p>
+        <p style="text-align: center;padding: 10px;font-size: .9em;margin-bottom: 0;">
+            HOW TO DISPUTE THIS NOTICE<br> You have 5 days to pay rent and/or utilities to the landlord or fi le an Application for Dispute Resolution with the Residential Tenancy Branch online, in person at any Service BC Off i ce or by going to the
+            Residential Tenancy Branch Off i ce at #400 - 5021 Kingsway in Burnaby. If you do not apply within the required time limit, you are presumed to accept that the tenancy is ending and must move out of the rental unit by the eff ective date of
+            this Notice.
         </p>
-        <ul style="margin-top: 10px;margin-left: -20px;">
-            <li style="list-style: none;" *ngFor="let method of serveMethod, let i = index">
-                <input type="checkbox" [checked]="notice.howIsServed == i" formControlName="howIsServed">&nbsp; {{method}}
-            </li>
-        </ul>
-    </form>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="end" style="border: 1px solid black;margin-top: -1px;">
+        <div fxFlex="50%">
+            <input type="radio">&nbsp; This Notice applies to the Manufactured Home Park Tenancy Act, Section 39
+        </div>
+        <div xFlex="50%">
+            <input type="radio" checked>&nbsp; This Notice applies to the Residential Tenancy Act, Section 46
+        </div>
+    </div>
+    <div>
+        <p style="font-weight: bold;color: white;background-color: #1150af;padding: 10px;margin-bottom: 0;">To the Tenant: (use Schedule of Parties form #RTB- 26 to list additional tenants)</p>
+        <table>
+            <tr style="border-bottom:0 ;">
+                <td style="border-bottom:0 ;">first and middle name</td>
+                <td style="border-bottom:0 ;">last name</td>
+            </tr>
+            <tr style="height: 40px; background: #c3c3ef; border-top: 0;">
+                <td style="width: 50%;border-top: 0;">{{lease.tenant[0].firstName}}</td>
+                <td style="border-top:0 ;">{{lease.tenant[0].lastName}}</td>
+            </tr>
+            <tr style="border-bottom:0 ;">
+                <td style="border-bottom:0 ;">first and middle name</td>
+                <td style="border-bottom:0 ;">last name</td>
+            </tr>
+            <tr style="height: 40px; background: #c3c3ef; border-top: 0;">
+                <td style="width: 50%;border-top: 0;"><span *ngIf="lease.tenant.length > 1">{{lease.tenant[1].firstName}}</span></td>
+                <td style="border-top:0 ;"><span *ngIf="lease.tenant[1]">{{lease.tenant[1].lastName}}</span></td>
+            </tr>
+            <tr style="border-bottom:0 ;">
+                <td style="border-bottom:0 ;">main phone</td>
+                <td style="border-bottom:0 ;">other phone</td>
+            </tr>
+            <tr style="height: 40px; background: #c3c3ef; border-top: 0;">
+                <td style="width: 50%;border-top: 0;">{{lease.tenant[0].contactTelephone1}}</td>
+                <td style="border-top:0 ;">{{lease.tenant[0].contactTelephone2}}</td>
+            </tr>
+        </table>
+        <p style="font-weight: bold;color: white;background-color: #1150af;padding: 10px;margin-bottom: 0;">Tenant Address</p>
+        <table>
+            <tr style="border-bottom:0 ;">
+                <td style="width: 10%; border-bottom:0 ;">unit #</td>
+                <td style="width: 40%; border-bottom:0 ;">street # and name</td>
+                <td style="width: 25%;border-bottom:0 ;">city</td>
+                <td style="width: 10%;border-bottom:0 ;">province</td>
+                <td style="width: 15%;border-bottom:0 ;">postal code</td>
+            </tr>
+            <tr style="height: 40px; background: #c3c3ef; border-top: 0;">
+                <td style="border-top: 0;"></td>
+                <td style="border-top:0 ;">{{lease.rentalProperty.address.streetNum}}</td>
+                <td style="border-top: 0;">{{lease.rentalProperty.address.city}}</td>
+                <td style="border-top:0 ;">{{lease.rentalProperty.address.stateProvince}}</td>
+                <td style="border-top: 0;">{{lease.rentalProperty.address.zipPostCode}}</td>
+            </tr>
+
+        </table>
+        <p style="font-weight: bold;color: white;background-color: #1150af;padding: 10px;margin-bottom: 0;">From the Landlord: (use Schedule of Parties #RTB- 26 to list additional landlords)</p>
+        <table>
+            <tr style="border-bottom:0 ;">
+                <td style="border-bottom:0 ;">first and middle name</td>
+                <td style="border-bottom:0 ;">last name</td>
+            </tr>
+            <tr style="height: 40px; background: #c3c3ef; border-top: 0;">
+                <td style="width: 50%;border-top: 0;">{{lease.rentalProperty.rentalPropertyOwners[0].firstName}}</td>
+                <td style="border-top:0 ;">{{lease.rentalProperty.rentalPropertyOwners[0].lastName}}</td>
+            </tr>
+            <tr style="border-bottom:0 ;">
+                <td style="border-bottom:0 ;">main phone</td>
+                <td style="border-bottom:0 ;">other phone</td>
+            </tr>
+            <tr style="height: 40px; background: #c3c3ef; border-top: 0;">
+                <td style="width: 50%;border-top: 0;">{{lease.rentalProperty.rentalPropertyOwners[0].contactTelephone}}</td>
+                <td style="border-top:0 ;"></td>
+            </tr>
+        </table>
+        <p style="font-weight: bold;color: white;background-color: #b4bac4;padding: 10px;margin-bottom: 0;">I, the Landlord, give you 10 days’ notice to move out of the rental unit/site located at:</p>
+        <table>
+            <tr style="border-bottom:0 ;">
+                <td style="width: 10%; border-bottom:0 ;">unit #</td>
+                <td style="width: 40%; border-bottom:0 ;">street # and name</td>
+                <td style="width: 25%;border-bottom:0 ;">city</td>
+                <td style="width: 10%;border-bottom:0 ;">province</td>
+                <td style="width: 15%;border-bottom:0 ;">postal code</td>
+            </tr>
+            <tr style="height: 40px; background: #c3c3ef; border-top: 0;">
+                <td style="border-top: 0;"></td>
+                <td style="border-top:0 ;">{{lease.rentalProperty.address.streetNum}}</td>
+                <td style="border-top: 0;">{{lease.rentalProperty.address.city}}</td>
+                <td style="border-top:0 ;">{{lease.rentalProperty.address.stateProvince}}</td>
+                <td style="border-top: 0;">{{lease.rentalProperty.address.zipPostCode}}</td>
+            </tr>
+
+        </table>
+        <table style="margin-top: -1px;" *ngIf="ntoice">
+            <tr style="height: 40px; background: #c3c3ef; border-top: 0;">
+                <td style="width: 50%;border-top: 0;">You must move out of the rental unit by: <span style="color: #949393;">(DD/MM/YYYY)</span></td>
+                <td style="border-top:0 ;">{{notice.requiredMoveOutDate | date: 'MM/dd/yyyy'}} </td>
+                <!-- <td style="border-top: 0;">Vancouver</td>
+              <td style="border-top:0 ;">BC</td>
+              <td style="border-top: 0;">V1V 1V1</td> -->
+            </tr>
+        </table>
+        <table>
+            <tr style="border-bottom:0 ;">
+                <td style="width: 33%; border-bottom:0 ;">name of landlord/agent</td>
+                <td style="width: 33%;border-bottom:0 ;">signature of landlord/agent</td>
+                <td style="width: 33%;border-bottom:0 ;">date signed DD/MM/YYYY</td>
+            </tr>
+            <tr style="height: 40px; background: #c3c3ef; border-top: 0;">
+                <td style="border-top: 0;">John</td>
+                <td style="border-top:0 ;"></td>
+                <td style="border-top:0 ;"></td>
+            </tr>
+        </table>
+        <p style="text-align: center; border-bottom: 10px solid #1150af;font-size: .85em;">
+            Your personal information is collected under section 26 (a) and (c) of the Freedom of Information and Protection of Privacy Act for the purpose of administering the Residential Tenancy Act. If you have any questions regarding the collection of your personal
+            information, please call 604-660-1020 in Greater Vancouver; 250-387-1602 in Victoria; or 1-800-665-8779 elsewhere in B.C.
+        </p>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start">
+        <div style="width: 35%;font-size: .95em;">
+            <span style="font-weight:bold;">
+                Residential Tenancy Branch
+              </span><br>
+            <span style="font-size: .85em;">
+                Office of Housing and<br>
+                Construction Standards<br>
+                #RTB-30 (2020/03/03)
+              </span>
+        </div>
+        <div style="width: 45%;" class="spacer">
+            Landlord must sign page 1 and give the tenant all pages of this Notice.
+        </div>
+        <div style="width: 30%;text-align: right;">
+            <span style="font-weight:400;">page 1 of 3 pages</span>
+        </div>
+
+    </div>
+    <div style="border: 1px solid black;" *ngIf="notice">
+        <p style="font-weight: bold;color: white;background-color: #1150af;padding: 10px;margin-bottom: 0;">I am ending your tenancy because:</p>
+        <form [formGroup]="detailsForm">
+            <div fxLayout="row" fxLayoutAlign="start">
+                <div style="width:25%" style="margin-left: 5px;">
+                    <input type="checkbox" [checked]="notice.outstandingRent > 0">&nbsp;Yuo have failed to pay the rent in the amount of
+                    <!-- [checked]="outstandingRent > 0" -->
+                </div>
+                <div style="width:25%">
+                    <mat-form-field style="margin-right: 10px;width: 85%;">
+                        <input *ngIf="notice.outstandingRent > 0" matInput type="text" formControlName="outstandingRent" style="height: 30px;padding-left: 0;margin-top: -30px;margin-left: 10px;" [value]="notice.outstandingRent | currency: 'CAD'" name="outstandingRent">
+                        <input *ngIf="notice.outstandingRent === 0" matInput type="text" formControlName="outstandingRent" style="height: 30px;padding-left: 0;margin-top: -30px;margin-left: 10px;">
+                    </mat-form-field>
+                </div>
+                <div style="width:25%">Due on (DD/MM/YYYY)</div>
+                <div style="width:25%">
+                    <mat-form-field style="margin-right: 10px;width: 85%;">
+                        <input *ngIf="notice.outstandingRent > 0" matInput type="text" formControlName="rentDueDate" style="height: 30px;padding-left: 0;margin-top: -30px;margin-left: 10px;" [value]="notice.rentDueDate | date: 'MM/dd/yyyy'" name="rentDueDate">
+                        <input *ngIf="notice.outstandingRent === 0" matInput type="text" formControlName="rentDueDate" style="height: 30px;padding-left: 0;margin-top: -30px;margin-left: 10px;">
+                    </mat-form-field>
+                </div>
+
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start">
+                <div style="width:25%" style="margin-left: 5px;">
+                    <input type="checkbox" [checked]="notice.outstandingUtilities > 0">&nbsp;Yuo have failed to pay the utility in the amount of
+                    <!-- [checked]="outstandingRent > 0" -->
+                </div>
+                <div style="width:25%">
+                    <mat-form-field style="margin-right: 10px;width: 85%;">
+                        <input *ngIf="notice.outstandingUtilities > 0" matInput type="text" formControlName="outstandingUtilities" style="height: 30px;padding-left: 0;margin-top: -30px;margin-left: 10px;" [value]="notice.outstandingRent | currency: 'CAD'" name="outstandingRent">
+                        <input *ngIf="notice.outstandingUtilities === 0" matInput type="text" formControlName="outstandingUtilities" style="height: 30px;padding-left: 0;margin-top: -30px;margin-left: 10px;">
+                    </mat-form-field>
+                </div>
+                <div style="width:25%">Due on (DD/MM/YYYY)</div>
+                <div style="width:25%">
+                    <mat-form-field style="margin-right: 10px;width: 85%;">
+                        <input *ngIf="notice.outstandingUtilities > 0" matInput type="text" formControlName="utilityDueDate" style="height: 30px;padding-left: 0;margin-top: -30px;margin-left: 10px;" [value]="notice.utilityDueDate | date: 'MM/dd/yyyy'" name="utilityDueDate">
+                        <input *ngIf="notice.outstandingUtilities === 0" matInput type="text" formControlName="utilityDueDate" style="height: 30px;padding-left: 0;margin-top: -30px;margin-left: 10px;">
+                    </mat-form-field>
+                </div>
 
 
+            </div>
+            <p style="font-weight: bold;color: white;background-color: #1150af;padding: 10px;margin-bottom: 0;">
+                Complete the details below at the time of service (not required on landlord’s copy; failure to complete does not invalidate notice).<br> Served by:
+            </p>
+            <ul style="margin-top: 10px;margin-left: -20px;">
+                <li style="list-style: none;margin-bottom: 5px;" *ngFor="let method of serveMethod, let i = index">
+                    <input type="checkbox" [checked]="notice.howIsServed == i" formControlName="howIsServed">&nbsp; {{method}}
+                </li>
+            </ul>
+        </form>
+        <p style="font-size: .9em;color: white;background-color: #1150af;padding: 10px;margin-bottom: 0;">Landlords should also complete Proof of Service Notice to End Tenancy (form #RTB-34) as evidence of service.</p>
+
+    </div>
+    <p style="text-align: center;font-weight: bold;margin-top: 10px;">
+        IMPORTANT INFORMATION ABOUT THIS NOTICE
+    </p>
+    <div>
+        <div style="margin-bottom: 10px;font-weight: 600;">
+            REQUIREMENTS FOR THIS NOTICE:
+        </div>
+        <div style="margin-bottom: 15px;font-weight: 600;">
+            1. EFFECTIVE DATE OF NOTICE
+        </div>
+        <div style="margin-bottom: 10px;">
+            The effective date of this Notice is the date you must move out by and for this Notice the effective date is 10 days after you receive it. This notice may be given by the landlord on any day after the rent was due (for unpaid rent) and/or 30 days after
+            the tenant was given a written demand for unpaid utilities.
+        </div>
+        <div style="margin-bottom: 15px;font-weight: 600;">
+            2. WHEN YOU ARE CONSIDERED TO HAVE RECEIVED THIS NOTICE
+        </div>
+        <div style="margin-bottom: 10px;">
+            You are considered to have received this notice on the day it is given to you in person (or to an adult (19+) who appears to live with you) If you were not personally served with this Notice, you are considered to have received the Notice, unless there
+            is evidence to the contrary, on the following:<br> • 3 days after the landlord either leaves the Notice in the mailbox or through the mail slot; posts it on the door or a noticeable place at the address where you live; or emails/faxes
+            it to a number you have provided as an address for service; or<br> • 5 days after the landlord sends the Notice by registered or regular mail to the address where you live.
+        </div>
+        <div style="margin-bottom: 100px;font-weight: 600;">
+            Note: The date a person receives documents is what is used to calculate the time to respond; the deeming provisions do not give you extra time to respond.
+        </div>
+    </div>
+    <p style="border-top: 10px solid #1150af;margin-bottom: 0;"></p>
+    <div fxLayout="row" fxLayoutAlign="start">
+        <div style="width: 35%;font-size: .95em;">
+            <span style="font-weight:bold;">
+                Residential Tenancy Branch
+              </span><br>
+            <span style="font-size: .85em;">
+                Office of Housing and<br>
+                Construction Standards<br>
+                #RTB-30 (2020/03/03)
+              </span>
+        </div>
+        <div style="width: 45%;" class="spacer">
+            Landlord must sign page 1 and give the tenant all pages of this Notice.
+        </div>
+        <div style="width: 30%;text-align: right;">
+            <span style="font-weight:400;">page 2 of 3 pages</span>
+        </div>
+
+    </div>
+    <div>
+        <div style="margin-bottom: 5px;font-weight: 600;">
+            3. INFORMATION FOR LANDLORDS AND TENANTS
+        </div>
+        <div style="margin-bottom: 5px;">
+            The tenant may not withhold rent unless ordered by an arbitrator, or the tenant has paid for emergency repairs and provided the landlord with receipts and a written description of what happened. If the tenant disputes the Notice, a hearing will be held.
+            Both parties will have an opportunity to participate. The tenant who accepts the Notice must move out by the date set out on page 1 of this Notice, or sooner. An error in this Notice or an incorrect move-out date on this Notice does not make
+            it invalid. An arbitrator can order that the tenancy ends on a date other than the date specified in this Notice. You MUST NOT physically evict a tenant without a Writ of Possession obtained from the Supreme Court of British Co-lumbia after
+            an arbitrator has issued an Order of Possession, change the locks without an arbitrator's order, or seize a tenant's personal property without a court order.
+        </div>
+        <div style="margin-bottom: 5px;font-weight: 600;">
+            4. INFORMATION FOR TENANTS
+        </div>
+        <div style="margin-bottom: 10px;">
+            You have the right to dispute this Notice within 5 days after you receive it, by filing an Application for Dispute Resolution with the Residential Tenancy Branch or at a Service BC Office. An arbitrator may extend your time to file an Application, but
+            only if he or she accepts your proof that you had a serious and compelling reason for not filing the Application on time. If you do not file an Application for Dispute Resolution within 5 days, you are presumed to accept that the tenancy is
+            ending and must move out of the rental unit by the date set out on page 1 of this Notice (you can move out sooner). If you do not file the Application or move out, your landlord can apply for an Order of Possession. You may dispute the Notice
+            for specific reasons such as:
+            <div style="margin-left: 20px;">
+                • you have proof the rent was paid; or,<br> • you have an order from an arbitrator giving you permission to keep all or part of the rent; or,<br> • you held part or all of the rent with prior notice to the landlord, for the cost of emergency
+                repairs.
+            </div>
+        </div>
+        <div style="margin-bottom: 5px;font-weight: 600;">
+            5. INFORMATION FOR LANDLORDS
+        </div>
+        <div style="margin-bottom: 10px;">
+            If the tenant fails to move out of the rental unit, or if you believe the tenant does not intend to move out and the tenant’s deadline to dispute this Notice has expired, you can file an Application for Dispute Resolution for an Order of Possession.
+        </div>
+        <div>
+            If the tenant applies to dispute this Notice and an arbitrator dismisses the tenant’s application or upholds this Notice, the arbitrator must grant an Order of Possession for the landlord. The Direct Request process is completed without either party attending
+            a hearing. Instead the landlord submits:
+        </div>
+        <div style="margin-left: 20px;">
+            • An Application for Dispute Resolution by Direct Request (#RTB-12LDR) • A Direct Request Worksheet (#RTB-46)<br> • A copy of this Notice (#RTB-30)<br> • Proof of Service Notice to End Tenancy (#RTB-34)<br> • A copy of the tenancy agreement
+            (including the addendum, if there is one)<br> • When payment for utilities is required, a copy of the written demand informing the tenant of the amount and due date, a copy of related utility bills, and proof of service of the written demand
+            for utilities.<br> • A copy of all Notices of Rent Increase since the tenancy began, if rent has increased.<br>
+        </div>
+
+    </div>
+    <div style="text-align: center;margin-top: 100px;margin-bottom: 15px;">
+        <span style="font-weight: bold;">FOR MORE INFORMATION:</span><br> <span></span>www.gov.bc.ca/landlordtenant<br> <span style="font-size: .9em;font-weight: bold;">Public Information Lines: 1-800-665-8779 (toll-free) Greater Vancouver: 604-660-1020 Victoria: 250-387-1602 This is page 3 of a 3-page Notice. The landlord must sign page one of this Notice
+      and must give the tenant every page.</span>
+    </div>
+    <p style="border-top: 10px solid #1150af;margin-bottom: 0;"></p>
+    <div fxLayout="row" fxLayoutAlign="start">
+        <div style="width: 35%;font-size: .95em;">
+            <span style="font-weight:bold;">
+                Residential Tenancy Branch
+              </span><br>
+            <span style="font-size: .85em;">
+                Office of Housing and<br>
+                Construction Standards<br>
+                #RTB-30 (2020/03/03)
+              </span>
+        </div>
+        <div style="width: 45%;" class="spacer">
+            Landlord must sign page 1 and give the tenant all pages of this Notice.
+        </div>
+        <div style="width: 30%;text-align: right;">
+            <span style="font-weight:400;">page 3 of 3 pages</span>
+        </div>
+
+    </div>
+</div>
+<div fxLayout="row" fxLayoutGap="7px" fxLayoutAlign="end center" class="button" style="margin-top: 30px;">
+    <button type="button" mat-raised-button color="primary" (click)="download()"><mat-icon style="color: yellow;">file_download</mat-icon> &nbsp;Download PDF</button>
+    <button mat-raised-button color="accent" (click)="Ok()">Ok</button>
 </div>

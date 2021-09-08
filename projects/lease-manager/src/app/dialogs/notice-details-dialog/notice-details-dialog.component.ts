@@ -1,10 +1,14 @@
 import { Component, Inject, OnInit, Optional } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Store } from '@ngrx/store';
 import { getNoticeDetails } from '../../store/actions/lease.actions';
 import { PropertyLeaseState } from '../../store/lease-state';
 import { leaseDetails, noticeDetails, noticeList } from '../../store/reducers';
+
+import * as jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
+import * as html2pdf from 'html2pdf.js';
 
 @Component({
   selector: 'app-notice-details-dialog',
@@ -29,6 +33,7 @@ export class NoticeDetailsDialogComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
               private store: Store<PropertyLeaseState>,
+              public dialogRef: MatDialogRef<NoticeDetailsDialogComponent>,
               @Optional() @Inject(MAT_DIALOG_DATA) public data: { id: number }) {
 
     this.store.select(leaseDetails).subscribe(res => {
@@ -75,6 +80,26 @@ export class NoticeDetailsDialogComponent implements OnInit {
 
   getNoticeDetails(id: number) {
     this.store.dispatch(getNoticeDetails({ payload: id }));
+  }
+
+  Ok() {
+    this.dialogRef.close();
+  }
+
+  download() {
+    debugger;
+
+    const element = document.getElementById('pdfdoc');
+
+    const options = {
+      margin: 0.2,
+      filename: 'Ten Day Notice', // this.contract.managementContractTitle + '_' + timestamp + '_contract.pdf',
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { scale: 1 },
+      jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+    };
+
+    html2pdf().from(element).set(options).save();
   }
 
 }
