@@ -885,7 +885,7 @@ export class LeaseEffects {
   getNoticeDetails$ = createEffect(() =>
     this.actions$.pipe(
       // ofType('[Property] Get Property List'),
-      ofType(LeaseActions.getVendorDetails),
+      ofType(LeaseActions.getNoticeDetails),
       // tap(() => console.log('got here: ')),
       map(action => action.payload),
       switchMap((payload) =>

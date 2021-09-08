@@ -1,5 +1,5 @@
 <!-- <app-agreement-header></app-agreement-header> -->
-<div fxLayout="row" fxLayoutAlign="end" class="header">
+<div fxLayout="row" fxLayoutAlign="end" class="header" *ngIf="notice">
     <!-- <div fxFlex="30%"></div> -->
     <div fxFlex="30%" style="align-items:end;margin-right: 15px;">
         <!-- LOGO -->
@@ -29,24 +29,24 @@
             <td style="border-bottom:0 ;">last name</td>
         </tr>
         <tr style="height: 40px; background: #c3c3ef; border-top: 0;">
-            <td style="width: 50%;border-top: 0;">John</td>
-            <td style="border-top:0 ;">Doe</td>
+            <td style="width: 50%;border-top: 0;">{{lease.tenant[0].firstName}}</td>
+            <td style="border-top:0 ;">{{lease.tenant[0].lastName}}</td>
         </tr>
         <tr style="border-bottom:0 ;">
             <td style="border-bottom:0 ;">first and middle name</td>
             <td style="border-bottom:0 ;">last name</td>
         </tr>
         <tr style="height: 40px; background: #c3c3ef; border-top: 0;">
-            <td style="width: 50%;border-top: 0;">John</td>
-            <td style="border-top:0 ;">Doe</td>
+            <td style="width: 50%;border-top: 0;"><span *ngIf="lease.tenant.length > 1">{{lease.tenant[1].firstName}}</span></td>
+            <td style="border-top:0 ;"><span *ngIf="lease.tenant[1]">{{lease.tenant[1].lastName}}</span></td>
         </tr>
         <tr style="border-bottom:0 ;">
             <td style="border-bottom:0 ;">main phone</td>
             <td style="border-bottom:0 ;">other phone</td>
         </tr>
         <tr style="height: 40px; background: #c3c3ef; border-top: 0;">
-            <td style="width: 50%;border-top: 0;">604-785-5127</td>
-            <td style="border-top:0 ;"></td>
+            <td style="width: 50%;border-top: 0;">{{lease.tenant[0].contactTelephone1}}</td>
+            <td style="border-top:0 ;">{{lease.tenant[0].contactTelephone2}}</td>
         </tr>
     </table>
     <p style="font-weight: bold;color: white;background-color: #1150af;padding: 10px;margin-bottom: 0;">Tenant Address</p>
@@ -59,11 +59,11 @@
             <td style="width: 15%;border-bottom:0 ;">postal code</td>
         </tr>
         <tr style="height: 40px; background: #c3c3ef; border-top: 0;">
-            <td style="border-top: 0;">119</td>
-            <td style="border-top:0 ;">1234 Main Street</td>
-            <td style="border-top: 0;">Vancouver</td>
-            <td style="border-top:0 ;">BC</td>
-            <td style="border-top: 0;">V1V 1V1</td>
+            <td style="border-top: 0;"></td>
+            <td style="border-top:0 ;">{{lease.rentalProperty.address.streetNum}}</td>
+            <td style="border-top: 0;">{{lease.rentalProperty.address.city}}</td>
+            <td style="border-top:0 ;">{{lease.rentalProperty.address.stateProvince}}</td>
+            <td style="border-top: 0;">{{lease.rentalProperty.address.zipPostCode}}</td>
         </tr>
 
     </table>
@@ -74,15 +74,15 @@
             <td style="border-bottom:0 ;">last name</td>
         </tr>
         <tr style="height: 40px; background: #c3c3ef; border-top: 0;">
-            <td style="width: 50%;border-top: 0;">John</td>
-            <td style="border-top:0 ;">Doe</td>
+            <td style="width: 50%;border-top: 0;">{{lease.rentalProperty.rentalPropertyOwners[0].firstName}}</td>
+            <td style="border-top:0 ;">{{lease.rentalProperty.rentalPropertyOwners[0].lastName}}</td>
         </tr>
         <tr style="border-bottom:0 ;">
             <td style="border-bottom:0 ;">main phone</td>
             <td style="border-bottom:0 ;">other phone</td>
         </tr>
         <tr style="height: 40px; background: #c3c3ef; border-top: 0;">
-            <td style="width: 50%;border-top: 0;">604-785-5127</td>
+            <td style="width: 50%;border-top: 0;">{{lease.rentalProperty.rentalPropertyOwners[0].contactTelephone}}</td>
             <td style="border-top:0 ;"></td>
         </tr>
     </table>
@@ -96,18 +96,18 @@
             <td style="width: 15%;border-bottom:0 ;">postal code</td>
         </tr>
         <tr style="height: 40px; background: #c3c3ef; border-top: 0;">
-            <td style="border-top: 0;">119</td>
-            <td style="border-top:0 ;">1234 Main Street</td>
-            <td style="border-top: 0;">Vancouver</td>
-            <td style="border-top:0 ;">BC</td>
-            <td style="border-top: 0;">V1V 1V1</td>
+            <td style="border-top: 0;"></td>
+            <td style="border-top:0 ;">{{lease.rentalProperty.address.streetNum}}</td>
+            <td style="border-top: 0;">{{lease.rentalProperty.address.city}}</td>
+            <td style="border-top:0 ;">{{lease.rentalProperty.address.stateProvince}}</td>
+            <td style="border-top: 0;">{{lease.rentalProperty.address.zipPostCode}}</td>
         </tr>
 
     </table>
-    <table style="margin-top: -1px;">
+    <table style="margin-top: -1px;" *ngIf="ntoice">
         <tr style="height: 40px; background: #c3c3ef; border-top: 0;">
-            <td style="width: 50%;border-top: 0;">You must move out of the rental unit by:</td>
-            <td style="border-top:0 ;">DD/MM/YYYY</td>
+            <td style="width: 50%;border-top: 0;">You must move out of the rental unit by: <span style="color: #949393;">(DD/MM/YYYY)</span></td>
+            <td style="border-top:0 ;">{{notice.requiredMoveOutDate | date: 'MM/dd/yyyy'}} </td>
             <!-- <td style="border-top: 0;">Vancouver</td>
             <td style="border-top:0 ;">BC</td>
             <td style="border-top: 0;">V1V 1V1</td> -->
@@ -149,27 +149,57 @@
     </div>
 
 </div>
-<div style="border: 1px solid black;">
+<div style="border: 1px solid black;" *ngIf="notice">
     <p style="font-weight: bold;color: white;background-color: #1150af;padding: 10px;margin-bottom: 0;">I am ending your tenancy because:</p>
     <form [formGroup]="detailsForm">
         <div fxLayout="row" fxLayoutAlign="start">
             <div style="width:25%" style="margin-left: 5px;">
-                <mat-checkbox formControlName="outstandingRent" checked>Yuo have failed to pay the rent<br> in the amount of</mat-checkbox>
+                <input type="checkbox" [checked]="notice.outstandingRent > 0">&nbsp;Yuo have failed to pay the rent in the amount of
                 <!-- [checked]="outstandingRent > 0" -->
             </div>
             <div style="width:25%">
                 <mat-form-field style="margin-right: 10px;width: 85%;">
-                    <input type="text" style="height: 30px;padding-left: 0;margin-top: -30px;margin-left: 10px;" [value]="outstandingRent" name="outstandingRent">
+                    <input matInput type="text" formControlName="outstandingRent" style="height: 30px;padding-left: 0;margin-top: -30px;margin-left: 10px;" [value]="notice.outstandingRent | currency: 'CAD'" name="outstandingRent">
                 </mat-form-field>
             </div>
-            <div style="width:25%">Due on DD/MM/YYYY</div>
+            <div style="width:25%">Due on (DD/MM/YYYY)</div>
             <div style="width:25%">
                 <mat-form-field style="margin-right: 10px;width: 85%;">
-                    <input type="text" style="height: 30px;padding-left: 0;margin-top: -30px;margin-left: 10px;" [value]="utilityDueDate" name="utilityDueDate">
+                    <input matInput type="text" formControlName="outstandingUtilities" style="height: 30px;padding-left: 0;margin-top: -30px;margin-left: 10px;" [value]="notice.utilityDueDate | date: 'MM/dd/yyyy'" name="utilityDueDate">
                 </mat-form-field>
             </div>
 
         </div>
+        <div fxLayout="row" fxLayoutAlign="start">
+            <div style="width:25%" style="margin-left: 5px;">
+                <input type="checkbox" [checked]="notice.outstandingUtilities > 0">&nbsp;Yuo have failed to pay the utility in the amount of
+                <!-- [checked]="outstandingRent > 0" -->
+            </div>
+            <div style="width:25%">
+                <mat-form-field style="margin-right: 10px;width: 85%;">
+                    <input *ngIf="notice.outstandingUtilities > 0" matInput type="text" formControlName="outstandingUtilities" style="height: 30px;padding-left: 0;margin-top: -30px;margin-left: 10px;" [value]="notice.outstandingRent | currency: 'CAD'" name="outstandingRent">
+                    <input *ngIf="notice.outstandingUtilities === 0" matInput type="text" formControlName="outstandingUtilities" style="height: 30px;padding-left: 0;margin-top: -30px;margin-left: 10px;">
+                </mat-form-field>
+            </div>
+            <div style="width:25%">Due on (DD/MM/YYYY)</div>
+            <div style="width:25%">
+                <mat-form-field style="margin-right: 10px;width: 85%;">
+                    <input *ngIf="notice.outstandingUtilities > 0" matInput type="text" formControlName="utilityDueDate" style="height: 30px;padding-left: 0;margin-top: -30px;margin-left: 10px;" [value]="notice.utilityDueDate | date: 'MM/dd/yyyy'" name="utilityDueDate">
+                    <input *ngIf="notice.outstandingUtilities === 0" matInput type="text" formControlName="utilityDueDate" style="height: 30px;padding-left: 0;margin-top: -30px;margin-left: 10px;">
+                </mat-form-field>
+            </div>
+
+
+        </div>
+        <p style="font-weight: bold;color: white;background-color: #1150af;padding: 10px;margin-bottom: 0;">
+            Complete the details below at the time of service (not required on landlord’s copy; failure to complete does not invalidate notice). Served by:
+        </p>
+        <ul style="margin-top: 10px;margin-left: -20px;">
+            <li style="list-style: none;" *ngFor="let method of serveMethod, let i = index">
+                <input type="checkbox" [checked]="notice.howIsServed == i" formControlName="howIsServed">&nbsp; {{method}}
+            </li>
+        </ul>
     </form>
+
 
 </div>

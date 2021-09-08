@@ -1,6 +1,10 @@
 import { Component, Inject, OnInit, Optional } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material';
+import { Store } from '@ngrx/store';
+import { getNoticeDetails } from '../../store/actions/lease.actions';
+import { PropertyLeaseState } from '../../store/lease-state';
+import { leaseDetails, noticeDetails, noticeList } from '../../store/reducers';
 
 @Component({
   selector: 'app-notice-details-dialog',
@@ -10,9 +14,41 @@ import { MAT_DIALOG_DATA } from '@angular/material';
 export class NoticeDetailsDialogComponent implements OnInit {
 
   detailsForm: FormGroup;
+  lease;
+  notice;
+
+  serveMethod = [
+    'In person to the tenant or agent of the tenant or an adult (over 19) who appears to live with the tenant',
+    'Sending a copy by registered mail to the address at which the person resides',
+    'Leaving a copy in a mailbox or mail slot at the address where the person resides',
+    'Attaching a copy to the door or other conspicuous place where the tenant resides',
+    'Faxes it to a fax number you have provided as an address for service',
+    'Email to an email address you have provided as an address for service',
+    'As ordered by the Director of the Residential Tenancy Branch (attach copy of Substituted Service Order)'
+  ];
 
   constructor(private formBuilder: FormBuilder,
-              @Optional() @Inject(MAT_DIALOG_DATA) public data: { id: number }) { }
+              private store: Store<PropertyLeaseState>,
+              @Optional() @Inject(MAT_DIALOG_DATA) public data: { id: number }) {
+
+    this.store.select(leaseDetails).subscribe(res => {
+      this.lease = res;
+      console.log('lease in dialog', this.lease);
+    });
+
+    // this.store.select(noticeList)
+    //   .subscribe(notices => {
+    //     if (notices) {
+    //       this.notice = notices.find(n => n.id === this.data.id);
+    //     }
+    //     console.log('notice details', this.notice);
+    //   });
+    this.store.select(noticeDetails).subscribe(notice => {
+      this.notice = notice;
+      console.log('notice details', this.notice);
+    });
+
+  }
 
   ngOnInit() {
 
@@ -31,11 +67,13 @@ export class NoticeDetailsDialogComponent implements OnInit {
       requiredMoveOutDate: [''],
     });
 
+    this.getNoticeDetails(this.data.id);
+
     console.log('notice id in details', this.data.id);
   }
 
   getNoticeDetails(id: number) {
-
+    this.store.dispatch(getNoticeDetails({ payload: id }));
   }
 
 }

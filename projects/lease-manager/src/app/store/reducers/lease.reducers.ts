@@ -822,6 +822,7 @@ export const getRentPaymentList = (state: PropertyLeaseState) => state.rentPayme
 export const getRemtPaymentDetails = (state: PropertyLeaseState) => state.selectedPayment;
 export const getInviceList = (state: PropertyLeaseState) => state.invoiceList;
 export const getNoticeList = (state: PropertyLeaseState) => state.noticeList;
+export const getNoticeDetails = (state: PropertyLeaseState) => state.notice;
 
 export const loadingStatus = createSelector(selectLeaseyState, getLoadingStatus);
 
@@ -839,6 +840,7 @@ export const rentPaymentList = createSelector(selectLeaseyState, getRentPaymentL
 export const rentPaymentDetails = createSelector(selectLeaseyState, getRemtPaymentDetails);
 export const invoiceList = createSelector(selectLeaseyState, getInviceList);
 export const noticeList = createSelector(selectLeaseyState, getNoticeList);
+export const noticeDetails = createSelector(selectLeaseyState, getNoticeDetails);
 
 export function l_reducer(state: PropertyLeaseState | undefined, action: Action) {
     return propertyLeaseReducer(state, action);

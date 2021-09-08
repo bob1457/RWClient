@@ -710,6 +710,7 @@ export class LeaseDetailsComponent implements OnInit {
       height: '500px',
       width: '880px',
       disableClose: false,
+      autoFocus: false,
       scrollStrategy: this.overlay.scrollStrategies.noop(),
       panelClass: 'my-custom-dialog-class',
       data: {

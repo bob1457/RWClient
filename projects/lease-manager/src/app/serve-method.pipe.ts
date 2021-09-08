@@ -12,23 +12,23 @@ export class ServeMethodPipe implements PipeTransform {
         break;
       }
       case 1: {
-        return 'By Attaching on Door';
-        break;
-      }
-      case 2: {
         return 'By Registered Mail';
         break;
       }
-      case 3: {
+      case 2: {
         return 'By Leaving In MailBox';
         break;
       }
+      case 3: {
+        return 'By Attaching on Door';
+        break;
+      }
       case 4: {
-        return 'By Email';
+        return 'By Fax';
         break;
       }
       case 5: {
-        return 'By Fax';
+        return 'By Email';
         break;
       }
       case 6: {
@@ -36,7 +36,7 @@ export class ServeMethodPipe implements PipeTransform {
         break;
       }
       default: {
-        return 'Other';
+        return 'In person';
         break;
       }
     }
