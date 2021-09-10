@@ -15,8 +15,8 @@
                         </mat-select>
                     </mat-form-field>
                     <mat-form-field style="width: 90%;">
-                        <mat-label>Description</mat-label>
-                        <textarea matInput formControlName="noticeDesc" style="width: 100%;" value="Ten day notice to end tenancy duo to unpaid rent and/or unpaid utility"></textarea>
+                        <mat-label>Details</mat-label>
+                        <textarea matInput formControlName="noticeDesc" style="width: 100%;"></textarea>
                     </mat-form-field>
                     <div fxLayout="row" fxLayoutAlign="start" style="font-size: .9em;width: 100%;">
                         <div fxFlex="35%">
@@ -46,13 +46,16 @@
                     </mat-form-field>
                     <div>
                         <!-- <button mat-button mat-stroked-button (click)="addReasonItems()">Add Ending Tenancy Reason</button> -->
-                        <p>Select Ending Tenancy Reason(s):</p>
+                        <p>Select Ending Tenancy Reason(s):<span><img *ngIf="loadingReasonItems" class="pl-2" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+                        /></span></p>
                     </div>
                     <div class="reason-panel">
                         <div formArrayName="reasonInNotice">
                             <div *ngFor="let reason of reasonList; let reasonIndex=index">
                                 <div [formGroupName]="reasonIndex">
+                                    <span [style.margin-left]=" reasonIndex === 3 || reasonIndex === 4 || reasonIndex === 5  ? '25px' : '0px'">
                                     <mat-checkbox class="" formControlName="applied">{{reason.reasonClause}}</mat-checkbox>
+                                    </span>
                                     <input hidden matInput formControlName="reasonCodeId" [ngModel]="reason.id">
                                 </div>
 
@@ -109,6 +112,14 @@
                                 </mat-form-field>
                             </div>
 
+                        </div>
+                        <div fxLayout="row" *ngIf="noticeType == 1">
+                            <mat-form-field fxFlex.xs="90%" style="margin-right: 10px;width: 85%;">
+                                <mat-label>Move Out Date</mat-label>
+                                <input matInput [matDatepicker]="picker10" formControlName="requiredMoveOutDate">
+                                <mat-datepicker-toggle matSuffix [for]="picker10"></mat-datepicker-toggle>
+                                <mat-datepicker #picker10></mat-datepicker>
+                            </mat-form-field>
                         </div>
 
                     </div>

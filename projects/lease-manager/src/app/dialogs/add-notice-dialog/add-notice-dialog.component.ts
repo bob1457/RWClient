@@ -23,6 +23,7 @@ export class AddNoticeDialogComponent implements OnInit {
   methodType;
 
   loading$: Observable<boolean>;
+  loadingReasonItems = false;
 
   constructor(private formBuilder: FormBuilder,
               private store: Store<PropertyLeaseState>,
@@ -33,6 +34,8 @@ export class AddNoticeDialogComponent implements OnInit {
   ngOnInit() {
 
     this.loading$ = this.store.select(loadingStatus);
+
+
 
     debugger;
     // Note, the following API call should be implemented on Dropdown box of notice type is selected (so that type is available)
@@ -105,6 +108,8 @@ export class AddNoticeDialogComponent implements OnInit {
   }
 
   onTypeChange(id) {
+    this.loadingReasonItems = true;
+
     this.noticeType = id;
     console.log('selected type', this.noticeType);
 
@@ -118,6 +123,7 @@ export class AddNoticeDialogComponent implements OnInit {
         this.reasonList = items;
         console.log('reason list in dialog', this.reasonList);
         this.addReasonItems();
+        this.loadingReasonItems = false;
       });
   }
 
