@@ -66,7 +66,7 @@ export class NoticeDetailsDialogComponent implements OnInit {
       howIsServed: Number([]),
       serviceDate: [''],
       isActive: [true],
-      outstandingRent: Number([1850]),
+      outstandingRent: Number([0]),
       outstandingUtilities: Number([0]),
       utilityDueDate: [''],
       rentDueDate: [''],

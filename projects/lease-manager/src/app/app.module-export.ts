@@ -58,6 +58,10 @@ import { NoticeTypePipe } from './notice-type.pipe';
 import { ActivePipe } from './active.pipe';
 import { NoticeDetailsDialogComponent } from './dialogs/notice-details-dialog/notice-details-dialog.component';
 import { ServeMethodPipe } from './serve-method.pipe';
+import { NoticeContentTenDayComponent } from './notice-content-ten-day/notice-content-ten-day.component';
+import { NoticeContentOneMonthComponent } from './notice-content-one-month/notice-content-one-month.component';
+import { NoticeContentTwoMonthComponent } from './notice-content-two-month/notice-content-two-month.component';
+
 
 
 const routes: Routes = [
@@ -132,7 +136,10 @@ const routes: Routes = [
     MutualAgreementComponent,
     NoticeTypePipe,
     ActivePipe,
-    ServeMethodPipe
+    ServeMethodPipe,
+    NoticeContentTenDayComponent,
+    NoticeContentOneMonthComponent,
+    NoticeContentTwoMonthComponent
   ],
   imports: [
     // BrowserModule,
