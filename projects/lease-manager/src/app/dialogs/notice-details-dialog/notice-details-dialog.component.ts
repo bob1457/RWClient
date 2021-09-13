@@ -20,6 +20,7 @@ export class NoticeDetailsDialogComponent implements OnInit {
   detailsForm: FormGroup;
   lease;
   notice;
+  noticeType = '';
 
   serveMethod = [
     'In person to the tenant or agent of the tenant or an adult (over 19) who appears to live with the tenant',
@@ -51,6 +52,13 @@ export class NoticeDetailsDialogComponent implements OnInit {
     this.store.select(noticeDetails).subscribe(notice => {
       this.notice = notice;
       console.log('notice details', this.notice);
+      if (this.notice && this.notice.type === 0) {
+        this.noticeType = 'Ten Day Notice';
+      }
+
+      if (this.notice && this.notice.type === 1) {
+        this.noticeType = 'One Month Notice';
+      }
     });
 
   }
@@ -93,7 +101,7 @@ export class NoticeDetailsDialogComponent implements OnInit {
 
     const options = {
       margin: 0.2,
-      filename: 'Ten Day Notice', // this.contract.managementContractTitle + '_' + timestamp + '_contract.pdf',
+      filename: this.noticeType, // 'Ten Day Notice', // this.contract.managementContractTitle + '_' + timestamp + '_contract.pdf',
       image: { type: 'jpeg', quality: 0.98 },
       html2canvas: { scale: 1 },
       jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
