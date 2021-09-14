@@ -162,7 +162,7 @@
     <div style="border: 1px solid black;">
         <ul style="margin-top: 10px;margin-left: -20px;">
             <li style="list-style: none;margin-bottom: 5px;" *ngFor="let reason of notice.noticeCodeList, let i = index">
-                <input type="checkbox" [checked]="reason.reasonInNotice[0].applied">&nbsp; {{reason.reasonClause}}
+                <span [style.margin-left]=" i === 3 || i === 4 || i === 5  ? '25px' : '0px'"><input type="checkbox" [checked]="reason.reasonInNotice[0].applied"></span>&nbsp; {{reason.reasonClause}}
             </li>
         </ul>
         <p style="font-weight: bold;color: white;background-color: #1150af;padding: 10px;margin-bottom: 0;">Details of Causes(s): Describe what, where and who caused the issue and include dates/times, names etc. This information is required. An arbitrator may cancel the notice if details are not provided.</p>

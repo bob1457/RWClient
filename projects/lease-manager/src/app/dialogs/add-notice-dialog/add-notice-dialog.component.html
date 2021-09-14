@@ -53,9 +53,23 @@
                         <div formArrayName="reasonInNotice">
                             <div *ngFor="let reason of reasonList; let reasonIndex=index">
                                 <div [formGroupName]="reasonIndex">
-                                    <span [style.margin-left]=" reasonIndex === 3 || reasonIndex === 4 || reasonIndex === 5  ? '25px' : '0px'">
-                                    <mat-checkbox class="" formControlName="applied">{{reason.reasonClause}}</mat-checkbox>
+                                    <span *ngIf="noticeType != 2" [style.margin-left]=" reasonIndex === 3 || reasonIndex === 4 || reasonIndex === 5  ? '25px' : '0px'">
+                                      <!-- <span *ngIf="noticeType === 2" [style.margin-left]=" reasonIndex === 1 || reasonIndex === 2 || reasonIndex === 3  ? '25px' : '0px'"></span> -->
+                                    <div *ngIf="reasonIndex === 1 && noticeType == 2" style="width: 450px;">
+                                        Please indicate which close family member will occupy the unit.
+                                    </div>
+                                    <mat-checkbox class="" formControlName="applied">&nbsp; {{reason.reasonClause}}</mat-checkbox>
                                     </span>
+
+                                    <span *ngIf="noticeType == 2" [style.margin-left]="reasonIndex === 2 || reasonIndex === 3  ? '25px' : '0px'">
+                                        <!-- <span *ngIf="noticeType === 2" [style.margin-left]=" reasonIndex === 1 || reasonIndex === 2 || reasonIndex === 3  ? '25px' : '0px'"></span> -->
+                                    <div *ngIf="reasonIndex === 1 && noticeType == 2" style="width: 450px;margin-left: 15px;">
+                                        Please indicate which close family member will occupy the unit.
+                                    </div>
+                                    <mat-checkbox [style.margin-left]="reasonIndex === 1 ? '25px' : '0px'" class="" formControlName="applied">&nbsp; {{reason.reasonClause}}</mat-checkbox>
+                                    </span>
+
+
                                     <input hidden matInput formControlName="reasonCodeId" [ngModel]="reason.id">
                                 </div>
 
@@ -113,7 +127,7 @@
                             </div>
 
                         </div>
-                        <div fxLayout="row" *ngIf="noticeType == 1">
+                        <div fxLayout="row" *ngIf="noticeType == 1 || noticeType == 2">
                             <mat-form-field fxFlex.xs="90%" style="margin-right: 10px;width: 85%;">
                                 <mat-label>Move Out Date</mat-label>
                                 <input matInput [matDatepicker]="picker10" formControlName="requiredMoveOutDate">
