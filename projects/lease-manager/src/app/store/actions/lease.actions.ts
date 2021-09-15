@@ -693,6 +693,27 @@ export const getNoticeDetailsFailure = createAction(
   }
 );
 
+/**
+ * Update Notice Status Actions
+ */
+
+export const updateNoticeStatus = createAction(
+  '[Leases] Update Notice Status',
+  props<{ payload: ServiceRequest }>()
+);
+
+export const updateNoticeStatusSuccess = createAction(
+  '[Leases] Update Notice Status Success',
+  props<{ payload: ServiceRequest }>()
+);
+
+export const updateNoticeStatusFailure = createAction(
+  '[[Leases] Update Notice Status Failure',
+  // props<{payload: any}>()
+  (errorMessage = 'Error updating notice status') => ({ payload: { errorMessage } })
+
+);
+
 
 
 

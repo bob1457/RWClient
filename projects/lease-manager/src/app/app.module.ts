@@ -55,6 +55,7 @@ import { ServeMethodPipe } from './serve-method.pipe';
 import { NoticeContentTenDayComponent } from './notice-content-ten-day/notice-content-ten-day.component';
 import { NoticeContentOneMonthComponent } from './notice-content-one-month/notice-content-one-month.component';
 import { NoticeContentTwoMonthComponent } from './notice-content-two-month/notice-content-two-month.component';
+import { UpdateStatusDialogComponent } from './dialogs/update-status-dialog/update-status-dialog.component';
 
 
 @NgModule({
@@ -106,7 +107,8 @@ import { NoticeContentTwoMonthComponent } from './notice-content-two-month/notic
     ServeMethodPipe,
     NoticeContentTenDayComponent,
     NoticeContentOneMonthComponent,
-    NoticeContentTwoMonthComponent
+    NoticeContentTwoMonthComponent,
+    UpdateStatusDialogComponent
   ],
   imports: [
     BrowserModule,

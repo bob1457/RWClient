@@ -1085,6 +1085,15 @@
                                         <ng-container matColumnDef="active">
                                             <th class="table-header-text" mat-header-cell *matHeaderCellDef>Status</th>
                                             <td mat-cell *matCellDef="let element"> {{element.isActive | active}} </td>
+                                            <!-- <mat-cell *matCellDef="let element">
+                                                <mat-form-field floatLabel="never">
+                                                    <mat-select [(value)]="element.isActive" placeholder="Status" formControlName="isActive">
+                                                        <mat-option value=true>Active</mat-option>
+                                                        <mat-option value=false>Inactive</mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                            </mat-cell> -->
+
                                         </ng-container>
 
                                         <ng-container matColumnDef="created">
@@ -1114,9 +1123,9 @@
 
                                                 <!-- <a (click)="openDialog('Update',element)">Edit</a> |
                     <a (click)="openDialog('Delete',element)">Delete</a> ['/details', 1]-->
-                                                <button type="button" mat-raised-button color="primary" disabled (click)="getNoticeDetails(element.id)">Details</button> &nbsp;
+                                                <button [disabled]="!element.isActive" type="button" mat-raised-button color="primary" (click)="updateSttus(element.id, element.isActive)">Update Status</button> &nbsp;
                                                 <!-- <button mat-raised-button color="accent " (click)="openDialog( 'Delete',element) ">Delete</button> -->
-                                                <!-- (click)="getWorkOrderDetails(element.id)" -->
+                                                <!-- (click)="getWorkOrderDetails(element.id)" disabled-->
                                             </td>
                                         </ng-container>
 

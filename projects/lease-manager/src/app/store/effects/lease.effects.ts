@@ -910,6 +910,34 @@ export class LeaseEffects {
   );
 
 
+  updateNoticeStatus$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(LeaseActions.updateNoticeStatus),
+      tap(() => console.log('got here to update notice status!!!')),
+      map(action => action.payload),
+      switchMap((payload) =>
+        this.leaseService.updateNoticeStatus(payload).pipe(
+          map((notice: Vendor) => ({
+            type: '[Leases] Update Notice Status Success',
+            payload: notice
+          })),
+          tap(() => {
+            // window.alert('done');
+            this.openSnackBar('Notice status updated successfully.', 'close', 'notify');
+          }), // display notificaiton
+
+          catchError(error => {
+            this.openSnackBar(error.message, 'dismiss', 'error');
+            return of(LeaseActions.updatVendorsFailure(error.message));
+            }
+          )
+          // catchError(error => of(LeaseActions.updateLeaseFailure(error.message)))
+        )
+      )
+    )
+  );
+
   openSnackBar(message: string, action: string, type: string) {
     const config = new MatSnackBarConfig();
     config.panelClass = [type];

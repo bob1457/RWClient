@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectorRef, AfterContentChecked } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { PropertyLeaseState } from '../store/lease-state';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -21,6 +21,7 @@ import { WorkorderDetailsDialogComponent } from '../dialogs/workorder-details-di
 import { DashState, RentalAppList, ServiceRequestList } from '@lib/dashboard';
 import { AddNoticeDialogComponent } from '../dialogs/add-notice-dialog/add-notice-dialog.component';
 import { NoticeDetailsDialogComponent } from '../dialogs/notice-details-dialog/notice-details-dialog.component';
+import { UpdateStatusDialogComponent } from '../dialogs/update-status-dialog/update-status-dialog.component';
 
 @Component({
   selector: 'app-lease-details',
@@ -34,7 +35,7 @@ import { NoticeDetailsDialogComponent } from '../dialogs/notice-details-dialog/n
     ]),
   ]
 })
-export class LeaseDetailsComponent implements OnInit {
+export class LeaseDetailsComponent implements OnInit, AfterContentChecked {
 
   id: number;
   lease: any; //PropertyLease;
@@ -172,6 +173,7 @@ export class LeaseDetailsComponent implements OnInit {
               private actRoute: ActivatedRoute,
               private dialog: MatDialog,
               public overlay: Overlay,
+              private cdr: ChangeDetectorRef,
               private formBuilder: FormBuilder,
               private propertyService: LeaseService) {
                 this.id = this.actRoute.snapshot.params.id;
@@ -293,7 +295,11 @@ export class LeaseDetailsComponent implements OnInit {
                       }
                     });
                 });
-              }
+  }
+
+  ngAfterContentChecked(): void {
+    this.cdr.detectChanges();
+  }
 
   ngOnInit() {
 
@@ -715,6 +721,26 @@ export class LeaseDetailsComponent implements OnInit {
       panelClass: 'my-custom-dialog-class',
       data: {
         id: id,
+        // py: this.paymentDetails,
+        // txt: 'test'
+
+        // rentDueAmount: this.rentAmtDue,
+        // rentDue: this.rentDueOn
+      }
+    });
+  }
+
+  updateSttus(id: any, active: any) {
+    let dialogRef = this.dialog.open(UpdateStatusDialogComponent, {
+      height: '180px',
+      width: '250px',
+      disableClose: false,
+      autoFocus: false,
+      scrollStrategy: this.overlay.scrollStrategies.noop(),
+      panelClass: 'my-custom-dialog-class',
+      data: {
+        id: id,
+        isActive:active
         // py: this.paymentDetails,
         // txt: 'test'
 

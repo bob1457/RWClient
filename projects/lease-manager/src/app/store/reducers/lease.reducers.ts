@@ -705,7 +705,7 @@ on(LeaseActions.addVendorFailure, (state) => {
 
   on(LeaseActions.getAllInvoicesFailure, (state) => ({
     ...state,
-    loading: true,
+    loading: false,
     loaded: false
   })),
 
@@ -776,7 +776,7 @@ on(LeaseActions.addVendorFailure, (state) => {
 
   on(LeaseActions.getAllNoticeForLeaseFailure, (state) => ({
     ...state,
-    loading: true,
+    loading: false,
     loaded: false
   })),
 
@@ -797,6 +797,35 @@ on(LeaseActions.addVendorFailure, (state) => {
       noticeList: [...state.noticeList, payload]
     });
   }),
+
+  /**
+   * Update Notice Status
+   */
+
+  on(LeaseActions.updateNoticeStatus, state => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+  on(LeaseActions.updateNoticeStatusSuccess, (state, { payload }) => {
+
+    const updatedNotices = state.noticeList.map(
+      item => payload.id === item.id ? payload : item
+    );
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      noticeList: updatedNotices
+    });
+  }),
+
+  on(LeaseActions.updateNoticeStatusFailure, (state) => ({
+    ...state,
+    loading: false,
+    loaded: false
+  })),
 
 );
 
