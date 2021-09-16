@@ -1,0 +1,153 @@
+<section fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="30px" fxFlexFill style="overflow-x: hidden;overflow-y: hidden;">
+    <div mat-dialog-title class="dialog-title">Add Service Notice<span></span></div>
+
+    <mat-dialog-content class="text" fxLayout="column" fxLayoutAlign="staret center" fxLayoutGap="1%" style="height: 200px;margin-top: 20px;" fxFlexFill>
+        <div fxLayout="column" fxLayoutAlign="start" style="font-size: .9em;width: 100%;">
+            <form novalidate [formGroup]="addNoticeForm" style="width: 100%;margin-bottom: 5px;padding: 5px;">
+                <div class="form-container">
+                    <mat-form-field style="width: 90%;">
+                        <mat-label>Notice Type</mat-label>
+                        <mat-select formControlName="type" #mySelect2 (selectionChange)="onTypeChange(mySelect2.value)">
+                            <mat-option value=0>Ten Day Notice (Tenancy Termination)</mat-option>
+                            <mat-option value=1>One Month Notice (Tenancy Termination)</mat-option>
+                            <mat-option value=2>Two Month Notice (Tenancy Termination)</mat-option>
+                            <mat-option value=3>Others</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field style="width: 90%;">
+                        <mat-label>Details</mat-label>
+                        <textarea matInput formControlName="noticeDesc" style="width: 100%;"></textarea>
+                    </mat-form-field>
+                    <div fxLayout="row" fxLayoutAlign="start" style="font-size: .9em;width: 100%;">
+                        <div fxFlex="35%">
+                            <mat-checkbox formControlName="isServed" [checked]="isServed" class="">Is Served</mat-checkbox>
+                        </div>
+                        <div fxFlex="65%">
+                            <mat-form-field fxFlex.xs="90%" style="margin-right: 10px;width: 85%;">
+                                <mat-label>Serving Date</mat-label>
+                                <input matInput [matDatepicker]="picker1" formControlName="serviceDate">
+                                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                                <mat-datepicker #picker1></mat-datepicker>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <mat-form-field style="width: 90%;">
+                        <mat-label>Serving Method</mat-label>
+                        <mat-select type="number" formControlName="howIsServed" #mySelect (selectionChange)="onMethodChange(mySelect.value)">
+                            <mat-option>Serving Method</mat-option>
+                            <mat-option value=0>In Person</mat-option>
+                            <mat-option value=1>By Registered Mail</mat-option>
+                            <mat-option value=2>Leave In MailBox</mat-option>
+                            <mat-option value=3>Attached on Door</mat-option>
+                            <mat-option value=4>By Fax</mat-option>
+                            <mat-option value=5>By Email</mat-option>
+                            <mat-option value=6>On Director Order</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <div>
+                        <!-- <button mat-button mat-stroked-button (click)="addReasonItems()">Add Ending Tenancy Reason</button> -->
+                        <p>Select Ending Tenancy Reason(s):<span><img *ngIf="loadingReasonItems" class="pl-2" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+                        /></span></p>
+                    </div>
+                    <div class="reason-panel">
+                        <div formArrayName="reasonInNotice">
+                            <div *ngFor="let reason of reasonList; let reasonIndex=index">
+                                <div [formGroupName]="reasonIndex">
+                                    <span *ngIf="noticeType != 2" [style.margin-left]=" reasonIndex === 3 || reasonIndex === 4 || reasonIndex === 5  ? '25px' : '0px'">
+                                      <!-- <span *ngIf="noticeType === 2" [style.margin-left]=" reasonIndex === 1 || reasonIndex === 2 || reasonIndex === 3  ? '25px' : '0px'"></span> -->
+                                    <div *ngIf="reasonIndex === 1 && noticeType == 2" style="width: 450px;">
+                                        Please indicate which close family member will occupy the unit.
+                                    </div>
+                                    <mat-checkbox class="" formControlName="applied">&nbsp; {{reason.reasonClause}}</mat-checkbox>
+                                    </span>
+
+                                    <span *ngIf="noticeType == 2" [style.margin-left]="reasonIndex === 2 || reasonIndex === 3  ? '25px' : '0px'">
+                                        <!-- <span *ngIf="noticeType === 2" [style.margin-left]=" reasonIndex === 1 || reasonIndex === 2 || reasonIndex === 3  ? '25px' : '0px'"></span> -->
+                                    <div *ngIf="reasonIndex === 1 && noticeType == 2" style="width: 450px;margin-left: 15px;">
+                                        Please indicate which close family member will occupy the unit.
+                                    </div>
+                                    <mat-checkbox [style.margin-left]="reasonIndex === 1 ? '25px' : '0px'" class="" formControlName="applied">&nbsp; {{reason.reasonClause}}</mat-checkbox>
+                                    </span>
+
+
+                                    <input hidden matInput formControlName="reasonCodeId" [ngModel]="reason.id">
+                                </div>
+
+                            </div>
+                            <!-- <div [formGroupName]="0">
+                            <mat-checkbox class="" formControlName="applied">Reasons to end tenancy 01</mat-checkbox>
+                        </div> -->
+                            <!-- <div [formGroupName]="1">
+                            <mat-checkbox class="" formControlName="applied">Reasons to end tenancy 02</mat-checkbox>
+                        </div> -->
+                        </div>
+                        <hr style="margin-top: 10px;">
+                        <div fxLayout="row" *ngIf="noticeType == 0">
+                            <div fxFlex="30%">
+                                <mat-form-field fxFlex.xs="90%" style="margin-right: 10px;width: 85%;">
+                                    <mat-label>Outstanding Rent</mat-label>
+                                    <input type="number" matInput formControlName="outstandingRent">
+
+                                </mat-form-field>
+                            </div>
+                            <div fxFlex="30%">
+                                <mat-form-field fxFlex.xs="90%" style="margin-right: 10px;width: 85%;">
+                                    <mat-label>Outstanding Utility</mat-label>
+                                    <input type="number" matInput formControlName="outstandingUtilities">
+
+                                </mat-form-field>
+                            </div>
+                            <div fxFlex="40%">
+                                <mat-form-field fxFlex.xs="90%" style="margin-right: 10px;width: 85%;">
+                                    <mat-label>Move Out Date</mat-label>
+                                    <input matInput [matDatepicker]="picker10" formControlName="requiredMoveOutDate">
+                                    <mat-datepicker-toggle matSuffix [for]="picker10"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker10></mat-datepicker>
+                                </mat-form-field>
+                            </div>
+
+                        </div>
+                        <div fxLayout="row" *ngIf="noticeType == 0">
+                            <div fxFlex="50%">
+                                <mat-form-field fxFlex.xs="90%" style="margin-right: 10px;width: 85%;">
+                                    <mat-label>Rent Due Date</mat-label>
+                                    <input matInput [matDatepicker]="picker11" formControlName="rentDueDate">
+                                    <mat-datepicker-toggle matSuffix [for]="picker11"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker11></mat-datepicker>
+                                </mat-form-field>
+                            </div>
+
+                            <div fxFlex="50%">
+                                <mat-form-field fxFlex.xs="90%" style="margin-right: 10px;width: 85%;">
+                                    <mat-label>Utility Due Date</mat-label>
+                                    <input matInput [matDatepicker]="picker12" formControlName="utilityDueDate">
+                                    <mat-datepicker-toggle matSuffix [for]="picker12"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker12></mat-datepicker>
+                                </mat-form-field>
+                            </div>
+
+                        </div>
+                        <div fxLayout="row" *ngIf="noticeType == 1 || noticeType == 2">
+                            <mat-form-field fxFlex.xs="90%" style="margin-right: 10px;width: 85%;">
+                                <mat-label>Move Out Date</mat-label>
+                                <input matInput [matDatepicker]="picker10" formControlName="requiredMoveOutDate">
+                                <mat-datepicker-toggle matSuffix [for]="picker10"></mat-datepicker-toggle>
+                                <mat-datepicker #picker10></mat-datepicker>
+                            </mat-form-field>
+                        </div>
+
+                    </div>
+
+                    <!-- <div *ngFor="let reason of reasonList">
+                        <mat-checkbox class="">{{reason.reasonClause}}</mat-checkbox>
+                    </div> -->
+
+                    <button mat-raised-button color="primary" (click)="CreateNotice()" style="margin-top: 20px;">Create</button>
+
+                </div>
+            </form>
+        </div>
+    </mat-dialog-content>
+
+
+</section>

@@ -1,11 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectorRef, AfterContentChecked } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { PropertyLeaseState } from '../store/lease-state';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LeaseService, PropertyLease, Vendor } from '@lib/app-core';
-import { addRentPayment, addTenant, addWorkOrder, getAllInvoices, getLeaseDetails, getRentPaymenttDetails, getWorkOrderDetails, updateLease, updateRentPayment } from '../store/actions/lease.actions';
-import { invoiceList, leaseDetails, loadingStatus, rentPaymentDetails, rentPaymentList, serviceRequestList,
+import { addRentPayment, addTenant, addWorkOrder, getAllInvoices, getAllNoticeForLease, getLeaseDetails, getRentPaymenttDetails, getWorkOrderDetails, updateLease, updateRentPayment } from '../store/actions/lease.actions';
+import { getNoticeList, invoiceList, leaseDetails, loadingStatus, noticeList, rentPaymentDetails, rentPaymentList, serviceRequestList,
          tenantList, vendorDetails, vendorList, workOrderList } from '../store/reducers';
 import { getAllServiceRequests, getAllVendors,
   getAllWorkOrders, getRentPaymentList, getAllTenants } from '../store/actions/lease.actions';
@@ -19,6 +19,9 @@ import {Overlay} from '@angular/cdk/overlay';
 import { WorkorderDetailsDialogComponent } from '../dialogs/workorder-details-dialog/workorder-details-dialog.component';
 
 import { DashState, RentalAppList, ServiceRequestList } from '@lib/dashboard';
+import { AddNoticeDialogComponent } from '../dialogs/add-notice-dialog/add-notice-dialog.component';
+import { NoticeDetailsDialogComponent } from '../dialogs/notice-details-dialog/notice-details-dialog.component';
+import { UpdateStatusDialogComponent } from '../dialogs/update-status-dialog/update-status-dialog.component';
 
 @Component({
   selector: 'app-lease-details',
@@ -32,7 +35,7 @@ import { DashState, RentalAppList, ServiceRequestList } from '@lib/dashboard';
     ]),
   ]
 })
-export class LeaseDetailsComponent implements OnInit {
+export class LeaseDetailsComponent implements OnInit, AfterContentChecked {
 
   id: number;
   lease: any; //PropertyLease;
@@ -43,7 +46,8 @@ export class LeaseDetailsComponent implements OnInit {
   addWorkOrder = false;
   workOrders: any;
   requests: any [];
-  tenants: any [];
+  tenants: any[];
+  notices: any[];
 
   tabIndex = 0;
   hide = false;
@@ -68,6 +72,8 @@ export class LeaseDetailsComponent implements OnInit {
   addForm2: FormGroup; // Add work order
   addTenantForm: FormGroup;
   updateRenForm: FormGroup;
+  addNoticeForm: FormGroup;
+  reasonItemList: FormGroup;
   // updateWorkOrderForm: FormGroup;
 
   vendors:any [];
@@ -152,6 +158,13 @@ export class LeaseDetailsComponent implements OnInit {
 
   dataSource3 = new MatTableDataSource<any>();
 
+
+  displayedColumns4: string[] = ['icon', 'id', 'type', 'description', 'created', 'served', 'active', 'action'];
+  @ViewChild('paginator4', { static: false }) paginator4: MatPaginator;
+  @ViewChild('Sort4', { static: true }) sort4: MatSort;
+
+  dataSource4 = new MatTableDataSource<any>();
+
   private dialogConfig;
 
   constructor(private store: Store<PropertyLeaseState>,
@@ -160,6 +173,7 @@ export class LeaseDetailsComponent implements OnInit {
               private actRoute: ActivatedRoute,
               private dialog: MatDialog,
               public overlay: Overlay,
+              private cdr: ChangeDetectorRef,
               private formBuilder: FormBuilder,
               private propertyService: LeaseService) {
                 this.id = this.actRoute.snapshot.params.id;
@@ -270,8 +284,22 @@ export class LeaseDetailsComponent implements OnInit {
                                 // console.log('co apps', this.coApplicantList);
 
                               });
+
+                  this.store.select(noticeList)
+                    .subscribe(notices => {
+                      if (notices) {
+                        this.notices = notices;
+                        this.dataSource4.data = notices;
+                        console.log('notices', this.dataSource4.data);
+                        setTimeout(() => { this.dataSource4.paginator = this.paginator4; this.dataSource4.sort = this.sort4; });
+                      }
+                    });
                 });
-              }
+  }
+
+  ngAfterContentChecked(): void {
+    this.cdr.detectChanges();
+  }
 
   ngOnInit() {
 
@@ -297,6 +325,13 @@ export class LeaseDetailsComponent implements OnInit {
         // rentDue: this.rentDueOn
       }
     };
+
+    this.propertyService.getNoticeReasonItems(0)
+      .subscribe(items => {
+        console.log('reason itemes', items);
+        this.reasonItems = items;
+        console.log('in reason group', this.reasonItems);
+      });
 
     this.coApplicantList$ = this.propertyService.getAlCoApplicants();
     this.propertyService.getAlCoApplicants().subscribe(coapps => {
@@ -442,6 +477,33 @@ export class LeaseDetailsComponent implements OnInit {
 
     });
 
+    this.addNoticeForm = this.formBuilder.group({
+
+      reasonInNotice: this.formBuilder.array([]),
+
+      leaseId: [],
+      type: Number([]),
+      noticeDesc: [''],
+      isServed: [true],
+      howIsServed: Number([]),
+      serviceDate: [''],
+      isActive: [true],
+      outstandingRent: [0],
+      outstandingUtilities: [0],
+      utilityDueDate: [''],
+      requiredMoveOutDate: [''],
+
+      // The following needs to be a form array
+
+      // reasonInNotice: this.formBuilder.group({
+      //   serviceNoticeId: [],
+      //   reasonCodeId: [],
+      //   applied: [false]
+      // })
+    });
+
+
+
     // this.store.dispatch(getRentPaymentList());
     // this.store.dispatch(getAllWorkOrders());
       // this.store.dispatch(getAllVendors());
@@ -451,13 +513,26 @@ export class LeaseDetailsComponent implements OnInit {
     this.GetLeaseDetails(this.id);
   }
 
+  reasonInNotice(): FormArray {
+    return this.addNoticeForm.get('reasonInNotice') as FormArray;
+  }
 
+  reasonItems(): FormGroup {
+    return this.formBuilder.group({
+      serviceNoticeId: [],
+      reasonCodeId: [],
+      applied: [false]
+    });
+  }
 
+  addReasonItems() {
+    this.reasonInNotice().push(this.reasonItems());
+  }
 
-    GetLeaseDetails(id: any) {
-      debugger;
-      // Always dispatch because new detailw are not available and must be coming from server
-      this.store.dispatch(getLeaseDetails({payload: id}));
+  GetLeaseDetails(id: any) {
+    debugger;
+    // Always dispatch because new detailw are not available and must be coming from server
+    this.store.dispatch(getLeaseDetails({payload: id}));
 
 
 
@@ -548,6 +623,18 @@ export class LeaseDetailsComponent implements OnInit {
         }
         break;
       }
+      case 5: {
+        this.hide = true;
+        // if (!this.vendors) {
+        //   this.store.dispatch(getAllVendors());
+        //   // this.vendors$ = this.propertyService.getAllVendors();
+        // }
+        this.store.dispatch(getAllNoticeForLease({ payload: this.id }));
+        // if (!this.notices) {
+        //   this.store.dispatch(getAllNoticeForLease({payload: this.id}));
+        // }
+        break;
+      }
         default: {
         this.hide = false;
         break;
@@ -604,6 +691,65 @@ export class LeaseDetailsComponent implements OnInit {
 
   }
 
+  addNotice() {
+    let dialogRef = this.dialog.open(AddNoticeDialogComponent, {
+      height: '700px',
+      width: '550px',
+      disableClose: false, // to be reviewed later
+      scrollStrategy: this.overlay.scrollStrategies.noop(),
+      panelClass: 'my-custom-dialog-class',
+      data: {
+        id: this.id,
+        // py: this.paymentDetails,
+        // txt: 'test'
+
+        // rentDueAmount: this.rentAmtDue,
+        // rentDue: this.rentDueOn
+      }
+    });
+  }
+
+  getNoticeDetails(id: number) {
+    debugger;
+
+    let dialogRef = this.dialog.open(NoticeDetailsDialogComponent, {
+      height: '500px',
+      width: '880px',
+      disableClose: false,
+      autoFocus: false,
+      scrollStrategy: this.overlay.scrollStrategies.noop(),
+      panelClass: 'my-custom-dialog-class',
+      data: {
+        id: id,
+        // py: this.paymentDetails,
+        // txt: 'test'
+
+        // rentDueAmount: this.rentAmtDue,
+        // rentDue: this.rentDueOn
+      }
+    });
+  }
+
+  updateSttus(id: any, active: any) {
+    let dialogRef = this.dialog.open(UpdateStatusDialogComponent, {
+      height: '180px',
+      width: '250px',
+      disableClose: false,
+      autoFocus: false,
+      scrollStrategy: this.overlay.scrollStrategies.noop(),
+      panelClass: 'my-custom-dialog-class',
+      data: {
+        id: id,
+        isActive:active
+        // py: this.paymentDetails,
+        // txt: 'test'
+
+        // rentDueAmount: this.rentAmtDue,
+        // rentDue: this.rentDueOn
+      }
+    });
+  }
+
   getRentPaymentDetails(id: number) {
     debugger;
     let dialogRef = this.dialog.open(PaymentDetailsDialogComponent, {
@@ -613,7 +759,7 @@ export class LeaseDetailsComponent implements OnInit {
       scrollStrategy: this.overlay.scrollStrategies.noop(),
       panelClass: 'my-custom-dialog-class',
       data: {
-        id: id,
+        id: this.id,
         // py: this.paymentDetails,
         // txt: 'test'
 
@@ -636,7 +782,7 @@ export class LeaseDetailsComponent implements OnInit {
       scrollStrategy: this.overlay.scrollStrategies.noop(),
       panelClass: 'my-custom-dialog-class',
       data: {
-        id: id,
+        id: Number(this.id),
         // py: this.paymentDetails,
         // txt: 'test'
 
@@ -755,7 +901,11 @@ export class LeaseDetailsComponent implements OnInit {
     this.dataSource3.filter = value.trim().toLowerCase();
   }
 
-  openDialog():void {
+  public doFilter4 = (value: string) => {
+    this.dataSource4.filter = value.trim().toLocaleLowerCase();
+  }
+
+  openDialog(): void {
     const dialogRef = this.dialog.open(PaymentDetailsDialogComponent, {
       width: '250px',
       data: {}

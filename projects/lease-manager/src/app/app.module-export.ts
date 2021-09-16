@@ -39,6 +39,7 @@ import { StatusPipe } from './status.pipe';
 import { WorkOrderDatePipe } from './work-order-date.pipe';
 import { PaymentMethodPipe } from './payment-method.pipe';
 import { PaymentDetailsDialogComponent } from './dialogs/payment-details-dialog/payment-details-dialog.component';
+import { AddNoticeDialogComponent } from './dialogs/add-notice-dialog/add-notice-dialog.component';
 import { AddRentDialogComponent } from './dialogs/add-rent-dialog/add-rent-dialog.component';
 import { FullLeaseAgreementComponent } from './full-lease-agreement/full-lease-agreement.component';
 import { AgreementHeaderComponent } from './agreement-header/agreement-header.component';
@@ -53,6 +54,15 @@ import { AddServiceRequestComponent } from './add-service-request/add-service-re
 // import { CdkColumnDef } from '@angular/cdk/table';
 import { AppStatusPipe } from './app-status.pipe';
 import { MutualAgreementComponent } from './mutual-agreement/mutual-agreement.component';
+import { NoticeTypePipe } from './notice-type.pipe';
+import { ActivePipe } from './active.pipe';
+import { NoticeDetailsDialogComponent } from './dialogs/notice-details-dialog/notice-details-dialog.component';
+import { ServeMethodPipe } from './serve-method.pipe';
+import { NoticeContentTenDayComponent } from './notice-content-ten-day/notice-content-ten-day.component';
+import { NoticeContentOneMonthComponent } from './notice-content-one-month/notice-content-one-month.component';
+import { NoticeContentTwoMonthComponent } from './notice-content-two-month/notice-content-two-month.component';
+import { UpdateStatusDialogComponent } from './dialogs/update-status-dialog/update-status-dialog.component';
+
 
 
 const routes: Routes = [
@@ -111,7 +121,9 @@ const routes: Routes = [
     PaymentMethodPipe,
     PaymentDetailsDialogComponent,
     WorkorderDetailsDialogComponent,
+    AddNoticeDialogComponent,
     AddRentDialogComponent,
+    NoticeDetailsDialogComponent,
     FullLeaseAgreementComponent,
     AgreementHeaderComponent,
     AgreementContentComponent,
@@ -122,7 +134,14 @@ const routes: Routes = [
     TypePipe,
     AddServiceRequestComponent,
     AppStatusPipe,
-    MutualAgreementComponent
+    MutualAgreementComponent,
+    NoticeTypePipe,
+    ActivePipe,
+    ServeMethodPipe,
+    NoticeContentTenDayComponent,
+    NoticeContentOneMonthComponent,
+    NoticeContentTwoMonthComponent,
+    UpdateStatusDialogComponent
   ],
   imports: [
     // BrowserModule,
@@ -143,7 +162,10 @@ const routes: Routes = [
   entryComponents: [
     PaymentDetailsDialogComponent,
     WorkorderDetailsDialogComponent,
-    AddRentDialogComponent
+    AddRentDialogComponent,
+    AddNoticeDialogComponent,
+    NoticeDetailsDialogComponent,
+    UpdateStatusDialogComponent
   ],
   bootstrap: [AppLMComponent]
 })

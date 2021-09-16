@@ -577,7 +577,7 @@
                                             <tr mat-header-row *matHeaderRowDef="displayedColumns3"></tr>
                                             <!-- <tr mat-row *matRowDef="let row; columns: displayedColumns3;"></tr> -->
 
-                                            <tr mat-row *matRowDef="let element; columns: displayedColumns3;" class="example-element-row" [class.example-expanded-row]="expandedElement === element" (click)="expandedElement = expandedElement === element ? null : element">
+                                            <tr style="cursor: pointer;" mat-row *matRowDef="let element; columns: displayedColumns3;" class="example-element-row" [class.example-expanded-row]="expandedElement === element" (click)="expandedElement = expandedElement === element ? null : element">
                                             </tr>
                                             <!-- Additional row-->
                                             <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
@@ -1033,6 +1033,156 @@
                                 <mat-paginator #paginator2 [hidden]="!dataSource2.data.length" [pageSize]="10" [pageSizeOptions]="[5, 10, 25]"></mat-paginator>
 
 
+                            </mat-tab>
+                            <mat-tab label="Service Notices" style="background: #f5f5f5;">
+                                <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="10px" style="margin-bottom: 1%;
+                                    flex-direction: row;
+                                    box-sizing: border-box;
+                                    display: flex;
+                                    place-content: stretch flex-end;
+                                    align-items: stretch;
+                                    margin-top: 20px;
+                                    margin-left: 25px;
+                                    width: 95%;">
+                                    <mat-form-field fxLayout fxLayoutAlign="start center">
+                                        <input matInput type="text" (keyup)="doFilter4($event.target.value)" placeholder="Find...">
+                                    </mat-form-field>
+                                    <!-- <mat-radio-group aria-label="Select an option" style="margin-top: 13px;margin-left: 25px;padding-right: 5px;">
+                                        <mat-radio-button value="1" checked style="padding-right: 10px;">Active</mat-radio-button>
+                                        <mat-radio-button value="0">All</mat-radio-button>
+                                    </mat-radio-group> (click)="addRentPayment()"-->
+                                    <span class="spacer"></span>
+                                    <button type="button" title="Add Service Notice" (click)="addNotice()" mat-button mat-mini-fab style="background: #3d5afe;color: white;">
+                                    <i class="material-icons" title="Add Service Notice">
+                                      playlist_add
+                                    </i>
+                                  </button>
+                                    <!-- <button *ngIf="addWorkOrder" (click)="cancel2()" title="Cancel" mat-button mat-mini-fab style="background: #d86f0d;color: white;">
+                                    <i class="material-icons" title="Cancel">
+                                      clear
+                                    </i>
+                                  </button> -->
+                                </div>
+                                <div fxLayout="column" fxLayoutAlign="center">
+                                    <table mat-table multiTemplateDataRows [dataSource]="dataSource4" #Sort4="matSort" matSort class="my-table mat-elevation-z8" style="width: 100%;">
+                                        <ng-container matColumnDef="id">
+                                            <th class="table-header-text" style="text-align: center;" mat-header-cell *matHeaderCellDef> ID </th>
+                                            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                                        </ng-container>
+
+                                        <ng-container matColumnDef="description">
+                                            <th class="table-header-text" style="text-align: center;" mat-header-cell *matHeaderCellDef>Description</th>
+                                            <td mat-cell *matCellDef="let element">
+                                                {{element.noticeDesc}}
+                                            </td>
+                                        </ng-container>
+
+                                        <ng-container matColumnDef="served">
+                                            <th class="table-header-text" mat-header-cell *matHeaderCellDef>Served</th>
+                                            <td mat-cell *matCellDef="let element"> {{element.isServed | yesNo}} </td>
+                                        </ng-container>
+
+                                        <ng-container matColumnDef="active">
+                                            <th class="table-header-text" mat-header-cell *matHeaderCellDef>Status</th>
+                                            <td mat-cell *matCellDef="let element"> {{element.isActive | active}} </td>
+                                            <!-- <mat-cell *matCellDef="let element">
+                                                <mat-form-field floatLabel="never">
+                                                    <mat-select [(value)]="element.isActive" placeholder="Status" formControlName="isActive">
+                                                        <mat-option value=true>Active</mat-option>
+                                                        <mat-option value=false>Inactive</mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                            </mat-cell> -->
+
+                                        </ng-container>
+
+                                        <ng-container matColumnDef="created">
+                                            <th class="table-header-text" style="margin-left: auto;margin-right: auto;" mat-header-cell *matHeaderCellDef mat-sort-header> Created </th>
+                                            <td mat-cell *matCellDef="let element"> {{element.created | date }} </td>
+                                        </ng-container>
+
+                                        <ng-container matColumnDef="type">
+                                            <th class="table-header-text" style="margin-left: auto;margin-right: auto;" mat-header-cell *matHeaderCellDef mat-sort-header> Type </th>
+                                            <td mat-cell *matCellDef="let element"> {{element.type | noticeType }} </td>
+                                        </ng-container>
+
+                                        <ng-container matColumnDef="icon">
+                                            <th mat-header-cell *matHeaderCellDef></th>
+                                            <td mat-cell *matCellDef="let element">
+                                                <i style="border: 2px solid;
+                                              padding: 3px;
+                                              border-radius: 50%;" class="material-icons">
+                                              assignment
+                                            </i>
+                                            </td>
+                                        </ng-container>
+
+                                        <ng-container matColumnDef="action">
+                                            <th mat-header-cell *matHeaderCellDef></th>
+                                            <td mat-cell *matCellDef="let element" class="action-link">
+
+                                                <!-- <a (click)="openDialog('Update',element)">Edit</a> |
+                    <a (click)="openDialog('Delete',element)">Delete</a> ['/details', 1]-->
+                                                <button [disabled]="!element.isActive" type="button" mat-raised-button color="primary" (click)="updateSttus(element.id, element.isActive)">Update Status</button> &nbsp;
+                                                <!-- <button mat-raised-button color="accent " (click)="openDialog( 'Delete',element) ">Delete</button> -->
+                                                <!-- (click)="getWorkOrderDetails(element.id)" disabled-->
+                                            </td>
+                                        </ng-container>
+
+                                        <!-- Additionsl -->
+
+                                        <ng-container matColumnDef="expandedDetail">
+                                            <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns4.length">
+
+                                                <div class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+
+                                                    <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px" style="width: 100%;">
+                                                        <p style="margin-top: 15px;"></p>
+                                                        <div fxFlex="10%">
+                                                            <img src="../../assets/images/doc.png" height="50px" width="50px">
+                                                        </div>
+                                                        <div fxFlex="40%" style="text-align: left;margin-top: 7px;">
+                                                            <div style="font-weight: bold;">{{element.type | noticeType | uppercase}}</div>
+                                                            <div>{{element.noticeDesc}}</div>
+                                                            <div style="margin-top: 10px;"><span style="font-weight: 600;">Served on </span>{{element.serviceDate | date }}</div>
+                                                            <div><span style="font-weight: 600;">Served</span> {{element.howIsServed | serveMethod}}</div>
+                                                            <!-- <div style="margin-top: 20px;">
+                                                                    <a routerLink="/Manage/lease/tenantdetails/{{element.id}}">more information</a>
+                                                                </div> -->
+                                                        </div>
+                                                        <div fxFlex="40%" style="text-align: left;margin-top: 7px;">
+                                                            <div *ngIf="!element.outstandingRent == 0"><span style="font-weight: bold;">Unpaid Rent</span>: &nbsp;${{element.outstandingRent}}</div>
+                                                            <div *ngIf="!element.outstandingUtilities == 0"><span style="font-weight: bold;">Unpaid Utility</span>: &nbsp;${{element.outstandingUtilities}}</div>
+                                                            <div><span style="font-weight: bold;">Required Move Out Date</span>: &nbsp;{{element.requiredMoveOutDate | date}}</div>
+                                                            <p></p>
+                                                            <div style="float: right;">Added on: &nbsp;{{element.created | date}} <button style="margin-left: 45px;" type="button" mat-raised-button color="primary" (click)="getNoticeDetails(element.id)">Details</button> &nbsp;</div>
+                                                            <!-- <div>Last updated on: &nbsp;{{element.modified | date}}</div> -->
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                            </td>
+                                        </ng-container>
+
+
+                                        <tr mat-header-row *matHeaderRowDef="displayedColumns4"></tr>
+                                        <!-- <tr mat-row *matRowDef="let row; columns: displayedColumns4;"></tr> -->
+                                        <tr style="cursor: pointer;" mat-row *matRowDef="let element; columns: displayedColumns4;" class="example-element-row" [class.example-expanded-row]="expandedElement === element" (click)="expandedElement = expandedElement === element ? null : element">
+                                        </tr>
+
+                                        <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+
+                                    </table>
+                                    <table style="width: 100%;">
+                                        <tr *ngIf="!dataSource4.data.length">
+                                            <td style="text-align: center;height:40px" [attr.colspan]="displayedColumns2.length">
+
+                                                No Records Found!
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
                             </mat-tab>
 
                         </mat-tab-group>

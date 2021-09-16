@@ -1,0 +1,10 @@
+<!-- <app-agreement-header></app-agreement-header> -->
+<div id="pdfdoc" #pdfdoc>
+    <app-notice-content-ten-day *ngIf=" notice && notice.type === 0" [lease]="lease" [notice]="notice" [serveMethod]="serveMethod"></app-notice-content-ten-day>
+    <app-notice-content-one-month *ngIf=" notice && notice.type === 1" [lease]="lease" [notice]="notice" [serveMethod]="serveMethod"></app-notice-content-one-month>
+    <app-notice-content-two-month *ngIf=" notice && notice.type === 2" [lease]="lease" [notice]="notice" [serveMethod]="serveMethod"></app-notice-content-two-month>
+</div>
+<div fxLayout="row" fxLayoutGap="7px" fxLayoutAlign="end center" class="button" style="margin-top: 30px;">
+    <button type="button" mat-raised-button color="primary" (click)="download()"><mat-icon style="color: yellow;">file_download</mat-icon> &nbsp;Download PDF</button>
+    <button mat-raised-button color="accent" (click)="Ok()">Ok</button>
+</div>

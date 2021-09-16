@@ -47,6 +47,15 @@ import { TypePipe } from './type.pipe';
 import { AddServiceRequestComponent } from './add-service-request/add-service-request.component';
 import { AppStatusPipe } from './app-status.pipe';
 import { MutualAgreementComponent } from './mutual-agreement/mutual-agreement.component';
+import { NoticeTypePipe } from './notice-type.pipe';
+import { AddNoticeDialogComponent } from './dialogs/add-notice-dialog/add-notice-dialog.component';
+import { ActivePipe } from './active.pipe';
+import { NoticeDetailsDialogComponent } from './dialogs/notice-details-dialog/notice-details-dialog.component';
+import { ServeMethodPipe } from './serve-method.pipe';
+import { NoticeContentTenDayComponent } from './notice-content-ten-day/notice-content-ten-day.component';
+import { NoticeContentOneMonthComponent } from './notice-content-one-month/notice-content-one-month.component';
+import { NoticeContentTwoMonthComponent } from './notice-content-two-month/notice-content-two-month.component';
+import { UpdateStatusDialogComponent } from './dialogs/update-status-dialog/update-status-dialog.component';
 
 
 @NgModule({
@@ -90,7 +99,16 @@ import { MutualAgreementComponent } from './mutual-agreement/mutual-agreement.co
     TypePipe,
     AddServiceRequestComponent,
     AppStatusPipe,
-    MutualAgreementComponent
+    MutualAgreementComponent,
+    NoticeTypePipe,
+    AddNoticeDialogComponent,
+    ActivePipe,
+    NoticeDetailsDialogComponent,
+    ServeMethodPipe,
+    NoticeContentTenDayComponent,
+    NoticeContentOneMonthComponent,
+    NoticeContentTwoMonthComponent,
+    UpdateStatusDialogComponent
   ],
   imports: [
     BrowserModule,

@@ -20,6 +20,8 @@ export interface PropertyLeaseState {
   rentPayments: any[];
   selectedPayment: any;
   invoiceList: any[];
+  noticeList: any[];
+  notice: any | null;
   // contracts: ManagementContract[] | null;
   // contractsForProperty: ManagementContract[] | null;
   // selectedContract: ManagementContract | null;

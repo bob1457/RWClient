@@ -23,6 +23,8 @@ export const initialState: PropertyLeaseState =  { // adapter.getInitialState
   rentPayments: null,
   selectedPayment: null,
   invoiceList: null,
+  noticeList: null,
+  notice: null,
   // contracts: null,
   // contractsForProperty: null,
   // selectedContract: null,
@@ -686,7 +688,7 @@ on(LeaseActions.addVendorFailure, (state) => {
   /**
   * All invoices */
 
-   on(LeaseActions.getAllInvoices, state => ({
+  on(LeaseActions.getAllInvoices, state => ({
     ...state,
     loading: true,
     loaded: false
@@ -703,7 +705,7 @@ on(LeaseActions.addVendorFailure, (state) => {
 
   on(LeaseActions.getAllInvoicesFailure, (state) => ({
     ...state,
-    loading: true,
+    loading: false,
     loaded: false
   })),
 
@@ -734,7 +736,96 @@ on(LeaseActions.addVendorFailure, (state) => {
     ...state,
     loading: true,
     loaded: false
-  }))
+  })),
+
+  on(LeaseActions.getAllNoticeForLease, state => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+  on(LeaseActions.getAllNoticeForLeaseSuccess, (state, { payload }) => {
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      noticeList: payload
+    });
+  }),
+
+  on(LeaseActions.getAllNoticeForLeaseFailure, (state) => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+  on(LeaseActions.getNoticeDetails, state => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+  on(LeaseActions.getNoticeDetailssSuccess, (state, { payload }) => {
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      notice: payload
+    });
+  }),
+
+  on(LeaseActions.getAllNoticeForLeaseFailure, (state) => ({
+    ...state,
+    loading: false,
+    loaded: false
+  })),
+
+  /**
+   * Add Notice to lease
+   */
+  on(LeaseActions.addNotice, state => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+  on(LeaseActions.addNoticeSuccess, (state, { payload }) => {
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      noticeList: [...state.noticeList, payload]
+    });
+  }),
+
+  /**
+   * Update Notice Status
+   */
+
+  on(LeaseActions.updateNoticeStatus, state => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+  on(LeaseActions.updateNoticeStatusSuccess, (state, { payload }) => {
+
+    const updatedNotices = state.noticeList.map(
+      item => payload.id === item.id ? payload : item
+    );
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      noticeList: updatedNotices
+    });
+  }),
+
+  on(LeaseActions.updateNoticeStatusFailure, (state) => ({
+    ...state,
+    loading: false,
+    loaded: false
+  })),
 
 );
 
@@ -759,6 +850,8 @@ export const getWorkOrderDetails = (state: PropertyLeaseState) => state.selected
 export const getRentPaymentList = (state: PropertyLeaseState) => state.rentPayments;
 export const getRemtPaymentDetails = (state: PropertyLeaseState) => state.selectedPayment;
 export const getInviceList = (state: PropertyLeaseState) => state.invoiceList;
+export const getNoticeList = (state: PropertyLeaseState) => state.noticeList;
+export const getNoticeDetails = (state: PropertyLeaseState) => state.notice;
 
 export const loadingStatus = createSelector(selectLeaseyState, getLoadingStatus);
 
@@ -775,7 +868,8 @@ export const workOrderDetails = createSelector(selectLeaseyState, getWorkOrderDe
 export const rentPaymentList = createSelector(selectLeaseyState, getRentPaymentList);
 export const rentPaymentDetails = createSelector(selectLeaseyState, getRemtPaymentDetails);
 export const invoiceList = createSelector(selectLeaseyState, getInviceList);
-
+export const noticeList = createSelector(selectLeaseyState, getNoticeList);
+export const noticeDetails = createSelector(selectLeaseyState, getNoticeDetails);
 
 export function l_reducer(state: PropertyLeaseState | undefined, action: Action) {
     return propertyLeaseReducer(state, action);
