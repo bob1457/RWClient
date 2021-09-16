@@ -59,6 +59,10 @@ export class NoticeDetailsDialogComponent implements OnInit {
       if (this.notice && this.notice.type === 1) {
         this.noticeType = 'One Month Notice';
       }
+
+      if (this.notice && this.notice.type === 2) {
+        this.noticeType = 'Two Month Notice';
+      }
     });
 
   }
