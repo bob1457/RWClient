@@ -230,11 +230,20 @@
                                     </mat-form-field>
                                     <!-- This field is used as Reason to end tenancy -->
 
+                                    <div fxLayout="row" fxLayoutAlign="start center" style="width: 75%;">
+                                        <div fxFlex="70%">
+                                            <mat-form-field class="lease-full-width">
+                                                <span class="icon-pos" matPrefix><mat-icon>notes</mat-icon> &nbsp;</span>
+                                                <textarea type="text" id="notes" formControlName="notes" matInput placeholder="Notes" [ngModel]="lease.notes"></textarea>
+                                            </mat-form-field>
+                                        </div>
+                                        <div fxFlex="30%">
+                                            <!-- <mat-checkbox formControlName="isAddendumAvailable" [ngModel]="lease.isAddendumAvailable" class="tenant-full-width">Addendum Available</mat-checkbox> -->
+                                            <button type="button" style="margin-left: 15px;" *ngIf="isAddendumAvailable" mat-raised-button color="primary" (click)="ViewAddendum()">View Addendum</button>
+                                            <button type="button" style="margin-left: 15px;" *ngIf="!isAddendumAvailable" mat-raised-button color="primary" (click)="AddAddendum()">Add Addendum</button>
+                                        </div>
+                                    </div>
 
-                                    <mat-form-field class="lease-full-width">
-                                        <span class="icon-pos" matPrefix><mat-icon>notes</mat-icon> &nbsp;</span>
-                                        <textarea type="text" id="notes" formControlName="notes" matInput placeholder="Notes" [ngModel]="lease.notes"></textarea>
-                                    </mat-form-field>
 
                                     <div *ngIf="lease.isActive" fxLayout="row" fxLayoutAlign="start center" style="width: 75%;">
                                         <div fxFlex="50%">
@@ -247,6 +256,9 @@
                                             <mat-checkbox formControlName="isActive" [ngModel]="lease.isActive" class="tenant-full-width">Is Active</mat-checkbox>
                                         </div>
                                     </div>
+
+
+
                                     <mat-checkbox style="width: 75%;" formControlName="serviceAgent" [ngModel]="lease.serviceAgent" class="tenant-full-width">Use agent for service contact</mat-checkbox>
                                     <mat-checkbox style="width: 75%;" formControlName="muutalAgreement" [ngModel]="lease.muutalAgreement" class="tenant-full-width">Mutual Agreement to vacatn at the end of tenancy</mat-checkbox>
                                     <p style="width: 80%;" *ngIf="!lease.isActive">

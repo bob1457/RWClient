@@ -1,0 +1,67 @@
+<section fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="30px" fxFlexFill style="overflow-x: hidden;overflow-y: hidden;">
+    <div mat-dialog-title class="dialog-title">Add Addendum<span></span></div>
+    <div mat-dialog-content class="text" fxLayout="column" fxLayoutAlign="staret center" fxLayoutGap="1%" style="height: 200px;margin-top: 20px;" fxFlexFill>
+        <div fxLayout="column" fxLayoutAlign="start" style="font-size: .9em;width: 100%;">
+            <form novalidate [formGroup]="addAddendumForm" style="width: 100%;margin-bottom: 5px;padding: 5px;">
+                <mat-form-field fxFlex.xs="90%" style="margin-right: 10px;width: 90%;display: none;">
+                    <input type="text" matInput formControlName="ContentText" [(ngModel)]="addendumContent">
+                </mat-form-field>
+                <mat-form-field fxFlex.xs="90%" style="margin-right: 10px;width: 90%;display: none;">
+                    <input type="text" matInput formControlName="FooterText" [(ngModel)]="addendumFooter">
+                </mat-form-field>
+                <mat-form-field fxFlex.xs="90%" style="margin-right: 10px;width: 90%;">
+                    <mat-label>Addendum Header Text</mat-label>
+                    <textarea type="text" [readonly]="!editEnabled" formControlName="HeaderText" matInput style="width: 100%;height: 80px;" [(ngModel)]="addendumHeader">
+                    </textarea>
+                </mat-form-field>
+                <mat-icon *ngIf="!editEnabled" class="mat-18" (click)="enableEdit()" style="color: green;cursor: pointer;" title="Edit">edit</mat-icon>
+                <mat-icon *ngIf="editEnabled" class="mat-18" (click)="enableEdit()" style="color: coral;cursor: pointer;" title="Cancel">clear</mat-icon>
+                <div style="width: 70%;margin-left: 30px;">
+                    <button type="button" mat-stroked-button style="margin-top: -10px;margin-left: -30px;" (click)="addNewItem(itemIndex)">Add Addendum Item</button>
+                </div>
+                <div formArrayName="addendumItems">
+                    <div *ngFor="let item of addendumItems().controls;let itemIndex=index" style="border: 1px solid; padding: 10px;margin-top: 15px;margin-bottom: 20px;">
+                        <mat-form-field style="width: 90%;">
+                            <mat-label>Select Pre-defined Addendum Clause</mat-label>
+                            <mat-select #myAppSelect (selectionChange)="onItemChange(myAppSelect.value)">
+                                <div>
+                                    <mat-option *ngFor="let clause of addendumClauseText; let i=index" [value]="clause">
+                                        {{clause.clauseTitle}}
+                                    </mat-option>
+                                </div>
+                                <ng-template #loading>
+                                    <mat-option>
+                                        <img src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==">
+                                    </mat-option>
+                                </ng-template>
+                                <!-- *ngIf="applicantList; else loading" -->
+
+                            </mat-select>
+
+                        </mat-form-field>
+                        <mat-icon style="color: orangered; cursor: pointer;margin-left: 10px;" (click)="removeItem(itemIndex)" title="Remove Clause">clear</mat-icon>
+                        <div [formGroupName]="itemIndex">
+                            <mat-form-field class="form-content" style="width: 90%;">
+                                <!-- <mat-icon matSuffix>receipt</mat-icon><br> -->
+                                <textarea formControlName="ItemContent" matInput placeholder="Addendum Clause" [ngModel]="clauseItemContent"></textarea>
+                            </mat-form-field>
+                            <!-- <mat-icon style="color: orangered; cursor: pointer;margin-left: 10px;" (click)="removeItem(itemIndex)">clear</mat-icon> -->
+                        </div>
+
+                    </div>
+                </div>
+                <div fxLayout="row" fxLayoutGap="7px" fxLayoutAlign="end center" style="width: 100%; margin-bottom: 20px;">
+                    <!-- <span *ngIf="showMsg" style="color: rgb(189, 150, 25);">Updated successfully!</span>
+<img *ngIf=" loading" class="pl-2" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+/> [disabled]="f.invalid || !f.dirty"              [disabled]="lease.isActive && !enableRenwal"-->
+                    <button type="button" mat-raised-button color="primary" (click)="addAddendum()"><mat-icon style="color: yellow;">done</mat-icon> CREATE</button>
+                    <!-- <button [hidden]="hide" [disabled]="lease.type === 0" type="submit" mat-raised-button color="primary"><mat-icon style="color: green;">done</mat-icon> RENEW</button> -->
+                    <button type="button" mat-raised-button color="accent" (click)="close()"><mat-icon style="color: yellow;vertical-align: middle;">clear</mat-icon> CANCEL</button>
+                </div>
+
+            </form>
+        </div>
+
+
+    </div>
+</section>

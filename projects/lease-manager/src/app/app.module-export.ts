@@ -62,6 +62,7 @@ import { NoticeContentTenDayComponent } from './notice-content-ten-day/notice-co
 import { NoticeContentOneMonthComponent } from './notice-content-one-month/notice-content-one-month.component';
 import { NoticeContentTwoMonthComponent } from './notice-content-two-month/notice-content-two-month.component';
 import { UpdateStatusDialogComponent } from './dialogs/update-status-dialog/update-status-dialog.component';
+import { AddAddendemDialogComponent } from './dialogs/add-addendem-dialog/add-addendem-dialog.component';
 
 
 
@@ -141,7 +142,8 @@ const routes: Routes = [
     NoticeContentTenDayComponent,
     NoticeContentOneMonthComponent,
     NoticeContentTwoMonthComponent,
-    UpdateStatusDialogComponent
+    UpdateStatusDialogComponent,
+    AddAddendemDialogComponent
   ],
   imports: [
     // BrowserModule,
@@ -165,7 +167,8 @@ const routes: Routes = [
     AddRentDialogComponent,
     AddNoticeDialogComponent,
     NoticeDetailsDialogComponent,
-    UpdateStatusDialogComponent
+    UpdateStatusDialogComponent,
+    AddAddendemDialogComponent
   ],
   bootstrap: [AppLMComponent]
 })

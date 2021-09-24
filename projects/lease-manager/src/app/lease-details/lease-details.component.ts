@@ -22,6 +22,7 @@ import { DashState, RentalAppList, ServiceRequestList } from '@lib/dashboard';
 import { AddNoticeDialogComponent } from '../dialogs/add-notice-dialog/add-notice-dialog.component';
 import { NoticeDetailsDialogComponent } from '../dialogs/notice-details-dialog/notice-details-dialog.component';
 import { UpdateStatusDialogComponent } from '../dialogs/update-status-dialog/update-status-dialog.component';
+import { AddAddendemDialogComponent } from '../dialogs/add-addendem-dialog/add-addendem-dialog.component';
 
 @Component({
   selector: 'app-lease-details',
@@ -74,6 +75,7 @@ export class LeaseDetailsComponent implements OnInit, AfterContentChecked {
   updateRenForm: FormGroup;
   addNoticeForm: FormGroup;
   reasonItemList: FormGroup;
+  addAddendumForm: FormGroup;
   // updateWorkOrderForm: FormGroup;
 
   vendors:any [];
@@ -502,6 +504,10 @@ export class LeaseDetailsComponent implements OnInit, AfterContentChecked {
       // })
     });
 
+    this.addAddendumForm = this.formBuilder.group({
+
+    });
+
 
 
     // this.store.dispatch(getRentPaymentList());
@@ -770,6 +776,30 @@ export class LeaseDetailsComponent implements OnInit, AfterContentChecked {
 
     this.store.dispatch(getRentPaymenttDetails({payload: id}));
 
+  }
+
+  ViewAddendum() {
+    console.log('view addendum');
+  }
+
+  AddAddendum() {
+    console.log('add addendum');
+
+    let dialogRef = this.dialog.open(AddAddendemDialogComponent, {
+      height: '650px',
+      width: '550px',
+      disableClose: false, // to be reviewed later
+      scrollStrategy: this.overlay.scrollStrategies.noop(),
+      panelClass: 'my-custom-dialog-class',
+      data: {
+        id: this.id,
+        // py: this.paymentDetails,
+        // txt: 'test'
+
+        // rentDueAmount: this.rentAmtDue,
+        // rentDue: this.rentDueOn
+      }
+    });
   }
 
   getWorkOrderDetails(id: number) {
