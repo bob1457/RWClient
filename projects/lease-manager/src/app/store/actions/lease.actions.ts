@@ -707,6 +707,29 @@ export const updateNoticeStatusSuccess = createAction(
   props<{ payload: ServiceRequest }>()
 );
 
+
+/**
+ * Add Addendum Actions
+ */
+
+export const addAddendum = createAction(
+  '[Leases] Add Addendum',
+  props<{ payload: any }>()
+);
+
+export const addAddendumSuccess = createAction(
+  '[Leases] Add Addendum Success',
+  props<{ payload: any }>()
+);
+
+export const addAddendumFailure = createAction(
+  '[[Leases] Add Addendum Failure',
+  // props<{payload: any}>()
+  (errorMessage = 'Error adding notice') => ({ payload: { errorMessage } })
+
+);
+
+
 export const updateNoticeStatusFailure = createAction(
   '[[Leases] Update Notice Status Failure',
   // props<{payload: any}>()

@@ -1,6 +1,9 @@
 import { Component, Inject, OnInit, Optional } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { Store } from '@ngrx/store';
+import { addAddendum } from '../../store/actions/lease.actions';
+import { PropertyLeaseState } from '../../store/lease-state';
 
 @Component({
   selector: 'app-add-addendem-dialog',
@@ -28,7 +31,10 @@ export class AddAddendemDialogComponent implements OnInit {
   addendumFooter = 'Ending content, signatuure, etc.';
   editEnabled = false;
 
+  clauseContents = [];
+
   constructor(private formBuilder: FormBuilder,
+              private store: Store<PropertyLeaseState>,
               public dialogRef: MatDialogRef<AddAddendemDialogComponent>,
               @Optional() @Inject(MAT_DIALOG_DATA) public data: { id: number }) { }
 
@@ -39,9 +45,9 @@ export class AddAddendemDialogComponent implements OnInit {
       addendumItems: this.formBuilder.array([]),
 
       leaseId: Number([]),
-      HeaderText: [''],
-      ContentText: [''],
-      FooterText: ['']
+      headerText: [''],
+      contentText: [''],
+      footerText: ['']
     });
 
     // console.log('edit enabled', this.editEnabled);
@@ -75,21 +81,24 @@ export class AddAddendemDialogComponent implements OnInit {
   onItemChange(item) {
     console.log('item selected', item);
     // this.clauseItemContent = item.clauseContent;
-    console.log('item content', this.clauseItemContent);
+    this.clauseContents.push(item.clauseContent);
+    console.log('item content', this.clauseContents);
   }
 
   addAddendum() {
     debugger;
     this.addAddendumForm.patchValue({
-      leaseId: this.data.id
+      leaseId: Number(this.data.id)
     });
     console.log('lease id', this.data.id);
     console.log('add addeddum form', this.addAddendumForm.value);
+    this.store.dispatch(addAddendum({ payload: this.addAddendumForm.value }));
     this.dialogRef.close();
   }
 
   close() {
     this.dialogRef.close();
   }
+
 
 }

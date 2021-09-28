@@ -25,6 +25,8 @@ export const initialState: PropertyLeaseState =  { // adapter.getInitialState
   invoiceList: null,
   noticeList: null,
   notice: null,
+  addendumList: null,
+  addendum: null,
   // contracts: null,
   // contractsForProperty: null,
   // selectedContract: null,
@@ -822,6 +824,30 @@ on(LeaseActions.addVendorFailure, (state) => {
   }),
 
   on(LeaseActions.updateNoticeStatusFailure, (state) => ({
+    ...state,
+    loading: false,
+    loaded: false
+  })),
+
+  /**
+   * Add Addedunm to lease
+   */
+  on(LeaseActions.addAddendum, state => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+  on(LeaseActions.addAddendumSuccess, (state, { payload }) => {
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      addendumList: [...state.addendumList, payload]
+    });
+  }),
+
+  on(LeaseActions.addAddendumFailure, (state) => ({
     ...state,
     loading: false,
     loaded: false

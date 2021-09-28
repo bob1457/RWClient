@@ -239,8 +239,8 @@
                                         </div>
                                         <div fxFlex="30%">
                                             <!-- <mat-checkbox formControlName="isAddendumAvailable" [ngModel]="lease.isAddendumAvailable" class="tenant-full-width">Addendum Available</mat-checkbox> -->
-                                            <button type="button" style="margin-left: 15px;" *ngIf="isAddendumAvailable" mat-raised-button color="primary" (click)="ViewAddendum()">View Addendum</button>
-                                            <button type="button" style="margin-left: 15px;" *ngIf="!isAddendumAvailable" mat-raised-button color="primary" (click)="AddAddendum()">Add Addendum</button>
+                                            <button type="button" style="margin-left: 15px;" *ngIf="lease.isAddendumAvailable" mat-raised-button color="primary" (click)="ViewAddendum()">View Addendum</button>
+                                            <button type="button" style="margin-left: 15px;" *ngIf="!lease.isAddendumAvailable" mat-raised-button color="primary" (click)="AddAddendum()">Add Addendum</button>
                                         </div>
                                     </div>
 
