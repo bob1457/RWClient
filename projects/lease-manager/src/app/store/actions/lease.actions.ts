@@ -707,7 +707,12 @@ export const updateNoticeStatusSuccess = createAction(
   props<{ payload: ServiceRequest }>()
 );
 
+export const updateNoticeStatusFailure = createAction(
+  '[[Leases] Update Notice Status Failure',
+  // props<{payload: any}>()
+  (errorMessage = 'Error updating notice status') => ({ payload: { errorMessage } })
 
+);
 /**
  * Add Addendum Actions
  */
@@ -729,13 +734,42 @@ export const addAddendumFailure = createAction(
 
 );
 
-
-export const updateNoticeStatusFailure = createAction(
-  '[[Leases] Update Notice Status Failure',
-  // props<{payload: any}>()
-  (errorMessage = 'Error updating notice status') => ({ payload: { errorMessage } })
-
+export const getAddendumForLease = createAction(
+  '[Leases] Get Addendum for Lease',
+  props<{ payload: number }>()
 );
+
+export const getAddendumForLeaseSuccess = createAction(
+  '[Leases] Get Addendum for Lease Success',
+  props<{ payload: any }>()
+);
+
+export const getAddendumForLeaseFailure = createAction(
+  '[Leases] Get Addendum for Lease Failure',
+  // props<{payload: any}>()
+  (errorMessage = 'Error loading notice details') => {
+    return ({ payload: { errorMessage } });
+  }
+);
+
+export const getAddendumDetails = createAction(
+  '[Leases] Get Addendum Details',
+  props<{ payload: number }>()
+);
+
+export const getAddendumDetailsSuccess = createAction(
+  '[Leases] Get Addendum Details Success',
+  props<{ payload: any }>()
+);
+
+export const getAddendumDetailsFailure = createAction(
+  '[Leases] Get Addendum Details Failure',
+  // props<{payload: any}>()
+  (errorMessage = 'Error loading notice details') => {
+    return ({ payload: { errorMessage } });
+  }
+);
+
 
 
 

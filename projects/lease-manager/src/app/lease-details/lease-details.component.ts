@@ -4,8 +4,8 @@ import { PropertyLeaseState } from '../store/lease-state';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LeaseService, PropertyLease, Vendor } from '@lib/app-core';
-import { addRentPayment, addTenant, addWorkOrder, getAllInvoices, getAllNoticeForLease, getLeaseDetails, getRentPaymenttDetails, getWorkOrderDetails, updateLease, updateRentPayment } from '../store/actions/lease.actions';
-import { getNoticeList, invoiceList, leaseDetails, loadingStatus, noticeList, rentPaymentDetails, rentPaymentList, serviceRequestList,
+import { addRentPayment, addTenant, addWorkOrder, getAddendumForLease, getAllInvoices, getAllNoticeForLease, getLeaseDetails, getRentPaymenttDetails, getWorkOrderDetails, updateLease, updateRentPayment } from '../store/actions/lease.actions';
+import { adddendumForLease, getNoticeList, invoiceList, leaseDetails, loadingStatus, noticeList, rentPaymentDetails, rentPaymentList, serviceRequestList,
          tenantList, vendorDetails, vendorList, workOrderList } from '../store/reducers';
 import { getAllServiceRequests, getAllVendors,
   getAllWorkOrders, getRentPaymentList, getAllTenants } from '../store/actions/lease.actions';
@@ -23,6 +23,7 @@ import { AddNoticeDialogComponent } from '../dialogs/add-notice-dialog/add-notic
 import { NoticeDetailsDialogComponent } from '../dialogs/notice-details-dialog/notice-details-dialog.component';
 import { UpdateStatusDialogComponent } from '../dialogs/update-status-dialog/update-status-dialog.component';
 import { AddAddendemDialogComponent } from '../dialogs/add-addendem-dialog/add-addendem-dialog.component';
+import { AddendumDetailsDialgoComponent } from '../dialogs/addendum-details-dialgo/addendum-details-dialgo.component';
 
 @Component({
   selector: 'app-lease-details',
@@ -49,6 +50,7 @@ export class LeaseDetailsComponent implements OnInit, AfterContentChecked {
   requests: any [];
   tenants: any[];
   notices: any[];
+  addendums: any[];
 
   tabIndex = 0;
   hide = false;
@@ -296,6 +298,14 @@ export class LeaseDetailsComponent implements OnInit, AfterContentChecked {
                         setTimeout(() => { this.dataSource4.paginator = this.paginator4; this.dataSource4.sort = this.sort4; });
                       }
                     });
+
+                  this.store.select(adddendumForLease)
+                    .subscribe(addedum => {
+                      if (addedum) {
+                        this.addendums = addedum;
+                        console.log('addendums', this.addendums);
+                      }
+                    });
                 });
   }
 
@@ -504,9 +514,9 @@ export class LeaseDetailsComponent implements OnInit, AfterContentChecked {
       // })
     });
 
-    this.addAddendumForm = this.formBuilder.group({
+    // this.addAddendumForm = this.formBuilder.group({
 
-    });
+    // });
 
 
 
@@ -517,6 +527,7 @@ export class LeaseDetailsComponent implements OnInit, AfterContentChecked {
     // this.store.dispatch(getAllTenants());
 
     this.GetLeaseDetails(this.id);
+    this.getAddendums(this.id);
   }
 
   reasonInNotice(): FormArray {
@@ -558,6 +569,10 @@ export class LeaseDetailsComponent implements OnInit, AfterContentChecked {
       //       console.log(data);
       // });
 
+  }
+
+  getAddendums(id) { // is: lease id
+    this.store.dispatch(getAddendumForLease({ payload: id }));
   }
 
   tabSelected(e) {
@@ -780,6 +795,23 @@ export class LeaseDetailsComponent implements OnInit, AfterContentChecked {
 
   ViewAddendum() {
     console.log('view addendum');
+
+    let dialogRef = this.dialog.open(AddendumDetailsDialgoComponent, {
+      height: '650px',
+      width: '550px',
+      disableClose: false, // to be reviewed later
+      scrollStrategy: this.overlay.scrollStrategies.noop(),
+      panelClass: 'my-custom-dialog-class',
+      data: {
+        id: this.id,
+        addendum: this.addendums
+        // py: this.paymentDetails,
+        // txt: 'test'
+
+        // rentDueAmount: this.rentAmtDue,
+        // rentDue: this.rentDueOn
+      }
+    });
   }
 
   AddAddendum() {

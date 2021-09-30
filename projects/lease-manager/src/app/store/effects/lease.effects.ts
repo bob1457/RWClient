@@ -966,6 +966,60 @@ export class LeaseEffects {
     )
   );
 
+  getAddendumForLease$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(LeaseActions.getAddendumForLease),
+      // tap(() => console.log('got here: ')),
+      map(action => action.payload),
+      switchMap((payload) =>
+        this.leaseService.getAddendumForLeas(payload).pipe(
+          tap(() => console.log('got here for addendum for lease')),
+          map((notice: any) => ({
+            // tslint:disable-next-line:max-line-length
+            type: '[Leases] Get Addendum for Lease Success', // the name of the action(string) must match the string in the Action, case senstive
+            payload: notice
+          })),
+          // tap(res => {console.log('response: ' + res); }),
+          // catchError(
+          //   err => {
+          //     tap( () => console.log('err'));
+          //     return of(LeaseActions.getTenantDetailsFailure([err.error]));
+          //   } // EMPTY // return of('[Property] Get Property Details Failure', err.error);
+          // )
+          catchError(error => of(LeaseActions.getAddendumForLeaseFailure(error.message)))
+        )
+      )
+    )
+  );
+
+  getAddendumDetails$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(LeaseActions.getAddendumDetails),
+      // tap(() => console.log('got here: ')),
+      map(action => action.payload),
+      switchMap((payload) =>
+        this.leaseService.getAddendumDetails(payload).pipe(
+          tap(() => console.log('got here for addendum details')),
+          map((notice: any) => ({
+            // tslint:disable-next-line:max-line-length
+            type: '[Leases] Get Addendum Details Success', // the name of the action(string) must match the string in the Action, case senstive
+            payload: notice
+          })),
+          // tap(res => {console.log('response: ' + res); }),
+          // catchError(
+          //   err => {
+          //     tap( () => console.log('err'));
+          //     return of(LeaseActions.getTenantDetailsFailure([err.error]));
+          //   } // EMPTY // return of('[Property] Get Property Details Failure', err.error);
+          // )
+          catchError(error => of(LeaseActions.getAddendumDetailsFailure(error.message)))
+        )
+      )
+    )
+  );
+
   openSnackBar(message: string, action: string, type: string) {
     const config = new MatSnackBarConfig();
     config.panelClass = [type];

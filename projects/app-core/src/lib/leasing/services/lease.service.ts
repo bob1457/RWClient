@@ -204,6 +204,18 @@ export class LeaseService {
     return this.http.post<any>(`${this.baseUrl}/Lease/updateAddendumItem`, data);
   }
 
+  // Addendum details
+  getAddendumForLeas(id: number) {
+    debugger;
+    return this.http.get<any>(`${this.baseUrl}/Lease/addendum/${id}`);
+  }
+
+  // Addendum list for lease
+  getAddendumDetails(id: number) {
+    debugger;
+    return this.http.get<any>(`${this.baseUrl}/Lease/addendums/${id}`);
+  }
+
   addNotice(data: any) {
     debugger;
     return this.http.post<any>(`${this.baseUrl}/Lease/servicenotice/add`, data);

@@ -853,6 +853,48 @@ on(LeaseActions.addVendorFailure, (state) => {
     loaded: false
   })),
 
+  on(LeaseActions.getAddendumDetails, state => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+  on(LeaseActions.getAddendumDetailsSuccess, (state, { payload }) => {
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      addendum: payload
+    });
+  }),
+
+  on(LeaseActions.getAddendumDetailsFailure, (state) => ({
+    ...state,
+    loading: false,
+    loaded: false
+  })),
+
+  on(LeaseActions.getAddendumForLease, state => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+  on(LeaseActions.getAddendumForLeaseSuccess, (state, { payload }) => {
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      addendumList: payload
+    });
+  }),
+
+  on(LeaseActions.getAddendumForLeaseFailure, (state) => ({
+    ...state,
+    loading: false,
+    loaded: false
+  })),
+
 );
 
 /**
@@ -878,6 +920,7 @@ export const getRemtPaymentDetails = (state: PropertyLeaseState) => state.select
 export const getInviceList = (state: PropertyLeaseState) => state.invoiceList;
 export const getNoticeList = (state: PropertyLeaseState) => state.noticeList;
 export const getNoticeDetails = (state: PropertyLeaseState) => state.notice;
+export const getAddendumForLease = (state: PropertyLeaseState) => state.addendumList;
 
 export const loadingStatus = createSelector(selectLeaseyState, getLoadingStatus);
 
@@ -896,6 +939,7 @@ export const rentPaymentDetails = createSelector(selectLeaseyState, getRemtPayme
 export const invoiceList = createSelector(selectLeaseyState, getInviceList);
 export const noticeList = createSelector(selectLeaseyState, getNoticeList);
 export const noticeDetails = createSelector(selectLeaseyState, getNoticeDetails);
+export const adddendumForLease = createSelector(selectLeaseyState, getAddendumForLease);
 
 export function l_reducer(state: PropertyLeaseState | undefined, action: Action) {
     return propertyLeaseReducer(state, action);
