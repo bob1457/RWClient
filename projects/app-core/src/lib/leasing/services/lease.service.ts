@@ -207,13 +207,13 @@ export class LeaseService {
   // Addendum details
   getAddendumForLeas(id: number) {
     debugger;
-    return this.http.get<any>(`${this.baseUrl}/Lease/addendum/${id}`);
+    return this.http.get<any>(`${this.baseUrl}/Lease/addendums/${id}`);
   }
 
   // Addendum list for lease
   getAddendumDetails(id: number) {
     debugger;
-    return this.http.get<any>(`${this.baseUrl}/Lease/addendums/${id}`);
+    return this.http.get<any>(`${this.baseUrl}/Lease/addendum/${id}`);
   }
 
   addNotice(data: any) {

@@ -21,11 +21,11 @@
 
         </div>
     </div>
-    <div>{{data.addendum.headerText}}</div>
-    <div>{{data.addendum.contentText}}</div>
+    <div>{{data.addendum[0].headerText}}</div>
+    <div>{{data.addendum[0].contentText}}</div>
     <div>
         <ul>
-            <li style="list-style: none;" *ngFor="let item of data.addendum.addendumItem; let i = index">
+            <li style="list-style: none;" *ngFor="let item of data.addendum[0].addendumItem; let i = index">
                 {{i+1}}: {{item.itemContent}}
             </li>
         </ul>
