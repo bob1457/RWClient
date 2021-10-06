@@ -1,4 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { select, Store } from '@ngrx/store';
+import { PropertyState } from 'projects/property-manager/src/app/store/property.state';
+import { getUserInfo } from '@lib/auth';
+import { adddendumForLease } from '../store/reducers/lease.reducers';
+import { getAddendumForLease } from '../store/actions/lease.actions';
 
 @Component({
   selector: 'app-addendum-view',
@@ -7,9 +13,42 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddendumViewComponent implements OnInit {
 
-  constructor() { }
+  id;
+  addendumDetails;
+  user;
+  addendums;
 
-  ngOnInit() {
+  constructor(private store: Store<PropertyState>,
+              private actRoute: ActivatedRoute) {
+    this.id = this.actRoute.snapshot.params.id;
+    console.log(this.id);
+
+    this.store.pipe(select(getUserInfo))
+      .subscribe(user => {
+        if (user) {
+          // this.pm = localStorage.getItem('user');
+          this.user = user;
+        } else {
+          this.user = JSON.parse(localStorage.getItem('auth'));
+        }
+        console.log('pm', this.user);
+      });
+
+    this.store.select(adddendumForLease)
+      .subscribe(addedum => {
+        if (addedum) {
+          this.addendums = addedum; // .filter(l => l.leaseId == this.id);
+          console.log('addendums new page', this.addendums);
+        }
+      });
   }
+  ngOnInit(): void {
+    this.getAddendums(this.id);
+  }
+
+  getAddendums(id) { // is: lease id
+    this.store.dispatch(getAddendumForLease({ payload: id }));
+  }
+
 
 }

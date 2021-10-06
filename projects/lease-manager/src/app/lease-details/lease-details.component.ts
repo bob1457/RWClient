@@ -144,6 +144,7 @@ export class LeaseDetailsComponent implements OnInit, AfterContentChecked {
   isTableExpanded = false;
   // currentMonth;
   // currentYear;
+  addendumId;
 
   displayedColumns: string[] = ['icon', 'id', 'paidAmt', 'paymentReceivedDate', 'payMethod', 'rentalForMonth', 'rentalForYear', 'created', 'action'];
   @ViewChild('paginator', {static: false}) paginator: MatPaginator;
@@ -305,6 +306,8 @@ export class LeaseDetailsComponent implements OnInit, AfterContentChecked {
                       if (addedum) {
                         this.addendums = addedum; // .filter(l => l.leaseId == this.id);
                         console.log('addendums', this.addendums);
+                        this.addendumId = this.addendums[0].id;
+                        console.log('addendum id', this.addendumId);
                       }
                     });
                 });
