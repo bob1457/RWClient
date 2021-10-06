@@ -51,6 +51,7 @@ export class LeaseDetailsComponent implements OnInit, AfterContentChecked {
   tenants: any[];
   notices: any[];
   addendums: any[];
+  addenddumAvailable = false;
 
   tabIndex = 0;
   hide = false;
@@ -80,7 +81,7 @@ export class LeaseDetailsComponent implements OnInit, AfterContentChecked {
   addAddendumForm: FormGroup;
   // updateWorkOrderForm: FormGroup;
 
-  vendors:any [];
+  vendors: any [];
   vendors$: Observable<Vendor[]>;
   invoiceList: any[];
   chosenVendorId;
@@ -678,7 +679,7 @@ export class LeaseDetailsComponent implements OnInit, AfterContentChecked {
     console.log('generating agreement....');
   }
 
-  submit() {
+  submit() { // Update lease details
     debugger;
 
     let active = false;
@@ -820,7 +821,7 @@ export class LeaseDetailsComponent implements OnInit, AfterContentChecked {
     let dialogRef = this.dialog.open(AddAddendemDialogComponent, {
       height: '650px',
       width: '550px',
-      disableClose: false, // to be reviewed later
+      disableClose: true, // to be reviewed later
       scrollStrategy: this.overlay.scrollStrategies.noop(),
       panelClass: 'my-custom-dialog-class',
       data: {
@@ -832,6 +833,14 @@ export class LeaseDetailsComponent implements OnInit, AfterContentChecked {
         // rentDue: this.rentDueOn
       }
     });
+
+    dialogRef.afterClosed().subscribe(res => {
+      // received data from dialog-component
+      console.log('return data after submit', res.data);
+      this.addenddumAvailable = res.data;
+      console.log('addendum', this.addenddumAvailable);
+    });
+
   }
 
   getWorkOrderDetails(id: number) {
@@ -1049,6 +1058,10 @@ export class LeaseDetailsComponent implements OnInit, AfterContentChecked {
       contactTelephone2: '',
       contactOthers: event.contactOthers
     });
+
+  }
+
+  RemoveAddendum() {
 
   }
 

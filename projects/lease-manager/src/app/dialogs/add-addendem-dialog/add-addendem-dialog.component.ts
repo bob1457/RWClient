@@ -92,8 +92,17 @@ export class AddAddendemDialogComponent implements OnInit {
     });
     console.log('lease id', this.data.id);
     console.log('add addeddum form', this.addAddendumForm.value);
-    this.store.dispatch(addAddendum({ payload: this.addAddendumForm.value }));
-    this.dialogRef.close();
+    // this.dialogRef.close({ data: 'you closed' });
+    try {
+      this.store.dispatch(addAddendum({ payload: this.addAddendumForm.value }));
+      this.dialogRef.close({ data: true });
+      // update lease with ngrx
+
+
+    } catch (err) {
+      console.log('Error occured', err.message);
+    }
+
   }
 
   close() {
