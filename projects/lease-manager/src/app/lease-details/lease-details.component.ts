@@ -23,7 +23,7 @@ import { AddNoticeDialogComponent } from '../dialogs/add-notice-dialog/add-notic
 import { NoticeDetailsDialogComponent } from '../dialogs/notice-details-dialog/notice-details-dialog.component';
 import { UpdateStatusDialogComponent } from '../dialogs/update-status-dialog/update-status-dialog.component';
 import { AddAddendemDialogComponent } from '../dialogs/add-addendem-dialog/add-addendem-dialog.component';
-import { AddendumDetailsDialgoComponent } from '../dialogs/addendum-details-dialgo/addendum-details-dialgo.component';
+// import { AddendumDetailsDialgoComponent } from '../dialogs/addendum-details-dialgo/addendum-details-dialgo.component';
 
 @Component({
   selector: 'app-lease-details',
@@ -797,26 +797,26 @@ export class LeaseDetailsComponent implements OnInit, AfterContentChecked {
 
   }
 
-  ViewAddendum() {
-    console.log('view addendum');
+  // ViewAddendum() {
+  //   console.log('view addendum');
 
-    let dialogRef = this.dialog.open(AddendumDetailsDialgoComponent, {
-      height: '650px',
-      width: '550px',
-      disableClose: false, // to be reviewed later
-      scrollStrategy: this.overlay.scrollStrategies.noop(),
-      panelClass: 'my-custom-dialog-class',
-      data: {
-        id: this.id,
-        addendum: this.addendums
-        // py: this.paymentDetails,
-        // txt: 'test'
+  //   let dialogRef = this.dialog.open(AddendumDetailsDialgoComponent, {
+  //     height: '650px',
+  //     width: '550px',
+  //     disableClose: false, // to be reviewed later
+  //     scrollStrategy: this.overlay.scrollStrategies.noop(),
+  //     panelClass: 'my-custom-dialog-class',
+  //     data: {
+  //       id: this.id,
+  //       addendum: this.addendums
+  //       // py: this.paymentDetails,
+  //       // txt: 'test'
 
-        // rentDueAmount: this.rentAmtDue,
-        // rentDue: this.rentDueOn
-      }
-    });
-  }
+  //       // rentDueAmount: this.rentAmtDue,
+  //       // rentDue: this.rentDueOn
+  //     }
+  //   });
+  // }
 
   AddAddendum() {
     console.log('add addendum');
