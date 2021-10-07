@@ -306,8 +306,6 @@ export class LeaseDetailsComponent implements OnInit, AfterContentChecked {
                       if (addedum) {
                         this.addendums = addedum; // .filter(l => l.leaseId == this.id);
                         console.log('addendums', this.addendums);
-                        this.addendumId = this.addendums[0].id;
-                        console.log('addendum id', this.addendumId);
                       }
                     });
                 });

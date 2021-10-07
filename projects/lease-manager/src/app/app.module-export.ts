@@ -64,6 +64,7 @@ import { NoticeContentTwoMonthComponent } from './notice-content-two-month/notic
 import { UpdateStatusDialogComponent } from './dialogs/update-status-dialog/update-status-dialog.component';
 import { AddAddendemDialogComponent } from './dialogs/add-addendem-dialog/add-addendem-dialog.component';
 // import { AddendumDetailsDialgoComponent } from './dialogs/addendum-details-dialgo/addendum-details-dialgo.component';
+import { NoticeViewComponent } from './notice-view/notice-view.component';
 
 
 const routes: Routes = [
@@ -87,7 +88,8 @@ const routes: Routes = [
       { path: 'addendumview/:id', component: AddendumViewComponent},
       { path: 'addaddendum', component: AddAddendumComponent},
       { path: 'addVendor', component: AddVendorComponent},
-      { path: 'addRequest', component: AddServiceRequestComponent}
+      { path: 'addRequest', component: AddServiceRequestComponent },
+      { path: 'noticeview/:id', component: NoticeViewComponent }
     ]
   }//,
   // { path: 'tenants', component: AllTenantsComponent}
@@ -143,7 +145,8 @@ const routes: Routes = [
     NoticeContentOneMonthComponent,
     NoticeContentTwoMonthComponent,
     UpdateStatusDialogComponent,
-    AddAddendemDialogComponent //,
+    AddAddendemDialogComponent,
+    NoticeViewComponent
     // AddendumDetailsDialgoComponent
   ],
   imports: [

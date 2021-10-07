@@ -1170,8 +1170,8 @@
                                                             <div *ngIf="!element.outstandingUtilities == 0"><span style="font-weight: bold;">Unpaid Utility</span>: &nbsp;${{element.outstandingUtilities}}</div>
                                                             <div><span style="font-weight: bold;">Required Move Out Date</span>: &nbsp;{{element.requiredMoveOutDate | date}}</div>
                                                             <p></p>
-                                                            <div style="float: right;">Added on: &nbsp;{{element.created | date}} <button style="margin-left: 45px;" type="button" mat-raised-button color="primary" (click)="getNoticeDetails(element.id)">Details</button> &nbsp;</div>
-                                                            <!-- <div>Last updated on: &nbsp;{{element.modified | date}}</div> -->
+                                                            <div style="float: right;">Added on: &nbsp;{{element.created | date}} <button style="margin-left: 45px;" type="button" mat-raised-button color="primary" routerLink="/Manage/lease/noticeview/{{element.id}}">View Details</button>                                                                &nbsp;</div>
+                                                            <!-- <div>Last updated on: &nbsp;{{element.modified | date}}</div> (click)="getNoticeDetails(element.id)"-->
                                                         </div>
                                                     </div>
 

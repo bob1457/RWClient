@@ -1,6 +1,6 @@
 <!--  -->
 <div class="view-container" *ngIf="addendums">
-    <div fxLayout="column" fxLayoutAlign="start" class="container">
+    <div id="pdfdoc" fxLayout="column" fxLayoutAlign="start" class="container" style="height: 450px;overflow-y: auto;">
         <div style="border-bottom: 4px solid blue;">
             <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
                 <div fxFlex="8%" style="margin-right: 20px;margin-bottom: 10px;"><img src="../../assets/images/logo.jpeg" height="60px" width="60px" style="margin-top: -10px;"></div>
@@ -30,5 +30,9 @@
                 </li>
             </ul>
         </div>
+    </div>
+    <div fxLayout="row" fxLayoutGap="7px" fxLayoutAlign="end center" class="button" style="margin-top: 30px;">
+        <button type="button" mat-raised-button color="primary" (click)="download()"><mat-icon style="color: yellow;">file_download</mat-icon> &nbsp;Download PDF</button>
+        <button mat-raised-button color="accent" (click)="Ok()">Ok</button>
     </div>
 </div>

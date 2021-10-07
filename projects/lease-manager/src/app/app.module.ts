@@ -57,7 +57,8 @@ import { NoticeContentOneMonthComponent } from './notice-content-one-month/notic
 import { NoticeContentTwoMonthComponent } from './notice-content-two-month/notice-content-two-month.component';
 import { UpdateStatusDialogComponent } from './dialogs/update-status-dialog/update-status-dialog.component';
 import { AddAddendemDialogComponent } from './dialogs/add-addendem-dialog/add-addendem-dialog.component';
-import { AddendumDetailsDialgoComponent } from './dialogs/addendum-details-dialgo/addendum-details-dialgo.component';
+// import { AddendumDetailsDialgoComponent } from './dialogs/addendum-details-dialgo/addendum-details-dialgo.component';
+import { NoticeViewComponent } from './notice-view/notice-view.component';
 
 
 @NgModule({
@@ -112,7 +113,8 @@ import { AddendumDetailsDialgoComponent } from './dialogs/addendum-details-dialg
     NoticeContentTwoMonthComponent,
     UpdateStatusDialogComponent,
     AddAddendemDialogComponent,
-    AddendumDetailsDialgoComponent
+    AddendumDetailsDialgoComponent,
+    NoticeViewComponent
   ],
   imports: [
     BrowserModule,
