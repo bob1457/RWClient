@@ -306,7 +306,7 @@ export class LeaseDetailsComponent implements OnInit, AfterContentChecked {
 
                   this.store.select(adddendumForLease)
                     .subscribe(addedum => {
-                      if (addedum) {
+                      if (addedum && addedum.length > 0) {
                         this.addendums = addedum; // .filter(l => l.leaseId == this.id);
                         this.addendumId = this.addendums[0].id;
                         console.log('addendums', this.addendums);
