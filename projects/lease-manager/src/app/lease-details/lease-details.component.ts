@@ -4,7 +4,7 @@ import { PropertyLeaseState } from '../store/lease-state';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LeaseService, PropertyLease, Vendor } from '@lib/app-core';
-import { addRentPayment, addTenant, addWorkOrder, getAddendumForLease, getAllInvoices, getAllNoticeForLease, getLeaseDetails, getRentPaymenttDetails, getWorkOrderDetails, updateLease, updateRentPayment } from '../store/actions/lease.actions';
+import { addRentPayment, addTenant, addWorkOrder, getAddendumForLease, getAllInvoices, getAllNoticeForLease, getLeaseDetails, getRentPaymenttDetails, getWorkOrderDetails, removeAddendum, updateLease, updateRentPayment } from '../store/actions/lease.actions';
 import { adddendumForLease, getNoticeList, invoiceList, leaseDetails, loadingStatus, noticeList, rentPaymentDetails, rentPaymentList, serviceRequestList,
          tenantList, vendorDetails, vendorList, workOrderList } from '../store/reducers';
 import { getAllServiceRequests, getAllVendors,
@@ -72,6 +72,7 @@ export class LeaseDetailsComponent implements OnInit, AfterContentChecked {
   coAppList;
 
   loading$: Observable<boolean>;
+  loading;
 
   detailsForm: FormGroup;
   addForm: FormGroup; // Add rent payment
@@ -1077,12 +1078,21 @@ export class LeaseDetailsComponent implements OnInit, AfterContentChecked {
       id: this.addendumId
     });
 
-    return this.propertyService.removeAddendum(this.removeAddendumForm.value)
-      .subscribe(res => {
-        this.addenddumAvailable = !res;
-        // this.addendumDeleted = res;
-        console.log('addendem removed', !this.addenddumAvailable);
-      });
+    // return this.propertyService.removeAddendum(this.removeAddendumForm.value)
+    //   .subscribe(res => {
+    //     this.addenddumAvailable = false;
+    //     // this.addendumDeleted = res;
+    //     console.log('addendem removed', !this.addenddumAvailable);
+    //   });
+
+    this.store.dispatch(removeAddendum({ payload: this.removeAddendumForm.value }));
+    this.loading$.subscribe(r => {
+      this.loading = r;
+      if (!this.loading) {
+        this.addenddumAvailable = true;
+      }
+    });
+
 
     // this.addenddumAvailable = false;
     // this.addendumDeleted = true;

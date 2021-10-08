@@ -895,6 +895,36 @@ on(LeaseActions.addVendorFailure, (state) => {
     loaded: false
   })),
 
+
+
+  /**
+   * Remove Addendum
+   */
+  on(LeaseActions.removeAddendum, state => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+  on(LeaseActions.removeAddendumSuccess, (state, { payload }) => {
+    const updatedAddendum = state.addendumList.map(
+      item => payload.id === item.id ? payload : item
+    );
+
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      addendumList: updatedAddendum
+    });
+  }),
+
+  on(LeaseActions.removeAddendumFailure, (state) => ({
+    ...state,
+    loading: false,
+    loaded: false
+  })),
+
 );
 
 /**

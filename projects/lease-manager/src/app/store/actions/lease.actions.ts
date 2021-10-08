@@ -770,6 +770,27 @@ export const getAddendumDetailsFailure = createAction(
   }
 );
 
+/**
+ * Remove Addendum Actions
+ */
+
+export const removeAddendum = createAction(
+  '[Leases] Remove Addendum',
+  props<{ payload: ServiceRequest }>()
+);
+
+export const removeAddendumSuccess = createAction(
+  '[Leases] Remove Addendum Success',
+  props<{ payload: ServiceRequest }>()
+);
+
+export const removeAddendumFailure = createAction(
+  '[[Leases] Remove Addendum Failure',
+  // props<{payload: any}>()
+  (errorMessage = 'Error remove addendum') => ({ payload: { errorMessage } })
+
+);
+
 
 
 
