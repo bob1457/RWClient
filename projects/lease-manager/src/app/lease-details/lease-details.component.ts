@@ -52,6 +52,8 @@ export class LeaseDetailsComponent implements OnInit, AfterContentChecked {
   notices: any[];
   addendums: any[];
   addenddumAvailable = false;
+  addendumId;
+  addendumDeleted = false;
 
   tabIndex = 0;
   hide = false;
@@ -79,6 +81,7 @@ export class LeaseDetailsComponent implements OnInit, AfterContentChecked {
   addNoticeForm: FormGroup;
   reasonItemList: FormGroup;
   addAddendumForm: FormGroup;
+  removeAddendumForm: FormGroup;
   // updateWorkOrderForm: FormGroup;
 
   vendors: any [];
@@ -144,7 +147,7 @@ export class LeaseDetailsComponent implements OnInit, AfterContentChecked {
   isTableExpanded = false;
   // currentMonth;
   // currentYear;
-  addendumId;
+  // addendumId;
 
   displayedColumns: string[] = ['icon', 'id', 'paidAmt', 'paymentReceivedDate', 'payMethod', 'rentalForMonth', 'rentalForYear', 'created', 'action'];
   @ViewChild('paginator', {static: false}) paginator: MatPaginator;
@@ -305,7 +308,9 @@ export class LeaseDetailsComponent implements OnInit, AfterContentChecked {
                     .subscribe(addedum => {
                       if (addedum) {
                         this.addendums = addedum; // .filter(l => l.leaseId == this.id);
+                        this.addendumId = this.addendums[0].id;
                         console.log('addendums', this.addendums);
+                        console.log('addendum id', this.addendumId);
                       }
                     });
                 });
@@ -514,6 +519,10 @@ export class LeaseDetailsComponent implements OnInit, AfterContentChecked {
       //   reasonCodeId: [],
       //   applied: [false]
       // })
+    });
+
+    this.removeAddendumForm = this.formBuilder.group({
+      id: Number([0])
     });
 
     // this.addAddendumForm = this.formBuilder.group({
@@ -1063,7 +1072,20 @@ export class LeaseDetailsComponent implements OnInit, AfterContentChecked {
   }
 
   RemoveAddendum() {
+    debugger;
+    this.removeAddendumForm.patchValue({
+      id: this.addendumId
+    });
 
+    return this.propertyService.removeAddendum(this.removeAddendumForm.value)
+      .subscribe(res => {
+        this.addenddumAvailable = !res;
+        // this.addendumDeleted = res;
+        console.log('addendem removed', !this.addenddumAvailable);
+      });
+
+    // this.addenddumAvailable = false;
+    // this.addendumDeleted = true;
   }
 
 }

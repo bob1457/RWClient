@@ -237,14 +237,21 @@
                                                 <textarea type="text" id="notes" formControlName="notes" matInput placeholder="Notes" [ngModel]="lease.notes"></textarea>
                                             </mat-form-field>
                                         </div>
-                                        <div fxFlex="40%">
+                                        <div fxFlex="30%">
                                             <!-- <mat-checkbox formControlName="isAddendumAvailable" [ngModel]="lease.isAddendumAvailable" class="tenant-full-width">Addendum Available</mat-checkbox> (click)="ViewAddendum()"-->
                                             <a mat-button style="margin-left: 15px;border: 1px solid;font-size: .85em;" *ngIf="lease.isAddendumAvailable || addenddumAvailable" routerLink="/Manage/lease/addendumview/{{id}}">View Addendum</a>
-                                            <a mat-button style="font-size: .85em;padding: 2px;" *ngIf="lease.isAddendumAvailable || addenddumAvailable" (click)="RemoveAddendum()">
-                                                <mat-icon style="color: orangered;" title="Remove Addendum">clear</mat-icon>
-                                            </a>
-                                            <a mat-button style="margin-left: 15px;border: 1px solid;font-size: .85em;padding-left: 5px;padding-right:5px;" *ngIf="!lease.isAddendumAvailable && !addenddumAvailable" (click)="AddAddendum()">Add Addendum</a>
+                                            <a mat-button style="margin-left: 15px;border: 1px solid;font-size: .85em;" *ngIf="!lease.isAddendumAvailable && !addenddumAvailable" (click)="AddAddendum()">Add Addendum</a>
                                         </div>
+                                        <div fxFlex="10%">
+                                            <form [formGroup]="removeAddendumForm">
+                                                <a mat-button style="font-size: .85em;padding: 2px;" *ngIf="lease.isAddendumAvailable || addenddumAvailable" (click)="RemoveAddendum()">
+                                                    <mat-icon style="color: orangered;" title="Remove Addendum">clear</mat-icon>
+                                                </a>
+                                            </form>
+                                        </div>
+
+
+
                                     </div>
 
 
