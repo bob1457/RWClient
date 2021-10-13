@@ -36,7 +36,7 @@ export class AddAddendemDialogComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
               private store: Store<PropertyLeaseState>,
               public dialogRef: MatDialogRef<AddAddendemDialogComponent>,
-              @Optional() @Inject(MAT_DIALOG_DATA) public data: { id: number }) { }
+              @Optional() @Inject(MAT_DIALOG_DATA) public data: { id: number, lease: any }) { }
 
   ngOnInit() {
 
@@ -52,6 +52,7 @@ export class AddAddendemDialogComponent implements OnInit {
 
     // console.log('edit enabled', this.editEnabled);
     console.log('lease id', this.data.id);
+    console.log('lease in dialog', this.data.lease);
   }
 
   addendumItems(): FormArray {

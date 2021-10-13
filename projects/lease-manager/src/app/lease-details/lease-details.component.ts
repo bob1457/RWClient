@@ -837,7 +837,7 @@ export class LeaseDetailsComponent implements OnInit, AfterContentChecked {
       panelClass: 'my-custom-dialog-class',
       data: {
         id: this.id,
-        // py: this.paymentDetails,
+        lease: this.lease,
         // txt: 'test'
 
         // rentDueAmount: this.rentAmtDue,
