@@ -925,6 +925,30 @@ on(LeaseActions.addVendorFailure, (state) => {
     loaded: false
   })),
 
+
+  /**
+   * Update lease Addendum State
+   */
+  on(LeaseActions.updateLeaseAddendumState, state => ({
+    ...state,
+    loading: true,
+    loaded: false
+  })),
+
+  on(LeaseActions.updateLeaseAddendumStateSuccess, (state, { payload }) => {
+
+    // const updatedLeases = state.leases.map(
+    //   item => payload.id === item.id ? payload : item
+    // );
+    return ({
+      ...state,
+      loading: false,
+      loaded: true,
+      // leases: updatedLeases, // [...state.listings, payload ]
+      selectedLease: payload
+    });
+  }),
+
 );
 
 /**

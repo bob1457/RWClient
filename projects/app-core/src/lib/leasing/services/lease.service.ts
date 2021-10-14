@@ -246,4 +246,9 @@ export class LeaseService {
     return this.http.post<any>(`${this.baseUrl}/Lease/removeAddendum`, data);
   }
 
+  updateLeaseAddendumState(data) {
+    debugger;
+    return this.http.post<any>(`${this.baseUrl}/Lease/updateLeaseAddendumState`, data);
+  }
+
 }

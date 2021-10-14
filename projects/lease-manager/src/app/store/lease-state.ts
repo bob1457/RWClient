@@ -24,6 +24,7 @@ export interface PropertyLeaseState {
   notice: any | null;
   addendumList: any[];
   addendum: any;
+  // updatedLeaseAddendum: any;
   // contracts: ManagementContract[] | null;
   // contractsForProperty: ManagementContract[] | null;
   // selectedContract: ManagementContract | null;

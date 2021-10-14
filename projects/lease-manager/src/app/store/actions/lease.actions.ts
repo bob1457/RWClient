@@ -775,17 +775,34 @@ export const getAddendumDetailsFailure = createAction(
  */
 
 export const removeAddendum = createAction(
-  '[Leases] Remove Addendum',
+  'Leases] Remove Addendum',
   props<{ payload: ServiceRequest }>()
 );
 
 export const removeAddendumSuccess = createAction(
   '[Leases] Remove Addendum Success',
-  props<{ payload: ServiceRequest }>()
+  props<{ payload: any }>()
 );
 
 export const removeAddendumFailure = createAction(
-  '[[Leases] Remove Addendum Failure',
+  '[Leases] Remove Addendum Failure',
+  // props<{payload: any}>()
+  (errorMessage = 'Error remove addendum') => ({ payload: { errorMessage } })
+
+);
+
+export const updateLeaseAddendumState = createAction(
+  '[Leases] Update Lease Addendum State',
+  props<{ payload: any }>()
+);
+
+export const updateLeaseAddendumStateSuccess = createAction(
+  '[Leases] Update Lease Addendum State Success',
+  props<{ payload: any }>()
+);
+
+export const updateLeaseAddendumStateFailure = createAction(
+  '[Leases] Update Lease Addendum State Failure',
   // props<{payload: any}>()
   (errorMessage = 'Error remove addendum') => ({ payload: { errorMessage } })
 

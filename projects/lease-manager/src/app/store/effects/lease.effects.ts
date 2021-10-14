@@ -1048,6 +1048,34 @@ export class LeaseEffects {
     )
   );
 
+  updateLeseAddendumState$ = createEffect(() =>
+    this.actions$.pipe(
+      // ofType('[Property] Get Property List'),
+      ofType(LeaseActions.updateLeaseAddendumState),
+      tap(() => console.log('got here to update !!!')),
+      map(action => action.payload),
+      switchMap((payload) =>
+        this.leaseService.updateLeaseAddendumState(payload).pipe(
+          map((updated: any) => ({
+            type: '[Leases] Update Lease Addendum State Success',
+            payload: updated
+          })),
+          // tap(() => {
+          //   // window.alert('done');
+          //   this.openSnackBar('Addendum removed successfully.', 'close', 'notify');
+          // }), // display notificaiton
+
+          catchError(error => {
+            this.openSnackBar(error.message, 'dismiss', 'error');
+            return of(LeaseActions.updateLeaseAddendumStateFailure(error.message));
+          }
+          )
+          // catchError(error => of(LeaseActions.addLeaseFailure(error.message)))
+        )
+      )
+    )
+  );
+
   openSnackBar(message: string, action: string, type: string) {
     const config = new MatSnackBarConfig();
     config.panelClass = [type];

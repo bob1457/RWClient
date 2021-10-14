@@ -4,7 +4,7 @@ import { PropertyLeaseState } from '../store/lease-state';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LeaseService, PropertyLease, Vendor } from '@lib/app-core';
-import { addRentPayment, addTenant, addWorkOrder, getAddendumForLease, getAllInvoices, getAllNoticeForLease, getLeaseDetails, getRentPaymenttDetails, getWorkOrderDetails, removeAddendum, updateLease, updateRentPayment } from '../store/actions/lease.actions';
+import { addRentPayment, addTenant, addWorkOrder, getAddendumForLease, getAllInvoices, getAllNoticeForLease, getLeaseDetails, getRentPaymenttDetails, getWorkOrderDetails, removeAddendum, updateLease, updateLeaseAddendumState, updateRentPayment } from '../store/actions/lease.actions';
 import { adddendumForLease, getNoticeList, invoiceList, leaseDetails, loadingStatus, noticeList, rentPaymentDetails, rentPaymentList, serviceRequestList,
          tenantList, vendorDetails, vendorList, workOrderList } from '../store/reducers';
 import { getAllServiceRequests, getAllVendors,
@@ -83,6 +83,7 @@ export class LeaseDetailsComponent implements OnInit, AfterContentChecked {
   reasonItemList: FormGroup;
   addAddendumForm: FormGroup;
   removeAddendumForm: FormGroup;
+  leaseAddendumUpdateForm: FormGroup;
   // updateWorkOrderForm: FormGroup;
 
   vendors: any [];
@@ -360,6 +361,11 @@ export class LeaseDetailsComponent implements OnInit, AfterContentChecked {
     });
 
     // this.GetLeaseDetails(this.id);
+
+    this.leaseAddendumUpdateForm = this.formBuilder.group({
+      id: [0],
+      addendumAavailability: [false]
+    });
 
     this.detailsForm = this.formBuilder.group({
       id: [0],
@@ -850,6 +856,14 @@ export class LeaseDetailsComponent implements OnInit, AfterContentChecked {
       console.log('return data after submit', res.data);
       this.addenddumAvailable = res.data;
       console.log('addendum', this.addenddumAvailable);
+
+      debugger;
+      this.leaseAddendumUpdateForm.patchValue({
+        id: Number(this.id),
+        addendumAavailability: true
+      });
+
+      this.store.dispatch(updateLeaseAddendumState({ payload: this.leaseAddendumUpdateForm.value }));
     });
 
   }
@@ -1086,12 +1100,14 @@ export class LeaseDetailsComponent implements OnInit, AfterContentChecked {
     //   });
 
     this.store.dispatch(removeAddendum({ payload: this.removeAddendumForm.value }));
-    this.loading$.subscribe(r => {
-      this.loading = r;
-      if (!this.loading) {
-        this.addenddumAvailable = true;
-      }
+
+    debugger;
+    this.leaseAddendumUpdateForm.patchValue({
+      id: Number(this.id),
+      addendumAavailability: false
     });
+
+    this.store.dispatch(updateLeaseAddendumState({ payload: this.leaseAddendumUpdateForm.value }));
 
 
     // this.addenddumAvailable = false;
