@@ -206,6 +206,7 @@ const propertyLeaseReducer = createReducer(
     const updatedLeases = state.leases.map(
       item => payload.id === item.id ? payload : item
     );
+
     return ({
       ...state,
       loading: false,

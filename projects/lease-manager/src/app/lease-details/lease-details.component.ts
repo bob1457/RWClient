@@ -4,7 +4,7 @@ import { PropertyLeaseState } from '../store/lease-state';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LeaseService, PropertyLease, Vendor } from '@lib/app-core';
-import { addRentPayment, addTenant, addWorkOrder, getAddendumForLease, getAllInvoices, getAllNoticeForLease, getLeaseDetails, getRentPaymenttDetails, getWorkOrderDetails, removeAddendum, updateLease, updateLeaseAddendumState, updateRentPayment } from '../store/actions/lease.actions';
+import { addRentPayment, addTenant, addWorkOrder, getAddendumForLease, getAllInvoices, getAllLeases, getAllNoticeForLease, getLeaseDetails, getRentPaymenttDetails, getWorkOrderDetails, removeAddendum, updateLease, updateLeaseAddendumState, updateRentPayment } from '../store/actions/lease.actions';
 import { adddendumForLease, getNoticeList, invoiceList, leaseDetails, loadingStatus, noticeList, rentPaymentDetails, rentPaymentList, serviceRequestList,
          tenantList, vendorDetails, vendorList, workOrderList } from '../store/reducers';
 import { getAllServiceRequests, getAllVendors,
@@ -569,6 +569,7 @@ export class LeaseDetailsComponent implements OnInit, AfterContentChecked {
     // Always dispatch because new detailw are not available and must be coming from server
     this.store.dispatch(getLeaseDetails({payload: id}));
 
+    this.store.dispatch(getAllLeases());
 
 
       // this.store.pipe(select(leaseDetails))
