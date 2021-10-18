@@ -1,4 +1,4 @@
-<div class="view-container">
+<div class="view-container" *ngIf="notice">
     <div id="pdfdoc" #pdfdoc style="padding: 10px;">
         <app-notice-content-ten-day *ngIf=" notice && notice.type === 0" [lease]="lease" [notice]="notice" [serveMethod]="serveMethod"></app-notice-content-ten-day>
         <app-notice-content-one-month *ngIf=" notice && notice.type === 1" [lease]="lease" [notice]="notice" [serveMethod]="serveMethod"></app-notice-content-one-month>
@@ -8,4 +8,7 @@
         <button type="button" mat-raised-button color="primary" (click)="download()"><mat-icon style="color: yellow;">file_download</mat-icon> &nbsp;Download PDF</button>
         <button mat-raised-button color="accent" (click)="Ok()">Ok</button>
     </div>
+</div>
+<div *ngIf="!notice">
+    <app-loading></app-loading>
 </div>
