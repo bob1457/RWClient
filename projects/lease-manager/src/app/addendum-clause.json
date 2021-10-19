@@ -1,0 +1,30 @@
+[{
+        "clauseTitle": "clause 1",
+        "clauseContent": "Lorem 1 ipsum dolor sit amet, consectetur adipiscing elit, sed"
+    },
+    {
+        "clauseTitle": "clause 2",
+        "clauseContent": "Lorem 2 ipsum dolor sit amet, consectetur adipiscing elit, sed"
+    },
+    {
+        "clauseTitle": "clause 3",
+        "clauseContent": "Lorem 3 ipsum dolor sit amet, consectetur adipiscing elit, sed"
+    },
+    {
+        "clauseTitle": "clause 4",
+        "clauseContent": "Lorem 4 ipsum dolor sit amet, consectetur adipiscing elit, sed"
+    },
+    {
+        "clauseTitle": "clause 5",
+        "clauseContent": "Lorem 5 ipsum dolor sit amet, consectetur adipiscing elit, sed"
+    },
+    {
+        "clauseTitle": "clause 6",
+        "clauseContent": "Lorem 6 ipsum dolor sit amet, consectetur adipiscing elit, sed"
+    },
+    {
+        "clauseTitle": "Custom Item (Enter your item title)",
+        "clauseContent": ""
+    }
+
+]

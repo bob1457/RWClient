@@ -4,6 +4,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Store } from '@ngrx/store';
 import { addAddendum } from '../../store/actions/lease.actions';
 import { PropertyLeaseState } from '../../store/lease-state';
+import { AddendumContents } from '../../addendum-contents';
+import * as AddendumClause from '../../addendum-clause.json';
 
 @Component({
   selector: 'app-add-addendem-dialog',
@@ -16,19 +18,22 @@ export class AddAddendemDialogComponent implements OnInit {
   // addendumClause = new FormControl();
   clauseItemContent = '';
 
-  addendumClauseText = [
-    { clauseTitle: 'clause 1', clauseContent: 'Lorem 1 ipsum dolor sit amet, consectetur adipiscing elit, sed' },
-    { clauseTitle: 'clause 2', clauseContent: 'Lorem 2 ipsum dolor sit amet, consectetur adipiscing elit, sed' },
-    { clauseTitle: 'clause 3', clauseContent: 'Lorem 3 ipsum dolor sit amet, consectetur adipiscing elit, sed' },
-    { clauseTitle: 'clause 4', clauseContent: 'Lorem 4 ipsum dolor sit amet, consectetur adipiscing elit, sed' },
-    { clauseTitle: 'clause 5', clauseContent: 'Lorem 5 ipsum dolor sit amet, consectetur adipiscing elit, sed' },
-    { clauseTitle: 'clause 6', clauseContent: 'Lorem 6 ipsum dolor sit amet, consectetur adipiscing elit, sed' },
-  ];
+  addendumClauseText: any = (AddendumClause as any).default;
 
-  addendumHeader = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui';
+  // addendumClauseText = [
+  //   { clauseTitle: 'clause 1', clauseContent: 'Lorem 1 ipsum dolor sit amet, consectetur adipiscing elit, sed' },
+  //   { clauseTitle: 'clause 2', clauseContent: 'Lorem 2 ipsum dolor sit amet, consectetur adipiscing elit, sed' },
+  //   { clauseTitle: 'clause 3', clauseContent: 'Lorem 3 ipsum dolor sit amet, consectetur adipiscing elit, sed' },
+  //   { clauseTitle: 'clause 4', clauseContent: 'Lorem 4 ipsum dolor sit amet, consectetur adipiscing elit, sed' },
+  //   { clauseTitle: 'clause 5', clauseContent: 'Lorem 5 ipsum dolor sit amet, consectetur adipiscing elit, sed' },
+  //   { clauseTitle: 'clause 6', clauseContent: 'Lorem 6 ipsum dolor sit amet, consectetur adipiscing elit, sed' },
+  // ];
 
-  addendumContent = 'Beginning content';
-  addendumFooter = 'Ending content, signatuure, etc.';
+  // tslint:disable-next-line:max-line-length
+  addendumHeader = AddendumContents.addendumHeader; //'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui';
+
+  addendumContent = AddendumContents.addendContent; // 'Beginning content';
+  addendumFooter = AddendumContents.addendumFooter; // 'Ending content, signatuure, etc.';
   editEnabled = false;
 
   clauseContents = [];
@@ -51,8 +56,9 @@ export class AddAddendemDialogComponent implements OnInit {
     });
 
     // console.log('edit enabled', this.editEnabled);
-    console.log('lease id', this.data.id);
-    console.log('lease in dialog', this.data.lease);
+    // console.log('lease id', this.data.id);
+    // console.log('lease in dialog', this.data.lease);
+    console.log('imported clause', AddendumClause);
   }
 
   addendumItems(): FormArray {
