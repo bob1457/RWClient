@@ -4,11 +4,14 @@
 <div class="view-container">
     <div id="pdfdoc" #pdfdoc class="content-container">
         <app-contract-header [user]="pm"></app-contract-header>
-        <app-contract-content [user]="pm" [contract]="contract"></app-contract-content>
+        <app-contract-content *ngIf="!edit" [user]="pm" [contract]="contract"></app-contract-content>
+        <app-contract-content-editor *ngIf="edit" [user]="pm" [contract]="contract"></app-contract-content-editor>
         <app-contract-footer></app-contract-footer>
     </div>
 </div>
 <div fxLayout="row" fxLayoutGap="7px" fxLayoutAlign="end center" class="button" style="margin-top: 30px;">
-    <button type="button" mat-raised-button color="primary" (click)="download()">Download PDF</button>
+    <button *ngIf="!edit" type="button" mat-raised-button color="primary" (click)="download()">Download PDF</button>
+    <button *ngIf="!edit" type="button" mat-raised-button color="primary" (click)="edit=true"><mat-icon>edit</mat-icon> Edit</button>
+    <button *ngIf="edit" type="button" mat-raised-button color="primary" (click)="edit=false">Cancel</button>
     <button mat-raised-button color="accent" (click)="Ok()">Ok</button>
 </div>

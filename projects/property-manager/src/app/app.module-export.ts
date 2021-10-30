@@ -48,6 +48,8 @@ import { StrataCouncilListComponent } from './strata-council-list/strata-council
 import { StrataDetailsComponent } from './strata-details/strata-details.component';
 import { AddStrataComponent } from './add-strata/add-strata.component';
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
+import { ContractClauseContentComponent } from './contract-clause-content/contract-clause-content.component';
+import { CustomContractClauseComponent } from './custom-contract-clause/custom-contract-clause.component';
 
 const routes: Routes = [
   { path: '', component: PropertyHomeComponent,
@@ -105,7 +107,9 @@ const routes: Routes = [
     ContractViewComponent,
     StrataCouncilListComponent,
     StrataDetailsComponent,
-    AddStrataComponent
+    AddStrataComponent,
+    ContractClauseContentComponent,
+    CustomContractClauseComponent
   ],
   imports: [
     // BrowserModule,

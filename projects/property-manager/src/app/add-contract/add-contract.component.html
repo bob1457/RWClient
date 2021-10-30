@@ -86,17 +86,28 @@
 
                 </div>
                 <div fxFlex='50%' fxFlex.xs='80%' fxLayout="column">
-                    <h5 style="font-size: 1.5em;
-                    margin-top: 20px;
-                    font-variant: all-petite-caps;">contract contents &nbsp;
-                        <!-- <span>
-                          <a mat-button style="font-size: .8em;" (click)="EditContent()">
+                    <h5 style="font-size: 1rem;
+                    margin-top: 20px;">CONTRACT CONTENTS &nbsp;
+                        <span style="vertical-align: middle; font-size: .8rem;">
+                          <!-- <a mat-button style="font-size: .8em;" (click)="EditContent()">
                             <span *ngIf="!edit">Edit</span><span *ngIf="edit">Cancel</span>
-                          </a>
-                        </span> -->
+                        </a> -->
+                        <mat-checkbox (change)="loadTemplate($event)" class="property-full-width">Load from pre-defined template</mat-checkbox>
+                        </span>
                     </h5>
-                    <div class="content" *ngIf="!edit">
+
+                    <div contenteditable="true" class="content" *ngIf="!edit">
                         <!-- <app-contract-content></app-contract-content> -->
+                        <!-- <ul>
+                            <ul *ngFor="let item of contractClauseText">
+                                {{item.clauseContent}}
+                            </ul>
+                        </ul> -->
+                        <ul>
+                            <app-contract-clause-content *ngIf="loadTemp" [contractClauseText]="contractClauseText"></app-contract-clause-content>
+                        </ul>
+
+                        <app-custom-contract-clause *ngIf="!loadTemp"></app-custom-contract-clause>
                     </div>
                     <div class="content" *ngIf="edit">
                         <!-- <app-contract-content-editor></app-contract-content-editor> -->

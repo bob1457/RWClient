@@ -23,6 +23,7 @@ export class ContractViewComponent implements OnInit {
   contract: any; // ManagementContract;
   contractTitle = '';
   pm: User;
+  edit = false;
 
   @ViewChild('pdfdoc', {static: false}) pdfdoc: ElementRef;
 

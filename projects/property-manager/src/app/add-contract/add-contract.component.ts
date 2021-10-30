@@ -7,6 +7,8 @@ import { propertyList } from '../store/reducers';
 import { Location } from '@angular/common';
 import { addManagementContract } from '../store/actions/property.actions';
 
+import * as ContractClause from '../content-templates/contract-clause.json';
+
 @Component({
   selector: 'app-add-contract',
   templateUrl: './add-contract.component.html',
@@ -14,7 +16,10 @@ import { addManagementContract } from '../store/actions/property.actions';
 })
 export class AddContractComponent implements OnInit {
 
+  contractClauseText: any = (ContractClause as any).default;
+
   addForm: FormGroup;
+  loadTemp = false;
 
   properties: Property[];
   // properties: any = [
@@ -72,5 +77,10 @@ export class AddContractComponent implements OnInit {
 
   cancel() {
     this.location.back();
+  }
+
+  loadTemplate(event) {
+    console.log('load template', event.checked);
+    this.loadTemp = event.checked;
   }
 }
