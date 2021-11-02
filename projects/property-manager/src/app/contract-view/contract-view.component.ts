@@ -67,9 +67,9 @@ export class ContractViewComponent implements OnInit {
   download() {
     debugger;
 
-    let date = new Date()
+    const date = new Date()
 
-    let timestamp = `${date.getFullYear()} ${date.getMonth() + 1} ${date.getDate()}`;
+    const timestamp = `${date.getFullYear()} ${date.getMonth() + 1} ${date.getDate()}`;
 
     const element = document.getElementById('pdfdoc');
 
