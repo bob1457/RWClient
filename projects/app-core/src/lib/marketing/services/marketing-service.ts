@@ -26,7 +26,7 @@ export class MarketingService {
 
   getAllRentalProperties() {
     debugger;
-    return this.http.get<any[]>(`${this.baseUrl}/listings/allrentalproperties`);
+    return this.http.get<any[]>(`${this.baseUrl}/listing/allrentalproperties`);
   }
 
   getPropertyListingDetails(id: number) {

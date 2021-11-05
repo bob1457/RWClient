@@ -28,10 +28,13 @@ export class AddListingComponent implements OnInit {
                   if (data != null) {
                     this.rentalProperties = data.filter(s => s.status === 0);
                   }
+
+                  console.log('rental prop', this.rentalProperties);
                 });
               }
 
   ngOnInit() {
+    debugger;
 
     // this.marketingService.getAllRentalProperties()
     //     .subscribe(properties => {
@@ -39,6 +42,12 @@ export class AddListingComponent implements OnInit {
     //       // console.log(this.rentalProperties);.filter(p => p.status === 'NotSet')
     //     });
     this.store.dispatch(getAllRentalProperties());
+
+    // this.marketingService.getAllRentalProperties()
+    //   .subscribe(data => {
+    //     this.rentalProperties = data;
+    //     console.log('rental prop', this.rentalProperties);
+    //   });
 
     // this.properties$ = this.store.select(allRentalProperties);
 
