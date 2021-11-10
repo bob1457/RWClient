@@ -71,10 +71,10 @@ export class PropertyListComponent implements OnInit, AfterViewInit {
 
                 setTimeout(() =>  {this.dataSource.paginator = this.paginator; this.dataSource.sort = this.sort; });
 
-                this.store.select(councilList).subscribe( res => {
-                  this.councils = res;
-                  console.log('council list', this.councils);
-                });
+                // this.store.select(councilList).subscribe( res => {
+                //   this.councils = res;
+                //   console.log('council list', this.councils);
+                // });
 
                 this.router.events.subscribe((routerEvent: Event) => {
                   if (routerEvent instanceof NavigationStart) {
@@ -121,7 +121,7 @@ export class PropertyListComponent implements OnInit, AfterViewInit {
 
     // }
 
-    this.store.dispatch(getCouncilList());
+    // this.store.dispatch(getCouncilList());
 
     // this.store.dispatch(getPropertyImageList());
 

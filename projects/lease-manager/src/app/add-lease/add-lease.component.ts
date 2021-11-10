@@ -42,22 +42,22 @@ export class AddLeaseComponent implements OnInit {
               private leaseService: LeaseService ) {
                 // this.authStore.select(getUserInfo)
                 //     .subscribe( user => this.user = user);
-                this.dashStore.select(RentalAppList)
-                              .subscribe(applist => {
-                                if (applist) {
-                                  this.applicantList = applist;
-                                  this.applicantList = this.applicantList.filter(a => a.status == 2);
-                                  console.log('app list', this.applicantList);
-                                // } else {
-                                //   this.applicantList = JSON.parse(localStorage.getItem('applications'));
-                                }
+                // this.dashStore.select(RentalAppList)
+                //               .subscribe(applist => {
+                //                 if (applist) {
+                //                   this.applicantList = applist;
+                //                   this.applicantList = this.applicantList.filter(a => a.status == 2);
+                //                   console.log('app list', this.applicantList);
+                //                 // } else {
+                //                 //   this.applicantList = JSON.parse(localStorage.getItem('applications'));
+                //                 }
 
 
-                                // this.coApplicantList = this.coApplicantList.filter(l => l.propertyId == this.lease.rentalPropertyId);
-                                // console.log('lease id', this.lease.rentalProperty.id);
-                                // console.log('co apps', this.coApplicantList);
+                //                 // this.coApplicantList = this.coApplicantList.filter(l => l.propertyId == this.lease.rentalPropertyId);
+                //                 // console.log('lease id', this.lease.rentalProperty.id);
+                //                 // console.log('co apps', this.coApplicantList);
 
-                              });
+                //               });
 
               }
 
@@ -81,6 +81,8 @@ export class AddLeaseComponent implements OnInit {
                       }
                       console.log('current user', this.user);
                     });
+
+    this.getApplicatonList();
 
     const today = new Date();
 
@@ -254,6 +256,15 @@ export class AddLeaseComponent implements OnInit {
 //     lastName: ['']
 //   });
 // }
+
+  getApplicatonList() {
+    this.marketingService.getAllRentalApplicationsByPm(this.user.username)
+      .subscribe(res => {
+        this.applicantList = res;
+        this.applicantList = this.applicantList.filter(a => a.status == 2);
+        console.log('app list from service', this.applicantList);
+      });
+  }
 
   onApplicationChange(app) {
     console.log('app', app);
