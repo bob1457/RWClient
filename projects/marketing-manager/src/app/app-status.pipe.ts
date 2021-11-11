@@ -21,11 +21,11 @@ export class AppStatusPipe implements PipeTransform {
         break;
       }
       case 3 : {
-        return 'Declined';
+        return 'Finalized';
         break;
       }
       case 4 : {
-        return 'Others';
+        return 'Declined';
         break;
       }
       default : {
