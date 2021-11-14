@@ -119,7 +119,7 @@
             </p>
             <div fxLayout="row" fxLayoutAlign="start" fxFlexFill style="border-bottom: 2px dashed;" style="margin-top: -15px;">
                 <div style="width: 10%;">
-                    <input readonly type="text">
+                    <input type="text">
                     <label>unit number</label>
                 </div>
                 <div style="width: 35%;">
@@ -192,7 +192,7 @@
                 <div style="width: 25%;">
                     <!-- <input type="text" [value]="lease.rentalProperty.rentalPropertyOwners[0].contactTelephone" [name]="lease.rentalProperty.rentalPropertyOwners[0].contactTelephone" style="width: 90%;"> -->
                     <input *ngIf="!lease.serviceAgent" readonly type="text" [value]="lease.rentalProperty.rentalPropertyOwners[0].contactTelephone" [name]="lease.rentalProperty.rentalPropertyOwners[0].contactTelephone" style="width: 90%;">
-                    <input *ngIf="lease.serviceAgent" readonly type="text" [value]="lease.agent[0].contztTel" [name]="lease.agent[0].contztTel" style="width: 90%;">
+                    <input *ngIf="lease.serviceAgent" readonly type="text" [value]="lease.agent[0].contactEmial" [name]="lease.agent[0].contactEmial" style="width: 90%;">
                     <label style="margin-left: -60px;">fax phone for services</label>
                 </div>
             </div>
@@ -405,11 +405,13 @@
                         a) Payment of Rent:
                     </p>
                     <div style="margin-left: 35px;font-size: .9em; margin-top: -20px;">
-                        The tenant will pay the rent of $ <input type="text" style="width: 10%;vertical-align: bottom;height: 30px;padding-left: 5px;" [value]="lease.rentAmount"> each <span style="font-size: initial;">(check one)</span> &nbsp;<input type="checkbox">                        &nbsp; day <input type="checkbox">&nbsp; week <input type="checkbox">&nbsp; month to the landlord on the first day of the rental period which falls on the (due date, e.g., 1st, 2nd, 3rd, .... 31st) <input type="text" style="width: 7%;vertical-align: bottom;height: 25px;padding-left: 5px;"
-                            [value]="lease.rentDueOn"> day of each
+                        The tenant will pay the rent of $ <input type="text" style="width: 10%;vertical-align: bottom;height: 30px;padding-left: 5px;" [value]="lease.rentAmount"> each <span style="font-size: initial;">(check one)</span> &nbsp;<input type="checkbox"
+                            [checked]="lease.rentFrequency == 'Daily'"> &nbsp; day <input type="checkbox" [checked]="lease.rentFrequency == 'Weekly'">&nbsp; week <input type="checkbox" [checked]="lease.rentFrequency == 'Monthly'">&nbsp; month to the landlord
+                        on the first day of the rental period which falls on the (due date, e.g., 1st, 2nd, 3rd, .... 31st) <input type="text" style="width: 7%;vertical-align: bottom;height: 25px;padding-left: 5px;" [value]="lease.rentDueOn"> day of each
                         <span style="font-size: initial;">(check one)</span>&nbsp;
-                        <input type="checkbox">&nbsp;day <input type="checkbox"> &nbsp; week <input type="checkbox"> &nbsp; month subject to rent increases given in accordance with the RTA.<br> The tenant must pay the rent on time. If the rent is late,
-                        the landlord may issue a <span style="font-size: .85em;font-style: italic;">Notice to End Tenancy for Unpaid Rent</span> (form RTB-30) to the tenant, which may take effect not earlier than 10 days after the date the notice is given.
+                        <input type="checkbox">&nbsp;day <input type="checkbox"> &nbsp; week <input type="checkbox" checked="true"> &nbsp; month subject to rent increases given in accordance with the RTA.<br> The tenant must pay the rent on time. If the
+                        rent is late, the landlord may issue a <span style="font-size: .85em;font-style: italic;">Notice to End Tenancy for Unpaid Rent</span> (form RTB-30) to the tenant, which may take effect not earlier than 10 days after the date the
+                        notice is given.
                     </div>
                     <p style="font-weight: 600;margin-left: 25px;font-size: .9em;color: #2d2d2d;margin-bottom: 2px;">
                         b) What is included in the rent:<span style="font-size: .9em;font-style: italic;font-weight:500;">(Check only those that are included and provide additional information, if needed.)</span>
@@ -487,7 +489,7 @@
                             The tenant is required to pay a security deposit of $ <input type="text" style="width: 20%;height: 30px;padding-left: 5px;" [value]="lease.damageDepositAmount">
                         </p>
                         <p style="font-size: .9em;margin-bottom: 0;">
-                            by <input type="text" style="width: 5%;height: 30px;padding-left: 0;padding-right: 3px;" [value]="todayDate"> <input type="text" style="width: 10%;height: 30px;padding-left: 3px;" [value]="todayMonth">
+                            by <input type="text" style="width: 5%;height: 30px;padding-left: 3px;padding-right: 3px;" [value]="todayDate"> <input type="text" style="width: 15%;height: 30px;padding-left: 7px;" [value]="todayMonth">
                             <input type="text" style="width: 10%;height: 30px;" [value]="todayYear">
                         </p>
                         <div style="font-size: .9em;margin-bottom: 0;">
@@ -502,7 +504,7 @@
                             The tenant is required to pay a pet damage deposit of $ <input type="text" style="width: 20%;height: 30px;padding-left: 5px;" [value]="lease.petDepositAmount">
                         </p>
                         <p style="font-size: .9em;margin-bottom: 10px;">
-                            by <input type="text" style="width: 5%;height: 30px;padding-left: 0;padding-right: 3px;" [value]="todayDate"> <input type="text" style="width: 10%;height: 30px;padding-left: 3px;" [value]="todayMonth">
+                            by <input type="text" style="width: 5%;height: 30px;padding-left: 2px;padding-right: 3px;" [value]="todayDate"> <input type="text" style="width: 15%;height: 30px;padding-left: 7px;" [value]="todayMonth">
                             <input type="text" style="width: 10%;height: 30px;" [value]="todayYear">
                         </p>
                         <div style="font-size: .9em;margin-bottom: 0;">
@@ -1305,9 +1307,9 @@
                     c)
                 </div>
                 <div fxLayout="column" fxLayoutAlign="start" fxFlexFill fxFlex="90%" style="margin-left: 5px;">
-                    <span>Attached to this tenancy agreement, there <input type="checkbox"> &nbsp;is <input type="checkbox"> &nbsp;is not an Addendum </span><br>
+                    <span>Attached to this tenancy agreement, there <input type="checkbox" [checked]="lease.isAddendumAvailable"> &nbsp;is &nbsp;&nbsp;<input type="checkbox" [checked]="!lease.isAddendumAvailable"> is not &nbsp;&nbsp;an Addendum </span><br>
                     <span style="margin-top: -13px;"><span style="font-style: italic;font-weight: bold;">If there is an Addendum attached,</span> provide the following information on the Addendum that forms part of thistenancy agreement:</span><br>
-                    <span style="margin-top: -20px;"><span style="font-style: italic;"> Number of pages of the Addendum: </span> <input type="text" style="width: 30px;height: 30px;"> <span style="font-style: italic;"> Number of additional terms in the Addendum: </span>                    <input type="text" style="width: 30px;height: 30px;"></span>
+                    <span style="margin-top: -20px;"><span style="font-style: italic;"> Number of pages of the Addendum: </span> <input type="text" style="width: 30px;height: 30px;" value="1" name="1"> <span style="font-style: italic;"> Number of additional terms in the Addendum: </span>                    <input type="text" style="width: 30px;height: 30px;"></span>
                 </div>
             </div>
             <p style="font-weight: bold;margin-bottom: 0;margin-top: 5px;text-align: center;">
