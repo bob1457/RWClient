@@ -11,6 +11,7 @@ export class AgreementContentComponent implements OnInit {
   // leaseForm: FormGroup;
 
   @Input() lease;
+  @Input() agent;
 
   startDate;
   startMonth;
@@ -31,6 +32,7 @@ export class AgreementContentComponent implements OnInit {
   ngOnInit() {
     debugger;
     console.log('lease received from parant component', this.lease);
+    console.log('user info received form paraent component', this.agent);
 
     const month = [
       'January',

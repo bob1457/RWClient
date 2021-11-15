@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import { Location } from '@angular/common';
 import { PropertyLeaseState } from '../store/lease-state';
 import { leaseDetails } from '../store/reducers';
@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 import * as jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import * as html2pdf from 'html2pdf.js';
+import { User, getUserInfo } from '@lib/auth';
 
 @Component({
   selector: 'app-full-lease-agreement',
@@ -26,6 +27,7 @@ export class FullLeaseAgreementComponent implements OnInit {
   page2 = false;
   pageNumber = 1;
   totalPageNumber = 1;
+  user: User;
 
   @ViewChild('pdfdoc', {static: false}) pdfdoc: ElementRef;
 
@@ -35,6 +37,16 @@ export class FullLeaseAgreementComponent implements OnInit {
               private router: Router) {
                 this.id = this.actRoute.snapshot.params.id;
                 console.log(this.id);
+
+                this.store.pipe(select(getUserInfo))
+                  .subscribe(user => {
+                    if (!user) {
+                      this.user = JSON.parse(localStorage.getItem('auth'));
+                    } else {
+                      this.user = user;
+                    }
+                    console.log('current user', this.user);
+                  });
 
               //   this.store.select(leaseDetails)
               //       .subscribe(lease => {

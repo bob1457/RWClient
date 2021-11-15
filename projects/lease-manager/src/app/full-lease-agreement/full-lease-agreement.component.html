@@ -5,7 +5,7 @@
     <!-- agreement$ | async -->
     <div id="pdfdoc" #pdfdoc>
         <app-agreement-header></app-agreement-header>
-        <app-agreement-content [lease]="agreementDetails"></app-agreement-content>
+        <app-agreement-content [lease]="agreementDetails" [agent]="user"></app-agreement-content>
         <div *ngIf="numberOfTenants > 2">
             <app-agreement-party-view [pageNumber]="totalPageNumber" [tenantNo]="numberOfTenants" [pageNum]="1" [lease]="agreementDetails"></app-agreement-party-view>
         </div>

@@ -149,22 +149,22 @@
                 </div>
                 <div style="width: 35%;">
                     <input *ngIf="!lease.serviceAgent" readonly type="text" [value]="lease.rentalProperty.rentalPropertyOwners[0].ownerAddress.streetNumber" [name]="lease.rentalProperty.rentalPropertyOwners[0].ownerAddress.streetNum">
-                    <input *ngIf="lease.serviceAgent" readonly type="text" [value]="lease.agent[0].addressStreetNumber" [name]="lease.agent[0].addressStreetNumber">
+                    <input *ngIf="lease.serviceAgent" readonly type="text" [value]="agent.addressstreet" [name]="agent.addressstreet">
                     <label>street number and street name</label>
                 </div>
                 <div style="width: 30%;">
                     <input *ngIf="!lease.serviceAgent" readonly type="text" [value]="lease.rentalProperty.rentalPropertyOwners[0].ownerAddress.city" [name]="lease.rentalProperty.rentalPropertyOwners[0].ownerAddress.city">
-                    <input *ngIf="lease.serviceAgent" readonly type="text" [value]="lease.agent[0].addressCity" [name]="lease.agent[0].addressCity">
+                    <input *ngIf="lease.serviceAgent" readonly type="text" [value]="agent.addresscity" [name]="agent.addresscity">
                     <label>city</label>
                 </div>
                 <div style="width: 10%;">
                     <input *ngIf="!lease.serviceAgent" readonly type="text" [value]="lease.rentalProperty.rentalPropertyOwners[0].ownerAddress.stateProvince" [name]="lease.rentalProperty.rentalPropertyOwners[0].ownerAddress.stateProvince">
-                    <input *ngIf="lease.serviceAgent" readonly type="text" [value]="lease.agent[0].addressStateProv" [name]="lease.agent[0].addressStateProv">
+                    <input *ngIf="lease.serviceAgent" readonly type="text" [value]="agent.addressprovstate" [name]="agent.addressprovstate">
                     <label>province</label>
                 </div>
                 <div style="width: 15%;">
                     <input *ngIf="!lease.serviceAgent" readonly type="text" [value]="lease.rentalProperty.rentalPropertyOwners[0].ownerAddress.zipPostCode" [name]="lease.rentalProperty.rentalPropertyOwners[0].ownerAddress.zipPostCode">
-                    <input *ngIf="lease.serviceAgent" readonly type="text" [value]="lease.agent[0].addressZipPostCode" [name]="lease.agent[0].addressZipPostCode">
+                    <input *ngIf="lease.serviceAgent" readonly type="text" [value]="agent.addresspostzipcode" [name]="agent.addresspostzipcode">
                     <label>postal code</label>
                 </div>
             </div>
@@ -174,7 +174,7 @@
                 </div>
                 <div style="width: 25%;">
                     <input *ngIf="!lease.serviceAgent" readonly type="text" [value]="lease.rentalProperty.rentalPropertyOwners[0].contactTelephone" [name]="lease.rentalProperty.rentalPropertyOwners[0].contactTelephone" style="width: 90%;">
-                    <input *ngIf="lease.serviceAgent" readonly type="text" [value]="lease.agent[0].contztTel" [name]="lease.agent[0].contztTel" style="width: 90%;">
+                    <input *ngIf="lease.serviceAgent" readonly type="text" [value]="agent.telephone1" [name]="agent.telephone1" style="width: 90%;">
                     <label style="margin-left: -60px;">daytime phone number</label>
                 </div>
                 <div style="width: 8%;">
@@ -183,7 +183,7 @@
                 <div style="width: 25%;">
                     <!-- <input type="text" [value]="lease.rentalProperty.rentalPropertyOwners[0].contactTelephone" [name]="lease.rentalProperty.rentalPropertyOwners[0].contactTelephone" style="width: 90%;"> -->
                     <input *ngIf="!lease.serviceAgent" readonly type="text" [value]="lease.rentalProperty.rentalPropertyOwners[0].contactTelephone" [name]="lease.rentalProperty.rentalPropertyOwners[0].contactTelephone" style="width: 90%;">
-                    <input *ngIf="lease.serviceAgent" readonly type="text" [value]="lease.agent[0].contztTel" [name]="lease.agent[0].contztTel" style="width: 90%;">
+                    <input *ngIf="lease.serviceAgent" readonly type="text" [value]="agent.telephone2" [name]="agent.telephone2" style="width: 90%;">
                     <label style="margin-left: -60px;">other phone number</label>
                 </div>
                 <div style="width: 8%;">
@@ -192,7 +192,7 @@
                 <div style="width: 25%;">
                     <!-- <input type="text" [value]="lease.rentalProperty.rentalPropertyOwners[0].contactTelephone" [name]="lease.rentalProperty.rentalPropertyOwners[0].contactTelephone" style="width: 90%;"> -->
                     <input *ngIf="!lease.serviceAgent" readonly type="text" [value]="lease.rentalProperty.rentalPropertyOwners[0].contactTelephone" [name]="lease.rentalProperty.rentalPropertyOwners[0].contactTelephone" style="width: 90%;">
-                    <input *ngIf="lease.serviceAgent" readonly type="text" [value]="lease.agent[0].contactEmial" [name]="lease.agent[0].contactEmial" style="width: 90%;">
+                    <input *ngIf="lease.serviceAgent" readonly type="text" [value]="agent.email" [name]="agent.email" style="width: 90%;">
                     <label style="margin-left: -60px;">fax phone for services</label>
                 </div>
             </div>
@@ -1307,7 +1307,7 @@
                     c)
                 </div>
                 <div fxLayout="column" fxLayoutAlign="start" fxFlexFill fxFlex="90%" style="margin-left: 5px;">
-                    <span>Attached to this tenancy agreement, there <input type="checkbox" [checked]="lease.isAddendumAvailable"> &nbsp;is &nbsp;&nbsp;<input type="checkbox" [checked]="!lease.isAddendumAvailable"> is not &nbsp;&nbsp;an Addendum </span><br>
+                    <span>Attached to this tenancy agreement, there <input type="checkbox" [checked]="lease.isAddendumAvailable"> is &nbsp;&nbsp;<input type="checkbox" [checked]="!lease.isAddendumAvailable"> is not &nbsp;&nbsp;an Addendum </span><br>
                     <span style="margin-top: -13px;"><span style="font-style: italic;font-weight: bold;">If there is an Addendum attached,</span> provide the following information on the Addendum that forms part of thistenancy agreement:</span><br>
                     <span style="margin-top: -20px;"><span style="font-style: italic;"> Number of pages of the Addendum: </span> <input type="text" style="width: 30px;height: 30px;" value="1" name="1"> <span style="font-style: italic;"> Number of additional terms in the Addendum: </span>                    <input type="text" style="width: 30px;height: 30px;"></span>
                 </div>

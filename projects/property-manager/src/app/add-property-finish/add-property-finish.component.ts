@@ -24,7 +24,7 @@ export class AddPropertyFinishComponent implements OnInit {
 
   submit() { // Add validation here...for all fields if any formValue
     debugger;
-    console.log(this.addForm.value);
+    console.log('add form',this.addForm.value);
     // console.log(formValue);
     // this.store.dispatch(PropertyActions.addProperty({payload: this.addForm.value}));
     // this.location.back();
