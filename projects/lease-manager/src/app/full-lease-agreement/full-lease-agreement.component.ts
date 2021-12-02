@@ -91,12 +91,12 @@ export class FullLeaseAgreementComponent implements OnInit {
                       }
 
                       this.numberOfTenants = this.agreementDetails.tenant.length;
-                      this.numberOfLandlords = this.agreementDetails.rentalProperty.rentalPropertyOwners.length;
+                      this.numberOfLandlords = this.agreementDetails.rentalProperty.ownerProperty.length;
 
                       this.totalEntity = this.numberOfTenants + this.numberOfLandlords;
                       // console.log('total entity', this.totalPageNumber);
-                      // console.log('No. Tenants',this.numberOfTenants);
-                      // console.log('No. Landloard',this.numberOfLandlords);
+                      console.log('No. Tenants',this.numberOfTenants);
+                      console.log('No. Landloard',this.numberOfLandlords);
                       // console.log('agreement sent to rpt view', this.agreementDetails);
                     });
 

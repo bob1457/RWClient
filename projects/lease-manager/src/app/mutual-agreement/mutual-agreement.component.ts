@@ -9,9 +9,11 @@ export class MutualAgreementComponent implements OnInit {
 
   @Input() agreement;
 
-  constructor() { }
+  constructor() {    
+  }
 
   ngOnInit() {
+    console.log('rental info in mutual agreement', this.agreement);
   }
 
 }
