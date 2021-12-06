@@ -23,6 +23,7 @@ export class AgreementPartyView2Component implements OnInit {
 
   ngOnInit() {
 
+    console.log('lease in part 2', this.lease);
 
     if (this.landlordNo > 2 ) {
       switch (this.landlordNo) {
