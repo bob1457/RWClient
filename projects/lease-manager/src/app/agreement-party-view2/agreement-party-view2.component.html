@@ -249,7 +249,7 @@
         <p style="font-weight: bold; margin-bottom: -10px;margin-left: 15px;">
             Address:
         </p>
-        <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
+        <div fxLayout="row" fxLayoutAlign="start" fxFlexFill *ngIf="lease">
             <div *ngIf="lease.rentalProperty.ownerProperty[3]">
                 <div fxFlex="10%" style="margin-left: 15px;">
                     <input type="text">
@@ -270,7 +270,7 @@
                     <input type="text" [value]="lease.rentalProperty.ownerProperty[3].rentalPropertyOwner.ownerAddress.zipPostCode" [name]="lease.rentalProperty.ownerProperty[3].rentalPropertyOwner.ownerAddress.zipPostCode">
                 </div>
             </div>
-            <div *ngIf="!lease.rentalProperty.rentalPropertyOwners[3]">
+            <div *ngIf="!lease.rentalProperty.ownerProperty[3]">
                 <div fxFlex="10%" style="margin-left: 15px;">
                     <input type="text">
                 </div>
@@ -372,7 +372,7 @@
         <p style="font-weight: bold; margin-bottom: -10px;margin-left: 15px;">
             Full Legal Name:
         </p>
-        <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
+        <div fxLayout="row" fxLayoutAlign="start" fxFlexFill *ngIf="lease">
             <div *ngIf="lease.rentalProperty.ownerProperty[4]">
                 <div fxFlex="33%" style="margin-left: 15px;">
                     <input type="text" [value]="lease.rentalProperty.ownerProperty[4].rentalPropertyOwner.lastName" [name]="lease.rentalProperty.ownerProperty[4].rentalPropertyOwner.lastName">
@@ -384,7 +384,7 @@
                     <input type="text">
                 </div>
             </div>
-            <div *ngIf="!lease.rentalProperty.rentalPropertyOwners[4]">
+            <div *ngIf="!lease.rentalProperty.ownerProperty[4]">
                 <div fxFlex="33%" style="margin-left: 15px;">
                     <input type="text">
                 </div>
@@ -412,8 +412,8 @@
         <p style="font-weight: bold; margin-bottom: -10px;margin-left: 15px;">
             Address:
         </p>
-        <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
-            <div *ngIf="lease.rentalProperty.rentalPropertyOwners[4]">
+        <div fxLayout="row" fxLayoutAlign="start" fxFlexFill *ngIf="lease">
+            <div *ngIf="lease.rentalProperty.ownerProperty[4]">
                 <div fxFlex="10%" style="margin-left: 15px;">
                     <input type="text">
                 </div>
@@ -433,7 +433,7 @@
                     <input type="text" [value]="lease.rentalProperty.ownerProperty[4].rentalPropertyOwner.ownerAddress.zipPostCode" [name]="lease.rentalProperty.ownerProperty[4].rentalPropertyOwner.ownerAddress.zipPostCode">
                 </div>
             </div>
-            <div *ngIf="!lease.rentalProperty.rentalPropertyOwners[4]">
+            <div *ngIf="!lease.rentalProperty.ownerProperty[4]">
                 <div fxFlex="10%" style="margin-left: 15px;">
                     <input type="text">
                 </div>
@@ -476,7 +476,7 @@
             </div>
         </div>
         <p style="margin-top:-20px"></p>
-        <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
+        <div fxLayout="row" fxLayoutAlign="start" fxFlexFill *ngIf="lease">
             <div *ngIf="lease.rentalProperty.ownerProperty[4]" fxFlex="33%" style="margin-left: 15px;font-size: .8em;">
                 <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
                     <div fxFlex="30%">
@@ -490,7 +490,7 @@
                     Area Code <span style="margin-left: 15px;">Home phone number</span>
                 </div>
             </div>
-            <div *ngIf="!lease.rentalProperty.rentalPropertyOwners[4]" fxFlex="33%" style="margin-left: 15px;font-size: .8em;">
+            <div *ngIf="!lease.rentalProperty.ownerProperty[4]" fxFlex="33%" style="margin-left: 15px;font-size: .8em;">
                 <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
                     <div fxFlex="30%">
                         <input type="text">
