@@ -1,7 +1,7 @@
 <!-- <p>
   agreement-content works!
 </p> -->
-<div class="container" style="margin-top: 5px;margin-bottom: 5px;">
+<div class="container" style="margin-top: 5px;margin-bottom: 5px;" *ngIf="lease">
     <span style="font-weight: bold;color:#1150af;">RESIDENTIAL TENANCY AGREEMENT between:</span> <span style="font-style: italic;color:grey">(use full, correct legal names)</span>
     <p style="margin-top: 7px;">
         <span style="font-size: .9em;font-weight: bold;">the LANDLORD(S):</span> <span style="font-size: .75em;font-weight: bold;font-style: italic;">(if entry for landlord is a business name, use the ’last name’ field box to enter the full legal business name)</span>
@@ -406,7 +406,7 @@
                     </p>
                     <div style="margin-left: 35px;font-size: .9em; margin-top: -20px;">
                         The tenant will pay the rent of $ <input type="text" style="width: 10%;vertical-align: bottom;height: 30px;padding-left: 5px;" [value]="lease.rentAmount"> each <span style="font-size: initial;">(check one)</span> &nbsp;<input type="checkbox"
-                            [checked]="lease.rentFrequency == 'Daily'"> &nbsp; day <input type="checkbox" [checked]="lease.rentFrequency == 'Weekly'">&nbsp; week <input type="checkbox" [checked]="lease.rentFrequency == 'Monthly'">&nbsp; month to the landlord
+                            [checked]="lease.rentFrequency == 'Daily'"> day &nbsp; <input type="checkbox" [checked]="lease.rentFrequency == 'Weekly'"> week &nbsp; <input type="checkbox" [checked]="lease.rentFrequency == 'Monthly'"> month &nbsp;to the landlord
                         on the first day of the rental period which falls on the (due date, e.g., 1st, 2nd, 3rd, .... 31st) <input type="text" style="width: 7%;vertical-align: bottom;height: 25px;padding-left: 5px;" [value]="lease.rentDueOn"> day of each
                         <span style="font-size: initial;">(check one)</span>&nbsp;
                         <input type="checkbox">&nbsp;day <input type="checkbox"> &nbsp; week <input type="checkbox" checked="true"> &nbsp; month subject to rent increases given in accordance with the RTA.<br> The tenant must pay the rent on time. If the
