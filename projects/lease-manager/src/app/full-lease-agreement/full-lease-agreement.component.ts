@@ -10,6 +10,8 @@ import * as jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import * as html2pdf from 'html2pdf.js';
 import { User, getUserInfo } from '@lib/auth';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-full-lease-agreement',
@@ -29,11 +31,16 @@ export class FullLeaseAgreementComponent implements OnInit {
   totalPageNumber = 1;
   user: User;
 
+  uploadForm: FormGroup;
+  serverUrl = 'http://localhost:63533/api/Lease/agreement/save';
+
   @ViewChild('pdfdoc', {static: false}) pdfdoc: ElementRef;
 
   constructor(private store: Store<PropertyLeaseState>,
               private actRoute: ActivatedRoute,
               private location: Location,
+              private formBuilder: FormBuilder,
+              private httpClient: HttpClient,
               private router: Router) {
                 this.id = this.actRoute.snapshot.params.id;
                 console.log(this.id);
@@ -68,10 +75,16 @@ export class FullLeaseAgreementComponent implements OnInit {
               //       });
               }
 
+  finalPdf;
+
   ngOnInit() {
     debugger;
 
     this.agreement$ = this.store.select(leaseDetails);
+
+    this.uploadForm = this.formBuilder.group({
+      encodedFile: ['']
+    });
 
     // this.totalEntity = this.agreementDetails.rentalPropertyOwners.length + this.agreementDetails.tenant.length;
     // console.log('total entity', this.totalPageNumber);
@@ -131,6 +144,74 @@ export class FullLeaseAgreementComponent implements OnInit {
     };
 
     html2pdf().from(element).set(options).save();
+
+  }
+
+  save() {
+    // save pdf as base64 or blob and upload to server?
+    debugger;
+
+    const element = document.getElementById('pdfdoc');
+
+    const options = {
+      margin: 0.2,
+      filename: 'Rental_Agreement', // this.contract.managementContractTitle + '_' + timestamp + '_contract.pdf',
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { scale: 1 },
+      jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+    };
+
+
+
+    // html2pdf().from(element).output('datauristring').then(pdf => {
+    //   console.log('b64 file', pdf);
+    //   this.finalPdf = pdf;
+    //   const pdfFile = this.finalPdf.split(',')[1];
+
+    //   console.log('final doc 64', this.finalPdf.split(',')[1]);
+
+    //   // this.upLoadFile(pdfFile);
+
+    // });
+
+    html2pdf().from(element).output().then(pdf => {
+      const fileData = btoa(pdf); // generate base64 string
+      console.log('btoa file', fileData);
+
+      this.upLoadFile(fileData);
+      // debugger;
+      // this.httpClient.post<any>(this.serverUrl, fileData)
+      //   .subscribe(res => console.log('response', res));
+
+    });
+
+    // html2pdf().from(element).output('datauri');
+
+    // const blobPdf = new Blob([html2pdf().from(element).output('blob'), { type: 'application/pdf' }]);
+
+    // const blobUrl = URL.createObjectURL(blobPdf);
+
+    // // window.open(blobUrl);
+
+    // console.log('blob url', blobUrl);
+
+    // const file = blobPdf;
+
+    // this.uploadForm.get('document').setValue(file);
+    // this.upLoadFile(file);
+
+  }
+
+  private upLoadFile(file: any) {
+    debugger;
+    this.uploadForm.get('encodedFile').setValue(file);
+
+    // const formData = new FormData();
+
+    // formData.append('file', this.uploadForm.get('document').value);
+
+    this.httpClient.post<any>(this.serverUrl, this.uploadForm.value)
+      .subscribe(res => console.log('response', res));
 
   }
 
