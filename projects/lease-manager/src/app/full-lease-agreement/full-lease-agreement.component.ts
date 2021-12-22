@@ -30,6 +30,8 @@ export class FullLeaseAgreementComponent implements OnInit {
   pageNumber = 1;
   totalPageNumber = 1;
   user: User;
+  lease;
+  agent: User;
 
   uploadForm: FormGroup;
   serverUrl = 'http://localhost:63533/api/Lease/agreement/save';
@@ -49,8 +51,10 @@ export class FullLeaseAgreementComponent implements OnInit {
                   .subscribe(user => {
                     if (!user) {
                       this.user = JSON.parse(localStorage.getItem('auth'));
+                      this.agent = JSON.parse(localStorage.getItem('auth'));
                     } else {
                       this.user = user;
+                      this.agent = user;
                     }
                     console.log('current user', this.user);
                   });
@@ -98,6 +102,7 @@ export class FullLeaseAgreementComponent implements OnInit {
                     .subscribe(lease => {
                       if (lease) {
                         this.agreementDetails = lease;
+                        this.lease = lease;
                         localStorage.setItem('agreement', JSON.stringify(this.agreementDetails));
                       } else {
                         this.agreementDetails = JSON.parse(localStorage.getItem('agreement'));
@@ -140,7 +145,8 @@ export class FullLeaseAgreementComponent implements OnInit {
       filename:     'Rental_Agreement', // this.contract.managementContractTitle + '_' + timestamp + '_contract.pdf',
       image:        { type: 'jpeg', quality: 0.98 },
       html2canvas:  { scale: 1 },
-      jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
+      jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' },
+      // pagebreak: { before: '.beforeClass', after: ['#after1'], avoid: 'avoid-all' }
     };
 
     html2pdf().from(element).set(options).save();
