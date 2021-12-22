@@ -217,6 +217,7 @@
         </div>
         <div class="html2pdf__page-break"></div>
         <div style="margin-top: 20px;">
+            <!-- Page 2 Start -->
             <div fxLayout="column" fxLayoutAlign="start" fxFlexFill style="border: 1px solid;padding: 9px;padding-top: 4px;padding-bottom: 3px;">
 
                 <p style="font-weight: bold;margin-bottom: 0;"> 1.APPLICATION OF THE RESIDENTIAL TENANCY ACT
@@ -398,77 +399,76 @@
                     </div>
                 </div>
             </div>
-            <div>
-                <div fxLayout="column" fxLayoutAlign="start" fxFlexFill style="border:1px solid;padding: 9px;margin-top: -10px;padding-top: 4px; padding-bottom: 0px;">
-                    <p style="font-weight: bold;margin-bottom: 3px;"> 3.RENT <span style="font-style: italic;font-size: .9em;font-weight: 500;">(please fill in the information in the spaces provided)</span>
-                    </p>
-                    <p style="font-weight: 600;margin-left: 25px;font-size: .9em;margin-top: -5px;color: #2d2d2d;margin-bottom: 2px;">
-                        a) Payment of Rent:
-                    </p>
-                    <div style="margin-left: 35px;font-size: .9em; margin-top: -20px;">
-                        The tenant will pay the rent of $ <input type="text" style="width: 10%;vertical-align: bottom;height: 30px;padding-left: 5px;" [value]="lease.rentAmount"> each <span style="font-size: initial;">(check one)</span> &nbsp;<input type="checkbox"
-                            [checked]="lease.rentFrequency == 'Daily'"> day &nbsp; <input type="checkbox" [checked]="lease.rentFrequency == 'Weekly'"> week &nbsp; <input type="checkbox" [checked]="lease.rentFrequency == 'Monthly'"> month &nbsp;to the landlord
-                        on the first day of the rental period which falls on the (due date, e.g., 1st, 2nd, 3rd, .... 31st) <input type="text" style="width: 7%;vertical-align: bottom;height: 25px;padding-left: 5px;" [value]="lease.rentDueOn"> day of each
-                        <span style="font-size: initial;">(check one)</span>&nbsp;
-                        <input type="checkbox">&nbsp;day <input type="checkbox"> &nbsp; week <input type="checkbox" checked="true"> &nbsp; month subject to rent increases given in accordance with the RTA.<br> The tenant must pay the rent on time. If the
-                        rent is late, the landlord may issue a <span style="font-size: .85em;font-style: italic;">Notice to End Tenancy for Unpaid Rent</span> (form RTB-30) to the tenant, which may take effect not earlier than 10 days after the date the
-                        notice is given.
+            <div fxLayout="column" fxLayoutAlign="start" fxFlexFill style="border:1px solid;padding: 9px;margin-top: -10px;padding-top: 4px; padding-bottom: 0px;">
+                <p style="font-weight: bold;margin-bottom: 3px;"> 3.RENT <span style="font-style: italic;font-size: .9em;font-weight: 500;">(please fill in the information in the spaces provided)</span>
+                </p>
+                <p style="font-weight: 600;margin-left: 25px;font-size: .9em;margin-top: -5px;color: #2d2d2d;margin-bottom: 2px;">
+                    a) Payment of Rent:
+                </p>
+                <div style="margin-left: 35px;font-size: .9em; margin-top: -20px;">
+                    The tenant will pay the rent of $ <input type="text" style="width: 10%;vertical-align: bottom;height: 30px;padding-left: 5px;" [value]="lease.rentAmount"> each <span style="font-size: initial;">(check one)</span> &nbsp;<input type="checkbox"
+                        [checked]="lease.rentFrequency == 'Daily'"> day &nbsp; <input type="checkbox" [checked]="lease.rentFrequency == 'Weekly'"> week &nbsp; <input type="checkbox" [checked]="lease.rentFrequency == 'Monthly'"> month &nbsp;to the landlord
+                    on the first day of the rental period which falls on the (due date, e.g., 1st, 2nd, 3rd, .... 31st) <input type="text" style="width: 7%;vertical-align: bottom;height: 25px;padding-left: 5px;" [value]="lease.rentDueOn"> day of each
+                    <span style="font-size: initial;">(check one)</span>&nbsp;
+                    <input type="checkbox">&nbsp;day <input type="checkbox"> &nbsp; week <input type="checkbox" checked="true"> &nbsp; month subject to rent increases given in accordance with the RTA.<br> The tenant must pay the rent on time. If the rent
+                    is late, the landlord may issue a <span style="font-size: .85em;font-style: italic;">Notice to End Tenancy for Unpaid Rent</span> (form RTB-30) to the tenant, which may take effect not earlier than 10 days after the date the notice
+                    is given.
+                </div>
+                <p style="font-weight: 600;margin-left: 25px;font-size: .9em;color: #2d2d2d;margin-bottom: 2px;">
+                    b) What is included in the rent:<span style="font-size: .9em;font-style: italic;font-weight:500;">(Check only those that are included and provide additional information, if needed.)</span>
+                </p>
+                <div style="margin-left: 35px;font-size: .9em;">
+                    The landlord must not terminate, or restrict a service or facility that is essential to the tenant’s use of the rental unitas living accommodation, or that is a material term of the tenancy agreement.
+                </div>
+                <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
+                    <div fxFlex="17%" fxLayout="column" fxLayoutAlign="start" fxFlexFill>
+                        <p style="margin-left: 25px;font-size: .8em;margin-bottom: 5px;"><input type="checkbox" [checked]="lease.rentCoverage.water"> Water</p>
+                        <p style="margin-left: 25px;font-size: .8em;margin-bottom: 5px;"><input type="checkbox" [checked]="lease.rentCoverage.cablevison"> Cablevision</p>
+                        <p style="margin-left: 25px;font-size: .8em;margin-bottom: 5px;"><input type="checkbox" [checked]="lease.rentCoverage.electricity"> Electricity</p>
+                        <p style="margin-left: 25px;font-size: .8em;margin-bottom: 5px;"><input type="checkbox" [checked]="lease.rentCoverage.internet"> Internet</p>
+                        <p style="margin-left: 25px;font-size: .8em;margin-bottom: 5px;"><input type="checkbox" [checked]="lease.rentCoverage.heat"> Heat</p>
+                        <!-- <input type="checkbox"> Additional information -->
                     </div>
-                    <p style="font-weight: 600;margin-left: 25px;font-size: .9em;color: #2d2d2d;margin-bottom: 2px;">
-                        b) What is included in the rent:<span style="font-size: .9em;font-style: italic;font-weight:500;">(Check only those that are included and provide additional information, if needed.)</span>
-                    </p>
-                    <div style="margin-left: 35px;font-size: .9em;">
-                        The landlord must not terminate, or restrict a service or facility that is essential to the tenant’s use of the rental unitas living accommodation, or that is a material term of the tenancy agreement.
+                    <div fxFlex="20%" fxLayout="column" fxLayoutAlign="start" fxFlexFill>
+                        <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox" [checked]="lease.rentCoverage.naturalGas"> Natural gas</p>
+                        <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox" [checked]="lease.rentCoverage.sewageDisposal"> Sewage disposal</p>
+                        <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox" [checked]="lease.rentCoverage.snowRemoval"> snow removal</p>
+                        <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox" [checked]="lease.rentCoverage.storage"> Storage</p>
+                        <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox" [checked]="lease.rentCoverage.recreationFacility"> reacreational facility</p>
+                        <!-- <input type="checkbox"> Additional information -->
                     </div>
-                    <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
-                        <div fxFlex="17%" fxLayout="column" fxLayoutAlign="start" fxFlexFill>
-                            <p style="margin-left: 25px;font-size: .8em;margin-bottom: 5px;"><input type="checkbox" [checked]="lease.rentCoverage.water"> Water</p>
-                            <p style="margin-left: 25px;font-size: .8em;margin-bottom: 5px;"><input type="checkbox" [checked]="lease.rentCoverage.cablevison"> Cablevision</p>
-                            <p style="margin-left: 25px;font-size: .8em;margin-bottom: 5px;"><input type="checkbox" [checked]="lease.rentCoverage.electricity"> Electricity</p>
-                            <p style="margin-left: 25px;font-size: .8em;margin-bottom: 5px;"><input type="checkbox" [checked]="lease.rentCoverage.internet"> Internet</p>
-                            <p style="margin-left: 25px;font-size: .8em;margin-bottom: 5px;"><input type="checkbox" [checked]="lease.rentCoverage.heat"> Heat</p>
-                            <!-- <input type="checkbox"> Additional information -->
-                        </div>
-                        <div fxFlex="20%" fxLayout="column" fxLayoutAlign="start" fxFlexFill>
-                            <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox" [checked]="lease.rentCoverage.naturalGas"> Natural gas</p>
-                            <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox" [checked]="lease.rentCoverage.sewageDisposal"> Sewage disposal</p>
-                            <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox" [checked]="lease.rentCoverage.snowRemoval"> snow removal</p>
-                            <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox" [checked]="lease.rentCoverage.storage"> Storage</p>
-                            <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox" [checked]="lease.rentCoverage.recreationFacility"> reacreational facility</p>
-                            <!-- <input type="checkbox"> Additional information -->
-                        </div>
-                        <div fxFlex="25%" fxLayout="column" fxLayoutAlign="start" fxFlexFill>
-                            <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox" [checked]="lease.rentCoverage.garbageCollection"> Garbage collection</p>
-                            <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox" [checked]="lease.rentCoverage.recycleServices"> Recycling services</p>
-                            <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox" [checked]="lease.rentCoverage.kitchenScrapCollection"> Kitchen scrap services</p>
-                            <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox"> Laundry (coin-op)</p>
-                            <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox" [checked]="lease.rentCoverage.laundry"> Laundry (free)</p>
-                            <!-- <input type="checkbox"> Additional information -->
-                        </div>
-                        <div fxFlex="20%" fxLayout="column" fxLayoutAlign="start" fxFlexFill>
-                            <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox" [checked]="lease.rentCoverage.regigerator"> Refrigerator</p>
-                            <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox" [checked]="lease.rentCoverage.dishwasher"> Dishwasher</p>
-                            <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox" [checked]="lease.rentCoverage.stoveOven"> Stove andoOven</p>
-                            <p style="font-size: .9em;margin-bottom: 5px;"><input type="checkbox" [checked]="lease.rentCoverage.windowCovering"> Window coverings</p>
-                            <p style="font-size: .9em;margin-bottom: 5px;"><input type="checkbox" [checked]="lease.rentCoverage.furniture"> Furniture)</p>
-                            <!-- <input type="checkbox"> Additional information -->
-                        </div>
-                        <div fxFlex="25%" fxLayout="column" fxLayoutAlign="start" fxFlexFill>
-                            <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox" [checked]="lease.rentCoverage.carpets"> Carpets</p>
-                            <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox" [checked]="lease.rentCoverage.parkingStall >= 1"> Parking for {{lease.rentCoverage.parkingStall}} &nbsp;vehicle(s)</p>
-                            <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox"> Other <input type="text" style="width: 60%; height: 30px;margin-top:-12px;"></p>
-                            <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox"> Other <input type="text" style="width: 60%; height: 30px;margin-top:-15px;"></p>
-                            <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox"> Other <input type="text" style="width: 60%; height: 30px;margin-top:-15px;"></p>
-                            <!-- <input type="checkbox"> Additional information -->
-                        </div>
+                    <div fxFlex="25%" fxLayout="column" fxLayoutAlign="start" fxFlexFill>
+                        <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox" [checked]="lease.rentCoverage.garbageCollection"> Garbage collection</p>
+                        <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox" [checked]="lease.rentCoverage.recycleServices"> Recycling services</p>
+                        <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox" [checked]="lease.rentCoverage.kitchenScrapCollection"> Kitchen scrap services</p>
+                        <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox"> Laundry (coin-op)</p>
+                        <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox" [checked]="lease.rentCoverage.laundry"> Laundry (free)</p>
+                        <!-- <input type="checkbox"> Additional information -->
                     </div>
-                    <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
-                        <p fxFlex="25%" style="font-size: .8em;margin-bottom: 15px;margin-left: 25px;"><input type="checkbox" [checked]="lease.notes.length > 1"> Additional Information</p>
-                        <input fxFlex="80%" type="text" style="height: 25px;margin-top:0px;" [value]="lease.notes">
+                    <div fxFlex="20%" fxLayout="column" fxLayoutAlign="start" fxFlexFill>
+                        <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox" [checked]="lease.rentCoverage.regigerator"> Refrigerator</p>
+                        <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox" [checked]="lease.rentCoverage.dishwasher"> Dishwasher</p>
+                        <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox" [checked]="lease.rentCoverage.stoveOven"> Stove andoOven</p>
+                        <p style="font-size: .9em;margin-bottom: 5px;"><input type="checkbox" [checked]="lease.rentCoverage.windowCovering"> Window coverings</p>
+                        <p style="font-size: .9em;margin-bottom: 5px;"><input type="checkbox" [checked]="lease.rentCoverage.furniture"> Furniture)</p>
+                        <!-- <input type="checkbox"> Additional information -->
+                    </div>
+                    <div fxFlex="25%" fxLayout="column" fxLayoutAlign="start" fxFlexFill>
+                        <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox" [checked]="lease.rentCoverage.carpets"> Carpets</p>
+                        <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox" [checked]="lease.rentCoverage.parkingStall >= 1"> Parking for {{lease.rentCoverage.parkingStall}} &nbsp;vehicle(s)</p>
+                        <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox"> Other <input type="text" style="width: 60%; height: 30px;margin-top:-12px;"></p>
+                        <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox"> Other <input type="text" style="width: 60%; height: 30px;margin-top:-15px;"></p>
+                        <p style="font-size: .8em;margin-bottom: 5px;"><input type="checkbox"> Other <input type="text" style="width: 60%; height: 30px;margin-top:-15px;"></p>
+                        <!-- <input type="checkbox"> Additional information -->
                     </div>
                 </div>
-                <!-- previous page break -->
+                <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
+                    <p fxFlex="25%" style="font-size: .8em;margin-bottom: 15px;margin-left: 25px;"><input type="checkbox" [checked]="lease.notes.length > 1"> Additional Information</p>
+                    <input fxFlex="80%" type="text" style="height: 25px;margin-top:0px;" [value]="lease.notes">
+                </div>
             </div>
+            <!-- previous page break -->
+
 
             <!--Previous page break--->
         </div>
@@ -487,6 +487,7 @@
         <div class="html2pdf__page-break"></div>
 
         <div style="margin-top: 15px;">
+            <!-- Page 3 Start -->
             <div fxLayout="column" fxLayoutAlign="start" fxFlexFill style="border:1px solid;padding: 9px;padding-top: 4px; padding-bottom: 0px;">
                 <p style="font-weight: bold;margin-bottom: 3px;margin-top: 5px;"> 4. SECURITY DEPOSIT AND PET DAMAGE DEPOSIT
                 </p>
@@ -558,134 +559,135 @@
 
                 </div>
             </div>
-        </div>
-        <div fxLayout="row" fxLayoutAlign="start" fxFlexFill style="margin-top: 10px;font-size: .9em;">
-            <div fxFlex="50%" style="border: 1px solid;padding: 6px;margin-top: 5px;margin-right: 4px;">
-                <p style="font-weight: bold;margin-bottom: 0;margin-top: 5px;"> 5. PETS
-                </p>
-                <p style="margin-left: 15px;margin-bottom: 0;font-size: .95em;">
-                    Any term in this tenancy agreement that prohibits, or restricts the size of, a pet or that governs the tenant's obligations regarding the keeping of a pet on the residential property is subject to the rights and restrictions under the
-                    <span style="font-style:italic;">Guide Dog and Service</span> Dog Act.
-                </p>
-                <p style="font-weight: bold;margin-bottom: 0;margin-top: 5px;"> 6. CONDITION INSPECTIONS
-                </p>
-                <div style="margin-left: 15px;margin-bottom: 5px;    font-size: .95em;">
-                    <div fxLayout="column" fxLayoutAlign="start" fxFlexFill>
-                        <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
-                            <div fxFlex="2%" style="margin-right: 5px;">
-                                1)
-                            </div>
-                            <div fxLayout="column" fxLayoutAlign="start" fxFlexFill fxFlex="90%" style="margin-left: 5px;">
-                                <span style="margin-left: 5px;">In accordance with sections 23 and 35 of the Act [condition inspections] and Part 3 of the regulation [condition inspections], the landlord and tenant must inspect the condition of the rental unit together</span>
-                                <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
-                                    <div fxFlex="2%" style="margin-right: 5px;margin-left: 5px;">
-                                        a)
+            <div fxLayout="row" fxLayoutAlign="start" fxFlexFill style="margin-top: 10px;font-size: .9em;">
+                <div fxFlex="50%" style="border: 1px solid;padding: 6px;margin-top: 5px;margin-right: 4px;">
+                    <p style="font-weight: bold;margin-bottom: 0;margin-top: 5px;"> 5. PETS
+                    </p>
+                    <p style="margin-left: 15px;margin-bottom: 0;font-size: .95em;">
+                        Any term in this tenancy agreement that prohibits, or restricts the size of, a pet or that governs the tenant's obligations regarding the keeping of a pet on the residential property is subject to the rights and restrictions under the
+                        <span style="font-style:italic;">Guide Dog and Service</span> Dog Act.
+                    </p>
+                    <p style="font-weight: bold;margin-bottom: 0;margin-top: 5px;"> 6. CONDITION INSPECTIONS
+                    </p>
+                    <div style="margin-left: 15px;margin-bottom: 5px;    font-size: .95em;">
+                        <div fxLayout="column" fxLayoutAlign="start" fxFlexFill>
+                            <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
+                                <div fxFlex="2%" style="margin-right: 5px;">
+                                    1)
+                                </div>
+                                <div fxLayout="column" fxLayoutAlign="start" fxFlexFill fxFlex="90%" style="margin-left: 5px;">
+                                    <span style="margin-left: 5px;">In accordance with sections 23 and 35 of the Act [condition inspections] and Part 3 of the regulation [condition inspections], the landlord and tenant must inspect the condition of the rental unit together</span>
+                                    <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
+                                        <div fxFlex="2%" style="margin-right: 5px;margin-left: 5px;">
+                                            a)
+                                        </div>
+                                        <div fxFlex="90%" style="margin-left: 5px;">
+                                            when the tenant is entitled to possession,
+                                        </div>
+                                        <!-- <div fxFlex="2%" style="margin-right: 5px;margin-left: 5px;">
+                                              b)
+                                          </div>
+                                          <div fxFlex="90%" style="margin-left: 5px;">
+                                              when the tenant starts keeping a pet during thetenancy, if a condition inspection was notcompleted at the start of the tenancy, and
+                                          </div>
+                                          <div fxFlex="2%" style="margin-right: 5px;margin-left: 5px;">
+                                              c)
+                                          </div>
+                                          <div fxFlex="90%" style="margin-left: 5px;">
+                                              at the end of the tenancy.
+                                          </div> -->
                                     </div>
-                                    <div fxFlex="90%" style="margin-left: 5px;">
-                                        when the tenant is entitled to possession,
-                                    </div>
-                                    <!-- <div fxFlex="2%" style="margin-right: 5px;margin-left: 5px;">
+                                    <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
+                                        <div fxFlex="2%" style="margin-right: 5px;margin-left: 5px;">
                                             b)
                                         </div>
                                         <div fxFlex="90%" style="margin-left: 5px;">
                                             when the tenant starts keeping a pet during thetenancy, if a condition inspection was notcompleted at the start of the tenancy, and
                                         </div>
+                                    </div>
+                                    <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
                                         <div fxFlex="2%" style="margin-right: 5px;margin-left: 5px;">
                                             c)
                                         </div>
                                         <div fxFlex="90%" style="margin-left: 5px;">
                                             at the end of the tenancy.
-                                        </div> -->
-                                </div>
-                                <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
-                                    <div fxFlex="2%" style="margin-right: 5px;margin-left: 5px;">
-                                        b)
+                                        </div>
                                     </div>
-                                    <div fxFlex="90%" style="margin-left: 5px;">
-                                        when the tenant starts keeping a pet during thetenancy, if a condition inspection was notcompleted at the start of the tenancy, and
-                                    </div>
-                                </div>
-                                <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
-                                    <div fxFlex="2%" style="margin-right: 5px;margin-left: 5px;">
-                                        c)
-                                    </div>
-                                    <div fxFlex="90%" style="margin-left: 5px;">
-                                        at the end of the tenancy.
-                                    </div>
-                                </div>
 
+                                </div>
+                            </div>
+                            <div>
+                                <div fxFlex="2%" style="margin-right: 5px;">
+                                    2)
+                                </div>
+                                <div fxFlex="90%" style="margin-left: 5px;">
+                                    The landlord and tenant may agree on a different day for the condition inspection.
+                                </div>
+                            </div>
+                            <div>
+                                <div fxFlex="2%" style="margin-right: 5px;">
+                                    3)
+                                </div>
+                                <div fxFlex="90%" style="margin-left: 5px;">
+                                    The right of the tenant or the landlord to claim against a security deposit or a pet damage deposit,or both, for damage to residential property is extinguished if that party does not comply with section 24 and 36 of the Residential Tenancy Act[consequences
+                                    if report requirements not met].
+                                </div>
                             </div>
                         </div>
-                        <div>
+                    </div>
+                </div>
+                <div fxFlex="50%" style="border: 1px solid;padding: 6px;margin-top: 5px;font-size: .95em;">
+                    <p style="font-weight: bold;margin-bottom: 0;margin-top: 5px;"> 7. PAYMENT OF RENT
+                    </p>
+                    <div style="margin-left: 15px;margin-bottom: 5px;">
+                        <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
+                            <div fxFlex="2%" style="margin-right: 5px;">
+                                1)
+                            </div>
+                            <div fxFlex="90%" style="margin-left: 5px;">
+                                The tenant must pay the rent on time, unless the tenant is permitted under the Act to deduct fromthe rent. If the rent is unpaid, the landlord may issue a 10 Day Notice to End Tenancy (form RTB-30) to the tenant, which may take effect not earlier than
+                                10 days after the date the tenant receives the notice.
+                            </div>
+                        </div>
+                    </div>
+                    <div style="margin-left: 15px;margin-bottom: 5px;">
+                        <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
                             <div fxFlex="2%" style="margin-right: 5px;">
                                 2)
                             </div>
                             <div fxFlex="90%" style="margin-left: 5px;">
-                                The landlord and tenant may agree on a different day for the condition inspection.
+                                The landlord must not take away or make the tenant pay extra for a service or facility that is already included in the rent, unless a reduction is made under section 27 (2) of the Act.
                             </div>
                         </div>
-                        <div>
+
+                    </div>
+                    <div style="margin-left: 15px;margin-bottom: 5px;">
+                        <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
                             <div fxFlex="2%" style="margin-right: 5px;">
                                 3)
                             </div>
                             <div fxFlex="90%" style="margin-left: 5px;">
-                                The right of the tenant or the landlord to claim against a security deposit or a pet damage deposit,or both, for damage to residential property is extinguished if that party does not comply with section 24 and 36 of the Residential Tenancy Act[consequences
-                                if report requirements not met].
+                                The landlord must give the tenant a receipt for rent paid in cash.
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div fxFlex="50%" style="border: 1px solid;padding: 6px;margin-top: 5px;font-size: .95em;">
-                <p style="font-weight: bold;margin-bottom: 0;margin-top: 5px;"> 7. PAYMENT OF RENT
-                </p>
-                <div style="margin-left: 15px;margin-bottom: 5px;">
-                    <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
-                        <div fxFlex="2%" style="margin-right: 5px;">
-                            1)
-                        </div>
-                        <div fxFlex="90%" style="margin-left: 5px;">
-                            The tenant must pay the rent on time, unless the tenant is permitted under the Act to deduct fromthe rent. If the rent is unpaid, the landlord may issue a 10 Day Notice to End Tenancy (form RTB-30) to the tenant, which may take effect not earlier than
-                            10 days after the date the tenant receives the notice.
-                        </div>
-                    </div>
-                </div>
-                <div style="margin-left: 15px;margin-bottom: 5px;">
-                    <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
-                        <div fxFlex="2%" style="margin-right: 5px;">
-                            2)
-                        </div>
-                        <div fxFlex="90%" style="margin-left: 5px;">
-                            The landlord must not take away or make the tenant pay extra for a service or facility that is already included in the rent, unless a reduction is made under section 27 (2) of the Act.
+                    <div style="margin-left: 15px;margin-bottom: 5px;">
+                        <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
+                            <div fxFlex="2%" style="margin-right: 5px;">
+                                4)
+                            </div>
+                            <div fxFlex="90%" style="margin-left: 5px;">
+                                The landlord must return to the tenant on or before the last day of the tenancy any post-dated cheques for rent that remain in the possession of the landlord. If the landlord does not have a forwardinga ddress for the tenant and the tenant has vacated
+                                the premises without notice to the landlord, the landlord must forward any post-dated cheques for rent to the tenant when the tenant provides a for- warding address in writing.
+                            </div>
                         </div>
                     </div>
 
-                </div>
-                <div style="margin-left: 15px;margin-bottom: 5px;">
-                    <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
-                        <div fxFlex="2%" style="margin-right: 5px;">
-                            3)
-                        </div>
-                        <div fxFlex="90%" style="margin-left: 5px;">
-                            The landlord must give the tenant a receipt for rent paid in cash.
-                        </div>
-                    </div>
-                </div>
-                <div style="margin-left: 15px;margin-bottom: 5px;">
-                    <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
-                        <div fxFlex="2%" style="margin-right: 5px;">
-                            4)
-                        </div>
-                        <div fxFlex="90%" style="margin-left: 5px;">
-                            The landlord must return to the tenant on or before the last day of the tenancy any post-dated cheques for rent that remain in the possession of the landlord. If the landlord does not have a forwardinga ddress for the tenant and the tenant has vacated
-                            the premises without notice to the landlord, the landlord must forward any post-dated cheques for rent to the tenant when the tenant provides a for- warding address in writing.
-                        </div>
-                    </div>
                 </div>
 
             </div>
-
         </div>
+
         <!-- <p style="margin-bottom: 3px;"></p> -->
         <div fxLayout="row" fxLayoutAlign="start" fxFlexFill style="border-top: 10px solid #1150af;">
             <div style="width: 25%;">
