@@ -146,7 +146,7 @@ export class FullLeaseAgreementComponent implements OnInit {
       image:        { type: 'jpeg', quality: 0.98 },
       html2canvas:  { scale: 1 },
       jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' },
-      // pagebreak: { before: '.beforeClass', after: ['#after1'], avoid: 'avoid-all' }
+    // pagebreak: { before: '.beforeClass', after: ['#after1'], avoid: 'avoid-all' }
     };
 
     html2pdf().from(element).set(options).save();
