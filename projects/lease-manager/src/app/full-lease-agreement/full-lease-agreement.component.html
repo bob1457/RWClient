@@ -21,7 +21,15 @@
 
 </div>
 <div fxLayout="row" fxLayoutGap="7px" fxLayoutAlign="end center" class="button" style="margin-top: 30px;">
-    <button type="button" mat-raised-button color="primary" (click)="save()"><mat-icon style="color: green;">save_as</mat-icon> &nbsp;SAVE</button>
+    <!-- <button type="button" mat-raised-button color="primary" (click)="save()"><mat-icon style="color: green;">save_as</mat-icon> &nbsp;SAVE</button> -->
+    <div *ngIf="done">Done...</div>
+    <div *ngIf="saving"><img src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="></div>
+    <button type="button" mat-raised-button color="primary" [matMenuTriggerFor]="appMenu"><mat-icon style="color: green;">settings_suggest</mat-icon> &nbsp;More options...</button>
     <button type="button" mat-raised-button color="primary" (click)="download()"><mat-icon style="color: green;">file_download</mat-icon> &nbsp;Download PDF</button>
     <button mat-raised-button color="accent" (click)="Ok()">Ok</button>
 </div>
+
+<mat-menu #appMenu="matMenu">
+    <button class="menu-button" mat-menu-item (click)="save()"><mat-icon style="color: green;">save_as</mat-icon>&nbsp;Save final version</button>
+    <button mat-menu-item><mat-icon style="color: green;">upload_file</mat-icon>&nbsp;Upload signed version</button>
+</mat-menu>

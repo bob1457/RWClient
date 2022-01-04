@@ -32,6 +32,8 @@ export class FullLeaseAgreementComponent implements OnInit {
   user: User;
   lease;
   agent: User;
+  saving = false;
+  done = false;
 
   uploadForm: FormGroup;
   serverUrl = 'http://localhost:63533/api/Lease/agreement/save';
@@ -156,6 +158,7 @@ export class FullLeaseAgreementComponent implements OnInit {
   save() {
     // save pdf as base64 or blob and upload to server?
     debugger;
+    this.saving = true;
 
     const element = document.getElementById('pdfdoc');
 
@@ -184,6 +187,7 @@ export class FullLeaseAgreementComponent implements OnInit {
       const fileData = btoa(pdf); // generate base64 string
       console.log('btoa file', fileData);
 
+      // this.saving = true;
       this.upLoadFile(fileData);
       // debugger;
       // this.httpClient.post<any>(this.serverUrl, fileData)
@@ -217,7 +221,13 @@ export class FullLeaseAgreementComponent implements OnInit {
     // formData.append('file', this.uploadForm.get('document').value);
 
     this.httpClient.post<any>(this.serverUrl, this.uploadForm.value)
-      .subscribe(res => console.log('response', res));
+      .subscribe(res => {
+        this.saving = false;
+        this.done = true;
+        setTimeout(() => { this.done = false }, 2000 );
+        console.log('response', res);
+        // function setDoneFalse() { this.done = false; }
+      });
 
   }
 
