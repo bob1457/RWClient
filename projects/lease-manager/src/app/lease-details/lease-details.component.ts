@@ -85,6 +85,7 @@ export class LeaseDetailsComponent implements OnInit, AfterContentChecked {
   removeAddendumForm: FormGroup;
   leaseAddendumUpdateForm: FormGroup;
   // updateWorkOrderForm: FormGroup;
+  serverBaseUrl = 'http://localhost:63533/';
 
   vendors: any [];
   vendors$: Observable<Vendor[]>;

@@ -35,6 +35,7 @@ export class FullLeaseAgreementComponent implements OnInit {
   saving = false;
   done = false;
 
+
   uploadForm: FormGroup;
   serverUrl = 'http://localhost:63533/api/Lease/agreement/save';
 
@@ -89,6 +90,7 @@ export class FullLeaseAgreementComponent implements OnInit {
     this.agreement$ = this.store.select(leaseDetails);
 
     this.uploadForm = this.formBuilder.group({
+      leaseId: [0],
       encodedFile: ['']
     });
 
@@ -215,10 +217,14 @@ export class FullLeaseAgreementComponent implements OnInit {
   private upLoadFile(file: any) {
     debugger;
     this.uploadForm.get('encodedFile').setValue(file);
+    this.uploadForm.patchValue({
+      leaseId: this.lease.id
+    });
 
     // const formData = new FormData();
 
     // formData.append('file', this.uploadForm.get('document').value);
+    console.log('upload form', this.uploadForm.value);
 
     this.httpClient.post<any>(this.serverUrl, this.uploadForm.value)
       .subscribe(res => {
