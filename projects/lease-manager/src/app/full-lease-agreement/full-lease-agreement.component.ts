@@ -12,6 +12,7 @@ import * as html2pdf from 'html2pdf.js';
 import { User, getUserInfo } from '@lib/auth';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { LeaseService } from '@lib/app-core';
 
 @Component({
   selector: 'app-full-lease-agreement',
@@ -45,6 +46,7 @@ export class FullLeaseAgreementComponent implements OnInit {
               private actRoute: ActivatedRoute,
               private location: Location,
               private formBuilder: FormBuilder,
+              private leaseService: LeaseService,
               private httpClient: HttpClient,
               private router: Router) {
                 this.id = this.actRoute.snapshot.params.id;
@@ -139,6 +141,36 @@ export class FullLeaseAgreementComponent implements OnInit {
     this.location.back();
   }
 
+  openInput() {
+    document.getElementById('fileInput').click();
+  }
+
+  onChange(files) {
+    debugger;
+    // const file = files.[0];
+    this.saving = true;
+    console.log(files);
+
+    // this.showErr = false;
+
+    if (files[0].type === 'application/pdf') {
+      // this.store.dispatch(uploadPropertyImage({ payload: files, rentalPropertyId: this.listing.rentalPropertyId }));
+      // alert('ACCEPTED !!!');
+      this.leaseService.uploadLeseAgreement(files, this.lease.id).subscribe(res => {
+        this.saving = false;
+        this.done = true;
+        setTimeout(() => { this.done = false; }, 2000);
+        console.log('response', res);
+      });
+
+    } else {
+      alert('ONLY PDF files are accepted');
+      // this.showErr = true;
+    }
+
+
+  }
+
   download() {
     debugger;
 
@@ -226,14 +258,22 @@ export class FullLeaseAgreementComponent implements OnInit {
     // formData.append('file', this.uploadForm.get('document').value);
     console.log('upload form', this.uploadForm.value);
 
-    this.httpClient.post<any>(this.serverUrl, this.uploadForm.value)
-      .subscribe(res => {
+    this.leaseService.saveFinalAgreement(this.uploadForm.value).subscribe(
+      res => {
         this.saving = false;
         this.done = true;
-        setTimeout(() => { this.done = false }, 2000 );
+        setTimeout(() => { this.done = false; }, 2000);
         console.log('response', res);
-        // function setDoneFalse() { this.done = false; }
       });
+
+    // this.httpClient.post<any>(this.serverUrl, this.uploadForm.value)
+    //   .subscribe(res => {
+    //     this.saving = false;
+    //     this.done = true;
+    //     setTimeout(() => { this.done = false }, 2000 );
+    //     console.log('response', res);
+    //     // function setDoneFalse() { this.done = false; }
+    //   });
 
   }
 

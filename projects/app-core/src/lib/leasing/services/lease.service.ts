@@ -251,4 +251,27 @@ export class LeaseService {
     return this.http.post<any>(`${this.baseUrl}/Lease/updateLeaseAddendumState`, data);
   }
 
+  uploadLeseAgreement(files, id: any) {
+    debugger;
+
+    if (files.length === 0) {
+      return;
+    }
+
+    // const fileToUpload = files[0] as File;
+    let fileToUpload = <File>files[0];
+
+    const formData = new FormData();
+    formData.append('file', fileToUpload, fileToUpload.name);
+    formData.append('leaseId', id);
+
+    return this.http.post(`${this.baseUrl}/Lease/agreement/upload`, formData);
+
+  }
+
+  saveFinalAgreement(data) {
+    debugger;
+    return this.http.post<any>(`${this.baseUrl}/Lease/agreement/save`, data);
+  }
+
 }

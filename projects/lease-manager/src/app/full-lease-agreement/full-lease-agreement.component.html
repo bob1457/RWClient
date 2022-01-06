@@ -31,5 +31,7 @@
 
 <mat-menu #appMenu="matMenu">
     <button class="menu-button" mat-menu-item (click)="save()"><mat-icon style="color: green;">save_as</mat-icon>&nbsp;Save final version</button>
-    <button mat-menu-item><mat-icon style="color: green;">upload_file</mat-icon>&nbsp;Upload signed version</button>
+    <button mat-menu-item (click)="openInput()"><mat-icon style="color: green;" >upload_file</mat-icon>&nbsp;Upload signed version</button>
 </mat-menu>
+
+<input #file id="fileInput" (change)="onChange(file.files)" hidden type="file" accept="application/pdf">
