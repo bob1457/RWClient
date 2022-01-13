@@ -50,6 +50,7 @@ import { AddStrataComponent } from './add-strata/add-strata.component';
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 import { ContractClauseContentComponent } from './contract-clause-content/contract-clause-content.component';
 import { CustomContractClauseComponent } from './custom-contract-clause/custom-contract-clause.component';
+import { RichTextEditorAllModule } from '@syncfusion/ej2-angular-richtexteditor';
 
 const routes: Routes = [
   { path: '', component: PropertyHomeComponent,
@@ -120,6 +121,7 @@ const routes: Routes = [
     MatSortModule,
     MatPaginatorModule,
     ReactiveFormsModule,
+    RichTextEditorAllModule,
     NgxMaskModule.forRoot(),
     RouterModule.forChild(routes),
     StoreModule.forFeature('property', p_reducer, {metaReducers})
