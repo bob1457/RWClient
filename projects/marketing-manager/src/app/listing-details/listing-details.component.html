@@ -110,10 +110,15 @@
                                         <span class="icon-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
                                         <input type="text" id="title" formControlName="title" matInput placeholder="Listing Title" [ngModel]="listing.title">
                                     </mat-form-field>
-                                    <mat-form-field class="listing-full-width ">
-                                        <!-- <span class="icon-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span> -->
-                                        <textarea type="text" style="height: 80px;" id="listingDesc" formControlName="listingDesc" matInput placeholder="Listing Description" [ngModel]="listing.listingDesc"></textarea>
-                                    </mat-form-field>
+                                    <!-- <mat-form-field class="listing-full-width "> -->
+                                    <!-- <span class="icon-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span> -->
+                                    <!-- <textarea type="text" style="height: 80px;" id="listingDesc" formControlName="listingDesc" matInput placeholder="Listing Description" [ngModel]="listing.listingDesc"></textarea> -->
+
+                                    <!-- </mat-form-field> -->
+                                    <div class="listing-full-width ">
+                                        <ejs-richtexteditor id='defaultRTE' #fromRTE formControlName="listingDesc" [(ngModel)]='listDesc'></ejs-richtexteditor>
+                                    </div>
+
                                     <mat-form-field class="listing-full-width ">
                                         <span class="icon-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
                                         <input type="number" id="monthlyRent" formControlName="monthlyRent" matInput placeholder="Monthly Rent (CAD$)" [ngModel]="listing.monthlyRent">

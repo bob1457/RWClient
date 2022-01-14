@@ -34,6 +34,7 @@ import { metaReducers } from './store/metaReducers';
 import { EmpyStatusPipe } from './empy-status.pipe';
 import { ImStatusPipe } from './im-status.pipe';
 import { ReferenceTypePipe } from './reference-type.pipe';
+import { RichTextEditorAllModule } from '@syncfusion/ej2-angular-richtexteditor';
 
 
 const routes: Routes = [
@@ -89,6 +90,7 @@ const routes: Routes = [
     FlexLayoutModule,
     FormsModule,
     ReactiveFormsModule,
+    RichTextEditorAllModule,
     RouterModule.forChild(routes),
     StoreModule.forFeature('marketing', m_reducer, {metaReducers}),
     EffectsModule.forFeature([MarketingEffects])

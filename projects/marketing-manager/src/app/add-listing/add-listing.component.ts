@@ -7,11 +7,13 @@ import { MarketingService } from '@lib/app-core';
 import { allRentalProperties } from '../store/reducers';
 import { getAllRentalProperties, addPropertyListing } from '../store/actions/marketing.actions';
 import { Observable } from 'rxjs';
+import { ToolbarService, LinkService, ImageService, HtmlEditorService, TableService } from '@syncfusion/ej2-angular-richtexteditor';
 
 @Component({
   selector: 'app-add-listing',
   templateUrl: './add-listing.component.html',
-  styleUrls: ['./add-listing.component.scss']
+  styleUrls: ['./add-listing.component.scss'],
+  providers: [ToolbarService, LinkService, ImageService, HtmlEditorService, TableService]
 })
 export class AddListingComponent implements OnInit {
 

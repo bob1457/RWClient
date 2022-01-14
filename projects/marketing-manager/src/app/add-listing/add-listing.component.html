@@ -73,13 +73,20 @@
                                 <input type="text" id="contactSMS" formControlName="contactSMS" matInput placeholder="Contact SMS Texting">
                             </mat-form-field>
                         </div>
-                        <div style="margin-top: 35px;" fxFlex="50" fxflex.xs="85">
+                        <!-- <div style="margin-top: 35px;" fxFlex="50" fxflex.xs="85">
                             <mat-form-field class="property-full-width" style="width: 100%;">
-                                <!-- <input matInput type="text" placeholder="Property Name" formControlName="propertyName" id="title"> -->
+
                                 <mat-label>Listing Description</mat-label>
                                 <textarea matInput formControlName="listingDesc" style="height: 350px; overflow-y: auto;"></textarea>
+
                             </mat-form-field>
+                        </div> -->
+                        <div fxLayout="column" style="width: 100%;">
+                            <p style="font-weight: bold;">Listing Description</p>
+                            <ejs-richtexteditor #fromRTE formControlName="listingDesc"></ejs-richtexteditor>
                         </div>
+
+
                     </div>
 
                     <div class="submit-button">

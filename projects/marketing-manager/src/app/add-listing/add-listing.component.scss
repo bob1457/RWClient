@@ -43,3 +43,9 @@
 .icon-pos {
     vertical-align: middle;
 }
+
+.e-richtexteditor .e-rte-content .e-content,
+.e-richtexteditor .e-source-content .e-content {
+    // overflow-y: scroll;
+    height: 460px;
+}

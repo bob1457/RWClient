@@ -40,6 +40,7 @@ export class ListingDetailsComponent implements OnInit {
   addOpenHouse = false;
   openhouse: any;
   // ohList: any[] = [];
+  listDesc;
 
   detailsForm: FormGroup;
   propertyForm: FormGroup;
@@ -61,6 +62,7 @@ export class ListingDetailsComponent implements OnInit {
                       this.listing = data;
                       // localStorage.setItem('listing', JSON.stringify(this.listing));
                       if (this.listing) {
+                        this.listDesc = this.listing.listingDesc;
                         this.store.select(propertyImgList)
                             .subscribe(imgs => {
                               this.imgList = imgs;
