@@ -4,8 +4,9 @@
 <div class="view-container">
     <div id="pdfdoc" #pdfdoc>
         <app-contract-header [user]="pm"></app-contract-header>
-        <app-contract-content contenteditable="true" *ngIf="!edit" [user]="pm" [contract]="contract"></app-contract-content>
+        <!-- <app-contract-content contenteditable="true" *ngIf="!edit" [user]="pm" [contract]="contract"></app-contract-content> -->
         <!-- <app-contract-content-editor *ngIf="edit" [user]="pm" [contract]="contract"></app-contract-content-editor> -->
+        <div [innerHTML]="contractContent"></div>
         <app-contract-footer></app-contract-footer>
     </div>
 </div>

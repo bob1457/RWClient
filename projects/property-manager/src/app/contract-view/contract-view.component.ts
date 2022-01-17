@@ -24,6 +24,7 @@ export class ContractViewComponent implements OnInit {
   contractTitle = '';
   pm: User;
   edit = false;
+  contractContent;
 
   @ViewChild('pdfdoc', {static: false}) pdfdoc: ElementRef;
 
@@ -42,6 +43,8 @@ export class ContractViewComponent implements OnInit {
                 if(data) {
                   this.contract = data;
                   this.contractTitle = data.ManagementContractTitle;
+                  this.contractContent = this.contract.contract;
+                  console.log('contract detail', this.contractContent);
                   localStorage.setItem('contract', JSON.stringify(this.contract));
                 } else {
                   this.contract = JSON.parse(localStorage.getItem('contract'));

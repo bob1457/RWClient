@@ -44,7 +44,8 @@ export class AddContractComponent implements OnInit {
       managementFeeScale: [''],
       solicitingOnly: [false],
       signDate: [''],
-      notes: ['']
+      notes: [''],
+      contract: ['']
     });
 
     this.store.pipe(select(propertyList))
