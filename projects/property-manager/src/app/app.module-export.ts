@@ -48,8 +48,8 @@ import { StrataCouncilListComponent } from './strata-council-list/strata-council
 import { StrataDetailsComponent } from './strata-details/strata-details.component';
 import { AddStrataComponent } from './add-strata/add-strata.component';
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
-import { ContractClauseContentComponent } from './contract-clause-content/contract-clause-content.component';
-import { CustomContractClauseComponent } from './custom-contract-clause/custom-contract-clause.component';
+// import { ContractClauseContentComponent } from './contract-clause-content/contract-clause-content.component';
+// import { CustomContractClauseComponent } from './custom-contract-clause/custom-contract-clause.component';
 import { RichTextEditorAllModule } from '@syncfusion/ej2-angular-richtexteditor';
 
 const routes: Routes = [
@@ -108,9 +108,7 @@ const routes: Routes = [
     ContractViewComponent,
     StrataCouncilListComponent,
     StrataDetailsComponent,
-    AddStrataComponent,
-    ContractClauseContentComponent,
-    CustomContractClauseComponent
+    AddStrataComponent
   ],
   imports: [
     // BrowserModule,

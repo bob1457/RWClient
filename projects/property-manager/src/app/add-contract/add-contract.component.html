@@ -96,7 +96,8 @@
                         </span>
                     </h5>
 
-                    <ejs-richtexteditor #fromRTE formControlName="contract"></ejs-richtexteditor>
+                    <ejs-richtexteditor *ngIf="!loadTemp" #fromRTE formControlName="contract"></ejs-richtexteditor>
+                    <ejs-richtexteditor *ngIf="loadTemp" #fromRTE formControlName="contract" [(ngModel)]='templateContent'></ejs-richtexteditor>
 
                 </div>
             </div>

@@ -42,9 +42,8 @@ import { AddStrataDialogComponent } from './dialogs/add-strata-dialog/add-strata
 import { StrataCouncilListComponent } from './strata-council-list/strata-council-list.component';
 import { StrataDetailsComponent } from './strata-details/strata-details.component';
 import { AddStrataComponent } from './add-strata/add-strata.component';
-import { ContractClauseContentComponent } from './contract-clause-content/contract-clause-content.component';
-import { CustomContractClauseComponent } from './custom-contract-clause/custom-contract-clause.component';
-
+// import { ContractClauseContentComponent } from './contract-clause-content/contract-clause-content.component';
+// import { CustomContractClauseComponent } from './custom-contract-clause/custom-contract-clause.component';
 
 @NgModule({
   declarations: [

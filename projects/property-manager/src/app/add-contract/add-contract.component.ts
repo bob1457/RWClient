@@ -7,7 +7,7 @@ import { propertyList } from '../store/reducers';
 import { Location } from '@angular/common';
 import { addManagementContract } from '../store/actions/property.actions';
 
-import * as ContractClause from '../content-templates/contract-clause.json';
+// import * as ContractClause from '../content-templates/contract-clause.json';
 
 @Component({
   selector: 'app-add-contract',
@@ -16,7 +16,7 @@ import * as ContractClause from '../content-templates/contract-clause.json';
 })
 export class AddContractComponent implements OnInit {
 
-  contractClauseText: any = (ContractClause as any).default;
+  // contractClauseText: any = (ContractClause as any).default;
 
   addForm: FormGroup;
   loadTemp = false;
@@ -27,6 +27,8 @@ export class AddContractComponent implements OnInit {
   //   { id: '2', propertyName: '1307 Surrey'}
   // ];
   edit = false;
+  // tslint:disable-next-line:max-line-length
+  templateContent = '<h3 style="text-align: center;"><strong>301 Management Contract</strong></h3><p><strong><br></strong></p><p>This is the management contract for the propery located in Brentwood Mall area, Burnaby</p>'
 
   constructor(private formBuilder: FormBuilder,
               private location: Location,
