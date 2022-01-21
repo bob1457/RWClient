@@ -8,12 +8,12 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { getPropertyListingDetails, updatePropertyListing, uploadPropertyImage, addOpenHouseToListing, updateOpenHouseToListingFailure, updateOpenHouseToListing, getPropertyImageList, getOpenHouseList, deletePropertyImage } from '../store/actions/marketing.actions';
 import { propertyListingDetails, loadingStatus, propertyImgList, loadedStatus, openHouses } from '../store/reducers';
 import { Observable } from 'rxjs';
-import { ToolbarService, LinkService, ImageService, HtmlEditorService, TableService } from '@syncfusion/ej2-angular-richtexteditor';
+import { HtmlEditorService } from '@syncfusion/ej2-angular-richtexteditor';
 @Component({
   selector: 'app-listing-details',
   templateUrl: './listing-details.component.html',
   styleUrls: ['./listing-details.component.scss'],
-  providers: [ToolbarService, LinkService, ImageService, HtmlEditorService, TableService]
+  providers: [HtmlEditorService]
 })
 export class ListingDetailsComponent implements OnInit {
 
