@@ -8,11 +8,13 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { selectPropertyState, contractDetails, loadingStatus } from '../store/reducers';
 import { Observable } from 'rxjs';
 import { DatePipe } from '@angular/common';
+import { ToolbarService, LinkService, ImageService, HtmlEditorService, TableService } from '@syncfusion/ej2-angular-richtexteditor';
 
 @Component({
   selector: 'app-contract-details',
   templateUrl: './contract-details.component.html',
-  styleUrls: ['./contract-details.component.scss']
+  styleUrls: ['./contract-details.component.scss'],
+  providers: [ToolbarService, LinkService, ImageService, HtmlEditorService, TableService]
 })
 export class ContractDetailsComponent implements OnInit {
 

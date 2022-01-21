@@ -6,13 +6,14 @@ import { Store, select } from '@ngrx/store';
 import { propertyList } from '../store/reducers';
 import { Location } from '@angular/common';
 import { addManagementContract } from '../store/actions/property.actions';
-
+import { ToolbarService, LinkService, ImageService, HtmlEditorService, TableService } from '@syncfusion/ej2-angular-richtexteditor';
 // import * as ContractClause from '../content-templates/contract-clause.json';
 
 @Component({
   selector: 'app-add-contract',
   templateUrl: './add-contract.component.html',
-  styleUrls: ['./add-contract.component.scss']
+  styleUrls: ['./add-contract.component.scss'],
+  providers: [ToolbarService, LinkService, ImageService, HtmlEditorService, TableService]
 })
 export class AddContractComponent implements OnInit {
 
