@@ -36,6 +36,7 @@
 
     </div>
     <div fxFlex="70%">
+
         <mat-card class="lease-details-card ">
             <mat-card-header style="background-color: #f5f5f5; ">
                 <div mat-card-avatar class="lease-details-header-image ">
@@ -47,83 +48,84 @@
                 <mat-card-title>Rental Agreement: ID: - <span style="font-size: .8em; font-style: italic;">{{lease.id}} {{lease.leaseTitle}}</span> </mat-card-title>
                 <mat-card-subtitle>Property Address: </mat-card-subtitle>
             </mat-card-header>
-            <mat-card-content class="lease-details-card-content">
-                <form novalidate fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" [formGroup]="detailsForm" (ngSubmit)="submit()">
-                    <mat-form-field hidden class="property-full-width" fxFlex="10" fxLayoutGap="50px" style="margin-top: 25px;">
-                        <span class="icon-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
-                        <input type="number" id="id" formControlName="id" matInput [ngModel]="lease.id">
+            <div *ngIf="!showSignedDoc">
+                <mat-card-content class="lease-details-card-content">
+                    <form novalidate fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" [formGroup]="detailsForm" (ngSubmit)="submit()">
+                        <mat-form-field hidden class="property-full-width" fxFlex="10" fxLayoutGap="50px" style="margin-top: 25px;">
+                            <span class="icon-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
+                            <input type="number" id="id" formControlName="id" matInput [ngModel]="lease.id">
 
-                    </mat-form-field>
-                    <div [@.disabled]="true" style="width: 100%;">
-                        <mat-tab-group (selectedTabChange)="tabSelected($event)">
-                            <mat-tab label="General" style="background: #f5f5f5;">
-                                <div fxLayout="column" fxLayoutAlign="start center" style=" width: 90%;">
-                                    <!-- <mat-form-field class="lease-full-width" style="margin-top: 25px;">
+                        </mat-form-field>
+                        <div [@.disabled]="true" style="width: 100%;">
+                            <mat-tab-group (selectedTabChange)="tabSelected($event)">
+                                <mat-tab label="General" style="background: #f5f5f5;">
+                                    <div fxLayout="column" fxLayoutAlign="start center" style=" width: 90%;">
+                                        <!-- <mat-form-field class="lease-full-width" style="margin-top: 25px;">
                             <span class="icon-pos" matPrefix><mat-icon>swap_calls</mat-icon> &nbsp;</span>
                             <input readonly type="text" id="leaseId" formControlName="id" matInput placeholder="Lease Agreement ID" [ngModel]="lease.id">
                         </mat-form-field> -->
-                                    <!-- [ngModel]="lease.id" -->
-                                    <p style="margin-top: 15px;"></p>
-                                    <div fxLayout="row" fxLayoutAlign="start start" style="width: 75%;">
-                                        <div fxFlex="50%" style="margin-top: 10px;">
-                                            <mat-radio-group aria-label="Select an option" style="width:75%;margin-top: 25px; padding-right: 5px;" (change)="onChange($event)" formControlName="type">
-                                                <mat-radio-button disabled value=0 [checked]="lease.type === 0" style="padding-right: 10px;margin-right: 25px;">New</mat-radio-button>
-                                                <mat-radio-button disabled value=1 [checked]="lease.type === 1">Renewal</mat-radio-button>
-                                            </mat-radio-group>
+                                        <!-- [ngModel]="lease.id" -->
+                                        <p style="margin-top: 15px;"></p>
+                                        <div fxLayout="row" fxLayoutAlign="start start" style="width: 75%;">
+                                            <div fxFlex="50%" style="margin-top: 10px;">
+                                                <mat-radio-group aria-label="Select an option" style="width:75%;margin-top: 25px; padding-right: 5px;" (change)="onChange($event)" formControlName="type">
+                                                    <mat-radio-button disabled value=0 [checked]="lease.type === 0" style="padding-right: 10px;margin-right: 25px;">New</mat-radio-button>
+                                                    <mat-radio-button disabled value=1 [checked]="lease.type === 1">Renewal</mat-radio-button>
+                                                </mat-radio-group>
+                                            </div>
+                                            <div fxFlex="50%">
+                                                <span *ngIf="toRenew"><button type="button" mat-button style="border: 1px solid #ccc;" (click)="renew()">Renew</button></span>
+                                                <span *ngIf="!toRenew"><button type="button" mat-button style="border: 1px solid #ccc;" (click)="cancel_renew()">Cancel</button></span>
+                                            </div>
                                         </div>
-                                        <div fxFlex="50%">
-                                            <span *ngIf="toRenew"><button type="button" mat-button style="border: 1px solid #ccc;" (click)="renew()">Renew</button></span>
-                                            <span *ngIf="!toRenew"><button type="button" mat-button style="border: 1px solid #ccc;" (click)="cancel_renew()">Cancel</button></span>
-                                        </div>
-                                    </div>
 
 
-                                    <mat-form-field class="lease-full-width" style="margin-top: 20px;">
-                                        <span class="icon-pos" matPrefix><mat-icon>notes</mat-icon> &nbsp;</span>
-                                        <input type="text" id="leaseTitle" formControlName="leaseTitle" matInput placeholder="Lease Title" [ngModel]="lease.leaseTitle">
-                                    </mat-form-field>
-                                    <mat-form-field class="lease-full-width">
-                                        <span class="icon-pos" matPrefix><mat-icon>notes</mat-icon> &nbsp;</span>
-                                        <input type="text" id="leaseDesc" formControlName="leaseDesc" matInput placeholder="Description" [ngModel]="lease.leaseDesc">
-                                    </mat-form-field>
-                                    <div fxLayout="row" fxLayoutAlign="start start" style="width: 75%;">
-                                        <div fxFlex="50%">
-                                            <mat-form-field fxFlex="90%">
-                                                <span class="icon-pos" matPrefix><mat-icon>date_range</mat-icon> &nbsp;</span>
-                                                <input type="text" id="leaseStartDate" formControlName="leaseStartDate" matInput placeholder="Lease Start Date" [ngModel]="lease.leaseStartDate | date">
-                                            </mat-form-field>
-                                        </div>
-                                        <div fxFlex="50%">
-                                            <div *ngIf="!editEndDate">
-                                                <mat-form-field fxFlex="100%">
+                                        <mat-form-field class="lease-full-width" style="margin-top: 20px;">
+                                            <span class="icon-pos" matPrefix><mat-icon>notes</mat-icon> &nbsp;</span>
+                                            <input type="text" id="leaseTitle" formControlName="leaseTitle" matInput placeholder="Lease Title" [ngModel]="lease.leaseTitle">
+                                        </mat-form-field>
+                                        <mat-form-field class="lease-full-width">
+                                            <span class="icon-pos" matPrefix><mat-icon>notes</mat-icon> &nbsp;</span>
+                                            <input type="text" id="leaseDesc" formControlName="leaseDesc" matInput placeholder="Description" [ngModel]="lease.leaseDesc">
+                                        </mat-form-field>
+                                        <div fxLayout="row" fxLayoutAlign="start start" style="width: 75%;">
+                                            <div fxFlex="50%">
+                                                <mat-form-field fxFlex="90%">
                                                     <span class="icon-pos" matPrefix><mat-icon>date_range</mat-icon> &nbsp;</span>
-                                                    <input type="text" id="leaseEndDate" formControlName="leaseEndDate" matInput placeholder="Lease End Date" [ngModel]="lease.leaseEndDate | date">
+                                                    <input type="text" id="leaseStartDate" formControlName="leaseStartDate" matInput placeholder="Lease Start Date" [ngModel]="lease.leaseStartDate | date">
                                                 </mat-form-field>
                                             </div>
-                                            <div *ngIf="editEndDate">
-                                                <mat-form-field fxFlex="90%" style="margin-right: 10px;">
-                                                    <mat-label>End Date</mat-label>
-                                                    <input matInput [matDatepicker]="picker2" formControlName="leaseEndDate">
-                                                    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-                                                    <mat-datepicker #picker2></mat-datepicker>
-                                                </mat-form-field>
-                                            </div>
+                                            <div fxFlex="50%">
+                                                <div *ngIf="!editEndDate">
+                                                    <mat-form-field fxFlex="100%">
+                                                        <span class="icon-pos" matPrefix><mat-icon>date_range</mat-icon> &nbsp;</span>
+                                                        <input type="text" id="leaseEndDate" formControlName="leaseEndDate" matInput placeholder="Lease End Date" [ngModel]="lease.leaseEndDate | date">
+                                                    </mat-form-field>
+                                                </div>
+                                                <div *ngIf="editEndDate">
+                                                    <mat-form-field fxFlex="90%" style="margin-right: 10px;">
+                                                        <mat-label>End Date</mat-label>
+                                                        <input matInput [matDatepicker]="picker2" formControlName="leaseEndDate">
+                                                        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                                                        <mat-datepicker #picker2></mat-datepicker>
+                                                    </mat-form-field>
+                                                </div>
 
-                                        </div>
-                                        <span *ngIf="!editEndDate" class="material-icons-outlined" (click)="enableEdit()" style="color:green;cursor: pointer;margin-right: -40px;">
+                                            </div>
+                                            <span *ngIf="!editEndDate" class="material-icons-outlined" (click)="enableEdit()" style="color:green;cursor: pointer;margin-right: -40px;">
                                           <mat-icon>edit</mat-icon>
                                         </span>
-                                        <span *ngIf="editEndDate" class="material-icons-outlined" (click)="enableEdit()" style="color:orangered;cursor: pointer;margin-right: -40px;">
+                                            <span *ngIf="editEndDate" class="material-icons-outlined" (click)="enableEdit()" style="color:orangered;cursor: pointer;margin-right: -40px;">
                                           <mat-icon>clear</mat-icon>
                                         </span>
-                                    </div>
-                                    <!-- [value]="detailsForm.get('term') | term" -->
-                                    <div fxLayout="row" fxLayoutAlign="start start" style="width: 75%;">
-                                        <div fxFlex="50%">
-                                            <mat-form-field fxFlex="90%">
-                                                <span class="icon-pos" matPrefix><mat-icon>swap_calls</mat-icon> &nbsp;</span>
-                                                <input readonly type="text" id="term" formControlName="term" matInput placeholder="Lease Term" [ngModel]="lease.term | term">
-                                                <!-- <mat-form-field style="width: 90%;">
+                                        </div>
+                                        <!-- [value]="detailsForm.get('term') | term" -->
+                                        <div fxLayout="row" fxLayoutAlign="start start" style="width: 75%;">
+                                            <div fxFlex="50%">
+                                                <mat-form-field fxFlex="90%">
+                                                    <span class="icon-pos" matPrefix><mat-icon>swap_calls</mat-icon> &nbsp;</span>
+                                                    <input readonly type="text" id="term" formControlName="term" matInput placeholder="Lease Term" [ngModel]="lease.term | term">
+                                                    <!-- <mat-form-field style="width: 90%;">
                                                     <mat-label>Lease Term</mat-label>
                                                     <mat-select id="term" formControlName="term" [ngModel]="lease.term | term">
                                                         <mat-option [value]=0>NotSet</mat-option>
@@ -133,61 +135,61 @@
                                                         <mat-option [value]=4>Other</mat-option>
                                                     </mat-select>
                                                 </mat-form-field> -->
-                                            </mat-form-field>
-                                        </div>
-                                        <div fxFlex="50%">
-                                            <mat-form-field style="width: 100%;">
-                                                <!-- <span class="icon-pos" matPrefix><mat-icon>notes</mat-icon> &nbsp;</span>
+                                                </mat-form-field>
+                                            </div>
+                                            <div fxFlex="50%">
+                                                <mat-form-field style="width: 100%;">
+                                                    <!-- <span class="icon-pos" matPrefix><mat-icon>notes</mat-icon> &nbsp;</span>
                                                 <input type="text" id="rentDueOn" formControlName="rentDueOn" matInput placeholder="Rent Due On" [ngModel]="lease.rentDueOn"> -->
-                                                <mat-label>Rent Due Date</mat-label>
-                                                <mat-select id="rentDueOn" formControlName="rentDueOn" [ngModel]="lease.rentDueOn">
-                                                    <mat-option>None</mat-option>
-                                                    <mat-option value="First Day of Month">First Day of Month</mat-option>
-                                                    <mat-option value="15th Day of Month">15th Day of Month</mat-option>
-                                                    <mat-option value="Last Day of Month">Last Day of Month</mat-option>
-                                                    <mat-option value="Other">Other</mat-option>
-                                                </mat-select>
-                                            </mat-form-field>
+                                                    <mat-label>Rent Due Date</mat-label>
+                                                    <mat-select id="rentDueOn" formControlName="rentDueOn" [ngModel]="lease.rentDueOn">
+                                                        <mat-option>None</mat-option>
+                                                        <mat-option value="First Day of Month">First Day of Month</mat-option>
+                                                        <mat-option value="15th Day of Month">15th Day of Month</mat-option>
+                                                        <mat-option value="Last Day of Month">Last Day of Month</mat-option>
+                                                        <mat-option value="Other">Other</mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                            </div>
+
+
+                                        </div>
+
+                                        <div fxLayout="row" fxLayoutAlign="start center" style="width: 75%;">
+                                            <div fxFlex="50%">
+                                                <mat-form-field class="lease-full-width" style="width:90%">
+                                                    <span class="icon-pos" matPrefix><mat-icon>payment</mat-icon> &nbsp;</span>
+                                                    <input type="text" id="rentAmount" formControlName="rentAmount" matInput placeholder="Monthly Rent(CAD$)" [ngModel]="lease.rentAmount">
+                                                </mat-form-field>
+                                            </div>
+                                            <div fxFlex="50%">
+                                                <mat-form-field class="lease-full-width" style="width:100%">
+                                                    <span class="icon-pos" matPrefix><mat-icon>payment</mat-icon> &nbsp;</span>
+                                                    <input type="text" id="rentFrequency" formControlName="rentFrequency" matInput placeholder="Rent Frequency" [ngModel]="lease.rentFrequency">
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+
+                                        <div fxLayout="row" fxLayoutAlign="start center" style="width: 75%;">
+                                            <div fxFlex="50%">
+                                                <mat-form-field class="lease-full-width" style="width:90%">
+                                                    <span class="icon-pos" matPrefix><mat-icon>payment</mat-icon> &nbsp;</span>
+                                                    <input type="text" id="damage" formControlName="damageDepositAmount" matInput placeholder="Damage Deposit(CAD$)" [ngModel]="lease.damageDepositAmount">
+                                                </mat-form-field>
+                                            </div>
+                                            <div fxFlex="50%">
+                                                <mat-form-field class="lease-full-width" style="width:100%">
+                                                    <span class="icon-pos" matPrefix><mat-icon>payment</mat-icon> &nbsp;</span>
+                                                    <input type="text" id="pet" formControlName="petDepositAmount" matInput placeholder="Pet Deposit(CAD$)" [ngModel]="lease.petDepositAmount">
+                                                </mat-form-field>
+                                            </div>
                                         </div>
 
 
-                                    </div>
-
-                                    <div fxLayout="row" fxLayoutAlign="start center" style="width: 75%;">
-                                        <div fxFlex="50%">
-                                            <mat-form-field class="lease-full-width" style="width:90%">
-                                                <span class="icon-pos" matPrefix><mat-icon>payment</mat-icon> &nbsp;</span>
-                                                <input type="text" id="rentAmount" formControlName="rentAmount" matInput placeholder="Monthly Rent(CAD$)" [ngModel]="lease.rentAmount">
-                                            </mat-form-field>
-                                        </div>
-                                        <div fxFlex="50%">
-                                            <mat-form-field class="lease-full-width" style="width:100%">
-                                                <span class="icon-pos" matPrefix><mat-icon>payment</mat-icon> &nbsp;</span>
-                                                <input type="text" id="rentFrequency" formControlName="rentFrequency" matInput placeholder="Rent Frequency" [ngModel]="lease.rentFrequency">
-                                            </mat-form-field>
-                                        </div>
-                                    </div>
-
-                                    <div fxLayout="row" fxLayoutAlign="start center" style="width: 75%;">
-                                        <div fxFlex="50%">
-                                            <mat-form-field class="lease-full-width" style="width:90%">
-                                                <span class="icon-pos" matPrefix><mat-icon>payment</mat-icon> &nbsp;</span>
-                                                <input type="text" id="damage" formControlName="damageDepositAmount" matInput placeholder="Damage Deposit(CAD$)" [ngModel]="lease.damageDepositAmount">
-                                            </mat-form-field>
-                                        </div>
-                                        <div fxFlex="50%">
-                                            <mat-form-field class="lease-full-width" style="width:100%">
-                                                <span class="icon-pos" matPrefix><mat-icon>payment</mat-icon> &nbsp;</span>
-                                                <input type="text" id="pet" formControlName="petDepositAmount" matInput placeholder="Pet Deposit(CAD$)" [ngModel]="lease.petDepositAmount">
-                                            </mat-form-field>
-                                        </div>
-                                    </div>
-
-
-                                    <mat-form-field class="lease-full-width">
-                                        <span class="icon-pos" matPrefix><mat-icon>swap_calls</mat-icon> &nbsp;</span>
-                                        <input type="text" readonly id="endLeaseCode" formControlName="endLeaseCode" matInput placeholder="End Lease Code" [ngModel]="lease.endLeaseCode  | renewCode">
-                                        <!-- <mat-label>End Lease</mat-label>
+                                        <mat-form-field class="lease-full-width">
+                                            <span class="icon-pos" matPrefix><mat-icon>swap_calls</mat-icon> &nbsp;</span>
+                                            <input type="text" readonly id="endLeaseCode" formControlName="endLeaseCode" matInput placeholder="End Lease Code" [ngModel]="lease.endLeaseCode  | renewCode">
+                                            <!-- <mat-label>End Lease</mat-label>
                                         <mat-select id="endLeaseCode" formControlName="endLeaseCode" [ngModel]="lease.endLeaseCode | renewCode">
                                             <mat-option [value]=0>None</mat-option>
                                             <mat-option [value]=1>Renew Month by Month</mat-option>
@@ -195,10 +197,10 @@
                                             <mat-option [value]=3>Fixed Term and Renew by Term</mat-option>
                                             <mat-option [value]=4>Fixed Term and Vacant</mat-option>
                                         </mat-select> -->
-                                    </mat-form-field>
+                                        </mat-form-field>
 
 
-                                    <!-- <div fxLayout="row" fxLayoutAlign="start center" style="width: 75%;">
+                                        <!-- <div fxLayout="row" fxLayoutAlign="start center" style="width: 75%;">
                                         <div fxFlex="50%">
                                             <span class="icon-pos" matPrefix><mat-icon>payment</mat-icon> &nbsp;</span>
                                             <input type="text" id="deposit1" formControlName="c" matInput placeholder="Damage Deposit(CAD$)" [ngModel]="lease.damageDepositAmount">
@@ -209,13 +211,13 @@
                                         </div>
                                     </div> -->
 
-                                    <!-- <mat-form-field class="lease-full-width">
+                                        <!-- <mat-form-field class="lease-full-width">
                                         <span class="icon-pos" matPrefix><mat-icon>payment</mat-icon> &nbsp;</span>
                                         <input type="text" id="rentAmount" formControlName="rentAmount" matInput placeholder="Monthly Rent" [ngModel]="lease.rentAmount | currency:'CAD'">
                                     </mat-form-field> -->
 
 
-                                    <!-- <div fxLayout="row" fxLayoutAlign="start center" style="width: 90%;">
+                                        <!-- <div fxLayout="row" fxLayoutAlign="start center" style="width: 90%;">
                                         <div fxFlex="50%">
                                             <mat-checkbox formControlName="isAddendumAvailable" [ngModel]="lease.isAddendumAvailable" class="tenant-full-width">Addendum Available</mat-checkbox>
                                         </div>
@@ -224,154 +226,157 @@
                                         </div>
                                     </div> -->
 
-                                    <mat-form-field class="lease-full-width">
-                                        <span class="icon-pos" matPrefix><mat-icon>notes</mat-icon> &nbsp;</span>
-                                        <input type="text" id="renewTerm" formControlName="renewTerm" matInput placeholder="Vacant Reason" [ngModel]="lease.renewTerm">
-                                    </mat-form-field>
-                                    <!-- This field is used as Reason to end tenancy -->
+                                        <mat-form-field class="lease-full-width">
+                                            <span class="icon-pos" matPrefix><mat-icon>notes</mat-icon> &nbsp;</span>
+                                            <input type="text" id="renewTerm" formControlName="renewTerm" matInput placeholder="Vacant Reason" [ngModel]="lease.renewTerm">
+                                        </mat-form-field>
+                                        <!-- This field is used as Reason to end tenancy -->
 
-                                    <div fxLayout="row" fxLayoutAlign="start center" style="width: 75%;">
-                                        <div fxFlex="60%">
-                                            <mat-form-field class="lease-full-width">
-                                                <span class="icon-pos" matPrefix><mat-icon>notes</mat-icon> &nbsp;</span>
-                                                <textarea type="text" id="notes" formControlName="notes" matInput placeholder="Notes" [ngModel]="lease.notes"></textarea>
-                                            </mat-form-field>
+                                        <div fxLayout="row" fxLayoutAlign="start center" style="width: 75%;">
+                                            <div fxFlex="60%">
+                                                <mat-form-field class="lease-full-width">
+                                                    <span class="icon-pos" matPrefix><mat-icon>notes</mat-icon> &nbsp;</span>
+                                                    <textarea type="text" id="notes" formControlName="notes" matInput placeholder="Notes" [ngModel]="lease.notes"></textarea>
+                                                </mat-form-field>
+                                            </div>
+                                            <div fxFlex="30%">
+                                                <!-- <mat-checkbox formControlName="isAddendumAvailable" [ngModel]="lease.isAddendumAvailable" class="tenant-full-width">Addendum Available</mat-checkbox> (click)="ViewAddendum()"-->
+                                                <a mat-button style="margin-left: 15px;border: 1px solid;font-size: .85em;" *ngIf="lease.isAddendumAvailable" routerLink="/Manage/lease/addendumview/{{id}}">View Addendum</a>
+                                                <a mat-button style="margin-left: 15px;border: 1px solid;font-size: .85em;" *ngIf="!lease.isAddendumAvailable" (click)="AddAddendum()">Add Addendum</a>
+                                            </div>
+                                            <div fxFlex="10%">
+                                                <form [formGroup]="removeAddendumForm">
+                                                    <a mat-button style="font-size: .85em;padding: 2px;" *ngIf="lease.isAddendumAvailable" (click)="RemoveAddendum()">
+                                                        <mat-icon style="color: orangered;" title="Remove Addendum">clear</mat-icon>
+                                                    </a>
+                                                </form>
+                                            </div>
+
+
+
                                         </div>
-                                        <div fxFlex="30%">
-                                            <!-- <mat-checkbox formControlName="isAddendumAvailable" [ngModel]="lease.isAddendumAvailable" class="tenant-full-width">Addendum Available</mat-checkbox> (click)="ViewAddendum()"-->
-                                            <a mat-button style="margin-left: 15px;border: 1px solid;font-size: .85em;" *ngIf="lease.isAddendumAvailable" routerLink="/Manage/lease/addendumview/{{id}}">View Addendum</a>
-                                            <a mat-button style="margin-left: 15px;border: 1px solid;font-size: .85em;" *ngIf="!lease.isAddendumAvailable" (click)="AddAddendum()">Add Addendum</a>
+
+
+                                        <div *ngIf="lease.isActive" fxLayout="row" fxLayoutAlign="start center" style="width: 75%;">
+                                            <div fxFlex="50%">
+                                                <mat-form-field fxFlex="90%">
+                                                    <span class="icon-pos" matPrefix><mat-icon>date_range</mat-icon> &nbsp;</span>
+                                                    <input readonly type="text" id="leaseSignDate" formControlName="leaseSignDate" matInput placeholder="Lease Sign Date" [ngModel]="lease.leaseSignDate | date">
+                                                </mat-form-field>
+                                            </div>
+                                            <div fxFlex="50%">
+                                                <mat-checkbox formControlName="isActive" [ngModel]="lease.isActive" class="tenant-full-width">Is Active</mat-checkbox>
+                                            </div>
                                         </div>
-                                        <div fxFlex="10%">
-                                            <form [formGroup]="removeAddendumForm">
-                                                <a mat-button style="font-size: .85em;padding: 2px;" *ngIf="lease.isAddendumAvailable" (click)="RemoveAddendum()">
-                                                    <mat-icon style="color: orangered;" title="Remove Addendum">clear</mat-icon>
-                                                </a>
-                                            </form>
-                                        </div>
 
 
 
-                                    </div>
+                                        <mat-checkbox style="width: 75%;" formControlName="serviceAgent" [ngModel]="lease.serviceAgent" class="tenant-full-width">Use agent for service contact</mat-checkbox>
+                                        <mat-checkbox style="width: 75%;" formControlName="muutalAgreement" [ngModel]="lease.muutalAgreement" class="tenant-full-width">Mutual Agreement to vacatn at the end of tenancy</mat-checkbox>
+                                        <p style="width: 80%;" *ngIf="!lease.isActive">
+                                            <span *ngIf="!getFinalize"><a mat-button (click)="showFinalize()"><mat-icon style="color: green;">done</mat-icon> &nbsp;Fianlize Agreement</a></span>
+                                            <span *ngIf="getFinalize"><a mat-button (click)="showFinalize()"><mat-icon style="color: red;">clear</mat-icon> &nbsp;Cancel</a></span>
+                                        </p>
 
-
-                                    <div *ngIf="lease.isActive" fxLayout="row" fxLayoutAlign="start center" style="width: 75%;">
-                                        <div fxFlex="50%">
-                                            <mat-form-field fxFlex="90%">
-                                                <span class="icon-pos" matPrefix><mat-icon>date_range</mat-icon> &nbsp;</span>
-                                                <input readonly type="text" id="leaseSignDate" formControlName="leaseSignDate" matInput placeholder="Lease Sign Date" [ngModel]="lease.leaseSignDate | date">
-                                            </mat-form-field>
-                                        </div>
-                                        <div fxFlex="50%">
-                                            <mat-checkbox formControlName="isActive" [ngModel]="lease.isActive" class="tenant-full-width">Is Active</mat-checkbox>
-                                        </div>
-                                    </div>
-
-
-
-                                    <mat-checkbox style="width: 75%;" formControlName="serviceAgent" [ngModel]="lease.serviceAgent" class="tenant-full-width">Use agent for service contact</mat-checkbox>
-                                    <mat-checkbox style="width: 75%;" formControlName="muutalAgreement" [ngModel]="lease.muutalAgreement" class="tenant-full-width">Mutual Agreement to vacatn at the end of tenancy</mat-checkbox>
-                                    <p style="width: 80%;" *ngIf="!lease.isActive">
-                                        <span *ngIf="!getFinalize"><a mat-button (click)="showFinalize()"><mat-icon style="color: green;">done</mat-icon> &nbsp;Fianlize Agreement</a></span>
-                                        <span *ngIf="getFinalize"><a mat-button (click)="showFinalize()"><mat-icon style="color: red;">clear</mat-icon> &nbsp;Cancel</a></span>
-                                    </p>
-
-                                    <div *ngIf="getFinalize" fxLayout="row" fxLayoutAlign="start center" style="width: 75%;">
-                                        <div fxFlex="50%">
-                                            <mat-form-field fxFlex="90%">
-                                                <mat-label>Sign Date</mat-label>
-                                                <input matInput [matDatepicker]="picker1" formControlName="leaseSignDate">
-                                                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                                                <mat-datepicker #picker1></mat-datepicker>
-                                                <!-- <span class="icon-pos" matPrefix><mat-icon>date_range</mat-icon> &nbsp;</span>
+                                        <div *ngIf="getFinalize" fxLayout="row" fxLayoutAlign="start center" style="width: 75%;">
+                                            <div fxFlex="50%">
+                                                <mat-form-field fxFlex="90%">
+                                                    <mat-label>Sign Date</mat-label>
+                                                    <input matInput [matDatepicker]="picker1" formControlName="leaseSignDate">
+                                                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                                                    <mat-datepicker #picker1></mat-datepicker>
+                                                    <!-- <span class="icon-pos" matPrefix><mat-icon>date_range</mat-icon> &nbsp;</span>
 
                                               <input readonly type="text" id="leaseSignDate" formControlName="leaseSignDate" matInput placeholder="Lease Sign Date" [ngModel]="lease.leaseSignDate | date"> -->
-                                            </mat-form-field>
+                                                </mat-form-field>
+                                            </div>
+                                            <div fxFlex="50%">
+                                                <!-- <button mat-raised-button color="primary"><mat-icon style="color: green;">done</mat-icon> &nbsp;Ok</button> -->
+                                            </div>
                                         </div>
-                                        <div fxFlex="50%">
-                                            <!-- <button mat-raised-button color="primary"><mat-icon style="color: green;">done</mat-icon> &nbsp;Ok</button> -->
-                                        </div>
-                                    </div>
 
-                                    <div fxLayout="row" fxLayoutAlign="start center" style="width: 75%;margin-bottom: 15px;">
-                                        <div fxFlex="28%">
-                                            <button type="button" routerLink="/Manage/lease/agreementview/{{id}}" mat-raised-button>View Agreement</button>
-                                        </div>
-                                        <div *ngIf="lease.leaseAgreementDocUrl">
-                                            <!-- <a [attr.href]="{{serverBaseUrl}}+lease.leaseAgreementDocUrl">&nbsp; Agreement</a> -->
-                                            <a [href]="'http://localhost:63533/' + lease.leaseAgreementDocUrl" target="_blank">&nbsp; Agreement</a>
-                                            <!-- <a attr.href="{{serverBaseUrl}}{{lease.leaseAgreementDocUrl}}" target="_blank">&nbsp; Agreement</a> -->
-                                        </div>
-                                        <!-- Temporarily diabled -->
-                                        <!-- <div fxFlex="50%">
+                                        <div fxLayout="row" fxLayoutAlign="start center" style="width: 75%;margin-bottom: 15px;">
+                                            <div fxFlex="28%">
+                                                <button type="button" routerLink="/Manage/lease/agreementview/{{id}}" mat-raised-button>Download Agreement</button>
+                                            </div>
+                                            <!-- <div *ngIf="lease.leaseAgreementDocUrl">
+
+                                                <a [href]="'http://localhost:63533/' + lease.leaseAgreementDocUrl" target="_blank">&nbsp; Agreement</a>
+
+                                             </div> -->
+                                            <div fxFlex="28%" style="margin-left: 30px;">
+                                                <button type="button" (click)="openView()" mat-raised-button>View Signed Agreement</button>
+                                            </div>
+                                            <!-- Temporarily diabled     *ngIf="finalized"  -->
+                                            <!-- <div fxFlex="50%">
 
                                             <button *ngIf="lease.isAddendumAvailable" type="button" routerLink="/Manage/lease/addendumview/{{id}}" mat-raised-button>View Addendum</button>
                                             <button *ngIf="!lease.isAddendumAvailable" type="button" routerLink="/Manage/lease/addaddendum" mat-raised-button>Add Addendum</button>
                                         </div> -->
 
-                                    </div>
-
-                                </div>
-
-
-                            </mat-tab>
-                            <mat-tab label="Details" style="background: #f5f5f5;">
-                                <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="start start" fxLayoutGap="10px" style="width:75%;margin-top: 25px;margin-left:45px ;">
-                                    <div fxLayout="column" fxLayoutAlign="start start" fxFlex="30" fxLayoutGap="10px" style="margin-left: 25px;">
-                                        <mat-checkbox formControlName="water" [ngModel]="lease.rentCoverage.water" class="property-full-width">Water</mat-checkbox>
-                                        <mat-checkbox formControlName="cablevison" [ngModel]="lease.rentCoverage.cablevison" class="property-full-width">Cable TV</mat-checkbox>
-                                        <mat-checkbox formControlName="electricity" [ngModel]="lease.rentCoverage.electricity" class="property-full-width">Electricity</mat-checkbox>
-                                        <mat-checkbox formControlName="internet" [ngModel]="lease.rentCoverage.internet" class="property-full-width">Internet</mat-checkbox>
-                                    </div>
-                                    <div fxLayout="column" fxLayoutAlign="start start" fxFlex="30" fxLayoutGap="10px">
-                                        <mat-checkbox formControlName="heat" [ngModel]="lease.rentCoverage.heat" class="property-full-width">Heat</mat-checkbox>
-                                        <mat-checkbox formControlName="naturalGas" [ngModel]="lease.rentCoverage.naturalGas" class="property-full-width">Natural Gas</mat-checkbox>
-                                        <mat-checkbox formControlName="sewageDisposal" [ngModel]="lease.rentCoverage.sewageDisposal" class="property-full-width">Sewage Disposal</mat-checkbox>
-                                        <mat-checkbox formControlName="snowRemoval" [ngModel]="lease.rentCoverage.snowRemoval" class="property-full-width">Snow Removal</mat-checkbox>
-                                    </div>
-                                    <div fxLayout="column" fxLayoutAlign="start start" fxFlex="30" fxLayoutGap="10px">
-                                        <mat-checkbox formControlName="storage" [ngModel]="lease.rentCoverage.storage" class="property-full-width">Storage</mat-checkbox>
-                                        <mat-checkbox formControlName="recreationFacility" [ngModel]="lease.rentCoverage.recreationFacility" class="property-full-width">Recreation Facility</mat-checkbox>
-                                        <mat-checkbox formControlName="garbageCollection" [ngModel]="lease.rentCoverage.garbageCollection" class="property-full-width">Garbage Collection</mat-checkbox>
-                                        <mat-checkbox formControlName="recycleServices" [ngModel]="lease.rentCoverage.recycleServices" class="property-full-width">Recycle Services</mat-checkbox>
-                                    </div>
-                                    <div fxLayout="column" fxLayoutAlign="start start" fxFlex="30" fxLayoutGap="10px">
-                                        <mat-checkbox formControlName="kitchenScrapCollection" [ngModel]="lease.rentCoverage.kitchenScrapCollection" class="property-full-width">Laundry</mat-checkbox>
-                                        <mat-checkbox formControlName="laundry" [ngModel]="lease.rentCoverage.laundry" class="property-full-width">Window Blinds</mat-checkbox>
-                                        <mat-checkbox formControlName="sewageDisposal" [ngModel]="lease.rentCoverage.sewageDisposal" class="property-full-width">Furniture</mat-checkbox>
-                                        <!-- <mat-checkbox formControlName="snowRemoval" [ngModel]="lease.rentCoverage.snowRemoval" class="property-full-width">Snow Removal</mat-checkbox> -->
-                                    </div>
-                                </div>
-                                <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="start start" fxLayoutGap="10px" style="width:75%;margin-top: 25px;margin-left:45px ;">
-                                    <div fxLayout="column" fxLayoutAlign="start start" fxFlex="30" fxLayoutGap="10px">
-                                        <mat-checkbox formControlName="dishwasher" [ngModel]="lease.rentCoverage.dishwasher" class="property-full-width">Dishwasher</mat-checkbox>
-                                        <mat-checkbox formControlName="stoveOven" [ngModel]="lease.rentCoverage.stoveOven" class="property-full-width">Stove/Oven</mat-checkbox>
-                                        <mat-checkbox formControlName="Regigerator" [ngModel]="lease.rentCoverage.regigerator" class="property-full-width">Refrigerator</mat-checkbox>
-                                        <mat-checkbox formControlName="windowCovering" [ngModel]="lease.rentCoverage.windowCovering" class="property-full-width">Window Covering</mat-checkbox>
-                                    </div>
-                                    <div fxLayout="column" fxLayoutAlign="start start" fxFlex="30" fxLayoutGap="10px">
-                                        <mat-checkbox formControlName="furniture" [ngModel]="lease.rentCoverage.furniture" class="property-full-width">Furniture</mat-checkbox>
-                                        <mat-checkbox formControlName="carpets" [ngModel]="lease.rentCoverage.carpets" class="property-full-width">Carpets</mat-checkbox>
-                                        <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px">
-                                            <!-- <mat-checkbox formControlName="parkingStall" [ngModel]="lease.rentCoverage.parkingStall" class="property-full-width">Parking Stall</mat-checkbox> -->
-                                            <mat-form-field class="property-full-width" fxFlex="50" style="margin-top: 25px;">
-                                                <span class="icon-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
-                                                <input type="number" id="numberOfLayers" formControlName="parkingStall" matInput placeholder="Parking Stall" [ngModel]="lease.rentCoverage.parkingStall">
-                                            </mat-form-field>
                                         </div>
 
-
-                                        <mat-form-field class="property-full-width">
-                                            <mat-label>Notes</mat-label>
-                                            <textarea matInput formControlName="other" [ngModel]="lease.rentCoverage.other"></textarea>
-                                        </mat-form-field>
-
-
                                     </div>
-                                </div>
-                            </mat-tab>
 
-                            <!-- <mat-tab label="Propeprty" style="background: #f5f5f5;">
+
+                                </mat-tab>
+                                <mat-tab label="Details" style="background: #f5f5f5;">
+                                    <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="start start" fxLayoutGap="10px" style="width:75%;margin-top: 25px;margin-left:45px ;">
+                                        <div fxLayout="column" fxLayoutAlign="start start" fxFlex="30" fxLayoutGap="10px" style="margin-left: 25px;">
+                                            <mat-checkbox formControlName="water" [ngModel]="lease.rentCoverage.water" class="property-full-width">Water</mat-checkbox>
+                                            <mat-checkbox formControlName="cablevison" [ngModel]="lease.rentCoverage.cablevison" class="property-full-width">Cable TV</mat-checkbox>
+                                            <mat-checkbox formControlName="electricity" [ngModel]="lease.rentCoverage.electricity" class="property-full-width">Electricity</mat-checkbox>
+                                            <mat-checkbox formControlName="internet" [ngModel]="lease.rentCoverage.internet" class="property-full-width">Internet</mat-checkbox>
+                                        </div>
+                                        <div fxLayout="column" fxLayoutAlign="start start" fxFlex="30" fxLayoutGap="10px">
+                                            <mat-checkbox formControlName="heat" [ngModel]="lease.rentCoverage.heat" class="property-full-width">Heat</mat-checkbox>
+                                            <mat-checkbox formControlName="naturalGas" [ngModel]="lease.rentCoverage.naturalGas" class="property-full-width">Natural Gas</mat-checkbox>
+                                            <mat-checkbox formControlName="sewageDisposal" [ngModel]="lease.rentCoverage.sewageDisposal" class="property-full-width">Sewage Disposal</mat-checkbox>
+                                            <mat-checkbox formControlName="snowRemoval" [ngModel]="lease.rentCoverage.snowRemoval" class="property-full-width">Snow Removal</mat-checkbox>
+                                        </div>
+                                        <div fxLayout="column" fxLayoutAlign="start start" fxFlex="30" fxLayoutGap="10px">
+                                            <mat-checkbox formControlName="storage" [ngModel]="lease.rentCoverage.storage" class="property-full-width">Storage</mat-checkbox>
+                                            <mat-checkbox formControlName="recreationFacility" [ngModel]="lease.rentCoverage.recreationFacility" class="property-full-width">Recreation Facility</mat-checkbox>
+                                            <mat-checkbox formControlName="garbageCollection" [ngModel]="lease.rentCoverage.garbageCollection" class="property-full-width">Garbage Collection</mat-checkbox>
+                                            <mat-checkbox formControlName="recycleServices" [ngModel]="lease.rentCoverage.recycleServices" class="property-full-width">Recycle Services</mat-checkbox>
+                                        </div>
+                                        <div fxLayout="column" fxLayoutAlign="start start" fxFlex="30" fxLayoutGap="10px">
+                                            <mat-checkbox formControlName="kitchenScrapCollection" [ngModel]="lease.rentCoverage.kitchenScrapCollection" class="property-full-width">Laundry</mat-checkbox>
+                                            <mat-checkbox formControlName="laundry" [ngModel]="lease.rentCoverage.laundry" class="property-full-width">Window Blinds</mat-checkbox>
+                                            <mat-checkbox formControlName="sewageDisposal" [ngModel]="lease.rentCoverage.sewageDisposal" class="property-full-width">Furniture</mat-checkbox>
+                                            <!-- <mat-checkbox formControlName="snowRemoval" [ngModel]="lease.rentCoverage.snowRemoval" class="property-full-width">Snow Removal</mat-checkbox> -->
+                                        </div>
+                                    </div>
+                                    <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="start start" fxLayoutGap="10px" style="width:75%;margin-top: 25px;margin-left:45px ;">
+                                        <div fxLayout="column" fxLayoutAlign="start start" fxFlex="30" fxLayoutGap="10px">
+                                            <mat-checkbox formControlName="dishwasher" [ngModel]="lease.rentCoverage.dishwasher" class="property-full-width">Dishwasher</mat-checkbox>
+                                            <mat-checkbox formControlName="stoveOven" [ngModel]="lease.rentCoverage.stoveOven" class="property-full-width">Stove/Oven</mat-checkbox>
+                                            <mat-checkbox formControlName="Regigerator" [ngModel]="lease.rentCoverage.regigerator" class="property-full-width">Refrigerator</mat-checkbox>
+                                            <mat-checkbox formControlName="windowCovering" [ngModel]="lease.rentCoverage.windowCovering" class="property-full-width">Window Covering</mat-checkbox>
+                                        </div>
+                                        <div fxLayout="column" fxLayoutAlign="start start" fxFlex="30" fxLayoutGap="10px">
+                                            <mat-checkbox formControlName="furniture" [ngModel]="lease.rentCoverage.furniture" class="property-full-width">Furniture</mat-checkbox>
+                                            <mat-checkbox formControlName="carpets" [ngModel]="lease.rentCoverage.carpets" class="property-full-width">Carpets</mat-checkbox>
+                                            <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px">
+                                                <!-- <mat-checkbox formControlName="parkingStall" [ngModel]="lease.rentCoverage.parkingStall" class="property-full-width">Parking Stall</mat-checkbox> -->
+                                                <mat-form-field class="property-full-width" fxFlex="50" style="margin-top: 25px;">
+                                                    <span class="icon-pos" matPrefix><mat-icon>developer_board</mat-icon> &nbsp;</span>
+                                                    <input type="number" id="numberOfLayers" formControlName="parkingStall" matInput placeholder="Parking Stall" [ngModel]="lease.rentCoverage.parkingStall">
+                                                </mat-form-field>
+                                            </div>
+
+
+                                            <mat-form-field class="property-full-width">
+                                                <mat-label>Notes</mat-label>
+                                                <textarea matInput formControlName="other" [ngModel]="lease.rentCoverage.other"></textarea>
+                                            </mat-form-field>
+
+
+                                        </div>
+                                    </div>
+                                </mat-tab>
+
+                                <!-- <mat-tab label="Propeprty" style="background: #f5f5f5;">
                                 <div style="margin-top: 25px; margin-left: 40px;margin-bottom: 320px;">
                                     <h6>Rental Property - {{lease.rentalProperty.propertyName}} </h6>
                                     <p style="font-weight: bold;">
@@ -383,9 +388,241 @@
 
                                 </div> -->
 
-                            <!-- </mat-tab> -->
-                            <mat-tab label="Tenants" style="background: #f5f5f5;">
-                                <ng-template matTabContent>
+                                <!-- </mat-tab> -->
+                                <mat-tab label="Tenants" style="background: #f5f5f5;">
+                                    <ng-template matTabContent>
+                                        <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="10px" style="margin-bottom: 1%;
+                                    flex-direction: row;
+                                    box-sizing: border-box;
+                                    display: flex;
+                                    place-content: stretch flex-end;
+                                    align-items: stretch;
+                                    margin-top: 20px;
+                                    margin-left: 25px;
+                                    width: 95%;">
+                                            <mat-form-field fxLayout fxLayoutAlign="start center">
+                                                <input matInput type="text" (keyup)="doFilter3($event.target.value)" placeholder="Filter">
+                                            </mat-form-field>
+                                            <!-- <mat-radio-group aria-label="Select an option" style="margin-top: 13px;margin-left: 25px;padding-right: 5px;">
+                                  <mat-radio-button value="1" checked style="padding-right: 10px;">Active</mat-radio-button>
+                                  <mat-radio-button value="0">All</mat-radio-button>
+                              </mat-radio-group> (click)="addRentPayment()"-->
+                                            <span class="spacer"></span>
+                                            <button *ngIf="!addTenant" title="Add Additional Tenant" (click)="addT()" mat-button mat-mini-fab style="background: #3d5afe;color: white;">
+                                    <i class="material-icons" title="Add Additional Tenant">
+                                      person_add
+                                    </i>
+                                  </button>
+                                            <button *ngIf="addTenant" (click)="cancel3()" title="Cancel" mat-button mat-mini-fab style="background: #d86f0d;color: white;">
+                                    <i class="material-icons" title="Cancel">
+                                      clear
+                                    </i>
+                                  </button>
+                                        </div>
+
+                                        <div *ngIf="addTenant" fxLayout="column" fxLayout.xs="column" fxLayoutAlign="center center" stye="width: 95%;margin-left: 10px; margin-right: 10px;">
+                                            <div style="width: 100%;margin-bottom: 10px;">
+                                                <mat-radio-group aria-label="Select an option" style="margin-top: 13px;margin-left: 25px;padding-right: 5px;" (change)="onAddTenantChange($event)">
+                                                    <mat-radio-button [value]=1 checked style="padding-right: 10px;">Select Co-applicant</mat-radio-button>
+                                                    <mat-radio-button [value]=2>Add new tenant</mat-radio-button>
+                                                </mat-radio-group>
+                                            </div>
+                                            <div style="width: 100%;">
+                                                <form novalidate fxLayout="column" fxLayoutAlign="center center" [formGroup]="addTenantForm" style="width: 100%;border: 1px solid;
+                                          margin-bottom: 5px;
+                                          padding: 5px;" (ngSubmit)="addAdditionalTenant()">
+                                                    <div *ngIf="!existingCoAplicant" style="width: 100%;">
+                                                        <mat-form-field fxFlex="15%" fxFlex.xs="90%" style="width: 15%;margin-left: 10px;">
+                                                            <mat-label>First Name</mat-label>
+                                                            <input type="text" matInput placeholder="First Name" formControlName="firstName">
+                                                        </mat-form-field>
+                                                        <mat-form-field fxFlex="15%" fxFlex.xs="90%" style="width:15%;margin-left: 10px;">
+                                                            <mat-label>First Name</mat-label>
+                                                            <input type="text" matInput placeholder="Last Name" formControlName="lastName">
+                                                        </mat-form-field>
+                                                        <mat-form-field fxFlex="15%" fxFlex.xs="90%" appearance="standard" style="width:20%;margin-top: -12px; margin-left: 10px;">
+                                                            <mat-label>Email</mat-label>
+                                                            <input type="text" matInput placeholder="Contact Email" formControlName="contactEmail">
+                                                            <!-- <mat-icon matSuffix>payment</mat-icon> -->
+                                                        </mat-form-field>
+                                                        <mat-form-field fxFlex="15%" fxFlex.xs="90%" style="width:15%;margin-left: 10px;">
+                                                            <mat-label>Telephone</mat-label>
+                                                            <input type="text" matInput placeholder="Contact Telephone" formControlName="contactTelephone1">
+                                                        </mat-form-field>
+
+                                                        <mat-form-field fxFlex="15%" fxFlex.xs="90%" style="margin-left: 10px;margin-right: 10px;">
+                                                            <mat-label>Telephone 2</mat-label>
+                                                            <input type="text" matInput placeholder="Contact Telephone 2" formControlName="contactTelephone2">
+                                                        </mat-form-field>
+
+                                                        <mat-form-field fxFlex="15%" fxFlex.xs="90%" style="margin-left: 10px;margin-right: 10px;">
+                                                            <mat-label>Other Contact</mat-label>
+                                                            <input type="text" matInput placeholder="Contact Others" formControlName="contactOthers">
+                                                        </mat-form-field>
+                                                    </div>
+                                                    <div *ngIf="existingCoAplicant" style="width: 100%;text-align: center;">
+                                                        <mat-form-field style="width: 90%;">
+                                                            <mat-label>Select Co Applicant</mat-label>
+                                                            <mat-select id="term" #mySelect2 (selectionChange)="onCpApplicantChange(mySelect2.value)">
+                                                                <div *ngIf="coApplicantList$ | async; else loading">
+                                                                    <mat-option *ngFor="let coapp of coApplicantList$ | async" [value]="coapp">
+                                                                        {{coapp.firstName}} {{coapp.lastName}}
+                                                                    </mat-option>
+                                                                </div>
+                                                                <ng-template #loading>
+                                                                    <mat-option>
+                                                                        <img src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==">
+                                                                    </mat-option>
+                                                                </ng-template>
+                                                            </mat-select>
+                                                        </mat-form-field>
+                                                    </div>
+
+                                                    <!-- <div fxFlex="20%" fxFlex.xs="90%"> -->
+                                                    <button type="submit" mat-raised-button color="primary" style="margin-right: 5px; width: 100%; color: green;">
+                                                    <!-- Add -->
+                                                    Add <mat-icon style="font-size: 2.5em;color: green;font-weight: bold;vertical-align: top;">check</mat-icon>
+                                                </button>
+                                                    <!-- <button type="button" (click)="reset()" mat-button mat-stroked-button color="accent">
+                                            Reset
+                                          </button> -->
+                                                    <!-- </div> -->
+                                                </form>
+                                            </div>
+
+
+                                            <!-- <mat-radio-group aria-label="Select an option" style="margin-top: 13px;margin-left: 25px;padding-right: 5px;">
+                                      <mat-radio-button value="1" checked style="padding-right: 10px;">Active</mat-radio-button>
+                                      <mat-radio-button value="0">All</mat-radio-button>
+                                  </mat-radio-group> -->
+                                            <!-- <span class="spacer"></span>
+                                  <button (click)="addRentPayment()" mat-button mat-mini-fab style="background: #3d5afe;color: white;">
+                                  <i class="material-icons" title="Add Lease Agreement">
+                                    playlist_add
+                                  </i>
+                                </button> -->
+                                        </div>
+
+                                        <div fxLayoutAlign="center">
+                                            <table mat-table [dataSource]="dataSource3" multiTemplateDataRows #Sort3="matSort" matSort class="my-table mat-elevation-z8" style="width: 100%;">
+                                                <ng-container matColumnDef="id">
+                                                    <th class="table-header-text" style="text-align: center;" mat-header-cell *matHeaderCellDef> ID </th>
+                                                    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                                                </ng-container>
+
+                                                <!-- Name Column -->
+                                                <!-- <ng-container matColumnDef="rentAmtDue">
+                                        <th class="table-header-text" mat-header-cell *matHeaderCellDef mat-sort-header>Rent Due </th>
+                                        <td mat-cell *matCellDef="let element"> {{element.scheduledPaymentAmt | currency:'CAD'}} </td>
+                                    </ng-container> -->
+
+                                                <ng-container matColumnDef="firstName">
+                                                    <th class="table-header-text" style="text-align: center;" mat-header-cell *matHeaderCellDef mat-sort-header>First Name</th>
+                                                    <td mat-cell *matCellDef="let element">
+                                                        {{element.firstName}}
+                                                    </td>
+                                                </ng-container>
+
+                                                <ng-container matColumnDef="lastName">
+                                                    <th class="table-header-text" mat-header-cell *matHeaderCellDef mat-sort-header>Last Name</th>
+                                                    <td mat-cell *matCellDef="let element"> {{element.lastName }} </td>
+                                                </ng-container>
+
+                                                <ng-container matColumnDef="email">
+                                                    <th class="table-header-text" mat-header-cell *matHeaderCellDef>Email</th>
+                                                    <td mat-cell *matCellDef="let element"> {{element.contactEmail}} </td>
+                                                </ng-container>
+
+                                                <ng-container matColumnDef="tel1">
+                                                    <th class="table-header-text" style="margin-left: auto;margin-right: auto;" mat-header-cell *matHeaderCellDef>Telephone 1</th>
+                                                    <td mat-cell *matCellDef="let element"> {{element.contactTelephone1}} </td>
+                                                </ng-container>
+
+                                                <!-- <ng-container matColumnDef="tel2">
+                                            <th class="table-header-text" style="margin-left: auto;margin-right: auto;" mat-header-cell *matHeaderCellDef mat-sort-header>Telephone 1</th>
+                                            <td mat-cell *matCellDef="let element"> {{element.contactTelephone2}} </td>
+                                        </ng-container> -->
+
+                                                <!-- <ng-container matColumnDef="updateDate">
+                                            <th class="table-header-text" style="margin-left: auto;margin-right: auto;" mat-header-cell *matHeaderCellDef mat-sort-header>Updated On</th>
+                                            <td mat-cell *matCellDef="let element"> {{element.modified | date}} </td>
+                                        </ng-container> -->
+
+                                                <ng-container matColumnDef="created">
+                                                    <th class="table-header-text" style="margin-left: auto;margin-right: auto;" mat-header-cell *matHeaderCellDef mat-sort-header> Added On </th>
+                                                    <td mat-cell *matCellDef="let element"> {{element.created | date }} </td>
+                                                </ng-container>
+
+                                                <ng-container matColumnDef="icon">
+                                                    <th mat-header-cell *matHeaderCellDef></th>
+                                                    <td mat-cell *matCellDef="let element">
+                                                        <i style="border: 2px solid;
+                                            padding: 3px;
+                                            border-radius: 50%;" class="material-icons">
+                                            person
+                                          </i>
+                                                    </td>
+                                                </ng-container>
+                                                <!-- style="font-size: 1.5em; color: red;" [style.color]="element.status == 'Rented' ? 'green': element.status == 'Pending'? 'orange' :'red'"-->
+                                                <!-- Action Column routerLink="/Manage/lease/leasedetails/rentpayment/{{element.id}}"-->
+                                                <ng-container matColumnDef="action">
+                                                    <th mat-header-cell *matHeaderCellDef></th>
+                                                    <td mat-cell *matCellDef="let element" class="action-link">
+                                                        <!-- <a (click)="openDialog('Update',element)">Edit</a> |
+                  <a (click)="openDialog('Delete',element)">Delete</a> ['/details', 1]-->
+                                                        <button type="button" mat-raised-button color="primary" (click)="getTenantDetails(element.id)">Details</button> &nbsp;
+                                                        <!-- <button mat-raised-button color="accent" (click)="openDialog('Delete',element)">Delete</button> -->
+                                                    </td>
+                                                </ng-container>
+
+                                                <ng-container matColumnDef="expandedDetail">
+                                                    <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
+
+                                                        <div class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+
+                                                            <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px" style="width: 100%;">
+                                                                <p style="margin-top: 15px;"></p>
+                                                                <div fxFlex="10%">
+                                                                    <img src="../../assets/images/tenant.png" height="50px" width="50px" style="border-radius: 50%">
+                                                                </div>
+                                                                <div fxFlex="40%" style="text-align: left;margin-top: 7px;">
+                                                                    <div style="font-weight: bold;">{{element.firstName}} {{element.lastName | uppercase}}</div>
+                                                                    <div>{{element.contactEmail}}</div>
+                                                                    <div>{{element.contactTelephone1 }}</div>
+                                                                    <div style="margin-top: 20px;">
+                                                                        <a routerLink="/Manage/lease/tenantdetails/{{element.id}}">more information</a>
+                                                                    </div>
+                                                                </div>
+                                                                <div fxFlex="40%" style="text-align: left;margin-top: 7px;">
+                                                                    <div><span style="font-weight: bold;">Rental Property</span>: &nbsp;{{element.propertyName}}</div>
+                                                                    <p></p>
+                                                                    <div>Added on: &nbsp;{{element.created | date}}</div>
+                                                                    <div>Last updated on: &nbsp;{{element.modified | date}}</div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+
+                                                    </td>
+                                                </ng-container>
+
+                                                <tr mat-header-row *matHeaderRowDef="displayedColumns3"></tr>
+                                                <!-- <tr mat-row *matRowDef="let row; columns: displayedColumns3;"></tr> -->
+
+                                                <tr style="cursor: pointer;" mat-row *matRowDef="let element; columns: displayedColumns3;" class="example-element-row" [class.example-expanded-row]="expandedElement === element" (click)="expandedElement = expandedElement === element ? null : element">
+                                                </tr>
+                                                <!-- Additional row-->
+                                                <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+                                            </table>
+                                        </div>
+                                        <!-- <mat-paginator #paginator3 [hidden]="!dataSource3.data.length" [pageSize]="10" [pageSizeOptions]="[5, 10, 25]"></mat-paginator> -->
+
+                                    </ng-template>
+                                </mat-tab>
+
+
+                                <mat-tab label="Rent Payment" style="background: #f5f5f5;">
+                                    <!-- <ng-template matTabContent> -->
                                     <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="10px" style="margin-bottom: 1%;
                                     flex-direction: row;
                                     box-sizing: border-box;
@@ -396,110 +633,92 @@
                                     margin-left: 25px;
                                     width: 95%;">
                                         <mat-form-field fxLayout fxLayoutAlign="start center">
-                                            <input matInput type="text" (keyup)="doFilter3($event.target.value)" placeholder="Filter">
+                                            <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="Filter">
                                         </mat-form-field>
                                         <!-- <mat-radio-group aria-label="Select an option" style="margin-top: 13px;margin-left: 25px;padding-right: 5px;">
-                                  <mat-radio-button value="1" checked style="padding-right: 10px;">Active</mat-radio-button>
-                                  <mat-radio-button value="0">All</mat-radio-button>
-                              </mat-radio-group> (click)="addRentPayment()"-->
+                                        <mat-radio-button value="1" checked style="padding-right: 10px;">Active</mat-radio-button>
+                                        <mat-radio-button value="0">All</mat-radio-button>
+                                    </mat-radio-group> (click)="addRentPayment()"-->
                                         <span class="spacer"></span>
-                                        <button *ngIf="!addTenant" title="Add Additional Tenant" (click)="addT()" mat-button mat-mini-fab style="background: #3d5afe;color: white;">
-                                    <i class="material-icons" title="Add Additional Tenant">
-                                      person_add
+                                        <button *ngIf="!addRent" title="Add Rent Payment" (click)="addR()" mat-button mat-mini-fab style="background: #3d5afe;color: white;">
+                                    <i class="material-icons" title="Add Rent Payment">
+                                      playlist_add
                                     </i>
                                   </button>
-                                        <button *ngIf="addTenant" (click)="cancel3()" title="Cancel" mat-button mat-mini-fab style="background: #d86f0d;color: white;">
+                                        <button *ngIf="addRent" (click)="cancel()" title="Cancel" mat-button mat-mini-fab style="background: #d86f0d;color: white;">
                                     <i class="material-icons" title="Cancel">
                                       clear
                                     </i>
                                   </button>
                                     </div>
 
-                                    <div *ngIf="addTenant" fxLayout="column" fxLayout.xs="column" fxLayoutAlign="center center" stye="width: 95%;margin-left: 10px; margin-right: 10px;">
-                                        <div style="width: 100%;margin-bottom: 10px;">
-                                            <mat-radio-group aria-label="Select an option" style="margin-top: 13px;margin-left: 25px;padding-right: 5px;" (change)="onAddTenantChange($event)">
-                                                <mat-radio-button [value]=1 checked style="padding-right: 10px;">Select Co-applicant</mat-radio-button>
-                                                <mat-radio-button [value]=2>Add new tenant</mat-radio-button>
-                                            </mat-radio-group>
-                                        </div>
-                                        <div style="width: 100%;">
-                                            <form novalidate fxLayout="column" fxLayoutAlign="center center" [formGroup]="addTenantForm" style="width: 100%;border: 1px solid;
-                                          margin-bottom: 5px;
-                                          padding: 5px;" (ngSubmit)="addAdditionalTenant()">
-                                                <div *ngIf="!existingCoAplicant" style="width: 100%;">
-                                                    <mat-form-field fxFlex="15%" fxFlex.xs="90%" style="width: 15%;margin-left: 10px;">
-                                                        <mat-label>First Name</mat-label>
-                                                        <input type="text" matInput placeholder="First Name" formControlName="firstName">
-                                                    </mat-form-field>
-                                                    <mat-form-field fxFlex="15%" fxFlex.xs="90%" style="width:15%;margin-left: 10px;">
-                                                        <mat-label>First Name</mat-label>
-                                                        <input type="text" matInput placeholder="Last Name" formControlName="lastName">
-                                                    </mat-form-field>
-                                                    <mat-form-field fxFlex="15%" fxFlex.xs="90%" appearance="standard" style="width:20%;margin-top: -12px; margin-left: 10px;">
-                                                        <mat-label>Email</mat-label>
-                                                        <input type="text" matInput placeholder="Contact Email" formControlName="contactEmail">
-                                                        <!-- <mat-icon matSuffix>payment</mat-icon> -->
-                                                    </mat-form-field>
-                                                    <mat-form-field fxFlex="15%" fxFlex.xs="90%" style="width:15%;margin-left: 10px;">
-                                                        <mat-label>Telephone</mat-label>
-                                                        <input type="text" matInput placeholder="Contact Telephone" formControlName="contactTelephone1">
-                                                    </mat-form-field>
+                                    <div *ngIf="addRent" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center" stye="width: 95%;margin-left: 10px; margin-right: 10px;">
+                                        <form novalidate fxLayoutAlign="center center" [formGroup]="addForm" style="width: 100%;border: 1px solid;
+                                            margin-bottom: 5px;
+                                            padding: 5px;" (ngSubmit)="addRentPayment()">
+                                            <mat-form-field fxFlex="15%" fxFlex.xs="90%" style="width: 15%;margin-left: 10px;">
+                                                <mat-label>Month</mat-label>
+                                                <mat-select id="month" formControlName="rentalForMonth">
+                                                    <mat-option [value]='month.name' *ngFor="let month of months">{{month.name}}</mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                            <mat-form-field fxFlex="10%" fxFlex.xs="90%" style="width:15%;margin-left: 10px;">
+                                                <mat-label>Year</mat-label>
+                                                <mat-select id="year" formControlName="rentalForYear">
+                                                    <mat-option [value]='year.name' *ngFor="let year of years">{{year.name}}</mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                            <mat-form-field fxFlex="10%" fxFlex.xs="90%" appearance="standard" style="width:20%;margin-top: -12px; margin-left: 10px;">
+                                                <mat-label>Amount</mat-label>
+                                                <input type="number" matInput placeholder="Rent Paid" formControlName="actualPaymentAmt">
+                                                <!-- <mat-icon matSuffix>payment</mat-icon> -->
+                                            </mat-form-field>
+                                            <mat-form-field fxFlex="15%" fxFlex.xs="90%" style="width:15%;margin-left: 10px;">
+                                                <mat-label>Paid By</mat-label>
+                                                <mat-select id="payby" formControlName="payMethod">
+                                                    <mat-option [value]='pay.key' *ngFor="let pay of payBy">{{pay.name}}</mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
 
-                                                    <mat-form-field fxFlex="15%" fxFlex.xs="90%" style="margin-left: 10px;margin-right: 10px;">
-                                                        <mat-label>Telephone 2</mat-label>
-                                                        <input type="text" matInput placeholder="Contact Telephone 2" formControlName="contactTelephone2">
-                                                    </mat-form-field>
+                                            <mat-form-field fxFlex="15%" fxFlex.xs="90%" style="margin-left: 10px;margin-right: 10px;">
+                                                <mat-label>Due Date</mat-label>
+                                                <input matInput [matDatepicker]="picker2" formControlName="paymentDueDate">
+                                                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                                                <mat-datepicker #picker2></mat-datepicker>
+                                            </mat-form-field>
 
-                                                    <mat-form-field fxFlex="15%" fxFlex.xs="90%" style="margin-left: 10px;margin-right: 10px;">
-                                                        <mat-label>Other Contact</mat-label>
-                                                        <input type="text" matInput placeholder="Contact Others" formControlName="contactOthers">
-                                                    </mat-form-field>
-                                                </div>
-                                                <div *ngIf="existingCoAplicant" style="width: 100%;text-align: center;">
-                                                    <mat-form-field style="width: 90%;">
-                                                        <mat-label>Select Co Applicant</mat-label>
-                                                        <mat-select id="term" #mySelect2 (selectionChange)="onCpApplicantChange(mySelect2.value)">
-                                                            <div *ngIf="coApplicantList$ | async; else loading">
-                                                                <mat-option *ngFor="let coapp of coApplicantList$ | async" [value]="coapp">
-                                                                    {{coapp.firstName}} {{coapp.lastName}}
-                                                                </mat-option>
-                                                            </div>
-                                                            <ng-template #loading>
-                                                                <mat-option>
-                                                                    <img src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==">
-                                                                </mat-option>
-                                                            </ng-template>
-                                                        </mat-select>
-                                                    </mat-form-field>
-                                                </div>
-
-                                                <!-- <div fxFlex="20%" fxFlex.xs="90%"> -->
-                                                <button type="submit" mat-raised-button color="primary" style="margin-right: 5px; width: 100%; color: green;">
-                                                    <!-- Add -->
-                                                    Add <mat-icon style="font-size: 2.5em;color: green;font-weight: bold;vertical-align: top;">check</mat-icon>
-                                                </button>
+                                            <mat-form-field fxFlex="15%" fxFlex.xs="90%" style="margin-left: 10px;margin-right: 10px;">
+                                                <mat-label>Paid Date</mat-label>
+                                                <input matInput [matDatepicker]="picker1" formControlName="paymentReceivedDate">
+                                                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                                                <mat-datepicker #picker1></mat-datepicker>
+                                            </mat-form-field>
+                                            <div fxFlex="20%" fxFlex.xs="90%">
+                                                <button type="submit" mat-button color="primary" style="margin-right: 5px; color: green;">
+                                            <!-- Add -->
+                                            <mat-icon style="font-size: 2.5em;vertical-align: top;">check_circle_outline</mat-icon>
+                                          </button>
                                                 <!-- <button type="button" (click)="reset()" mat-button mat-stroked-button color="accent">
                                             Reset
                                           </button> -->
-                                                <!-- </div> -->
-                                            </form>
-                                        </div>
-
+                                            </div>
+                                        </form>
 
                                         <!-- <mat-radio-group aria-label="Select an option" style="margin-top: 13px;margin-left: 25px;padding-right: 5px;">
-                                      <mat-radio-button value="1" checked style="padding-right: 10px;">Active</mat-radio-button>
-                                      <mat-radio-button value="0">All</mat-radio-button>
-                                  </mat-radio-group> -->
+                                        <mat-radio-button value="1" checked style="padding-right: 10px;">Active</mat-radio-button>
+                                        <mat-radio-button value="0">All</mat-radio-button>
+                                    </mat-radio-group> -->
                                         <!-- <span class="spacer"></span>
-                                  <button (click)="addRentPayment()" mat-button mat-mini-fab style="background: #3d5afe;color: white;">
-                                  <i class="material-icons" title="Add Lease Agreement">
-                                    playlist_add
-                                  </i>
-                                </button> -->
+                                    <button (click)="addRentPayment()" mat-button mat-mini-fab style="background: #3d5afe;color: white;">
+                                    <i class="material-icons" title="Add Lease Agreement">
+                                      playlist_add
+                                    </i>
+                                  </button> -->
                                     </div>
 
                                     <div fxLayoutAlign="center">
-                                        <table mat-table [dataSource]="dataSource3" multiTemplateDataRows #Sort3="matSort" matSort class="my-table mat-elevation-z8" style="width: 100%;">
+                                        <!-- <ng-template matTabContent> -->
+                                        <table mat-table [dataSource]="dataSource" #Sort="matSort" matSort matSort class="my-table mat-elevation-z8" style="width: 100%;">
                                             <ng-container matColumnDef="id">
                                                 <th class="table-header-text" style="text-align: center;" mat-header-cell *matHeaderCellDef> ID </th>
                                                 <td mat-cell *matCellDef="let element"> {{element.id}} </td>
@@ -507,41 +726,36 @@
 
                                             <!-- Name Column -->
                                             <!-- <ng-container matColumnDef="rentAmtDue">
-                                        <th class="table-header-text" mat-header-cell *matHeaderCellDef mat-sort-header>Rent Due </th>
-                                        <td mat-cell *matCellDef="let element"> {{element.scheduledPaymentAmt | currency:'CAD'}} </td>
-                                    </ng-container> -->
+                                              <th class="table-header-text" mat-header-cell *matHeaderCellDef mat-sort-header>Rent Due </th>
+                                              <td mat-cell *matCellDef="let element"> {{element.scheduledPaymentAmt | currency:'CAD'}} </td>
+                                          </ng-container> -->
 
-                                            <ng-container matColumnDef="firstName">
-                                                <th class="table-header-text" style="text-align: center;" mat-header-cell *matHeaderCellDef mat-sort-header>First Name</th>
+                                            <ng-container matColumnDef="paidAmt">
+                                                <th class="table-header-text" style="text-align: center;" mat-header-cell *matHeaderCellDef> Actual Paid </th>
                                                 <td mat-cell *matCellDef="let element">
-                                                    {{element.firstName}}
+                                                    {{element.actualPaymentAmt | currency:'CAD'}}
                                                 </td>
                                             </ng-container>
 
-                                            <ng-container matColumnDef="lastName">
-                                                <th class="table-header-text" mat-header-cell *matHeaderCellDef mat-sort-header>Last Name</th>
-                                                <td mat-cell *matCellDef="let element"> {{element.lastName }} </td>
+                                            <ng-container matColumnDef="paymentReceivedDate">
+                                                <th class="table-header-text" mat-header-cell *matHeaderCellDef mat-sort-header> Paid on </th>
+                                                <td mat-cell *matCellDef="let element"> {{element.paymentReceivedDate | date}} </td>
                                             </ng-container>
 
-                                            <ng-container matColumnDef="email">
-                                                <th class="table-header-text" mat-header-cell *matHeaderCellDef>Email</th>
-                                                <td mat-cell *matCellDef="let element"> {{element.contactEmail}} </td>
+                                            <ng-container matColumnDef="payMethod">
+                                                <th class="table-header-text" style="margin-left: auto;margin-right: auto;" mat-header-cell *matHeaderCellDef mat-sort-header> Paid by </th>
+                                                <td mat-cell *matCellDef="let element"> {{element.payMethod | paymentMethod}} </td>
                                             </ng-container>
 
-                                            <ng-container matColumnDef="tel1">
-                                                <th class="table-header-text" style="margin-left: auto;margin-right: auto;" mat-header-cell *matHeaderCellDef>Telephone 1</th>
-                                                <td mat-cell *matCellDef="let element"> {{element.contactTelephone1}} </td>
+                                            <ng-container matColumnDef="rentalForMonth">
+                                                <th class="table-header-text" style="margin-left: auto;margin-right: auto;" mat-header-cell *matHeaderCellDef mat-sort-header> Rent Month </th>
+                                                <td mat-cell *matCellDef="let element"> {{element.rentalForMonth}} </td>
                                             </ng-container>
 
-                                            <!-- <ng-container matColumnDef="tel2">
-                                            <th class="table-header-text" style="margin-left: auto;margin-right: auto;" mat-header-cell *matHeaderCellDef mat-sort-header>Telephone 1</th>
-                                            <td mat-cell *matCellDef="let element"> {{element.contactTelephone2}} </td>
-                                        </ng-container> -->
-
-                                            <!-- <ng-container matColumnDef="updateDate">
-                                            <th class="table-header-text" style="margin-left: auto;margin-right: auto;" mat-header-cell *matHeaderCellDef mat-sort-header>Updated On</th>
-                                            <td mat-cell *matCellDef="let element"> {{element.modified | date}} </td>
-                                        </ng-container> -->
+                                            <ng-container matColumnDef="rentalForYear">
+                                                <th class="table-header-text" style="margin-left: auto;margin-right: auto;" mat-header-cell *matHeaderCellDef mat-sort-header> Rent Year </th>
+                                                <td mat-cell *matCellDef="let element"> {{element.rentalForYear }} </td>
+                                            </ng-container>
 
                                             <ng-container matColumnDef="created">
                                                 <th class="table-header-text" style="margin-left: auto;margin-right: auto;" mat-header-cell *matHeaderCellDef mat-sort-header> Added On </th>
@@ -552,10 +766,10 @@
                                                 <th mat-header-cell *matHeaderCellDef></th>
                                                 <td mat-cell *matCellDef="let element">
                                                     <i style="border: 2px solid;
-                                            padding: 3px;
-                                            border-radius: 50%;" class="material-icons">
-                                            person
-                                          </i>
+                                                      padding: 3px;
+                                                      border-radius: 50%;" class="material-icons">
+                                                      attach_money
+                                                    </i>
                                                 </td>
                                             </ng-container>
                                             <!-- style="font-size: 1.5em; color: red;" [style.color]="element.status == 'Rented' ? 'green': element.status == 'Pending'? 'orange' :'red'"-->
@@ -563,225 +777,16 @@
                                             <ng-container matColumnDef="action">
                                                 <th mat-header-cell *matHeaderCellDef></th>
                                                 <td mat-cell *matCellDef="let element" class="action-link">
-                                                    <!-- <a (click)="openDialog('Update',element)">Edit</a> |
-                  <a (click)="openDialog('Delete',element)">Delete</a> ['/details', 1]-->
-                                                    <button type="button" mat-raised-button color="primary" (click)="getTenantDetails(element.id)">Details</button> &nbsp;
-                                                    <!-- <button mat-raised-button color="accent" (click)="openDialog('Delete',element)">Delete</button> -->
+                                                    <!-- <a (click)="openDialog('Update',element)">Edit</a> | -->
+                                                    <!-- <a (click)="openDialog('Delete',element)">Delete</a> ['/details', 1] -->
+                                                    <!-- <a type="button" mat-raised-button color="primary">Details</a> &nbsp; (click)="openDialog('Delete',element)"-->
+                                                    <button type="button" mat-raised-button color="accent" (click)="getRentPaymentDetails(element.id)">Details</button>
                                                 </td>
                                             </ng-container>
 
-                                            <ng-container matColumnDef="expandedDetail">
-                                                <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
 
-                                                    <div class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
-
-                                                        <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px" style="width: 100%;">
-                                                            <p style="margin-top: 15px;"></p>
-                                                            <div fxFlex="10%">
-                                                                <img src="../../assets/images/tenant.png" height="50px" width="50px" style="border-radius: 50%">
-                                                            </div>
-                                                            <div fxFlex="40%" style="text-align: left;margin-top: 7px;">
-                                                                <div style="font-weight: bold;">{{element.firstName}} {{element.lastName | uppercase}}</div>
-                                                                <div>{{element.contactEmail}}</div>
-                                                                <div>{{element.contactTelephone1 }}</div>
-                                                                <div style="margin-top: 20px;">
-                                                                    <a routerLink="/Manage/lease/tenantdetails/{{element.id}}">more information</a>
-                                                                </div>
-                                                            </div>
-                                                            <div fxFlex="40%" style="text-align: left;margin-top: 7px;">
-                                                                <div><span style="font-weight: bold;">Rental Property</span>: &nbsp;{{element.propertyName}}</div>
-                                                                <p></p>
-                                                                <div>Added on: &nbsp;{{element.created | date}}</div>
-                                                                <div>Last updated on: &nbsp;{{element.modified | date}}</div>
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
-
-                                                </td>
-                                            </ng-container>
-
-                                            <tr mat-header-row *matHeaderRowDef="displayedColumns3"></tr>
-                                            <!-- <tr mat-row *matRowDef="let row; columns: displayedColumns3;"></tr> -->
-
-                                            <tr style="cursor: pointer;" mat-row *matRowDef="let element; columns: displayedColumns3;" class="example-element-row" [class.example-expanded-row]="expandedElement === element" (click)="expandedElement = expandedElement === element ? null : element">
-                                            </tr>
-                                            <!-- Additional row-->
-                                            <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
-                                        </table>
-                                    </div>
-                                    <!-- <mat-paginator #paginator3 [hidden]="!dataSource3.data.length" [pageSize]="10" [pageSizeOptions]="[5, 10, 25]"></mat-paginator> -->
-
-                                </ng-template>
-                            </mat-tab>
-
-
-                            <mat-tab label="Rent Payment" style="background: #f5f5f5;">
-                                <!-- <ng-template matTabContent> -->
-                                <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="10px" style="margin-bottom: 1%;
-                                    flex-direction: row;
-                                    box-sizing: border-box;
-                                    display: flex;
-                                    place-content: stretch flex-end;
-                                    align-items: stretch;
-                                    margin-top: 20px;
-                                    margin-left: 25px;
-                                    width: 95%;">
-                                    <mat-form-field fxLayout fxLayoutAlign="start center">
-                                        <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="Filter">
-                                    </mat-form-field>
-                                    <!-- <mat-radio-group aria-label="Select an option" style="margin-top: 13px;margin-left: 25px;padding-right: 5px;">
-                                        <mat-radio-button value="1" checked style="padding-right: 10px;">Active</mat-radio-button>
-                                        <mat-radio-button value="0">All</mat-radio-button>
-                                    </mat-radio-group> (click)="addRentPayment()"-->
-                                    <span class="spacer"></span>
-                                    <button *ngIf="!addRent" title="Add Rent Payment" (click)="addR()" mat-button mat-mini-fab style="background: #3d5afe;color: white;">
-                                    <i class="material-icons" title="Add Rent Payment">
-                                      playlist_add
-                                    </i>
-                                  </button>
-                                    <button *ngIf="addRent" (click)="cancel()" title="Cancel" mat-button mat-mini-fab style="background: #d86f0d;color: white;">
-                                    <i class="material-icons" title="Cancel">
-                                      clear
-                                    </i>
-                                  </button>
-                                </div>
-
-                                <div *ngIf="addRent" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center" stye="width: 95%;margin-left: 10px; margin-right: 10px;">
-                                    <form novalidate fxLayoutAlign="center center" [formGroup]="addForm" style="width: 100%;border: 1px solid;
-                                            margin-bottom: 5px;
-                                            padding: 5px;" (ngSubmit)="addRentPayment()">
-                                        <mat-form-field fxFlex="15%" fxFlex.xs="90%" style="width: 15%;margin-left: 10px;">
-                                            <mat-label>Month</mat-label>
-                                            <mat-select id="month" formControlName="rentalForMonth">
-                                                <mat-option [value]='month.name' *ngFor="let month of months">{{month.name}}</mat-option>
-                                            </mat-select>
-                                        </mat-form-field>
-                                        <mat-form-field fxFlex="10%" fxFlex.xs="90%" style="width:15%;margin-left: 10px;">
-                                            <mat-label>Year</mat-label>
-                                            <mat-select id="year" formControlName="rentalForYear">
-                                                <mat-option [value]='year.name' *ngFor="let year of years">{{year.name}}</mat-option>
-                                            </mat-select>
-                                        </mat-form-field>
-                                        <mat-form-field fxFlex="10%" fxFlex.xs="90%" appearance="standard" style="width:20%;margin-top: -12px; margin-left: 10px;">
-                                            <mat-label>Amount</mat-label>
-                                            <input type="number" matInput placeholder="Rent Paid" formControlName="actualPaymentAmt">
-                                            <!-- <mat-icon matSuffix>payment</mat-icon> -->
-                                        </mat-form-field>
-                                        <mat-form-field fxFlex="15%" fxFlex.xs="90%" style="width:15%;margin-left: 10px;">
-                                            <mat-label>Paid By</mat-label>
-                                            <mat-select id="payby" formControlName="payMethod">
-                                                <mat-option [value]='pay.key' *ngFor="let pay of payBy">{{pay.name}}</mat-option>
-                                            </mat-select>
-                                        </mat-form-field>
-
-                                        <mat-form-field fxFlex="15%" fxFlex.xs="90%" style="margin-left: 10px;margin-right: 10px;">
-                                            <mat-label>Due Date</mat-label>
-                                            <input matInput [matDatepicker]="picker2" formControlName="paymentDueDate">
-                                            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-                                            <mat-datepicker #picker2></mat-datepicker>
-                                        </mat-form-field>
-
-                                        <mat-form-field fxFlex="15%" fxFlex.xs="90%" style="margin-left: 10px;margin-right: 10px;">
-                                            <mat-label>Paid Date</mat-label>
-                                            <input matInput [matDatepicker]="picker1" formControlName="paymentReceivedDate">
-                                            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                                            <mat-datepicker #picker1></mat-datepicker>
-                                        </mat-form-field>
-                                        <div fxFlex="20%" fxFlex.xs="90%">
-                                            <button type="submit" mat-button color="primary" style="margin-right: 5px; color: green;">
-                                            <!-- Add -->
-                                            <mat-icon style="font-size: 2.5em;vertical-align: top;">check_circle_outline</mat-icon>
-                                          </button>
-                                            <!-- <button type="button" (click)="reset()" mat-button mat-stroked-button color="accent">
-                                            Reset
-                                          </button> -->
-                                        </div>
-                                    </form>
-
-                                    <!-- <mat-radio-group aria-label="Select an option" style="margin-top: 13px;margin-left: 25px;padding-right: 5px;">
-                                        <mat-radio-button value="1" checked style="padding-right: 10px;">Active</mat-radio-button>
-                                        <mat-radio-button value="0">All</mat-radio-button>
-                                    </mat-radio-group> -->
-                                    <!-- <span class="spacer"></span>
-                                    <button (click)="addRentPayment()" mat-button mat-mini-fab style="background: #3d5afe;color: white;">
-                                    <i class="material-icons" title="Add Lease Agreement">
-                                      playlist_add
-                                    </i>
-                                  </button> -->
-                                </div>
-
-                                <div fxLayoutAlign="center">
-                                    <!-- <ng-template matTabContent> -->
-                                    <table mat-table [dataSource]="dataSource" #Sort="matSort" matSort matSort class="my-table mat-elevation-z8" style="width: 100%;">
-                                        <ng-container matColumnDef="id">
-                                            <th class="table-header-text" style="text-align: center;" mat-header-cell *matHeaderCellDef> ID </th>
-                                            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-                                        </ng-container>
-
-                                        <!-- Name Column -->
-                                        <!-- <ng-container matColumnDef="rentAmtDue">
-                                              <th class="table-header-text" mat-header-cell *matHeaderCellDef mat-sort-header>Rent Due </th>
-                                              <td mat-cell *matCellDef="let element"> {{element.scheduledPaymentAmt | currency:'CAD'}} </td>
-                                          </ng-container> -->
-
-                                        <ng-container matColumnDef="paidAmt">
-                                            <th class="table-header-text" style="text-align: center;" mat-header-cell *matHeaderCellDef> Actual Paid </th>
-                                            <td mat-cell *matCellDef="let element">
-                                                {{element.actualPaymentAmt | currency:'CAD'}}
-                                            </td>
-                                        </ng-container>
-
-                                        <ng-container matColumnDef="paymentReceivedDate">
-                                            <th class="table-header-text" mat-header-cell *matHeaderCellDef mat-sort-header> Paid on </th>
-                                            <td mat-cell *matCellDef="let element"> {{element.paymentReceivedDate | date}} </td>
-                                        </ng-container>
-
-                                        <ng-container matColumnDef="payMethod">
-                                            <th class="table-header-text" style="margin-left: auto;margin-right: auto;" mat-header-cell *matHeaderCellDef mat-sort-header> Paid by </th>
-                                            <td mat-cell *matCellDef="let element"> {{element.payMethod | paymentMethod}} </td>
-                                        </ng-container>
-
-                                        <ng-container matColumnDef="rentalForMonth">
-                                            <th class="table-header-text" style="margin-left: auto;margin-right: auto;" mat-header-cell *matHeaderCellDef mat-sort-header> Rent Month </th>
-                                            <td mat-cell *matCellDef="let element"> {{element.rentalForMonth}} </td>
-                                        </ng-container>
-
-                                        <ng-container matColumnDef="rentalForYear">
-                                            <th class="table-header-text" style="margin-left: auto;margin-right: auto;" mat-header-cell *matHeaderCellDef mat-sort-header> Rent Year </th>
-                                            <td mat-cell *matCellDef="let element"> {{element.rentalForYear }} </td>
-                                        </ng-container>
-
-                                        <ng-container matColumnDef="created">
-                                            <th class="table-header-text" style="margin-left: auto;margin-right: auto;" mat-header-cell *matHeaderCellDef mat-sort-header> Added On </th>
-                                            <td mat-cell *matCellDef="let element"> {{element.created | date }} </td>
-                                        </ng-container>
-
-                                        <ng-container matColumnDef="icon">
-                                            <th mat-header-cell *matHeaderCellDef></th>
-                                            <td mat-cell *matCellDef="let element">
-                                                <i style="border: 2px solid;
-                                                      padding: 3px;
-                                                      border-radius: 50%;" class="material-icons">
-                                                      attach_money
-                                                    </i>
-                                            </td>
-                                        </ng-container>
-                                        <!-- style="font-size: 1.5em; color: red;" [style.color]="element.status == 'Rented' ? 'green': element.status == 'Pending'? 'orange' :'red'"-->
-                                        <!-- Action Column routerLink="/Manage/lease/leasedetails/rentpayment/{{element.id}}"-->
-                                        <ng-container matColumnDef="action">
-                                            <th mat-header-cell *matHeaderCellDef></th>
-                                            <td mat-cell *matCellDef="let element" class="action-link">
-                                                <!-- <a (click)="openDialog('Update',element)">Edit</a> | -->
-                                                <!-- <a (click)="openDialog('Delete',element)">Delete</a> ['/details', 1] -->
-                                                <!-- <a type="button" mat-raised-button color="primary">Details</a> &nbsp; (click)="openDialog('Delete',element)"-->
-                                                <button type="button" mat-raised-button color="accent" (click)="getRentPaymentDetails(element.id)">Details</button>
-                                            </td>
-                                        </ng-container>
-
-
-                                        <!-- Detail Panel [@detailExpand]="element.isExpanded ? 'expanded' : 'collapsed'"-->
-                                        <!-- <ng-container matColumnDef="expandedDetail">
+                                            <!-- Detail Panel [@detailExpand]="element.isExpanded ? 'expanded' : 'collapsed'"-->
+                                            <!-- <ng-container matColumnDef="expandedDetail">
                                             <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
 
                                                 <div class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
@@ -804,36 +809,36 @@
 
 
 
-                                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                                        <!-- <tr mat-row *matRowDef="let element; columns: displayedColumns;" class="student-element-row" [class.student-expanded-row]="element.isExpanded"></tr> -->
+                                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                                            <!-- <tr mat-row *matRowDef="let element; columns: displayedColumns;" class="student-element-row" [class.student-expanded-row]="element.isExpanded"></tr> -->
 
 
-                                        <!-- Expanded row implementation -- Disabled -->
-                                        <!-- <tr mat-row *matRowDef="let element; columns: displayedColumns;" class="example-element-row" [class.example-expanded-row]="expandedElement === element" (click)="expandedElement = expandedElement === element ? null : element">
+                                            <!-- Expanded row implementation -- Disabled -->
+                                            <!-- <tr mat-row *matRowDef="let element; columns: displayedColumns;" class="example-element-row" [class.example-expanded-row]="expandedElement === element" (click)="expandedElement = expandedElement === element ? null : element">
                                             </tr> -->
-                                        <!-- Additional row-->
-                                        <!-- <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr> -->
-                                        <!-- Expanded row implementation -- Disabled -->
+                                            <!-- Additional row-->
+                                            <!-- <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr> -->
+                                            <!-- Expanded row implementation -- Disabled -->
+                                        </table>
+                                        <!-- </ng-template> -->
+
+                                    </div>
+
+                                    <table style="width: 100%;">
+                                        <tr *ngIf="!dataSource.data.length">
+                                            <td style="text-align: center;height:40px" [attr.colspan]="displayedColumns.length">
+
+                                                No Records Found!
+                                            </td>
+                                        </tr>
                                     </table>
+                                    <span class="spacer"></span>
+                                    <mat-paginator #paginator [hidden]="!dataSource.data.length" [pageSize]="10" [pageSizeOptions]="[5, 10, 25]"></mat-paginator>
                                     <!-- </ng-template> -->
-
-                                </div>
-
-                                <table style="width: 100%;">
-                                    <tr *ngIf="!dataSource.data.length">
-                                        <td style="text-align: center;height:40px" [attr.colspan]="displayedColumns.length">
-
-                                            No Records Found!
-                                        </td>
-                                    </tr>
-                                </table>
-                                <span class="spacer"></span>
-                                <mat-paginator #paginator [hidden]="!dataSource.data.length" [pageSize]="10" [pageSizeOptions]="[5, 10, 25]"></mat-paginator>
-                                <!-- </ng-template> -->
-                            </mat-tab>
-                            <mat-tab label="Work Orders" style="background: #f5f5f5;">
-                                <!-- <div style="margin-top: 25px; margin-left: 40px;margin-bottom: 320px;">
+                                </mat-tab>
+                                <mat-tab label="Work Orders" style="background: #f5f5f5;">
+                                    <!-- <div style="margin-top: 25px; margin-left: 40px;margin-bottom: 320px;">
                                     <h6>Rental Property - {{lease.rentalProperty.propertyName}} </h6>
                                     <p>
                                         <span style="font-weight: bold;">Address:</span> {{lease.rentalProperty.address.streetNum}} {{lease.rentalProperty.address.city}} {{lease.rentalProperty.address.stateProvince}} {{lease.rentalProperty.address.zipPostCode}}
@@ -842,7 +847,7 @@
                                     <h6>Work Orders</h6>
 
                                 </div> -->
-                                <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="10px" style="margin-bottom: 1%;
+                                    <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="10px" style="margin-bottom: 1%;
                                     flex-direction: row;
                                     box-sizing: border-box;
                                     display: flex;
@@ -851,218 +856,218 @@
                                     margin-top: 20px;
                                     margin-left: 25px;
                                     width: 95%;">
-                                    <mat-form-field fxLayout fxLayoutAlign="start center">
-                                        <input matInput type="text" (keyup)="doFilter2($event.target.value)" placeholder="Filter">
-                                    </mat-form-field>
-                                    <!-- <mat-radio-group aria-label="Select an option" style="margin-top: 13px;margin-left: 25px;padding-right: 5px;">
+                                        <mat-form-field fxLayout fxLayoutAlign="start center">
+                                            <input matInput type="text" (keyup)="doFilter2($event.target.value)" placeholder="Filter">
+                                        </mat-form-field>
+                                        <!-- <mat-radio-group aria-label="Select an option" style="margin-top: 13px;margin-left: 25px;padding-right: 5px;">
                                         <mat-radio-button value="1" checked style="padding-right: 10px;">Active</mat-radio-button>
                                         <mat-radio-button value="0">All</mat-radio-button>
                                     </mat-radio-group> (click)="addRentPayment()"-->
-                                    <span class="spacer"></span>
-                                    <button *ngIf="!addWorkOrder" title="Add Work Order" (click)="addW()" mat-button mat-mini-fab style="background: #3d5afe;color: white;">
+                                        <span class="spacer"></span>
+                                        <button *ngIf="!addWorkOrder" title="Add Work Order" (click)="addW()" mat-button mat-mini-fab style="background: #3d5afe;color: white;">
                                     <i class="material-icons" title="Add Work Order">
                                       playlist_add
                                     </i>
                                   </button>
-                                    <button *ngIf="addWorkOrder" (click)="cancel2()" title="Cancel" mat-button mat-mini-fab style="background: #d86f0d;color: white;">
+                                        <button *ngIf="addWorkOrder" (click)="cancel2()" title="Cancel" mat-button mat-mini-fab style="background: #d86f0d;color: white;">
                                     <i class="material-icons" title="Cancel">
                                       clear
                                     </i>
                                   </button>
-                                </div>
+                                    </div>
 
-                                <div *ngIf="addWorkOrder">
-                                    <form novalidate fxLayout="column" fxLayout.xs="column" fxLayoutAlign="center center" stye="width: 95%;margin-left: 10px; margin-right: 10px;" [formGroup]="addForm2" style="width: 100%;border: 1px solid;
+                                    <div *ngIf="addWorkOrder">
+                                        <form novalidate fxLayout="column" fxLayout.xs="column" fxLayoutAlign="center center" stye="width: 95%;margin-left: 10px; margin-right: 10px;" [formGroup]="addForm2" style="width: 100%;border: 1px solid;
                                         margin-bottom: 5px;
                                         padding: 5px;" (ngSubmit)="addNewOrder()">
-                                        <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center" style="width: 95%;">
-                                            <mat-form-field fxFlex="20%" fxFlex.xs="90%" appearance="standard" style="width:20%;margin-top: -12px; margin-left: 10px;">
-                                                <mat-label>Title</mat-label>
-                                                <input type="text" matInput placeholder="Rent Paid" formControlName="workOrderName">
-                                                <!-- <mat-icon matSuffix>payment</mat-icon> -->
-                                            </mat-form-field>
-                                            <mat-form-field fxFlex="30%" fxFlex.xs="90%" appearance="standard" style="width:20%;margin-top: -12px; margin-left: 10px;">
-                                                <mat-label>Details</mat-label>
-                                                <input type="text" matInput placeholder="Rent Paid" formControlName="workOrderDetails">
-                                                <!-- <mat-icon matSuffix>payment</mat-icon> -->
-                                            </mat-form-field>
+                                            <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center" style="width: 95%;">
+                                                <mat-form-field fxFlex="20%" fxFlex.xs="90%" appearance="standard" style="width:20%;margin-top: -12px; margin-left: 10px;">
+                                                    <mat-label>Title</mat-label>
+                                                    <input type="text" matInput placeholder="Rent Paid" formControlName="workOrderName">
+                                                    <!-- <mat-icon matSuffix>payment</mat-icon> -->
+                                                </mat-form-field>
+                                                <mat-form-field fxFlex="30%" fxFlex.xs="90%" appearance="standard" style="width:20%;margin-top: -12px; margin-left: 10px;">
+                                                    <mat-label>Details</mat-label>
+                                                    <input type="text" matInput placeholder="Rent Paid" formControlName="workOrderDetails">
+                                                    <!-- <mat-icon matSuffix>payment</mat-icon> -->
+                                                </mat-form-field>
 
-                                            <mat-form-field fxFlex="15%" fxFlex.xs="90%" style="width: 15%;margin-left: 10px;">
-                                                <mat-label>Type</mat-label>
-                                                <mat-select id="month" formControlName="workOrderType">
-                                                    <mat-option [value]='type.name' *ngFor="let type of types">{{type.name}}</mat-option>
-                                                </mat-select>
-                                            </mat-form-field>
-                                            <mat-form-field fxFlex="15%" fxFlex.xs="90%" style="width:15%;margin-left: 10px;">
-                                                <mat-label>Category</mat-label>
-                                                <mat-select id="year" formControlName="workOrderCategory">
-                                                    <mat-option [value]='category.name' *ngFor="let category of categories">{{category.name}}</mat-option>
-                                                </mat-select>
-                                            </mat-form-field>
-                                        </div>
-                                        <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center" style="width: 95%;">
-                                            <mat-form-field fxFlex="20%" fxFlex.xs="90%" style="width:20%;margin-left: 10px;">
-                                                <mat-label>Vendor</mat-label>
-                                                <mat-select #mySelect id="vendor" formControlName="vendorId" (selectionChange)="onVendorChange(mySelect.value)">
-                                                    <div *ngIf="vendors; else loading">
-                                                        <mat-option [value]='vendor.id' *ngFor="let vendor of vendors">
-                                                            {{vendor.vendorBusinessName}}
-                                                        </mat-option>
-                                                    </div>
-                                                    <ng-template #loading>
-                                                        <mat-option>
-                                                            <img src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==">
-                                                        </mat-option>
-                                                    </ng-template>
+                                                <mat-form-field fxFlex="15%" fxFlex.xs="90%" style="width: 15%;margin-left: 10px;">
+                                                    <mat-label>Type</mat-label>
+                                                    <mat-select id="month" formControlName="workOrderType">
+                                                        <mat-option [value]='type.name' *ngFor="let type of types">{{type.name}}</mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                                <mat-form-field fxFlex="15%" fxFlex.xs="90%" style="width:15%;margin-left: 10px;">
+                                                    <mat-label>Category</mat-label>
+                                                    <mat-select id="year" formControlName="workOrderCategory">
+                                                        <mat-option [value]='category.name' *ngFor="let category of categories">{{category.name}}</mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                            </div>
+                                            <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center" style="width: 95%;">
+                                                <mat-form-field fxFlex="20%" fxFlex.xs="90%" style="width:20%;margin-left: 10px;">
+                                                    <mat-label>Vendor</mat-label>
+                                                    <mat-select #mySelect id="vendor" formControlName="vendorId" (selectionChange)="onVendorChange(mySelect.value)">
+                                                        <div *ngIf="vendors; else loading">
+                                                            <mat-option [value]='vendor.id' *ngFor="let vendor of vendors">
+                                                                {{vendor.vendorBusinessName}}
+                                                            </mat-option>
+                                                        </div>
+                                                        <ng-template #loading>
+                                                            <mat-option>
+                                                                <img src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==">
+                                                            </mat-option>
+                                                        </ng-template>
 
-                                                </mat-select>
-                                            </mat-form-field>
-                                            <mat-checkbox fxFlex="20%" style="width:20%;margin-left: 20px; margin-top: 8px;" formControlName="isEmergency">Urgent</mat-checkbox>
-                                            <mat-checkbox fxFlex="20%" style="width:20%;margin-left: 10px; margin-top: 8px;" formControlName="isOwnerAuthorized">Approved</mat-checkbox>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                                <mat-checkbox fxFlex="20%" style="width:20%;margin-left: 20px; margin-top: 8px;" formControlName="isEmergency">Urgent</mat-checkbox>
+                                                <mat-checkbox fxFlex="20%" style="width:20%;margin-left: 10px; margin-top: 8px;" formControlName="isOwnerAuthorized">Approved</mat-checkbox>
 
-                                            <mat-form-field style="width: 20%;">
-                                                <!-- <input matInput type="text" placeholder="Property Name" formControlName="propertyName" id="title"> -->
-                                                <mat-label>Notes</mat-label>
-                                                <textarea matInput formControlName="note"></textarea>
-                                            </mat-form-field>
+                                                <mat-form-field style="width: 20%;">
+                                                    <!-- <input matInput type="text" placeholder="Property Name" formControlName="propertyName" id="title"> -->
+                                                    <mat-label>Notes</mat-label>
+                                                    <textarea matInput formControlName="note"></textarea>
+                                                </mat-form-field>
 
-                                        </div>
-                                        <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center" style="width: 95%;">
+                                            </div>
+                                            <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center" style="width: 95%;">
 
-                                            <mat-form-field fxFlex="20%" fxFlex.xs="90%" style="width:20%;margin-left: 10px;">
-                                                <mat-label>Service Requests</mat-label>
-                                                <mat-select #Selected id="request" formControlName="serviceRequestId" (selectionChange)="onServieRequestChange(Selected.value)">
-                                                    <mat-option [value]='request.id' *ngFor="let request of requests">{{request.requestSubject}}</mat-option>
-                                                </mat-select>
-                                            </mat-form-field>
-                                            <mat-form-field fxFlex="20%" fxFlex.xs="90%" style="width:20%;margin-left: 10px;margin-right: 10px;">
-                                                <mat-label>Start Date</mat-label>
-                                                <input matInput [matDatepicker]="picker2" formControlName="startDate">
-                                                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-                                                <mat-datepicker #picker2></mat-datepicker>
-                                            </mat-form-field>
+                                                <mat-form-field fxFlex="20%" fxFlex.xs="90%" style="width:20%;margin-left: 10px;">
+                                                    <mat-label>Service Requests</mat-label>
+                                                    <mat-select #Selected id="request" formControlName="serviceRequestId" (selectionChange)="onServieRequestChange(Selected.value)">
+                                                        <mat-option [value]='request.id' *ngFor="let request of requests">{{request.requestSubject}}</mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                                <mat-form-field fxFlex="20%" fxFlex.xs="90%" style="width:20%;margin-left: 10px;margin-right: 10px;">
+                                                    <mat-label>Start Date</mat-label>
+                                                    <input matInput [matDatepicker]="picker2" formControlName="startDate">
+                                                    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                                                    <mat-datepicker #picker2></mat-datepicker>
+                                                </mat-form-field>
 
 
-                                            <mat-form-field fxFlex="20%" fxFlex.xs="90%" style="width: 20%; margin-left: 10px;margin-right: 10px;">
-                                                <mat-label>End Date</mat-label>
-                                                <input matInput [matDatepicker]="picker1" formControlName="endDate">
-                                                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                                                <mat-datepicker #picker1></mat-datepicker>
-                                            </mat-form-field>
-                                            <div fxFlex="20%" fxFlex.xs="90%" style="width: 20%;">
-                                                <button type="submit" mat-raised-button color="primary" style="margin-right: 5px; color: green;width: 100%;">
+                                                <mat-form-field fxFlex="20%" fxFlex.xs="90%" style="width: 20%; margin-left: 10px;margin-right: 10px;">
+                                                    <mat-label>End Date</mat-label>
+                                                    <input matInput [matDatepicker]="picker1" formControlName="endDate">
+                                                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                                                    <mat-datepicker #picker1></mat-datepicker>
+                                                </mat-form-field>
+                                                <div fxFlex="20%" fxFlex.xs="90%" style="width: 20%;">
+                                                    <button type="submit" mat-raised-button color="primary" style="margin-right: 5px; color: green;width: 100%;">
                                               Add <mat-icon class="mat-18" style="color:green;font-weight: bold;">check</mat-icon>
                                             </button>
+                                                </div>
+
                                             </div>
+                                        </form>
 
-                                        </div>
-                                    </form>
-
-                                    <!-- <mat-radio-group aria-label="Select an option" style="margin-top: 13px;margin-left: 25px;padding-right: 5px;">
+                                        <!-- <mat-radio-group aria-label="Select an option" style="margin-top: 13px;margin-left: 25px;padding-right: 5px;">
                                       <mat-radio-button value="1" checked style="padding-right: 10px;">Active</mat-radio-button>
                                       <mat-radio-button value="0">All</mat-radio-button>
                                   </mat-radio-group> -->
-                                    <!-- <span class="spacer"></span>
+                                        <!-- <span class="spacer"></span>
                                   <button (click)="addRentPayment()" mat-button mat-mini-fab style="background: #3d5afe;color: white;">
                                   <i class="material-icons" title="Add Lease Agreement">
                                     playlist_add
                                   </i>
                                 </button> -->
-                                </div>
+                                    </div>
 
 
-                                <div fxLayoutAlign="center">
-                                    <table mat-table [dataSource]="dataSource2" #Sort2="matSort" matSort class="my-table mat-elevation-z8" style="width: 100%;">
-                                        <ng-container matColumnDef="id">
-                                            <th class="table-header-text" style="text-align: center;" mat-header-cell *matHeaderCellDef> ID </th>
-                                            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-                                        </ng-container>
+                                    <div fxLayoutAlign="center">
+                                        <table mat-table [dataSource]="dataSource2" #Sort2="matSort" matSort class="my-table mat-elevation-z8" style="width: 100%;">
+                                            <ng-container matColumnDef="id">
+                                                <th class="table-header-text" style="text-align: center;" mat-header-cell *matHeaderCellDef> ID </th>
+                                                <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                                            </ng-container>
 
-                                        <!-- Name Column -->
-                                        <!-- <ng-container matColumnDef="rentAmtDue">
+                                            <!-- Name Column -->
+                                            <!-- <ng-container matColumnDef="rentAmtDue">
                                           <th class="table-header-text" mat-header-cell *matHeaderCellDef mat-sort-header>Rent Due </th>
                                           <td mat-cell *matCellDef="let element"> {{element.scheduledPaymentAmt | currency:'CAD'}} </td>
                                       </ng-container> -->
 
-                                        <ng-container matColumnDef="workOrderName">
-                                            <th class="table-header-text" style="text-align: center;" mat-header-cell *matHeaderCellDef>Order Title</th>
-                                            <td mat-cell *matCellDef="let element">
-                                                {{element.workOrderName}}
-                                            </td>
-                                        </ng-container>
+                                            <ng-container matColumnDef="workOrderName">
+                                                <th class="table-header-text" style="text-align: center;" mat-header-cell *matHeaderCellDef>Order Title</th>
+                                                <td mat-cell *matCellDef="let element">
+                                                    {{element.workOrderName}}
+                                                </td>
+                                            </ng-container>
 
-                                        <ng-container matColumnDef="startDate">
-                                            <th class="table-header-text" mat-header-cell *matHeaderCellDef>Start Date</th>
-                                            <td mat-cell *matCellDef="let element"> {{element.startDate | date}} </td>
-                                        </ng-container>
+                                            <ng-container matColumnDef="startDate">
+                                                <th class="table-header-text" mat-header-cell *matHeaderCellDef>Start Date</th>
+                                                <td mat-cell *matCellDef="let element"> {{element.startDate | date}} </td>
+                                            </ng-container>
 
-                                        <ng-container matColumnDef="endDate">
-                                            <th class="table-header-text" mat-header-cell *matHeaderCellDef>End Date</th>
-                                            <td mat-cell *matCellDef="let element"> {{element.endDate | date}} </td>
-                                        </ng-container>
+                                            <ng-container matColumnDef="endDate">
+                                                <th class="table-header-text" mat-header-cell *matHeaderCellDef>End Date</th>
+                                                <td mat-cell *matCellDef="let element"> {{element.endDate | date}} </td>
+                                            </ng-container>
 
-                                        <ng-container matColumnDef="workOrderCategory">
-                                            <th class="table-header-text" style="margin-left: auto;margin-right: auto;" mat-header-cell *matHeaderCellDef mat-sort-header> Category </th>
-                                            <td mat-cell *matCellDef="let element"> {{element.workOrderCategory}} </td>
-                                        </ng-container>
+                                            <ng-container matColumnDef="workOrderCategory">
+                                                <th class="table-header-text" style="margin-left: auto;margin-right: auto;" mat-header-cell *matHeaderCellDef mat-sort-header> Category </th>
+                                                <td mat-cell *matCellDef="let element"> {{element.workOrderCategory}} </td>
+                                            </ng-container>
 
-                                        <ng-container matColumnDef="workOrderType">
-                                            <th class="table-header-text" style="margin-left: auto;margin-right: auto;" mat-header-cell *matHeaderCellDef mat-sort-header> Type </th>
-                                            <td mat-cell *matCellDef="let element"> {{element.workOrderType}} </td>
-                                        </ng-container>
+                                            <ng-container matColumnDef="workOrderType">
+                                                <th class="table-header-text" style="margin-left: auto;margin-right: auto;" mat-header-cell *matHeaderCellDef mat-sort-header> Type </th>
+                                                <td mat-cell *matCellDef="let element"> {{element.workOrderType}} </td>
+                                            </ng-container>
 
-                                        <ng-container matColumnDef="workOrderStatus">
-                                            <th class="table-header-text" style="margin-left: auto;margin-right: auto;" mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
-                                            <td mat-cell *matCellDef="let element"> {{element.workOrderStatus }} </td>
-                                        </ng-container>
+                                            <ng-container matColumnDef="workOrderStatus">
+                                                <th class="table-header-text" style="margin-left: auto;margin-right: auto;" mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+                                                <td mat-cell *matCellDef="let element"> {{element.workOrderStatus }} </td>
+                                            </ng-container>
 
-                                        <ng-container matColumnDef="added">
-                                            <th class="table-header-text" style="margin-left: auto;margin-right: auto;" mat-header-cell *matHeaderCellDef mat-sort-header> Added On </th>
-                                            <td mat-cell *matCellDef="let element"> {{element.created | date }} </td>
-                                        </ng-container>
+                                            <ng-container matColumnDef="added">
+                                                <th class="table-header-text" style="margin-left: auto;margin-right: auto;" mat-header-cell *matHeaderCellDef mat-sort-header> Added On </th>
+                                                <td mat-cell *matCellDef="let element"> {{element.created | date }} </td>
+                                            </ng-container>
 
-                                        <ng-container matColumnDef="icon">
-                                            <th mat-header-cell *matHeaderCellDef></th>
-                                            <td mat-cell *matCellDef="let element">
-                                                <i style="border: 2px solid;
+                                            <ng-container matColumnDef="icon">
+                                                <th mat-header-cell *matHeaderCellDef></th>
+                                                <td mat-cell *matCellDef="let element">
+                                                    <i style="border: 2px solid;
                                               padding: 3px;
                                               border-radius: 50%;" class="material-icons">
                                               assignment
                                             </i>
-                                            </td>
-                                        </ng-container>
-                                        <!-- style="font-size: 1.5em; color: red;" [style.color]="element.status == 'Rented' ? 'green': element.status == 'Pending'? 'orange' :'red'"-->
-                                        <!-- Action Column routerLink="/Manage/lease/leasedetails/rentpayment/{{element.id}}"-->
-                                        <ng-container matColumnDef="action">
-                                            <th mat-header-cell *matHeaderCellDef></th>
-                                            <td mat-cell *matCellDef="let element" class="action-link">
+                                                </td>
+                                            </ng-container>
+                                            <!-- style="font-size: 1.5em; color: red;" [style.color]="element.status == 'Rented' ? 'green': element.status == 'Pending'? 'orange' :'red'"-->
+                                            <!-- Action Column routerLink="/Manage/lease/leasedetails/rentpayment/{{element.id}}"-->
+                                            <ng-container matColumnDef="action">
+                                                <th mat-header-cell *matHeaderCellDef></th>
+                                                <td mat-cell *matCellDef="let element" class="action-link">
 
-                                                <!-- <a (click)="openDialog('Update',element)">Edit</a> |
+                                                    <!-- <a (click)="openDialog('Update',element)">Edit</a> |
                     <a (click)="openDialog('Delete',element)">Delete</a> ['/details', 1]-->
-                                                <button type="button" mat-raised-button color="primary" (click)="getWorkOrderDetails(element.id)">Details</button> &nbsp;
-                                                <!-- <button mat-raised-button color="accent" (click)="openDialog('Delete',element)">Delete</button> -->
+                                                    <button type="button" mat-raised-button color="primary" (click)="getWorkOrderDetails(element.id)">Details</button> &nbsp;
+                                                    <!-- <button mat-raised-button color="accent" (click)="openDialog('Delete',element)">Delete</button> -->
+                                                </td>
+                                            </ng-container>
+
+                                            <tr mat-header-row *matHeaderRowDef="displayedColumns2"></tr>
+                                            <tr mat-row *matRowDef="let row; columns: displayedColumns2;"></tr>
+                                        </table>
+                                    </div>
+                                    <table style="width: 100%;">
+                                        <tr *ngIf="!dataSource2.data.length">
+                                            <td style="text-align: center;height:40px" [attr.colspan]="displayedColumns2.length">
+
+                                                No Records Found!
                                             </td>
-                                        </ng-container>
-
-                                        <tr mat-header-row *matHeaderRowDef="displayedColumns2"></tr>
-                                        <tr mat-row *matRowDef="let row; columns: displayedColumns2;"></tr>
+                                        </tr>
                                     </table>
-                                </div>
-                                <table style="width: 100%;">
-                                    <tr *ngIf="!dataSource2.data.length">
-                                        <td style="text-align: center;height:40px" [attr.colspan]="displayedColumns2.length">
-
-                                            No Records Found!
-                                        </td>
-                                    </tr>
-                                </table>
-                                <span class="spacer"></span>
-                                <mat-paginator #paginator2 [hidden]="!dataSource2.data.length" [pageSize]="10" [pageSizeOptions]="[5, 10, 25]"></mat-paginator>
+                                    <span class="spacer"></span>
+                                    <mat-paginator #paginator2 [hidden]="!dataSource2.data.length" [pageSize]="10" [pageSizeOptions]="[5, 10, 25]"></mat-paginator>
 
 
-                            </mat-tab>
-                            <mat-tab label="Service Notices" style="background: #f5f5f5;">
-                                <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="10px" style="margin-bottom: 1%;
+                                </mat-tab>
+                                <mat-tab label="Service Notices" style="background: #f5f5f5;">
+                                    <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="10px" style="margin-bottom: 1%;
                                     flex-direction: row;
                                     box-sizing: border-box;
                                     display: flex;
@@ -1071,48 +1076,48 @@
                                     margin-top: 20px;
                                     margin-left: 25px;
                                     width: 95%;">
-                                    <mat-form-field fxLayout fxLayoutAlign="start center">
-                                        <input matInput type="text" (keyup)="doFilter4($event.target.value)" placeholder="Find...">
-                                    </mat-form-field>
-                                    <!-- <mat-radio-group aria-label="Select an option" style="margin-top: 13px;margin-left: 25px;padding-right: 5px;">
+                                        <mat-form-field fxLayout fxLayoutAlign="start center">
+                                            <input matInput type="text" (keyup)="doFilter4($event.target.value)" placeholder="Find...">
+                                        </mat-form-field>
+                                        <!-- <mat-radio-group aria-label="Select an option" style="margin-top: 13px;margin-left: 25px;padding-right: 5px;">
                                         <mat-radio-button value="1" checked style="padding-right: 10px;">Active</mat-radio-button>
                                         <mat-radio-button value="0">All</mat-radio-button>
                                     </mat-radio-group> (click)="addRentPayment()"-->
-                                    <span class="spacer"></span>
-                                    <button type="button" title="Add Service Notice" (click)="addNotice()" mat-button mat-mini-fab style="background: #3d5afe;color: white;">
+                                        <span class="spacer"></span>
+                                        <button type="button" title="Add Service Notice" (click)="addNotice()" mat-button mat-mini-fab style="background: #3d5afe;color: white;">
                                     <i class="material-icons" title="Add Service Notice">
                                       playlist_add
                                     </i>
                                   </button>
-                                    <!-- <button *ngIf="addWorkOrder" (click)="cancel2()" title="Cancel" mat-button mat-mini-fab style="background: #d86f0d;color: white;">
+                                        <!-- <button *ngIf="addWorkOrder" (click)="cancel2()" title="Cancel" mat-button mat-mini-fab style="background: #d86f0d;color: white;">
                                     <i class="material-icons" title="Cancel">
                                       clear
                                     </i>
                                   </button> -->
-                                </div>
-                                <div fxLayout="column" fxLayoutAlign="center">
-                                    <table mat-table multiTemplateDataRows [dataSource]="dataSource4" #Sort4="matSort" matSort class="my-table mat-elevation-z8" style="width: 100%;">
-                                        <ng-container matColumnDef="id">
-                                            <th class="table-header-text" style="text-align: center;" mat-header-cell *matHeaderCellDef> ID </th>
-                                            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-                                        </ng-container>
+                                    </div>
+                                    <div fxLayout="column" fxLayoutAlign="center">
+                                        <table mat-table multiTemplateDataRows [dataSource]="dataSource4" #Sort4="matSort" matSort class="my-table mat-elevation-z8" style="width: 100%;">
+                                            <ng-container matColumnDef="id">
+                                                <th class="table-header-text" style="text-align: center;" mat-header-cell *matHeaderCellDef> ID </th>
+                                                <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                                            </ng-container>
 
-                                        <ng-container matColumnDef="description">
-                                            <th class="table-header-text" style="text-align: center;" mat-header-cell *matHeaderCellDef>Description</th>
-                                            <td mat-cell *matCellDef="let element">
-                                                {{element.noticeDesc}}
-                                            </td>
-                                        </ng-container>
+                                            <ng-container matColumnDef="description">
+                                                <th class="table-header-text" style="text-align: center;" mat-header-cell *matHeaderCellDef>Description</th>
+                                                <td mat-cell *matCellDef="let element">
+                                                    {{element.noticeDesc}}
+                                                </td>
+                                            </ng-container>
 
-                                        <ng-container matColumnDef="served">
-                                            <th class="table-header-text" mat-header-cell *matHeaderCellDef>Served</th>
-                                            <td mat-cell *matCellDef="let element"> {{element.isServed | yesNo}} </td>
-                                        </ng-container>
+                                            <ng-container matColumnDef="served">
+                                                <th class="table-header-text" mat-header-cell *matHeaderCellDef>Served</th>
+                                                <td mat-cell *matCellDef="let element"> {{element.isServed | yesNo}} </td>
+                                            </ng-container>
 
-                                        <ng-container matColumnDef="active">
-                                            <th class="table-header-text" mat-header-cell *matHeaderCellDef>Status</th>
-                                            <td mat-cell *matCellDef="let element"> {{element.isActive | active}} </td>
-                                            <!-- <mat-cell *matCellDef="let element">
+                                            <ng-container matColumnDef="active">
+                                                <th class="table-header-text" mat-header-cell *matHeaderCellDef>Status</th>
+                                                <td mat-cell *matCellDef="let element"> {{element.isActive | active}} </td>
+                                                <!-- <mat-cell *matCellDef="let element">
                                                 <mat-form-field floatLabel="never">
                                                     <mat-select [(value)]="element.isActive" placeholder="Status" formControlName="isActive">
                                                         <mat-option value=true>Active</mat-option>
@@ -1121,112 +1126,121 @@
                                                 </mat-form-field>
                                             </mat-cell> -->
 
-                                        </ng-container>
+                                            </ng-container>
 
-                                        <ng-container matColumnDef="created">
-                                            <th class="table-header-text" style="margin-left: auto;margin-right: auto;" mat-header-cell *matHeaderCellDef mat-sort-header> Created </th>
-                                            <td mat-cell *matCellDef="let element"> {{element.created | date }} </td>
-                                        </ng-container>
+                                            <ng-container matColumnDef="created">
+                                                <th class="table-header-text" style="margin-left: auto;margin-right: auto;" mat-header-cell *matHeaderCellDef mat-sort-header> Created </th>
+                                                <td mat-cell *matCellDef="let element"> {{element.created | date }} </td>
+                                            </ng-container>
 
-                                        <ng-container matColumnDef="type">
-                                            <th class="table-header-text" style="margin-left: auto;margin-right: auto;" mat-header-cell *matHeaderCellDef mat-sort-header> Type </th>
-                                            <td mat-cell *matCellDef="let element"> {{element.type | noticeType }} </td>
-                                        </ng-container>
+                                            <ng-container matColumnDef="type">
+                                                <th class="table-header-text" style="margin-left: auto;margin-right: auto;" mat-header-cell *matHeaderCellDef mat-sort-header> Type </th>
+                                                <td mat-cell *matCellDef="let element"> {{element.type | noticeType }} </td>
+                                            </ng-container>
 
-                                        <ng-container matColumnDef="icon">
-                                            <th mat-header-cell *matHeaderCellDef></th>
-                                            <td mat-cell *matCellDef="let element">
-                                                <i style="border: 2px solid;
+                                            <ng-container matColumnDef="icon">
+                                                <th mat-header-cell *matHeaderCellDef></th>
+                                                <td mat-cell *matCellDef="let element">
+                                                    <i style="border: 2px solid;
                                               padding: 3px;
                                               border-radius: 50%;" class="material-icons">
                                               assignment
                                             </i>
-                                            </td>
-                                        </ng-container>
+                                                </td>
+                                            </ng-container>
 
-                                        <ng-container matColumnDef="action">
-                                            <th mat-header-cell *matHeaderCellDef></th>
-                                            <td mat-cell *matCellDef="let element" class="action-link">
+                                            <ng-container matColumnDef="action">
+                                                <th mat-header-cell *matHeaderCellDef></th>
+                                                <td mat-cell *matCellDef="let element" class="action-link">
 
-                                                <!-- <a (click)="openDialog('Update',element)">Edit</a> |
+                                                    <!-- <a (click)="openDialog('Update',element)">Edit</a> |
                     <a (click)="openDialog('Delete',element)">Delete</a> ['/details', 1]-->
-                                                <button [disabled]="!element.isActive" type="button" mat-raised-button color="primary" (click)="updateSttus(element.id, element.isActive)">Update Status</button> &nbsp;
-                                                <!-- <button mat-raised-button color="accent " (click)="openDialog( 'Delete',element) ">Delete</button> -->
-                                                <!-- (click)="getWorkOrderDetails(element.id)" disabled-->
-                                            </td>
-                                        </ng-container>
+                                                    <button [disabled]="!element.isActive" type="button" mat-raised-button color="primary" (click)="updateSttus(element.id, element.isActive)">Update Status</button> &nbsp;
+                                                    <!-- <button mat-raised-button color="accent " (click)="openDialog( 'Delete',element) ">Delete</button> -->
+                                                    <!-- (click)="getWorkOrderDetails(element.id)" disabled-->
+                                                </td>
+                                            </ng-container>
 
-                                        <!-- Additionsl -->
+                                            <!-- Additionsl -->
 
-                                        <ng-container matColumnDef="expandedDetail">
-                                            <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns4.length">
+                                            <ng-container matColumnDef="expandedDetail">
+                                                <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns4.length">
 
-                                                <div class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+                                                    <div class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
 
-                                                    <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px" style="width: 100%;">
-                                                        <p style="margin-top: 15px;"></p>
-                                                        <div fxFlex="10%">
-                                                            <img src="../../assets/images/doc.png" height="50px" width="50px">
-                                                        </div>
-                                                        <div fxFlex="40%" style="text-align: left;margin-top: 7px;">
-                                                            <div style="font-weight: bold;">{{element.type | noticeType | uppercase}}</div>
-                                                            <div>{{element.noticeDesc}}</div>
-                                                            <div style="margin-top: 10px;"><span style="font-weight: 600;">Served on </span>{{element.serviceDate | date }}</div>
-                                                            <div><span style="font-weight: 600;">Served</span> {{element.howIsServed | serveMethod}}</div>
-                                                            <!-- <div style="margin-top: 20px;">
+                                                        <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px" style="width: 100%;">
+                                                            <p style="margin-top: 15px;"></p>
+                                                            <div fxFlex="10%">
+                                                                <img src="../../assets/images/doc.png" height="50px" width="50px">
+                                                            </div>
+                                                            <div fxFlex="40%" style="text-align: left;margin-top: 7px;">
+                                                                <div style="font-weight: bold;">{{element.type | noticeType | uppercase}}</div>
+                                                                <div>{{element.noticeDesc}}</div>
+                                                                <div style="margin-top: 10px;"><span style="font-weight: 600;">Served on </span>{{element.serviceDate | date }}</div>
+                                                                <div><span style="font-weight: 600;">Served</span> {{element.howIsServed | serveMethod}}</div>
+                                                                <!-- <div style="margin-top: 20px;">
                                                                     <a routerLink="/Manage/lease/tenantdetails/{{element.id}}">more information</a>
                                                                 </div> -->
+                                                            </div>
+                                                            <div fxFlex="40%" style="text-align: left;margin-top: 7px;">
+                                                                <div *ngIf="!element.outstandingRent == 0"><span style="font-weight: bold;">Unpaid Rent</span>: &nbsp;${{element.outstandingRent}}</div>
+                                                                <div *ngIf="!element.outstandingUtilities == 0"><span style="font-weight: bold;">Unpaid Utility</span>: &nbsp;${{element.outstandingUtilities}}</div>
+                                                                <div><span style="font-weight: bold;">Required Move Out Date</span>: &nbsp;{{element.requiredMoveOutDate | date}}</div>
+                                                                <p></p>
+                                                                <div style="float: right;">Added on: &nbsp;{{element.created | date}} <button style="margin-left: 45px;" type="button" mat-raised-button color="primary" routerLink="/Manage/lease/noticeview/{{element.id}}">View Details</button>                                                                    &nbsp;</div>
+                                                                <!-- <div>Last updated on: &nbsp;{{element.modified | date}}</div> (click)="getNoticeDetails(element.id)"-->
+                                                            </div>
                                                         </div>
-                                                        <div fxFlex="40%" style="text-align: left;margin-top: 7px;">
-                                                            <div *ngIf="!element.outstandingRent == 0"><span style="font-weight: bold;">Unpaid Rent</span>: &nbsp;${{element.outstandingRent}}</div>
-                                                            <div *ngIf="!element.outstandingUtilities == 0"><span style="font-weight: bold;">Unpaid Utility</span>: &nbsp;${{element.outstandingUtilities}}</div>
-                                                            <div><span style="font-weight: bold;">Required Move Out Date</span>: &nbsp;{{element.requiredMoveOutDate | date}}</div>
-                                                            <p></p>
-                                                            <div style="float: right;">Added on: &nbsp;{{element.created | date}} <button style="margin-left: 45px;" type="button" mat-raised-button color="primary" routerLink="/Manage/lease/noticeview/{{element.id}}">View Details</button>                                                                &nbsp;</div>
-                                                            <!-- <div>Last updated on: &nbsp;{{element.modified | date}}</div> (click)="getNoticeDetails(element.id)"-->
-                                                        </div>
+
                                                     </div>
 
-                                                </div>
-
-                                            </td>
-                                        </ng-container>
+                                                </td>
+                                            </ng-container>
 
 
-                                        <tr mat-header-row *matHeaderRowDef="displayedColumns4"></tr>
-                                        <!-- <tr mat-row *matRowDef="let row; columns: displayedColumns4;"></tr> -->
-                                        <tr style="cursor: pointer;" mat-row *matRowDef="let element; columns: displayedColumns4;" class="example-element-row" [class.example-expanded-row]="expandedElement === element" (click)="expandedElement = expandedElement === element ? null : element">
-                                        </tr>
+                                            <tr mat-header-row *matHeaderRowDef="displayedColumns4"></tr>
+                                            <!-- <tr mat-row *matRowDef="let row; columns: displayedColumns4;"></tr> -->
+                                            <tr style="cursor: pointer;" mat-row *matRowDef="let element; columns: displayedColumns4;" class="example-element-row" [class.example-expanded-row]="expandedElement === element" (click)="expandedElement = expandedElement === element ? null : element">
+                                            </tr>
 
-                                        <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+                                            <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
 
-                                    </table>
-                                    <table style="width: 100%;">
-                                        <tr *ngIf="!dataSource4.data.length">
-                                            <td style="text-align: center;height:40px" [attr.colspan]="displayedColumns2.length">
+                                        </table>
+                                        <table style="width: 100%;">
+                                            <tr *ngIf="!dataSource4.data.length">
+                                                <td style="text-align: center;height:40px" [attr.colspan]="displayedColumns2.length">
 
-                                                No Records Found!
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </mat-tab>
+                                                    No Records Found!
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </mat-tab>
 
-                        </mat-tab-group>
-                    </div>
-                    <span class="button-spacer"></span>
-                    <div fxLayout="row" fxLayoutGap="7px" fxLayoutAlign="end center" style="width: 75%; margin-bottom: 20px;">
-                        <!-- <span *ngIf="showMsg" style="color: rgb(189, 150, 25);">Updated successfully!</span>
+                            </mat-tab-group>
+                        </div>
+                        <span class="button-spacer"></span>
+                        <div fxLayout="row" fxLayoutGap="7px" fxLayoutAlign="end center" style="width: 75%; margin-bottom: 20px;">
+                            <!-- <span *ngIf="showMsg" style="color: rgb(189, 150, 25);">Updated successfully!</span>
 <img *ngIf=" loading" class="pl-2" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
 /> [disabled]="f.invalid || !f.dirty"-->
-                        <button [hidden]="hide" [disabled]="lease.isActive && !enableRenwal" type="submit" mat-raised-button color="primary"><mat-icon style="color: green;">done</mat-icon> <span *ngIf="!enableRenwal">UPDATE</span><span *ngIf="enableRenwal">RENEW</span></button>
-                        <!-- <button [hidden]="hide" [disabled]="lease.type === 0" type="submit" mat-raised-button color="primary"><mat-icon style="color: green;">done</mat-icon> RENEW</button> -->
-                        <button type="button" [hidden]="hide" mat-raised-button color="accent" (click)="goBack()"><span *ngIf="!lease.isActive"><mat-icon style="color: orangered;vertical-align: middle;">clear</mat-icon> CANCEL</span><span *ngIf="lease.isActive"><mat-icon style="color: green;vertical-align: middle;">thumb_up_alt</mat-icon> Ok</span></button>
-                    </div>
+                            <button [hidden]="hide" [disabled]="lease.isActive && !enableRenwal" type="submit" mat-raised-button color="primary"><mat-icon style="color: green;">done</mat-icon> <span *ngIf="!enableRenwal">UPDATE</span><span *ngIf="enableRenwal">RENEW</span></button>
+                            <!-- <button [hidden]="hide" [disabled]="lease.type === 0" type="submit" mat-raised-button color="primary"><mat-icon style="color: green;">done</mat-icon> RENEW</button> -->
+                            <button type="button" [hidden]="hide" mat-raised-button color="accent" (click)="goBack()"><span *ngIf="!lease.isActive"><mat-icon style="color: orangered;vertical-align: middle;">clear</mat-icon> CANCEL</span><span *ngIf="lease.isActive"><mat-icon style="color: green;vertical-align: middle;">thumb_up_alt</mat-icon> Ok</span></button>
+                        </div>
 
-                </form>
-            </mat-card-content>
+                    </form>
+                </mat-card-content>
+            </div>
+            <div *ngIf="showSignedDoc">
+                <app-pdf-view></app-pdf-view>
+                <div fxLayout="row" fxLayoutGap="7px" fxLayoutAlign="end center" style="width: 100%; margin-top: 40px; margin-bottom: 20px;">
+                    <button type="button" mat-raised-button color="accent" (click)="closeView()"><mat-icon mat-icon style="color: orangered;vertical-align: middle;">clear</mat-icon>&nbsp; CLOSE AGREEMENT VIEW</button>
+                </div>
+            </div>
         </mat-card>
+
+
     </div>
 </div>
 

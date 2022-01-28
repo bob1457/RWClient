@@ -65,6 +65,9 @@ import { UpdateStatusDialogComponent } from './dialogs/update-status-dialog/upda
 import { AddAddendemDialogComponent } from './dialogs/add-addendem-dialog/add-addendem-dialog.component';
 // import { AddendumDetailsDialgoComponent } from './dialogs/addendum-details-dialgo/addendum-details-dialgo.component';
 import { NoticeViewComponent } from './notice-view/notice-view.component';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
+import { PdfViewComponent } from './pdf-view/pdf-view.component';
 
 
 const routes: Routes = [
@@ -146,7 +149,8 @@ const routes: Routes = [
     NoticeContentTwoMonthComponent,
     UpdateStatusDialogComponent,
     AddAddendemDialogComponent,
-    NoticeViewComponent
+    NoticeViewComponent,
+    PdfViewComponent
     // AddendumDetailsDialgoComponent
   ],
   imports: [
@@ -155,6 +159,8 @@ const routes: Routes = [
     AppMaterialModule,
     FlexLayoutModule,
     FormsModule,
+    // PdfViewerModule,
+    NgxExtendedPdfViewerModule,
     ReactiveFormsModule,
     RouterModule.forChild(routes),
     StoreModule.forFeature('lease', l_reducer),
@@ -178,3 +184,4 @@ const routes: Routes = [
   bootstrap: [AppLMComponent]
 })
 export class AppLMModule { }
+

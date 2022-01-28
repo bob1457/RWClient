@@ -97,6 +97,8 @@ export class LeaseDetailsComponent implements OnInit, AfterContentChecked {
   getFinalize = false;
 
   toRenew = true;
+  showSignedDoc = false;
+  based64 = '';
 
   months = [
     {name: 'January'},
@@ -1086,6 +1088,14 @@ export class LeaseDetailsComponent implements OnInit, AfterContentChecked {
       contactOthers: event.contactOthers
     });
 
+  }
+
+  openView() {
+    this.showSignedDoc = true;
+  }
+
+  closeView() {
+    this.showSignedDoc = false;
   }
 
   RemoveAddendum() {

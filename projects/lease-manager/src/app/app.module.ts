@@ -59,6 +59,7 @@ import { UpdateStatusDialogComponent } from './dialogs/update-status-dialog/upda
 import { AddAddendemDialogComponent } from './dialogs/add-addendem-dialog/add-addendem-dialog.component';
 // import { AddendumDetailsDialgoComponent } from './dialogs/addendum-details-dialgo/addendum-details-dialgo.component';
 import { NoticeViewComponent } from './notice-view/notice-view.component';
+import { PdfViewComponent } from './pdf-view/pdf-view.component';
 
 
 @NgModule({
@@ -114,7 +115,8 @@ import { NoticeViewComponent } from './notice-view/notice-view.component';
     UpdateStatusDialogComponent,
     AddAddendemDialogComponent,
     AddendumDetailsDialgoComponent,
-    NoticeViewComponent
+    NoticeViewComponent,
+    PdfViewComponent
   ],
   imports: [
     BrowserModule,
