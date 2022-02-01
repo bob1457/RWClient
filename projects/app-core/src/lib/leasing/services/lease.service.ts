@@ -274,4 +274,9 @@ export class LeaseService {
     return this.http.post<any>(`${this.baseUrl}/Lease/agreement/save`, data);
   }
 
+  retrieveAgreement(data) {
+    debugger;
+    return this.http.post<any>(`${this.baseUrl}/Lease/agreement/retrieve`, data);
+  }
+
 }
