@@ -304,7 +304,7 @@
                                                 <a [href]="'http://localhost:63533/' + lease.leaseAgreementDocUrl" target="_blank">&nbsp; Agreement</a>
 
                                              </div> -->
-                                            <div fxFlex="28%" style="margin-left: 30px;">
+                                            <div fxFlex="28%" style="margin-left: 30px;" *ngIf="lease.agreementFileData">
                                                 <button type="button" (click)="openView()" mat-raised-button>View Signed Agreement</button>
                                             </div>
                                             <!-- Temporarily diabled     *ngIf="finalized"  -->
