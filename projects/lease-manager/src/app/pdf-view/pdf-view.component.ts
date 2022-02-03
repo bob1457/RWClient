@@ -30,20 +30,17 @@ export class PdfViewComponent implements OnInit {
       leaseId: this.leaseId
     });
 
-    // this.leaseService.retrieveAgreement(this.retrieveForm.value)
+    this.leaseService.retrieveAgreement(this.retrieveForm.value)
+      .subscribe(res => {
+        this.newB64 = res as string;
+        console.log('returned file', this.newB64);
+      });
+
+    // this.httpClient.post(`${this.baseUrl}/api/Lease/agreement/retrieve`, this.retrieveForm.value, { responseType: 'text' })
     //   .subscribe(res => {
     //     this.newB64 = res;
-    //     // this.newSrc = JSON.stringify(res);
-    //     // this.newSrc = this.newSrc.split(':')[1];
-    //     // console.log('parsed', this.newSrc);
-    //     console.log('returned file', this.newB64);
+    //     console.log('doc returned', this.newB64);
     //   });
-
-    this.httpClient.post(`${this.baseUrl}/api/Lease/agreement/retrieve`, this.retrieveForm.value, { responseType: 'text' })
-      .subscribe(res => {
-        this.newB64 = res;
-        console.log('doc returned', this.newB64);
-      });
   }
 
 }

@@ -276,7 +276,7 @@ export class LeaseService {
 
   retrieveAgreement(data) {
     debugger;
-    return this.http.post<any>(`${this.baseUrl}/Lease/agreement/retrieve`, data);
+    return this.http.post<any>(`${this.baseUrl}/Lease/agreement/retrieve`, data, { responseType: 'text' as 'json' });
   }
 
 }

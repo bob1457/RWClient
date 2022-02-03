@@ -4,5 +4,8 @@
 <!-- <ngx-extended-pdf-viewer [src]="'../../assets/Rental_Agreement.pdf'" [height]="'95%'" [textLayer]="true" [showHandToolButton]="true">
 
 </ngx-extended-pdf-viewer> -->
-<ngx-extended-pdf-viewer [base64Src]="newB64" backgroundColor="#ffffff" [height]="'90vh'" [useBrowserLocale]="true" [showBookmarkButton]="false" [textLayer]="true">
+<ngx-extended-pdf-viewer *ngIf="newB64; else load" [base64Src]="newB64" backgroundColor="#ffffff" [height]="'90vh'" [useBrowserLocale]="true" [showOpenFileButton]="false" [showBookmarkButton]="false" [textLayer]="true">
 </ngx-extended-pdf-viewer>
+<ng-template #load>
+    <p class="loading">Loading...please wait</p>
+</ng-template>
