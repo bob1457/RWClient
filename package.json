@@ -7,7 +7,7 @@
         "start:pm": " ng serve property-manager --port 4202",
         "start:client": "ng serve client-portal --port=4204",
         "build": "ng build",
-        "build:app": "ng build --prod",
+        "build:app": "ng build --prod --aot",
         "dev": "ng serve --port=4201",
         "build:material": "ng build app-material && npm install ./dist/app-material  && ng serve --port=4201",
         "build:dashboard": "ng build dashboard && npm install ./dist/dashboard  && ng serve --port=4201",
