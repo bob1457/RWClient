@@ -68,6 +68,7 @@ import { NoticeViewComponent } from './notice-view/notice-view.component';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { PdfViewComponent } from './pdf-view/pdf-view.component';
+import { RichTextEditorAllModule } from '@syncfusion/ej2-angular-richtexteditor';
 
 
 const routes: Routes = [
@@ -160,6 +161,7 @@ const routes: Routes = [
     FlexLayoutModule,
     FormsModule,
     // PdfViewerModule,
+    RichTextEditorAllModule,
     NgxExtendedPdfViewerModule,
     ReactiveFormsModule,
     RouterModule.forChild(routes),
