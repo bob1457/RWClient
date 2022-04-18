@@ -41,4 +41,22 @@ export class ManagementContractService {
     // return this.http.get<Property>(`${this.baseUrl}/property/${id});
     return this.http.get<ManagementContract>(`${this.baseUrl}/property/contract/${id}`);
   }
+
+  uploadContractFile(files, id: any) {
+    debugger;
+
+    if (files.length === 0) {
+      return;
+    }
+
+    // const fileToUpload = files[0] as File;
+    let fileToUpload = <File>files[0];
+
+    const formData = new FormData();
+    formData.append('file', fileToUpload, fileToUpload.name);
+    formData.append('contractId', id);
+
+    return this.http.post(`${this.baseUrl}/property/file/add`, formData);
+  }
+
 }

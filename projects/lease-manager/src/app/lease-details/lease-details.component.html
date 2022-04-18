@@ -304,7 +304,7 @@
                                                 <a [href]="'http://localhost:63533/' + lease.leaseAgreementDocUrl" target="_blank">&nbsp; Agreement</a>
 
                                              </div> -->
-                                            <div fxFlex="28%" style="margin-left: 30px;">
+                                            <div fxFlex="28%" style="margin-left: 30px;" *ngIf="lease.agreementFileData">
                                                 <button type="button" (click)="openView()" mat-raised-button>View Signed Agreement</button>
                                             </div>
                                             <!-- Temporarily diabled     *ngIf="finalized"  -->
@@ -1233,7 +1233,7 @@
                 </mat-card-content>
             </div>
             <div *ngIf="showSignedDoc">
-                <app-pdf-view></app-pdf-view>
+                <app-pdf-view [leaseId]="lease.id"></app-pdf-view>
                 <div fxLayout="row" fxLayoutGap="7px" fxLayoutAlign="end center" style="width: 100%; margin-top: 40px; margin-bottom: 20px;">
                     <button type="button" mat-raised-button color="accent" (click)="closeView()"><mat-icon mat-icon style="color: orangered;vertical-align: middle;">clear</mat-icon>&nbsp; CLOSE AGREEMENT VIEW</button>
                 </div>

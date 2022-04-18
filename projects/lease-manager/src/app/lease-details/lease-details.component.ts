@@ -84,6 +84,7 @@ export class LeaseDetailsComponent implements OnInit, AfterContentChecked {
   addAddendumForm: FormGroup;
   removeAddendumForm: FormGroup;
   leaseAddendumUpdateForm: FormGroup;
+  retrieveForm: FormGroup;
   // updateWorkOrderForm: FormGroup;
   serverBaseUrl = 'http://localhost:63533';
 
@@ -534,6 +535,10 @@ export class LeaseDetailsComponent implements OnInit, AfterContentChecked {
     this.removeAddendumForm = this.formBuilder.group({
       id: Number([0])
     });
+
+    // this.retrieveForm = this.formBuilder.group({
+    //   leaseId: this.lease.id
+    // });
 
     // this.addAddendumForm = this.formBuilder.group({
 

@@ -25,7 +25,10 @@ export class ContractDetailsComponent implements OnInit {
   detailsForm: FormGroup;;
   contract: any;// ManagementContract;
   editSignDate = false;
-  serverUrl = 'http://localhost:19807/';
+  saving = false;
+  done = false;
+  fileUploaded = false;
+  // serverUrl = 'http://localhost:19807/';
 
   // contract$ = this.store.pipe(select(contractDetails))
   //             .subscribe(data => {
@@ -124,12 +127,41 @@ export class ContractDetailsComponent implements OnInit {
   }
 
   onChange( files ) {
-    debugger;
-    console.log('file selected');
+    // debugger;
+    // console.log('file selected');
     // var control = new FormControl();
     // const primativeFileList: FileList = control.value;
     // const cloneFiles = { ...primativeFileList};
     // this.store.dispatch(uploadPropertyImage({payload: files, rentalPropertyId: this.listing.rentalPropertyId}));
+
+    debugger;
+    // const file = files.[0];
+    this.saving = true;
+    console.log(files);
+
+    // this.showErr = false;
+
+    if (files[0].type === 'application/pdf') {
+      // this.store.dispatch(uploadPropertyImage({ payload: files, rentalPropertyId: this.listing.rentalPropertyId }));
+      // alert('ACCEPTED !!!');
+      this.contractService.uploadContractFile(files, this.contract.id).subscribe(res => {
+        this.saving = false;
+        this.done = true;
+        this.getContractDetails(this.id);
+        this.store.pipe(select(contractDetails))
+          .subscribe(data => {
+            this.contract = data;
+            console.log('refereshed contract', this.contract);
+          });
+        this.fileUploaded = true;
+        setTimeout(() => { this.done = false; }, 2000);
+        console.log('response', res);
+      });
+
+    } else {
+      alert('ONLY PDF files are accepted');
+      // this.showErr = true;
+    }
   }
 
   getToday() {

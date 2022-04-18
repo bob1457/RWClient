@@ -135,5 +135,6 @@ export class PropertyService {
     return this.http.get<boolean>(`${this.baseUrl}/property/owners/checkemail/${email}`);
   }
 
+  
 
 }
