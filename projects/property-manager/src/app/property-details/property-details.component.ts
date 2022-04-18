@@ -14,6 +14,7 @@ import { DashState, PropertyImgList } from '@lib/dashboard';
 import { MatDialog } from '@angular/material';
 import {Overlay} from '@angular/cdk/overlay';
 import { AddStrataDialogComponent } from '../dialogs/add-strata-dialog/add-strata-dialog.component';
+import { MapsAPILoader } from '@agm/core';
 @Component({
   selector: 'app-property-details',
   templateUrl: './property-details.component.html',
@@ -45,6 +46,12 @@ export class PropertyDetailsComponent implements OnInit {
   //   console.log(data);
   // });
 
+  title = 'My first AGM project';
+  lat = 51.678418;
+  lng = 7.809007;
+
+  geoCoder;
+
   constructor(private store: Store<PropertyState>,
               private dashStore: Store<DashState>,
               private location: Location,
@@ -53,6 +60,7 @@ export class PropertyDetailsComponent implements OnInit {
               private formBuilder: FormBuilder,
               private dialog: MatDialog,
               public overlay: Overlay,
+              private mapsApiLoader: MapsAPILoader,
               private propertyService: PropertyService) {
                 this.id = this.actRoute.snapshot.params.id;
                 console.log(this.id);
@@ -102,6 +110,8 @@ export class PropertyDetailsComponent implements OnInit {
 
   iconImg: any;
 
+  
+  
 
   // property$: Observable<Property>;
 
@@ -194,6 +204,12 @@ export class PropertyDetailsComponent implements OnInit {
 
     });
 
+    // this.geoCoder = new google.maps.Geocoder;
+
+    // const input = document.getElementById('propertyZipPostCode');
+    // // const autocomplete = new google.maps.places.Autocomplete(input as h, {})
+    // this.geoCoder.geocode( input).then((result) => {console.log(result)})
+
     // this.selectPropertyDetails();
 
     // Then select the state from the store, re-set to the form
@@ -259,6 +275,7 @@ export class PropertyDetailsComponent implements OnInit {
   //     console.log(data);
   //   });
   // }
+  
 
   submit() { //formValue
     debugger;

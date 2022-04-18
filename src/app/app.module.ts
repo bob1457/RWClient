@@ -28,6 +28,7 @@ import { FlexLayoutModule, LayoutGapStyleBuilder } from '@angular/flex-layout';
 import { metaReducers } from './store/metareducres';
 import { CustomLayoutGapStyleBuilder } from './shared/LayoutGapBuilder';
 import { appReducer } from './store/app.state';
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,9 @@ import { appReducer } from './store/app.state';
   ],
   imports: [
     BrowserModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyAr2b8rPqim3RA5bhWaP_36TeS-zV7Hgms'
+    }),
     AppRoutingModule,
     BrowserAnimationsModule,
     FlexLayoutModule,
@@ -68,6 +72,7 @@ import { appReducer } from './store/app.state';
     { provide: LayoutGapStyleBuilder, useClass: CustomLayoutGapStyleBuilder },
     { provide: RouterStateSerializer, useClass: fromStore.CustomSerializer }
   ],
+  exports: [ AgmCoreModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

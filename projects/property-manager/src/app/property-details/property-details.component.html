@@ -96,10 +96,16 @@
                             <a routerLink="/Manage/property/contractdetails/{{contract.id}}">more details</a>
                         </div>
 
-
+                        
+                
                     </mat-menu>
                 </li>
             </ul>
+        </div>
+        <div >
+            <agm-map [latitude]="lat" [longitude]="lng" >
+                <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+            </agm-map>
         </div>
 
         <!-- <div *ngIf="(property.propertyType1 == 'Apartment' || property.propertyType1 == 'TownHouse') && !property.councilName">

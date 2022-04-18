@@ -51,6 +51,7 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 // import { ContractClauseContentComponent } from './contract-clause-content/contract-clause-content.component';
 // import { CustomContractClauseComponent } from './custom-contract-clause/custom-contract-clause.component';
 import { RichTextEditorAllModule } from '@syncfusion/ej2-angular-richtexteditor';
+import { AgmCoreModule } from '@agm/core';
 
 const routes: Routes = [
   { path: '', component: PropertyHomeComponent,
@@ -112,6 +113,7 @@ const routes: Routes = [
   ],
   imports: [
     // BrowserModule,
+    AgmCoreModule,
     CommonModule,
     AppMaterialModule,
     FlexLayoutModule,
