@@ -47,8 +47,8 @@ export class PropertyDetailsComponent implements OnInit {
   // });
 
   title = 'My first AGM project';
-  lat = 51.678418;
-  lng = 7.809007;
+  lat = 49.1968734;
+  lng = -122.7887601;
 
   geoCoder;
 
