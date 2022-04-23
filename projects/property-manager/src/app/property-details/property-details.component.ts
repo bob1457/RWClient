@@ -70,10 +70,11 @@ export class PropertyDetailsComponent implements OnInit {
 
                     if (data) {
                        this.property = data;
-                       console.log(data);
+                       console.log('property', data);
                        this.store.select(councilList).subscribe(list => {
 
                         if (list) {
+                          console.log('council list', list);
                           this.council = list;
                           this.council = this.council.filter(p => p.id === this.property.strataCouncilId);
                           console.log('this council', this.council[0]);
@@ -204,7 +205,7 @@ export class PropertyDetailsComponent implements OnInit {
 
     });
 
-    // this.geoCoder = new google.maps.Geocoder;
+    this.geoCoder = new google.maps.Geocoder;
 
     const input = document.getElementById('propertyZipPostCode');
     // const autocomplete = new google.maps.places.Autocomplete(input as h, {})
