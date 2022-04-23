@@ -206,9 +206,9 @@ export class PropertyDetailsComponent implements OnInit {
 
     // this.geoCoder = new google.maps.Geocoder;
 
-    // const input = document.getElementById('propertyZipPostCode');
-    // // const autocomplete = new google.maps.places.Autocomplete(input as h, {})
-    // this.geoCoder.geocode( input).then((result) => {console.log(result)})
+    const input = document.getElementById('propertyZipPostCode');
+    // const autocomplete = new google.maps.places.Autocomplete(input as h, {})
+    this.geoCoder.geocode( input).then((result) => {console.log(result)})
 
     // this.selectPropertyDetails();
 
