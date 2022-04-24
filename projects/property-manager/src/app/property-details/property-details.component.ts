@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { Store, select } from '@ngrx/store';
 import { PropertyState } from '../store/property.state';
@@ -15,6 +15,7 @@ import { MatDialog } from '@angular/material';
 import {Overlay} from '@angular/cdk/overlay';
 import { AddStrataDialogComponent } from '../dialogs/add-strata-dialog/add-strata-dialog.component';
 import { MapsAPILoader } from '@agm/core';
+
 @Component({
   selector: 'app-property-details',
   templateUrl: './property-details.component.html',
@@ -207,9 +208,9 @@ export class PropertyDetailsComponent implements OnInit {
 
     this.geoCoder = new google.maps.Geocoder;
 
-    const input = document.getElementById('propertyZipPostCode');
-    // const autocomplete = new google.maps.places.Autocomplete(input as h, {})
-    this.geoCoder.geocode( input).then((result) => {console.log(result)})
+    // const input = document.getElementById('propertyZipPostCode');
+    // // const autocomplete = new google.maps.places.Autocomplete(input as h, {})
+    // this.geoCoder.geocode( input).then((result) => {console.log(result)})
 
     // this.selectPropertyDetails();
 
@@ -232,6 +233,15 @@ export class PropertyDetailsComponent implements OnInit {
     // this.basement = this.property.isBasementSuite.toString();
     console.log(this.basement);
   }
+
+  // ngAfterViewInit(): void {
+  //   // Load google maps script after view init
+  //   const DSLScript = document.createElement('script');
+  //   DSLScript.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyAr2b8rPqim3RA5bhWaP_36TeS-zV7Hgms'; // replace by your API key
+  //   DSLScript.type = 'text/javascript';
+  //   document.body.appendChild(DSLScript);
+  //   document.body.removeChild(DSLScript);
+  // }
 
   GetPropertyDetails(id: any) {
     debugger;

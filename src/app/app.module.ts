@@ -37,7 +37,7 @@ import { AgmCoreModule } from '@agm/core';
   imports: [
     BrowserModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyAr2b8rPqim3RA5bhWaP_36TeS-zV7Hgms'
+      apiKey: 'yyy'
     }),
     AppRoutingModule,
     BrowserAnimationsModule,
