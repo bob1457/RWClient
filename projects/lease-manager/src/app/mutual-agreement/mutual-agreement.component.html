@@ -35,8 +35,8 @@
         <td style="border-bottom: 0;padding-left: 6px;font-size: .9em;border-right: 1px solid;">Last name(s)</td>
     </tr>
     <tr style="height: 40px;background: #e4ebf3;">
-        <td style="border-top: 0;padding-left: 5px;border-right: 1px solid;">{{agreement.rentalProperty.rentalPropertyOwners[0].firstName}}</td>
-        <td style="border-top: 0;padding-left: 5px;">{{agreement.rentalProperty.rentalPropertyOwners[0].lastName}}</td>
+        <td style="border-top: 0;padding-left: 5px;border-right: 1px solid;">{{agreement.rentalProperty.ownerProperty[0].rentalPropertyOwner.firstName}}</td>
+        <td style="border-top: 0;padding-left: 5px;">{{agreement.rentalProperty.ownerProperty[0].rentalPropertyOwner.lastName}}</td>
     </tr>
 </table>
 <p class="section-title" style="margin-bottom: 0;">
@@ -52,10 +52,10 @@
     </tr>
     <tr style="height: 40px;background: #e4ebf3;">
         <td style="width: 15%;border-bottom: 0;font-size: .85em;border-right: 1px solid;padding-left: 5px;"><input type="text" style="border: 0; margin-top: -5px;"></td>
-        <td style="width: 35%;border-bottom: 0;font-size: .85em;border-right: 1px solid;padding-left: 5px;">{{agreement.rentalProperty.rentalPropertyOwners[0].ownerAddress.streetNumber}}</td>
-        <td style="width: 20%;border-bottom: 0;font-size: .85em;border-right: 1px solid;padding-left: 5px;">{{agreement.rentalProperty.rentalPropertyOwners[0].ownerAddress.city}}</td>
-        <td style="width:15%; font-size: .85em;border-right: 1px solid;padding-left: 5px;">{{agreement.rentalProperty.rentalPropertyOwners[0].ownerAddress.stateProvince}}</td>
-        <td style="width:15%;font-size: .85em;padding-left: 5px;">{{agreement.rentalProperty.rentalPropertyOwners[0].ownerAddress.zipPostCode}}</td>
+        <td style="width: 35%;border-bottom: 0;font-size: .85em;border-right: 1px solid;padding-left: 5px;">{{agreement.rentalProperty.ownerProperty[0].rentalPropertyOwner.ownerAddress.streetNumber}}</td>
+        <td style="width: 20%;border-bottom: 0;font-size: .85em;border-right: 1px solid;padding-left: 5px;">{{agreement.rentalProperty.ownerProperty[0].rentalPropertyOwner.ownerAddress.city}}</td>
+        <td style="width:15%; font-size: .85em;border-right: 1px solid;padding-left: 5px;">{{agreement.rentalProperty.ownerProperty[0].rentalPropertyOwner.ownerAddress.stateProvince}}</td>
+        <td style="width:15%;font-size: .85em;padding-left: 5px;">{{agreement.rentalProperty.ownerProperty[0].rentalPropertyOwner.ownerAddress.zipPostCode}}</td>
     </tr>
 
 </table>
@@ -65,7 +65,7 @@
         <td style="border-bottom: 0;padding-left: 6px;font-size: .9em;">Other Phone</td>
     </tr>
     <tr style="height: 40px;background: #e4ebf3;">
-        <td style="border-top: 0;padding-left: 5px;border-right: 1px solid;">{{agreement.rentalProperty.rentalPropertyOwners[0].contactTelephone}}</td>
+        <td style="border-top: 0;padding-left: 5px;border-right: 1px solid;">{{agreement.rentalProperty.ownerProperty[0].rentalPropertyOwner.contactTelephone}}</td>
         <td style="border-top: 0;padding-left: 5px;"></td>
     </tr>
 </table>
