@@ -40,7 +40,7 @@
                         <label>last Name</label>
                     </div>
                     <div style="width: 50%;">
-                        <input readonly type="text" [value]="lease.rentalProperty.rentalPropertyOwners[1].firstName" [name]="lease.rentalProperty.ownerProperty[1].rentalPropertyOwner.firstName">
+                        <input readonly type="text" [value]="lease.rentalProperty.ownerProperty[1].rentalPropertyOwner.firstName" [name]="lease.rentalProperty.ownerProperty[1].rentalPropertyOwner.firstName">
                         <label>first and middle name(s)</label>
                     </div>
                 </div>
@@ -1339,15 +1339,15 @@
 
                     </div>
                 </div>
-                <!-- </div> -->
+                <!-- </div> .ownerProperty[1]-->
                 <div *ngIf="lease.rentalProperty.ownerProperty[1]">
                     <div fxLayout="row" fxLayoutAlign="start" fxFlexFill>
                         <div fxFlex="50%">
-                            <input type="text" [value]="lease.rentalProperty.ownerProperty[1].rentalPropertyOwner.lastName" [name]="lease.rentalProperty.rentalPropertyOwners[1].lastName">
+                            <input type="text" [value]="lease.rentalProperty.ownerProperty[1].rentalPropertyOwner.lastName" [name]="lease.rentalProperty.ownerProperty[1].rentalPropertyOwner.lastName">
                             <label>last Name</label>
                         </div>
                         <div fxFlex="50%">
-                            <input type="text" [value]="lease.rentalProperty.ownerProperty[1].rentalPropertyOwner.firstName" [name]="lease.rentalProperty.rentalPropertyOwners[1].firstName">
+                            <input type="text" [value]="lease.rentalProperty.ownerProperty[1].rentalPropertyOwner.firstName" [name]="lease.rentalProperty.ownerProperty[1].rentalPropertyOwner.firstName">
                             <label>first and middle Name(s)</label>
                         </div>
                     </div>

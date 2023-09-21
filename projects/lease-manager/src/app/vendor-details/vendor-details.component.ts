@@ -6,6 +6,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { loadingStatus, vendorDetails } from '../store/reducers';
 import { getVendorDetails, updateVendor } from '../store/actions/lease.actions';
+import { getUserInfo } from '@lib/auth';
 
 @Component({
   selector: 'app-vendor-details',
@@ -17,6 +18,7 @@ export class VendorDetailsComponent implements OnInit {
   id;
   loading$: Observable<boolean>;
   vendor;
+  currentUser;
 
   detailsForm: FormGroup;
 
@@ -60,10 +62,25 @@ export class VendorDetailsComponent implements OnInit {
       // createdBy: [''],
       updatedBy: ['']
     });
+
+
+    this.store.pipe(select(getUserInfo))
+    .subscribe(user => {
+      if (!user) {
+        this.currentUser = JSON.parse(localStorage.getItem('auth'));
+      } else {
+        this.currentUser = user;
+      }
+        console.log('current user', this.currentUser);
+      });
+
+      this.detailsForm.get('updatedBy').setValue(this.currentUser.username);
   }
+
 
   submit() {
     console.log('form', this.detailsForm.value);
+
     this.store.dispatch(updateVendor({payload: this.detailsForm.value}));
   }
 
